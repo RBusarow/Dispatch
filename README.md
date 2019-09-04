@@ -65,6 +65,8 @@ scoping and testing with much less boilerplate.
 
 ## Testing:
 
+I've added a convenience TestDispatcherProvider.
+
 ```kotlin
 class TestDispatcherProvider(
   override val default: TestCoroutineDispatcher = TestCoroutineDispatcher(),
@@ -73,30 +75,37 @@ class TestDispatcherProvider(
   override val mainImmediate: TestCoroutineDispatcher = TestCoroutineDispatcher(),
   override val unconfined: TestCoroutineDispatcher = TestCoroutineDispatcher()
 ) : DispatcherProvider
+```
 
+`runBlockingProvided` is really just delegating `runBlocking`, but
+creates a `CoroutineScope` which includes a `TestDispatcherProvider`, so
+"IO" here is really a `TestCoroutineDispatcher`.
+  
+
+```Kotlin
 @Test
 fun `getSomeData should return some data`() = runBlockingProvided {
 
-  // "runBlockingProvided" is really just delegating runBlocking,
-  // but creating a CoroutineScope which includes a TestDispatcherProvider
-  // so "IO" here is really a TestCoroutineDispatcher
    
   val subject = SomeClass(this)
   
   subject.getSomeData() shouldBe MyData()
 }
+```
 
+`runBlockingProvidedTest` delegates to `runBlockingTest`, but creates a
+`TestCoroutineScope` which includes the `TestDispatcherProvider`.
+
+This delay will be automatically skipped.
+
+The call to `Main` is just a normal `TestCoroutineDispatcher`. There is
+no use of a service loader or `MainCoroutineDispatcher`. No use of
+`Dispatchers.setMain()` or `Dispatchers.resetMain()` either.
+
+
+```Kotlin
 @Test
 fun `showToast should do Toast magic`() = runBlockingProvidedTest {
-
-  // runBlockingProvidedTest delegates to runBlockingTest,
-  // but creates a TestCoroutineScope which includes the TestDispatcherProvider
-  
-  // the delay will be automatically skipped
-  
-  // The call to Main is just a normal TestCoroutineDispatcher.
-  // There is no use of a service loader or MainCoroutineDispatcher
-  // No use of Dispatchers.setMain() or Dispatchers.resetMain() either
 
   val subject = SomeClass(this)
   
@@ -131,6 +140,7 @@ dependencies {
 
 ## License
 
+``` 
 Copyright (C) 2019 Rick Busarow
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -141,3 +151,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
