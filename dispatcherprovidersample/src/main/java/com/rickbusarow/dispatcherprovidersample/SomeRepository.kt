@@ -24,12 +24,12 @@ import kotlinx.coroutines.delay
 class SomeRepository(val coroutineScope: IOCoroutineScope) {
 
   suspend fun getSomethingExpensive() = withIO {
-    delay(10000)
-    "Structured and Expensive!"
+    delay(5000)
+    "suspend function is complete!"
   }
 
   fun getSomethingExpensiveUnstructured() = coroutineScope.asyncIO {
-    delay(10000)
-    "Unstructured and Expensive!"
+    delay(5000)
+    "deferred function is complete!"
   }
 }

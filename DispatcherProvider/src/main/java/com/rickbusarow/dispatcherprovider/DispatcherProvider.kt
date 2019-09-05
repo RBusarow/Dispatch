@@ -42,4 +42,3 @@ class DefaultDispatcherProvider : DispatcherProvider {
   override val mainImmediate: CoroutineDispatcher = Dispatchers.Main.immediate
   override val unconfined: CoroutineDispatcher = Dispatchers.Unconfined
 }
-

@@ -20,6 +20,24 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.coroutines.coroutineContext
 
+val CoroutineScope.defaultDispatcher: CoroutineDispatcher
+  get() = dispatcherProvider.default
+
+val CoroutineScope.ioDispatcher: CoroutineDispatcher
+  get() = dispatcherProvider.io
+
+val CoroutineScope.mainDispatcher: CoroutineDispatcher
+  get() = dispatcherProvider.main
+
+val CoroutineScope.mainImmediateDispatcher: CoroutineDispatcher
+  get() = dispatcherProvider.mainImmediate
+
+val CoroutineScope.unconfinedDispatcher: CoroutineDispatcher
+  get() = dispatcherProvider.unconfined
+
+val CoroutineScope.dispatcherProvider: DispatcherProvider
+  get() = coroutineContext.dispatcherProvider
+
 val CoroutineContext.dispatcherProvider: DispatcherProvider
   get() = get(DispatcherProvider) ?: DefaultDispatcherProvider()
 
@@ -121,3 +139,4 @@ fun <T> CoroutineScope.asyncUnconfined(
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
 ): Deferred<T> = async(coroutineContext.dispatcherProvider.unconfined + context, start, block)
+

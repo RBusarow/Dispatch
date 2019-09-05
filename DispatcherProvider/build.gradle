@@ -15,8 +15,6 @@ plugins {
     id "kotlin"
 }
 
-group = "com.github.rbusarow"
-
 test {
     useJUnitPlatform()
     testLogging {
@@ -28,14 +26,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     def coroutinesVersion = "1.3.0"
-    def kotlinVersion = "1.3.50"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
     testImplementation "org.amshove.kluent:kluent:1.53"
-    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-common:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
     testImplementation "io.mockk:mockk:1.9.2"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
@@ -43,6 +40,7 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
@@ -53,11 +51,3 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
-
-ext {
-    PUBLISH_GROUP_ID = 'com.rickbusarow.BetterDispatcherLocation'
-    PUBLISH_ARTIFACT_ID = 'better-dispatcher-location'
-    PUBLISH_VERSION = '0.9.0-SNAPSHOT'
-}
-
-apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"

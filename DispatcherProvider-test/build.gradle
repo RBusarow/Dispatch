@@ -15,8 +15,6 @@ plugins {
     id "kotlin"
 }
 
-group = "com.github.rbusarow"
-
 test {
     useJUnitPlatform()
     testLogging {
@@ -28,14 +26,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     def coroutinesVersion = "1.3.0"
-    def kotlinVersion = "1.3.50"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
     implementation project(":DispatcherProvider")
 
-    implementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
-    implementation "org.jetbrains.kotlin:kotlin-test-common:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
     testImplementation "io.mockk:mockk:1.9.2"
@@ -46,6 +43,7 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"

@@ -434,7 +434,7 @@ internal class BuildersTest {
   fun runBlockingJoined(block: suspend CoroutineScope.() -> Unit) =
     runBlocking(testProvider) { coroutineScope(block) }
 
-  fun foo() = runBlockingTest {  }
+  fun foo() = runBlockingTest { }
 
 }
 

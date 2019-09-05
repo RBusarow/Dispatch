@@ -17,24 +17,18 @@ package com.rickbusarow.dispatcherprovidersample
 
 import androidx.lifecycle.ViewModel
 import com.rickbusarow.dispatcherprovider.DefaultCoroutineScope
-import com.rickbusarow.dispatcherprovider.launchDefault
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.launch
+import com.rickbusarow.dispatcherprovider.defaultDispatcher
+import com.rickbusarow.dispatcherprovider.dispatcherProvider
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
+@ExperimentalCoroutinesApi
 class MainViewModel(val coroutineScope: DefaultCoroutineScope, val repository: SomeRepository) :
   ViewModel() {
 
-  val message = Channel<String>()
-
-  // This property is eagerly evaluated.  The query is made immediately and the deferred will be
-  // completed as soon as it is done.
   val expensiveDeferred: Deferred<String> = repository.getSomethingExpensiveUnstructured()
 
-  // This property is lazily evaluated.  The query is made when it is requested the first time,
-  // then will be completed as soon as it is done.
   val alsoExpensiveDeferred: Deferred<String> by lazy {
     CompletableDeferred<String>().also { completable ->
 
@@ -47,20 +41,18 @@ class MainViewModel(val coroutineScope: DefaultCoroutineScope, val repository: S
     }
   }
 
-  init {
+  val message = flow {
 
-    // this launch will explicitly use the "default" dispatcher,
-    // which is also the default for this CoroutineScope (which is confusing)
-    coroutineScope.launchDefault {
+    emit("Get ready for some coroutine stuff...")
 
-      message.send(expensiveDeferred.await())
+    emit(expensiveDeferred.await())
 
-      // this send will not be evaluated until after the first one has completed
-      // it will begin the query for "alsoExpensiveDeferred"
-      message.send(alsoExpensiveDeferred.await())
+    emit(alsoExpensiveDeferred.await())
 
-    }
-  }
+    delay(5000)
+
+  // explicitly specify the default dispatcher (which is redundant here, but it's an example)
+  }.flowOn(coroutineScope.defaultDispatcher)
 
   override fun onCleared() {
     super.onCleared()
