@@ -18,8 +18,6 @@ package com.rickbusarow.dispatcherprovider
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.CoroutineContext
@@ -33,28 +31,6 @@ internal class BuildersTest {
     override val main: CoroutineDispatcher = TestCoroutineDispatcher()
     override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
     override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
-  }
-
-  @Nested
-  inner class `dispatcherProvider property` {
-
-    @Test
-    fun `call from context with existing provider should return that provider`() {
-
-      val provider = DispatcherProvider()
-
-      val context = Job() + provider
-
-      context.dispatcherProvider shouldBe provider
-    }
-
-    @Test
-    fun `call from context without provider should return new one`() {
-
-      val context: CoroutineContext = Job()
-
-      context.dispatcherProvider.shouldBeInstanceOf<DispatcherProvider>()
-    }
   }
 
   @Nested
