@@ -53,17 +53,20 @@ val CoroutineContext.dispatcherProvider: DispatcherProvider
 
  class SomeClass(val coroutineScope: CoroutineScope) {
 
-  // "withIO" extracts the dispatcher provider from the calling coroutine's coroutineContext, then uses the IO property
+  // "withIO" extracts the dispatcher provider from the calling 
+  // coroutine's coroutineContext, then uses the IO property
   suspend fun getSomeData(): SomeData = withIO {
     ...
   }
   
-  // "asyncDefault" extracts the dispatcher provider from the scope, then uses the default property
+  // "asyncDefault" extracts the dispatcher provider from the scope,
+  // then uses the default property
   fun calculatePi(numDigits: Int): Deferred<String> = coroutineScope.asyncDefault {
     ...
   }
   
-  // "launchMain" extracts the dispatcher provider from the scope, then uses the main property
+  // "launchMain" extracts the dispatcher provider from the scope,
+  // then uses the main property
   // mainImmediate is also available
   fun showToast(message: String) = coroutineScope.launchMain {
     delay(10.seconds)
@@ -75,7 +78,7 @@ val CoroutineContext.dispatcherProvider: DispatcherProvider
 
 ## Testing:
 
-I've added a convenience TestDispatcherProvider.
+There's a convenience TestDispatcherProvider.
 
 ```kotlin
 class TestDispatcherProvider(
@@ -86,7 +89,7 @@ class TestDispatcherProvider(
   override val unconfined: TestCoroutineDispatcher = TestCoroutineDispatcher()
 ) : DispatcherProvider
 ```
-
+---
 `runBlockingProvided` is really just delegating `runBlocking`, but
 creates a `CoroutineScope` which includes a `TestDispatcherProvider`, so
 "IO" here is really a `TestCoroutineDispatcher`.
@@ -101,7 +104,7 @@ fun `getSomeData should return some data`() = runBlockingProvided {
   subject.getSomeData() shouldBe MyData()
 }
 ```
-
+---
 `runBlockingProvidedTest` delegates to `runBlockingTest`, but creates a
 `TestCoroutineScope` which includes the `TestDispatcherProvider`.
 
