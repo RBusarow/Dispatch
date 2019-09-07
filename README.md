@@ -92,7 +92,7 @@ class TestDispatcherProvider(
 ---
 `runBlockingProvided` is really just delegating `runBlocking`, but
 creates a `CoroutineScope` which includes a `TestDispatcherProvider`, so
-"IO" here is really a `TestCoroutineDispatcher`.
+"io" here is really a `TestCoroutineDispatcher`.
   
 
 ```Kotlin
@@ -100,7 +100,7 @@ creates a `CoroutineScope` which includes a `TestDispatcherProvider`, so
 fun `getSomeData should return some data`() = runBlockingProvided {
    
   val subject = SomeClass(this)
-  
+  // uses "io" TestCoroutineDispatcher
   subject.getSomeData() shouldBe MyData()
 }
 ```
@@ -110,7 +110,7 @@ fun `getSomeData should return some data`() = runBlockingProvided {
 
 This delay will be automatically skipped.
 
-The call to `Main` is just a normal `TestCoroutineDispatcher`. There is
+The call to `main` is just a normal `TestCoroutineDispatcher`. There is
 no use of a service loader or `MainCoroutineDispatcher`. No use of
 `Dispatchers.setMain()` or `Dispatchers.resetMain()` either.
 
@@ -120,7 +120,7 @@ no use of a service loader or `MainCoroutineDispatcher`. No use of
 fun `showToast should do Toast magic`() = runBlockingProvidedTest {
 
   val subject = SomeClass(this)
-  
+  // uses "main" TestCoroutineDispatcher
   subject.showToast("hello world!")
   
   verify { ... }
