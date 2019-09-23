@@ -8,9 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/DispatcherProvider" />
-            <option value="$PROJECT_DIR$/DispatcherProvider-test" />
-            <option value="$PROJECT_DIR$/dispatcherprovidersample" />
+            <option value="$PROJECT_DIR$/dispatcher-provider" />
+            <option value="$PROJECT_DIR$/dispatcher-provider-test" />
+            <option value="$PROJECT_DIR$/sample" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,5 +1,3 @@
-rootProject.name = "DispatcherProvider"
-
-include(":DispatcherProvider")
-include(":DispatcherProvider-test")
-include(":dispatcherprovidersample")
+include(":dispatcher-provider")
+include(":dispatcher-provider-test")
+include(":sample")
