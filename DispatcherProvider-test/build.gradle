@@ -10,10 +10,12 @@ buildscript {
 }
 
 plugins {
-    id "maven"
     id "java-library"
     id "kotlin"
+    id "com.github.dcendents.android-maven"
 }
+
+group = "com.github.rbusarow"
 
 test {
     useJUnitPlatform()
