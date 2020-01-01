@@ -18,7 +18,15 @@ package com.rickbusarow.dispatcherprovider
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
-interface DispatcherProvider : CoroutineContext.Element {
+/**
+ * Interface corresponding to the different [CoroutineDispatcher]'s offered by [Dispatchers].
+ *
+ * Implements the [CoroutineContext.Element] interface
+ * so that it can be embedded into the [CoroutineContext] map,
+ * meaning that a `CoroutineContext` can be composed with a set of pre-set dispatchers,
+ * thereby eliminating the need for singleton references or dependency injecting this interface.
+ */
+public interface DispatcherProvider : CoroutineContext.Element {
 
   override val key: CoroutineContext.Key<*> get() = Key
 
@@ -31,9 +39,15 @@ interface DispatcherProvider : CoroutineContext.Element {
   companion object Key : CoroutineContext.Key<DispatcherProvider>
 }
 
-fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()
+public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()
 
-class DefaultDispatcherProvider : DispatcherProvider {
+/**
+ * Default implementation of [DispatcherProvider] which simply delegates to the corresponding
+ * properties in the [Dispatchers] singleton.
+ *
+ * This should be suitable for most production code.
+ */
+public class DefaultDispatcherProvider : DispatcherProvider {
 
   override val default: CoroutineDispatcher = Dispatchers.Default
   override val io: CoroutineDispatcher = Dispatchers.IO
