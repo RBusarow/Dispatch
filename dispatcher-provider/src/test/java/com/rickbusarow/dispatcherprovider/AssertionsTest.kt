@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,19 +17,14 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.test.assertFails
+import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
+import kotlin.test.*
 
 internal class AssertionsTest {
 
   @Nested
   inner class `should be SupervisorJob` {
-
 
     @Test
     fun `normal Job should fail`() {

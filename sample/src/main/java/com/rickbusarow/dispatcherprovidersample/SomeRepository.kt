@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,10 +15,8 @@
 
 package com.rickbusarow.dispatcherprovidersample
 
-import com.rickbusarow.dispatcherprovider.IOCoroutineScope
-import com.rickbusarow.dispatcherprovider.asyncIO
-import com.rickbusarow.dispatcherprovider.withIO
-import kotlinx.coroutines.delay
+import com.rickbusarow.dispatcherprovider.*
+import kotlinx.coroutines.*
 
 // normally a singleton but we don't have a DI framework here, so we'll just _suspend_ disbelief
 class SomeRepository(val coroutineScope: IOCoroutineScope) {
