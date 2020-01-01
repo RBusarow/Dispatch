@@ -15,17 +15,12 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
-import com.rickbusarow.dispatcherprovider.DispatcherProvider
-import com.rickbusarow.dispatcherprovider.dispatcherProvider
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.CoroutineContext
+import com.rickbusarow.dispatcherprovider.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.amshove.kluent.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class BuildersTest {

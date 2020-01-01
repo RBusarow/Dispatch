@@ -15,9 +15,8 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 val CoroutineScope.defaultDispatcher: CoroutineDispatcher
   get() = dispatcherProvider.default

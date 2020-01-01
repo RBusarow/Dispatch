@@ -15,15 +15,10 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
-import com.rickbusarow.dispatcherprovider.DispatcherProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.runBlockingTest
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
+import com.rickbusarow.dispatcherprovider.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 fun runBlockingProvided(

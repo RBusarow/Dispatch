@@ -15,11 +15,9 @@
 
 package com.rickbusarow.dispatcherprovidersample
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.launch
 
 fun <T> ReceiveChannel<T>.observe(
   coroutineScope: CoroutineScope, observer: suspend CoroutineScope.

@@ -15,20 +15,11 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.ContinuationInterceptor
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.amshove.kluent.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class CoroutineScopesTest {
@@ -85,7 +76,6 @@ internal class CoroutineScopesTest {
 
   @Nested
   inner class `IO CoroutineScope` {
-
 
     @Test
     fun `no args should use SupervisorJob`() {
@@ -245,7 +235,6 @@ internal class CoroutineScopesTest {
 
   @Nested
   inner class `Unconfined CoroutineScope` {
-
 
     @Test
     fun `no args should use SupervisorJob`() {

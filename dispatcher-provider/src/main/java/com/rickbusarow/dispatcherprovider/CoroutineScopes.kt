@@ -15,9 +15,7 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.*
 
 interface IOCoroutineScope : CoroutineScope
 interface DefaultCoroutineScope : CoroutineScope

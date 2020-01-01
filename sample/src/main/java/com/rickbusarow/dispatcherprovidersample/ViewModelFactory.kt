@@ -15,9 +15,8 @@
 
 package com.rickbusarow.dispatcherprovidersample
 
-import android.app.Activity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import android.app.*
+import androidx.lifecycle.*
 
 interface ViewModelFactory<T> : ViewModelProvider.Factory {
   val viewModelClass: Class<T>

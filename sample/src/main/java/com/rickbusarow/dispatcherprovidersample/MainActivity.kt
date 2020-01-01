@@ -14,18 +14,15 @@
  */
 package com.rickbusarow.dispatcherprovidersample
 
-import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import android.annotation.*
+import android.os.*
+import androidx.appcompat.app.*
+import androidx.lifecycle.*
 import com.rickbusarow.dispatcherprovider.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import timber.log.*
 
 @ExperimentalCoroutinesApi
 @SuppressLint("SetTextI18n")

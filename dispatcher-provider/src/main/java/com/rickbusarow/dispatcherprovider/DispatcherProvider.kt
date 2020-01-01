@@ -15,9 +15,8 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 interface DispatcherProvider : CoroutineContext.Element {
 

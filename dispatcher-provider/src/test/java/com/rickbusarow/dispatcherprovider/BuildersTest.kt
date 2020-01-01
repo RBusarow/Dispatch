@@ -16,11 +16,9 @@
 package com.rickbusarow.dispatcherprovider
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.runBlockingTest
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.test.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class BuildersTest {

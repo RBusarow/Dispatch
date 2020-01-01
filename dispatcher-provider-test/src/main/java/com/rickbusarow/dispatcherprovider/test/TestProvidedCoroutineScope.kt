@@ -16,11 +16,9 @@
 package com.rickbusarow.dispatcherprovider.test
 
 import com.rickbusarow.dispatcherprovider.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 interface TestProvidedCoroutineScope : TestCoroutineScope,
