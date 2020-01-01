@@ -15,13 +15,9 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.Job
-import org.amshove.kluent.shouldBeIn
-import org.amshove.kluent.shouldEqual
-import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
+import org.amshove.kluent.*
+import kotlin.coroutines.*
 
 fun Job.shouldBeSupervisorJob() {
 

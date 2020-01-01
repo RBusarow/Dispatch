@@ -15,13 +15,10 @@
 
 package com.rickbusarow.dispatcherprovidersample
 
-import androidx.lifecycle.ViewModel
-import com.rickbusarow.dispatcherprovider.DefaultCoroutineScope
-import com.rickbusarow.dispatcherprovider.defaultDispatcher
-import com.rickbusarow.dispatcherprovider.dispatcherProvider
+import androidx.lifecycle.*
+import com.rickbusarow.dispatcherprovider.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 
 @ExperimentalCoroutinesApi
 class MainViewModel(val coroutineScope: DefaultCoroutineScope, val repository: SomeRepository) :
@@ -51,7 +48,7 @@ class MainViewModel(val coroutineScope: DefaultCoroutineScope, val repository: S
 
     delay(5000)
 
-  // explicitly specify the default dispatcher (which is redundant here, but it's an example)
+    // explicitly specify the default dispatcher (which is redundant here, but it's an example)
   }.flowOn(coroutineScope.defaultDispatcher)
 
   override fun onCleared() {

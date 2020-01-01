@@ -16,9 +16,7 @@
 package com.rickbusarow.dispatcherprovider
 
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
-import kotlin.coroutines.coroutineContext
+import kotlin.coroutines.*
 
 suspend fun <T> withDefault(
   context: CoroutineContext = EmptyCoroutineContext,

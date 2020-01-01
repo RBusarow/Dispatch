@@ -15,10 +15,8 @@
 
 package com.rickbusarow.dispatcherprovidersample
 
-import com.rickbusarow.dispatcherprovider.IOCoroutineScope
-import com.rickbusarow.dispatcherprovider.asyncIO
-import com.rickbusarow.dispatcherprovider.withIO
-import kotlinx.coroutines.delay
+import com.rickbusarow.dispatcherprovider.*
+import kotlinx.coroutines.*
 
 // normally a singleton but we don't have a DI framework here, so we'll just _suspend_ disbelief
 class SomeRepository(val coroutineScope: IOCoroutineScope) {
