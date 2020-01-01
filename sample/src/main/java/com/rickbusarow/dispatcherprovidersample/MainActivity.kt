@@ -21,6 +21,7 @@ import android.annotation.*
 import android.os.*
 import androidx.activity.*
 import androidx.appcompat.app.*
+import androidx.lifecycle.*
 import com.rickbusarow.dispatcherprovider.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
@@ -67,4 +68,12 @@ class MainActivity : AppCompatActivity() {
 
   }
 }
+
+@Suppress("UNCHECKED_CAST")
+inline fun <reified VM : ViewModel> viewModelFactory(crossinline f: () -> VM):
+    ViewModelProvider.Factory =
+  object : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
+  }
+
 

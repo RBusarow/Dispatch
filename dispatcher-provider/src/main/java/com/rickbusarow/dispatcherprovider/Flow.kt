@@ -26,6 +26,7 @@ import kotlin.coroutines.*
  *
  * See also: [flowOn]
  */
+@ExperimentalCoroutinesApi
 fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
   flowOn(coroutineContext.dispatcherProvider.default)
     .collect { emit(it) }
@@ -38,6 +39,7 @@ fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
  *
  * See also: [flowOn]
  */
+@ExperimentalCoroutinesApi
 fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
   flowOn(coroutineContext.dispatcherProvider.io)
     .collect { emit(it) }
@@ -50,6 +52,7 @@ fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
  *
  * See also: [flowOn]
  */
+@ExperimentalCoroutinesApi
 fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
   flowOn(coroutineContext.dispatcherProvider.main)
     .collect { emit(it) }
@@ -62,6 +65,7 @@ fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
  *
  * See also: [flowOn]
  */
+@ExperimentalCoroutinesApi
 fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
   flowOn(coroutineContext.dispatcherProvider.mainImmediate)
     .collect { emit(it) }
@@ -74,6 +78,7 @@ fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
  *
  * See also: [flowOn]
  */
+@ExperimentalCoroutinesApi
 fun <T> Flow<T>.flowOnUnconfined(): Flow<T> = flow {
   flowOn(coroutineContext.dispatcherProvider.unconfined)
     .collect { emit(it) }
