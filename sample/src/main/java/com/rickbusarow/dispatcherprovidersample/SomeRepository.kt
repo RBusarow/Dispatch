@@ -18,8 +18,11 @@ package com.rickbusarow.dispatcherprovidersample
 import com.rickbusarow.dispatcherprovider.*
 import kotlinx.coroutines.*
 
-// normally a singleton but we don't have a DI framework here, so we'll just _suspend_ disbelief
-class SomeRepository(val coroutineScope: IOCoroutineScope) {
+/**
+ * This would normally a singleton,
+ * but we don't have a DI framework here, so we'll just _suspend_ disbelief.
+ */
+class SomeRepository(private val coroutineScope: IOCoroutineScope) {
 
   suspend fun getSomethingExpensive() = withIO {
     delay(5000)
