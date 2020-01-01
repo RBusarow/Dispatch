@@ -1,3 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="Apache" />
+  <settings default="Apache">
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="addBlankAfter" value="false" />
+    </LanguageOptions>
+  </settings>
 </component>
