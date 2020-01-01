@@ -44,3 +44,9 @@ infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
   get(CoroutineName) shouldEqual other[CoroutineName]
   get(DispatcherProvider) shouldEqual other[DispatcherProvider]
 }
+
+inline fun <reified T> Any?.shouldBeTypeOf() {
+  if (this !is T) throw AssertionError(
+    "Expected $this to be an instance or subclass of ${T::class.simpleName}"
+  )
+}

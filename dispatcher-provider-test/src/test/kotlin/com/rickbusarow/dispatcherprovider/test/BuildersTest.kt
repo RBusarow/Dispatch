@@ -41,7 +41,7 @@ internal class BuildersTest {
 
       val dispatcherProvider = coroutineContext.dispatcherProvider
 
-      dispatcherProvider.shouldBeInstanceOf<TestDispatcherProvider>()
+      dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
     }
 
     @Test
@@ -75,7 +75,7 @@ internal class BuildersTest {
 
         val dispatcherProvider = coroutineContext.dispatcherProvider
 
-        dispatcherProvider.shouldBeInstanceOf<TestDispatcherProvider>()
+        dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
       }
 
     @Test
@@ -101,7 +101,7 @@ internal class BuildersTest {
     @Test
     fun `CoroutineScope receiver should be TestCoroutineScope`() = runBlockingTestProvided {
 
-      this.shouldBeInstanceOf<TestCoroutineScope>()
+      this.shouldBeTypeOf<TestCoroutineScope>()
     }
   }
 
