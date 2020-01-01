@@ -21,8 +21,10 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 @ExperimentalCoroutinesApi
-class MainViewModel(val coroutineScope: DefaultCoroutineScope, val repository: SomeRepository) :
-  ViewModel() {
+class MainViewModel(
+  val coroutineScope: DefaultCoroutineScope,
+  val repository: SomeRepository
+) : ViewModel() {
 
   val expensiveDeferred: Deferred<String> = repository.getSomethingExpensiveUnstructured()
 
