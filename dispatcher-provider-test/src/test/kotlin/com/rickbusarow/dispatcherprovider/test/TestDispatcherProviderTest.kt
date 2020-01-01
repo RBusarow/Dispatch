@@ -45,7 +45,7 @@ internal class TestDispatcherProviderTest {
 
       val provider = TestDispatcherProvider(dispatcher)
 
-      provider.shouldBeInstanceOf<TestDispatcherProvider>()
+      provider.shouldBeTypeOf<TestDispatcherProvider>()
     }
   }
 

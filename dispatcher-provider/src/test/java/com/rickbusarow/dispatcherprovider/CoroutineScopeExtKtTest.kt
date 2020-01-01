@@ -78,7 +78,7 @@ internal class CoroutineScopeExtKtTest {
 
       val scope = MainScope()
 
-      scope.dispatcherProvider.shouldBeInstanceOf<DispatcherProvider>()
+      scope.dispatcherProvider.shouldBeTypeOf<DispatcherProvider>()
     }
   }
 
@@ -98,7 +98,7 @@ internal class CoroutineScopeExtKtTest {
 
       val context: CoroutineContext = Job()
 
-      context.dispatcherProvider.shouldBeInstanceOf<DispatcherProvider>()
+      context.dispatcherProvider.shouldBeTypeOf<DispatcherProvider>()
     }
   }
 }

@@ -81,7 +81,7 @@ internal class DispatcherProviderTest {
     @Test
     fun `DispatcherProvider factory should create DefaultDispatcherProvider`() {
 
-      DispatcherProvider().shouldBeInstanceOf<DefaultDispatcherProvider>()
+      DispatcherProvider().shouldBeTypeOf<DefaultDispatcherProvider>()
     }
   }
 

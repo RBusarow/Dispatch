@@ -35,31 +35,31 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `TestProvidedCoroutineScope should implement DefaultCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<DefaultCoroutineScope>()
+      scope.shouldBeTypeOf<DefaultCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement IOCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<IOCoroutineScope>()
+      scope.shouldBeTypeOf<IOCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement MainCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<MainCoroutineScope>()
+      scope.shouldBeTypeOf<MainCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement MainImmediateCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<MainImmediateCoroutineScope>()
+      scope.shouldBeTypeOf<MainImmediateCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement UnconfinedCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<UnconfinedCoroutineScope>()
+      scope.shouldBeTypeOf<UnconfinedCoroutineScope>()
     }
   }
 
