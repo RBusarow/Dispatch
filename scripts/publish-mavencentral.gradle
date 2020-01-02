@@ -80,12 +80,12 @@ def dokkaJarTaskProvider = tasks.register("dokkaJar", Jar) { task ->
   task.dependsOn("dokka")
 }
 
-nexusStaging {
-  packageGroup = PUBLISH_GROUP_ID
-  stagingProfileId = '1d85d183a9d567'
-  username = ossrhUsername
-  password = ossrhPassword
-}
+//nexusStaging {
+//  packageGroup = PUBLISH_GROUP_ID
+//  stagingProfileId = '1d85d183a9d567'
+//  username = ossrhUsername
+//  password = ossrhPassword
+//}
 
 publishing {
   publications {
@@ -93,7 +93,7 @@ publishing {
       groupId PUBLISH_GROUP_ID
       artifactId PUBLISH_ARTIFACT_ID
       version PUBLISH_VERSION
-      artifact("build/libs/${project.getName()}-${project.versionName}.jar")
+      artifact("build/libs/${project.getName()}-${Versions.versionName}.jar")
       artifact sourcesJar
       artifact dokkaJarTaskProvider.get()
 
