@@ -20,6 +20,20 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import kotlin.coroutines.*
 
+/**
+ * A polymorphic testing [CoroutineScope] interface.
+ *
+ * This single interface implements:
+ *  [TestCoroutineScope]
+ *  [DefaultCoroutineScope]
+ *  [IOCoroutineScope]
+ *  [MainCoroutineScope]
+ *  [MainImmediateCoroutineScope]
+ *  [UnconfinedCoroutineScope]
+ *
+ * This means that it can be injected into any class or function
+ * regardless of what type of `CoroutineScope` is required.
+ */
 @ExperimentalCoroutinesApi
 interface TestProvidedCoroutineScope : TestCoroutineScope,
   DefaultCoroutineScope,
@@ -38,6 +52,14 @@ internal class TestProvidedCoroutineScopeImpl(
 ) : TestProvidedCoroutineScope,
   TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
 
+/**
+ * Creates a [TestProvidedCoroutineScope] implementation with optional parameters of
+ * [TestCoroutineDispatcher], [TestDispatcherProvider], and a generic [CoroutineContext].
+ *
+ * The resultant `TestProvidedCoroutineScope` will utilize a single `TestCoroutineDispatcher`
+ * for all the [CoroutineDispatcher] properties of its [DispatcherProvider],
+ * and the [ContinuationInterceptor] Key of the `CoroutineContext` will also return that `TestCoroutineDispatcher`.
+ */
 @ExperimentalCoroutinesApi
 fun TestProvidedCoroutineScope(
   dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),

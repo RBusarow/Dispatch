@@ -20,6 +20,12 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import kotlin.coroutines.*
 
+/**
+ * Delegates to [runBlocking], but injects a [DispatcherProvider] into the created [CoroutineScope].
+ *
+ * If no `DispatcherProvider` is specified, a [TestDispatcherProvider] is created
+ * with a single shared [TestCoroutineDispatcher].
+ */
 @ExperimentalCoroutinesApi
 fun runBlockingProvided(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -27,6 +33,12 @@ fun runBlockingProvided(
   block: suspend CoroutineScope.() -> Unit
 ): Unit = runBlocking(context = dispatcherProvider + context, block = block)
 
+/**
+ * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created [TestCoroutineScope].
+ *
+ * If no `DispatcherProvider` is specified, a [TestDispatcherProvider] is created
+ * with a single shared [TestCoroutineDispatcher].
+ */
 @ExperimentalCoroutinesApi
 fun runBlockingTestProvided(
   context: CoroutineContext = EmptyCoroutineContext,

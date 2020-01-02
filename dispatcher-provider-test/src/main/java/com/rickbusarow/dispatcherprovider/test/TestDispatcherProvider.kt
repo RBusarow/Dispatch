@@ -19,6 +19,11 @@ import com.rickbusarow.dispatcherprovider.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 
+/**
+ * [DispatcherProvider] implementation for testing, where each property is a [TestCoroutineDispatcher].
+ *
+ * A default version will create a different `TestCoroutineDispatcher` for each property.
+ */
 @ExperimentalCoroutinesApi
 class TestDispatcherProvider(
   override val default: TestCoroutineDispatcher = TestCoroutineDispatcher(),
@@ -28,6 +33,10 @@ class TestDispatcherProvider(
   override val unconfined: TestCoroutineDispatcher = TestCoroutineDispatcher()
 ) : DispatcherProvider
 
+/**
+ * Convenience factory function for [TestDispatcherProvider], creating an implementation
+ * where all properties point to the same underlying [TestCoroutineDispatcher].
+ */
 @ExperimentalCoroutinesApi
 fun TestDispatcherProvider(dispatcher: TestCoroutineDispatcher): TestDispatcherProvider =
   TestDispatcherProvider(
