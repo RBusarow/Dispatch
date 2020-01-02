@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,12 +16,10 @@
 package com.rickbusarow.dispatcherprovider
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.test.*
+import org.amshove.kluent.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class CoroutineScopeExtKtTest {
@@ -80,7 +78,7 @@ internal class CoroutineScopeExtKtTest {
 
       val scope = MainScope()
 
-      scope.dispatcherProvider.shouldBeInstanceOf<DispatcherProvider>()
+      scope.dispatcherProvider.shouldBeTypeOf<DispatcherProvider>()
     }
   }
 
@@ -100,7 +98,7 @@ internal class CoroutineScopeExtKtTest {
 
       val context: CoroutineContext = Job()
 
-      context.dispatcherProvider.shouldBeInstanceOf<DispatcherProvider>()
+      context.dispatcherProvider.shouldBeTypeOf<DispatcherProvider>()
     }
   }
 }

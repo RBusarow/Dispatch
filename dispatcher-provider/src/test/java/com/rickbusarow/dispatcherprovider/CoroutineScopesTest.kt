@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,26 +15,16 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.ContinuationInterceptor
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.amshove.kluent.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class CoroutineScopesTest {
 
   val job = Job()
-  val supervisorJob = SupervisorJob()
 
   val dispatcherProvider = DispatcherProvider()
 
@@ -44,7 +34,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `no args should use SupervisorJob`() {
 
-      val scope: DefaultCoroutineScope = DefaultCoroutineScope()
+      val scope = DefaultCoroutineScope()
 
       scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
     }
@@ -52,7 +42,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `job arg should be used in coroutineContext`() {
 
-      val scope: DefaultCoroutineScope = DefaultCoroutineScope(job = job)
+      val scope = DefaultCoroutineScope(job = job)
 
       scope.coroutineContext[Job] shouldBe job
     }
@@ -60,16 +50,15 @@ internal class CoroutineScopesTest {
     @Test
     fun `no args should use DefaultDispatcherProvider`() {
 
-      val scope: DefaultCoroutineScope = DefaultCoroutineScope()
+      val scope = DefaultCoroutineScope()
 
-      scope.coroutineContext[DispatcherProvider]!!.shouldBeInstanceOf<DefaultDispatcherProvider>()
+      scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
     }
 
     @Test
     fun `dispatcherProvider arg should be used in coroutineContext`() {
 
-      val scope: DefaultCoroutineScope =
-        DefaultCoroutineScope(dispatcherProvider = dispatcherProvider)
+      val scope = DefaultCoroutineScope(dispatcherProvider = dispatcherProvider)
 
       scope.coroutineContext[DispatcherProvider] shouldBe dispatcherProvider
     }
@@ -77,7 +66,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `coroutineContext should use Dispatchers_Default`() {
 
-      val scope: DefaultCoroutineScope = DefaultCoroutineScope()
+      val scope = DefaultCoroutineScope()
 
       scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Default
     }
@@ -86,11 +75,10 @@ internal class CoroutineScopesTest {
   @Nested
   inner class `IO CoroutineScope` {
 
-
     @Test
     fun `no args should use SupervisorJob`() {
 
-      val scope: IOCoroutineScope = IOCoroutineScope()
+      val scope = IOCoroutineScope()
 
       scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
     }
@@ -98,7 +86,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `job arg should be used in coroutineContext`() {
 
-      val scope: IOCoroutineScope = IOCoroutineScope(job = job)
+      val scope = IOCoroutineScope(job = job)
 
       scope.coroutineContext[Job] shouldBe job
     }
@@ -106,15 +94,15 @@ internal class CoroutineScopesTest {
     @Test
     fun `no args should use IODispatcherProvider`() {
 
-      val scope: IOCoroutineScope = IOCoroutineScope()
+      val scope = IOCoroutineScope()
 
-      scope.coroutineContext[DispatcherProvider]!!.shouldBeInstanceOf<DefaultDispatcherProvider>()
+      scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
     }
 
     @Test
     fun `dispatcherProvider arg should be used in coroutineContext`() {
 
-      val scope: IOCoroutineScope = IOCoroutineScope(dispatcherProvider = dispatcherProvider)
+      val scope = IOCoroutineScope(dispatcherProvider = dispatcherProvider)
 
       scope.coroutineContext[DispatcherProvider] shouldBe dispatcherProvider
     }
@@ -122,7 +110,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `coroutineContext should use Dispatchers_IO`() {
 
-      val scope: IOCoroutineScope = IOCoroutineScope()
+      val scope = IOCoroutineScope()
 
       scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.IO
     }
@@ -145,7 +133,7 @@ internal class CoroutineScopesTest {
       @Test
       fun `no args should use SupervisorJob`() {
 
-        val scope: MainCoroutineScope = MainCoroutineScope()
+        val scope = MainCoroutineScope()
 
         scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
       }
@@ -153,7 +141,7 @@ internal class CoroutineScopesTest {
       @Test
       fun `job arg should be used in coroutineContext`() {
 
-        val scope: MainCoroutineScope = MainCoroutineScope(job = job)
+        val scope = MainCoroutineScope(job = job)
 
         scope.coroutineContext[Job] shouldBe job
       }
@@ -161,15 +149,15 @@ internal class CoroutineScopesTest {
       @Test
       fun `no args should use MainDispatcherProvider`() {
 
-        val scope: MainCoroutineScope = MainCoroutineScope()
+        val scope = MainCoroutineScope()
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeInstanceOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
       }
 
       @Test
       fun `dispatcherProvider arg should be used in coroutineContext`() {
 
-        val scope: MainCoroutineScope = MainCoroutineScope(dispatcherProvider = dispatcherProvider)
+        val scope = MainCoroutineScope(dispatcherProvider = dispatcherProvider)
 
         scope.coroutineContext[DispatcherProvider] shouldBe dispatcherProvider
       }
@@ -177,7 +165,7 @@ internal class CoroutineScopesTest {
       @Test
       fun `coroutineContext should use Dispatchers_Main`() {
 
-        val scope: MainCoroutineScope = MainCoroutineScope()
+        val scope = MainCoroutineScope()
 
         scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main
       }
@@ -203,7 +191,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `no args should use SupervisorJob`() {
 
-      val scope: MainImmediateCoroutineScope = MainImmediateCoroutineScope()
+      val scope = MainImmediateCoroutineScope()
 
       scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
     }
@@ -211,7 +199,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `job arg should be used in coroutineContext`() {
 
-      val scope: MainImmediateCoroutineScope = MainImmediateCoroutineScope(job = job)
+      val scope = MainImmediateCoroutineScope(job = job)
 
       scope.coroutineContext[Job] shouldBe job
     }
@@ -219,15 +207,15 @@ internal class CoroutineScopesTest {
     @Test
     fun `no args should use MainDispatcherProvider`() {
 
-      val scope: MainImmediateCoroutineScope = MainImmediateCoroutineScope()
+      val scope = MainImmediateCoroutineScope()
 
-      scope.coroutineContext[DispatcherProvider]!!.shouldBeInstanceOf<DefaultDispatcherProvider>()
+      scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
     }
 
     @Test
     fun `dispatcherProvider arg should be used in coroutineContext`() {
 
-      val scope: MainImmediateCoroutineScope =
+      val scope =
         MainImmediateCoroutineScope(dispatcherProvider = dispatcherProvider)
 
       scope.coroutineContext[DispatcherProvider] shouldBe dispatcherProvider
@@ -236,7 +224,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `coroutineContext should use Dispatchers_Main`() {
 
-      val scope: MainImmediateCoroutineScope = MainImmediateCoroutineScope()
+      val scope = MainImmediateCoroutineScope()
 
       // This is weak.  I'm not sure how to differentiate between Main and Main.immediate
       scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main.immediate
@@ -246,11 +234,10 @@ internal class CoroutineScopesTest {
   @Nested
   inner class `Unconfined CoroutineScope` {
 
-
     @Test
     fun `no args should use SupervisorJob`() {
 
-      val scope: UnconfinedCoroutineScope = UnconfinedCoroutineScope()
+      val scope = UnconfinedCoroutineScope()
 
       scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
     }
@@ -258,7 +245,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `job arg should be used in coroutineContext`() {
 
-      val scope: UnconfinedCoroutineScope = UnconfinedCoroutineScope(job = job)
+      val scope = UnconfinedCoroutineScope(job = job)
 
       scope.coroutineContext[Job] shouldBe job
     }
@@ -266,15 +253,15 @@ internal class CoroutineScopesTest {
     @Test
     fun `no args should use UnconfinedDispatcherProvider`() {
 
-      val scope: UnconfinedCoroutineScope = UnconfinedCoroutineScope()
+      val scope = UnconfinedCoroutineScope()
 
-      scope.coroutineContext[DispatcherProvider]!!.shouldBeInstanceOf<DefaultDispatcherProvider>()
+      scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
     }
 
     @Test
     fun `dispatcherProvider arg should be used in coroutineContext`() {
 
-      val scope: UnconfinedCoroutineScope =
+      val scope =
         UnconfinedCoroutineScope(dispatcherProvider = dispatcherProvider)
 
       scope.coroutineContext[DispatcherProvider] shouldBe dispatcherProvider
@@ -283,7 +270,7 @@ internal class CoroutineScopesTest {
     @Test
     fun `coroutineContext should use Dispatchers_Unconfined`() {
 
-      val scope: UnconfinedCoroutineScope = UnconfinedCoroutineScope()
+      val scope = UnconfinedCoroutineScope()
 
       scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Unconfined
     }

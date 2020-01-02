@@ -1,3 +1,5 @@
 <component name="CopyrightManager">
-  <settings default="Apache" />
+  <settings default="Apache">
+    <LanguageOptions name="__TEMPLATE__" />
+  </settings>
 </component>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,12 +16,10 @@
 package com.rickbusarow.dispatcherprovider.test
 
 import com.rickbusarow.dispatcherprovider.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.amshove.kluent.*
+import org.junit.jupiter.api.*
 
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeTest {
@@ -37,31 +35,31 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `TestProvidedCoroutineScope should implement DefaultCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<DefaultCoroutineScope>()
+      scope.shouldBeTypeOf<DefaultCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement IOCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<IOCoroutineScope>()
+      scope.shouldBeTypeOf<IOCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement MainCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<MainCoroutineScope>()
+      scope.shouldBeTypeOf<MainCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement MainImmediateCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<MainImmediateCoroutineScope>()
+      scope.shouldBeTypeOf<MainImmediateCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement UnconfinedCoroutineScope`() {
 
-      scope.shouldBeInstanceOf<UnconfinedCoroutineScope>()
+      scope.shouldBeTypeOf<UnconfinedCoroutineScope>()
     }
   }
 

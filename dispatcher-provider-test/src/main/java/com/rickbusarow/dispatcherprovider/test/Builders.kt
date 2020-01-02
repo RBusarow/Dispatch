@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,16 +15,17 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
-import com.rickbusarow.dispatcherprovider.DispatcherProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.runBlockingTest
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
+import com.rickbusarow.dispatcherprovider.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import kotlin.coroutines.*
 
+/**
+ * Delegates to [runBlocking], but injects a [DispatcherProvider] into the created [CoroutineScope].
+ *
+ * If no `DispatcherProvider` is specified, a [TestDispatcherProvider] is created
+ * with a single shared [TestCoroutineDispatcher].
+ */
 @ExperimentalCoroutinesApi
 fun runBlockingProvided(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -32,6 +33,12 @@ fun runBlockingProvided(
   block: suspend CoroutineScope.() -> Unit
 ): Unit = runBlocking(context = dispatcherProvider + context, block = block)
 
+/**
+ * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created [TestCoroutineScope].
+ *
+ * If no `DispatcherProvider` is specified, a [TestDispatcherProvider] is created
+ * with a single shared [TestCoroutineDispatcher].
+ */
 @ExperimentalCoroutinesApi
 fun runBlockingTestProvided(
   context: CoroutineContext = EmptyCoroutineContext,

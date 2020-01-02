@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,17 +15,12 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
-import com.rickbusarow.dispatcherprovider.DispatcherProvider
-import com.rickbusarow.dispatcherprovider.dispatcherProvider
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.CoroutineContext
+import com.rickbusarow.dispatcherprovider.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.amshove.kluent.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class BuildersTest {
@@ -46,7 +41,7 @@ internal class BuildersTest {
 
       val dispatcherProvider = coroutineContext.dispatcherProvider
 
-      dispatcherProvider.shouldBeInstanceOf<TestDispatcherProvider>()
+      dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
     }
 
     @Test
@@ -80,7 +75,7 @@ internal class BuildersTest {
 
         val dispatcherProvider = coroutineContext.dispatcherProvider
 
-        dispatcherProvider.shouldBeInstanceOf<TestDispatcherProvider>()
+        dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
       }
 
     @Test
@@ -106,7 +101,7 @@ internal class BuildersTest {
     @Test
     fun `CoroutineScope receiver should be TestCoroutineScope`() = runBlockingTestProvided {
 
-      this.shouldBeInstanceOf<TestCoroutineScope>()
+      this.shouldBeTypeOf<TestCoroutineScope>()
     }
   }
 

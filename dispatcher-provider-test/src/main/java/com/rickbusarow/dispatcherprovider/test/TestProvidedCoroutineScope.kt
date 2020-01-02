@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,12 +16,24 @@
 package com.rickbusarow.dispatcherprovider.test
 
 import com.rickbusarow.dispatcherprovider.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import kotlin.coroutines.*
 
+/**
+ * A polymorphic testing [CoroutineScope] interface.
+ *
+ * This single interface implements:
+ *  [TestCoroutineScope]
+ *  [DefaultCoroutineScope]
+ *  [IOCoroutineScope]
+ *  [MainCoroutineScope]
+ *  [MainImmediateCoroutineScope]
+ *  [UnconfinedCoroutineScope]
+ *
+ * This means that it can be injected into any class or function
+ * regardless of what type of `CoroutineScope` is required.
+ */
 @ExperimentalCoroutinesApi
 interface TestProvidedCoroutineScope : TestCoroutineScope,
   DefaultCoroutineScope,
@@ -40,6 +52,14 @@ internal class TestProvidedCoroutineScopeImpl(
 ) : TestProvidedCoroutineScope,
   TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
 
+/**
+ * Creates a [TestProvidedCoroutineScope] implementation with optional parameters of
+ * [TestCoroutineDispatcher], [TestDispatcherProvider], and a generic [CoroutineContext].
+ *
+ * The resultant `TestProvidedCoroutineScope` will utilize a single `TestCoroutineDispatcher`
+ * for all the [CoroutineDispatcher] properties of its [DispatcherProvider],
+ * and the [ContinuationInterceptor] Key of the `CoroutineContext` will also return that `TestCoroutineDispatcher`.
+ */
 @ExperimentalCoroutinesApi
 fun TestProvidedCoroutineScope(
   dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),

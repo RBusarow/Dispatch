@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Rick Busarow
+ * Copyright (C) 2019-2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,16 +15,13 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldBeInstanceOf
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.amshove.kluent.*
+import org.junit.jupiter.api.*
 
 @ExperimentalCoroutinesApi
 internal class TestDispatcherProviderTest {
-
 
   val dispatcher = TestCoroutineDispatcher()
 
@@ -48,7 +45,7 @@ internal class TestDispatcherProviderTest {
 
       val provider = TestDispatcherProvider(dispatcher)
 
-      provider.shouldBeInstanceOf<TestDispatcherProvider>()
+      provider.shouldBeTypeOf<TestDispatcherProvider>()
     }
   }
 

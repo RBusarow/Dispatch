@@ -13,24 +13,14 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.dispatcherprovidersample
+repositories {
+  jcenter()
+}
 
-import com.rickbusarow.dispatcherprovider.*
-import kotlinx.coroutines.*
+plugins {
+  `kotlin-dsl`
+}
 
-/**
- * This would normally a singleton,
- * but we don't have a DI framework here, so we'll just _suspend_ disbelief.
- */
-class SomeRepository(private val coroutineScope: IOCoroutineScope) {
-
-  suspend fun getSomethingExpensive() = withIO {
-    delay(5000)
-    "suspend function is complete!"
-  }
-
-  fun getSomethingExpensiveUnstructured() = coroutineScope.asyncIO {
-    delay(5000)
-    "deferred function is complete!"
-  }
+kotlinDslPluginOptions {
+  experimentalWarning.set(false)
 }
