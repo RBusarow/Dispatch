@@ -27,16 +27,11 @@ buildscript {
 plugins {
     id "java-library"
     id "kotlin"
-    id "com.github.dcendents.android-maven"
+    id "org.jetbrains.dokka" version "0.10.0"
 }
-
-group = "com.github.rbusarow.dispatcher-provider"
 
 test {
     useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
 }
 
 dependencies {
@@ -55,6 +50,11 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
 
 }
-repositories {
-    mavenCentral()
+
+ext {
+    PUBLISH_GROUP_ID = "com.rickbusarow.dispatcherprovider"
+    PUBLISH_ARTIFACT_ID = "dispatcher-provider"
+    PUBLISH_VERSION = project.versionName
 }
+
+apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
