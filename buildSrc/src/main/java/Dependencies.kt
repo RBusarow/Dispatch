@@ -108,9 +108,9 @@ object Libs {
   object RickBusarow {
 
     object DispatcherProvider {
-      private const val version = "0.9.2"
-      const val core = "com.github.RBusarow.DispatcherProvider:dispatcher-provider:$version"
-      const val test = "com.github.RBusarow.DispatcherProvider:dispatcher-provider-test:$version"
+      private const val version = "1.0.0-beta01"
+      const val core = "com.rickbusarow.dispatcherprovider:dispatcher-provider:$version"
+      const val test = "com.rickbusarow.dispatcherprovider:dispatcher-provider-test:$version"
     }
   }
 

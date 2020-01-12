@@ -16,6 +16,7 @@
 package com.rickbusarow.dispatcherprovider
 
 import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 /**
  * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `default`.
@@ -59,6 +60,22 @@ public fun DefaultCoroutineScope(
 }
 
 /**
+ * Factory function for a [DefaultCoroutineScope] with a [DispatcherProvider].
+ * Dispatch defaults to the `default` property of the `DispatcherProvider`.
+ *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
+ * Any existing [ContinuationInterceptor] will be overwritten.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ *
+ * see also: [CoroutineScope]
+ */
+public fun DefaultCoroutineScope(
+  coroutineContext: CoroutineContext
+): DefaultCoroutineScope = object : DefaultCoroutineScope {
+  override val coroutineContext = coroutineContext.withDefaultElements { default }
+}
+
+/**
  * Factory function for an [IOCoroutineScope] with a [DispatcherProvider].
  * Dispatch defaults to the `io` property of the `DispatcherProvider`.
  *
@@ -75,6 +92,22 @@ public fun IOCoroutineScope(
 }
 
 /**
+ * Factory function for a [IOCoroutineScope] with a [DispatcherProvider].
+ * Dispatch defaults to the `io` property of the `DispatcherProvider`.
+ *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
+ * Any existing [ContinuationInterceptor] will be overwritten.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ *
+ * see also: [CoroutineScope]
+ */
+public fun IOCoroutineScope(
+  coroutineContext: CoroutineContext
+): IOCoroutineScope = object : IOCoroutineScope {
+  override val coroutineContext = coroutineContext.withDefaultElements { io }
+}
+
+/**
  * Factory function for a [MainCoroutineScope] with a [DispatcherProvider].
  * Dispatch defaults to the `main` property of the `DispatcherProvider`.
  *
@@ -88,6 +121,22 @@ public fun MainCoroutineScope(
   dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
 ): MainCoroutineScope = object : MainCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.main + dispatcherProvider
+}
+
+/**
+ * Factory function for a [MainCoroutineScope] with a [DispatcherProvider].
+ * Dispatch defaults to the `main` property of the `DispatcherProvider`.
+ *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
+ * Any existing [ContinuationInterceptor] will be overwritten.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ *
+ * see also: [CoroutineScope]
+ */
+public fun MainCoroutineScope(
+  coroutineContext: CoroutineContext
+): MainCoroutineScope = object : MainCoroutineScope {
+  override val coroutineContext = coroutineContext.withDefaultElements { main }
 }
 
 /**
@@ -109,6 +158,22 @@ public fun MainImmediateCoroutineScope(
 }
 
 /**
+ * Factory function for a [MainImmediateCoroutineScope] with a [DispatcherProvider].
+ * Dispatch defaults to the `mainImmediate` property of the `DispatcherProvider`.
+ *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
+ * Any existing [ContinuationInterceptor] will be overwritten.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ *
+ * see also: [CoroutineScope]
+ */
+public fun MainImmediateCoroutineScope(
+  coroutineContext: CoroutineContext
+): MainImmediateCoroutineScope = object : MainImmediateCoroutineScope {
+  override val coroutineContext = coroutineContext.withDefaultElements { mainImmediate }
+}
+
+/**
  * Factory function for a [UnconfinedCoroutineScope] with a [DispatcherProvider].
  * Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.
  *
@@ -124,4 +189,28 @@ public fun UnconfinedCoroutineScope(
   override val coroutineContext = job + dispatcherProvider.unconfined + dispatcherProvider
 }
 
+/**
+ * Factory function for a [UnconfinedCoroutineScope] with a [DispatcherProvider].
+ * Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.
+ *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
+ * Any existing [ContinuationInterceptor] will be overwritten.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ *
+ * see also: [CoroutineScope]
+ */
+public fun UnconfinedCoroutineScope(
+  coroutineContext: CoroutineContext
+): UnconfinedCoroutineScope = object : UnconfinedCoroutineScope {
+  override val coroutineContext = coroutineContext.withDefaultElements { unconfined }
+}
 
+private inline fun CoroutineContext.withDefaultElements(
+  dispatcherPromise: DispatcherProvider.() -> ContinuationInterceptor
+): CoroutineContext {
+
+  val job = get(Job) ?: SupervisorJob()
+  val provider = get(DispatcherProvider) ?: DefaultDispatcherProvider()
+
+  return this + job + provider + provider.dispatcherPromise()
+}
