@@ -16,7 +16,9 @@
 package com.rickbusarow.dispatcherprovider
 
 import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.coroutines.coroutineContext
 
 /**
  * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
@@ -28,7 +30,7 @@ import kotlin.coroutines.*
  *
  * The *default* property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * see also: [withContext]
+ * @see withContext
  */
 public suspend fun <T> withDefault(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -48,7 +50,7 @@ public suspend fun <T> withDefault(
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * see also: [withContext]
+ * @see withContext
  */
 public suspend fun <T> withIO(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -68,7 +70,7 @@ public suspend fun <T> withIO(
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * see also: [withContext]
+ * @see withContext
  */
 public suspend fun <T> withMain(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -88,7 +90,7 @@ public suspend fun <T> withMain(
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * see also: [withContext]
+ * @see withContext
  */
 public suspend fun <T> withMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext, block: suspend CoroutineScope.() -> T
@@ -107,7 +109,7 @@ public suspend fun <T> withMainImmediate(
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * see also: [withContext]
+ * @see withContext
  */
 public suspend fun <T> withUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -126,7 +128,7 @@ public suspend fun <T> withUnconfined(
  *
  * The `default` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [launch]
+ * @see launch
  */
 public fun CoroutineScope.launchDefault(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -143,7 +145,7 @@ public fun CoroutineScope.launchDefault(
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [launch]
+ * @see launch
  */
 public fun CoroutineScope.launchIO(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -160,7 +162,7 @@ public fun CoroutineScope.launchIO(
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [launch]
+ * @see launch
  */
 public fun CoroutineScope.launchMain(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -177,7 +179,7 @@ public fun CoroutineScope.launchMain(
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [launch]
+ * @see launch
  */
 public fun CoroutineScope.launchMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -194,7 +196,7 @@ public fun CoroutineScope.launchMainImmediate(
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [launch]
+ * @see launch
  */
 public fun CoroutineScope.launchUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -210,7 +212,7 @@ public fun CoroutineScope.launchUnconfined(
  *
  * The `default` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [async]
+ * @see async
  */
 public fun <T> CoroutineScope.asyncDefault(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -226,7 +228,7 @@ public fun <T> CoroutineScope.asyncDefault(
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [async]
+ * @see async
  */
 public fun <T> CoroutineScope.asyncIO(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -242,7 +244,7 @@ public fun <T> CoroutineScope.asyncIO(
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [async]
+ * @see async
  */
 public fun <T> CoroutineScope.asyncMain(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -258,7 +260,7 @@ public fun <T> CoroutineScope.asyncMain(
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [async]
+ * @see async
  */
 public fun <T> CoroutineScope.asyncMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -274,7 +276,7 @@ public fun <T> CoroutineScope.asyncMainImmediate(
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * see also: [async]
+ * @see async
  */
 public fun <T> CoroutineScope.asyncUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
