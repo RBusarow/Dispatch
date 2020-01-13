@@ -37,15 +37,16 @@ internal class BuildersTest {
   inner class `run blocking provided` {
 
     @Test
-    fun `default params should create scope with TestDispatcherProvider`() = runBlockingProvided {
+    fun `default CoroutineContext param should create scope with TestDispatcherProvider`() =
+      runBlockingProvided {
 
-      val dispatcherProvider = coroutineContext.dispatcherProvider
+        val dispatcherProvider = coroutineContext.dispatcherProvider
 
-      dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
-    }
+        dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
+      }
 
     @Test
-    fun `specified provider param should be used in CoroutineContext`() =
+    fun `existing DispatcherProvider in CoroutineContext param should be used in new CoroutineContext`() =
       runBlockingProvided(testProvider) {
 
         val dispatcherProvider = coroutineContext.dispatcherProvider
@@ -54,7 +55,7 @@ internal class BuildersTest {
       }
 
     @Test
-    fun `specified context param should be used in CoroutineContext`() {
+    fun `existing unique CoroutineContext elements should be used in CoroutineContext`() {
 
       val ctx = TestCoroutineContext()
 
@@ -63,6 +64,22 @@ internal class BuildersTest {
         coroutineContext[TestCoroutineContext] shouldBe ctx
       }
     }
+
+    @Test
+    fun `CoroutineContext param without DispatcherProvider should create provider which delegates to Dispatchers`() =
+
+      runBlockingProvided {
+
+        val provider = dispatcherProvider
+
+        provider.default shouldBe Dispatchers.Default
+        provider.io shouldBe Dispatchers.IO
+        provider.unconfined shouldBe Dispatchers.Unconfined
+
+        provider.main shouldBe provider.mainImmediate
+
+        provider.main shouldNotBe Dispatchers.Main
+      }
 
   }
 
@@ -103,6 +120,29 @@ internal class BuildersTest {
 
       this.shouldBeTypeOf<TestCoroutineScope>()
     }
+
+    @Test
+    fun `new CoroutineContext should share delay control across all dispatchers`() =
+      runBlockingTestProvided {
+        launchMain {
+          delay(1000)
+        }
+        advanceTimeBy(1000)
+      }
+
+    @Test
+    fun `new CoroutineContext should have the same TestCoroutineDispatcher as the DispatcherProvider`() =
+      runBlockingTestProvided {
+
+        val dispatcher = coroutineContext[ContinuationInterceptor]
+
+        dispatcher shouldBe dispatcherProvider.default
+        dispatcher shouldBe dispatcherProvider.io
+        dispatcher shouldBe dispatcherProvider.main
+        dispatcher shouldBe dispatcherProvider.mainImmediate
+        dispatcher shouldBe dispatcherProvider.unconfined
+      }
+
   }
 
   class TestCoroutineContext : CoroutineContext.Element {

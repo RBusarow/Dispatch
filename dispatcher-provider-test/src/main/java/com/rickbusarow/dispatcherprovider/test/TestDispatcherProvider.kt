@@ -20,30 +20,65 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 
 /**
- * [DispatcherProvider] implementation for testing, where each property is a [TestCoroutineDispatcher].
+ * [DispatcherProvider] implementation for testing, where each property is a [CoroutineDispatcher].
  *
  * A default version will create a different `TestCoroutineDispatcher` for each property.
  */
 @ExperimentalCoroutinesApi
 class TestDispatcherProvider(
-  override val default: TestCoroutineDispatcher = TestCoroutineDispatcher(),
-  override val io: TestCoroutineDispatcher = TestCoroutineDispatcher(),
-  override val main: TestCoroutineDispatcher = TestCoroutineDispatcher(),
-  override val mainImmediate: TestCoroutineDispatcher = TestCoroutineDispatcher(),
-  override val unconfined: TestCoroutineDispatcher = TestCoroutineDispatcher()
-) : DispatcherProvider
+  override val default: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val io: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val main: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+) : DispatcherProvider {
+  override fun toString(): String {
+    return """${this::class.java.simpleName}: default       -> $default
+      |io            -> $io
+      |main          -> $main
+      |mainImmediate -> $mainImmediate
+      |unconfined    -> $unconfined
+    """.replaceIndentByMargin(" ".repeat(this::class.java.simpleName.length + 2))
+  }
+}
 
 /**
  * Convenience factory function for [TestDispatcherProvider], creating an implementation
  * where all properties point to the same underlying [TestCoroutineDispatcher].
  */
 @ExperimentalCoroutinesApi
-fun TestDispatcherProvider(dispatcher: TestCoroutineDispatcher): TestDispatcherProvider =
-  TestDispatcherProvider(
-    default = dispatcher,
-    io = dispatcher,
-    main = dispatcher,
-    mainImmediate = dispatcher,
-    unconfined = dispatcher
+fun TestDispatcherProvider(
+  dispatcher: CoroutineDispatcher
+): TestDispatcherProvider = TestDispatcherProvider(
+  default = dispatcher,
+  io = dispatcher,
+  main = dispatcher,
+  mainImmediate = dispatcher,
+  unconfined = dispatcher
+)
+
+/**
+ * "Basic" [TestDispatcherProvider] which mimics production behavior,
+ * without the automatic time control of [TestCoroutineDispatcher]
+ * and without the need for [Dispatchers.setMain](kotlinx.coroutines.test)
+ *
+ * The `default`, `io`, and `unconfined` properties just delegate to their counterparts in [Dispatchers].
+ *
+ * The `main` and `mainImmediate` properties share a single dispatcher and thread
+ * as they do with the `Dispatchers.setMain(...)` implementation from `kotlinx-coroutines-test`.
+ */
+@ExperimentalCoroutinesApi
+fun TestBasicDispatcherProvider(): TestDispatcherProvider {
+
+  @Suppress("EXPERIMENTAL_API_USAGE")
+  val mainThread = newSingleThreadContext("main thread proxy")
+
+  return TestDispatcherProvider(
+    default = Dispatchers.Default,
+    io = Dispatchers.IO,
+    main = mainThread,
+    mainImmediate = mainThread,
+    unconfined = Dispatchers.Unconfined
   )
 
+}

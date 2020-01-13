@@ -15,16 +15,20 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlin.coroutines.coroutineContext
 
 /**
  * Extracts the [DispatcherProvider] from the `coroutineContext` of the **collector** coroutine,
  * then uses its **default** [CoroutineDispatcher] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * See also: [flowOn]
+ * @see flowOn
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
@@ -37,7 +41,7 @@ public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
  * then uses its **io** [CoroutineDispatcher] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * See also: [flowOn]
+ * @see flowOn
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
@@ -50,7 +54,7 @@ public fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
  * then uses its **main** [CoroutineDispatcher] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * See also: [flowOn]
+ * @see flowOn
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
@@ -63,7 +67,7 @@ public fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
  * then uses its **mainImmediate** [CoroutineDispatcher] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * See also: [flowOn]
+ * @see flowOn
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
@@ -76,7 +80,7 @@ public fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
  * then uses its **unconfined** [CoroutineDispatcher] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * See also: [flowOn]
+ * @see flowOn
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnUnconfined(): Flow<T> = flow {

@@ -53,26 +53,26 @@ android {
 dependencies {
 
   implementation(Libs.Androidx.activity)
+  implementation(Libs.Androidx.appcompat)
+  implementation(Libs.Androidx.constraintLayout)
+  implementation(Libs.Androidx.coreKtx)
   implementation(Libs.Androidx.lifecycle)
   implementation(Libs.Androidx.lifecycleExtensions)
 
   implementation(Libs.JakeWharton.timber)
 
-  implementation(Libs.Kotlinx.Coroutines.core)
-  implementation(Libs.Kotlinx.Coroutines.android)
-
-  testImplementation(Libs.Kotlinx.Coroutines.test)
-
-  implementation(project(":dispatcher-provider"))
-  testImplementation(project(":dispatcher-provider-test"))
-
   implementation(Libs.Kotlin.stdlib)
-  implementation(Libs.Androidx.appcompat)
-  implementation(Libs.Androidx.coreKtx)
-  implementation(Libs.Androidx.constraintLayout)
+
+  implementation(Libs.Kotlinx.Coroutines.android)
+  implementation(Libs.Kotlinx.Coroutines.core)
+
+  implementation(Libs.RickBusarow.DispatcherProvider.core)
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.kluent)
+  testImplementation(Libs.Kotlinx.Coroutines.test)
+  testImplementation(Libs.RickBusarow.DispatcherProvider.test)
+
   androidTestImplementation(Libs.Androidx.testRunner)
   androidTestImplementation(Libs.Androidx.testEspressoCore)
 }
