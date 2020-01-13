@@ -24,7 +24,7 @@ object Versions {
   const val dagger = "2.25.2"
   const val kotlin = "1.3.61"
 
-  const val versionName = "1.0.0-beta01"
+  const val versionName = "1.0.0-beta02"
 }
 
 object BuildPlugins {
@@ -108,7 +108,7 @@ object Libs {
   object RickBusarow {
 
     object DispatcherProvider {
-      private const val version = "1.0.0-beta01"
+      private const val version = "1.+"
       const val core = "com.rickbusarow.dispatcherprovider:dispatcher-provider:$version"
       const val test = "com.rickbusarow.dispatcherprovider:dispatcher-provider-test:$version"
     }
