@@ -19,14 +19,15 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.amshove.kluent.*
 import org.junit.jupiter.api.*
+import java.util.concurrent.atomic.*
 
 @ExperimentalCoroutinesApi
 internal class TestDispatcherProviderTest {
 
-  val dispatcher = TestCoroutineDispatcher()
-
   @Nested
-  inner class `single arg factory` {
+  inner class `TestCoroutineDispatcher factory` {
+
+    val dispatcher = TestCoroutineDispatcher()
 
     @Test
     fun `provider arg should be assigned to all properties`() {
@@ -44,6 +45,71 @@ internal class TestDispatcherProviderTest {
     fun `factory should create TestDispatcherProvider`() {
 
       val provider = TestDispatcherProvider(dispatcher)
+
+      provider.shouldBeTypeOf<TestDispatcherProvider>()
+    }
+  }
+
+  @Nested
+  inner class `Basic CoroutineDispatcher factory` {
+
+    @Test
+    fun `default property should delegate to Dispatchers_Default`() {
+
+      val provider = TestBasicDispatcherProvider()
+
+      provider.default shouldBe Dispatchers.Default
+    }
+
+    @Test
+    fun `io property should delegate to Dispatchers_IO`() {
+
+      val provider = TestBasicDispatcherProvider()
+
+      provider.io shouldBe Dispatchers.IO
+    }
+
+    @Test
+    fun `main and mainImmediate properties should be a single dispatcher`() {
+
+      val provider = TestBasicDispatcherProvider()
+
+      provider.main shouldBe provider.mainImmediate
+
+      val count = AtomicInteger(1)
+
+      runBlocking(provider.main) {
+
+        provider.main.asExecutor()
+
+        count.getAndIncrement() shouldEqual 1
+
+        launch(provider.main) {
+          count.getAndIncrement() shouldEqual 2
+        }
+        launch(provider.mainImmediate) {
+          count.getAndIncrement() shouldEqual 3
+        }
+
+        // yielding only works because the above launches are already queued for dispatch on the same dispatcher
+        yield()
+        yield()
+        count.getAndIncrement() shouldEqual 4
+      }
+    }
+
+    @Test
+    fun `unconfined property should delegate to Dispatchers_Unconfined`() {
+
+      val provider = TestBasicDispatcherProvider()
+
+      provider.unconfined shouldBe Dispatchers.Unconfined
+    }
+
+    @Test
+    fun `factory should create TestDispatcherProvider`() {
+
+      val provider = TestDispatcherProvider()
 
       provider.shouldBeTypeOf<TestDispatcherProvider>()
     }
