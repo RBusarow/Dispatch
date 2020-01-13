@@ -15,8 +15,12 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `default`.
@@ -50,7 +54,7 @@ public interface UnconfinedCoroutineScope : CoroutineScope
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
  * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun DefaultCoroutineScope(
   job: Job = SupervisorJob(),
@@ -67,7 +71,7 @@ public fun DefaultCoroutineScope(
  * Any existing [ContinuationInterceptor] will be overwritten.
  * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun DefaultCoroutineScope(
   coroutineContext: CoroutineContext
@@ -82,7 +86,7 @@ public fun DefaultCoroutineScope(
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
  * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun IOCoroutineScope(
   job: Job = SupervisorJob(),
@@ -99,7 +103,7 @@ public fun IOCoroutineScope(
  * Any existing [ContinuationInterceptor] will be overwritten.
  * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun IOCoroutineScope(
   coroutineContext: CoroutineContext
@@ -114,7 +118,7 @@ public fun IOCoroutineScope(
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
  * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun MainCoroutineScope(
   job: Job = SupervisorJob(),
@@ -131,7 +135,7 @@ public fun MainCoroutineScope(
  * Any existing [ContinuationInterceptor] will be overwritten.
  * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun MainCoroutineScope(
   coroutineContext: CoroutineContext
@@ -146,7 +150,7 @@ public fun MainCoroutineScope(
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
  * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun MainImmediateCoroutineScope(
   job: Job = SupervisorJob(), dispatcherProvider:
@@ -165,7 +169,7 @@ public fun MainImmediateCoroutineScope(
  * Any existing [ContinuationInterceptor] will be overwritten.
  * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun MainImmediateCoroutineScope(
   coroutineContext: CoroutineContext
@@ -180,7 +184,7 @@ public fun MainImmediateCoroutineScope(
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
  * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun UnconfinedCoroutineScope(
   job: Job = SupervisorJob(),
@@ -197,7 +201,7 @@ public fun UnconfinedCoroutineScope(
  * Any existing [ContinuationInterceptor] will be overwritten.
  * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
  *
- * see also: [CoroutineScope]
+ * @see CoroutineScope
  */
 public fun UnconfinedCoroutineScope(
   coroutineContext: CoroutineContext
