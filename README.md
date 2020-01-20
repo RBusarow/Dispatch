@@ -13,7 +13,7 @@ class MyPresenter @Inject constructor(
   
   fun loopSomething() = coroutineScope.launchDefault { ... }
   
-  fun updateSomething() = coroutineScope.launchMainImmediate { ... }
+  suspend fun updateSomething() = withMainImmediate { ... }
 }
 ```
 
