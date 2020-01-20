@@ -264,6 +264,8 @@ dependepencies {
   
   // necessary for Android projects
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$currentCoroutinesVersion"
+  
+  // necessary for testing
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$currentCoroutinesVersion"
 
   implementation "com.rickbusarow.dispatcherprovider:dispatcher-provider:1.0.0-beta02"
