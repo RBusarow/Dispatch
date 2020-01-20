@@ -5,6 +5,8 @@
 Simpler coroutines which are type-safe, easier to test, and require less code.  Define your [CoroutineDispatchers][CoroutineDispatcher] once in a [CoroutineScope][CoroutineScope] factory and then never think about them again.
 
 ```Kotlin
+val presenter = MyPresenter(MainCoroutineScope())
+
 class MyPresenter @Inject constructor(
   val coroutineScope: MainCoroutineScope // <-- Main
 ) {
