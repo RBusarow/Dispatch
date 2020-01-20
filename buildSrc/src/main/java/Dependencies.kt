@@ -17,7 +17,7 @@ object Versions {
   const val ktlint = "0.35.0"
 
   const val compileSdk = 29
-  const val minSdk = "23"
+  const val minSdk = "24"
   const val targetSdk = 29
 
   const val gradleWrapper = "3.5.3"
