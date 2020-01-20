@@ -1,4 +1,4 @@
-[![Maven Central](DispatcherProvider.assets/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatcherprovider/dispatcher-provider)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatcherprovider/dispatcher-provider/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatcherprovider/dispatcher-provider)
 
 # DispatcherProvider
 
