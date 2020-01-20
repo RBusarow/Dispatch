@@ -2,7 +2,7 @@
 
 # DispatcherProvider
 
-Simpler coroutines which are type-safe, easier to test, and require less code.  Define your [CoroutineDispatchers][CoroutineDispatcher] once in a [CoroutineScope][CoroutineScope] factory and then never think about them again.
+Utilities for [kotlinx.coroutines][coroutines] which make them type-safe, easier to test, and require less code.  Define your [CoroutineDispatchers][CoroutineDispatcher] once in a [CoroutineScope][CoroutineScope] factory and then never think about them again.
 
 ```Kotlin
 val presenter = MyPresenter(MainCoroutineScope())
@@ -290,7 +290,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
+[coroutines]: https://github.com/Kotlin/kotlinx.coroutines
 [CoroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-coroutine-context/index.html
 [CoroutineContext.Element]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-coroutine-context/index.html#types
 [CoroutineContext.Key]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-coroutine-context/index.html#types
