@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+include(":android-lifecycle-runtime")
 include(":core")
 include(":core-test")
 include(":core-test-android")
