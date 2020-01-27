@@ -16,11 +16,11 @@
 package com.rickbusarow.dispatcherprovider.test
 
 import com.rickbusarow.dispatcherprovider.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import org.amshove.kluent.shouldBe
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import io.kotlintest.*
+import io.kotlintest.matchers.types.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.junit.jupiter.api.*
 
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeTest {
@@ -36,31 +36,31 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `TestProvidedCoroutineScope should implement DefaultCoroutineScope`() {
 
-      scope.shouldBeTypeOf<DefaultCoroutineScope>()
+      scope.shouldBeInstanceOf<DefaultCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement IOCoroutineScope`() {
 
-      scope.shouldBeTypeOf<IOCoroutineScope>()
+      scope.shouldBeInstanceOf<IOCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement MainCoroutineScope`() {
 
-      scope.shouldBeTypeOf<MainCoroutineScope>()
+      scope.shouldBeInstanceOf<MainCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement MainImmediateCoroutineScope`() {
 
-      scope.shouldBeTypeOf<MainImmediateCoroutineScope>()
+      scope.shouldBeInstanceOf<MainImmediateCoroutineScope>()
     }
 
     @Test
     fun `TestProvidedCoroutineScope should implement UnconfinedCoroutineScope`() {
 
-      scope.shouldBeTypeOf<UnconfinedCoroutineScope>()
+      scope.shouldBeInstanceOf<UnconfinedCoroutineScope>()
     }
   }
 

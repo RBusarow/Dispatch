@@ -69,10 +69,10 @@ dependencies {
   implementation(Libs.RickBusarow.DispatcherProvider.core)
 
   testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.kluent)
+  testImplementation(Libs.KotlinTest.junit4runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
   testImplementation(Libs.RickBusarow.DispatcherProvider.test)
 
   androidTestImplementation(Libs.Androidx.testRunner)
-  androidTestImplementation(Libs.Androidx.testEspressoCore)
+  androidTestImplementation(Libs.Androidx.espresso)
 }

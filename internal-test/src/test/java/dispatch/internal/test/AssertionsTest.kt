@@ -13,17 +13,11 @@
  * limitations under the License.
  */
 
-@file:Suppress("EXPERIMENTAL_API_USAGE")
+package dispatch.internal.test
 
-package com.rickbusarow.dispatcherprovider
-
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.test.assertFails
+import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
+import kotlin.test.*
 
 internal class AssertionsTest {
 
@@ -55,7 +49,7 @@ internal class AssertionsTest {
     }
 
     @Test
-    fun `receiver job as child of parameter should pass`() = runBlocking<Unit> a@{
+    fun `receiver job as child of parameter should pass`() = runBlocking a@{
 
       launch b@{
         this@b.coroutineContext[Job]!! shouldBeOrChildOf this@a.coroutineContext[Job]!!

@@ -13,11 +13,28 @@
  * limitations under the License.
  */
 
+object Plugins {
+
+  const val androidApplication = "com.android.application"
+  const val androidLibrary = "com.android.library"
+
+  const val atomicFu = "kotlinx-atomicfu"
+
+  const val dokka = "org.jetbrains.dokka"
+
+  const val javaLibrary = "java-library"
+
+  const val kotlin = "kotlin"
+  const val kotlinAndroid = "kotlin-android"
+  const val kotlinAndroidExtensions = "kotlin-android-extensions"
+}
+
 object Versions {
   const val ktlint = "0.35.0"
+  const val dokka = "0.10.0"
 
   const val compileSdk = 29
-  const val minSdk = "23"
+  const val minSdk = "21"
   const val targetSdk = 29
 
   const val gradleWrapper = "3.5.3"
@@ -28,6 +45,8 @@ object Versions {
 }
 
 object BuildPlugins {
+
+  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.1"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -45,9 +64,15 @@ object Libs {
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val coreKtx = "androidx.core:core-ktx:1.1.0"
-    const val lifecycle = "androidx.lifecycle:lifecycle-common-java8:2.1.0"
-    const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.1.0"
-    const val testEspressoCore = "androidx.test.espresso:espresso-core:3.2.0"
+    const val fragment = "androidx.fragment:fragment:1.2.0"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:1.2.0"
+    const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.0"
+    const val lifecycle = "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
     const val testRunner = "androidx.test:runner:1.2.0"
   }
 
@@ -76,8 +101,6 @@ object Libs {
     const val jUnit5Vintage = "org.junit.vintage:junit-vintage-engine:$version"
   }
 
-  const val kluent = "org.amshove.kluent:kluent:1.53"
-
   object Kotlin {
     private const val version = "1.3.61"
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
@@ -93,12 +116,14 @@ object Libs {
   }
 
   object Kotlinx {
+
     object Coroutines {
       private const val version = "1.3.3"
       const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
       const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
       const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
+
   }
 
   object MockK {

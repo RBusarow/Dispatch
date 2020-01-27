@@ -15,13 +15,12 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
+import io.kotlintest.*
+import io.kotlintest.matchers.types.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldEqual
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import java.util.concurrent.atomic.AtomicInteger
+import kotlinx.coroutines.test.*
+import org.junit.jupiter.api.*
+import java.util.concurrent.atomic.*
 
 @ExperimentalCoroutinesApi
 internal class TestDispatcherProviderTest {
@@ -84,19 +83,19 @@ internal class TestDispatcherProviderTest {
 
         provider.main.asExecutor()
 
-        count.getAndIncrement() shouldEqual 1
+        count.getAndIncrement() shouldBe 1
 
         launch(provider.main) {
-          count.getAndIncrement() shouldEqual 2
+          count.getAndIncrement() shouldBe 2
         }
         launch(provider.mainImmediate) {
-          count.getAndIncrement() shouldEqual 3
+          count.getAndIncrement() shouldBe 3
         }
 
         // yielding only works because the above launches are already queued for dispatch on the same dispatcher
         yield()
         yield()
-        count.getAndIncrement() shouldEqual 4
+        count.getAndIncrement() shouldBe 4
       }
     }
 

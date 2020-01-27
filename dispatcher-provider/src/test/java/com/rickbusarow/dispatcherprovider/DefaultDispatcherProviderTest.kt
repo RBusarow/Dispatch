@@ -15,18 +15,11 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.mockkStatic
-import io.mockk.unmockkStatic
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainCoroutineDispatcher
-import org.amshove.kluent.shouldBe
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import io.kotlintest.*
+import io.kotlintest.matchers.types.*
+import io.mockk.*
+import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
 
 internal class DispatcherProviderTest {
 
@@ -89,7 +82,8 @@ internal class DispatcherProviderTest {
     @Test
     fun `DispatcherProvider factory should create DefaultDispatcherProvider`() {
 
-      DispatcherProvider().shouldBeTypeOf<DefaultDispatcherProvider>()
+      DispatcherProvider()
+        .shouldBeTypeOf<DefaultDispatcherProvider>()
     }
   }
 
