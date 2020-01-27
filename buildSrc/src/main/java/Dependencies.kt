@@ -24,7 +24,7 @@ object Versions {
   const val dagger = "2.25.2"
   const val kotlin = "1.3.61"
 
-  const val versionName = "1.0.0-beta02"
+  const val versionName = "1.0.0-beta03"
 }
 
 object BuildPlugins {
