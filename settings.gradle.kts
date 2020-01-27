@@ -14,6 +14,7 @@
  */
 
 include(":android-lifecycle-runtime")
+include(":android-lifecycle-viewmodel")
 include(":core")
 include(":core-test")
 include(":core-test-android")
