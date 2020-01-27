@@ -13,9 +13,6 @@
  * limitations under the License.
  */
 
-include(":core")
-include(":core-test")
-include(":core-test-android")
-include(":extensions")
-include(":internal-test")
-include(":sample")
+package dispatch.test.android
+
+internal class IdlingDispatcherProviderTest

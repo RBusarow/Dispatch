@@ -13,9 +13,28 @@
  * limitations under the License.
  */
 
-include(":core")
-include(":core-test")
-include(":core-test-android")
-include(":extensions")
-include(":internal-test")
-include(":sample")
+package dispatch.test.android
+
+import org.junit.rules.*
+import org.junit.runner.*
+
+class IdlingCoroutineScopeRule(
+  private val factory: () -> IdlingCoroutineScope
+) : TestWatcher() {
+
+  lateinit var scope: IdlingCoroutineScope
+
+  override fun starting(description: Description?) {
+    super.starting(description)
+
+    scope = factory.invoke()
+
+    scope.countingDispatcherProvider.registerAllIdlingResources()
+  }
+
+  override fun finished(description: Description?) {
+    super.finished(description)
+
+    scope.countingDispatcherProvider.unregisterAllIdlingResources()
+  }
+}
