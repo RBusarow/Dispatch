@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.*
 
 buildscript {
 
@@ -26,6 +26,7 @@ buildscript {
   }
   dependencies {
     classpath(BuildPlugins.androidGradlePlugin)
+    classpath(BuildPlugins.atomicFu)
     classpath("com.github.ben-manes:gradle-versions-plugin:0.27.0")
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath("com.github.dcendents:android-maven-gradle-plugin:2.1")

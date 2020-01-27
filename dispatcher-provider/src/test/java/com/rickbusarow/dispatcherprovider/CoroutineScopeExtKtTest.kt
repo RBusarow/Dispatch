@@ -15,12 +15,12 @@
 
 package com.rickbusarow.dispatcherprovider
 
+import io.kotlintest.*
+import io.kotlintest.matchers.types.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import org.amshove.kluent.shouldBe
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.test.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class CoroutineScopeExtKtTest {
@@ -79,7 +79,7 @@ internal class CoroutineScopeExtKtTest {
 
       val scope = MainScope()
 
-      scope.dispatcherProvider.shouldBeTypeOf<DispatcherProvider>()
+      scope.dispatcherProvider.shouldBeInstanceOf<DispatcherProvider>()
     }
   }
 
@@ -99,7 +99,7 @@ internal class CoroutineScopeExtKtTest {
 
       val context: CoroutineContext = Job()
 
-      context.dispatcherProvider.shouldBeTypeOf<DispatcherProvider>()
+      context.dispatcherProvider.shouldBeInstanceOf<DispatcherProvider>()
     }
   }
 }

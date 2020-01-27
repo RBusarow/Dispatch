@@ -14,16 +14,13 @@
  */
 package com.rickbusarow.dispatcherprovider
 
+import io.kotlintest.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldEqual
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 import java.util.*
-import java.util.concurrent.atomic.AtomicInteger
-import kotlin.coroutines.CoroutineContext
+import java.util.concurrent.atomic.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class FlowTest {
@@ -155,7 +152,7 @@ internal class FlowTest {
       .flowOnUnconfined()
       .launchIn(originalScope)
 
-    dispatchCount.get() shouldEqual 2 // original dispatch + unconfined
+    dispatchCount.get() shouldBe 2 // original dispatch + unconfined
   }
 
   @Test
@@ -165,7 +162,7 @@ internal class FlowTest {
       .flowOnDefault()
       .launchIn(originalScope + testProvider.default)
 
-    dispatchCount.get() shouldEqual 1
+    dispatchCount.get() shouldBe 1
   }
 
   @Test
@@ -177,7 +174,7 @@ internal class FlowTest {
       .flowOn(testProvider.default)
       .launchIn(originalScope + testProvider.default)
 
-    dispatchCount.get() shouldEqual 1  // ChannelFlow does not re-dispatch for the same dispatcher
+    dispatchCount.get() shouldBe 1  // ChannelFlow does not re-dispatch for the same dispatcher
 
     dispatchCount.set(0)
 
@@ -187,7 +184,7 @@ internal class FlowTest {
       .flowOn(testProvider.main)
       .launchIn(originalScope + testProvider.default)
 
-    dispatchCount.get() shouldEqual 3  // sanity check -- switching should increment the count
+    dispatchCount.get() shouldBe 3  // sanity check -- switching should increment the count
   }
 
   @Test
@@ -201,7 +198,7 @@ internal class FlowTest {
       .take(1)
       .collect()
 
-    sourceProgress shouldEqual listOf(1, 2, 3, 4, 5)
+    sourceProgress shouldBe listOf(1, 2, 3, 4, 5)
   }
 
   inner class RecordingDispatcher(private val name: String) : CoroutineDispatcher() {

@@ -13,19 +13,17 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.dispatcherprovider
+package dispatch.internal.test
 
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.Job
-import org.amshove.kluent.shouldBeIn
-import org.amshove.kluent.shouldEqual
-import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
+import com.rickbusarow.dispatcherprovider.*
+import io.kotlintest.*
+import io.kotlintest.matchers.collections.*
+import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 fun Job.shouldBeSupervisorJob() {
 
-  this::class.simpleName shouldEqual "SupervisorJobImpl"
+  this::class.simpleName shouldBe "SupervisorJobImpl"
 }
 
 infix fun Job?.shouldBeOrChildOf(other: Job?) {
@@ -36,21 +34,16 @@ infix fun Job?.shouldBeOrChildOf(other: Job?) {
     return
   } else {
     other?.let { parameter ->
-      this shouldBeIn parameter.children.toList()
-    } ?: this shouldEqual other
+      parameter.children.toList() shouldContain this
+    } ?: this shouldBe other
   }
 }
 
 infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
   get(Job) shouldBeOrChildOf other[Job]
-  get(ContinuationInterceptor) shouldEqual other[ContinuationInterceptor]
-  get(CoroutineExceptionHandler) shouldEqual other[CoroutineExceptionHandler]
-  get(CoroutineName) shouldEqual other[CoroutineName]
-  get(DispatcherProvider) shouldEqual other[DispatcherProvider]
+  get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]
+  get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
+  get(CoroutineName) shouldBe other[CoroutineName]
+  get(DispatcherProvider) shouldBe other[DispatcherProvider]
 }
 
-inline fun <reified T> Any?.shouldBeTypeOf() {
-  if (this !is T) throw AssertionError(
-    "Expected $this to be an instance or subclass of ${T::class.simpleName}"
-  )
-}

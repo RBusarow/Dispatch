@@ -15,17 +15,13 @@
 
 package com.rickbusarow.dispatcherprovider
 
+import dispatch.internal.test.*
+import io.kotlintest.*
+import io.kotlintest.matchers.types.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.amshove.kluent.shouldBe
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
+import kotlinx.coroutines.test.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
@@ -137,7 +133,7 @@ internal class CoroutineScopesTest {
 
         val scope = DefaultCoroutineScope(originContext)
 
-        scope.coroutineContext shouldBe originContext + Dispatchers.Default
+        scope.coroutineContext shouldEqualFolded originContext + Dispatchers.Default
       }
     }
   }
@@ -229,7 +225,7 @@ internal class CoroutineScopesTest {
 
         val scope = IOCoroutineScope(originContext)
 
-        scope.coroutineContext shouldBe originContext + Dispatchers.IO
+        scope.coroutineContext shouldEqualFolded originContext + Dispatchers.IO
       }
     }
   }
@@ -320,7 +316,7 @@ internal class CoroutineScopesTest {
 
         val scope = MainCoroutineScope(originContext)
 
-        scope.coroutineContext shouldBe originContext + Dispatchers.Main
+        scope.coroutineContext shouldEqualFolded originContext + Dispatchers.Main
       }
     }
 
@@ -359,8 +355,7 @@ internal class CoroutineScopesTest {
       @Test
       fun `dispatcherProvider arg should be used in coroutineContext`() {
 
-        val scope =
-          MainImmediateCoroutineScope(dispatcherProvider = dispatcherProvider)
+        val scope = MainImmediateCoroutineScope(dispatcherProvider = dispatcherProvider)
 
         scope.coroutineContext[DispatcherProvider] shouldBe dispatcherProvider
       }
@@ -415,7 +410,7 @@ internal class CoroutineScopesTest {
 
         val scope = MainImmediateCoroutineScope(originContext)
 
-        scope.coroutineContext shouldBe originContext + Dispatchers.Main.immediate
+        scope.coroutineContext shouldEqualFolded originContext + Dispatchers.Main.immediate
       }
     }
   }
@@ -452,8 +447,7 @@ internal class CoroutineScopesTest {
       @Test
       fun `dispatcherProvider arg should be used in coroutineContext`() {
 
-        val scope =
-          UnconfinedCoroutineScope(dispatcherProvider = dispatcherProvider)
+        val scope = UnconfinedCoroutineScope(dispatcherProvider = dispatcherProvider)
 
         scope.coroutineContext[DispatcherProvider] shouldBe dispatcherProvider
       }
@@ -507,24 +501,8 @@ internal class CoroutineScopesTest {
 
         val scope = UnconfinedCoroutineScope(originContext)
 
-        scope.coroutineContext shouldBe originContext + Dispatchers.Unconfined
+        scope.coroutineContext shouldEqualFolded originContext + Dispatchers.Unconfined
       }
-    }
-  }
-
-  infix fun CoroutineContext.shouldBe(other: CoroutineContext) {
-
-    val keys = listOf(
-      Job,
-      ContinuationInterceptor,
-      CoroutineName,
-      CoroutineExceptionHandler,
-      DispatcherProvider
-    )
-
-    keys.forEach { key ->
-
-      other[key] shouldBe get(key)
     }
   }
 }

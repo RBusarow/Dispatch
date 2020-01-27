@@ -15,21 +15,13 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
-import com.rickbusarow.dispatcherprovider.DispatcherProvider
-import com.rickbusarow.dispatcherprovider.dispatcherProvider
-import com.rickbusarow.dispatcherprovider.launchMain
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import org.amshove.kluent.shouldBe
-import org.amshove.kluent.shouldNotBe
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
-import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
+import com.rickbusarow.dispatcherprovider.*
+import io.kotlintest.*
+import io.kotlintest.matchers.types.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal class BuildersTest {
@@ -127,7 +119,7 @@ internal class BuildersTest {
     @Test
     fun `CoroutineScope receiver should be TestCoroutineScope`() = runBlockingTestProvided {
 
-      this.shouldBeTypeOf<TestCoroutineScope>()
+      this.shouldBeInstanceOf<TestCoroutineScope>()
     }
 
     @Test

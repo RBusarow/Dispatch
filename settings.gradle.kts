@@ -15,4 +15,5 @@
 
 include(":dispatcher-provider")
 include(":dispatcher-provider-test")
+include(":internal-test")
 include(":sample")

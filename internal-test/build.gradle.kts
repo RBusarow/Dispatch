@@ -25,9 +25,9 @@ buildscript {
 }
 
 plugins {
-  id("java-library")
-  id("kotlin")
-  id("org.jetbrains.dokka").version("0.10.0")
+  id(Plugins.atomicFu)
+  id(Plugins.javaLibrary)
+  id(Plugins.kotlin)
 }
 
 tasks.test {
@@ -38,26 +38,15 @@ dependencies {
   implementation(Libs.Kotlin.stdlib)
 
   implementation(Libs.Kotlinx.Coroutines.core)
+
+  implementation(Libs.JUnit.jUnit5)
+  implementation(Libs.KotlinTest.junit4runner)
+
+  implementation(Libs.Kotlin.test)
+  implementation(Libs.Kotlin.testCommon)
+
   implementation(Libs.Kotlinx.Coroutines.test)
 
   implementation(project(":dispatcher-provider"))
 
-  testImplementation(project(":internal-test"))
-
-  testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit4runner)
-
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-
-  testImplementation(Libs.MockK.core)
-
 }
-
-ext {
-  extra["PUBLISH_GROUP_ID"] = "com.rickbusarow.dispatcherprovider"
-  extra["PUBLISH_ARTIFACT_ID"] = "dispatcher-provider-test"
-  extra["PUBLISH_VERSION"] = Versions.versionName
-}
-
-apply("${rootProject.projectDir}/scripts/publish-mavencentral.gradle")
