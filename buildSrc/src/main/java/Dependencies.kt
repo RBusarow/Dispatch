@@ -112,7 +112,7 @@ object Libs {
   }
 
   object KotlinTest {
-    const val junit4runner = "io.kotlintest:kotlintest-runner-junit4:3.3.3"
+    const val junit4runner = "io.kotlintest:kotlintest-runner-junit5:3.3.3"
   }
 
   object Kotlinx {
