@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-include(":dispatcher-provider")
-include(":dispatcher-provider-test")
+include(":core")
+include(":core-test")
 include(":extensions")
 include(":internal-test")
 include(":sample")

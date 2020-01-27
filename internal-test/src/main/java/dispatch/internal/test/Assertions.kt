@@ -15,7 +15,7 @@
 
 package dispatch.internal.test
 
-import com.rickbusarow.dispatcherprovider.*
+import dispatch.core.*
 import io.kotlintest.*
 import io.kotlintest.matchers.collections.*
 import kotlinx.coroutines.*

@@ -15,7 +15,7 @@
 
 package dispatch.extensions
 
-import com.rickbusarow.dispatcherprovider.*
+import dispatch.core.*
 import io.kotlintest.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*

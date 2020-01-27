@@ -41,9 +41,9 @@ dependencies {
 
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(project(":dispatcher-provider"))
+  implementation(project(":core"))
 
-  testImplementation(project(":dispatcher-provider-test"))
+  testImplementation(project(":core-test"))
   testImplementation(project(":internal-test"))
 
   testImplementation(Libs.JUnit.jUnit5)
