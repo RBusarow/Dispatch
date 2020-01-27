@@ -18,23 +18,23 @@ package dispatch.test.android
 import org.junit.rules.*
 import org.junit.runner.*
 
-class IdlingCoroutineScopeRule(
-  private val factory: () -> IdlingCoroutineScope
+class IdlingDispatcherProviderRule(
+  private val factory: () -> IdlingDispatcherProvider
 ) : TestWatcher() {
 
-  lateinit var scope: IdlingCoroutineScope
+  lateinit var dispatcherProvider: IdlingDispatcherProvider
 
   override fun starting(description: Description?) {
     super.starting(description)
 
-    scope = factory.invoke()
+    dispatcherProvider = factory.invoke()
 
-    scope.countingDispatcherProvider.registerAllIdlingResources()
+    dispatcherProvider.registerAllIdlingResources()
   }
 
   override fun finished(description: Description?) {
     super.finished(description)
 
-    scope.countingDispatcherProvider.unregisterAllIdlingResources()
+    dispatcherProvider.unregisterAllIdlingResources()
   }
 }

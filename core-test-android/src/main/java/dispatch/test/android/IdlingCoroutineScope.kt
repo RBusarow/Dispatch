@@ -20,7 +20,7 @@ import kotlinx.coroutines.*
 
 interface IdlingCoroutineScope : CoroutineScope {
 
-  val countingDispatcherProvider: IdlingDispatcherProvider
+  val idlingDispatcherProvider: IdlingDispatcherProvider
 }
 
 interface DefaultIdlingCoroutineScope : IdlingCoroutineScope, DefaultCoroutineScope
@@ -34,7 +34,7 @@ fun IdlingCoroutineScope(
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): IdlingCoroutineScope = object : IdlingCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.default + dispatcherProvider
-  override val countingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
+  override val idlingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
 }
 
 fun DefaultIdlingCoroutineScope(
@@ -42,7 +42,7 @@ fun DefaultIdlingCoroutineScope(
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): DefaultIdlingCoroutineScope = object : DefaultIdlingCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.default + dispatcherProvider
-  override val countingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
+  override val idlingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
 }
 
 fun IOIdlingCoroutineScope(
@@ -50,7 +50,7 @@ fun IOIdlingCoroutineScope(
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): IOIdlingCoroutineScope = object : IOIdlingCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.io + dispatcherProvider
-  override val countingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
+  override val idlingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
 }
 
 fun MainIdlingCoroutineScope(
@@ -58,7 +58,7 @@ fun MainIdlingCoroutineScope(
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): MainIdlingCoroutineScope = object : MainIdlingCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.main + dispatcherProvider
-  override val countingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
+  override val idlingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
 }
 
 fun MainImmediateIdlingCoroutineScope(
@@ -67,7 +67,7 @@ fun MainImmediateIdlingCoroutineScope(
 ): MainImmediateIdlingCoroutineScope = object : MainImmediateIdlingCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.mainImmediate +
       dispatcherProvider
-  override val countingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
+  override val idlingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
 }
 
 fun UnconfinedIdlingCoroutineScope(
@@ -75,5 +75,5 @@ fun UnconfinedIdlingCoroutineScope(
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): UnconfinedIdlingCoroutineScope = object : UnconfinedIdlingCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.unconfined + dispatcherProvider
-  override val countingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
+  override val idlingDispatcherProvider: IdlingDispatcherProvider = dispatcherProvider
 }
