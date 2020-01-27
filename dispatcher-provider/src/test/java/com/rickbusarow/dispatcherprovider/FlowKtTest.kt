@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Rick Busarow
+ * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,11 +16,14 @@ package com.rickbusarow.dispatcherprovider
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import org.amshove.kluent.*
-import org.junit.jupiter.api.*
+import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldEqual
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import java.util.*
-import java.util.concurrent.atomic.*
-import kotlin.coroutines.*
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.coroutines.CoroutineContext
 
 @ExperimentalCoroutinesApi
 internal class FlowTest {
