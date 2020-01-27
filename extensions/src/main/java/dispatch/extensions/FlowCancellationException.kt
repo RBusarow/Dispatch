@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-include(":dispatcher-provider")
-include(":dispatcher-provider-test")
-include(":extensions")
-include(":internal-test")
-include(":sample")
+package dispatch.extensions
+
+import kotlinx.coroutines.*
+
+internal class FlowCancellationException : CancellationException("Flow was aborted")
