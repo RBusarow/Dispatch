@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Rick Busarow
+ * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,16 +17,22 @@
 
 package com.rickbusarow.dispatcherprovidersample
 
-import android.annotation.*
-import android.os.*
-import androidx.activity.*
-import androidx.appcompat.app.*
-import androidx.lifecycle.*
+import android.annotation.SuppressLint
+import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.rickbusarow.dispatcherprovider.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import timber.log.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.plus
+import timber.log.Timber
 
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {

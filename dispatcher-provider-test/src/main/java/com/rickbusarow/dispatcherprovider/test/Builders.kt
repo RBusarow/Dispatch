@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Rick Busarow
+ * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,10 +15,16 @@
 
 package com.rickbusarow.dispatcherprovider.test
 
-import com.rickbusarow.dispatcherprovider.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import kotlin.coroutines.*
+import com.rickbusarow.dispatcherprovider.DispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.runBlockingTest
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 /**
  * Delegates to [runBlocking], but injects a [DispatcherProvider] into the created [CoroutineScope].

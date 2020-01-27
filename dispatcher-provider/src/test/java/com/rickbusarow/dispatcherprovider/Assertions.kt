@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Rick Busarow
+ * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,9 +15,13 @@
 
 package com.rickbusarow.dispatcherprovider
 
-import kotlinx.coroutines.*
-import org.amshove.kluent.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Job
+import org.amshove.kluent.shouldBeIn
+import org.amshove.kluent.shouldEqual
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
 
 fun Job.shouldBeSupervisorJob() {
 
