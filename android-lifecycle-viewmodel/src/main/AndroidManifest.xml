@@ -13,4 +13,4 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.rickbusarow.dispatcherprovider.test.android" />
+<manifest package="dispatch.android.viewmodel" />

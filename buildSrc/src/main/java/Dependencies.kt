@@ -59,6 +59,16 @@ object BuildPlugins {
 
 object Libs {
 
+  object Lint {
+
+    private const val version = "26.5.3"
+
+    const val api = "com.android.tools.lint:lint-api:26.5.3"
+    const val checks = "com.android.tools.lint:lint-checks:26.5.3"
+    const val core = "com.android.tools.lint:lint:26.5.3"
+    const val tests = "com.android.tools.lint:lint-tests:26.5.3"
+  }
+
   object Androidx {
     const val activity = "androidx.activity:activity-ktx:1.0.0"
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
@@ -67,7 +77,7 @@ object Libs {
     const val fragment = "androidx.fragment:fragment:1.2.0"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:1.2.0"
     const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.0"
-    const val lifecycle = "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    const val lifecycle = "androidx.lifecycle:lifecycle-common:2.2.0"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
     const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"

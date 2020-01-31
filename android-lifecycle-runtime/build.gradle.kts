@@ -55,6 +55,8 @@ android {
 
 dependencies {
 
+  lintPublish(project(":android-lifecycle-runtime-lint"))
+
   implementation(Libs.Androidx.lifecycle)
   testImplementation(Libs.Androidx.lifecycleRuntime)
 

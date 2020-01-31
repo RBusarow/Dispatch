@@ -53,7 +53,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
       var executed = false
 
-      scope.launchWhileCreated { executed = true }
+      scope.launchWhenCreated { executed = true }
 
       executed shouldBe true
     }
@@ -65,7 +65,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
       var executed = false
 
-      scope.launchWhileCreated { executed = true }
+      scope.launchWhenCreated { executed = true }
 
       executed shouldBe false
     }
@@ -79,7 +79,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      scope.launchWhileCreated {
+      scope.launchWhenCreated {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -107,7 +107,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
       var executed = false
 
 
-      scope.launchWhileStarted { executed = true }
+      scope.launchWhenStarted { executed = true }
 
       executed shouldBe true
     }
@@ -131,7 +131,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
           var executed = false
 
 
-          scope.launchWhileStarted { executed = true }
+          scope.launchWhenStarted { executed = true }
 
           executed shouldBe false
         }
@@ -147,7 +147,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
 
-      scope.launchWhileStarted {
+      scope.launchWhenStarted {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -175,7 +175,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
       var executed = false
 
 
-      scope.launchWhileResumed { executed = true }
+      scope.launchWhenResumed { executed = true }
 
       executed shouldBe true
     }
@@ -201,7 +201,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
           var executed = false
 
 
-          scope.launchWhileResumed { executed = true }
+          scope.launchWhenResumed { executed = true }
 
           executed shouldBe false
         }
@@ -216,7 +216,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      scope.launchWhileResumed {
+      scope.launchWhenResumed {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }

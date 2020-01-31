@@ -25,7 +25,7 @@ import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 
 @Suppress("EXPERIMENTAL_API_USAGE")
-internal fun <T> LifecycleCoroutineScope.launchOnlyWhile(
+internal fun <T> LifecycleCoroutineScope.launchOnlyWhen(
   minimumState: Lifecycle.State, block: suspend CoroutineScope.() -> T
 ): Job = callbackFlow<Boolean> {
 

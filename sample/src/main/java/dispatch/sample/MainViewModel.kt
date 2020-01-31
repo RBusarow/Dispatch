@@ -13,10 +13,12 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.dispatcherprovidersample
+package dispatch.sample
 
 import androidx.lifecycle.*
-import com.rickbusarow.dispatcherprovider.*
+import androidx.lifecycle.lifecycleScope
+import dispatch.android.*
+import dispatch.core.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -57,5 +59,30 @@ class MainViewModel(
     super.onCleared()
 
     coroutineScope.cancel()
+  }
+}
+
+class XMLHTTPRequest
+
+val foo = XMLHTTPRequest()
+
+class SomeFragment : LifecycleOwner {
+
+  init {
+
+    lifecycleScope.launchWhenResumed {
+
+    }
+    foo().launchWhenResumed {
+
+    }
+  }
+
+  fun bar() = Unit
+
+  fun fo2o() = bar()
+
+  override fun getLifecycle(): Lifecycle {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 }

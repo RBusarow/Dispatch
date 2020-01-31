@@ -57,6 +57,7 @@ dependencies {
   implementation(Libs.Androidx.constraintLayout)
   implementation(Libs.Androidx.coreKtx)
   implementation(Libs.Androidx.lifecycle)
+  implementation(Libs.Androidx.lifecycleRuntime)
   implementation(Libs.Androidx.lifecycleExtensions)
 
   implementation(Libs.JakeWharton.timber)
@@ -66,12 +67,20 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(Libs.RickBusarow.DispatcherProvider.core)
+//  lintChecks(project(":android-lifecycle-runtime-lint"))
+
+  implementation(project(":android-lifecycle-runtime"))
+  implementation(project(":android-lifecycle-viewmodel"))
+  implementation(project(":core"))
+  testImplementation(project(":core-test-android"))
+  implementation(project(":extensions"))
+
+//  implementation(Libs.RickBusarow.DispatcherProvider.core)
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit4runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
-  testImplementation(Libs.RickBusarow.DispatcherProvider.test)
+//  testImplementation(Libs.RickBusarow.DispatcherProvider.test)
 
   androidTestImplementation(Libs.Androidx.testRunner)
   androidTestImplementation(Libs.Androidx.espresso)

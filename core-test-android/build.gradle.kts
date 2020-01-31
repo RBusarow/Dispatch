@@ -61,6 +61,7 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":core"))
+  api(project(":core-test"))
 
   implementation(Libs.Androidx.testRunner)
   implementation(Libs.Androidx.espresso)

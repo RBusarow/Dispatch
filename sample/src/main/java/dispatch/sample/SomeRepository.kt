@@ -13,12 +13,24 @@
  * limitations under the License.
  */
 
-include(":android-lifecycle-runtime")
-include(":android-lifecycle-runtime-lint")
-include(":android-lifecycle-viewmodel")
-include(":core")
-include(":core-test")
-include(":core-test-android")
-include(":extensions")
-include(":internal-test")
-include(":sample")
+package dispatch.sample
+
+import dispatch.core.*
+import kotlinx.coroutines.*
+
+/**
+ * This would normally a singleton,
+ * but we don't have a DI framework here, so we'll just _suspend_ disbelief.
+ */
+class SomeRepository(private val coroutineScope: IOCoroutineScope) {
+
+  suspend fun getSomethingExpensive() = withIO {
+    delay(5000)
+    "suspend function is complete!"
+  }
+
+  fun getSomethingExpensiveUnstructured() = coroutineScope.asyncIO {
+    delay(5000)
+    "deferred function is complete!"
+  }
+}

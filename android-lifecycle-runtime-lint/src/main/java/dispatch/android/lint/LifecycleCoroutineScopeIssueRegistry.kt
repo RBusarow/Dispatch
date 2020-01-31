@@ -13,24 +13,18 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.dispatcherprovidersample
+package dispatch.android.lint
 
-import com.rickbusarow.dispatcherprovider.*
-import kotlinx.coroutines.*
+import com.android.tools.lint.client.api.*
+import com.android.tools.lint.detector.api.*
 
-/**
- * This would normally a singleton,
- * but we don't have a DI framework here, so we'll just _suspend_ disbelief.
- */
-class SomeRepository(private val coroutineScope: IOCoroutineScope) {
+class LifecycleCoroutineScopeIssueRegistry : IssueRegistry() {
 
-  suspend fun getSomethingExpensive() = withIO {
-    delay(5000)
-    "suspend function is complete!"
-  }
-
-  fun getSomethingExpensiveUnstructured() = coroutineScope.asyncIO {
-    delay(5000)
-    "deferred function is complete!"
-  }
+  override val api = CURRENT_API
+  override val issues
+    get() = listOf(
+      ISSUE_ANDROID_X_LIFECYCLE_SCOPE
+    )
 }
+
+

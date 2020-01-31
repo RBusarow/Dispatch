@@ -35,6 +35,19 @@ val LifecycleOwner.lifecycleScope: LifecycleCoroutineScope
   get() = LifecycleCoroutineScopeStore.get(this.lifecycle)
 
 /**
+ * [CoroutineScope] instance for the [LifecycleOwner].
+ * By default, it uses the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher.
+ *
+ * The `lifecycleScope` instance is created automatically upon first access,
+ * from the factory set in [LifecycleScopeFactory].
+ *
+ * The type of [CoroutineScope] created is configurable via [LifecycleScopeFactory.set].
+ *
+ * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
+ */
+fun LifecycleOwner.foo() = lifecycleScope
+
+/**
  * [MainImmediateCoroutineScope] instance which is tied to a [Lifecycle].
  *
  * The [CoroutineScope] provides lifecycle-aware [launch] functions
@@ -72,9 +85,9 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhileCreated(
+  fun <T> launchWhenCreated(
     block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhile(Lifecycle.State.CREATED, block)
+  ): Job = launchOnlyWhen(Lifecycle.State.CREATED, block)
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
@@ -101,9 +114,9 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhileStarted(
+  fun <T> launchWhenStarted(
     block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhile(Lifecycle.State.STARTED, block)
+  ): Job = launchOnlyWhen(Lifecycle.State.STARTED, block)
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
@@ -130,8 +143,8 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhileResumed(
+  fun <T> launchWhenResumed(
     block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhile(Lifecycle.State.RESUMED, block)
+  ): Job = launchOnlyWhen(Lifecycle.State.RESUMED, block)
 
 }
