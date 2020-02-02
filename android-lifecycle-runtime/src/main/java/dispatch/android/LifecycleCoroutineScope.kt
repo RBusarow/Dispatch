@@ -72,8 +72,8 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchEveryCreate(
-    block: suspend CoroutineScope.() -> T
+  fun launchEveryCreate(
+    block: suspend CoroutineScope.() -> Unit
   ): Job = launchEvery(Lifecycle.State.CREATED, block)
 
   /**
@@ -101,8 +101,8 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchEveryStart(
-    block: suspend CoroutineScope.() -> T
+  fun launchEveryStart(
+    block: suspend CoroutineScope.() -> Unit
   ): Job = launchEvery(Lifecycle.State.STARTED, block)
 
   /**
@@ -130,8 +130,8 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchEveryResume(
-    block: suspend CoroutineScope.() -> T
+  fun launchEveryResume(
+    block: suspend CoroutineScope.() -> Unit
   ): Job = launchEvery(Lifecycle.State.RESUMED, block)
 
 }
