@@ -24,3 +24,5 @@ jobs:
           java-version: 1.8
       - name: all tests
         run: ./gradlew test
+      - name: lint
+        run: ./gradlew lint

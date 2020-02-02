@@ -35,19 +35,6 @@ val LifecycleOwner.lifecycleScope: LifecycleCoroutineScope
   get() = LifecycleCoroutineScopeStore.get(this.lifecycle)
 
 /**
- * [CoroutineScope] instance for the [LifecycleOwner].
- * By default, it uses the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher.
- *
- * The `lifecycleScope` instance is created automatically upon first access,
- * from the factory set in [LifecycleScopeFactory].
- *
- * The type of [CoroutineScope] created is configurable via [LifecycleScopeFactory.set].
- *
- * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
- */
-fun LifecycleOwner.foo() = lifecycleScope
-
-/**
  * [MainImmediateCoroutineScope] instance which is tied to a [Lifecycle].
  *
  * The [CoroutineScope] provides lifecycle-aware [launch] functions
@@ -56,7 +43,7 @@ fun LifecycleOwner.foo() = lifecycleScope
  * that state again will start a new [Job].
  */
 class LifecycleCoroutineScope(
-  val lifecycle: Lifecycle,
+  internal val lifecycle: Lifecycle,
   private val coroutineScope: MainImmediateCoroutineScope
 ) : MainImmediateCoroutineScope by coroutineScope {
 
@@ -76,7 +63,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifeycleScope.launchWhileCreated {
+   *     lifecycleScope.launchWhileCreated {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -85,9 +72,9 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhenCreated(
-    block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhen(Lifecycle.State.CREATED, block)
+  fun launchEveryCreate(
+    block: suspend CoroutineScope.() -> Unit
+  ): Job = launchEvery(Lifecycle.State.CREATED, block)
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
@@ -105,7 +92,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifeycleScope.launchWhileStarted {
+   *     lifecycleScope.launchWhileStarted {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -114,9 +101,9 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhenStarted(
-    block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhen(Lifecycle.State.STARTED, block)
+  fun launchEveryStart(
+    block: suspend CoroutineScope.() -> Unit
+  ): Job = launchEvery(Lifecycle.State.STARTED, block)
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
@@ -134,7 +121,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifeycleScope.launchWhileResumed {
+   *     lifecycleScope.launchWhileResumed {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -143,8 +130,8 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhenResumed(
-    block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhen(Lifecycle.State.RESUMED, block)
+  fun launchEveryResume(
+    block: suspend CoroutineScope.() -> Unit
+  ): Job = launchEvery(Lifecycle.State.RESUMED, block)
 
 }

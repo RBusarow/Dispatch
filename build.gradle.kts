@@ -51,13 +51,19 @@ tasks.register("clean").configure {
 subprojects {
   tasks.withType<KotlinCompile>()
     .configureEach {
-      kotlinOptions.jvmTarget = "1.6"
-      // https://youtrack.jetbrains.com/issue/KT-24946
-      // kotlinOptions.freeCompilerArgs = listOf(
-      //     "-progressive",
-      //     "-Xskip-runtime-version-check",
-      //     "-Xdisable-default-scripting-plugin",
-      //     "-Xuse-experimental=kotlin.Experimental"
-      // )
+
+      kotlinOptions {
+        allWarningsAsErrors = true
+
+        jvmTarget = "1.6"
+
+        // https://youtrack.jetbrains.com/issue/KT-24946
+        // freeCompilerArgs = listOf(
+        //     "-progressive",
+        //     "-Xskip-runtime-version-check",
+        //     "-Xdisable-default-scripting-plugin",
+        //     "-Xuse-experimental=kotlin.Experimental"
+        // )
+      }
     }
 }
