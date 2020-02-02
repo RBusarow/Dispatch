@@ -44,34 +44,34 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
   }
 
   @Nested
-  inner class `launch only created` {
+  inner class `launch every create` {
 
     @Test
-    fun `added lambda should immediately execute if already created`() = runBlocking {
+    fun `block should immediately execute if already created`() = runBlocking {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
       var executed = false
 
-      scope.launchWhileCreated { executed = true }
+      scope.launchEveryCreate { executed = true }
 
       executed shouldBe true
     }
 
     @Test
-    fun `added lambda should not immediately execute if screen is not created`() = runBlocking {
+    fun `block should not immediately execute if screen is not created`() = runBlocking {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
       var executed = false
 
-      scope.launchWhileCreated { executed = true }
+      scope.launchEveryCreate { executed = true }
 
       executed shouldBe false
     }
 
     @Test
-    fun `added lambda should stop when screen is destroyed`() = runBlocking {
+    fun `block should stop when screen is destroyed`() = runBlocking {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -79,7 +79,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      scope.launchWhileCreated {
+      scope.launchEveryCreate {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -97,23 +97,22 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
   }
 
   @Nested
-  inner class `launch only started` {
+  inner class `launch every start` {
 
     @Test
-    fun `added lambda should immediately execute if already started`() = runBlocking {
+    fun `block should immediately execute if already started`() = runBlocking {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
       var executed = false
 
-
-      scope.launchWhileStarted { executed = true }
+      scope.launchEveryStart { executed = true }
 
       executed shouldBe true
     }
 
     @Test
-    fun `added lambda should not immediately execute if screen is not started`() = runBlocking {
+    fun `block should not immediately execute if screen is not started`() = runBlocking {
 
       Lifecycle.Event.values()
         .filter {
@@ -130,15 +129,14 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
           var executed = false
 
-
-          scope.launchWhileStarted { executed = true }
+          scope.launchEveryStart { executed = true }
 
           executed shouldBe false
         }
     }
 
     @Test
-    fun `added lambda should stop when screen is stopped`() = runBlocking {
+    fun `block should stop when screen is stopped`() = runBlocking {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -146,8 +144,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
-
-      scope.launchWhileStarted {
+      scope.launchEveryStart {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -165,23 +162,22 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
   }
 
   @Nested
-  inner class `launch only resumed` {
+  inner class `launch every resume` {
 
     @Test
-    fun `added lambda should immediately execute if already resumed`() = runBlocking {
+    fun `block should immediately execute if already resumed`() = runBlocking {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       var executed = false
 
-
-      scope.launchWhileResumed { executed = true }
+      scope.launchEveryResume { executed = true }
 
       executed shouldBe true
     }
 
     @Test
-    fun `added lambda should not immediately execute if screen is not resumed`() = runBlocking {
+    fun `block should not immediately execute if screen is not resumed`() = runBlocking {
 
       Lifecycle.Event.values()
         .filter {
@@ -200,15 +196,14 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
           var executed = false
 
-
-          scope.launchWhileResumed { executed = true }
+          scope.launchEveryResume { executed = true }
 
           executed shouldBe false
         }
     }
 
     @Test
-    fun `added lambda should stop when screen is paused`() = runBlocking {
+    fun `block should stop when screen is paused`() = runBlocking {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -216,7 +211,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      scope.launchWhileResumed {
+      scope.launchEveryResume {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
