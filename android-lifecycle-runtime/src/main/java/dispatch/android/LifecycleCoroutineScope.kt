@@ -43,7 +43,7 @@ val LifecycleOwner.lifecycleScope: LifecycleCoroutineScope
  * that state again will start a new [Job].
  */
 class LifecycleCoroutineScope(
-  val lifecycle: Lifecycle,
+  internal val lifecycle: Lifecycle,
   private val coroutineScope: MainImmediateCoroutineScope
 ) : MainImmediateCoroutineScope by coroutineScope {
 
@@ -63,7 +63,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifeycleScope.launchWhileCreated {
+   *     lifecycleScope.launchWhileCreated {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -72,9 +72,9 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhileCreated(
-    block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhile(Lifecycle.State.CREATED, block)
+  fun launchEveryCreate(
+    block: suspend CoroutineScope.() -> Unit
+  ): Job = launchEvery(Lifecycle.State.CREATED, block)
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
@@ -92,7 +92,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifeycleScope.launchWhileStarted {
+   *     lifecycleScope.launchWhileStarted {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -101,9 +101,9 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhileStarted(
-    block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhile(Lifecycle.State.STARTED, block)
+  fun launchEveryStart(
+    block: suspend CoroutineScope.() -> Unit
+  ): Job = launchEvery(Lifecycle.State.STARTED, block)
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
@@ -121,7 +121,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifeycleScope.launchWhileResumed {
+   *     lifecycleScope.launchWhileResumed {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -130,8 +130,8 @@ class LifecycleCoroutineScope(
    * }
    *```
    */
-  fun <T> launchWhileResumed(
-    block: suspend CoroutineScope.() -> T
-  ): Job = launchOnlyWhile(Lifecycle.State.RESUMED, block)
+  fun launchEveryResume(
+    block: suspend CoroutineScope.() -> Unit
+  ): Job = launchEvery(Lifecycle.State.RESUMED, block)
 
 }
