@@ -46,13 +46,25 @@ import kotlin.coroutines.*
  * will throw an [UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
+ * ### Requires JUnit 4.
+ * ```
+ * dependencies {
+ *   testImplementation "junit:junit:4.12"
+ *   -- or --
+ *   testImplementation "org.junit.vintage:junit-vintage-engine:5.5.1"
+ * }
+ * ```
+ * @param factory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
+ * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
+ *
  * @see TestRule
  * @see TestCoroutineScope
  * @see TestProvidedCoroutineScope
  */
 @ExperimentalCoroutinesApi
-class TestCoroutineRule : TestWatcher(),
-  TestProvidedCoroutineScope by TestProvidedCoroutineScope() {
+class TestCoroutineRule(
+  factory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
+) : TestWatcher(), TestProvidedCoroutineScope by factory() {
 
   val dispatcher = coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
 
