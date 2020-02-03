@@ -43,6 +43,7 @@ dependencies {
 
   implementation(project(":core"))
 
+  implementation(Libs.JUnit.jUnit4)
   implementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit4runner)
 
