@@ -112,7 +112,7 @@ object Libs {
   }
 
   object KotlinTest {
-    const val junit4runner = "io.kotlintest:kotlintest-runner-junit5:3.3.3"
+    const val junit5runner = "io.kotlintest:kotlintest-runner-junit5:3.3.3"
   }
 
   object Kotlinx {
@@ -139,4 +139,7 @@ object Libs {
     }
   }
 
+  object Robolectric {
+    const val core = "org.robolectric:robolectric:4.3.1"
+  }
 }

@@ -13,18 +13,36 @@
  * limitations under the License.
  */
 
-package dispatch.test.android
+package dispatch.android.espresso
 
+import androidx.test.espresso.*
 import androidx.test.espresso.idling.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
+/**
+ * [IdlingResource] helper for coroutines.  This class simply wraps a delegate [CoroutineDispatcher]
+ * and keeps a running count of all coroutines it creates, decrementing the count when they complete.
+ *
+ * @param delegate The [CoroutineDispatcher] which will be used for actual dispatch.
+ * @see IdlingResource
+ * @see Espresso
+ * @see CoroutineDispatcher
+ */
 class IdlingDispatcher(
   private val delegate: CoroutineDispatcher
 ) : CoroutineDispatcher() {
 
+  /**
+   * The [CountingIdlingResource] which is responsible for [Espresso] functionality.
+   */
   val counter: CountingIdlingResource = CountingIdlingResource("IdlingResource for $this")
 
+  /**
+   * @return
+   * * true if the [counter]'s count is zero
+   * * false if the [counter]'s count is non-zero
+   */
   fun isIdle(): Boolean = counter.isIdleNow
 
   override fun dispatch(context: CoroutineContext, block: Runnable) {
