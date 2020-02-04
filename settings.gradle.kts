@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
+include(":android-espresso")
 include(":android-lifecycle-runtime")
 include(":android-lifecycle-viewmodel")
 include(":core")
 include(":core-test")
-include(":dispatch-android-espresso")
 include(":extensions")
 include(":internal-test")
 include(":sample")

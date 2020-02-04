@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dispatch.android.espresso.IdlingDispatcherProviderRuleTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-02-04T05:44:35" hostname="admins-MacBook-Pro.local" time="6.953">
+  <properties/>
+  <testcase name="dispatcherProvider should be registered with IdlingRegistry before test begins" classname="dispatch.android.espresso.IdlingDispatcherProviderRuleTest" time="6.821"/>
+  <testcase name="rule's DispatcherProvider should be what is returned by the factory" classname="dispatch.android.espresso.IdlingDispatcherProviderRuleTest" time="0.132"/>
+  <system-out><![CDATA[WARNING: No manifest file found at ./AndroidManifest.xml.
+Falling back to the Android OS resources only.
+To remove this warning, annotate your test class with @Config(manifest=Config.NONE).
+[Robolectric] dispatch.android.espresso.IdlingDispatcherProviderRuleTest.dispatcherProvider should be registered with IdlingRegistry before test begins: sdk=16; resources=LEGACY
+[Robolectric] NOTICE: legacy resources mode is deprecated; see http://robolectric.org/migrating/#migrating-to-40
+[Robolectric] dispatch.android.espresso.IdlingDispatcherProviderRuleTest.rule's DispatcherProvider should be what is returned by the factory: sdk=16; resources=LEGACY
+[Robolectric] NOTICE: legacy resources mode is deprecated; see http://robolectric.org/migrating/#migrating-to-40
+]]></system-out>
+  <system-err><![CDATA[[Robolectric] WARN: Android SDK 29 requires Java 9 (have Java 8). Tests won't be run on SDK 29 unless explicitly requested.
+No such manifest file: ./AndroidManifest.xml
+]]></system-err>
+</testsuite>
