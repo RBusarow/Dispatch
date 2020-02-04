@@ -40,7 +40,7 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit4runner)
+  testImplementation(Libs.KotlinTest.junit5runner)
 
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)

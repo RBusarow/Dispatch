@@ -41,7 +41,7 @@ dependencies {
 
   implementation(Libs.JUnit.jUnit5)
   implementation(Libs.JUnit.jUnit5Vintage)
-  implementation(Libs.KotlinTest.junit4runner)
+  implementation(Libs.KotlinTest.junit5runner)
 
   implementation(Libs.Kotlin.test)
   implementation(Libs.Kotlin.testCommon)
