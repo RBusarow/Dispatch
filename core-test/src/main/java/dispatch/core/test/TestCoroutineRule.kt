@@ -22,7 +22,8 @@ import org.junit.runner.*
 import kotlin.coroutines.*
 
 /**
- * A basic JUnit 4 [TestRule] which creates a new [TestProvidedCoroutineScope] for each test.
+ * A basic JUnit 4 [TestRule] which creates a new [TestProvidedCoroutineScope] for each test,
+ * sets [Dispatchers.Main], and calls [cleanupTestCoroutines] afterwards.
  *
  * The rule itself implements [TestProvidedCoroutineScope], so it can be used as follows:
  *

@@ -40,6 +40,7 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(Libs.JUnit.jUnit5)
+  implementation(Libs.JUnit.jUnit5Vintage)
   implementation(Libs.KotlinTest.junit4runner)
 
   implementation(Libs.Kotlin.test)

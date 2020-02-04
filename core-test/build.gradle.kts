@@ -52,6 +52,7 @@ dependencies {
 
   testImplementation(Libs.MockK.core)
 
+  testImplementation(project(":internal-test"))
 }
 
 ext {
