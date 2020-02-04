@@ -15,6 +15,7 @@
 
 package dispatch.core.test
 
+import dispatch.internal.test.*
 import io.kotlintest.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
@@ -37,11 +38,9 @@ class CoroutineTestCustomFactoryTest : CoroutineTest {
     customHistory.add(testScope)
   }
 
-  @AfterAll
-  fun afterAll() {
-
+  @AfterEach
+  fun afterEach() {
     customHistory.size shouldBe 1
-
   }
 
   @Test
@@ -52,12 +51,21 @@ class CoroutineTestCustomFactoryTest : CoroutineTest {
   }
 
   @Test
-  fun `this function exists so that we set testScope multiple times`() {
+  fun `runBlockingTest with default context should use testScope`() = runBlockingTest {
 
-    // TestScope should be set before every test.
-    // This function means that we set testScope twice, which allows us to check
-    // that the same instance is returned each time thanks to this custom factory.
+    // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
+    coroutineContext shouldEqualFolded testScope.coroutineContext + coroutineContext[Job]!!
+  }
 
-    // The check is done in afterAll().
+  @Test
+  fun `runBlockingTest with context arg should use testScope + context arg`() {
+
+    val job = Job()
+
+    runBlockingTest(job) {
+
+      // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
+      coroutineContext shouldEqualFolded testScope.coroutineContext + job
+    }
   }
 }

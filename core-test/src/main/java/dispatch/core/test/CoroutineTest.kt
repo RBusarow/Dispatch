@@ -73,6 +73,10 @@ interface CoroutineTest {
 
   var testScope: TestProvidedCoroutineScope
 
+  fun runBlockingTest(
+    context: CoroutineContext = EmptyCoroutineContext,
+    testBody: suspend TestCoroutineScope.() -> Unit
+  ): Unit = runBlockingTestProvided(testScope.coroutineContext + context, testBody)
 }
 
 /**
