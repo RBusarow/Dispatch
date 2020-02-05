@@ -17,7 +17,8 @@ plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
   id(Plugins.kotlinAndroidExtensions)
-  id(Plugins.dokka).version(Versions.dokka)
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 buildscript {

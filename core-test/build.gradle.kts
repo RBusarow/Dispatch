@@ -30,7 +30,8 @@ plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
-  id(Plugins.dokka).version(Versions.dokka)
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 tasks.test {
@@ -57,11 +58,3 @@ dependencies {
 
   testImplementation(project(":internal-test"))
 }
-
-ext {
-  extra["PUBLISH_GROUP_ID"] = "com.rickbusarow.dispatcherprovider"
-  extra["PUBLISH_ARTIFACT_ID"] = "dispatcher-provider-test"
-  extra["PUBLISH_VERSION"] = Versions.versionName
-}
-
-apply("${rootProject.projectDir}/scripts/publish-mavencentral.gradle")

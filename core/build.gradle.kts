@@ -21,13 +21,13 @@ buildscript {
   dependencies {
     classpath(BuildPlugins.kotlinGradlePlugin)
   }
-
 }
 
 plugins {
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
-  id(Plugins.dokka).version(Versions.dokka)
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 tasks.test {
@@ -52,11 +52,3 @@ dependencies {
   testImplementation(project(":internal-test"))
 
 }
-
-ext {
-  extra["PUBLISH_GROUP_ID"] = "com.rickbusarow.dispatcherprovider"
-  extra["PUBLISH_ARTIFACT_ID"] = "dispatcher-provider"
-  extra["PUBLISH_VERSION"] = Versions.versionName
-}
-
-apply("${rootProject.projectDir}/scripts/publish-mavencentral.gradle")

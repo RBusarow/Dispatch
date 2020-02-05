@@ -28,7 +28,8 @@ plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
-  id(Plugins.dokka).version(Versions.dokka)
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 tasks.test {

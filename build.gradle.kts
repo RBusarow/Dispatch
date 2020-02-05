@@ -13,11 +13,14 @@
  * limitations under the License.
  */
 
+import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
+import java.net.*
 
 buildscript {
 
   repositories {
+    mavenLocal()
     mavenCentral()
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     google()
@@ -29,18 +32,66 @@ buildscript {
     classpath(BuildPlugins.atomicFu)
     classpath("com.github.ben-manes:gradle-versions-plugin:0.27.0")
     classpath(BuildPlugins.kotlinGradlePlugin)
-    classpath("com.github.dcendents:android-maven-gradle-plugin:2.1")
-    classpath("io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.2")
+    classpath(BuildPlugins.gradleMavenPublish)
+    classpath(BuildPlugins.dokka)
   }
 }
-
-//apply("io.codearte.nexus-staging")
 
 allprojects {
   repositories {
     mavenCentral()
     google()
     jcenter()
+  }
+
+  afterEvaluate {
+    tasks.withType<DokkaTask> {
+
+      outputFormat = "gfm"
+      outputDirectory = "$rootDir/docs/kdoc"
+
+      configuration {
+
+        jdkVersion = 6
+        reportUndocumented = false
+        skipDeprecated = true
+        skipEmptyPackages = true
+
+        samples = listOf("samples")
+        includes = listOf("extra.md")
+
+        externalDocumentationLink {
+          url = URL("https://developer.android.com/reference/androidx/")
+          packageListUrl = URL("https://developer.android.com/reference/androidx/package-list")
+        }
+        externalDocumentationLink {
+          url = URL("https://developer.android.com/reference/")
+          packageListUrl =
+            URL("https://developer.android.com/reference/android/support/package-list")
+        }
+        externalDocumentationLink {
+          url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/")
+          packageListUrl =
+            URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/package-list")
+        }
+        externalDocumentationLink {
+          url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
+          packageListUrl =
+            URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/package-list")
+        }
+
+        sourceLink {
+          // Unix based directory relative path to the root of the project (where you execute gradle respectively).
+          path = "./"
+
+          // URL showing where the source code can be accessed through the web browser
+          url = "https://github.com/RBusarow/Dispatch/tree/master"
+
+          // Suffix which is used to append the line number to the URL. Use #L for GitHub
+          lineSuffix = "#L"
+        }
+      }
+    }
   }
 }
 
