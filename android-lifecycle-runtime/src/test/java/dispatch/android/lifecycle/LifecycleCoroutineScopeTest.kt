@@ -40,8 +40,7 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
     lifecycleOwner = LifecycleOwner { lifecycle }
     lifecycle = LifecycleRegistry(lifecycleOwner)
 
-    scope =
-      LifecycleCoroutineScope(lifecycle, testScope)
+    scope = LifecycleCoroutineScope(lifecycle, testScope)
   }
 
   @Nested

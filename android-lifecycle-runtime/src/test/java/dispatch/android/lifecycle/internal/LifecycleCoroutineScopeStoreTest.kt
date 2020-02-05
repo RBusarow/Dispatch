@@ -41,8 +41,7 @@ internal class LifecycleCoroutineScopeStoreTest : CoroutineTest {
     lifecycleOwner = LifecycleOwner { lifecycle }
     lifecycle = LifecycleRegistry(lifecycleOwner)
 
-    scope =
-      LifecycleCoroutineScope(lifecycle, testScope)
+    scope = LifecycleCoroutineScope(lifecycle, testScope)
 
     lifecycle.currentState shouldBe Lifecycle.State.INITIALIZED
   }
