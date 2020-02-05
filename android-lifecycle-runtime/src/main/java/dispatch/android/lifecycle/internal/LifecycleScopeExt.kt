@@ -54,28 +54,6 @@ internal suspend fun <T> Lifecycle.onNext(
 }
 
 @Suppress("EXPERIMENTAL_API_USAGE")
-internal fun LifecycleCoroutineScope.launchNext(
-  minimumState: Lifecycle.State, block: suspend CoroutineScope.() -> Unit
-): Job = launch {
-  lifecycle.eventFlow(minimumState)
-    // Respond to every change in the Flow, cancelling execution of the previous onEach if it hasn't already finished.
-    // This is responsible for cancelling Jobs when a Lifecycle.State dips below the threshold,
-    // such as going from CREATED to DESTROYED in launchWhileCreated().
-    .onEachLatest { active ->
-
-      if (active) {
-        // Create a CoroutineScope which is tied to the receiver LifecycleCoroutineScope.
-        // This new CoroutineScope will be automatically cancelled when the parent scope is cancelled,
-        // or when onEachLatest executes for a new value.
-        coroutineScope { block() }
-      }
-    }
-    // Use the receiver LifecycleCoroutineScope's Job, but ensure that this coroutine is launch immediately from Main.
-    // Lifecycle observers can only be added/removed from Main.
-    .collectUntil { true }
-}
-
-@Suppress("EXPERIMENTAL_API_USAGE")
 internal fun LifecycleCoroutineScope.launchEvery(
   minimumState: Lifecycle.State, block: suspend CoroutineScope.() -> Unit
 ): Job = lifecycle.eventFlow(minimumState)
@@ -125,4 +103,4 @@ internal fun Lifecycle.eventFlow(
   // Don't send [true, true] since the second true would cancel the already-active block.
   .distinctUntilChanged()
 
-internal class FlowCancellationException : CancellationException("Flow was aborted")
+private class FlowCancellationException : CancellationException("Flow was aborted")
