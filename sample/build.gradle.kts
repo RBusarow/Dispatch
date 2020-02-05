@@ -66,12 +66,17 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(Libs.RickBusarow.DispatcherProvider.core)
+  implementation(project(":core"))
+  implementation(project(":android-espresso"))
+  implementation(project(":extensions"))
+  implementation(project(":android-lifecycle-runtime"))
+  implementation(project(":android-lifecycle-viewmodel"))
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
-  testImplementation(Libs.RickBusarow.DispatcherProvider.test)
+
+  testImplementation(project(":core-test"))
 
   androidTestImplementation(Libs.Androidx.testRunner)
   androidTestImplementation(Libs.Androidx.espresso)

@@ -137,10 +137,19 @@ object Libs {
 
   object RickBusarow {
 
-    object DispatcherProvider {
-      private const val version = "1.+"
-      const val core = "com.rickbusarow.dispatcherprovider:dispatcher-provider:$version"
-      const val test = "com.rickbusarow.dispatcherprovider:dispatcher-provider-test:$version"
+    object Dispatch {
+
+      const val core = "com.rickbusarow.dispatcherprovider:dispatch-core:${Versions.versionName}"
+      const val espresso =
+        "com.rickbusarow.dispatcherprovider:dispatch-android-espresso:${Versions.versionName}"
+      const val extensions =
+        "com.rickbusarow.dispatcherprovider:dispatch-extensions:${Versions.versionName}"
+      const val lifecycleRuntime =
+        "com.rickbusarow.dispatcherprovider:dispatch-android-lifecycle-runtime:${Versions.versionName}"
+      const val lifecycleViewModel =
+        "com.rickbusarow.dispatcherprovider:dispatch-android-lifecycle-viewmodel:${Versions.versionName}"
+      const val test =
+        "com.rickbusarow.dispatcherprovider:dispatch-core-test:${Versions.versionName}"
     }
   }
 
