@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package dispatch.android.internal
+package dispatch.android.lifecycle.internal
 
 import androidx.lifecycle.*
-import dispatch.android.LifecycleCoroutineScope
+import dispatch.android.lifecycle.LifecycleCoroutineScope
 import dispatch.core.test.*
 import io.kotlintest.*
 import io.kotlintest.matchers.types.*
@@ -41,7 +41,8 @@ internal class LifecycleCoroutineScopeStoreTest : CoroutineTest {
     lifecycleOwner = LifecycleOwner { lifecycle }
     lifecycle = LifecycleRegistry(lifecycleOwner)
 
-    scope = LifecycleCoroutineScope(lifecycle, testScope)
+    scope =
+      LifecycleCoroutineScope(lifecycle, testScope)
 
     lifecycle.currentState shouldBe Lifecycle.State.INITIALIZED
   }

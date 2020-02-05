@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-package dispatch.android.internal
+package dispatch.android.lifecycle.internal
 
 import android.os.*
 import androidx.lifecycle.*
-import dispatch.android.*
+import dispatch.android.lifecycle.*
 import dispatch.core.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -35,14 +35,20 @@ internal object LifecycleCoroutineScopeStore {
 
   fun get(lifecycle: Lifecycle): LifecycleCoroutineScope {
 
-    return map[lifecycle] ?: bindLifecycle(lifecycle, LifecycleScopeFactory.create())
+    return map[lifecycle] ?: bindLifecycle(
+      lifecycle,
+      LifecycleScopeFactory.create()
+    )
   }
 
   private fun bindLifecycle(
     lifecycle: Lifecycle, coroutineScope: MainImmediateCoroutineScope
   ): LifecycleCoroutineScope {
 
-    val scope = LifecycleCoroutineScope(lifecycle, coroutineScope)
+    val scope = LifecycleCoroutineScope(
+      lifecycle,
+      coroutineScope
+    )
 
     map[lifecycle] = scope
 

@@ -14,10 +14,10 @@
  */
 
 
-package dispatch.android.internal
+package dispatch.android.lifecycle.internal
 
 import androidx.lifecycle.*
-import dispatch.android.*
+import dispatch.android.lifecycle.*
 import dispatch.core.*
 import dispatch.extensions.flow.*
 import kotlinx.coroutines.*

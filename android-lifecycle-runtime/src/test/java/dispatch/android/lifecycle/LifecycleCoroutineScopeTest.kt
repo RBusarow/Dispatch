@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package  dispatch.android
+package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
 import dispatch.core.test.*
@@ -40,7 +40,8 @@ class LifecycleCoroutineScopeTest : CoroutineTest {
     lifecycleOwner = LifecycleOwner { lifecycle }
     lifecycle = LifecycleRegistry(lifecycleOwner)
 
-    scope = LifecycleCoroutineScope(lifecycle, testScope)
+    scope =
+      LifecycleCoroutineScope(lifecycle, testScope)
   }
 
   @Nested

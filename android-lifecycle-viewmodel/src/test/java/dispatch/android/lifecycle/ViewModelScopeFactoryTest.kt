@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dispatch.android
+package dispatch.android.lifecycle
 
 import dispatch.core.*
 import dispatch.internal.test.*
@@ -26,7 +26,7 @@ import kotlin.coroutines.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class LifecycleScopeFactoryTest {
+internal class ViewModelScopeFactoryTest {
 
   val job = Job()
   val dispatcher = newSingleThreadContext("single thread dispatcher")
@@ -45,7 +45,7 @@ internal class LifecycleScopeFactoryTest {
 
   @AfterEach
   fun afterEach() {
-    LifecycleScopeFactory.reset()
+    ViewModelScopeFactory.reset()
   }
 
   @AfterAll
@@ -54,9 +54,9 @@ internal class LifecycleScopeFactoryTest {
   }
 
   @Test
-  fun `default factory should be a default MainImmediateCoroutineScope`() = runBlockingTest {
+  fun `default factory should be a default MainCoroutineScope`() = runBlockingTest {
 
-    val scope = LifecycleScopeFactory.create()
+    val scope = ViewModelScopeFactory.create()
 
     scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
 
@@ -64,15 +64,15 @@ internal class LifecycleScopeFactoryTest {
 
     scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main
 
-    scope.shouldBeInstanceOf<MainImmediateCoroutineScope>()
+    scope.shouldBeInstanceOf<MainCoroutineScope>()
   }
 
   @Test
   fun `a custom factory should be used after being set`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    ViewModelScopeFactory.set { MainCoroutineScope(originContext) }
 
-    val scope = LifecycleScopeFactory.create()
+    val scope = ViewModelScopeFactory.create()
 
     scope.coroutineContext shouldEqualFolded originContext + mainDispatcher
   }
@@ -80,15 +80,15 @@ internal class LifecycleScopeFactoryTest {
   @Test
   fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    ViewModelScopeFactory.set { MainCoroutineScope(originContext) }
 
-    val custom = LifecycleScopeFactory.create()
+    val custom = ViewModelScopeFactory.create()
 
     custom.coroutineContext shouldEqualFolded originContext + mainDispatcher
 
-    LifecycleScopeFactory.reset()
+    ViewModelScopeFactory.reset()
 
-    val default = LifecycleScopeFactory.create()
+    val default = ViewModelScopeFactory.create()
 
     default.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
 
@@ -96,7 +96,7 @@ internal class LifecycleScopeFactoryTest {
 
     default.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main
 
-    default.shouldBeInstanceOf<MainImmediateCoroutineScope>()
+    default.shouldBeInstanceOf<MainCoroutineScope>()
   }
 
 }
