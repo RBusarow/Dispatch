@@ -26,6 +26,7 @@ import kotlin.coroutines.*
  *
  * The `default` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncDefaultSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncDefault(
@@ -42,6 +43,7 @@ public fun <T> CoroutineScope.asyncDefault(
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncIOSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncIO(
@@ -58,6 +60,7 @@ public fun <T> CoroutineScope.asyncIO(
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncMainSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncMain(
@@ -74,6 +77,7 @@ public fun <T> CoroutineScope.asyncMain(
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncMainImmediateSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncMainImmediate(
@@ -90,6 +94,7 @@ public fun <T> CoroutineScope.asyncMainImmediate(
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncUnconfinedSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncUnconfined(

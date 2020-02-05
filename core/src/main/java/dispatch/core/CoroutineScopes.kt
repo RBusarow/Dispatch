@@ -55,8 +55,7 @@ public interface UnconfinedCoroutineScope : CoroutineScope
 public fun DefaultCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
-): DefaultCoroutineScope = object :
-  DefaultCoroutineScope {
+): DefaultCoroutineScope = object : DefaultCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.default + dispatcherProvider
 }
 
@@ -72,8 +71,7 @@ public fun DefaultCoroutineScope(
  */
 public fun DefaultCoroutineScope(
   coroutineContext: CoroutineContext
-): DefaultCoroutineScope = object :
-  DefaultCoroutineScope {
+): DefaultCoroutineScope = object : DefaultCoroutineScope {
   override val coroutineContext = coroutineContext.withDefaultElements { default }
 }
 
@@ -89,8 +87,7 @@ public fun DefaultCoroutineScope(
 public fun IOCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
-): IOCoroutineScope = object :
-  IOCoroutineScope {
+): IOCoroutineScope = object : IOCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.io + dispatcherProvider
 }
 
@@ -106,8 +103,7 @@ public fun IOCoroutineScope(
  */
 public fun IOCoroutineScope(
   coroutineContext: CoroutineContext
-): IOCoroutineScope = object :
-  IOCoroutineScope {
+): IOCoroutineScope = object : IOCoroutineScope {
   override val coroutineContext = coroutineContext.withDefaultElements { io }
 }
 
@@ -123,8 +119,7 @@ public fun IOCoroutineScope(
 public fun MainCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
-): MainCoroutineScope = object :
-  MainCoroutineScope {
+): MainCoroutineScope = object : MainCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.main + dispatcherProvider
 }
 
@@ -140,8 +135,7 @@ public fun MainCoroutineScope(
  */
 public fun MainCoroutineScope(
   coroutineContext: CoroutineContext
-): MainCoroutineScope = object :
-  MainCoroutineScope {
+): MainCoroutineScope = object : MainCoroutineScope {
   override val coroutineContext = coroutineContext.withDefaultElements { main }
 }
 
@@ -157,8 +151,7 @@ public fun MainCoroutineScope(
 public fun MainImmediateCoroutineScope(
   job: Job = SupervisorJob(), dispatcherProvider:
   DispatcherProvider = DefaultDispatcherProvider()
-): MainImmediateCoroutineScope = object :
-  MainImmediateCoroutineScope {
+): MainImmediateCoroutineScope = object : MainImmediateCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.mainImmediate +
       dispatcherProvider
 }
@@ -175,8 +168,7 @@ public fun MainImmediateCoroutineScope(
  */
 public fun MainImmediateCoroutineScope(
   coroutineContext: CoroutineContext
-): MainImmediateCoroutineScope = object :
-  MainImmediateCoroutineScope {
+): MainImmediateCoroutineScope = object : MainImmediateCoroutineScope {
   override val coroutineContext = coroutineContext.withDefaultElements { mainImmediate }
 }
 
@@ -192,8 +184,7 @@ public fun MainImmediateCoroutineScope(
 public fun UnconfinedCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
-): UnconfinedCoroutineScope = object :
-  UnconfinedCoroutineScope {
+): UnconfinedCoroutineScope = object : UnconfinedCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.unconfined + dispatcherProvider
 }
 
@@ -209,8 +200,7 @@ public fun UnconfinedCoroutineScope(
  */
 public fun UnconfinedCoroutineScope(
   coroutineContext: CoroutineContext
-): UnconfinedCoroutineScope = object :
-  UnconfinedCoroutineScope {
+): UnconfinedCoroutineScope = object : UnconfinedCoroutineScope {
   override val coroutineContext = coroutineContext.withDefaultElements { unconfined }
 }
 
