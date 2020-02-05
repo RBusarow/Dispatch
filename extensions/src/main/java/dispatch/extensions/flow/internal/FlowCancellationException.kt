@@ -13,27 +13,8 @@
  * limitations under the License.
  */
 
-package dispatch.extensions.internal
+package dispatch.extensions.flow.internal
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
 
-@ExperimentalCoroutinesApi
-@FlowPreview
-internal fun <T> Flow<T>.asCachedFlow(
-  cacheHistory: Int
-): Flow<T> {
-
-  require(cacheHistory > 0) { "cacheHistory parameter must be greater than 0, but was $cacheHistory" }
-
-  val cache = CircularArray<T>(cacheHistory)
-
-  return onEach { value ->
-    // While flowing, also record all values in the cache.
-    cache.add(value)
-  }.onStart {
-    // Before emitting any values in sourceFlow,
-    // emit any cached values starting with the oldest.
-    cache.forEach { emit(it) }
-  }
-}
+internal class FlowCancellationException : CancellationException("Flow was aborted")

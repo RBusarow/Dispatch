@@ -19,7 +19,7 @@ package dispatch.android.internal
 import androidx.lifecycle.*
 import dispatch.android.*
 import dispatch.core.*
-import dispatch.extensions.*
+import dispatch.extensions.flow.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
