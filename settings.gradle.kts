@@ -14,12 +14,16 @@
  */
 
 include(":android-espresso")
+include(":android-espresso:samples")
 include(":android-lifecycle-runtime")
+include(":android-lifecycle-runtime:samples")
 include(":android-lifecycle-viewmodel")
+include(":android-lifecycle-viewmodel:samples")
 include(":core")
 include(":core:samples")
 include(":core-test")
 include(":core-test:samples")
 include(":extensions")
+include(":extensions:samples")
 include(":internal-test")
 include(":sample")

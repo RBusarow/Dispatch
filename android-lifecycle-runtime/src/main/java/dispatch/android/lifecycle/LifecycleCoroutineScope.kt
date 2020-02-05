@@ -63,7 +63,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifecycleScope.launchWhileCreated {
+   *     lifecycleScope.launchEveryCreate {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -92,7 +92,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifecycleScope.launchWhileStarted {
+   *     lifecycleScope.launchEveryStart {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
@@ -121,7 +121,7 @@ class LifecycleCoroutineScope(
    * class SomeFragment : Fragment {
    *
    *   init {
-   *     lifecycleScope.launchWhileResumed {
+   *     lifecycleScope.launchEveryResume {
    *       viewModel.someFlow.collect {
    *         printLn("new value --> $it")
    *       }
