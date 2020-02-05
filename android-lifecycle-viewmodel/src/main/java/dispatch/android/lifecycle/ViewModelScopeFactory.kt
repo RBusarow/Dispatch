@@ -13,16 +13,17 @@
  * limitations under the License.
  */
 
-package dispatch.android
+package dispatch.android.lifecycle
 
-import dispatch.android.LifecycleScopeFactory.create
-import dispatch.android.LifecycleScopeFactory.reset
+import dispatch.android.lifecycle.ViewModelScopeFactory.create
+import dispatch.android.lifecycle.ViewModelScopeFactory.reset
 import dispatch.core.*
+import kotlinx.coroutines.*
 
 /**
- * Factory holder for [LifecycleCoroutineScope]'s.
+ * Factory holder for [viewModelScope][dispatch.android.CoroutineViewModel.viewModelScope]'s.
  *
- * By default, [create] returns a [MainImmediateCoroutineScope].
+ * By default, [create] returns a [MainImmediateCoroutineScope], but may return any [CoroutineScope].
  *
  * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
  * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate].
@@ -50,10 +51,9 @@ import dispatch.core.*
  *
  * [reset] may be used to reset the factory to default at any time.
  */
-public object LifecycleScopeFactory {
+public object ViewModelScopeFactory {
 
-  private var _factory: () -> MainImmediateCoroutineScope = { MainImmediateCoroutineScope() }
-
+  private var _factory: () -> CoroutineScope = { MainImmediateCoroutineScope() }
   /**
    * example:
    *
@@ -62,7 +62,7 @@ public object LifecycleScopeFactory {
    *
    *   override fun onCreate() {
    *     super.onCreate()
-   *     LifecycleScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
+   *     ViewModelScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
    *   }
    * }
    * ```
@@ -71,24 +71,24 @@ public object LifecycleScopeFactory {
    * class MyEspressoTest {
    *
    *   @Before fun setUp() {
-   *     LifecycleCoroutineScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+   *     ViewModelScopeFactory.set { MainImmediateIdlingCoroutineScope() }
    *   }
    * }
    * ```
    *
-   * @param factory sets a custom [MainImmediateCoroutineScope] factory to be used for all new instance creations until reset.
+   * @param factory sets a custom [CoroutineScope] factory to be used for all new instance creations until reset.
    */
-  public fun set(factory: () -> MainImmediateCoroutineScope) {
+  public fun set(factory: () -> CoroutineScope) {
     _factory = factory
   }
 
-  internal fun create() = _factory.invoke()
+  internal fun create(): CoroutineScope = _factory.invoke()
 
   /**
    * Immediately resets the factory function to its default.
    */
   public fun reset() {
-    _factory = { MainImmediateCoroutineScope() }
+    _factory = { MainCoroutineScope() }
   }
 
 }

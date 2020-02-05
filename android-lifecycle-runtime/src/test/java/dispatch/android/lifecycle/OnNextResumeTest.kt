@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package  dispatch.android
+package  dispatch.android.lifecycle
 
 import androidx.lifecycle.*
 import dispatch.core.test.*
@@ -27,7 +27,7 @@ import org.junit.jupiter.api.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class OnNextStartTest : BaseTest(), CoroutineTest {
+class OnNextResumeTest : BaseTest(), CoroutineTest {
 
   override lateinit var testScope: TestProvidedCoroutineScope
 
@@ -45,25 +45,25 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already started`() = runBlockingTest {
+    fun `block should immediately execute if already resumed`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       var executed = false
 
-      launch { lifecycle.onNextStart { executed = true } }
+      launch { lifecycle.onNextResume { executed = true } }
 
       executed shouldBe true
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not started`() = runBlockingTest {
+    fun `block should not immediately execute if lifecycle is not resumed`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       var executed = false
 
-      val job = launch { lifecycle.onNextStart { executed = true } }
+      val job = launch { lifecycle.onNextResume { executed = true } }
 
       executed shouldBe false
 
@@ -71,16 +71,16 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = runBlockingTest {
+    fun `block should pause when lifecycle is destroyed`() = runBlockingTest {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       launch {
-        lifecycle.onNextStart {
+        lifecycle.onNextResume {
           input.consumeAsFlow()
             .onCompletion { completed = true }
             .collect { output.add(it) }
@@ -91,24 +91,24 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is started twice`() = runBlockingTest {
+    fun `block should not execute twice when lifecycle is resumed twice`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      lifecycle.onNextStart { expect(1) }
+      lifecycle.onNextResume { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       finish(3)
     }
@@ -116,9 +116,9 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     @Test
     fun `block should return value if allowed to complete`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      val result = lifecycle.onNextStart { true }
+      val result = lifecycle.onNextResume { true }
 
       result shouldBe true
     }
@@ -128,10 +128,10 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
 
       val lock = Mutex(locked = true)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       val resultDeferred = async {
-        lifecycle.onNextStart {
+        lifecycle.onNextResume {
           lock.withLock {
             // unreachable
             true
@@ -139,7 +139,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
         }
       }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       resultDeferred.await() shouldBe null
     }
@@ -149,25 +149,25 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already started`() = runBlockingTest {
+    fun `block should immediately execute if already resumed`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       var executed = false
 
-      launch { lifecycle.onNextStart { executed = true } }
+      launch { lifecycle.onNextResume { executed = true } }
 
       executed shouldBe true
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not started`() = runBlockingTest {
+    fun `block should not immediately execute if lifecycle is not resumed`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       var executed = false
 
-      val job = launch { lifecycle.onNextStart { executed = true } }
+      val job = launch { lifecycle.onNextResume { executed = true } }
 
       executed shouldBe false
 
@@ -175,16 +175,16 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = runBlockingTest {
+    fun `block should pause when lifecycle is destroyed`() = runBlockingTest {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       launch {
-        lifecycle.onNextStart {
+        lifecycle.onNextResume {
           input.consumeAsFlow()
             .onCompletion { completed = true }
             .collect { output.add(it) }
@@ -195,24 +195,24 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is started twice`() = runBlockingTest {
+    fun `block should not execute twice when lifecycle is resumed twice`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      lifecycle.onNextStart { expect(1) }
+      lifecycle.onNextResume { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       finish(3)
     }
@@ -220,9 +220,9 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     @Test
     fun `block should return value if allowed to complete`() = runBlockingTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      val result = lifecycle.onNextStart { true }
+      val result = lifecycle.onNextResume { true }
 
       result shouldBe true
     }
@@ -232,10 +232,10 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
 
       val lock = Mutex(locked = true)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
       val resultDeferred = async {
-        lifecycle.onNextStart {
+        lifecycle.onNextResume {
           lock.withLock {
             // unreachable
             true
@@ -243,7 +243,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
         }
       }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       resultDeferred.await() shouldBe null
     }

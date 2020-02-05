@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dispatch.android
+package dispatch.android.lifecycle
 
 import dispatch.core.*
 import dispatch.internal.test.*

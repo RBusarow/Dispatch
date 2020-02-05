@@ -13,8 +13,9 @@
  * limitations under the License.
  */
 
-package dispatch.android
+package dispatch.android.lifecycle
 
+import androidx.lifecycle.*
 import dispatch.core.*
 import dispatch.internal.test.*
 import io.kotlintest.*
@@ -26,7 +27,7 @@ import kotlin.coroutines.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class LifecycleScopeFactoryTest {
+internal class CoroutineViewModelTest {
 
   val job = Job()
   val dispatcher = newSingleThreadContext("single thread dispatcher")
@@ -45,7 +46,7 @@ internal class LifecycleScopeFactoryTest {
 
   @AfterEach
   fun afterEach() {
-    LifecycleScopeFactory.reset()
+    ViewModelScopeFactory.reset()
   }
 
   @AfterAll
@@ -54,49 +55,69 @@ internal class LifecycleScopeFactoryTest {
   }
 
   @Test
+  fun `accessing the property repeatedly should return the same scope`() = runBlocking {
+
+    val viewModel = TestViewModel()
+
+    val fresh = viewModel.viewModelScope
+
+    val cached = viewModel.viewModelScope
+
+    fresh shouldBeSameInstanceAs cached
+  }
+
+  @Test
+  fun `different ViewModels should get different scopes`() = runBlocking {
+
+    val fresh = TestViewModel().viewModelScope
+
+    val alsoFresh = TestViewModel().viewModelScope
+
+    fresh shouldNotBe alsoFresh
+  }
+
+  @Test
   fun `default factory should be a default MainImmediateCoroutineScope`() = runBlockingTest {
 
-    val scope = LifecycleScopeFactory.create()
+    val scope = TestViewModel().viewModelScope
 
     scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
 
     scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
 
-    scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main
+    scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main.immediate
 
-    scope.shouldBeInstanceOf<MainImmediateCoroutineScope>()
+    scope.shouldBeInstanceOf<MainCoroutineScope>()
   }
 
   @Test
   fun `a custom factory should be used after being set`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    ViewModelScopeFactory.set { MainImmediateCoroutineScope(originContext) }
 
-    val scope = LifecycleScopeFactory.create()
+    val scope = TestViewModel().viewModelScope
 
     scope.coroutineContext shouldEqualFolded originContext + mainDispatcher
   }
 
   @Test
-  fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
+  fun `an initialized scope should be cancelled during onCleared`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    val store = ViewModelStore()
 
-    val custom = LifecycleScopeFactory.create()
+    val owner = ViewModelStoreOwner { store }
 
-    custom.coroutineContext shouldEqualFolded originContext + mainDispatcher
+    val viewModel = ViewModelProvider(owner).get(TestViewModel::class.java)
 
-    LifecycleScopeFactory.reset()
+    val scope = viewModel.viewModelScope
 
-    val default = LifecycleScopeFactory.create()
+    scope.isActive shouldBe true
 
-    default.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    store.clear()
 
-    default.coroutineContext[Job]!!.shouldBeSupervisorJob()
-
-    default.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main
-
-    default.shouldBeInstanceOf<MainImmediateCoroutineScope>()
+    scope.isActive shouldBe false
   }
+
+  class TestViewModel : CoroutineViewModel()
 
 }
