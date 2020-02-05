@@ -16,7 +16,7 @@
 package com.rickbusarow.dispatcherprovidersample
 
 import androidx.lifecycle.*
-import com.rickbusarow.dispatcherprovider.*
+import dispatch.core.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 

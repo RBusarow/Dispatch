@@ -70,7 +70,6 @@ dependencies {
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
-  testImplementation(Libs.RickBusarow.DispatcherProvider.test)
 
   testImplementation(Libs.Androidx.testRunner)
   testImplementation(Libs.Androidx.espresso)

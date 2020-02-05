@@ -17,22 +17,16 @@
 
 package com.rickbusarow.dispatcherprovidersample
 
-import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.rickbusarow.dispatcherprovider.*
+import android.annotation.*
+import android.os.*
+import androidx.activity.*
+import androidx.appcompat.app.*
+import androidx.lifecycle.*
+import dispatch.core.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.plus
-import timber.log.Timber
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import timber.log.*
 
 @ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
