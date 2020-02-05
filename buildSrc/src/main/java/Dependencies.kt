@@ -27,6 +27,8 @@ object Plugins {
   const val kotlin = "kotlin"
   const val kotlinAndroid = "kotlin-android"
   const val kotlinAndroidExtensions = "kotlin-android-extensions"
+
+  const val mavenPublish = "com.vanniktech.maven.publish"
 }
 
 object Versions {
@@ -45,6 +47,9 @@ object Versions {
 }
 
 object BuildPlugins {
+
+  const val gradleMavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.9.0-SNAPSHOT"
+  const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
 
   const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.1"
 
@@ -67,7 +72,7 @@ object Libs {
     const val fragment = "androidx.fragment:fragment:1.2.0"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:1.2.0"
     const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.0"
-    const val lifecycle = "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    const val lifecycle = "androidx.lifecycle:lifecycle-common:2.2.0"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
     const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"

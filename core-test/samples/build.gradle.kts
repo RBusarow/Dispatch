@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+import kotlinx.atomicfu.plugin.gradle.*
+
 plugins {
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
