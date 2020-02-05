@@ -31,7 +31,7 @@ object Plugins {
 
 object Versions {
   const val ktlint = "0.35.0"
-  const val dokka = "0.10.0"
+  const val dokka = "0.10.1"
 
   const val compileSdk = 29
   const val minSdk = "21"
