@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dispatch.extensions.internal
+package dispatch.extensions.flow.internal
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*

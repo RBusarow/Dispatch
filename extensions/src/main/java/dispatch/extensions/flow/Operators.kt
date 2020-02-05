@@ -16,7 +16,7 @@
 @file:JvmMultifileClass
 @file:JvmName("FlowKt")
 
-package dispatch.extensions
+package dispatch.extensions.flow
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*

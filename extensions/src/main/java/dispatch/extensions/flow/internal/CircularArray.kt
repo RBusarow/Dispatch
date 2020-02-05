@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dispatch.extensions.internal
+package dispatch.extensions.flow.internal
 
 /**
  * CircularArray implementation which will hold the latest of up to `size` elements.
