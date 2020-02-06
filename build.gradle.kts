@@ -50,15 +50,23 @@ allprojects {
       outputFormat = "gfm"
       outputDirectory = "$rootDir/docs/kdoc"
 
+      subProjects = listOf(
+        ":core",
+        ":core-test",
+        ":extensions",
+        ":android-espresso",
+        ":android-lifecycle-runtime",
+        ":android-lifecycle-viewmodel"
+      )
+
       configuration {
 
         jdkVersion = 6
-        reportUndocumented = false
+        reportUndocumented = true
         skipDeprecated = true
         skipEmptyPackages = true
 
         samples = listOf("samples")
-        includes = listOf("extra.md")
 
         externalDocumentationLink {
           url = URL("https://developer.android.com/reference/androidx/")

@@ -1,0 +1,63 @@
+site_name: 'Dispatch'
+site_description: 'Quality of life coroutine utilities.'
+site_author: '2020 Rick Busarow'
+site_url: 'https://rbusarow.github.io/Dispatch/'
+remote_branch: gh-pages
+
+# Repository
+repo_name: 'Dispatch'
+repo_url: 'https://github.com/rbusarow/dispatch'
+
+# Copyright
+copyright: 'Copyright &copy; 2020 Rick Busarow'
+
+# Customization
+extra:
+  social:
+    - type: github
+      link: https://github.com/rbusarow/dispatch
+    - type: twitter
+      link: https://twitter.com/rbusarow
+    - type: linkedin
+      link: https://linkedin.com/in/rick-busarow
+
+nav:
+  - 'Overview': index.md
+  - 'Getting Started': getting-started.md
+  - 'Change Log': changes.md
+  - 'KDoc':
+      - 'core': kdoc/core/index.md
+      - 'core-test': kdoc/core-test/index.md
+      - 'extensions': kdoc/extensions/index.md
+      - 'android-espresso': kdoc/android-espresso/index.md
+      - 'android-lifecycle-runtime': kdoc/android-lifecycle-runtime/index.md
+      - 'android-lifecycle-viewmodel': kdoc/android-lifecycle-viewmodel/index.md
+
+theme:
+  name: 'material'
+
+  language: en
+  feature:
+    tabs: true
+  palette:
+    primary: blue
+    accent: blue
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: True
+      use_pygments: True
+      noclasses: True
+  #      pygments_style: monokai
+  - footnotes
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
