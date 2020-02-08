@@ -13,7 +13,7 @@ The type of [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx
 
 This must be an abstract class since nothing about the [ViewModel.onCleared](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html#onCleared()) event is exposed.
 
-The `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
+`viewModelScope` is automatically cancelled when `onCleared()` is invoked.
 
 ### Constructors
 

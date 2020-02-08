@@ -2,7 +2,7 @@
 
 # onClear
 
-`protected open fun onClear(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-viewmodel/src/main/java/dispatch/android/lifecycle/CoroutineViewModel.kt#L78)
+`protected open fun onClear(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-viewmodel/src/main/java/dispatch/android/lifecycle/CoroutineViewModel.kt#L76)
 
 This method will be called when this ViewModel is no longer used and will be destroyed.
 
