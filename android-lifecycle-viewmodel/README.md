@@ -17,10 +17,10 @@ class SomeViewModel : CoroutineViewModel() {
     viewModelScope. //...
 
     // multiple invocations use the same instance
-    viewModelScope.launch { ... }
+    viewModelScope.launch {  }
 
     // it works as a normal CoroutineScope (because it is)
-    viewModelScope.launchMain { ... }
+    viewModelScope.launchMain {  }
 
   }
 }
@@ -50,9 +50,9 @@ class SomeViewModelTest {
   }
 
   @Test
-  fun `some test`() = runBlocking {
+  fun someTest() = runBlocking {
     // the AndroidX version is public, so it's public here as well.
-    viewModel.viewModelScope.launch { ... }
+    viewModel.viewModelScope.launch {  }
   }
 }
 ```
@@ -65,7 +65,7 @@ It exists entirely so that we can have a settable factory.  This gives us a lot 
 
 ### Custom CoroutineScope factories
 
-The way `androidx-lifecycle-viewModel` constructs its [CoroutineScope][coroutineScope] is [hard-coded][lifecycle.kt], which eliminates the possibility of using a custom [CoroutineContext][coroutineContext] such as a [DispatcherProvider][dispatcherProvider] or [IdlingDispatcher][idlingDispatcher]. With `dispatch.android.lifecycle`, we can set a custom factory.
+The way `androidx-lifecycle-viewModel` constructs its [CoroutineScope][coroutineScope] is [hard-coded][androidx-lifecycle-viewmodel-ktx], which eliminates the possibility of using a custom [CoroutineContext][coroutineContext] such as a [DispatcherProvider][dispatcherProvider] or [IdlingDispatcher][idlingDispatcher]. With `dispatch.android.lifecycle`, we can set a custom factory.
 
 ```Kotlin
 class SomeViewModelTest {
@@ -123,7 +123,7 @@ class SomeFragment : Fragment() {
 
   init {
     lifecycleScope.launchWhenResumed {
-      viewModel.dataFlow.collect { ... }
+      viewModel.dataFlow.collect {  }
     }
   }
 }
@@ -172,15 +172,14 @@ dependencies {
 }
 ```
 
-
-
-[androidx-lifecycle]:https://developer.android.com/jetpack/androidx/releases/lifecycle
-[viewModelScope]:https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope
-[coroutineContext]:https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
-[coroutineScope]:https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
-[flow.conflate]:https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/flow.md#conflation
-[lifecycle.java]:https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-common/src/main/java/androidx/lifecycle/Lifecycle.java
-[idlingDispatcher]:https://github.com/RBusarow/Dispatch/blob/dev/dispatch-android-espresso/src/main/java/dispatch/test/android/IdlingDispatcher.kt
-[channel]:https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/
-[pausingDispatcher]:https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/PausingDispatcher.kt
-[b/146370660]:https://issuetracker.google.com/issues/146370660
+[androidx-lifecycle-viewmodel-ktx]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42
+[viewModelScope]: https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope
+[coroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
+[coroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
+[flow.conflate]: https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/flow.md#conflation
+[lifecycle.java]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-common/src/main/java/androidx/lifecycle/Lifecycle.java
+[idlingDispatcher]: https://github.com/RBusarow/Dispatch/blob/dev/dispatch-android-espresso/src/main/java/dispatch/test/android/IdlingDispatcher.kt
+[channel]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/
+[pausingDispatcher]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/PausingDispatcher.kt
+[b/146370660]: https://issuetracker.google.com/issues/146370660
+[dispatcherProvider]: ../docs/kdoc/core/dispatch.core/-dispatcher-provider.md

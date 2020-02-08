@@ -8,7 +8,8 @@
 
 # DispatcherProvider
 
-Utilities for [kotlinx.coroutines][coroutines] which make them type-safe, easier to test, and require less code.  Define your [CoroutineDispatchers][CoroutineDispatcher] once in a [CoroutineScope][CoroutineScope] factory and then never think about them again.
+Utilities for [kotlinx.coroutines][coroutines] which make them type-safe, easier to test, and require less code. 
+Define your [CoroutineDispatchers][coroutineDispatcher] once in a [CoroutineScope][coroutineScope] factory and then never think about them again.
 
 ```kotlin
 val presenter = MyPresenter(MainCoroutineScope())
@@ -17,9 +18,9 @@ class MyPresenter @Inject constructor(
   val coroutineScope: MainCoroutineScope // <-- Main
 ) {
 
-  fun loopSomething() = coroutineScope.launchDefault { ... }
+  fun loopSomething() = coroutineScope.launchDefault {  }
 
-  suspend fun updateSomething() = withMainImmediate { ... }
+  suspend fun updateSomething() = withMainImmediate { }
 }
 ```
 
@@ -47,7 +48,7 @@ class MyTest {
 
 ### Injecting dispatchers
 
-The core of this library is `DispatcherProvider` - an interface with properties corresponding to the 5 different [CoroutineDispatchers][CoroutineDispatcher] we can get from [Dispatchers][Dispatchers].  It implements [CoroutineContext.Element][CoroutineContext.Element] and provides a unique [CoroutineContext.Key][CoroutineContext.Key].
+The core of this library is `DispatcherProvider` - an interface with properties corresponding to the 5 different [CoroutineDispatchers][coroutineDispatcher] we can get from [Dispatchers][Dispatchers].  It implements [CoroutineContext.Element][CoroutineContext.Element] and provides a unique [CoroutineContext.Key][CoroutineContext.Key].
 
 ```kotlin
 interface DispatcherProvider : CoroutineContext.Element {
@@ -90,7 +91,7 @@ class DefaultDispatcherProvider : DispatcherProvider {
 
 ### Referencing dispatchers
 
-These references can then be accessed via extension functions upon [CoroutineScope][CoroutineScope]:
+These references can then be accessed via extension functions upon [CoroutineScope][coroutineScope]:
 
 ```kotlin
 // from any CoroutineScope
@@ -112,11 +113,11 @@ Or with builders and operators:
 
 ```kotlin
 fun foo(scope: CoroutineScope) {
-  scope.launchDefault { ... }
-  scope.launchIO { ... }
-  scope.launchMain { ... }
-  scope.launchMainImmediate { ... }
-  scope.launchUnconfined { ... }
+  scope.launchDefault {  }
+  scope.launchIO {  }
+  scope.launchMain {  }
+  scope.launchMainImmediate {  }
+  scope.launchUnconfined {  }
 }
 ```
 
@@ -124,11 +125,11 @@ fun foo(scope: CoroutineScope) {
 
 ```kotlin
 fun foo(scope: CoroutineScope) {
-  scope.asyncDefault { ... }
-  scope.asyncIO { ... }
-  scope.asyncMain { ... }
-  scope.asyncMainImmediate { ... }
-  scope.asyncUnconfined { ... }
+  scope.asyncDefault {  }
+  scope.asyncIO {  }
+  scope.asyncMain {  }
+  scope.asyncMainImmediate {  }
+  scope.asyncUnconfined {  }
 }
 ```
 
@@ -139,11 +140,11 @@ The [CoroutineContext][CoroutineContext] used for `withContext` comes from the `
 ```kotlin
 suspend fun foo() {
   // note that we have no CoroutineContext
-  withDefault { ... }
-  withIO { ... }
-  withMain { ... }
-  withMainImmediate { ... }
-  withUnconfined { ... }
+  withDefault {  }
+  withIO {  }
+  withMain {  }
+  withMainImmediate {  }
+  withUnconfined {  }
 }
 ```
 
@@ -152,7 +153,7 @@ suspend fun foo() {
 Like `withContext`, `Flow` typically doesn’t get a `CoroutineScope` of its own.  They inherit the `coroutineContext` from the collector in a pattern called [context preservation][context_preservation]. These new operators maintain context preservation (*they’re forced to, actually*), and extract the `coroutineContext` from the collector.
 
 ```kotlin
-val someFlow = flow { ... }
+val someFlow = flow {  }
   .flowOnDefault()
   .flowOnIO()
   .flowOnMain()
@@ -164,7 +165,7 @@ val someFlow = flow { ... }
 
 ### Types and Factories
 
-A [CoroutineScope][CoroutineScope] may have any type [CoroutineDispatcher][CoroutineDispatcher] (*actually it’s a [ContinuationInterceptor][ContinuationInterceptor]*).  What if we have a class which will always use the [Main][Dispatchers.Main] thread, such as a View class?  We have marker interfaces and factories to ensure that the correct type of [CoroutineScope][CoroutineScope] is always used.
+A [CoroutineScope][coroutineScope] may have any type [CoroutineDispatcher][coroutineDispatcher] (*actually it’s a [ContinuationInterceptor][ContinuationInterceptor]*).  What if we have a class which will always use the [Main][Dispatchers.Main] thread, such as a View class?  We have marker interfaces and factories to ensure that the correct type of [CoroutineScope][coroutineScope] is always used.
 
 ```kotlin
 val someDefaultScope = DefaultCoroutineScope()
@@ -178,7 +179,7 @@ val customProviderScope = UnconfinedCoroutineScope(MyCustomDispatcherProvider())
 
 
 We can also write an extension val which returns a default implementation of the `DispatcherProvider`,
-meaning that we're able to immediately utilize the following pattern with [CoroutineScopes][CoroutineScope] from unaltered legacy code or another library.
+meaning that we're able to immediately utilize the following pattern with [CoroutineScopes][coroutineScope] from unaltered legacy code or another library.
 
 ```kotlin
 val CoroutineContext.dispatcherProvider: DispatcherProvider
@@ -203,7 +204,7 @@ class TestDispatcherProvider(
 
 ---
 
-`runBlockingProvided` is really just delegating `runBlocking`, but creates a [CoroutineScope][CoroutineScope] which includes  `TestDispatcherProvider`, so "io" here is really a `TestCoroutineDispatcher`.
+`runBlockingProvided` is really just delegating `runBlocking`, but creates a [CoroutineScope][coroutineScope] which includes  `TestDispatcherProvider`, so "io" here is really a `TestCoroutineDispatcher`.
 
 
 ```kotlin
@@ -233,7 +234,7 @@ fun `showToast should do Toast magic`() = runBlockingProvidedTest {
   // uses "main" TestCoroutineDispatcher
   subject.showToast("hello world!")
 
-  verify { ... }
+  verify {  }
 }
 ```
 
@@ -309,10 +310,9 @@ limitations under the License.
 [CoroutineContext.Key]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-coroutine-context/index.html#types
 [ContinuationInterceptor]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-continuation-interceptor/index.html
 [Dispatchers]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html
-[CoroutineDispatcher]:https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html
-[CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html
-[code_golf]:https://code-golf.io
-[context_preservation]:https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
+[coroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-dispatcher.html
+[coroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
+[context_preservation]: https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
 [Dispatchers.Main]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html
-[android-lifecycle-runtime]:android-lifecycle-runtime/README.md
-[android-lifecycle-viewmodel]: android-lifecycle-viewmodel/README.md
+[android-lifecycle-runtime]: /docs/module-android-lifecycle-runtime.md
+[android-lifecycle-viewmodel]: /docs/module-android-lifecycle-viewmodel.md

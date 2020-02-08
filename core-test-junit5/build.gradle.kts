@@ -1,5 +1,3 @@
-import org.gradle.api.internal.initialization.ClassLoaderIds.*
-
 /*
  * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,19 +13,12 @@ import org.gradle.api.internal.initialization.ClassLoaderIds.*
  * limitations under the License.
  */
 
-buildscript {
-  dependencies {
-//    classpath(BuildPlugins.knit)
-  }
-}
-
 plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
-//  id(Plugins.knit)
 }
 
 dependencies {

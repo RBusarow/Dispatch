@@ -19,16 +19,16 @@ class SomeScreen : Fragment() {
 
     // active only when "resumed".  starts a fresh coroutine each time
     // this is a rough proxy for LiveData behavior
-    lifecycleScope.launchWhenResumed { ... }
+    lifecycleScope.launchWhenResumed {  }
 
     // active only when "started".  starts a fresh coroutine each time
-    lifecycleScope.launchWhenStarted { ... }
+    lifecycleScope.launchWhenStarted {  }
 
     // launch when created, automatically stop on destroy
-    lifecycleScope.launchWhenCreated { ... }
+    lifecycleScope.launchWhenCreated {  }
 
     // it works as a normal CoroutineScope as well (because it is)
-    lifecycleScope.launchMain { ... }
+    lifecycleScope.launchMain {  }
 
   }
 }
@@ -87,7 +87,7 @@ class SomeFragmentEspressoTest() {
 
 ### Automatic start/stop/restart of "observer" jobs
 
-Structured concurrency relies upon cancellation, but [androidx-lifecycle-runtime.ktx][androidx-lifecycle] doesn't cancel.  It uses a special [PausingDispatcher][pausingDispatcher]. This pausing behavior then **leaks** upstream, creating backpressure and potentially deadlocks.
+Structured concurrency relies upon cancellation, but [androidx-lifecycle-runtime.ktx][androidx-lifecycle-runtime-ktx] doesn't cancel.  It uses a special [PausingDispatcher][pausingDispatcher]. This pausing behavior then **leaks** upstream, creating backpressure and potentially deadlocks.
 
 There's a [bug filed in their issue tracker][b/146370660], but 2.2.0 got released anyway.
 
@@ -103,7 +103,7 @@ class SomeFragment : Fragment() {
   init {
     // automatically created CoroutineScope using the factory described above
     lifecycleScope.launchWhenResumed {
-      viewModel.someFlow.consume { ... }
+      viewModel.someFlow.consume {  }
     }
   }
 
@@ -132,15 +132,13 @@ dependencies {
 }
 ```
 
-
-
-[androidx-lifecycle-runtime-ktx]:https://developer.android.com/jetpack/androidx/releases/lifecycle
-[lifecycleScope]:https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope
-[coroutineContext]:https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
-[coroutineScope]:https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
-[flow.conflate]:https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/flow.md#conflation
-[lifecycle.java]:https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-common/src/main/java/androidx/lifecycle/Lifecycle.java
-[idlingDispatcher]:https://github.com/RBusarow/Dispatch/blob/dispatch-android-espresso/src/main/java/dispatch/test/android/IdlingDispatcher.kt
-[channel]:https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/
-[pausingDispatcher]:https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/PausingDispatcher.kt
-[b/146370660]:https://issuetracker.google.com/issues/146370660
+[androidx-lifecycle-runtime-ktx]: https://developer.android.com/jetpack/androidx/releases/lifecycle
+[lifecycleScope]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44
+[coroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
+[coroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
+[flow.conflate]: https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/flow.md#conflation
+[lifecycle.java]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-common/src/main/java/androidx/lifecycle/Lifecycle.java
+[idlingDispatcher]: https://github.com/RBusarow/Dispatch/blob/dispatch-android-espresso/src/main/java/dispatch/test/android/IdlingDispatcher.kt
+[channel]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/
+[pausingDispatcher]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/PausingDispatcher.kt
+[b/146370660]: https://issuetracker.google.com/issues/146370660

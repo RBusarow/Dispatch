@@ -5,6 +5,10 @@
 In addition to all the functionality in [dispatch-core-test][dispatch_core_test_readme], this module exposes a [TestCoroutineRule][testCoroutineRule]
 to handle set-up and tear-down of a [TestProvidedCoroutineScope][testProvidedCoroutineScope].
 
+```kotlin
+fun foo() = Unit
+```
+
 ## This module provides core-test
 
 If using this module, there is no need to include `dispatch-core-test` in 
@@ -45,6 +49,10 @@ dependencies {
 </summary>
 
 ``` kotlin
+repositories {
+  mavenCentral()
+}
+
 dependencies {
 	
 	val coroutinesVersion = "1.3.3"
@@ -64,6 +72,6 @@ dependencies {
 </details>
 
 
-[dispatch_core_test_readme]: ../docs/module_core-test.md
-[testCoroutineRule]: ../docs/kdoc/core-test-junit4/dispatch.core.test/-test-coroutine-rule/index.md
-[testProvidedCoroutineScope]: ../docs/kdoc/core-test/dispatch.core.test/-test-provided-coroutine-scope.md
+[dispatch_core_test_readme]: /module-core-test
+[testCoroutineRule]: /kdoc/core-test-junit4/dispatch.core.test/-test-coroutine-rule
+[testProvidedCoroutineScope]: /kdoc/core-test/dispatch.core.test/-test-provided-coroutine-scope

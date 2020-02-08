@@ -41,6 +41,7 @@ object Versions {
   const val minSdk = "21"
   const val targetSdk = 29
 
+  const val benManes = "0.27.0"
   const val gradleWrapper = "3.5.3"
   const val dagger = "2.25.2"
   const val kotlin = "1.3.61"
@@ -58,6 +59,7 @@ object BuildPlugins {
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+  const val benManesVersions = "com.github.ben-manes:gradle-versions-plugin:${Versions.benManes}"
 
   const val androidApplication = "com.android.application"
   const val kotlinAndroid = "kotlin-android"
