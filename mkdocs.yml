@@ -71,6 +71,5 @@ markdown_extensions:
 
 plugins:
   - search
-  - awesome-pages
   - minify:
       minify_html: true

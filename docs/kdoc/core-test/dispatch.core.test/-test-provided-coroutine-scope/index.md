@@ -19,9 +19,3 @@ regardless of what type of `CoroutineScope` is required.
 | Name | Summary |
 |---|---|
 | [dispatcherProvider](dispatcher-provider.md) | `abstract val dispatcherProvider: DispatcherProvider` |
-
-### Inheritors
-
-| Name | Summary |
-|---|---|
-| [TestCoroutineRule](../-test-coroutine-rule/index.md) | A basic JUnit 4 [TestRule](#) which creates a new [TestProvidedCoroutineScope](./index.md) for each test, sets [Dispatchers.Main](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html), and calls [cleanupTestCoroutines](#) afterwards.`class TestCoroutineRule : TestWatcher, `[`TestProvidedCoroutineScope`](./index.md) |

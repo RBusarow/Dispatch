@@ -6,7 +6,27 @@ In addition to all the functionality in [dispatch-core-test][dispatch_core_test_
 to handle set-up and tear-down of a [TestProvidedCoroutineScope][testProvidedCoroutineScope].
 
 ```kotlin
-fun foo() = Unit
+class SomeTest {
+
+  @JvmField
+  @Rule
+  val rule = TestCoroutineRule()
+
+  @Test
+  fun `rule should be a TestProvidedCoroutineScope`() = runBlocking {
+
+    val subject = SomeClass(rule)
+  
+    val job = subject.fireAndForget()
+    
+    // assertions go here
+  }
+
+}
+
+class SomeClass(val coroutineScope: CoroutineScope) {
+  fun fireAndForget() = launch { }
+}
 ```
 
 ## This module provides core-test
@@ -72,6 +92,6 @@ dependencies {
 </details>
 
 
-[dispatch_core_test_readme]: /module-core-test
+[dispatch_core_test_readme]: /kdoc/core-test/dispatch.core.text/index.md
 [testCoroutineRule]: /kdoc/core-test-junit4/dispatch.core.test/-test-coroutine-rule
 [testProvidedCoroutineScope]: /kdoc/core-test/dispatch.core.test/-test-provided-coroutine-scope
