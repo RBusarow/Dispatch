@@ -33,7 +33,8 @@ nav:
       - 'Android-Espresso': module-android-espresso.md
       - 'Android-Lifecycle-runtime': module-android-lifecycle-runtime.md
       - 'Android-Lifecycle-viewmodel': module-android-lifecycle-viewmodel.md
-  - 'Change Log': changes.md
+  - 'Change Log':
+      - 'Change Log': changes.md
   - 'KDoc':
       - 'core': kdoc/core/index.md
       - 'extensions': kdoc/extensions/index.md
@@ -48,8 +49,8 @@ theme:
   name: 'material'
 
   language: en
-  #  feature:
-  #    tabs: true
+  feature:
+    tabs: true
   palette:
     primary: blue
     accent: blue
