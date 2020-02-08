@@ -2,9 +2,9 @@
 
 ## Features
 
-In addition to all the functionality in [dispatch-core-test][dispatch_core_test_readme], 
-this module exposes a [TestCoroutineRule][testCoroutineRule] to handle set-up and tear-down
-of a [TestProvidedCoroutineScope][testProvidedCoroutineScope].
+In addition to all the functionality in [dispatch-core-test][dispatch_core_test_readme], this module exposes a [TestCoroutineRule][testCoroutineRule] to handle set-up and tear-down of a [TestProvidedCoroutineScope][testProvidedCoroutineScope].
+
+Since [TestProvidedCoroutineScope][testProvidedCoroutineScope] is a [TestCoroutineScope][testCoroutineScope], this Rule also invokes [cleanupTestCoroutines][cleanupTestCoroutines] after the test.
 
 ```kotlin
 class SomeClassTest {
@@ -30,9 +30,27 @@ class SomeClass(val coroutineScope: CoroutineScope) {
 }
 ```
 
-## This module provides core-test
+## Setting Dispatchers.Main
 
-If using this module, there is no need to include `dispatch-core-test` in 
+Even though `dispatch-core` eliminates the need to use `Dispatchers.Main` in internal code, it’s still possible that code which has yet to be migrated, or a third-party library is making use of the hard-coded dispatcher.  Because of this, the rule still calls `Dispatchers.setMain(...)` in its setup and `Dispatchers.resetMain()` afterwards.
+
+## This module replaces core-test
+
+If using this module, there is no need to include the `dispatch-core-test` artifact in your dependencies.
+
+## JUnit dependencies
+
+Because this is a JUnit 4 Rule, it requires a variant of that artifact.  No external libraries are bundled as part of Dispatch, so you’ll need to add it to your `dependencies` block yourself.  The two official options would be:
+
+```
+// classic JUnit 4
+"org.junit.jupiter:junit-jupiter:4.13"
+
+// JUnit 5 "vintage"
+"org.junit.vintage:junit-vintage-engine:5.5.1"
+```
+
+
 
 ## Gradle
 
@@ -92,7 +110,9 @@ dependencies {
 
 </details>
 
-
 [dispatch_core_test_readme]: /kdoc/core-test/dispatch.core.text/index.md
 [testCoroutineRule]: /kdoc/core-test-junit4/dispatch.core.test/-test-coroutine-rule
 [testProvidedCoroutineScope]: /kdoc/core-test/dispatch.core.test/-test-provided-coroutine-scope
+[testCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/
+[cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
+
