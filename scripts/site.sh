@@ -5,17 +5,20 @@ rm -rf docs/kdoc
 
 cp CHANGES.md docs/changes.md
 
-mkdir docs/modules
+# delete any existing module_* file
+find . -type f -name 'module_*' -exec rm -f {} \;
 
-cp android-espresso/README.md docs/modules/android-espresso.md
-cp android-lifecycle-runtime/README.md docs/modules/android-lifecycle-runtime.md
-cp android-lifecycle-viewmodel/README.md docs/modules/android-lifecycle-viewmodel.md
-cp core/README.md docs/modules/core.md
-cp core-test/README.md docs/modules/core-test.md
-cp extensions/README.md docs/modules/extensions.md
+cp android-espresso/README.md docs/module_android-espresso.md
+cp android-lifecycle-runtime/README.md docs/module_android-lifecycle-runtime.md
+cp android-lifecycle-viewmodel/README.md docs/module_android-lifecycle-viewmodel.md
+cp core/README.md docs/module_core.md
+cp core-test/README.md docs/module_core-test.md
+cp core-test-junit4/README.md docs/module_core-test-junit4.md
+cp core-test-junit5/README.md docs/module_core-test-junit5.md
+cp extensions/README.md docs/module_extensions.md
 
 # mkdocs gh-pages
-mkdocs serve
+# mkdocs serve
 # mkdocs serve --no-livereload
 
 #rm docs/index.md

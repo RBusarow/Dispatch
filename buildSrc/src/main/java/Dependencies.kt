@@ -21,6 +21,7 @@ object Plugins {
   const val atomicFu = "kotlinx-atomicfu"
 
   const val dokka = "org.jetbrains.dokka"
+  const val knit = "kotlinx-knit"
 
   const val javaLibrary = "java-library"
 
@@ -34,6 +35,7 @@ object Plugins {
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "0.10.1"
+  const val knit = "0.1.0"
 
   const val compileSdk = 29
   const val minSdk = "21"
@@ -50,6 +52,7 @@ object BuildPlugins {
 
   const val gradleMavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.9.0-SNAPSHOT"
   const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
+  const val knit = "org.jetbrains.kotlinx:kotlinx-knit:${Versions.knit}"
 
   const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.1"
 
@@ -117,7 +120,7 @@ object Libs {
   }
 
   object KotlinTest {
-    const val junit5runner = "io.kotlintest:kotlintest-runner-junit5:3.3.3"
+    const val junit5runner = "io.kotlintest:kotlintest-runner-junit5:3.4.2"
   }
 
   object Kotlinx {
@@ -150,6 +153,10 @@ object Libs {
         "com.rickbusarow.dispatcherprovider:dispatch-android-lifecycle-viewmodel:${Versions.versionName}"
       const val test =
         "com.rickbusarow.dispatcherprovider:dispatch-core-test:${Versions.versionName}"
+      const val testJunit4 =
+        "com.rickbusarow.dispatcherprovider:dispatch-core-test-junit4:${Versions.versionName}"
+      const val testJunit5 =
+        "com.rickbusarow.dispatcherprovider:dispatch-core-test-junit5:${Versions.versionName}"
     }
   }
 

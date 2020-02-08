@@ -27,18 +27,6 @@ import kotlin.coroutines.*
  *
  * The rule itself implements [TestProvidedCoroutineScope], so it can be used as follows:
  *
- * ```
- * class SomeTest {
- *
- *   @JvmField @Rule val testScope = TestCoroutineRule()
- *
- *   @Test
- *   fun testThings() = runBlocking {
- *     testScope.launch { ... }
- *   }
- * }
- * ```
- *
  * ### Before the test:
  * * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
  *
@@ -48,19 +36,23 @@ import kotlin.coroutines.*
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 4.
- * ```
+ *
+ * ``` groovy
  * dependencies {
  *   testImplementation "junit:junit:4.12"
  *   -- or --
  *   testImplementation "org.junit.vintage:junit-vintage-engine:5.5.1"
  * }
  * ```
+ *
  * @param factory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
  * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
  *
  * @see TestRule
  * @see TestCoroutineScope
  * @see TestProvidedCoroutineScope
+ * @sample samples.TestCoroutineRuleSample
+ * @sample samples.TestCoroutineRuleWithFactorySample
  */
 @ExperimentalCoroutinesApi
 class TestCoroutineRule(

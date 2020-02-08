@@ -21,47 +21,26 @@ import org.junit.jupiter.api.extension.*
 import kotlin.coroutines.*
 
 /**
- * Convenience interface for tagging a test class with a JUnit 5 extension.  This creates a new instance
- * of [testScope] before each test, optionally using a custom [testScopeFactory].  It sets [Dispatchers.Main]
- * to the new [TestCoroutineDispatcher] before each test and calls [Dispatchers.resetMain] afterwards.
- * After the test, it also calls [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines].
+ * Convenience interface which tags a test class with a JUnit 5 extension.  This creates a new instance
+ * of [testScope] before each test, optionally using a custom [testScopeFactory].
  *
- * ```
- * class SomeTest : CoroutineTest {
- *
- *   override val testScopeFactory = { MyCustomCoroutineScope() }
- *   override lateinit var testScope: TestProvidedCoroutineScope
- *
- *   lateinit var someClass: SomeClass
- *
- *   @BeforeEach
- *   fun beforeEach() {
- *     someClass = SomeClass(testScope)
- *   }
- *
- *   @Test
- *   fun testSomething() = runBlocking {
- *     someClass.doSomething { ... }
- *   }
- *
- * }
- * ```
- *
- * ### Before `@BeforeEach`:
+ * ### Before Each:
  * * A new [TestProvidedCoroutineScope] is created using [testScopeFactory].
  * * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
  *
- * ### After `@AfterEach`:
+ * ### After Each:
  * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are no leaking coroutines.  Any unfinished coroutine
  * will throw an [UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 5.
- * ```
+ * ``` groovy
  * dependencies {
  *   testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
  * }
  * ```
+ * @sample samples.CoroutineTestSample
+ * @sample samples.CoroutineTestWithFactorySample
  * @see TestCoroutineExtension
  */
 @ExperimentalCoroutinesApi
@@ -76,54 +55,36 @@ interface CoroutineTest {
   fun runBlockingTest(
     context: CoroutineContext = EmptyCoroutineContext,
     testBody: suspend TestCoroutineScope.() -> Unit
-  ): Unit = runBlockingTestProvided(testScope.coroutineContext + context, testBody)
+  ): Unit = runBlockingTestProvided(
+    testScope.coroutineContext + context,
+    testBody
+  )
 }
 
 /**
  * Convenience interface for tagging a test class with a JUnit 5 extension.  This creates a new instance
- * of [testScope] before each test, optionally using a custom [factory].  It sets [Dispatchers.Main]
- * to the new [TestCoroutineDispatcher] before each test and calls [Dispatchers.resetMain] afterwards.
- * After the test, it also calls [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines].
+ * of [testScope] before each test, optionally using a custom [factory].
  *
- * ```
- * class SomeTest {
- *
- *   @JvmField
- *   @RegisterExtension
- *   val extension = TestCoroutineExtension { MyCustomCoroutineScope() }
- *
- *   lateinit var someClass: SomeClass
- *
- *   @BeforeEach
- *   fun beforeEach() {
- *     someClass = SomeClass(extension.testScope)
- *   }
- *
- *   @Test
- *   fun testSomething() = runBlocking {
- *     someClass.doSomething { ... }
- *   }
- *
- * }
- * ```
- *
- * ### Before `@BeforeEach`:
+ * ### Before Each:
  * * A new [TestProvidedCoroutineScope] is created using [factory].
  * * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
  *
- * ### After `@AfterEach`:
+ * ### After Each:
  * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are no leaking coroutines.  Any unfinished coroutine
  * will throw an [UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 5.
- * ```
+ * ``` groovy
  * dependencies {
  *   testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
  * }
  * ```
+ *
  * @param factory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
  * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
+ * @sample samples.TestCoroutineExtensionSample
+ * @sample samples.TestCoroutineExtensionWithFactorySample
  */
 @ExperimentalCoroutinesApi
 class TestCoroutineExtension(

@@ -13,26 +13,29 @@
  * limitations under the License.
  */
 
-plugins {
-  id(Plugins.atomicFu)
-  id(Plugins.javaLibrary)
-  id(Plugins.kotlin)
-}
+package samples
 
-dependencies {
-  implementation(Libs.Kotlin.stdlib)
+import dispatch.core.test.*
+import io.kotlintest.matchers.types.*
+import kotlinx.coroutines.*
+import org.junit.*
 
-  implementation(Libs.Kotlinx.Coroutines.core)
+@ExperimentalCoroutinesApi
+class TestCoroutineRuleSample {
 
-  implementation(Libs.JUnit.jUnit5)
-  implementation(Libs.JUnit.jUnit5Vintage)
-  implementation(Libs.KotlinTest.junit5runner)
+  @JvmField
+  @Rule
+  val rule = TestCoroutineRule()
 
-  implementation(Libs.Kotlin.test)
-  implementation(Libs.Kotlin.testCommon)
+  @Test
+  fun `rule should be a TestProvidedCoroutineScope`() = runBlocking {
 
-  implementation(Libs.Kotlinx.Coroutines.test)
+    rule.shouldBeInstanceOf<TestProvidedCoroutineScope>()
 
-  implementation(project(":core"))
+    rule.launch {
+      // use the rule like any other CoroutineScope
+    }
+      .join()
+  }
 
 }

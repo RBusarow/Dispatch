@@ -13,29 +13,38 @@
  * limitations under the License.
  */
 
-import kotlinx.atomicfu.plugin.gradle.*
+package samples
 
-plugins {
-  id(Plugins.javaLibrary)
-  id(Plugins.kotlin)
+import dispatch.core.test.*
+import io.kotlintest.*
+import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
+
+@ExperimentalCoroutinesApi
+class CoroutineTestSample : CoroutineTest {
+
+  override lateinit var testScope: TestProvidedCoroutineScope
+
+  lateinit var someClass: SomeClass
+
+  @BeforeEach
+  fun beforeEach() {
+    someClass = SomeClass(testScope)
+  }
+
+  @Test
+  fun someSample() = runBlocking {
+
+    someClass.someFunction().await() shouldBe someValue
+
+  }
+
 }
 
-sourceSets["test"].java.srcDir("test")
+val someValue = true
 
-dependencies {
-  implementation(Libs.Kotlin.stdlib)
+class SomeClass(val coroutineScope: CoroutineScope) {
 
-  implementation(Libs.Kotlinx.Coroutines.core)
-
-  implementation(project(":core"))
-  implementation(project(":core-test"))
-
-  testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit5runner)
-
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-
-  testImplementation(Libs.Kotlinx.Coroutines.test)
-
+  fun someFunction() = coroutineScope.async { true }
 }
+

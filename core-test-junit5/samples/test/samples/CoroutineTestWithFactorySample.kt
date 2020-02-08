@@ -21,7 +21,13 @@ import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
 
 @ExperimentalCoroutinesApi
-class CoroutineTestSample : CoroutineTest {
+class CoroutineTestWithFactorySample : CoroutineTest {
+
+  val customScope = TestProvidedCoroutineScope(
+    context = CoroutineName("custom name")
+  )
+
+  override val testScopeFactory = { customScope }
 
   override lateinit var testScope: TestProvidedCoroutineScope
 
@@ -35,14 +41,11 @@ class CoroutineTestSample : CoroutineTest {
   @Test
   fun someSample() = runBlocking {
 
-    someClass.someFunction().await() shouldBe true
-
+    someClass
+      .coroutineScope
+      .coroutineContext[CoroutineName]!!
+      .name shouldBe "custom name"
   }
 
-}
-
-class SomeClass(val coroutineScope: CoroutineScope) {
-
-  fun someFunction() = coroutineScope.async { true }
 }
 

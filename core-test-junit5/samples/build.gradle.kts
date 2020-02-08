@@ -13,26 +13,29 @@
  * limitations under the License.
  */
 
+import kotlinx.atomicfu.plugin.gradle.*
+
 plugins {
-  id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
 }
+
+sourceSets["test"].java.srcDir("test")
 
 dependencies {
   implementation(Libs.Kotlin.stdlib)
 
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(Libs.JUnit.jUnit5)
-  implementation(Libs.JUnit.jUnit5Vintage)
-  implementation(Libs.KotlinTest.junit5runner)
-
-  implementation(Libs.Kotlin.test)
-  implementation(Libs.Kotlin.testCommon)
-
-  implementation(Libs.Kotlinx.Coroutines.test)
-
   implementation(project(":core"))
+  implementation(project(":core-test-junit5"))
+
+  testImplementation(Libs.JUnit.jUnit5)
+  testImplementation(Libs.KotlinTest.junit5runner)
+
+  testImplementation(Libs.Kotlin.test)
+  testImplementation(Libs.Kotlin.testCommon)
+
+  testImplementation(Libs.Kotlinx.Coroutines.test)
 
 }

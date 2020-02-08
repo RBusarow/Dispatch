@@ -19,17 +19,6 @@ plugins {
   id(Plugins.kotlinAndroidExtensions)
 }
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-    google()
-    jcenter()
-    maven(url = "https://jitpack.io")
-  }
-
-}
-
 android {
   compileSdkVersion(Versions.compileSdk)
 
@@ -72,11 +61,13 @@ dependencies {
   implementation(project(":android-lifecycle-runtime"))
   implementation(project(":android-lifecycle-viewmodel"))
 
+  testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
-  testImplementation(project(":core-test"))
+  testImplementation(project(":core-test-junit4"))
+  testImplementation(project(":core-test-junit5"))
 
   androidTestImplementation(Libs.Androidx.testRunner)
   androidTestImplementation(Libs.Androidx.espresso)

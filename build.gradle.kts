@@ -18,7 +18,6 @@ import org.jetbrains.kotlin.gradle.tasks.*
 import java.net.*
 
 buildscript {
-
   repositories {
     mavenLocal()
     mavenCentral()
@@ -34,10 +33,12 @@ buildscript {
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath(BuildPlugins.gradleMavenPublish)
     classpath(BuildPlugins.dokka)
+//    classpath(BuildPlugins.knit)
   }
 }
 
 allprojects {
+
   repositories {
     mavenCentral()
     google()

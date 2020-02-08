@@ -13,26 +13,28 @@
  * limitations under the License.
  */
 
-plugins {
-  id(Plugins.atomicFu)
-  id(Plugins.javaLibrary)
-  id(Plugins.kotlin)
-}
+package samples
 
-dependencies {
-  implementation(Libs.Kotlin.stdlib)
+import dispatch.core.test.*
+import io.kotlintest.*
+import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
+import org.junit.jupiter.api.extension.*
 
-  implementation(Libs.Kotlinx.Coroutines.core)
+@ExperimentalCoroutinesApi
+class TestCoroutineExtensionWithFactorySample {
 
-  implementation(Libs.JUnit.jUnit5)
-  implementation(Libs.JUnit.jUnit5Vintage)
-  implementation(Libs.KotlinTest.junit5runner)
+  val customScope = TestProvidedCoroutineScope(
+    context = CoroutineName("custom name")
+  )
 
-  implementation(Libs.Kotlin.test)
-  implementation(Libs.Kotlin.testCommon)
+  @JvmField
+  @RegisterExtension
+  val extension = TestCoroutineExtension { customScope }
 
-  implementation(Libs.Kotlinx.Coroutines.test)
+  @Test
+  fun `extension should provide a scope from the custom factory`() = runBlocking {
 
-  implementation(project(":core"))
-
+    extension.testScope shouldBe customScope
+  }
 }

@@ -1,3 +1,5 @@
+import kotlinx.atomicfu.plugin.gradle.*
+
 /*
  * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,22 +19,26 @@ plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 dependencies {
   implementation(Libs.Kotlin.stdlib)
 
   implementation(Libs.Kotlinx.Coroutines.core)
-
-  implementation(Libs.JUnit.jUnit5)
-  implementation(Libs.JUnit.jUnit5Vintage)
-  implementation(Libs.KotlinTest.junit5runner)
-
-  implementation(Libs.Kotlin.test)
-  implementation(Libs.Kotlin.testCommon)
-
   implementation(Libs.Kotlinx.Coroutines.test)
 
   implementation(project(":core"))
+  api(project(":core-test"))
 
+  implementation(Libs.JUnit.jUnit4)
+  testImplementation(Libs.KotlinTest.junit5runner)
+
+  testImplementation(Libs.Kotlin.test)
+  testImplementation(Libs.Kotlin.testCommon)
+
+  testImplementation(Libs.MockK.core)
+
+  testImplementation(project(":internal-test"))
 }
