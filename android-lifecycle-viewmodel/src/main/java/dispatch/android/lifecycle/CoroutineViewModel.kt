@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.*
  *
  * This must be an abstract class since nothing about the [ViewModel.onCleared] event is exposed.
  *
- * The `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
+ * `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
  */
 abstract class CoroutineViewModel : ViewModel() {
 
@@ -44,9 +44,7 @@ abstract class CoroutineViewModel : ViewModel() {
    *
    * The type of [CoroutineScope] created is configurable via [ViewModelScopeFactory.set].
    *
-   * This must be an abstract class since nothing about the `ViewModel.clear()` event is exposed.
-   *
-   * The `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
+   * `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
    */
   val viewModelScope: CoroutineScope
     get() {
