@@ -126,9 +126,9 @@ in your project `build.gradle`:
 dependencies {
 
   // core is required
-  implementation 'com.rickbusarow.dispatcherprovider:dispatch-core:$version'
+  implementation 'com.rickbusarow.dispatch:dispatch-core:$version'
 
-  implementation 'com.rickbusarow.dispatcherprovider:dispatch-dispatch-android-lifecycle-runtime:$version'
+  implementation 'com.rickbusarow.dispatch:dispatch-dispatch-android-lifecycle-runtime:$version'
 }
 ```
 

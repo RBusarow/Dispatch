@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatcherprovider/dispatcher-provider/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatcherprovider/dispatcher-provider)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatch/core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatch/core)
 
 # Artifacts
 
@@ -261,8 +261,8 @@ dependepencies {
   // necessary for testing
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$currentCoroutinesVersion"
 
-  implementation "com.rickbusarow.dispatcherprovider:dispatcher-provider:1.0.0-beta02"
-  testImplementation "com.rickbusarow.dispatcherprovider:dispatcher-provider-test:1.0.0-beta02"
+  implementation "com.rickbusarow.dispatch:dispatcher-provider:1.0.0-beta02"
+  testImplementation "com.rickbusarow.dispatch:dispatcher-provider-test:1.0.0-beta02"
 }
 ```
 
@@ -284,8 +284,8 @@ dependepencies {
   // necessary for testing
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$currentCoroutinesVersion")
 
-  implementation("com.rickbusarow.dispatcherprovider:dispatcher-provider:1.0.0-beta02")
-  testImplementation("com.rickbusarow.dispatcherprovider:dispatcher-provider-test:1.0.0-beta02")
+  implementation("com.rickbusarow.dispatch:dispatcher-provider:1.0.0-beta02")
+  testImplementation("com.rickbusarow.dispatch:dispatcher-provider-test:1.0.0-beta02")
 }
 ```
 
