@@ -24,13 +24,5 @@ cp extensions/README.md docs/module-extensions.md
 ./gradlew knit
 
 # mkdocs gh-pages
- mkdocs serve
+mkdocs serve
 # mkdocs serve --no-livereload
-
-#rm docs/index.md
-#rm docs/android-espresso.md
-#rm docs/android-lifecycle-runtime.md
-#rm docs/android-lifecycle-viewmodel.md
-#rm docs/core.md
-#rm docs/core-test.md
-#rm docs/extensions.md
