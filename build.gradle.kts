@@ -18,7 +18,6 @@ import org.jetbrains.kotlin.gradle.tasks.*
 import java.net.*
 
 buildscript {
-
   repositories {
     mavenLocal()
     mavenCentral()
@@ -38,6 +37,7 @@ buildscript {
 }
 
 allprojects {
+
   repositories {
     mavenCentral()
     google()
