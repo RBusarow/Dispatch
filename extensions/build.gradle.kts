@@ -13,27 +13,12 @@
  * limitations under the License.
  */
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath(BuildPlugins.kotlinGradlePlugin)
-  }
-
-}
-
 plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
-}
-
-tasks.test {
-  useJUnitPlatform()
 }
 
 dependencies {

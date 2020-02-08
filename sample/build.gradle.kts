@@ -19,17 +19,6 @@ plugins {
   id(Plugins.kotlinAndroidExtensions)
 }
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-    google()
-    jcenter()
-    maven(url = "https://jitpack.io")
-  }
-
-}
-
 android {
   compileSdkVersion(Versions.compileSdk)
 

@@ -21,26 +21,12 @@ plugins {
   id(Plugins.dokka)
 }
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-    google()
-    jcenter()
-  }
-  dependencies {
-    classpath(BuildPlugins.kotlinGradlePlugin)
-  }
-
-}
-
 android {
   compileSdkVersion(Versions.compileSdk)
 
   defaultConfig {
     minSdkVersion(Versions.minSdk)
     targetSdkVersion(Versions.targetSdk)
-    versionCode = 1
     versionName = Versions.versionName
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

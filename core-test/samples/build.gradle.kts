@@ -22,22 +22,6 @@ plugins {
 
 sourceSets["test"].java.srcDir("test")
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath(BuildPlugins.kotlinGradlePlugin)
-  }
-
-}
-
-
-tasks.test {
-  useJUnitPlatform()
-}
-
 dependencies {
   implementation(Libs.Kotlin.stdlib)
 
