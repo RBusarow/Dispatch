@@ -1,7 +1,7 @@
 #!/bin/zsh
 rm -rf docs/kdoc
 
-./gradlew clean dokka
+./gradlew clean build dokka
 
 rm docs/changes.md
 rm docs/index.md
