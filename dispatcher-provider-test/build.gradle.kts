@@ -27,7 +27,6 @@ buildscript {
 plugins {
   id("java-library")
   id("kotlin")
-  id("org.jetbrains.dokka").version("0.10.0")
 }
 
 tasks.test {

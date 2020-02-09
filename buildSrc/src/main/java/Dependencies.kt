@@ -15,6 +15,7 @@
 
 object Versions {
   const val ktlint = "0.35.0"
+  const val dokka = "0.10.1"
 
   const val compileSdk = 29
   const val minSdk = "23"
@@ -29,6 +30,7 @@ object Versions {
 
 object BuildPlugins {
 
+  const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 
@@ -45,7 +47,7 @@ object Libs {
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val coreKtx = "androidx.core:core-ktx:1.1.0"
-    const val lifecycle = "androidx.lifecycle:lifecycle-common-java8:2.1.0"
+    const val lifecycle = "androidx.lifecycle:lifecycle-common:2.1.0"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.1.0"
     const val testEspressoCore = "androidx.test.espresso:espresso-core:3.2.0"
     const val testRunner = "androidx.test:runner:1.2.0"
