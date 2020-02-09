@@ -32,52 +32,8 @@ import org.junit.runner.*
  * For this reason, it's a good idea to use a dependency injection framework just as Dagger or Koin
  * to provide [CoroutineScope]s.
  *
- * ```
- * class SomeEspressoTest {
- *
- *   // Retrieve the DispatcherProvider from a dependency graph,
- *   // so that the same one is used throughout the codebase.
- *   val customDispatcherProvider = testAppComponent.customDispatcherProvider
- *
- *   @JvmField @Rule val idlingRule = IdlingDispatcherProviderRule { IdlingDispatcherProvider(customDispatcherProvider) }
- *
- *   @Test
- *   fun testThings() = runBlocking {
- *
- *     // for the duration of this test
- *
- *   }
- * }
- * ```
- *
  * If using the `lifecycleScope` and `viewModelScope` properties,
  * be sure to use the versions from the `dispatch-android-lifecycle` artifacts to make use of their settable factories.
- *
- * ```
- * import dispatch.lifecycle.*
- *
- * class SomeEspressoTest {
- *
- *   val customDispatcherProvider = IdlingDispatcherProvider()
- *
- *   @JvmField @Rule val idlingRule = IdlingDispatcherProviderRule { customDispatcherProvider }
- *
- *   @Before
- *   fun setUp() {
- *     LifecycleScopeFactory.set { MainImmediateCoroutineScope(customDispatcherProvider) }
- *     ViewModelScopeFactory.set { MainImmediateCoroutineScope(customDispatcherProvider) }
- *
- *     // now all scopes use the same IdlingDispatcherProvider
- *   }
- *
- *   @Test
- *   fun testThings() = runBlocking {
- *
- *     // for the duration of this test
- *
- *   }
- * }
- * ```
  *
  * ### Before the test:
  * * [IdlingDispatcherProvider.registerAllIdlingResources] is called to register all dispatchers with [IdlingRegistry].
@@ -96,6 +52,8 @@ import org.junit.runner.*
  * @param factory factory for a custom [IdlingDispatcherProvider].
  * This must be the same [DispatcherProvider] which is used to create [CoroutineScope]s in the code being tested.
  *
+ * @sample samples.IdlingCoroutineScopeRuleSample
+ * @sample samples.IdlingCoroutineScopeRuleWithLifecycleSample
  * @see TestRule
  * @see TestCoroutineScope
  * @see IdlingRegistry

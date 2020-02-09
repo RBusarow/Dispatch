@@ -2,4 +2,4 @@
 
 # dispatcherProvider
 
-`lateinit var dispatcherProvider: `[`IdlingDispatcherProvider`](../-idling-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScopeRule.kt#L107)
+`lateinit var dispatcherProvider: `[`IdlingDispatcherProvider`](../-idling-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScopeRule.kt#L65)

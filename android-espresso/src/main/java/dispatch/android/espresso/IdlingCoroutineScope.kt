@@ -85,6 +85,8 @@ interface UnconfinedIdlingCoroutineScope : IdlingCoroutineScope, UnconfinedCorou
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
+ * @sample samples.IdlingCoroutineScopeSample.createNoArgIdlingCoroutineScope
+ * @sample samples.IdlingCoroutineScopeSample.createCustomIdlingCoroutineScope
  */
 fun IdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -103,6 +105,8 @@ fun IdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
+ * @sample samples.DefaultIdlingCoroutineScopeSample.createNoArgDefaultIdlingCoroutineScope
+ * @sample samples.DefaultIdlingCoroutineScopeSample.createCustomDefaultIdlingCoroutineScope
  */
 fun DefaultIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -121,6 +125,8 @@ fun DefaultIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
+ * @sample samples.IOIdlingCoroutineScopeSample.createNoArgIOIdlingCoroutineScope
+ * @sample samples.IOIdlingCoroutineScopeSample.createCustomIOIdlingCoroutineScope
  */
 fun IOIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -139,6 +145,8 @@ fun IOIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
+ * @sample samples.MainIdlingCoroutineScopeSample.createNoArgMainIdlingCoroutineScope
+ * @sample samples.MainIdlingCoroutineScopeSample.createCustomMainIdlingCoroutineScope
  */
 fun MainIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -157,6 +165,8 @@ fun MainIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
+ * @sample samples.MainImmediateIdlingCoroutineScopeSample.createNoArgMainImmediateIdlingCoroutineScope
+ * @sample samples.MainImmediateIdlingCoroutineScopeSample.createCustomMainImmediateIdlingCoroutineScope
  */
 fun MainImmediateIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -176,6 +186,8 @@ fun MainImmediateIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
+ * @sample samples.UnconfinedIdlingCoroutineScopeSample.createNoArgUnconfinedIdlingCoroutineScope
+ * @sample samples.UnconfinedIdlingCoroutineScopeSample.createCustomUnconfinedIdlingCoroutineScope
  */
 fun UnconfinedIdlingCoroutineScope(
   job: Job = SupervisorJob(),
