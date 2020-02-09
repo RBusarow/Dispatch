@@ -62,6 +62,7 @@ internal fun LifecycleCoroutineScope.launchEvery(
   // such as going from CREATED to DESTROYED in launchWhileCreated().
   .onEachLatest { active ->
 
+    println("here")
     if (active) {
       // Create a CoroutineScope which is tied to the receiver LifecycleCoroutineScope.
       // This new CoroutineScope will be automatically cancelled when the parent scope is cancelled,
@@ -84,7 +85,7 @@ internal fun Lifecycle.eventFlow(
 ): Flow<Boolean> = callbackFlow<Boolean> {
 
   val observer = LifecycleEventObserver { _, _ ->
-
+    println("at min --> ${currentState.isAtLeast(minimumState)}")
     // send true if the state is high enough, false if not
     sendBlocking(currentState.isAtLeast(minimumState))
 
@@ -95,7 +96,7 @@ internal fun Lifecycle.eventFlow(
   }
 
   addObserver(observer)
-
+  println("here")
   // When the channel is closed, remove the observer.
   awaitClose { removeObserver(observer) }
 }
