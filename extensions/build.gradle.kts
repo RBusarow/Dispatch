@@ -29,7 +29,7 @@ dependencies {
 
   implementation(project(":core"))
 
-  testImplementation(project(":core-test"))
+  testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
 
   testImplementation(Libs.JUnit.jUnit5)

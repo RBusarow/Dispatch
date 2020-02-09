@@ -13,6 +13,4 @@
 /.idea/gradle.xml
 /buildSrc/build/
 /.idea/
-/*/.kotlintest/
-/*/*/.kotlintest/
 /projectFilesBackup/.idea/

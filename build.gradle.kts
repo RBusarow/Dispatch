@@ -55,6 +55,8 @@ allprojects {
       subProjects = listOf(
         ":core",
         ":core-test",
+        ":core-test-junit4",
+        ":core-test-junit5",
         ":extensions",
         ":android-espresso",
         ":android-lifecycle-runtime",

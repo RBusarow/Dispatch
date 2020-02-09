@@ -22,13 +22,25 @@ extra:
       link: https://linkedin.com/in/rick-busarow
 
 nav:
-  - 'Overview': index.md
+  - 'Home': index.md
   - 'Getting Started': getting-started.md
-  - 'Change Log': changes.md
+  - 'Modules':
+      - 'Core': module-core.md
+      - 'Extensions': module-extensions.md
+      - 'Test-Core': module-core-test.md
+      - 'Test-JUnit4': module-core-test-junit4.md
+      - 'Test-JUnit5': module-core-test-junit5.md
+      - 'Android-Espresso': module-android-espresso.md
+      - 'Android-Lifecycle-runtime': module-android-lifecycle-runtime.md
+      - 'Android-Lifecycle-viewmodel': module-android-lifecycle-viewmodel.md
+  - 'Change Log':
+      - 'Change Log': changes.md
   - 'KDoc':
       - 'core': kdoc/core/index.md
-      - 'core-test': kdoc/core-test/index.md
       - 'extensions': kdoc/extensions/index.md
+      - 'test-core': kdoc/core-test/index.md
+      - 'test-junit4': kdoc/core-test-junit4/index.md
+      - 'test-junit5': kdoc/core-test-junit5/index.md
       - 'android-espresso': kdoc/android-espresso/index.md
       - 'android-lifecycle-runtime': kdoc/android-lifecycle-runtime/index.md
       - 'android-lifecycle-viewmodel': kdoc/android-lifecycle-viewmodel/index.md
