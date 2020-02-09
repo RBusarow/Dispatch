@@ -26,5 +26,3 @@ jobs:
         run: ./gradlew test
       - name: lint
         run: ./gradlew lint
-      - name: update dokka and site
-        run: ./scripts/site.sh
