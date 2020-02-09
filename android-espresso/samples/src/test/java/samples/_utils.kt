@@ -20,7 +20,7 @@ package samples
 import dispatch.core.*
 import io.kotlintest.*
 import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
+import org.junit.*
 
 typealias Sample = Test
 

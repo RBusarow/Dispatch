@@ -14,9 +14,24 @@ Marker interface for an [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
 [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
-`fun IOIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`IOIdlingCoroutineScope`](./-i-o-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L125)
+`fun IOIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`IOIdlingCoroutineScope`](./-i-o-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L131)
 
 Factory function for an [IOIdlingCoroutineScope](./-i-o-idling-coroutine-scope.md).
+
+``` kotlin
+val scope = IOIdlingCoroutineScope()
+
+scope.idlingDispatcherProvider.registerAllIdlingResources()
+```
+
+``` kotlin
+val scope = IOIdlingCoroutineScope(
+  job = Job(),
+  dispatcherProvider = SomeCustomIdlingDispatcherProvider()
+)
+
+scope.idlingDispatcherProvider.registerAllIdlingResources()
+```
 
 ### Parameters
 

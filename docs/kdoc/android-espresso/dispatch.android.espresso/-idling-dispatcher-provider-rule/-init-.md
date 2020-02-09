@@ -13,52 +13,8 @@ When doing Espresso testing, it's important that the same [IdlingDispatcher](../
 For this reason, it's a good idea to use a dependency injection framework just as Dagger or Koin
 to provide [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)s.
 
-```
-class SomeEspressoTest {
-
-  // Retrieve the DispatcherProvider from a dependency graph,
-  // so that the same one is used throughout the codebase.
-  val customDispatcherProvider = testAppComponent.customDispatcherProvider
-
-  @JvmField @Rule val idlingRule = IdlingDispatcherProviderRule { IdlingDispatcherProvider(customDispatcherProvider) }
-
-  @Test
-  fun testThings() = runBlocking {
-
-    // for the duration of this test
-
-  }
-}
-```
-
 If using the `lifecycleScope` and `viewModelScope` properties,
 be sure to use the versions from the `dispatch-android-lifecycle` artifacts to make use of their settable factories.
-
-```
-import dispatch.lifecycle.*
-
-class SomeEspressoTest {
-
-  val customDispatcherProvider = IdlingDispatcherProvider()
-
-  @JvmField @Rule val idlingRule = IdlingDispatcherProviderRule { customDispatcherProvider }
-
-  @Before
-  fun setUp() {
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(customDispatcherProvider) }
-    ViewModelScopeFactory.set { MainImmediateCoroutineScope(customDispatcherProvider) }
-
-    // now all scopes use the same IdlingDispatcherProvider
-  }
-
-  @Test
-  fun testThings() = runBlocking {
-
-    // for the duration of this test
-
-  }
-}
-```
 
 ### Before the test:
 
@@ -75,6 +31,63 @@ dependencies {
   testImplementation "junit:junit:4.12"
   -- or --
   testImplementation "org.junit.vintage:junit-vintage-engine:5.5.1"
+}
+```
+
+``` kotlin
+@RunWith(RobolectricTestRunner::class)
+class IdlingCoroutineScopeRuleSample {
+
+  // Retrieve the DispatcherProvider from a dependency graph,
+  // so that the same one is used throughout the codebase.
+  val customDispatcherProvider = testAppComponent.customDispatcherProvider
+
+  @JvmField
+  @Rule
+  val idlingRule = IdlingDispatcherProviderRule {
+    IdlingDispatcherProvider(customDispatcherProvider)
+  }
+
+  @Test
+  fun testThings() = runBlocking {
+
+    // Now any CoroutineScope which uses the DispatcherProvider
+    // in TestAppComponent will sync its "idle" state with Espresso
+
+  }
+
+}
+```
+
+``` kotlin
+@RunWith(RobolectricTestRunner::class)
+class IdlingCoroutineScopeRuleWithLifecycleSample {
+
+  // Retrieve the DispatcherProvider from a dependency graph,
+  // so that the same one is used throughout the codebase.
+  val customDispatcherProvider = testAppComponent.customDispatcherProvider
+
+  @JvmField
+  @Rule
+  val idlingRule = IdlingDispatcherProviderRule {
+    IdlingDispatcherProvider(customDispatcherProvider)
+  }
+
+  @Before
+  fun setUp() {
+    LifecycleScopeFactory.set { MainImmediateCoroutineScope(customDispatcherProvider) }
+    ViewModelScopeFactory.set { MainImmediateCoroutineScope(customDispatcherProvider) }
+    // now all scopes use the same IdlingDispatcherProvider
+  }
+
+  @Test
+  fun testThings() = runBlocking {
+
+    // Now any CoroutineScope which uses the DispatcherProvider
+    // in TestAppComponent will sync its "idle" state with Espresso
+
+  }
+
 }
 ```
 

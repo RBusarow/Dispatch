@@ -46,12 +46,21 @@ dependencies {
   implementation(project(":core"))
   implementation(project(":extensions"))
   implementation(project(":android-espresso"))
+  implementation(project(":android-lifecycle-runtime"))
+  implementation(project(":android-lifecycle-viewmodel"))
+
+  testImplementation(project(":internal-test"))
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)
 
+  testImplementation(Libs.Androidx.testRunner)
+  testImplementation(Libs.Androidx.espresso)
+
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
+
+  testImplementation(Libs.Robolectric.core)
 
   testImplementation(Libs.Kotlinx.Coroutines.test)
 

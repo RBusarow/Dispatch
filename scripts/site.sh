@@ -24,5 +24,5 @@ cp extensions/README.md docs/module-extensions.md
 ./gradlew knit
 
 # mkdocs gh-pages
-mkdocs serve
+# mkdocs serve
 # mkdocs serve --no-livereload
