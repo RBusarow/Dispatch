@@ -21,6 +21,7 @@ object Plugins {
   const val atomicFu = "kotlinx-atomicfu"
 
   const val dokka = "org.jetbrains.dokka"
+  const val knit = "kotlinx-knit"
 
   const val javaLibrary = "java-library"
 
@@ -34,11 +35,13 @@ object Plugins {
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "0.10.1"
+  const val knit = "0.1.0"
 
   const val compileSdk = 29
   const val minSdk = "21"
   const val targetSdk = 29
 
+  const val benManes = "0.27.0"
   const val gradleWrapper = "3.5.3"
   const val dagger = "2.25.2"
   const val kotlin = "1.3.61"
@@ -50,11 +53,13 @@ object BuildPlugins {
 
   const val gradleMavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.9.0-SNAPSHOT"
   const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
+  const val knit = "org.jetbrains.kotlinx:kotlinx-knit:${Versions.knit}"
 
   const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.1"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+  const val benManesVersions = "com.github.ben-manes:gradle-versions-plugin:${Versions.benManes}"
 
   const val androidApplication = "com.android.application"
   const val kotlinAndroid = "kotlin-android"

@@ -25,14 +25,16 @@ buildscript {
     google()
     jcenter()
     gradlePluginPortal()
+    maven("https://dl.bintray.com/kotlin/kotlinx")
   }
   dependencies {
     classpath(BuildPlugins.androidGradlePlugin)
     classpath(BuildPlugins.atomicFu)
-    classpath("com.github.ben-manes:gradle-versions-plugin:0.27.0")
+    classpath(BuildPlugins.benManesVersions)
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath(BuildPlugins.gradleMavenPublish)
     classpath(BuildPlugins.dokka)
+    classpath(BuildPlugins.knit)
   }
 }
 
@@ -126,3 +128,5 @@ subprojects {
       }
     }
 }
+
+apply(plugin = Plugins.knit)

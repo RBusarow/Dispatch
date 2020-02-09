@@ -25,7 +25,7 @@ class SomeTest {
 
   @Test
   fun testSomething() = runBlocking {
-    someClass.doSomething { ... }
+    someClass.doSomething {  }
   }
 
 }

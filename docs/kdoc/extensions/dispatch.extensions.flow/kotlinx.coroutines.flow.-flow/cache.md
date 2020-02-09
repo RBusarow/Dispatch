@@ -14,9 +14,9 @@ example:
 ``` Kotlin
 val ints = flowOf(1, 2, 3, 4).cache(2)   // cache the last 2 values
 
-ints.take(4).collect { ... }             // 4 values are emitted, but also recorded.  The last 2 remain.
+ints.take(4).collect {  }             // 4 values are emitted, but also recorded.  The last 2 remain.
 
-ints.collect { ... }                     // collects [3, 4, 1, 2, 3, 4]
+ints.collect {  }                     // collects [3, 4, 1, 2, 3, 4]
 ```
 
 Throws [IllegalArgumentException](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html) if size parameter is not greater than 0
