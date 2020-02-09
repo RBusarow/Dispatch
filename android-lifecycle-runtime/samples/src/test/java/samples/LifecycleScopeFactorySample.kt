@@ -143,7 +143,7 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
     class SomeViewModel {
       val someFlow = flow {
         repeat(500) {
-          delay(10)
+          //          delay(10)
           emit(it)
         }
       }
@@ -165,8 +165,6 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
       }
     }
 
-    testScope.pauseDispatcher()
-
     val fragment = SomeFragment()
 
     println("starting at --> ${fragment.lifecycle.currentState}")
@@ -177,7 +175,7 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
 
     fragment.start()
 
-    delay(3500)
+    println(fragment.lifecycle.observerCount)
 
     println("destroying")
     output.add("destroying")
@@ -209,4 +207,4 @@ class LifecycleCoroutineScopeSample : CoroutineTest {
   }
 }
 
-abstract class Fragment : FakeLifecycleOwner()
+abstract class Fragment : FakeLifecycleOwner(initialState = Lifecycle.State.STARTED)
