@@ -41,7 +41,7 @@ import kotlin.coroutines.*
  *
  *   @Test
  *   fun testSomething() = runBlocking {
- *     someClass.doSomething { ... }
+ *     someClass.doSomething {  }
  *   }
  *
  * }
@@ -101,7 +101,7 @@ interface CoroutineTest {
  *
  *   @Test
  *   fun testSomething() = runBlocking {
- *     someClass.doSomething { ... }
+ *     someClass.doSomething {  }
  *   }
  *
  * }

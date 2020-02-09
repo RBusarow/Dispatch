@@ -16,7 +16,7 @@ class SomeTest {
 
   @Test
   fun testThings() = runBlocking {
-    testScope.launch { ... }
+    testScope.launch {  }
   }
 }
 ```

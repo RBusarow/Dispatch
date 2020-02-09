@@ -19,16 +19,16 @@ class SomeScreen : Fragment() {
 
     // active only when "resumed".  starts a fresh coroutine each time
     // this is a rough proxy for LiveData behavior
-    lifecycleScope.launchWhenResumed { ... }
+    lifecycleScope.launchWhenResumed {  }
 
     // active only when "started".  starts a fresh coroutine each time
-    lifecycleScope.launchWhenStarted { ... }
+    lifecycleScope.launchWhenStarted {  }
 
     // launch when created, automatically stop on destroy
-    lifecycleScope.launchWhenCreated { ... }
+    lifecycleScope.launchWhenCreated {  }
 
     // it works as a normal CoroutineScope as well (because it is)
-    lifecycleScope.launchMain { ... }
+    lifecycleScope.launchMain {  }
 
   }
 }
@@ -103,7 +103,7 @@ class SomeFragment : Fragment() {
   init {
     // automatically created CoroutineScope using the factory described above
     lifecycleScope.launchWhenResumed {
-      viewModel.someFlow.consume { ... }
+      viewModel.someFlow.consume {  }
     }
   }
 

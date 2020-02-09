@@ -17,10 +17,10 @@ class SomeViewModel : CoroutineViewModel() {
     viewModelScope. //...
 
     // multiple invocations use the same instance
-    viewModelScope.launch { ... }
+    viewModelScope.launch {  }
 
     // it works as a normal CoroutineScope (because it is)
-    viewModelScope.launchMain { ... }
+    viewModelScope.launchMain {  }
 
   }
 }
@@ -52,7 +52,7 @@ class SomeViewModelTest {
   @Test
   fun `some test`() = runBlocking {
     // the AndroidX version is public, so it's public here as well.
-    viewModel.viewModelScope.launch { ... }
+    viewModel.viewModelScope.launch {  }
   }
 }
 ```
@@ -123,7 +123,7 @@ class SomeFragment : Fragment() {
 
   init {
     lifecycleScope.launchWhenResumed {
-      viewModel.dataFlow.collect { ... }
+      viewModel.dataFlow.collect {  }
     }
   }
 }

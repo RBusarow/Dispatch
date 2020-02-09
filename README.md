@@ -17,9 +17,9 @@ class MyPresenter @Inject constructor(
   val coroutineScope: MainCoroutineScope // <-- Main
 ) {
 
-  fun loopSomething() = coroutineScope.launchDefault { ... }
+  fun loopSomething() = coroutineScope.launchDefault {  }
 
-  suspend fun updateSomething() = withMainImmediate { ... }
+  suspend fun updateSomething() = withMainImmediate {  }
 }
 ```
 
@@ -112,11 +112,11 @@ Or with builders and operators:
 
 ```kotlin
 fun foo(scope: CoroutineScope) {
-  scope.launchDefault { ... }
-  scope.launchIO { ... }
-  scope.launchMain { ... }
-  scope.launchMainImmediate { ... }
-  scope.launchUnconfined { ... }
+  scope.launchDefault {  }
+  scope.launchIO {  }
+  scope.launchMain {  }
+  scope.launchMainImmediate {  }
+  scope.launchUnconfined {  }
 }
 ```
 
@@ -124,11 +124,11 @@ fun foo(scope: CoroutineScope) {
 
 ```kotlin
 fun foo(scope: CoroutineScope) {
-  scope.asyncDefault { ... }
-  scope.asyncIO { ... }
-  scope.asyncMain { ... }
-  scope.asyncMainImmediate { ... }
-  scope.asyncUnconfined { ... }
+  scope.asyncDefault {  }
+  scope.asyncIO {  }
+  scope.asyncMain {  }
+  scope.asyncMainImmediate {  }
+  scope.asyncUnconfined {  }
 }
 ```
 
@@ -139,11 +139,11 @@ The [CoroutineContext][CoroutineContext] used for `withContext` comes from the `
 ```kotlin
 suspend fun foo() {
   // note that we have no CoroutineContext
-  withDefault { ... }
-  withIO { ... }
-  withMain { ... }
-  withMainImmediate { ... }
-  withUnconfined { ... }
+  withDefault {  }
+  withIO {  }
+  withMain {  }
+  withMainImmediate {  }
+  withUnconfined {  }
 }
 ```
 
@@ -152,7 +152,7 @@ suspend fun foo() {
 Like `withContext`, `Flow` typically doesn’t get a `CoroutineScope` of its own.  They inherit the `coroutineContext` from the collector in a pattern called [context preservation][context_preservation]. These new operators maintain context preservation (*they’re forced to, actually*), and extract the `coroutineContext` from the collector.
 
 ```kotlin
-val someFlow = flow { ... }
+val someFlow = flow {  }
   .flowOnDefault()
   .flowOnIO()
   .flowOnMain()
@@ -233,7 +233,7 @@ fun `showToast should do Toast magic`() = runBlockingProvidedTest {
   // uses "main" TestCoroutineDispatcher
   subject.showToast("hello world!")
 
-  verify { ... }
+  verify {  }
 }
 ```
 

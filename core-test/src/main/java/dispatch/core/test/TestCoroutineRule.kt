@@ -34,7 +34,7 @@ import kotlin.coroutines.*
  *
  *   @Test
  *   fun testThings() = runBlocking {
- *     testScope.launch { ... }
+ *     testScope.launch {  }
  *   }
  * }
  * ```

@@ -24,7 +24,7 @@ class SomeTest : CoroutineTest {
 
   @Test
   fun testSomething() = runBlocking {
-    someClass.doSomething { ... }
+    someClass.doSomething {  }
   }
 
 }
