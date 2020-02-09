@@ -27,4 +27,4 @@ jobs:
       - name: lint
         run: ./gradlew lint
       - name: update dokka and site
-        run: chmod +x ./scripts/site.sh
+        run: ./scripts/site.sh
