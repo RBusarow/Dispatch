@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.dispatcherprovidersample
+package dispatch.sample
 
 import androidx.lifecycle.*
 import dispatch.core.*

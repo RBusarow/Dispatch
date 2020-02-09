@@ -15,7 +15,7 @@
 
 @file:SuppressLint("SetTextI18n")
 
-package com.rickbusarow.dispatcherprovidersample
+package dispatch.sample
 
 import android.annotation.*
 import android.os.*
