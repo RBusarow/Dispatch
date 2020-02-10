@@ -74,16 +74,28 @@ object Libs {
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val coreKtx = "androidx.core:core-ktx:1.1.0"
-    const val fragment = "androidx.fragment:fragment:1.2.0"
-    const val fragmentKtx = "androidx.fragment:fragment-ktx:1.2.0"
-    const val fragmentTesting = "androidx.fragment:fragment-testing:1.2.0"
-    const val lifecycle = "androidx.lifecycle:lifecycle-common:2.2.0"
-    const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-    const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     const val espresso = "androidx.test.espresso:espresso-core:3.2.0"
     const val testRunner = "androidx.test:runner:1.2.0"
+
+    object Fragment {
+
+      private const val version = "1.2.0"
+
+      const val core = "androidx.fragment:fragment:$version"
+      const val ktx = "androidx.fragment:fragment-ktx:$version"
+      const val testing = "androidx.fragment:fragment-testing:$version"
+    }
+
+    object Lifecycle {
+
+      private const val version = "2.2.0"
+
+      const val common = "androidx.lifecycle:lifecycle-common:$version"
+      const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
+      const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+      const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
+      const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+    }
   }
 
   object Dagger {

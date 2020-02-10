@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-  implementation(Libs.Androidx.lifecycleViewModel)
+  implementation(Libs.Androidx.Lifecycle.viewModel)
 
   implementation(Libs.Kotlin.stdlib)
 

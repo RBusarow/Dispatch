@@ -40,9 +40,9 @@ android {
 
 dependencies {
 
-  implementation(Libs.Androidx.lifecycle)
-  implementation(Libs.Androidx.lifecycleLiveData)
-  testImplementation(Libs.Androidx.lifecycleRuntime)
+  implementation(Libs.Androidx.Lifecycle.common)
+  implementation(Libs.Androidx.Lifecycle.liveData)
+  testImplementation(Libs.Androidx.Lifecycle.runtime)
 
   implementation(Libs.Kotlin.stdlib)
 

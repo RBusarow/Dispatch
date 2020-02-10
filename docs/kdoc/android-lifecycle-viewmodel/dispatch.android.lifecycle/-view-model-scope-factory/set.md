@@ -2,25 +2,36 @@
 
 # set
 
-`fun set(factory: () -> `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-viewmodel/src/main/java/dispatch/android/lifecycle/ViewModelScopeFactory.kt#L81)
+`fun set(factory: () -> `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-viewmodel/src/main/java/dispatch/android/lifecycle/ViewModelScopeFactory.kt#L48)
 
-example:
+Override the default [MainImmediateCoroutineScope](#) factory, for testing or to include a custom [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)
+in production code.  This may be done in [Application.onCreate](https://developer.android.com/reference/android/app/Application.html#onCreate())
 
-```
-class MyApplication : Application() {
+``` kotlin
+class MyApplication : Application {
 
   override fun onCreate() {
-    super.onCreate()
-    ViewModelScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
+    ViewModelScopeFactory.set { MainImmediateCoroutineScope() }
   }
 }
 ```
 
-```
+``` kotlin
 class MyEspressoTest {
 
-  @Before fun setUp() {
+  @Before
+  fun setUp() {
     ViewModelScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+  }
+}
+```
+
+``` kotlin
+class MyJvmTest {
+
+  @Before
+  fun setUp() {
+    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }
   }
 }
 ```

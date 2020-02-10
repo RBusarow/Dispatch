@@ -2,7 +2,7 @@
 
 # CoroutineViewModel
 
-`abstract class CoroutineViewModel : `[`ViewModel`](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-viewmodel/src/main/java/dispatch/android/lifecycle/CoroutineViewModel.kt#L34)
+`abstract class CoroutineViewModel : `[`ViewModel`](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-viewmodel/src/main/java/dispatch/android/lifecycle/CoroutineViewModel.kt#L36)
 
 Base class for [ViewModel](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html)s which will be using a [viewModelScope](view-model-scope.md).
 
@@ -14,6 +14,28 @@ The type of [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx
 This must be an abstract class since nothing about the [ViewModel.onCleared](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html#onCleared()) event is exposed.
 
 `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
+
+``` kotlin
+class SomeViewModel : CoroutineViewModel() {
+
+  init {
+
+    // auto-created MainImmediateCoroutineScope which is auto-cancelled in onClear()
+    viewModelScope //...
+
+    // it works as a normal CoroutineScope (because it is)
+    viewModelScope.launchMain { }
+
+    // this is the same CoroutineScope instance each time
+    viewModelScope.launchMain { }
+
+  }
+
+  override fun onClear() {
+    viewModelScope.isActive shouldBe false
+  }
+}
+```
 
 ### Constructors
 
