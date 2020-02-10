@@ -52,6 +52,8 @@ public object LifecycleScopeFactory {
 
   /**
    * Immediately resets the factory function to its default.
+   *
+   * @sample samples.LifecycleScopeFactorySample.lifecycleScopeFactoryResetSample
    */
   public fun reset() {
     _factory = { MainImmediateCoroutineScope() }

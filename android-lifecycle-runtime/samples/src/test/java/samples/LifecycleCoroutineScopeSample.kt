@@ -13,59 +13,79 @@
  * limitations under the License.
  */
 
-@file:Suppress("EXPERIMENTAL_API_USAGE")
 
 package samples
 
-import androidx.lifecycle.*
 import dispatch.android.lifecycle.*
-import dispatch.android.lifecycle.lifecycleScope
 import dispatch.core.*
 import dispatch.core.test.*
 import io.kotlintest.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
 
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeSample {
+class LifecycleCoroutineScopeSample : CoroutineTest {
 
-  val main = newSingleThreadContext("main")
-
-  val testScope = MainImmediateCoroutineScope(main + TestDispatcherProvider(main))
+  override lateinit var testScope: TestProvidedCoroutineScope
 
   @BeforeEach
   fun beforeEach() {
-    Dispatchers.setMain(testScope.dispatcherProvider.mainImmediate)
+
     LifecycleScopeFactory.set { testScope }
+  }
+
+  @Sample
+  fun lifecycleCoroutineScopeSample() = runBlocking {
+
+    // This could be any LifecycleOwner -- Fragments, Activities, Services...
+    class SomeFragment : Fragment() {
+
+      init {
+
+        // auto-created MainImmediateCoroutineScope which is lifecycle-aware
+        lifecycleScope //...
+
+        // active only when "resumed".  starts a fresh coroutine each time
+        // this is a rough proxy for LiveData behavior
+        lifecycleScope.launchEveryResume { }
+
+        // active only when "started".  starts a fresh coroutine each time
+        lifecycleScope.launchEveryStart { }
+
+        // launch when created, automatically stop on destroy
+        lifecycleScope.launchEveryCreate { }
+
+        // it works as a normal CoroutineScope as well (because it is)
+        lifecycleScope.launchMain { }
+
+      }
+    }
   }
 
   @Sample
   fun launchEveryCreateSample() = runBlocking {
 
-    val output = mutableListOf<String>()
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
 
     class SomeViewModel {
       val someFlow = flow {
-        repeat(500) {
-          delay(10)
+        repeat(100) {
           emit(it)
         }
       }
     }
 
-    class SomeFragment : Fragment(Lifecycle.State.CREATED) {
+    class SomeFragment : Fragment() {
 
       val viewModel = SomeViewModel()
 
       init {
-        println(3)
         lifecycleScope.launchEveryCreate {
-          println(1)
           viewModel.someFlow.collect {
-            println(2)
-            output.add("$it")
+            channel.send("$it")
           }
         }
       }
@@ -73,67 +93,48 @@ class LifecycleCoroutineScopeSample {
 
     val fragment = SomeFragment()
 
-    fragment.lifecycle.addObserver(LifecycleEventObserver { _, event ->
-      println("event --> $event")
-    })
-
-    delay(3500)
-
+    history.add("creating")
     fragment.create()
 
-    delay(3500)
+    repeat(3) {
+      history.add(channel.receive())
+    }
 
-    output.add("destroying")
+    // destroying the lifecycle cancels the lifecycleScope
+    history.add("destroying")
     fragment.destroy()
 
-    delay(30)
-
-    output.add("creating")
-    fragment.create()
-
-    delay(30)
-    output.add("destroying")
-    fragment.destroy()
-
-    output shouldBe listOf(
+    history shouldBe listOf(
+      "creating",
+      "0",
       "1",
       "2",
-      "3",
-      "destroying",
-      "creating",
-      "5",
-      "6",
-      "7",
       "destroying"
     )
-
   }
 
   @Sample
   fun launchEveryStartSample() = runBlocking {
 
-    val output = mutableListOf<String>()
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
 
     class SomeViewModel {
       val someFlow = flow {
-        repeat(500) {
-          delay(10)
+        repeat(100) {
           emit(it)
         }
       }
     }
 
-    class SomeFragment : Fragment(Lifecycle.State.CREATED) {
+    class SomeFragment : Fragment() {
 
       val viewModel = SomeViewModel()
 
       init {
-        println(3)
         lifecycleScope.launchEveryStart {
-          println(1)
           viewModel.someFlow.collect {
-            println(2)
-            output.add("$it")
+            channel.send("$it")
           }
         }
       }
@@ -141,47 +142,105 @@ class LifecycleCoroutineScopeSample {
 
     val fragment = SomeFragment()
 
-    println("starting at --> ${fragment.lifecycle.currentState}")
-
-    fragment.start()
-    delay(3500)
-
-    fragment.lifecycle.addObserver(LifecycleEventObserver { _, event ->
-      println("event --> $event \t\t now at at --> ${fragment.lifecycle.currentState}")
-    })
-
+    history.add("starting")
     fragment.start()
 
-    println("destroying")
-    output.add("destroying")
+    repeat(3) {
+      history.add(channel.receive())
+    }
+
+    // stopping the lifecycle cancels the existing Job
+    history.add("stopping")
     fragment.stop()
 
-    delay(30)
-
-    println("creating")
-    output.add("creating")
+    // starting the lifecycle creates a new Job
+    history.add("starting")
     fragment.start()
 
-    delay(30)
-    println("destroying")
-    output.add("destroying")
+    repeat(3) {
+      history.add(channel.receive())
+    }
+
+    history.add("stopping")
     fragment.stop()
 
-    output shouldBe listOf(
+    history shouldBe listOf(
+      "starting",
+      "0",
       "1",
       "2",
-      "3",
-      "destroying",
-      "creating",
-      "5",
-      "6",
-      "7",
-      "destroying"
+      "stopping",
+      "starting",
+      "0",
+      "1",
+      "2",
+      "stopping"
     )
+  }
 
+  @Sample
+  fun launchEveryResumeSample() = runBlocking {
+
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
+
+    class SomeViewModel {
+      val someFlow = flow {
+        repeat(100) {
+          emit(it)
+        }
+      }
+    }
+
+    class SomeFragment : Fragment() {
+
+      val viewModel = SomeViewModel()
+
+      init {
+        lifecycleScope.launchEveryResume {
+          viewModel.someFlow.collect {
+            channel.send("$it")
+          }
+        }
+      }
+    }
+
+    val fragment = SomeFragment()
+
+    history.add("resuming")
+    fragment.resume()
+
+    repeat(3) {
+      history.add(channel.receive())
+    }
+
+    // pausing the lifecycle cancels the existing Job
+    history.add("pausing")
+    fragment.pause()
+
+    // resuming the lifecycle creates a new Job
+    history.add("resuming")
+    fragment.resume()
+
+    repeat(3) {
+      history.add(channel.receive())
+    }
+
+    history.add("pausing")
+    fragment.pause()
+
+    history shouldBe listOf(
+      "resuming",
+      "0",
+      "1",
+      "2",
+      "pausing",
+      "resuming",
+      "0",
+      "1",
+      "2",
+      "pausing"
+    )
   }
 }
 
-abstract class Fragment(
-  initialState: Lifecycle.State
-) : FakeLifecycleOwner(initialState = initialState)

@@ -18,11 +18,9 @@ package samples
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
 
-@ObsoleteCoroutinesApi
-abstract class FakeLifecycleOwner(
-  private val mainDispatcher: CoroutineDispatcher = newSingleThreadContext(
-    "FakeLifecycleOwner main"
-  ),
+@Suppress("EXPERIMENTAL_API_USAGE")
+open class FakeLifecycleOwner(
+  private val mainDispatcher: CoroutineDispatcher = fakeMainDispatcher(),
   initialState: Lifecycle.State = Lifecycle.State.INITIALIZED
 ) : LifecycleOwner {
 
@@ -60,12 +58,16 @@ abstract class FakeLifecycleOwner(
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
   }
 
+  fun initialize() = runBlocking(mainDispatcher) {
+    lifecycle.currentState = Lifecycle.State.INITIALIZED
+  }
+
   fun destroy() = runBlocking(mainDispatcher) {
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
   }
 
-  private suspend fun getObserverCount(): Int =
-    withContext(mainDispatcher) {
-      registry.observerCount
-    }
+  fun getObserverCount(): Int = runBlocking(mainDispatcher) { registry.observerCount }
 }
+
+@Suppress("EXPERIMENTAL_API_USAGE")
+private fun fakeMainDispatcher() = newSingleThreadContext("FakeLifecycleOwner main")

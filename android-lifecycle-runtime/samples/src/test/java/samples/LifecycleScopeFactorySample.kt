@@ -46,7 +46,25 @@ class LifecycleScopeFactorySample {
     }
   }
 
+  @Sample
+  fun lifecycleScopeFactoryResetSample() {
+
+    class MyEspressoTest {
+
+      @Before
+      fun setUp() {
+        LifecycleScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+      }
+
+      @After
+      fun tearDown() {
+        LifecycleScopeFactory.reset()
+      }
+    }
+  }
+
   private annotation class Before
+  private annotation class After
 
 }
 

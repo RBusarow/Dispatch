@@ -19,6 +19,7 @@ package dispatch.android.lifecycle.internal
 import androidx.lifecycle.*
 import dispatch.android.lifecycle.*
 import dispatch.core.*
+import dispatch.extensions.channel.*
 import dispatch.extensions.flow.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -86,7 +87,7 @@ internal fun Lifecycle.eventFlow(
   val observer = LifecycleEventObserver { _, _ ->
 
     // send true if the state is high enough, false if not
-    sendBlocking(currentState.isAtLeast(minimumState))
+    sendBlockingOrNull(currentState.isAtLeast(minimumState))
 
     // if lifecycle is destroyed, send the last value to cancel the last block and then close the channel
     if (currentState == Lifecycle.State.DESTROYED) {

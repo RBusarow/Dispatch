@@ -41,6 +41,7 @@ android {
 dependencies {
 
   implementation(Libs.Androidx.lifecycle)
+  implementation(Libs.Androidx.lifecycleLiveData)
   testImplementation(Libs.Androidx.lifecycleRuntime)
 
   implementation(Libs.Kotlin.stdlib)
