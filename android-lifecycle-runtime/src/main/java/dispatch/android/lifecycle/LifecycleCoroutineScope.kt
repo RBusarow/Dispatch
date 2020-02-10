@@ -30,6 +30,8 @@ import kotlinx.coroutines.*
  * The type of [CoroutineScope] created is configurable via [LifecycleScopeFactory.set].
  *
  * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
+ *
+ * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeSample
  */
 val LifecycleOwner.lifecycleScope: LifecycleCoroutineScope
   get() = LifecycleCoroutineScopeStore.get(this.lifecycle)
@@ -41,6 +43,8 @@ val LifecycleOwner.lifecycleScope: LifecycleCoroutineScope
  * which will automatically start upon reaching their associated [Lifecycle.Event],
  * then automatically cancel upon the [lifecycle] dropping below that state.  Reaching
  * that state again will start a new [Job].
+ *
+ * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeSample
  */
 class LifecycleCoroutineScope(
   internal val lifecycle: Lifecycle,
@@ -57,20 +61,7 @@ class LifecycleCoroutineScope(
    * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
    *
-   * example:
-   *
-   * ```
-   * class SomeFragment : Fragment {
-   *
-   *   init {
-   *     lifecycleScope.launchEveryCreate {
-   *       viewModel.someFlow.collect {
-   *         printLn("new value --> $it")
-   *       }
-   *     }
-   *   }
-   * }
-   *```
+   * @sample samples.LifecycleCoroutineScopeSample.launchEveryCreateSample
    */
   fun launchEveryCreate(
     block: suspend CoroutineScope.() -> Unit
@@ -86,20 +77,7 @@ class LifecycleCoroutineScope(
    * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.STARTED].
    *
-   * example:
-   *
-   * ```
-   * class SomeFragment : Fragment {
-   *
-   *   init {
-   *     lifecycleScope.launchEveryStart {
-   *       viewModel.someFlow.collect {
-   *         printLn("new value --> $it")
-   *       }
-   *     }
-   *   }
-   * }
-   *```
+   * @sample samples.LifecycleCoroutineScopeSample.launchEveryStartSample
    */
   fun launchEveryStart(
     block: suspend CoroutineScope.() -> Unit
@@ -115,19 +93,7 @@ class LifecycleCoroutineScope(
    * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.RESUMED].
    *
-   * example:
-   *
-   * ```
-   * class SomeFragment : Fragment {
-   *
-   *   init {
-   *     lifecycleScope.launchEveryResume {
-   *       viewModel.someFlow.collect {
-   *         printLn("new value --> $it")
-   *       }
-   *     }
-   *   }
-   * }
+   * @sample samples.LifecycleCoroutineScopeSample.launchEveryResumeSample
    *```
    */
   fun launchEveryResume(

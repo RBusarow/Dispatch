@@ -25,58 +25,24 @@ import dispatch.core.*
  * By default, [create] returns a [MainImmediateCoroutineScope].
  *
  * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
- * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate].
- *
- * example:
- *
- * ```
- * class MyApplication : Application() {
- *
- *   override fun onCreate() {
- *     super.onCreate()
- *     LifecycleScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
- *   }
- * }
- * ```
- *
- * ```
- * class MyEspressoTest {
- *
- *   @Before fun setUp() {
- *     LifecycleCoroutineScopeFactory.set { MainImmediateIdlingCoroutineScope() }
- *   }
- * }
- * ```
+ * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]
  *
  * [reset] may be used to reset the factory to default at any time.
+ * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+ * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
  */
 public object LifecycleScopeFactory {
 
   private var _factory: () -> MainImmediateCoroutineScope = { MainImmediateCoroutineScope() }
 
   /**
-   * example:
-   *
-   * ```
-   * class MyApplication : Application() {
-   *
-   *   override fun onCreate() {
-   *     super.onCreate()
-   *     LifecycleScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
-   *   }
-   * }
-   * ```
-   *
-   * ```
-   * class MyEspressoTest {
-   *
-   *   @Before fun setUp() {
-   *     LifecycleCoroutineScopeFactory.set { MainImmediateIdlingCoroutineScope() }
-   *   }
-   * }
-   * ```
+   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
+   * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]
    *
    * @param factory sets a custom [MainImmediateCoroutineScope] factory to be used for all new instance creations until reset.
+   *
+   * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+   * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
    */
   public fun set(factory: () -> MainImmediateCoroutineScope) {
     _factory = factory
@@ -86,6 +52,8 @@ public object LifecycleScopeFactory {
 
   /**
    * Immediately resets the factory function to its default.
+   *
+   * @sample samples.LifecycleScopeFactorySample.lifecycleScopeFactoryResetSample
    */
   public fun reset() {
     _factory = { MainImmediateCoroutineScope() }
