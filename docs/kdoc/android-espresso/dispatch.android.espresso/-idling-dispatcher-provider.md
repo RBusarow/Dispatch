@@ -2,7 +2,7 @@
 
 # IdlingDispatcherProvider
 
-`fun IdlingDispatcherProvider(delegate: DispatcherProvider = DefaultDispatcherProvider()): `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L51)
+`fun IdlingDispatcherProvider(delegate: DispatcherProvider = DefaultDispatcherProvider()): `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L71)
 
 [IdlingDispatcherProvider](-idling-dispatcher-provider/index.md) factory function, which creates an instance using an existing [DispatcherProvider](#).
 

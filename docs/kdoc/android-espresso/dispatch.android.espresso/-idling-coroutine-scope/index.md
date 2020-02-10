@@ -16,7 +16,7 @@ Marker interface for a [CoroutineScope](https://kotlin.github.io/kotlinx.corouti
 
 | Name | Summary |
 |---|---|
-| [idlingDispatcherProvider](idling-dispatcher-provider.md) | `abstract val idlingDispatcherProvider: `[`IdlingDispatcherProvider`](../-idling-dispatcher-provider/index.md) |
+| [idlingDispatcherProvider](idling-dispatcher-provider.md) | Any [IdlingCoroutineScope](./index.md) has an [idlingDispatcherProvider](idling-dispatcher-provider.md) property which can be registered in the [IdlingRegistry](#).`abstract val idlingDispatcherProvider: `[`IdlingDispatcherProvider`](../-idling-dispatcher-provider/index.md) |
 
 ### Inheritors
 

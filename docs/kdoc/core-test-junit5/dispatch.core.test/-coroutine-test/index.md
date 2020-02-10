@@ -88,11 +88,11 @@ class CoroutineTestWithFactorySample : CoroutineTest {
 
 | Name | Summary |
 |---|---|
-| [testScope](test-scope.md) | `abstract var testScope: TestProvidedCoroutineScope` |
-| [testScopeFactory](test-scope-factory.md) | `open val testScopeFactory: () -> TestProvidedCoroutineScope` |
+| [testScope](test-scope.md) | The [TestProvidedCoroutineScope](#) which is created and managed by the `CoroutineTest``abstract var testScope: TestProvidedCoroutineScope` |
+| [testScopeFactory](test-scope-factory.md) | Optional parameter for defining a custom [TestProvidedCoroutineScope](#).`open val testScopeFactory: () -> TestProvidedCoroutineScope` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [runBlockingTest](run-blocking-test.md) | `open fun runBlockingTest(context: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)` = EmptyCoroutineContext, testBody: suspend `[`TestCoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.test/-test-coroutine-scope/index.html)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [runBlockingTest](run-blocking-test.md) | Convenience function for invoking [runBlockingTestProvided](#) without an additional import.`open fun runBlockingTest(context: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)` = EmptyCoroutineContext, testBody: suspend `[`TestCoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.test/-test-coroutine-scope/index.html)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

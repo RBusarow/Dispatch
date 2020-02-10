@@ -2,4 +2,7 @@
 
 # testScope
 
-`lateinit var testScope: TestProvidedCoroutineScope` [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test-junit5/src/main/java/dispatch/core/test/CoroutineTest.kt#L94)
+`lateinit var testScope: TestProvidedCoroutineScope` [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test-junit5/src/main/java/dispatch/core/test/CoroutineTest.kt#L107)
+
+The [TestProvidedCoroutineScope](#) which is created and managed by the `CoroutineTest`
+

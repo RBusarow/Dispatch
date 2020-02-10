@@ -28,6 +28,9 @@ import kotlin.coroutines.*
  */
 interface IdlingCoroutineScope : CoroutineScope {
 
+  /**
+   * Any [IdlingCoroutineScope] has an [idlingDispatcherProvider] property which can be registered in the [IdlingRegistry].
+   */
   val idlingDispatcherProvider: IdlingDispatcherProvider
 }
 

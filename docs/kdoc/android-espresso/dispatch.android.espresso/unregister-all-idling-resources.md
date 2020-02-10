@@ -2,7 +2,7 @@
 
 # unregisterAllIdlingResources
 
-`fun `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)`.unregisterAllIdlingResources(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L96)
+`fun `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)`.unregisterAllIdlingResources(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L116)
 
 Unregister all [IdlingDispatcher](-idling-dispatcher/index.md) properties of the receiver [IdlingDispatcherProvider](-idling-dispatcher-provider/index.md) with Espresso's [IdlingRegistry](#).
 

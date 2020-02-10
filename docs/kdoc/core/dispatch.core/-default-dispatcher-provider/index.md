@@ -2,7 +2,7 @@
 
 # DefaultDispatcherProvider
 
-`class DefaultDispatcherProvider : `[`DispatcherProvider`](../-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/DispatcherProvider.kt#L89)
+`class DefaultDispatcherProvider : `[`DispatcherProvider`](../-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/DispatcherProvider.kt#L95)
 
 Default implementation of [DispatcherProvider](../-dispatcher-provider/index.md) which simply delegates to the corresponding
 properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.
