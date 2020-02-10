@@ -2,7 +2,7 @@
 
 # onEachLatest
 
-`@ExperimentalCoroutinesApi fun <T> `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>.onEachLatest(action: suspend (T) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>` [(source)](https://github.com/RBusarow/Dispatch/tree/master/extensions/src/main/java/dispatch/extensions/flow/Operators.kt#L50)
+`@ExperimentalCoroutinesApi fun <T> `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>.onEachLatest(action: suspend (T) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>` [(source)](https://github.com/RBusarow/Dispatch/tree/master/extensions/src/main/java/dispatch/extensions/flow/Operators.kt#L36)
 
 Returns a flow which performs the given [action](on-each-latest.md#dispatch.extensions.flow$onEachLatest(kotlinx.coroutines.flow.Flow((dispatch.extensions.flow.onEachLatest.T)), kotlin.coroutines.SuspendFunction1((dispatch.extensions.flow.onEachLatest.T, kotlin.Unit)))/action) on each value of the original flow.
 
@@ -11,19 +11,22 @@ value is cancelled.
 
 It can be demonstrated by the following example:
 
-```
-flow {
-    emit(1)
-    delay(50)
-    emit(2)
-}
-.onEachLatest { value ->
-    println("Collecting $value")
-    delay(100) // Emulate work
-    println("$value collected")
-}
-.launchIn(myScope)
-```
+``` kotlin
+runBlocking {
 
-prints "Collecting 1, Collecting 2, 2 collected"
+    flow {
+      emit(1)
+      delay(50)
+      emit(2)
+    }
+      .onEachLatest { value ->
+        println("Collecting $value")
+        delay(100)            // Emulate work
+        println("$value collected")
+      }
+      .launchIn(this)
+
+    //  prints "Collecting 1, Collecting 2, 2 collected"
+  }
+```
 

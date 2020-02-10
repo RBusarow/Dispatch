@@ -2,7 +2,7 @@
 
 # shareIn
 
-`@ExperimentalCoroutinesApi @FlowPreview fun <T> `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>.shareIn(scope: `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`, cacheHistory: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0): `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>` [(source)](https://github.com/RBusarow/Dispatch/tree/master/extensions/src/main/java/dispatch/extensions/flow/Share.kt#L154)
+`@ExperimentalCoroutinesApi @FlowPreview fun <T> `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>.shareIn(scope: `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`, cacheHistory: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0): `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>` [(source)](https://github.com/RBusarow/Dispatch/tree/master/extensions/src/main/java/dispatch/extensions/flow/Share.kt#L68)
 
 Creates a [broadcast](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/broadcast.html) coroutine which collects the [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html) receiver and shares with multiple collectors.
 
@@ -18,48 +18,6 @@ If a new collector is added after the channel has been closed, a new channel wil
 
 By default, this flow is effectively **stateless** in that collectors will only receive values emitted after collection begins.
 
-example:
-
-```
-  val sourceFlow = flowOf(1, 2, 3, 4, 5)
-      .onStart { println("start source") }
-      .onEach { println("emit $it") }
-      .onCompletion { println("complete source") }
-      .shareIn(this)
-
-  val a = async { sourceFlow.toList() }
-  val b = async { sourceFlow.toList() }  // collect concurrently
-
-  println(a.await())
-  println(b.await())
-
-  println("** break **")
-
-  println(sourceFlow.toList())
-
-prints:
-
-  start source
-  emit 1
-  emit 2
-  emit 3
-  emit 4
-  emit 5
-  complete source
-  [1, 2, 3, 4, 5]
-  [1, 2, 3, 4, 5]
-   ** break **
-  start source
-  emit 1
-  emit 2
-  emit 3
-  emit 4
-  emit 5
-  complete source
-  [1, 2, 3, 4, 5]
-
-```
-
 ### Caching
 
 When a shared flow is cached, the values are recorded as they are emitted from the source Flow.
@@ -67,56 +25,7 @@ They are then replayed for each new subscriber.
 
 When a shared flow is reset, the cached values are cleared.
 
-example:
-
-```
-val sourceFlow = flowOf(1, 2, 3, 4, 5)
-    .onEach {
-        delay(50)
-        println("emit $it")
-    }.shareIn(this, 1)
-
-val a = async { sourceFlow.toList() }
-delay(125)
-val b = async { sourceFlow.toList() } // begin collecting after "emit 3"
-
-println(a.await())
-println(b.await())
-
-println("** break **")
-
-println(sourceFlow.toList())          // the shared flow has been reset, so the cached values are cleared
-
-prints:
-
-  emit 1
-  emit 2
-  emit 3
-  emit 4
-  emit 5
-  [1, 2, 3, 4, 5]
-  [2, 3, 4, 5]
-   ** break **
-  emit 1
-  emit 2
-  emit 3
-  emit 4
-  emit 5
-  [1, 2, 3, 4, 5]
-
-```
-
 In order to have cached values persist across resets, use `cache(n)` before `shareIn(...)`.
-
-example:
-
-```
-// resets cache whenever the Flow is reset
-flowOf(1, 2, 3).shareIn(myScope, 3)
-
-// persists cache across resets
-flowOf(1, 2, 3).cached(3).shareIn(myScope)
-```
 
 ### Cancellation semantics
 
@@ -125,6 +34,106 @@ flowOf(1, 2, 3).cached(3).shareIn(myScope)
 3. Collection is cancelled when the (scope)[CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) parameter is cancelled,
 thereby ending the consumer when it has run out of elements.
 4. If the flow consumer fails with an exception, subscription is cancelled.
+
+``` kotlin
+runBlocking {
+
+    val sourceFlow = flowOf(1, 2, 3, 4, 5)
+      .onStart { println("start source") }
+      .onEach { println("emit $it") }
+      .onCompletion { println("complete source") }
+      .shareIn(this)
+    val a = async { sourceFlow.toList() }
+    val b = async { sourceFlow.toList() }  // collect concurrently
+    println(a.await())
+    println(b.await())
+    println("** break **")
+    println(sourceFlow.toList())
+
+    /*
+    prints:
+
+      start source
+      emit 1
+      emit 2
+      emit 3
+      emit 4
+      emit 5
+      complete source
+      [1, 2, 3, 4, 5]
+      [1, 2, 3, 4, 5]
+      ** break **
+      start source
+          emit 1
+      emit 2
+      emit 3
+      emit 4
+      emit 5
+      complete source
+     */
+  }
+```
+
+``` kotlin
+runBlocking {
+
+    val sourceFlow = flowOf(1, 2, 3, 4, 5)
+      .onEach {
+        delay(50)
+        println("emit $it")
+
+      }
+      .shareIn(this, 1)
+
+    val a = async { sourceFlow.toList() }
+    delay(125)
+
+    val b = async {
+      // begin collecting after "emit 3"
+      sourceFlow.toList()
+    }
+
+    println(a.await())
+    println(b.await())
+
+    println("** break **")
+
+    println(sourceFlow.toList())   // the shared flow has been reset, so the cached values are cleared
+
+    /*
+    prints:
+
+      emit 1
+      emit 2
+      emit 3
+      emit 4
+      emit 5
+      [1, 2, 3, 4, 5]
+      [2, 3, 4, 5]
+       ** break **
+      emit 1
+      emit 2
+      emit 3
+      emit 4
+      emit 5
+      [1, 2, 3, 4, 5]
+     */
+  }
+```
+
+``` kotlin
+runBlocking {
+
+    // resets cache whenever the Flow is reset
+    flowOf(1, 2, 3)
+      .shareIn(this, 3)
+
+    // persists cache across resets
+    flowOf(1, 2, 3)
+      .cache(3)
+      .shareIn(this)
+  }
+```
 
 ### Parameters
 

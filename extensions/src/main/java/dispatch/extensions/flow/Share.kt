@@ -38,47 +38,6 @@ import kotlinx.coroutines.flow.*
  *
  * By default, this flow is effectively **stateless** in that collectors will only receive values emitted after collection begins.
  *
- * example:
- *
- * ```
- *   val sourceFlow = flowOf(1, 2, 3, 4, 5)
- *       .onStart { println("start source") }
- *       .onEach { println("emit $it") }
- *       .onCompletion { println("complete source") }
- *       .shareIn(this)
- *
- *   val a = async { sourceFlow.toList() }
- *   val b = async { sourceFlow.toList() }  // collect concurrently
- *
- *   println(a.await())
- *   println(b.await())
- *
- *   println("** break **")
- *
- *   println(sourceFlow.toList())
- *
- * prints:
- *
- *   start source
- *   emit 1
- *   emit 2
- *   emit 3
- *   emit 4
- *   emit 5
- *   complete source
- *   [1, 2, 3, 4, 5]
- *   [1, 2, 3, 4, 5]
- *    ** break **
- *   start source
- *   emit 1
- *   emit 2
- *   emit 3
- *   emit 4
- *   emit 5
- *   complete source
- *   [1, 2, 3, 4, 5]
- *
- * ```
  * ### Caching
  *
  * When a shared flow is cached, the values are recorded as they are emitted from the source Flow.
@@ -86,56 +45,8 @@ import kotlinx.coroutines.flow.*
  *
  * When a shared flow is reset, the cached values are cleared.
  *
- * example:
- *
- * ```
- * val sourceFlow = flowOf(1, 2, 3, 4, 5)
- *     .onEach {
- *         delay(50)
- *         println("emit $it")
- *     }.shareIn(this, 1)
- *
- * val a = async { sourceFlow.toList() }
- * delay(125)
- * val b = async { sourceFlow.toList() } // begin collecting after "emit 3"
- *
- * println(a.await())
- * println(b.await())
- *
- * println("** break **")
- *
- * println(sourceFlow.toList())          // the shared flow has been reset, so the cached values are cleared
- *
- * prints:
- *
- *   emit 1
- *   emit 2
- *   emit 3
- *   emit 4
- *   emit 5
- *   [1, 2, 3, 4, 5]
- *   [2, 3, 4, 5]
- *    ** break **
- *   emit 1
- *   emit 2
- *   emit 3
- *   emit 4
- *   emit 5
- *   [1, 2, 3, 4, 5]
- *
- * ```
- *
  * In order to have cached values persist across resets, use `cache(n)` before `shareIn(...)`.
  *
- * example:
- *
- * ```
- * // resets cache whenever the Flow is reset
- * flowOf(1, 2, 3).shareIn(myScope, 3)
- *
- * // persists cache across resets
- * flowOf(1, 2, 3).cached(3).shareIn(myScope)
- * ```
  *
  * ### Cancellation semantics
  * 1) Flow consumer is cancelled when the original channel is cancelled.
@@ -148,6 +59,9 @@ import kotlinx.coroutines.flow.*
  * will close the underlying [BroadcastChannel].
  * @param cacheHistory (default = 0).  Any value greater than zero will add a [cache] to the shared Flow.
  *
+ * @sample samples.ShareSample.shareSample
+ * @sample samples.ShareSample.shareWithCacheSample
+ * @sample samples.ShareSample.shareWithResetSample
  */
 @ExperimentalCoroutinesApi
 @FlowPreview
