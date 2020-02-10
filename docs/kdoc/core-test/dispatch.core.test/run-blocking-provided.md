@@ -2,7 +2,7 @@
 
 # runBlockingProvided
 
-`@ExperimentalCoroutinesApi fun runBlockingProvided(context: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)` = EmptyCoroutineContext, block: suspend `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test/src/main/java/dispatch/core/test/Builders.kt#L39)
+`@ExperimentalCoroutinesApi fun runBlockingProvided(context: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)` = EmptyCoroutineContext, block: suspend `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test/src/main/java/dispatch/core/test/Builders.kt#L41)
 
 Delegates to [runBlocking](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html), but injects a [DispatcherProvider](#) into the created [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html).
 
@@ -10,15 +10,30 @@ The resultant [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/ko
 as its default [ContinuationInterceptor](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation-interceptor/index.html).
 
 If the `context` does not contain a `DispatcherProvider`,
-a [TestDispatcherProvider](-test-dispatcher-provider/index.md) will be created using the `BlockingEventLoop` interceptor.
+a [TestDispatcherProvider](-test-dispatcher-provider/index.md) will be created using the [BlockingEventLoop](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-blocking-event-loop/index.html) interceptor.
+
+``` kotlin
+@Test
+fun someTest() = runBlockingProvided {
+
+  val subject = SomeClass(this)
+
+  val myData = Data()
+
+  subject.dataDeferred().await() shouldBe myData
+
+}
+```
 
 ### Parameters
 
 `context` - The base `CoroutineContext` which will be modified
-to use a `TestCoroutineDispatcher` and `TestDispatcherProvider`.
+to use a [TestCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.test/-test-coroutine-dispatcher/index.html) and [TestDispatcherProvider](-test-dispatcher-provider/index.md).
 [EmptyCoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-empty-coroutine-context/index.html) is used if one is not provided.
 
 **See Also**
 
 [runBlocking](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html)
+
+[runBlockingTestProvided](run-blocking-test-provided.md)
 

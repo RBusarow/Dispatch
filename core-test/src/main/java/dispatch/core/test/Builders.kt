@@ -27,13 +27,15 @@ import kotlin.coroutines.*
  * as its default [ContinuationInterceptor].
  *
  * If the `context` does not contain a `DispatcherProvider`,
- * a [TestDispatcherProvider] will be created using the `BlockingEventLoop` interceptor.
+ * a [TestDispatcherProvider] will be created using the [BlockingEventLoop] interceptor.
  *
  * @param context The base `CoroutineContext` which will be modified
- * to use a `TestCoroutineDispatcher` and `TestDispatcherProvider`.
+ * to use a [TestCoroutineDispatcher] and [TestDispatcherProvider].
  * [EmptyCoroutineContext] is used if one is not provided.
  *
  * @see runBlocking
+ * @see runBlockingTestProvided
+ * @sample samples.BuildersSample.runBlockingProvidedSample
  */
 @ExperimentalCoroutinesApi
 fun runBlockingProvided(
@@ -64,6 +66,8 @@ fun runBlockingProvided(
  * [EmptyCoroutineContext] is used if one is not provided.
  *
  * @see runBlockingTest
+ * @see runBlockingProvided
+ * @sample samples.BuildersSample.runBlockingTestProvidedSample
  */
 @ExperimentalCoroutinesApi
 fun runBlockingTestProvided(

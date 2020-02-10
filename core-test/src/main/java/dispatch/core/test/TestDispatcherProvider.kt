@@ -49,8 +49,7 @@ class TestDispatcherProvider(
 @ExperimentalCoroutinesApi
 fun TestDispatcherProvider(
   dispatcher: CoroutineDispatcher
-): TestDispatcherProvider =
-  TestDispatcherProvider(
+): TestDispatcherProvider = TestDispatcherProvider(
     default = dispatcher,
     io = dispatcher,
     main = dispatcher,
