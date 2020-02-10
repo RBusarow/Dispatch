@@ -2,7 +2,7 @@
 
 # TestCoroutineExtension
 
-`@ExperimentalCoroutinesApi class TestCoroutineExtension : TestInstancePostProcessor, BeforeEachCallback, AfterEachCallback` [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test-junit5/src/main/java/dispatch/core/test/CoroutineTest.kt#L90)
+`@ExperimentalCoroutinesApi class TestCoroutineExtension : TestInstancePostProcessor, BeforeEachCallback, AfterEachCallback` [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test-junit5/src/main/java/dispatch/core/test/CoroutineTest.kt#L101)
 
 Convenience interface for tagging a test class with a JUnit 5 extension.  This creates a new instance
 of [testScope](test-scope.md) before each test, optionally using a custom [factory](#).
@@ -89,13 +89,5 @@ the resultant scope uses the same [TestCoroutineDispatcher](https://kotlin.githu
 
 | Name | Summary |
 |---|---|
-| [dispatcher](dispatcher.md) | `lateinit var dispatcher: `[`TestCoroutineDispatcher`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.test/-test-coroutine-dispatcher/index.html) |
-| [testScope](test-scope.md) | `lateinit var testScope: TestProvidedCoroutineScope` |
-
-### Functions
-
-| Name | Summary |
-|---|---|
-| [afterEach](after-each.md) | `fun afterEach(context: ExtensionContext): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [beforeEach](before-each.md) | `fun beforeEach(context: ExtensionContext): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [postProcessTestInstance](post-process-test-instance.md) | `fun postProcessTestInstance(testInstance: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`?, context: ExtensionContext?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [dispatcher](dispatcher.md) | The underlying [TestCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.test/-test-coroutine-dispatcher/index.html) which is responsible for virtual time control.`lateinit var dispatcher: `[`TestCoroutineDispatcher`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.test/-test-coroutine-dispatcher/index.html) |
+| [testScope](test-scope.md) | The [TestProvidedCoroutineScope](#) which is created and managed by the `CoroutineTest``lateinit var testScope: TestProvidedCoroutineScope` |

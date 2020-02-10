@@ -2,7 +2,7 @@
 
 # IdlingDispatcherProviderRule
 
-`class IdlingDispatcherProviderRule : TestWatcher` [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScopeRule.kt#L61)
+`class IdlingDispatcherProviderRule : TestWatcher` [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScopeRule.kt#L59)
 
 A basic JUnit 4 [TestRule](#) which creates a new [IdlingDispatcherProvider](../-idling-dispatcher-provider/index.md) for each test,
 registering all [IdlingDispatcher](../-idling-dispatcher/index.md)s with [IdlingRegistry](#) before `@Before` and unregistering them after `@After`.
@@ -100,8 +100,6 @@ This must be the same [DispatcherProvider](#) which is used to create [Coroutine
 
 [TestRule](#)
 
-[TestCoroutineScope](#)
-
 [IdlingRegistry](#)
 
 ### Constructors
@@ -114,11 +112,4 @@ This must be the same [DispatcherProvider](#) which is used to create [Coroutine
 
 | Name | Summary |
 |---|---|
-| [dispatcherProvider](dispatcher-provider.md) | `lateinit var dispatcherProvider: `[`IdlingDispatcherProvider`](../-idling-dispatcher-provider/index.md) |
-
-### Functions
-
-| Name | Summary |
-|---|---|
-| [finished](finished.md) | `fun finished(description: Description?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [starting](starting.md) | `fun starting(description: Description?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [dispatcherProvider](dispatcher-provider.md) | The [IdlingDispatcherProvider](../-idling-dispatcher-provider/index.md) which is automatically registered with [IdlingRegistry](#).`lateinit var dispatcherProvider: `[`IdlingDispatcherProvider`](../-idling-dispatcher-provider/index.md) |

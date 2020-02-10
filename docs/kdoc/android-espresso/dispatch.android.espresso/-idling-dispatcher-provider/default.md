@@ -2,4 +2,8 @@
 
 # default
 
-`val default: `[`IdlingDispatcher`](../-idling-dispatcher/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L32)
+`val default: `[`IdlingDispatcher`](../-idling-dispatcher/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L36)
+
+[IdlingDispatcher](../-idling-dispatcher/index.md) implementation of [DispatcherProvider.default](#),
+which typically corresponds to the [Dispatchers.Default](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html).
+

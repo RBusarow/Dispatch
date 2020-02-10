@@ -2,4 +2,9 @@
 
 # testScopeFactory
 
-`open val testScopeFactory: () -> TestProvidedCoroutineScope` [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test-junit5/src/main/java/dispatch/core/test/CoroutineTest.kt#L50)
+`open val testScopeFactory: () -> TestProvidedCoroutineScope` [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test-junit5/src/main/java/dispatch/core/test/CoroutineTest.kt#L55)
+
+Optional parameter for defining a custom [TestProvidedCoroutineScope](#).
+
+Each iteration of a test will be a new invocation of this lambda.
+

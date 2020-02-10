@@ -100,7 +100,5 @@ This must be the same [DispatcherProvider](#) which is used to create [Coroutine
 
 [TestRule](#)
 
-[TestCoroutineScope](#)
-
 [IdlingRegistry](#)
 

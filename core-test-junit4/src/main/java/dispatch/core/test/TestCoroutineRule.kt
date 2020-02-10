@@ -59,12 +59,24 @@ class TestCoroutineRule(
   factory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
 ) : TestWatcher(), TestProvidedCoroutineScope by factory() {
 
+  /**
+   * The underlying [TestCoroutineDispatcher] which is responsible for virtual time control.
+   *
+   * @see UncaughtExceptionCaptor
+   * @see DelayController
+   */
   val dispatcher = coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
 
+  /**
+   * @suppress
+   */
   override fun starting(description: Description?) {
     Dispatchers.setMain(dispatcher)
   }
 
+  /**
+   * @suppress
+   */
   override fun finished(description: Description?) {
     cleanupTestCoroutines()
     Dispatchers.resetMain()
