@@ -43,6 +43,7 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":core"))
+  implementation(project(":core-test-junit5"))
   implementation(project(":extensions"))
 
   testImplementation(Libs.JUnit.jUnit5)

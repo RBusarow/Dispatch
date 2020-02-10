@@ -13,26 +13,23 @@
  * limitations under the License.
  */
 
-@file:JvmMultifileClass
-@file:JvmName("FlowKt")
+package samples
 
-package dispatch.extensions.flow
-
-import dispatch.extensions.flow.internal.*
+import dispatch.extensions.flow.*
+import io.kotlintest.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-/**
- * A "cached" [Flow] which will record the last [history] collected values.
- *
- * When a collector begins collecting after values have already been recorded,
- * those values will be collected *before* values from the receiver [Flow] are collected.
- *
- * Throws [IllegalArgumentException] if size parameter is not greater than 0
- *
- * @param history the number of items to keep in the [Flow]'s history -- must be greater than 0
- * @sample samples.CacheSample.cacheSample
- */
 @ExperimentalCoroutinesApi
-@FlowPreview
-fun <T> Flow<T>.cache(history: Int): Flow<T> = asCachedFlow(history)
+class FirstOrNullSample {
+
+  @Sample
+  fun firstOrNullSample() = runBlocking {
+
+    val firstFlow = flowOf(1, 2, 3, 4)
+    firstFlow.firstOrNull() shouldBe 1
+
+    val secondFlow = flowOf<Int>()
+    secondFlow.firstOrNull() shouldBe null
+  }
+}

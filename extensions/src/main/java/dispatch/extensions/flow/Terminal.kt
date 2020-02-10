@@ -28,15 +28,11 @@ import kotlinx.coroutines.flow.*
  *
  * Returns true immediately upon collecting a matching value.
  *
- * Example of true:
- * ```
- * val flow = flowOf(1, 2, 3, 4)
- * flow.any { it == 2 } shouldBe true
- * ```
- *
  * This terminal operator returns false if the flow completes without ever matching.
  *
  * If the flow being collected never completes and never emits a matching value, the function will suspend indefinitely.
+ *
+ * @sample samples.AnySample.anySample
  */
 suspend fun <T> Flow<T>.any(predicate: (T) -> Boolean): Boolean {
 
@@ -57,23 +53,7 @@ suspend fun <T> Flow<T>.any(predicate: (T) -> Boolean): Boolean {
 /**
  * Terminal operator which collects the given [Flow] until the predicate [block] returns true.
  *
- * example:
- * ```
- * val flow = flowOf(1, 2, 3, 4)
- *
- * flow
- *   .onCompletion { println("all done") }
- *   .collectUntil {
- *     println("collected $it")
- *     it == 2
- *   }
- *
- * output:
- *
- * 1
- * 2
- * all done
- * ```
+ * @sample samples.CollectUntilSample.collectUntilSample
  */
 suspend fun <T> Flow<T>.collectUntil(block: suspend (T) -> Boolean) {
   try {
@@ -92,16 +72,9 @@ suspend fun <T> Flow<T>.collectUntil(block: suspend (T) -> Boolean) {
  *
  * Returns null if the `Flow` completes without emitting any values.
  *
- * Example:
- * ```
- * val firstFlow = flowOf(1, 2, 3, 4)
- * firstFlow.firstOrNull() shouldBe 1
- *
- * val secondFlow = flowOf<Int> { }
- * secondFlow.firstOrNull() shouldBe null
- * ```
- *
  * If the flow being collected never completes and never emits a matching value, the function will suspend indefinitely.
+ *
+ * @sample samples.FirstOrNullSample.firstOrNullSample
  */
 @ExperimentalCoroutinesApi
 suspend fun <T> Flow<T>.firstOrNull(): T? {

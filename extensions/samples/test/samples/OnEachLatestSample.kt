@@ -13,27 +13,32 @@
  * limitations under the License.
  */
 
-@file:JvmMultifileClass
-@file:JvmName("FlowKt")
+package samples
 
-package dispatch.extensions.flow
-
+import dispatch.extensions.flow.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-/**
- * Returns a flow which performs the given [action] on each value of the original flow.
- *
- *
- * The crucial difference from [onEach] is that when the original flow emits a new value, the [action] block for previous
- * value is cancelled.
- *
- * It can be demonstrated by the following example:
- *
- * @sample samples.OnEachLatestSample.onEachLatestSample
- */
+@FlowPreview
 @ExperimentalCoroutinesApi
-fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLatest { value ->
-  action(value)
-  return@transformLatest emit(value)
+class OnEachLatestSample {
+
+  @Sample
+  fun onEachLatestSample() = runBlocking {
+
+    flow {
+      emit(1)
+      delay(50)
+      emit(2)
+    }
+      .onEachLatest { value ->
+        println("Collecting $value")
+        delay(100)            // Emulate work
+        println("$value collected")
+      }
+      .launchIn(this)
+
+    //  prints "Collecting 1, Collecting 2, 2 collected"
+  }
 }
+
