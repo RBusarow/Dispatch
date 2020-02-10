@@ -45,8 +45,8 @@ android {
 
 dependencies {
 
-  implementation(Libs.Androidx.lifecycle)
-  testImplementation(Libs.Androidx.lifecycleRuntime)
+  implementation(Libs.Androidx.Lifecycle.common)
+  testImplementation(Libs.Androidx.Lifecycle.runtime)
 
   implementation(Libs.JakeWharton.timber)
 

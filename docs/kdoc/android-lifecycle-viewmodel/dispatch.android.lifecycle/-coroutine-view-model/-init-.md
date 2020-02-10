@@ -15,3 +15,25 @@ This must be an abstract class since nothing about the [ViewModel.onCleared](htt
 
 `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
 
+``` kotlin
+class SomeViewModel : CoroutineViewModel() {
+
+  init {
+
+    // auto-created MainImmediateCoroutineScope which is auto-cancelled in onClear()
+    viewModelScope //...
+
+    // it works as a normal CoroutineScope (because it is)
+    viewModelScope.launchMain { }
+
+    // this is the same CoroutineScope instance each time
+    viewModelScope.launchMain { }
+
+  }
+
+  override fun onClear() {
+    viewModelScope.isActive shouldBe false
+  }
+}
+```
+

@@ -39,12 +39,15 @@ android {
 }
 
 dependencies {
+  implementation(Libs.Androidx.Lifecycle.viewModel)
   implementation(Libs.Kotlin.stdlib)
 
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":core"))
+  implementation(project(":core-test-junit5"))
   implementation(project(":extensions"))
+  implementation(project(":android-espresso"))
   implementation(project(":android-lifecycle-viewmodel"))
 
   testImplementation(Libs.JUnit.jUnit5)

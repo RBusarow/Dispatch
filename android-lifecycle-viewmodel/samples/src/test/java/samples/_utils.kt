@@ -21,6 +21,7 @@ import dispatch.core.*
 import io.kotlintest.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 typealias Sample = Test
 
@@ -39,3 +40,12 @@ val someDispatcherProvider = object : DispatcherProvider {
   override val mainImmediate = newSingleThreadContext("main immediate")
   override val unconfined = newSingleThreadContext("unconfined")
 } + blocking
+
+fun MyCustomElement(): CoroutineContext {
+  return EmptyCoroutineContext
+}
+
+interface Application {
+  fun onCreate()
+}
+

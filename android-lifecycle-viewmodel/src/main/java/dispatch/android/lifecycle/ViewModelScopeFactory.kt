@@ -28,55 +28,22 @@ import kotlinx.coroutines.*
  * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
  * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate].
  *
- * example:
- *
- * ```
- * class MyApplication : Application() {
- *
- *   override fun onCreate() {
- *     super.onCreate()
- *     LifecycleScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
- *   }
- * }
- * ```
- *
- * ```
- * class MyEspressoTest {
- *
- *   @Before fun setUp() {
- *     LifecycleCoroutineScopeFactory.set { MainImmediateIdlingCoroutineScope() }
- *   }
- * }
- * ```
- *
  * [reset] may be used to reset the factory to default at any time.
+ * @sample samples.ViewModelScopeFactorySample.setViewModelScopeFactoryProductionSample
+ * @sample samples.ViewModelScopeFactorySample.setViewModelScopeFactoryEspressoSample
+ * @sample samples.ViewModelScopeFactorySample.setViewModelScopeFactoryJvmSample
  */
 public object ViewModelScopeFactory {
 
   private var _factory: () -> CoroutineScope = { MainImmediateCoroutineScope() }
   /**
-   * example:
-   *
-   * ```
-   * class MyApplication : Application() {
-   *
-   *   override fun onCreate() {
-   *     super.onCreate()
-   *     ViewModelScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
-   *   }
-   * }
-   * ```
-   *
-   * ```
-   * class MyEspressoTest {
-   *
-   *   @Before fun setUp() {
-   *     ViewModelScopeFactory.set { MainImmediateIdlingCoroutineScope() }
-   *   }
-   * }
-   * ```
+   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
+   * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]
    *
    * @param factory sets a custom [CoroutineScope] factory to be used for all new instance creations until reset.
+   * @sample samples.ViewModelScopeFactorySample.setViewModelScopeFactoryProductionSample
+   * @sample samples.ViewModelScopeFactorySample.setViewModelScopeFactoryEspressoSample
+   * @sample samples.ViewModelScopeFactorySample.setViewModelScopeFactoryJvmSample
    */
   public fun set(factory: () -> CoroutineScope) {
     _factory = factory
@@ -86,6 +53,8 @@ public object ViewModelScopeFactory {
 
   /**
    * Immediately resets the factory function to its default.
+   *
+   * @sample samples.ViewModelScopeFactorySample.viewModelScopeFactoryResetSample
    */
   public fun reset() {
     _factory = { MainCoroutineScope() }
