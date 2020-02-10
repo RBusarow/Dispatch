@@ -70,7 +70,7 @@ object BuildPlugins {
 object Libs {
 
   object Androidx {
-    const val activity = "androidx.activity:activity-ktx:1.1.0"
+    const val activity = "androidx.activity:activity-ktx:1.0.0"
     const val appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val coreKtx = "androidx.core:core-ktx:1.1.0"

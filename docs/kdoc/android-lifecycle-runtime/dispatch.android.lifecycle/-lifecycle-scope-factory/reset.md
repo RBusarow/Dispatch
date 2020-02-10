@@ -2,7 +2,22 @@
 
 # reset
 
-`fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-runtime/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L90)
+`fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-runtime/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L58)
 
 Immediately resets the factory function to its default.
+
+``` kotlin
+class MyEspressoTest {
+
+  @Before
+  fun setUp() {
+    LifecycleScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+  }
+
+  @After
+  fun tearDown() {
+    LifecycleScopeFactory.reset()
+  }
+}
+```
 

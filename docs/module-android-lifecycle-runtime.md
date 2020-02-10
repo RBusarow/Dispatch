@@ -6,7 +6,7 @@
 
 Examples
 
-```Kotlin
+```kotlin
 import dispatch.android.*
 
 // This could be any LifecycleOwner -- Fragments, Activities, Services...
@@ -15,24 +15,26 @@ class SomeScreen : Fragment() {
   init {
 
     // auto-created MainImmediateCoroutineScope which is lifecycle-aware
-    lifecycleScope. //...
+    lifecycleScope //...
 
     // active only when "resumed".  starts a fresh coroutine each time
     // this is a rough proxy for LiveData behavior
-    lifecycleScope.launchWhenResumed {  }
+    lifecycleScope.launchEveryResume {  }
 
     // active only when "started".  starts a fresh coroutine each time
-    lifecycleScope.launchWhenStarted {  }
+    lifecycleScope.launchEveryStart {  }
 
     // launch when created, automatically stop on destroy
-    lifecycleScope.launchWhenCreated {  }
+    lifecycleScope.launchEveryCreate {  }
 
     // it works as a normal CoroutineScope as well (because it is)
     lifecycleScope.launchMain {  }
 
   }
 }
+```
 
+```kotlin
 class SomeApplication : Application() {
   override fun onCreate() {
     super.onCreate()
@@ -40,7 +42,9 @@ class SomeApplication : Application() {
     LifecycleScopeFactory.set { MainImmediateCoroutineScope() + SomeCustomElement() }
   }
 }
+```
 
+```kotlin
 class SomeEspressoTest {
   @Before
   fun setUp() {
@@ -67,8 +71,8 @@ Why not just use AndroidX?  Because we need two things it doesn't offer.
 
 The way `androidx-lifecycle-runtime` constructs its [CoroutineScope][coroutineScope] is [hard-coded][lifecycleScope], which eliminates the possibility of using a custom [CoroutineContext][coroutineContext] such as a `DispatcherProvider` or [IdlingDispatcher][idlingDispatcher]. With `dispatch.android.lifecycle`, we can set a custom factory.
 
-```Kotlin
-class SomeFragmentEspressoTest() {
+```kotlin
+class SomeFragmentEspressoTest {
 
   // Not part of this artifact.  see dispatch-android-espresso
   @JvmField @Rule val idlingRule = IdlingDispatcherProviderRule()

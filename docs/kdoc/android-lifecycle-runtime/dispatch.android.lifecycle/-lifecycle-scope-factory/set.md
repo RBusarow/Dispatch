@@ -2,25 +2,26 @@
 
 # set
 
-`fun set(factory: () -> MainImmediateCoroutineScope): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-runtime/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L81)
+`fun set(factory: () -> MainImmediateCoroutineScope): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-runtime/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L47)
 
-example:
+Override the default [MainImmediateCoroutineScope](#) factory, for testing or to include a custom [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)
+in production code.  This may be done in [Application.onCreate](https://developer.android.com/reference/android/app/Application.html#onCreate())
 
-```
-class MyApplication : Application() {
+``` kotlin
+class MyApplication : Application {
 
   override fun onCreate() {
-    super.onCreate()
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope() + MyCustomElement() }
+    LifecycleScopeFactory.set { MainImmediateCoroutineScope() }
   }
 }
 ```
 
-```
+``` kotlin
 class MyEspressoTest {
 
-  @Before fun setUp() {
-    LifecycleCoroutineScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+  @Before
+  fun setUp() {
+    LifecycleScopeFactory.set { MainImmediateIdlingCoroutineScope() }
   }
 }
 ```

@@ -2,7 +2,7 @@
 
 # launchEveryCreate
 
-`fun launchEveryCreate(block: suspend `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-runtime/src/main/java/dispatch/android/lifecycle/LifecycleCoroutineScope.kt#L75)
+`fun launchEveryCreate(block: suspend `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-lifecycle-runtime/src/main/java/dispatch/android/lifecycle/LifecycleCoroutineScope.kt#L66)
 
 Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html)
 is at least [Lifecycle.State.CREATED](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html#CREATED).
@@ -13,18 +13,53 @@ but always executes using [Dispatchers.Main](https://kotlin.github.io/kotlinx.co
 Execution of [block](launch-every-create.md#dispatch.android.lifecycle.LifecycleCoroutineScope$launchEveryCreate(kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, kotlin.Unit)))/block) is cancelled when the receiver [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) is cancelled,
 or when [lifecycle](#)'s [Lifecycle.State](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html) drops below [Lifecycle.State.CREATED](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html#CREATED).
 
-example:
+``` kotlin
+runBlocking {
 
-```
-class SomeFragment : Fragment {
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
 
-  init {
-    lifecycleScope.launchEveryCreate {
-      viewModel.someFlow.collect {
-        printLn("new value --> $it")
+    class SomeViewModel {
+      val someFlow = flow {
+        repeat(100) {
+          emit(it)
+        }
       }
     }
+
+    class SomeFragment : Fragment() {
+
+      val viewModel = SomeViewModel()
+
+      init {
+        lifecycleScope.launchEveryCreate {
+          viewModel.someFlow.collect {
+            channel.send("$it")
+          }
+        }
+      }
+    }
+
+    val fragment = SomeFragment()
+
+    history.add("creating")
+    fragment.create()
+
+    repeat(3) {
+      history.add(channel.receive())
+    }
+
+    // destroying the lifecycle cancels the lifecycleScope
+    history.add("destroying")
+    fragment.destroy()
+
+    history shouldBe listOf(
+      "creating",
+      "0",
+      "1",
+      "2",
+      "destroying"
+    )
   }
-}
 ```
 
