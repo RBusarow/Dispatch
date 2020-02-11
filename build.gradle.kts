@@ -131,4 +131,37 @@ subprojects {
     }
 }
 
+tasks.register("cleanDocs").configure {
+
+  description = "cleans /docs"
+  group = "documentation"
+
+  DocsTasks.cleanDocs()
+
+}
+
+tasks.register("copyMarkdownFiles").configure {
+
+  description = "copies all module README's to /docs/modules and all root markdown to /docs"
+  group = "documentation"
+
+  dependsOn("cleanDocs")
+  doLast {
+    DocsTasks.copyModuleReadMes()
+    DocsTasks.copyRootFiles()
+  }
+}
+
+tasks.register("allDocs").configure {
+
+  description = "recreates all documentation for the /docs directory"
+  group = "documentation"
+
+  dependsOn(
+    "copyMarkdownFiles",
+    subprojects.mapNotNull { it.tasks.findByName("dokka") },
+    subprojects.mapNotNull { it.tasks.findByName("knitPrepare") }
+  )
+}
+
 apply(plugin = Plugins.knit)
