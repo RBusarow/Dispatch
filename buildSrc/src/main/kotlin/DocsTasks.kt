@@ -28,7 +28,6 @@ object DocsTasks {
         when {
           file.parentFile != root          -> false
           file.path.startsWith("docs/css") -> false
-//          file.path.startsWith("docs/extensions") -> false
           else                             -> true
         }
       }
