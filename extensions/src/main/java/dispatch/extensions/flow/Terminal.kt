@@ -55,17 +55,10 @@ suspend fun <T> Flow<T>.any(predicate: (T) -> Boolean): Boolean {
  *
  * @sample samples.CollectUntilSample.collectUntilSample
  */
-suspend fun <T> Flow<T>.collectUntil(block: suspend (T) -> Boolean) {
-  try {
-    collect { value ->
-      if (block(value)) {
-        throw FlowCancellationException()
-      }
-    }
-  } catch (e: FlowCancellationException) {
-    // Do nothing
-  }
-}
+@ExperimentalCoroutinesApi
+suspend fun <T> Flow<T>.collectUntil(
+  block: suspend (T) -> Boolean
+) = takeWhile { !block(it) }.collect()
 
 /**
  * Terminal operator which suspends until the [Flow] has emitted one value, then immediately returns that value.
