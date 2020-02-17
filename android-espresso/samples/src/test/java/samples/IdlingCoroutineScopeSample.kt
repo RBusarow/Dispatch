@@ -49,4 +49,4 @@ class TestAppComponent {
   val customDispatcherProvider = IdlingDispatcherProvider()
 }
 
-val testAppComponent = TestAppComponent()
+val testAppComponent get() = TestAppComponent()
