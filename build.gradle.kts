@@ -52,22 +52,17 @@ allprojects {
     useJUnitPlatform()
   }
 
-  afterEvaluate {
+  afterEvaluate proj@{
     tasks.withType<DokkaTask> dokkaTask@{
+
+      /*
+      Basic Dokka config
+       */
 
       outputFormat = "gfm"
       outputDirectory = "${project.buildDir}/dokka"
 
-      subProjects = listOf(
-        ":core",
-        ":core-test",
-        ":core-test-junit4",
-        ":core-test-junit5",
-        ":extensions",
-        ":android-espresso",
-        ":android-lifecycle-runtime",
-        ":android-lifecycle-viewmodel"
-      )
+      subProjects = Modules.allProduction
 
       configuration {
 
@@ -77,25 +72,33 @@ allprojects {
         skipEmptyPackages = true
 
         samples = listOf("samples")
+        includes = listOf("README.md")
 
         externalDocumentationLink {
           url = URL("https://developer.android.com/reference/androidx/")
-          packageListUrl = URL("https://developer.android.com/reference/androidx/package-list")
+          packageListUrl = URL(
+            "https://developer.android.com/reference/androidx/package-list"
+          )
         }
         externalDocumentationLink {
           url = URL("https://developer.android.com/reference/")
-          packageListUrl =
-            URL("https://developer.android.com/reference/android/support/package-list")
+          packageListUrl = URL(
+            "https://developer.android.com/reference/android/support/package-list"
+          )
         }
         externalDocumentationLink {
-          url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/")
-          packageListUrl =
-            URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/package-list")
+          url = URL(
+            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/"
+          )
+          packageListUrl = URL(
+            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/package-list"
+          )
         }
         externalDocumentationLink {
           url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
-          packageListUrl =
-            URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/package-list")
+          packageListUrl = URL(
+            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/package-list"
+          )
         }
 
         sourceLink {
@@ -108,6 +111,76 @@ allprojects {
           // Suffix which is used to append the line number to the URL. Use #L for GitHub
           lineSuffix = "#L"
         }
+      }
+
+      /*
+       Module-specific linking fixes.  This makes it so that links in moduleB's kdoc
+       which point to something in moduleA's kdoc will actually work.
+       */
+
+      if (this@proj.name != "core") {
+
+        linkModuleDocs(
+          matchingModules = emptyList(), // all
+          currentProject = this@proj,
+          currentTask = this@dokkaTask,
+          dependencyModule = "core"
+        )
+
+        linkModuleDocs(
+          matchingModules = listOf("android-lifecycle-runtime", "android-lifecycle-viewmodel"),
+          currentProject = this@proj,
+          currentTask = this@dokkaTask,
+          dependencyModule = "extensions"
+        )
+
+        linkModuleDocs(
+          matchingModules = listOf("core-test-junit4", "core-test-junit5"),
+          currentProject = this@proj,
+          currentTask = this@dokkaTask,
+          dependencyModule = "core-test"
+        )
+      }
+
+      tasks.register("buildDocs")
+        .configure {
+
+          description = "recreates all documentation for the /docs directory"
+          group = "documentation"
+
+          dependsOn(
+            rootProject.tasks.findByName("cleanDocs"),
+            rootProject.tasks.findByName("copyRootFiles"),
+            rootProject.tasks.findByName("knit"),
+            this@dokkaTask
+          )
+
+          doLast {
+            copyKdoc()
+            copyReadMe()
+          }
+        }
+    }
+  }
+}
+
+fun linkModuleDocs(
+  matchingModules: List<String>,
+  currentProject: Project,
+  currentTask: DokkaTask,
+  dependencyModule: String
+) {
+
+  if (matchingModules.contains(currentProject.name) || matchingModules.isEmpty()) {
+
+    currentTask.dependsOn(project(":$dependencyModule").tasks.withType<DokkaTask>())
+
+    currentTask.configuration {
+      externalDocumentationLink {
+        url = URL("https://rbusarow.github.io/Dispatch/$dependencyModule/")
+        packageListUrl = URL(
+          "file://$projectDir/$dependencyModule/build/dokka/$dependencyModule/package-list"
+        )
       }
     }
   }
@@ -142,32 +215,20 @@ tasks.register("cleanDocs").configure {
   description = "cleans /docs"
   group = "documentation"
 
-  DocsTasks.cleanDocs()
+  cleanDocs()
 
 }
 
-tasks.register("copyMarkdownFiles").configure {
+tasks.register("copyRootFiles").configure {
 
-  description = "copies all module README's to /docs/modules and all root markdown to /docs"
+  description = "copies documentation files from the project root into /docs"
   group = "documentation"
 
   dependsOn("cleanDocs")
+
   doLast {
-    DocsTasks.copyModuleReadMes()
-    DocsTasks.copyRootFiles()
+    copyRootFiles()
   }
-}
-
-tasks.register("allDocs").configure {
-
-  description = "recreates all documentation for the /docs directory"
-  group = "documentation"
-
-  dependsOn(
-    "copyMarkdownFiles",
-    subprojects.mapNotNull { it.tasks.findByName("dokka") },
-    subprojects.mapNotNull { it.tasks.findByName("knitPrepare") }
-  )
 }
 
 apply(plugin = Plugins.knit)
