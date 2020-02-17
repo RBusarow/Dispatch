@@ -73,7 +73,6 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":core"))
-  implementation(project(":android-espresso"))
   implementation(project(":extensions"))
   implementation(project(":android-lifecycle-runtime"))
   implementation(project(":android-lifecycle-viewmodel"))
@@ -85,6 +84,8 @@ dependencies {
 
   testImplementation(project(":core-test-junit4"))
   testImplementation(project(":core-test-junit5"))
+
+  androidTestImplementation(project(":android-espresso"))
 
   androidTestImplementation(Libs.Androidx.testRunner)
   androidTestImplementation(Libs.Androidx.espresso)

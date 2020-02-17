@@ -13,22 +13,4 @@
  * limitations under the License.
  */
 
-repositories {
-  jcenter()
-}
-
-plugins {
-  `kotlin-dsl`
-}
-
-kotlinDslPluginOptions {
-  experimentalWarning.set(false)
-}
-
-dependencies {
-  compileOnly(gradleApi())
-
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
-  testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
-
-}
+fun String.matches(vararg regex: Regex) = regex.any { it.matches(this) }
