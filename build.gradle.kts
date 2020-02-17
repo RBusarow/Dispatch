@@ -210,28 +210,26 @@ subprojects {
     }
 }
 
-tasks.register("cleanDocs")
-  .configure {
+tasks.register("cleanDocs").configure {
 
-    description = "cleans /docs"
-    group = "documentation"
+  description = "cleans /docs"
+  group = "documentation"
 
-    cleanDocs()
+  cleanDocs()
 
+}
+
+tasks.register("copyRootFiles").configure {
+
+  description = "copies documentation files from the project root into /docs"
+  group = "documentation"
+
+  dependsOn("cleanDocs")
+
+  doLast {
+    copyRootFiles()
   }
-
-tasks.register("copyRootFiles")
-  .configure {
-
-    description = "copies documentation files from the project root into /docs"
-    group = "documentation"
-
-    dependsOn("cleanDocs")
-
-    doLast {
-      copyRootFiles()
-    }
-  }
+}
 
 apply(plugin = Plugins.knit)
 
