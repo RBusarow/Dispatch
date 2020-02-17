@@ -17,36 +17,29 @@ package samples
 
 import dispatch.android.espresso.*
 import kotlinx.coroutines.*
+import org.junit.*
 import org.junit.runner.*
 import org.robolectric.*
 
 @RunWith(RobolectricTestRunner::class)
-class IdlingCoroutineScopeSample {
+class IdlingCoroutineScopeRuleSample {
 
-  @Sample
-  fun createNoArgIdlingCoroutineScope() {
+  // Retrieve the DispatcherProvider from a dependency graph,
+  // so that the same one is used throughout the codebase.
+  val customDispatcherProvider = testAppComponent.customDispatcherProvider
 
-    val scope = IdlingCoroutineScope()
-
-    scope.idlingDispatcherProvider.registerAllIdlingResources()
+  @JvmField
+  @Rule
+  val idlingRule = IdlingDispatcherProviderRule {
+    IdlingDispatcherProvider(customDispatcherProvider)
   }
 
-  @Sample
-  fun createCustomIdlingCoroutineScope() {
+  @Test
+  fun testThings() = runBlocking {
 
-    val scope = IdlingCoroutineScope(
-      job = Job(),
-      dispatcherProvider = SomeCustomIdlingDispatcherProvider()
-    )
+    // Now any CoroutineScope which uses the DispatcherProvider
+    // in TestAppComponent will sync its "idle" state with Espresso
 
-    scope.idlingDispatcherProvider.registerAllIdlingResources()
   }
+
 }
-
-fun SomeCustomIdlingDispatcherProvider() = IdlingDispatcherProvider()
-
-class TestAppComponent {
-  val customDispatcherProvider = IdlingDispatcherProvider()
-}
-
-val testAppComponent get() = TestAppComponent()

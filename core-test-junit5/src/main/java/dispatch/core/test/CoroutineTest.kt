@@ -120,7 +120,12 @@ class TestCoroutineExtension(
    * @suppress
    */
   override fun postProcessTestInstance(testInstance: Any?, context: ExtensionContext?) {
-    this.testInstance = testInstance as? CoroutineTest
+
+    // In a nested test, set the testInstance when the root class is initialized
+    // but don't re-set it for the nested classes
+    (testInstance as? CoroutineTest)?.let {
+      this.testInstance = it
+    }
   }
 
   /**

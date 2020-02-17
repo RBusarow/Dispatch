@@ -41,12 +41,12 @@ abstract class BaseTest {
 
   fun finish(expectedIndex: Int) {
     expect(expectedIndex)
-    assert(!finished.getAndSet(true)) { "Should call 'finish(...)' at most once" }
+    require(!finished.getAndSet(true)) { "Should call 'finish(...)' at most once" }
   }
 
   fun resetIndex() {
     try {
-      assert(index.value == 0 || finished.value) { "Expecting that 'finish(...)' was invoked, but it was not" }
+      require(index.value == 0 || finished.value) { "Expecting that 'finish(...)' was invoked, but it was not" }
     } finally {
       index.value = 0
       finished.value = false

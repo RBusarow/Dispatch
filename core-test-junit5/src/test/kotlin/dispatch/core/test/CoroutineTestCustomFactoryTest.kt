@@ -68,4 +68,34 @@ class CoroutineTestCustomFactoryTest : CoroutineTest {
       coroutineContext shouldEqualFolded testScope.coroutineContext + job
     }
   }
+
+  @Nested
+  inner class `nested classes` {
+
+    @Test
+    fun `a custom factory extension should use use the custom factory`() {
+
+      testScope shouldBe customScope
+
+    }
+
+    @Test
+    fun `runBlockingTest with default context should use testScope`() = runBlockingTest {
+
+      // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
+      coroutineContext shouldEqualFolded testScope.coroutineContext + coroutineContext[Job]!!
+    }
+
+    @Test
+    fun `runBlockingTest with context arg should use testScope + context arg`() {
+
+      val job = Job()
+
+      runBlockingTest(job) {
+
+        // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
+        coroutineContext shouldEqualFolded testScope.coroutineContext + job
+      }
+    }
+  }
 }
