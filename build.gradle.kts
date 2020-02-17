@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+import kotlinx.knit.*
+import org.gradle.kotlin.dsl.*
 import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
 import java.net.*
@@ -47,10 +49,10 @@ allprojects {
   }
 
   afterEvaluate {
-    tasks.withType<DokkaTask> {
+    tasks.withType<DokkaTask> dokkaTask@{
 
       outputFormat = "gfm"
-      outputDirectory = "$rootDir/docs/kdoc"
+      outputDirectory = "${project.buildDir}/dokka"
 
       subProjects = listOf(
         ":core",
@@ -165,3 +167,18 @@ tasks.register("allDocs").configure {
 }
 
 apply(plugin = Plugins.knit)
+
+extensions.configure<KnitPluginExtension> {
+
+  //  rootDir = File(".")
+  //  moduleRoots = listOf( )
+
+  moduleDocs = "build/dokka"
+  moduleMarkers = listOf("build.gradle", "build.gradle.kts")
+  siteRoot = "https://rbusarow.github.io/Dispatch"
+}
+
+// Build API docs for all modules with dokka before running Knit
+tasks.getByName("knitPrepare") {
+  dependsOn(subprojects.mapNotNull { it.tasks.findByName("dokka") })
+}
