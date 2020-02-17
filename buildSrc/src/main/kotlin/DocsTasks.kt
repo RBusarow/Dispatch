@@ -13,72 +13,88 @@
  * limitations under the License.
  */
 
+import org.gradle.api.*
 import java.io.*
 
-object DocsTasks {
+fun cleanDocs() {
 
-  fun cleanDocs() {
+  val root = File("docs")
 
-    val root = File("docs")
+  root.walkTopDown()
+    .maxDepth(1)
+    .filter { file ->
 
-    root.walkTopDown()
-      .maxDepth(1)
-      .filter { file ->
+      when {
+        file.parentFile != root                   -> false
+        file.path.startsWith(prefix = "docs/css") -> false
+        else                                      -> true
+      }
+    }
+    .forEach {
+      it.deleteRecursively()
+    }
+}
 
-        when {
-          file.parentFile != root          -> false
-          file.path.startsWith("docs/css") -> false
-          else                             -> true
+fun copyRootFiles() {
+
+  val root = File(".")
+
+  val markdown = "./(.*).md".toRegex()
+  val readMe = "./README.md".toRegex()
+
+  root.walkTopDown()
+    .maxDepth(1)
+    .filter { file ->
+      file.path.matches(markdown)
+    }
+    .forEach { file ->
+
+      val newName = if (file.path.matches(readMe)) {
+        "docs/index.md"
+      } else {
+        markdown.replace(file.path) { match ->
+          "docs/${match.destructured.component1()}.md"
         }
       }
-      .forEach {
-        it.deleteRecursively()
-      }
-  }
 
-  fun copyModuleReadMes() {
+      file.copyTo(File(newName))
+    }
+}
 
-    val root = File(".")
+fun Project.copyKdoc() {
 
-    val regex = "(.*)/(.*)/README.md".toRegex()
+  val root = File("$buildDir/dokka")
 
-    root.walkTopDown()
-      // A depth of 3 allows for nested modules to introduce their README's.
-      // This probably won't ever be necessary but it's like 10ms.
-      .maxDepth(3)
-      .filter { file ->
+  val dirName = "$buildDir/dokka/${projectDir.name}"
 
-        file.path.matches(regex)
-      }
-      .forEach { file ->
+  root.walkTopDown()
+    .maxDepth(1)
+    .filter { file ->
 
-        val newName = regex.replace(file.path) { match ->
-          "docs/modules/${match.destructured.component2()}.md"
-        }
+      file.isDirectory && file.path == dirName
+    }
+    .forEach { file ->
 
-        file.copyTo(File(newName))
-      }
-  }
+      file.copyRecursively(File("docs/dokka/${projectDir.name}"))
+    }
+}
 
-  fun copyRootFiles() {
+fun Project.copyReadMe() {
 
-    val root = File(".")
+  val regex = "$projectDir/README.md".toRegex()
 
-    val markdown = "./(.*).md".toRegex()
-    val readMe = "./README.md".toRegex()
+  projectDir.walkTopDown()
+    // A depth of 3 allows for nested modules to introduce their README's.
+    // This probably won't ever be necessary but it's like 10ms.
+    .maxDepth(3)
+    .filter { file ->
 
-    root.walkTopDown()
-      .maxDepth(1)
-      .filter { file ->
-        file.path.matches(markdown)
-      }
-      .forEach { file ->
+      file.path.matches(regex)
+    }
+    .forEach { file ->
 
-        if (file.path.matches(readMe)) {
-          file.copyTo(File("docs/index.md"))
-        } else {
-          file.copyTo(File("docs/${file.path}"))
-        }
-      }
-  }
+      val newName = "$rootDir/docs/modules/${projectDir.name}.md"
+
+      file.copyTo(File(newName))
+    }
 }
