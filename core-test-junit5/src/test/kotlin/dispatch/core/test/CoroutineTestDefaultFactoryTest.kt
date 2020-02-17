@@ -75,4 +75,43 @@ class CoroutineTestDefaultFactoryTest : CoroutineTest {
       coroutineContext shouldEqualFolded testScope.coroutineContext + job
     }
   }
+
+  @Nested
+  inner class `nested classes` {
+
+    @Test
+    fun `a no-arg extension should use a default TestProvidedCoroutineScope`() {
+      val dispatcherProvider = testScope.dispatcherProvider
+
+      val allDispatchers = setOf(
+        dispatcherProvider.default,
+        dispatcherProvider.io,
+        dispatcherProvider.main,
+        dispatcherProvider.mainImmediate,
+        dispatcherProvider.unconfined,
+        testScope.coroutineContext[ContinuationInterceptor]!!
+      )
+
+      allDispatchers.size shouldBe 1
+    }
+
+    @Test
+    fun `runBlockingTest with default context should use testScope`() = runBlockingTest {
+
+      // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
+      coroutineContext shouldEqualFolded testScope.coroutineContext + coroutineContext[Job]!!
+    }
+
+    @Test
+    fun `runBlockingTest with context arg should use testScope + context arg`() {
+
+      val job = Job()
+
+      runBlockingTest(job) {
+
+        // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
+        coroutineContext shouldEqualFolded testScope.coroutineContext + job
+      }
+    }
+  }
 }

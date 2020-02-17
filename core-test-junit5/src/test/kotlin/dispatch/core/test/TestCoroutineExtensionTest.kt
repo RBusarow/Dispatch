@@ -46,7 +46,7 @@ class TestCoroutineExtensionTest {
 
     customHistory.size shouldBe 1
 
-    defaultHistory.distinct().size shouldBe 2
+    defaultHistory.distinct().size shouldBe 4
 
   }
 
@@ -74,6 +74,35 @@ class TestCoroutineExtensionTest {
 
     context shouldBe customScope.coroutineContext
 
+  }
+
+  @Nested
+  inner class `nested classes` {
+    @Test
+    fun `a no-arg extension should use a default TestProvidedCoroutineScope`() {
+      val dispatcherProvider = defaultExtension.testScope.coroutineContext[DispatcherProvider]!!
+
+      val allDispatchers = setOf(
+        dispatcherProvider.default,
+        dispatcherProvider.io,
+        dispatcherProvider.main,
+        dispatcherProvider.mainImmediate,
+        dispatcherProvider.unconfined,
+        defaultExtension.dispatcher,
+        defaultExtension.testScope.coroutineContext[ContinuationInterceptor]!!
+      )
+
+      allDispatchers.size shouldBe 1
+    }
+
+    @Test
+    fun `a custom factory extension should use use the custom factory`() {
+
+      val context = customFactoryExtension.testScope.coroutineContext
+
+      context shouldBe customScope.coroutineContext
+
+    }
   }
 }
 
