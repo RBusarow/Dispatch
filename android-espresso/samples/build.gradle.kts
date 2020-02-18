@@ -47,7 +47,7 @@ dependencies {
   implementation(project(":extensions"))
   implementation(project(":android-espresso"))
   implementation(project(":android-lifecycle-runtime"))
-  implementation(project(":android-lifecycle-viewmodel"))
+  implementation(project(":android-viewmodel"))
 
   testImplementation(project(":internal-test"))
 

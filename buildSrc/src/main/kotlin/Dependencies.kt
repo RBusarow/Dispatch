@@ -163,7 +163,7 @@ object Libs {
       const val lifecycleRuntime =
         "com.rickbusarow.dispatch:dispatch-android-lifecycle-runtime:${Versions.versionName}"
       const val lifecycleViewModel =
-        "com.rickbusarow.dispatch:dispatch-android-lifecycle-viewmodel:${Versions.versionName}"
+        "com.rickbusarow.dispatch:dispatch-android-viewmodel:${Versions.versionName}"
       const val test = "com.rickbusarow.dispatch:dispatch-core-test:${Versions.versionName}"
       const val testJunit4 =
         "com.rickbusarow.dispatch:dispatch-core-test-junit4:${Versions.versionName}"

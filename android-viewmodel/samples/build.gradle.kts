@@ -48,7 +48,7 @@ dependencies {
   implementation(project(":core-test-junit5"))
   implementation(project(":extensions"))
   implementation(project(":android-espresso"))
-  implementation(project(":android-lifecycle-viewmodel"))
+  implementation(project(":android-viewmodel"))
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)

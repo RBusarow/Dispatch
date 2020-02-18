@@ -6,7 +6,7 @@
 
 [dispatch-android-lifecycle-runtime][android-lifecycle-runtime] - better lifecycle management for [CoroutineScope][coroutineScope] from a `LifecycleOwner`.
 
-[dispatch-android-lifecycle-viewmodel][android-lifecycle-viewmodel] - marginally better lifecycle management for [CoroutineScope][coroutineScope] from a `ViewModel`.
+[dispatch-android-viewmodel][android-viewmodel] - marginally better lifecycle management for [CoroutineScope][coroutineScope] from a `ViewModel`.
 
 # DispatcherProvider
 
@@ -317,4 +317,4 @@ limitations under the License.
 [context_preservation]: https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
 [Dispatchers.Main]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html
 [android-lifecycle-runtime]: /docs/module-android-lifecycle-runtime.md
-[android-lifecycle-viewmodel]: /docs/module-android-lifecycle-viewmodel.md
+[android-viewmodel]: /docs/module-android-viewmodel.md

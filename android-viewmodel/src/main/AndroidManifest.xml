@@ -13,4 +13,4 @@
   ~ limitations under the License.
   -->
 
-<manifest package="dispatch.android.lifecycle.viewmodel" />
+<manifest package="dispatch.android.viewmodel" />
