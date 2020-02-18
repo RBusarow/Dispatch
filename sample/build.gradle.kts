@@ -74,7 +74,8 @@ dependencies {
 
   implementation(project(":core"))
   implementation(project(":extensions"))
-  implementation(project(":android-lifecycle-runtime"))
+  implementation(project(":android-lifecycle"))
+  implementation(project(":android-lifecycle-extensions"))
   implementation(project(":android-viewmodel"))
 
   testImplementation(Libs.JUnit.jUnit4)

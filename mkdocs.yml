@@ -31,8 +31,8 @@ nav:
       - 'Test-JUnit4': modules/core-test-junit4.md
       - 'Test-JUnit5': modules/core-test-junit5.md
       - 'Android-Espresso': modules/android-espresso.md
-      - 'Android-Lifecycle-runtime': modules/android-lifecycle-runtime.md
-      - 'android-viewmodel': modules/android-viewmodel.md
+      - 'android-lifecycle': modules/android-lifecycle.md
+      - 'Android-viewmodel': modules/android-viewmodel.md
   #  - 'Change Log':
   - 'Change Log': CHANGELOG.md
   - 'KDoc':
@@ -42,7 +42,7 @@ nav:
       - 'test-junit4': kdoc/core-test-junit4/index.md
       - 'test-junit5': kdoc/core-test-junit5/index.md
       - 'android-espresso': kdoc/android-espresso/index.md
-      - 'android-lifecycle-runtime': kdoc/android-lifecycle-runtime/index.md
+      - 'android-lifecycle': kdoc/android-lifecycle/index.md
       - 'android-viewmodel': kdoc/android-viewmodel/index.md
 
 theme:

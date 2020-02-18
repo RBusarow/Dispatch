@@ -128,7 +128,7 @@ allprojects {
         )
 
         linkModuleDocs(
-          matchingModules = listOf("android-lifecycle-runtime", "android-viewmodel"),
+          matchingModules = listOf("android-lifecycle", "android-viewmodel"),
           currentProject = this@proj,
           currentTask = this@dokkaTask,
           dependencyModule = "extensions"

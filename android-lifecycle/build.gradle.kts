@@ -17,6 +17,8 @@ plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
   id(Plugins.kotlinAndroidExtensions)
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 android {
@@ -33,36 +35,36 @@ android {
   buildTypes {
     getByName("release") {
       isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro"
+      )
     }
   }
 }
 
 dependencies {
+
+  implementation(Libs.Androidx.Lifecycle.common)
+  testImplementation(Libs.Androidx.Lifecycle.runtime)
+
+  implementation(Libs.JakeWharton.timber)
+
   implementation(Libs.Kotlin.stdlib)
 
+  implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":core"))
   implementation(project(":extensions"))
-  implementation(project(":android-espresso"))
-  implementation(project(":android-lifecycle"))
-  implementation(project(":android-lifecycle-extensions"))
-  implementation(project(":android-viewmodel"))
-
+  testImplementation(project(":core-test"))
+  testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
 
-  testImplementation(Libs.JUnit.jUnit4)
+  testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)
+  testImplementation(Libs.Kotlinx.Coroutines.test)
 
   testImplementation(Libs.Androidx.testRunner)
   testImplementation(Libs.Androidx.espresso)
-
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-
-  testImplementation(Libs.Robolectric.core)
-
-  testImplementation(Libs.Kotlinx.Coroutines.test)
-
 }

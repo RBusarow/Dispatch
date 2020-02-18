@@ -21,8 +21,10 @@ object Modules {
   val allPaths = listOf(
     ":android-espresso",
     ":android-espresso:samples",
-    ":android-lifecycle-runtime",
-    ":android-lifecycle-runtime:samples",
+    ":android-lifecycle",
+    ":android-lifecycle:samples",
+    ":android-lifecycle-extensions",
+    ":android-lifecycle-extensions:samples",
     ":android-viewmodel",
     ":android-viewmodel:samples",
     ":core",
