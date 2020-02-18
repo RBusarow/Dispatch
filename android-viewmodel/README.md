@@ -1,4 +1,4 @@
-# dispatch-android-lifecycle-viewmodel
+# dispatch-android-viewmodel
 
 The artifact I hope you don't need, but if you're not doing dependency injection, you probably do.
 
@@ -168,7 +168,7 @@ dependencies {
   // core is required
   implementation 'com.rickbusarow.dispatch:dispatch-core:$version'
 
-  implementation 'com.rickbusarow.dispatch:dispatch-android-lifecycle-viewModel:$version'
+  implementation 'com.rickbusarow.dispatch:dispatch-android-viewmodel:$version'
 }
 ```
 
