@@ -18,7 +18,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
   /**
   * If you don't provide CoroutineScopes to your lifecycle components via a dependency injection framework,
   * you need to use the `dispatch-android-lifecycle-extensions` and `dispatch-android-viewmodel` artifacts
-  * to ensure that the same [IdlingDispatcherProvider] is used.
+  * to ensure that the same `IdlingDispatcherProvider` is used.
   */
   @Before
   fun setUp() {
@@ -28,7 +28,6 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
     ViewModelScopeFactory.set {
       MainImmediateCoroutineScope(customDispatcherProvider)
     }
-    // now all scopes use the same IdlingDispatcherProvider
   }
 
   @Test
@@ -46,6 +45,8 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 <!--- TOC -->
 
 * [Types](#types)
+* [Marker interfaces](#marker-interfaces)
+* [Factory functions](#factory-functions)
 * [Member functions](#member-functions)
 * [Extensions](#extensions)
 
@@ -60,8 +61,29 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 | [IdlingDispatcherProvider] | Things
 | [IdlingDispatcher] | Things
 
-## Member functions
+## Marker interfaces
 
+| **Name**                 | **Description**
+| -------------------      | ---------------
+| [DefaultIdlingCoroutineScope] | Stuff
+| [IOIdlingCoroutineScope] | Stuff
+| [MainIdlingCoroutineScope] | Stuff
+| [MainImmediateIdlingCoroutineScope] | Stuff
+| [UnconfinedIdlingCoroutineScope] | Stuff
+
+## Factory functions
+
+| **Name**                 | **Description**
+| -------------------      | ---------------
+| [IdlingCoroutineScope] | Foo
+| [DefaultIdlingCoroutineScope] | Foo
+| [IOIdlingCoroutineScope] | Foo
+| [MainIdlingCoroutineScope] | Foo
+| [MainImmediateIdlingCoroutineScope] | Foo
+| [UnconfinedIdlingCoroutineScope] | Foo
+
+
+## Member functions
 
 | **Name**                 | **Description**
 | -------------------      | ---------------
@@ -88,6 +110,11 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 [IdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-coroutine-scope/index.html
 [IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher-provider/index.html
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html
+[DefaultIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-default-idling-coroutine-scope.html
+[IOIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-i-o-idling-coroutine-scope.html
+[MainIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-main-idling-coroutine-scope.html
+[MainImmediateIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-main-immediate-idling-coroutine-scope.html
+[UnconfinedIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-unconfined-idling-coroutine-scope.html
 <!--- MODULE android-lifecycle-->
 <!--- INDEX  -->
 <!--- MODULE android-viewmodel-->
