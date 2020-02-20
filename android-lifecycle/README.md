@@ -1,5 +1,7 @@
 # Module android-lifecycle
 
+
+[CoroutineScope] functionality linked with an [Android Lifecycle].
 ## Contents
 <!--- TOC -->
 
@@ -8,8 +10,6 @@
 * [Extension functions](#extension-functions)
 
 <!--- END -->
-
-[CoroutineScope] functionality linked with an [Android Lifecycle].
 
 ## Types
 

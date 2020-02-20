@@ -70,14 +70,13 @@ class IdlingDispatcherProvider(
  */
 fun IdlingDispatcherProvider(
   delegate: DispatcherProvider = DefaultDispatcherProvider()
-): IdlingDispatcherProvider =
-  IdlingDispatcherProvider(
-    default = IdlingDispatcher(delegate.default),
-    io = IdlingDispatcher(delegate.io),
-    main = IdlingDispatcher(delegate.main),
-    mainImmediate = IdlingDispatcher(delegate.mainImmediate),
-    unconfined = IdlingDispatcher(delegate.unconfined)
-  )
+): IdlingDispatcherProvider = IdlingDispatcherProvider(
+  default = IdlingDispatcher(delegate.default),
+  io = IdlingDispatcher(delegate.io),
+  main = IdlingDispatcher(delegate.main),
+  mainImmediate = IdlingDispatcher(delegate.mainImmediate),
+  unconfined = IdlingDispatcher(delegate.unconfined)
+)
 
 /**
  * Register all [IdlingDispatcher] properties of the receiver [IdlingDispatcherProvider] with Espresso's [IdlingRegistry].

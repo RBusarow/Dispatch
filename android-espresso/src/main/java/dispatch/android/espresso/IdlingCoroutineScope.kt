@@ -21,7 +21,7 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
 /**
- * Marker interface for a [CoroutineScope] which indicates that its [DispatcherProvider] is an [IdlingDispatcherProvider].
+ * Special [CoroutineScope] with a [DispatcherProvider] which is an [IdlingDispatcherProvider].
  *
  * @see IdlingDispatcherProvider
  * @see IdlingResource
