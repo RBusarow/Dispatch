@@ -56,7 +56,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 
 | **Name**       | **Description**
 | -------------  | --------------- |
-| [IdlingDispatcherProviderRule] | Things
+| [IdlingDispatcherProviderRule] | JUnit 4 [Rule] which automatically
 | [IdlingCoroutineScope] | Things
 | [IdlingDispatcherProvider] | Things
 | [IdlingDispatcher] | Things
@@ -192,3 +192,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 [androidx-lifecycle-runtime-ktx]: https://developer.android.com/jetpack/androidx/releases/lifecycle
 [androidx.lifecycle.lifecycleScope]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44
 [PausingDispatcher]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/PausingDispatcher.kt
+
+<!--JUnit-->
+
+[Rule]: https://junit.org/junit4/javadoc/4.12/org/junit/Rule.html
