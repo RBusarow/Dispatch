@@ -24,7 +24,7 @@ import kotlinx.coroutines.*
  *
  * If the lifecycle is already in this state, [block] will be executed immediately.
  *
- * @see [LifecycleCoroutineScope.launchEveryCreate] for repeating behavior.
+ * @see [LifecycleCoroutineScope.launchOnCreate] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
  */
 suspend fun <T> LifecycleOwner.onNextCreate(
@@ -36,7 +36,7 @@ suspend fun <T> LifecycleOwner.onNextCreate(
  *
  * If the lifecycle is already in this state, [block] will be executed immediately.
  *
- * @see [LifecycleCoroutineScope.launchEveryCreate] for repeating behavior.
+ * @see [LifecycleCoroutineScope.launchOnCreate] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextCreateSample
  */
 suspend fun <T> Lifecycle.onNextCreate(
@@ -48,7 +48,7 @@ suspend fun <T> Lifecycle.onNextCreate(
  *
  * If the lifecycle is already in this state, [block] will be executed immediately.
  *
- * @see [LifecycleCoroutineScope.launchEveryStart] for repeating behavior.
+ * @see [LifecycleCoroutineScope.launchOnStart] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
  */
 suspend fun <T> LifecycleOwner.onNextStart(
@@ -60,7 +60,7 @@ suspend fun <T> LifecycleOwner.onNextStart(
  *
  * If the lifecycle is already in this state, [block] will be executed immediately.
  *
- * @see [LifecycleCoroutineScope.launchEveryStart] for repeating behavior.
+ * @see [LifecycleCoroutineScope.launchOnStart] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextStartSample
  */
 suspend fun <T> Lifecycle.onNextStart(
@@ -72,7 +72,7 @@ suspend fun <T> Lifecycle.onNextStart(
  *
  * If the lifecycle is already in this state, [block] will be executed immediately.
  *
- * @see [LifecycleCoroutineScope.launchEveryResume] for repeating behavior.
+ * @see [LifecycleCoroutineScope.launchOnResume] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
  */
 suspend fun <T> LifecycleOwner.onNextResume(
@@ -84,7 +84,7 @@ suspend fun <T> LifecycleOwner.onNextResume(
  *
  * If the lifecycle is already in this state, [block] will be executed immediately.
  *
- * @see [LifecycleCoroutineScope.launchEveryResume] for repeating behavior.
+ * @see [LifecycleCoroutineScope.launchOnResume] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextResumeSample
  */
 suspend fun <T> Lifecycle.onNextResume(
