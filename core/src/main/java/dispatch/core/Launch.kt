@@ -40,7 +40,7 @@ public fun CoroutineScope.launchDefault(
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
  * The coroutine is cancelled when the resulting job is [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **io** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.io`) to call `launch(...)`.
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
@@ -58,7 +58,7 @@ public fun CoroutineScope.launchIO(
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
  * The coroutine is cancelled when the resulting job is [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **main** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.main`) to call `launch(...)`.
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
@@ -76,7 +76,7 @@ public fun CoroutineScope.launchMain(
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
  * The coroutine is cancelled when the resulting job is [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **mainImmediate** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.mainImmediate`) to call `launch(...)`.
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
@@ -94,7 +94,7 @@ public fun CoroutineScope.launchMainImmediate(
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
  * The coroutine is cancelled when the resulting job is [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **unconfined** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.unconfined`) to call `launch(...)`.
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
