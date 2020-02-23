@@ -2,7 +2,7 @@
 
 Tools to provide [Espresso](https://developer.android.com/training/testing/espresso/idling-resource) functionality for coroutines.
 
-If a [IdlingDispatcherProvider](https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher-provider/index.html) is registered with the [IdlingRegistry](https://developer.android.com/reference/androidx/test/espresso/IdlingRegistry), [Espresso](https://developer.android.com/training/testing/espresso) will wait
+If an [IdlingDispatcherProvider](https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher-provider/index.html) is registered with the [IdlingRegistry](https://developer.android.com/reference/androidx/test/espresso/IdlingRegistry), [Espresso](https://developer.android.com/training/testing/espresso) will wait
 for all associated coroutines to leave the *active* state before performing any assertions.
 
 Coroutines which are in a *suspended* state (such as a [Job](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html) "observing" a [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html) for updates)

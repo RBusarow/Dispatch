@@ -67,9 +67,10 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 
 ## Types
 
-| **Name**              | **Description**
-| -------------         | --------------- |
-| [DispatcherProvider]  | Interface which provides the 5 standard [CoroutineDispatcher] properties of the [Dispatchers] object, but which can be embedded in a [CoroutineContext]
+| **Name**                     | **Description**
+| -------------                | --------------- |
+| [DispatcherProvider]         | Interface which provides the 5 standard [CoroutineDispatcher] properties of the [Dispatchers] object, but which can be embedded in a [CoroutineContext]
+| [DefaultDispatcherProvider]  | Default implementation of [DispatcherProvider] which simply delegates to the corresponding properties in the [Dispatchers] singleton
 
 
 ### Marker interfaces and factories
@@ -132,6 +133,7 @@ These functions are shorthand for [Flow.flowOn] with a [DispatcherProvider]
 <!--- MODULE core-->
 <!--- INDEX  -->
 [DispatcherProvider]: https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html
+[DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/core//dispatch.core/-default-dispatcher-provider/index.html
 [DefaultCoroutineScope]: https://rbusarow.github.io/Dispatch/core//dispatch.core/-default-coroutine-scope.html
 [DispatcherProvider.default]: https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/default.html
 [IOCoroutineScope]: https://rbusarow.github.io/Dispatch/core//dispatch.core/-i-o-coroutine-scope.html

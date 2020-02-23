@@ -20,7 +20,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 
 /**
- * [DispatcherProvider] implementation for testing, where each property is a [CoroutineDispatcher].
+ * [DispatcherProvider] implementation for testing, where each property defaults to a [TestCoroutineDispatcher].
  *
  * A default version will create a different `TestCoroutineDispatcher` for each property.
  */
@@ -59,8 +59,6 @@ class TestDispatcherProvider(
    */
   override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher(),
   /**
-   * [CoroutineDispatcher] which is unconfined.
-   *
    * Corresponds to the [Dispatchers.Unconfined] property in a default implementation.
    *
    * @see [Dispatchers.Unconfined]
@@ -79,7 +77,6 @@ class TestDispatcherProvider(
     """.replaceIndentByMargin(" ".repeat(this::class.java.simpleName.length + 2))
   }
 }
-
 /**
  * Convenience factory function for [TestDispatcherProvider], creating an implementation
  * where all properties point to the same underlying [TestCoroutineDispatcher].
@@ -118,5 +115,4 @@ fun TestBasicDispatcherProvider(): TestDispatcherProvider {
     mainImmediate = mainThread,
     unconfined = Dispatchers.Unconfined
   )
-
 }

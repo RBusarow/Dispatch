@@ -2,7 +2,7 @@
 
 Tools to provide [Espresso] [IdlingResource] functionality for coroutines.
 
-If a [IdlingDispatcherProvider] is registered with the [IdlingRegistry], [Espresso] will wait
+If an [IdlingDispatcherProvider] is registered with the [IdlingRegistry], [Espresso] will wait
 for all associated coroutines to leave the *active* state before performing any assertions.
 
 Coroutines which are in a *suspended* state (such as a [Job] "observing" a [Flow] for updates)
