@@ -64,9 +64,10 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 
 ## Types
 
-| **Name**              | **Description**
-| -------------         | --------------- |
-| [DispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html)  | Interface which provides the 5 standard [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) properties of the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) object, but which can be embedded in a [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-coroutine-context/index.html)
+| **Name**                     | **Description**
+| -------------                | --------------- |
+| [DispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html)         | Interface which provides the 5 standard [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) properties of the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) object, but which can be embedded in a [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-coroutine-context/index.html)
+| [DefaultDispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-default-dispatcher-provider/index.html)  | Default implementation of [DispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html) which simply delegates to the corresponding properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton
 
 ### Marker interfaces and factories
 
