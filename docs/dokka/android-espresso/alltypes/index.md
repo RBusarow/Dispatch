@@ -1,5 +1,7 @@
 
 
+Tools to provide [Espresso](https://developer.android.com/training/testing/espresso/idling-resource) functionality for coroutines.
+
 ### All Types
 
 | Name | Summary |
@@ -15,7 +17,7 @@ Marker interface for an [IdlingCoroutineScope](../dispatch.android.espresso/-idl
 
 ##### [dispatch.android.espresso.IdlingCoroutineScope](../dispatch.android.espresso/-idling-coroutine-scope/index.md)
 
-Marker interface for a [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) which indicates that its [DispatcherProvider](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) is an [IdlingDispatcherProvider](../dispatch.android.espresso/-idling-dispatcher-provider/index.md).
+Special [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) with a [DispatcherProvider](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) which is an [IdlingDispatcherProvider](../dispatch.android.espresso/-idling-dispatcher-provider/index.md).
 
 
 |
@@ -38,7 +40,7 @@ utilizes an [IdlingDispatcher](../dispatch.android.espresso/-idling-dispatcher/i
 
 ##### [dispatch.android.espresso.IdlingDispatcherProviderRule](../dispatch.android.espresso/-idling-dispatcher-provider-rule/index.md)
 
-A basic JUnit 4 [TestRule](#) which creates a new [IdlingDispatcherProvider](../dispatch.android.espresso/-idling-dispatcher-provider/index.md) for each test,
+A JUnit 4 [TestRule](#) which creates a new [IdlingDispatcherProvider](../dispatch.android.espresso/-idling-dispatcher-provider/index.md) for each test,
 registering all [IdlingDispatcher](../dispatch.android.espresso/-idling-dispatcher/index.md)s with [IdlingRegistry](#) before `@Before` and unregistering them after `@After`.
 
 

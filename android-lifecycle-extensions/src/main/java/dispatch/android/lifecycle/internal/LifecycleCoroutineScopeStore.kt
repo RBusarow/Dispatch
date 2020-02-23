@@ -35,20 +35,14 @@ internal object LifecycleCoroutineScopeStore {
 
   fun get(lifecycle: Lifecycle): LifecycleCoroutineScope {
 
-    return map[lifecycle] ?: bindLifecycle(
-      lifecycle,
-      LifecycleScopeFactory.create()
-    )
+    return map[lifecycle] ?: bindLifecycle(lifecycle, LifecycleScopeFactory.create())
   }
 
   private fun bindLifecycle(
     lifecycle: Lifecycle, coroutineScope: MainImmediateCoroutineScope
   ): LifecycleCoroutineScope {
 
-    val scope = LifecycleCoroutineScope(
-      lifecycle,
-      coroutineScope
-    )
+    val scope = LifecycleCoroutineScope(lifecycle, coroutineScope)
 
     map[lifecycle] = scope
 

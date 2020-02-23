@@ -4,7 +4,7 @@
 
 `IdlingDispatcherProviderRule(factory: () -> `[`IdlingDispatcherProvider`](../-idling-dispatcher-provider/index.md)`)`
 
-A basic JUnit 4 [TestRule](#) which creates a new [IdlingDispatcherProvider](../-idling-dispatcher-provider/index.md) for each test,
+A JUnit 4 [TestRule](#) which creates a new [IdlingDispatcherProvider](../-idling-dispatcher-provider/index.md) for each test,
 registering all [IdlingDispatcher](../-idling-dispatcher/index.md)s with [IdlingRegistry](#) before `@Before` and unregistering them after `@After`.
 
 The rule takes an optional [IdlingDispatcherProvider](../-idling-dispatcher-provider/index.md) factory, in which case it only handles registration.
@@ -76,14 +76,10 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
   @Before
   fun setUp() {
     LifecycleScopeFactory.set {
-      MainImmediateCoroutineScope(
-        customDispatcherProvider
-      )
+      MainImmediateCoroutineScope(customDispatcherProvider)
     }
     ViewModelScopeFactory.set {
-      MainImmediateCoroutineScope(
-        customDispatcherProvider
-      )
+      MainImmediateCoroutineScope(customDispatcherProvider)
     }
     // now all scopes use the same IdlingDispatcherProvider
   }
