@@ -49,8 +49,8 @@ dependencies {
 
   implementation(project(":core"))
 
-  implementation(Libs.Androidx.testRunner)
-  implementation(Libs.Androidx.espresso)
+  implementation(Libs.Androidx.Test.runner)
+  implementation(Libs.Androidx.Test.Espresso.core)
 
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.MockK.core)
