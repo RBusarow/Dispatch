@@ -1,0 +1,25 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:dispatch.core$asyncDefault(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, dispatch.core.asyncDefault.T)))dispatch.core/kotlinx.coroutines.-coroutine-scope/async-default.md
+$dokka.location:dispatch.core$asyncIO(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, dispatch.core.asyncIO.T)))dispatch.core/kotlinx.coroutines.-coroutine-scope/async-i-o.md
+$dokka.location:dispatch.core$asyncMain(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, dispatch.core.asyncMain.T)))dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main.md
+$dokka.location:dispatch.core$asyncMainImmediate(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, dispatch.core.asyncMainImmediate.T)))dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main-immediate.md
+$dokka.location:dispatch.core$asyncUnconfined(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, dispatch.core.asyncUnconfined.T)))dispatch.core/kotlinx.coroutines.-coroutine-scope/async-unconfined.md
+$dokka.location:dispatch.core$defaultDispatcher#kotlinx.coroutines.CoroutineScopedispatch.core/kotlinx.coroutines.-coroutine-scope/default-dispatcher.md
+$dokka.location:dispatch.core$dispatcherProvider#kotlin.coroutines.CoroutineContextdispatch.core/kotlin.coroutines.-coroutine-context/dispatcher-provider.md
+$dokka.location:dispatch.core$dispatcherProvider#kotlinx.coroutines.CoroutineScopedispatch.core/kotlinx.coroutines.-coroutine-scope/dispatcher-provider.md
+$dokka.location:dispatch.core$flowOnDefault(kotlinx.coroutines.flow.Flow((dispatch.core.flowOnDefault.T)))dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-default.md
+$dokka.location:dispatch.core$flowOnIO(kotlinx.coroutines.flow.Flow((dispatch.core.flowOnIO.T)))dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-i-o.md
+$dokka.location:dispatch.core$flowOnMain(kotlinx.coroutines.flow.Flow((dispatch.core.flowOnMain.T)))dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main.md
+$dokka.location:dispatch.core$flowOnMainImmediate(kotlinx.coroutines.flow.Flow((dispatch.core.flowOnMainImmediate.T)))dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main-immediate.md
+$dokka.location:dispatch.core$flowOnUnconfined(kotlinx.coroutines.flow.Flow((dispatch.core.flowOnUnconfined.T)))dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-unconfined.md
+$dokka.location:dispatch.core$ioDispatcher#kotlinx.coroutines.CoroutineScopedispatch.core/kotlinx.coroutines.-coroutine-scope/io-dispatcher.md
+$dokka.location:dispatch.core$launchDefault(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, kotlin.Unit)))dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-default.md
+$dokka.location:dispatch.core$launchIO(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, kotlin.Unit)))dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-i-o.md
+$dokka.location:dispatch.core$launchMain(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, kotlin.Unit)))dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-main.md
+$dokka.location:dispatch.core$launchMainImmediate(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, kotlin.Unit)))dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-main-immediate.md
+$dokka.location:dispatch.core$launchUnconfined(kotlinx.coroutines.CoroutineScope, kotlin.coroutines.CoroutineContext, kotlinx.coroutines.CoroutineStart, kotlin.coroutines.SuspendFunction1((kotlinx.coroutines.CoroutineScope, kotlin.Unit)))dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-unconfined.md
+$dokka.location:dispatch.core$mainDispatcher#kotlinx.coroutines.CoroutineScopedispatch.core/kotlinx.coroutines.-coroutine-scope/main-dispatcher.md
+$dokka.location:dispatch.core$mainImmediateDispatcher#kotlinx.coroutines.CoroutineScopedispatch.core/kotlinx.coroutines.-coroutine-scope/main-immediate-dispatcher.md
+$dokka.location:dispatch.core$unconfinedDispatcher#kotlinx.coroutines.CoroutineScopedispatch.core/kotlinx.coroutines.-coroutine-scope/unconfined-dispatcher.md
+dispatch.core
