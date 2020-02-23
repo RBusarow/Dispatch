@@ -28,19 +28,63 @@ import kotlin.coroutines.*
  */
 public interface DispatcherProvider : CoroutineContext.Element {
 
+  /**
+   * This unique [Key] property is what allows the `DispatcherProvider` to be stored in the [CoroutineContext].
+   */
   override val key: CoroutineContext.Key<*> get() = Key
 
+  /**
+   * [CoroutineDispatcher] generally intended for cpu-bound tasks.
+   *
+   * Corresponds to the [Dispatchers.Default] property in a default implementation.
+   *
+   * @see Dispatchers.Default
+   */
   val default: CoroutineDispatcher
+
+  /**
+   * [CoroutineDispatcher] generally intended for blocking I/O tasks.
+   *
+   * Corresponds to the [Dispatchers.IO] property in a default implementation.
+   *
+   * @see Dispatchers.IO
+   */
   val io: CoroutineDispatcher
+
+  /**
+   * [CoroutineDispatcher] which is confined to the "main" thread.
+   *
+   * Corresponds to the [Dispatchers.Main] property in a default implementation.
+   *
+   * @see Dispatchers.Main
+   */
   val main: CoroutineDispatcher
+
+  /**
+   * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
+   *
+   * Corresponds to the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in a default implementation.
+   *
+   * @see MainCoroutineDispatcher.immediate
+   */
   val mainImmediate: CoroutineDispatcher
+
+  /**
+   * [CoroutineDispatcher] which is unconfined.
+   *
+   * Corresponds to the [Dispatchers.Unconfined] property in a default implementation.
+   *
+   * @see Dispatchers.Unconfined
+   */
   val unconfined: CoroutineDispatcher
 
+  /**
+   * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the [CoroutineContext].
+   */
   companion object Key : CoroutineContext.Key<DispatcherProvider>
 }
 
-public fun DispatcherProvider(): DispatcherProvider =
-  DefaultDispatcherProvider()
+public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()
 
 /**
  * Default implementation of [DispatcherProvider] which simply delegates to the corresponding

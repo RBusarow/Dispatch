@@ -19,7 +19,7 @@ import dispatch.core.*
 import kotlinx.coroutines.*
 
 /**
- * This would normally a singleton,
+ * This would normally be a singleton,
  * but we don't have a DI framework here, so we'll just _suspend_ disbelief.
  */
 class SomeRepository(private val coroutineScope: IOCoroutineScope) {

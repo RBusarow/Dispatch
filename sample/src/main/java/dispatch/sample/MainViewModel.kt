@@ -16,6 +16,7 @@
 package dispatch.sample
 
 import androidx.lifecycle.*
+import dispatch.core.*
 import androidx.lifecycle.lifecycleScope
 import dispatch.android.*
 import dispatch.core.*

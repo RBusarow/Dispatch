@@ -13,25 +13,10 @@
  * limitations under the License.
  */
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath(BuildPlugins.kotlinGradlePlugin)
-  }
-
-}
-
 plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
-}
-
-tasks.test {
-  useJUnitPlatform()
 }
 
 dependencies {
@@ -40,7 +25,8 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(Libs.JUnit.jUnit5)
-  implementation(Libs.KotlinTest.junit4runner)
+  implementation(Libs.JUnit.jUnit5Vintage)
+  implementation(Libs.KotlinTest.junit5runner)
 
   implementation(Libs.Kotlin.test)
   implementation(Libs.Kotlin.testCommon)

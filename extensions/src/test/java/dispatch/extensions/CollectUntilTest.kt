@@ -15,6 +15,7 @@
 
 package dispatch.extensions
 
+import dispatch.extensions.flow.*
 import dispatch.internal.test.*
 import io.kotlintest.*
 import kotlinx.coroutines.*

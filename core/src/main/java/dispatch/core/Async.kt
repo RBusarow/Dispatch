@@ -26,6 +26,7 @@ import kotlin.coroutines.*
  *
  * The `default` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncDefaultSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncDefault(
@@ -37,11 +38,12 @@ public fun <T> CoroutineScope.asyncDefault(
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **io** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.io`) to call `async(...)`.
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncIOSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncIO(
@@ -53,11 +55,12 @@ public fun <T> CoroutineScope.asyncIO(
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **main** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.main`) to call `async(...)`.
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncMainSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncMain(
@@ -69,11 +72,12 @@ public fun <T> CoroutineScope.asyncMain(
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **mainImmediate** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.mainImmediate`) to call `async(...)`.
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncMainImmediateSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncMainImmediate(
@@ -85,11 +89,12 @@ public fun <T> CoroutineScope.asyncMainImmediate(
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default** [CoroutineDispatcher]
+ * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **unconfined** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.unconfined`) to call `async(...)`.
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
+ * @sample samples.AsyncSample.asyncUnconfinedSample
  * @see async
  */
 public fun <T> CoroutineScope.asyncUnconfined(

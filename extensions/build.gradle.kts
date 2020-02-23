@@ -13,26 +13,12 @@
  * limitations under the License.
  */
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath(BuildPlugins.kotlinGradlePlugin)
-  }
-
-}
-
 plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
-  id(Plugins.dokka).version(Versions.dokka)
-}
-
-tasks.test {
-  useJUnitPlatform()
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 dependencies {
@@ -43,13 +29,13 @@ dependencies {
 
   implementation(project(":core"))
 
-  testImplementation(project(":core-test"))
+  testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
 
   testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit4runner)
+  testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
-  testImplementation(Libs.Androidx.testRunner)
-  testImplementation(Libs.Androidx.espresso)
+  testImplementation(Libs.Androidx.Test.runner)
+  testImplementation(Libs.Androidx.Test.Espresso.core)
 }

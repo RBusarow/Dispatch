@@ -63,12 +63,9 @@ internal class TestProvidedCoroutineScopeImpl(
 @ExperimentalCoroutinesApi
 fun TestProvidedCoroutineScope(
   dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),
-  dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(
-    dispatcher
-  ),
+  dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
   context: CoroutineContext = EmptyCoroutineContext
-): TestProvidedCoroutineScope =
-  TestProvidedCoroutineScopeImpl(
-    dispatcherProvider = dispatcherProvider,
-    context = context + dispatcher
-  )
+): TestProvidedCoroutineScope = TestProvidedCoroutineScopeImpl(
+  dispatcherProvider = dispatcherProvider,
+  context = context + dispatcher
+)

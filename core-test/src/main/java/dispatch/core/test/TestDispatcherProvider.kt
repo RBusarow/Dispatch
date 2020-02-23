@@ -26,12 +26,50 @@ import kotlinx.coroutines.test.*
  */
 @ExperimentalCoroutinesApi
 class TestDispatcherProvider(
+  /**
+   * [CoroutineDispatcher] generally intended for cpu-bound tasks.
+   *
+   * Corresponds to the [Dispatchers.Default] property in a default implementation.
+   *
+   * @see Dispatchers.Default
+   */
   override val default: CoroutineDispatcher = TestCoroutineDispatcher(),
+  /**
+   * [CoroutineDispatcher] generally intended for blocking I/O tasks.
+   *
+   * Corresponds to the [Dispatchers.IO] property in a default implementation.
+   *
+   * @see Dispatchers.IO
+   */
   override val io: CoroutineDispatcher = TestCoroutineDispatcher(),
+  /**
+   * [CoroutineDispatcher] which is confined to the "main" thread.
+   *
+   * Corresponds to the [Dispatchers.Main] property in a default implementation.
+   *
+   * @see Dispatchers.Main
+   */
   override val main: CoroutineDispatcher = TestCoroutineDispatcher(),
+  /**
+   * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
+   *
+   * Corresponds to the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in a default implementation.
+   *
+   * @see [MainCoroutineDispatcher.immediate]
+   */
   override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher(),
+  /**
+   * [CoroutineDispatcher] which is unconfined.
+   *
+   * Corresponds to the [Dispatchers.Unconfined] property in a default implementation.
+   *
+   * @see [Dispatchers.Unconfined]
+   */
   override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
 ) : DispatcherProvider {
+  /**
+   * @suppress
+   */
   override fun toString(): String {
     return """${this::class.java.simpleName}: default       -> $default
       |io            -> $io
@@ -49,14 +87,13 @@ class TestDispatcherProvider(
 @ExperimentalCoroutinesApi
 fun TestDispatcherProvider(
   dispatcher: CoroutineDispatcher
-): TestDispatcherProvider =
-  TestDispatcherProvider(
-    default = dispatcher,
-    io = dispatcher,
-    main = dispatcher,
-    mainImmediate = dispatcher,
-    unconfined = dispatcher
-  )
+): TestDispatcherProvider = TestDispatcherProvider(
+  default = dispatcher,
+  io = dispatcher,
+  main = dispatcher,
+  mainImmediate = dispatcher,
+  unconfined = dispatcher
+)
 
 /**
  * "Basic" [TestDispatcherProvider] which mimics production behavior,

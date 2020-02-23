@@ -13,26 +13,12 @@
  * limitations under the License.
  */
 
-buildscript {
-
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath(BuildPlugins.kotlinGradlePlugin)
-  }
-
-}
-
 plugins {
   id(Plugins.atomicFu)
   id(Plugins.javaLibrary)
   id(Plugins.kotlin)
-  id(Plugins.dokka).version(Versions.dokka)
-}
-
-tasks.test {
-  useJUnitPlatform()
+  id(Plugins.mavenPublish)
+  id(Plugins.dokka)
 }
 
 dependencies {
@@ -43,20 +29,15 @@ dependencies {
 
   implementation(project(":core"))
 
+  implementation(Libs.JUnit.jUnit4)
   implementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit4runner)
+  implementation(Libs.JUnit.jUnit5Vintage)
+  testImplementation(Libs.KotlinTest.junit5runner)
 
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
 
   testImplementation(Libs.MockK.core)
 
+  testImplementation(project(":internal-test"))
 }
-
-ext {
-  extra["PUBLISH_GROUP_ID"] = "com.rickbusarow.dispatcherprovider"
-  extra["PUBLISH_ARTIFACT_ID"] = "dispatcher-provider-test"
-  extra["PUBLISH_VERSION"] = Versions.versionName
-}
-
-apply("${rootProject.projectDir}/scripts/publish-mavencentral.gradle")
