@@ -2,6 +2,12 @@
 
 Tools to provide [Espresso] [IdlingResource] functionality for coroutines.
 
+If a [IdlingDispatcherProvider] is registered with the [IdlingRegistry], [Espresso] will wait
+for all associated coroutines to leave the *active* state before performing any assertions.
+
+Coroutines which are in a *suspended* state (such as a [Job] "observing" a [Flow] for updates)
+do not prevent Espresso from performing assertions.
+
 ``` kotlin
 class IdlingCoroutineScopeRuleWithLifecycleSample {
 
@@ -45,8 +51,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 <!--- TOC -->
 
 * [Types](#types)
-* [Marker interfaces](#marker-interfaces)
-* [Factory functions](#factory-functions)
+* [IdlingCoroutineScopes](#idlingcoroutinescopes)
 * [Member functions](#member-functions)
 * [Extensions](#extensions)
 
@@ -56,32 +61,20 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 
 | **Name**       | **Description**
 | -------------  | --------------- |
-| [IdlingDispatcherProviderRule] | JUnit 4 [Rule] which automatically
-| [IdlingCoroutineScope] | Things
-| [IdlingDispatcherProvider] | Things
-| [IdlingDispatcher] | Things
+| [IdlingDispatcherProviderRule] | JUnit 4 [Rule] which automatically registers an [IdlingDispatcherProvider] with the [IdlingRegistry]
+| [IdlingDispatcher] | A [CoroutineDispatcher] which tracks each dispatched coroutine using a [CountingIdlingResource]
+| [IdlingDispatcherProvider] | A special [DispatcherProvider] which guarantees that each of its properties is an [IdlingDispatcher]
+| [IdlingCoroutineScope] | A special [CoroutineScope] which guarantees a property of an [IdlingDispatcherProvider]
 
-## Marker interfaces
+## IdlingCoroutineScopes
 
-| **Name**                 | **Description**
-| -------------------      | ---------------
-| [DefaultIdlingCoroutineScope] | Stuff
-| [IOIdlingCoroutineScope] | Stuff
-| [MainIdlingCoroutineScope] | Stuff
-| [MainImmediateIdlingCoroutineScope] | Stuff
-| [UnconfinedIdlingCoroutineScope] | Stuff
-
-## Factory functions
-
-| **Name**                 | **Description**
-| -------------------      | ---------------
-| [IdlingCoroutineScope] | Foo
-| [DefaultIdlingCoroutineScope] | Foo
-| [IOIdlingCoroutineScope] | Foo
-| [MainIdlingCoroutineScope] | Foo
-| [MainImmediateIdlingCoroutineScope] | Foo
-| [UnconfinedIdlingCoroutineScope] | Foo
-
+| **Marker Interface**                | **Factory Function**                | **Description**
+| -------------------                 | -------------------                 | ---------------
+| [DefaultIdlingCoroutineScope]       | [DefaultIdlingCoroutineScope]       | A [IdlingCoroutineScope] with a [CoroutineDispatcher] of `default`.
+| [IOIdlingCoroutineScope]            | [IOIdlingCoroutineScope]            | A [IdlingCoroutineScope] with a [CoroutineDispatcher] of `io`.
+| [MainIdlingCoroutineScope]          | [MainIdlingCoroutineScope]          | A [IdlingCoroutineScope] with a [CoroutineDispatcher] of `main`.
+| [MainImmediateIdlingCoroutineScope] | [MainImmediateIdlingCoroutineScope] | A [IdlingCoroutineScope] with a [CoroutineDispatcher] of `mainImmediate`.
+| [UnconfinedIdlingCoroutineScope]    | [UnconfinedIdlingCoroutineScope]    | A [IdlingCoroutineScope] with a [CoroutineDispatcher] of `unconfined`.
 
 ## Member functions
 
@@ -96,6 +89,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 
 <!--- MODULE core-->
 <!--- INDEX  -->
+[DispatcherProvider]: https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html
 <!--- MODULE core-test-->
 <!--- INDEX  -->
 <!--- MODULE core-test-junit4-->
@@ -106,10 +100,10 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 <!--- INDEX  -->
 <!--- MODULE android-espresso-->
 <!--- INDEX  -->
-[IdlingDispatcherProviderRule]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher-provider-rule/index.html
-[IdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-coroutine-scope/index.html
 [IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher-provider/index.html
+[IdlingDispatcherProviderRule]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher-provider-rule/index.html
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html
+[IdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-coroutine-scope/index.html
 [DefaultIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-default-idling-coroutine-scope.html
 [IOIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-i-o-idling-coroutine-scope.html
 [MainIdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-main-idling-coroutine-scope.html
@@ -126,6 +120,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 <!-- kotlinx.coroutines -->
 [launch]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/launch.html
 [Job]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html
+[Flow]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html
 [async]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html
 [Deferred]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html
@@ -175,7 +170,8 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 <!--Android Espresso-->
 [Espresso]: https://developer.android.com/training/testing/espresso
 [IdlingResource]: https://developer.android.com/training/testing/espresso/idling-resource
-
+[IdlingRegistry]: https://developer.android.com/reference/androidx/test/espresso/IdlingRegistry
+[CountingIdlingResource]: https://developer.android.com/reference/androidx/test/espresso/idling/CountingIdlingResource
 
 <!--AndroidX Lifecycle-->
 
