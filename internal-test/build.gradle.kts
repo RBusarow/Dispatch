@@ -33,6 +33,6 @@ dependencies {
 
   implementation(Libs.Kotlinx.Coroutines.test)
 
-  implementation(project(":core"))
+  api(project(":core"))
 
 }
