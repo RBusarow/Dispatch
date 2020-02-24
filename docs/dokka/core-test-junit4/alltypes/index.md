@@ -1,6 +1,6 @@
 
 
-## Features
+## Contents
 
 ### All Types
 
