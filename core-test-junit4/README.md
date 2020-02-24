@@ -1,10 +1,22 @@
 # Module core-test-junit4
 
+## Contents
+<!--- TOC -->
+
+* [Features](#features)
+* [Setting Dispatchers.Main](#setting-dispatchersmain)
+* [This module replaces core-test](#this-module-replaces-core-test)
+* [JUnit dependencies](#junit-dependencies)
+  * [minimum config](#minimum-config)
+  * [JUnit 5 interoperability](#junit-5-interoperability)
+
+<!--- END -->
+
 ## Features
 
-In addition to all the functionality in [dispatch-core-test][dispatch_core_test_readme], this module exposes a [TestCoroutineRule][testCoroutineRule] to handle set-up and tear-down of a [TestProvidedCoroutineScope][testProvidedCoroutineScope].
+In addition to all the functionality in [dispatch-core-test][core-test], this module exposes a [TestCoroutineRule] to handle set-up and tear-down of a [TestProvidedCoroutineScope].
 
-Since [TestProvidedCoroutineScope][testProvidedCoroutineScope] is a [TestCoroutineScope][testCoroutineScope], this Rule also invokes [cleanupTestCoroutines][cleanupTestCoroutines] after the test.
+Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Rule also invokes [cleanupTestCoroutines][cleanupTestCoroutines] after the test.
 
 ```kotlin
 class SomeClassTest {
@@ -170,9 +182,16 @@ dependencies {
 
 </details>
 
-[dispatch_core_test_readme]: /kdoc/core-test/dispatch.core.text/index.md
-[testCoroutineRule]: /kdoc/core-test-junit4/dispatch.core.test/-test-coroutine-rule
-[testProvidedCoroutineScope]: /kdoc/core-test/dispatch.core.test/-test-provided-coroutine-scope
-[testCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/
+<!--- MODULE core-test-->
+<!--- INDEX  -->
+[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html
+<!--- MODULE core-test-junit4-->
+<!--- INDEX  -->
+[TestCoroutineRule]: https://rbusarow.github.io/Dispatch/core-test-junit4//dispatch.core.test/-test-coroutine-rule/index.html
+<!--- END -->
+
+
 [cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
 
+[TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html
+[core-test]: https://rbusarow.github.io/Dispatch/core-test//index.html

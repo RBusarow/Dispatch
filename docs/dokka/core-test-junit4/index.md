@@ -1,10 +1,19 @@
 [core-test-junit4](./index.md)
 
+## Contents
+
+* [Features](#features)
+* [Setting Dispatchers.Main](#setting-dispatchersmain)
+* [This module replaces core-test](#this-module-replaces-core-test)
+* [JUnit dependencies](#junit-dependencies)
+  * [minimum config](#minimum-config)
+  * [JUnit 5 interoperability](#junit-5-interoperability)
+
 ## Features
 
-In addition to all the functionality in [dispatch-core-test](/kdoc/core-test/dispatch.core.text/index.md), this module exposes a [TestCoroutineRule](/kdoc/core-test-junit4/dispatch.core.test/-test-coroutine-rule) to handle set-up and tear-down of a [TestProvidedCoroutineScope](/kdoc/core-test/dispatch.core.test/-test-provided-coroutine-scope).
+In addition to all the functionality in [dispatch-core-test](https://rbusarow.github.io/Dispatch/core-test//index.html), this module exposes a [TestCoroutineRule](https://rbusarow.github.io/Dispatch/core-test-junit4//dispatch.core.test/-test-coroutine-rule/index.html) to handle set-up and tear-down of a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html).
 
-Since [TestProvidedCoroutineScope](/kdoc/core-test/dispatch.core.test/-test-provided-coroutine-scope) is a [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/), this Rule also invokes [cleanupTestCoroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html) after the test.
+Since [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html) is a [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html), this Rule also invokes [cleanupTestCoroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html) after the test.
 
 ``` kotlin
 class SomeClassTest {
