@@ -14,3 +14,4 @@
 /buildSrc/build/
 /.idea/
 /projectFilesBackup/.idea/
+!/.idea/scopes/*

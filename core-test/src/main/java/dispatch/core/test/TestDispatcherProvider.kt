@@ -95,7 +95,7 @@ fun TestDispatcherProvider(
 /**
  * "Basic" [TestDispatcherProvider] which mimics production behavior,
  * without the automatic time control of [TestCoroutineDispatcher]
- * and without the need for [Dispatchers.setMain][kotlinx.coroutines.test]
+ * and without the need for [Dispatchers.setMain][kotlinx.coroutines.test.setMain]
  *
  * The `default`, `io`, and `unconfined` properties just delegate to their counterparts in [Dispatchers].
  *

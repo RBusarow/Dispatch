@@ -81,11 +81,18 @@ allprojects {
           )
         }
         externalDocumentationLink {
+          url = URL("https://developer.android.com/reference/androidx/test/")
+          packageListUrl = URL(
+            "https://developer.android.com/reference/androidx/test/package-list"
+          )
+        }
+        externalDocumentationLink {
           url = URL("https://developer.android.com/reference/")
           packageListUrl = URL(
             "https://developer.android.com/reference/android/support/package-list"
           )
         }
+        externalDocumentationLink { url = URL("https://junit.org/junit4/javadoc/latest/") }
         externalDocumentationLink {
           url = URL(
             "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/"
@@ -98,6 +105,12 @@ allprojects {
           url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
           packageListUrl = URL(
             "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/package-list"
+          )
+        }
+        externalDocumentationLink {
+          url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/")
+          packageListUrl = URL(
+            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/package-list"
           )
         }
 
@@ -132,6 +145,13 @@ allprojects {
           currentProject = this@proj,
           currentTask = this@dokkaTask,
           dependencyModule = "extensions"
+        )
+
+        linkModuleDocs(
+          matchingModules = listOf("android-lifecycle-extensions"),
+          currentProject = this@proj,
+          currentTask = this@dokkaTask,
+          dependencyModule = "android-lifecycle"
         )
 
         linkModuleDocs(

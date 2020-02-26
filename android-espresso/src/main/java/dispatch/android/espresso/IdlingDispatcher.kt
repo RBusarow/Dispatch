@@ -46,7 +46,7 @@ class IdlingDispatcher(
   fun isIdle(): Boolean = counter.isIdleNow
 
   /**
-   * Counting implementation of the [dispatch] function.
+   * Counting implementation of the [dispatch][CoroutineDispatcher.dispatch] function.
    *
    * The count is incremented for every dispatch, and decremented for every completion, including suspension.
    */

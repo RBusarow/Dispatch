@@ -15,7 +15,6 @@
 
 package dispatch.android.lifecycle
 
-import dispatch.android.lifecycle.ViewModelScopeFactory.create
 import dispatch.android.lifecycle.ViewModelScopeFactory.reset
 import dispatch.core.*
 import kotlinx.coroutines.*
@@ -23,7 +22,7 @@ import kotlinx.coroutines.*
 /**
  * Factory holder for [viewModelScope][dispatch.android.lifecycle.CoroutineViewModel.viewModelScope]'s.
  *
- * By default, [create] returns a [MainImmediateCoroutineScope], but may return any [CoroutineScope].
+ * By default, `create` returns a [MainImmediateCoroutineScope], but may return any [CoroutineScope].
  *
  * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
  * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate].
