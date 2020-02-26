@@ -96,22 +96,27 @@ object Libs {
     }
 
     object Test {
-      const val core = "androidx.test:core:1.2.0"
+      private const val version = "1.2.0"
+
+      const val core = "androidx.test:core:$version"
       const val jUnit = "androidx.test.ext:junit:1.1.1"
-      const val orchestrator = "androidx.test:orchestrator:1.2.0"
-      const val rules = "androidx.test:rules:1.2.0"
-      const val runner = "androidx.test:runner:1.2.0"
-      const val truth = "androidx.test.ext:truth:1.2.0"
+      const val orchestrator = "androidx.test:orchestrator:$version"
+      const val rules = "androidx.test:rules:$version"
+      const val runner = "androidx.test:runner:$version"
+      const val truth = "androidx.test.ext:truth:$version"
 
       object Arch {
         const val core = "androidx.arch.core:core-testing:2.1.0"
       }
 
       object Espresso {
-        const val contrib = "androidx.test.espresso:espresso-contrib:3.2.0"
-        const val core = "androidx.test.espresso:espresso-core:3.2.0"
-        const val intents = "androidx.test.espresso:espresso-intents:3.2.0"
-        const val web = "androidx.test.espresso:espresso-web:3.2.0"
+
+        private const val version = "3.2.0"
+
+        const val contrib = "androidx.test.espresso:espresso-contrib:$version"
+        const val core = "androidx.test.espresso:espresso-core:$version"
+        const val intents = "androidx.test.espresso:espresso-intents:$version"
+        const val web = "androidx.test.espresso:espresso-web:$version"
       }
     }
   }
@@ -182,15 +187,21 @@ object Libs {
       const val espresso =
         "com.rickbusarow.dispatch:dispatch-android-espresso:${Versions.versionName}"
       const val extensions = "com.rickbusarow.dispatch:dispatch-extensions:${Versions.versionName}"
-      const val lifecycleRuntime =
+      const val lifecycle =
         "com.rickbusarow.dispatch:dispatch-android-lifecycle:${Versions.versionName}"
-      const val lifecycleViewModel =
+      const val lifecycleExtensions =
+        "com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:${Versions.versionName}"
+      const val viewModel =
         "com.rickbusarow.dispatch:dispatch-android-viewmodel:${Versions.versionName}"
-      const val test = "com.rickbusarow.dispatch:dispatch-core-test:${Versions.versionName}"
-      const val testJunit4 =
-        "com.rickbusarow.dispatch:dispatch-core-test-junit4:${Versions.versionName}"
-      const val testJunit5 =
-        "com.rickbusarow.dispatch:dispatch-core-test-junit5:${Versions.versionName}"
+
+      object Test {
+        const val core = "com.rickbusarow.dispatch:dispatch-core-test:${Versions.versionName}"
+        const val jUnit4 =
+          "com.rickbusarow.dispatch:dispatch-core-test-junit4:${Versions.versionName}"
+        const val jUnit5 =
+          "com.rickbusarow.dispatch:dispatch-core-test-junit5:${Versions.versionName}"
+
+      }
     }
   }
 
