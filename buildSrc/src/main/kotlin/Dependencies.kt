@@ -45,13 +45,15 @@ object Versions {
   const val gradleWrapper = "3.5.3"
   const val dagger = "2.25.2"
   const val kotlin = "1.3.61"
+  const val mavenPublish = "0.9.0"
 
   const val versionName = "1.0.0-beta03"
 }
 
 object BuildPlugins {
 
-  const val gradleMavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.9.0-SNAPSHOT"
+  const val gradleMavenPublish =
+    "com.vanniktech:gradle-maven-publish-plugin:${Versions.mavenPublish}"
   const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
   const val knit = "org.jetbrains.kotlinx:kotlinx-knit:${Versions.knit}"
 
