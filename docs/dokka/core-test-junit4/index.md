@@ -11,7 +11,7 @@
 
 ## Features
 
-In addition to all the functionality in [dispatch-core-test](#), this module exposes a [TestCoroutineRule](https://rbusarow.github.io/Dispatch/core-test-junit4//dispatch.core.test/-test-coroutine-rule/index.html) to handle set-up and tear-down of a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html).
+In addition to all the functionality in [dispatch-core-test](https://rbusarow.github.io/Dispatch/core-test//index.html), this module exposes a [TestCoroutineRule](https://rbusarow.github.io/Dispatch/core-test-junit4//dispatch.core.test/-test-coroutine-rule/index.html) to handle set-up and tear-down of a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html).
 
 Since [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html) is a [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html), this Rule also invokes [cleanupTestCoroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html) after the test.
 

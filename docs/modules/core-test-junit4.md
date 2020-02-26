@@ -14,7 +14,7 @@
 
 ## Features
 
-In addition to all the functionality in [dispatch-core-test][core-test], this module exposes a [TestCoroutineRule] to handle set-up and tear-down of a [TestProvidedCoroutineScope].
+In addition to all the functionality in [dispatch-core-test], this module exposes a [TestCoroutineRule] to handle set-up and tear-down of a [TestProvidedCoroutineScope].
 
 Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Rule also invokes [cleanupTestCoroutines][cleanupTestCoroutines] after the test.
 
