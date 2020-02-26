@@ -41,10 +41,15 @@ interface TestProvidedCoroutineScope : TestCoroutineScope,
   MainCoroutineScope,
   MainImmediateCoroutineScope,
   UnconfinedCoroutineScope {
-
+  /**
+   * single [DispatcherProvider] promise for the [TestProvidedCoroutineScope]
+   */
   val dispatcherProvider: DispatcherProvider
 }
 
+/**
+ * @suppress internal use only
+ */
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeImpl(
   override val dispatcherProvider: DispatcherProvider,

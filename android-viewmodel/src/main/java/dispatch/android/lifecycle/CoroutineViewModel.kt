@@ -65,6 +65,11 @@ abstract class CoroutineViewModel : ViewModel() {
       }
     }
 
+  /**
+   * It is necessary to do a final override of [ViewModel.onCleared] to ensure that [viewModelScope] is cancelled.
+   *
+   * Use [onClear] to perform logic after this event.
+   */
   final override fun onCleared() {
     _coroutineScope.get()
       ?.coroutineContext?.cancel()

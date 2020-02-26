@@ -15,14 +15,13 @@
 
 package dispatch.android.lifecycle
 
-import dispatch.android.lifecycle.LifecycleScopeFactory.create
 import dispatch.android.lifecycle.LifecycleScopeFactory.reset
 import dispatch.core.*
 
 /**
  * Factory holder for [LifecycleCoroutineScope]'s.
  *
- * By default, [create] returns a [MainImmediateCoroutineScope].
+ * By default, `create` returns a [MainImmediateCoroutineScope].
  *
  * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
  * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]

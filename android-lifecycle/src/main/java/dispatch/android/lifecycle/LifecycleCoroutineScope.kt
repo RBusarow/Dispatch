@@ -29,6 +29,7 @@ import kotlinx.coroutines.*
  * that state again will start a new [Job].
  *
  * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeSample
+ * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
  */
 class LifecycleCoroutineScope(
   val lifecycle: Lifecycle,

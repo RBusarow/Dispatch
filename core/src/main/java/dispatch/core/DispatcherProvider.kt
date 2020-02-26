@@ -84,6 +84,11 @@ public interface DispatcherProvider : CoroutineContext.Element {
   companion object Key : CoroutineContext.Key<DispatcherProvider>
 }
 
+/**
+ * Creates a default implementation of [DispatcherProvider].
+ *
+ * @see DefaultDispatcherProvider
+ */
 public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()
 
 /**
