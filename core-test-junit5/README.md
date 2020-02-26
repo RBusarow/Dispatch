@@ -16,7 +16,7 @@
 
 ## Features
 
-In addition to all the functionality in [core-test], this module exposes a JUnit 5 [TestCoroutineExtension] and [CoroutineTest] marker interface to handle set-up and tear-down of a [TestProvidedCoroutineScope].
+In addition to all the functionality in [dispatch-core-test], this module exposes a JUnit 5 [TestCoroutineExtension] and [CoroutineTest] marker interface to handle set-up and tear-down of a [TestProvidedCoroutineScope].
 
 Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Extension also invokes [cleanupTestCoroutines] after the test.
 
