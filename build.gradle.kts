@@ -168,6 +168,10 @@ allprojects {
           description = "recreates all documentation for the /docs directory"
           group = "documentation"
 
+          doFirst {
+            updateReadMeArtifactVersions()
+          }
+
           dependsOn(
             rootProject.tasks.findByName("cleanDocs"),
             rootProject.tasks.findByName("copyRootFiles"),

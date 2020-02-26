@@ -2,18 +2,12 @@
 ![CI](https://github.com/RBusarow/Dispatch/workflows/CI/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-# Artifacts
-
-[dispatch-android-lifecycle][android-lifecycle] - better lifecycle management for [CoroutineScope][coroutineScope] from a `LifecycleOwner`.
-
-[dispatch-android-viewmodel][android-viewmodel] - marginally better lifecycle management for [CoroutineScope][coroutineScope] from a `ViewModel`.
-
 # DispatcherProvider
 
-Utilities for [kotlinx.coroutines][coroutines] which make them type-safe, easier to test, and require less code. 
-Define your [CoroutineDispatchers][coroutineDispatcher] once in a [CoroutineScope][coroutineScope] factory and then never think about them again.
+Utilities for [kotlinx.coroutines][coroutines] which make them type-safe, easier to test, and require less code.
+Define your [CoroutineDispatchers][coroutineDispatcher] once in a [CoroutineScope] factory and then never think about them again.
 
-```kotlin
+``` kotlin
 val presenter = MyPresenter(MainCoroutineScope())
 
 class MyPresenter @Inject constructor(
@@ -26,7 +20,7 @@ class MyPresenter @Inject constructor(
 }
 ```
 
-```kotlin
+``` kotlin
 class MyTest {
 
   @Test
@@ -48,11 +42,34 @@ class MyTest {
 
 ---
 
-### Injecting dispatchers
+## Contents
+<!--- TOC -->
+
+* [Modules](#modules)
+* [Injecting dispatchers](#injecting-dispatchers)
+* [Referencing dispatchers](#referencing-dispatchers)
+    * [Launch](#launch)
+    * [Async](#async)
+    * [WithContext](#withcontext)
+    * [Flow](#flow)
+* [Types and Factories](#types-and-factories)
+* [Testing](#testing)
+* [Gradle](#gradle)
+* [License](#license)
+
+<!--- END -->
+
+## Modules
+
+
+
+
+
+## Injecting dispatchers
 
 The core of this library is `DispatcherProvider` - an interface with properties corresponding to the 5 different [CoroutineDispatchers][coroutineDispatcher] we can get from [Dispatchers][Dispatchers].  It implements [CoroutineContext.Element][CoroutineContext.Element] and provides a unique [CoroutineContext.Key][CoroutineContext.Key].
 
-```kotlin
+``` kotlin
 interface DispatcherProvider : CoroutineContext.Element {
 
   override val key: CoroutineContext.Key<*> get() = Key
@@ -69,7 +86,7 @@ interface DispatcherProvider : CoroutineContext.Element {
 
 This allows it to be included as an element in `CoroutineContext`:
 
-```kotlin
+``` kotlin
 val someCoroutineScope = CoroutineScope(
   //                         here
   Job() + Dispatchers.Main + DispatcherProvider()
@@ -78,7 +95,7 @@ val someCoroutineScope = CoroutineScope(
 
 The default implementation of this interface simply delegates to that `Dispatchers` object:
 
-```kotlin
+``` kotlin
 class DefaultDispatcherProvider : DispatcherProvider {
 
   override val default: CoroutineDispatcher = Dispatchers.Default
@@ -91,11 +108,11 @@ class DefaultDispatcherProvider : DispatcherProvider {
 
 ---
 
-### Referencing dispatchers
+## Referencing dispatchers
 
-These references can then be accessed via extension functions upon [CoroutineScope][coroutineScope]:
+These references can then be accessed via extension functions upon [CoroutineScope]:
 
-```kotlin
+``` kotlin
 // from any CoroutineScope
 val mainDispatcher = myCoroutineScope.mainDispatcher
 val ioDispatcher = myCoroutineScope.ioDispatcher
@@ -103,7 +120,7 @@ val ioDispatcher = myCoroutineScope.ioDispatcher
 
 Or the `coroutineContext`:
 
-```kotlin
+``` kotlin
 suspend fun myFunction() {
   val defaultDispatcher = coroutineContext.dispatcherProvider.default
 }
@@ -111,9 +128,9 @@ suspend fun myFunction() {
 
 Or with builders and operators:
 
-##### Launch
+#### Launch
 
-```kotlin
+``` kotlin
 fun foo(scope: CoroutineScope) {
   scope.launchDefault {  }
   scope.launchIO {  }
@@ -123,9 +140,9 @@ fun foo(scope: CoroutineScope) {
 }
 ```
 
-##### Async
+#### Async
 
-```kotlin
+``` kotlin
 fun foo(scope: CoroutineScope) {
   scope.asyncDefault {  }
   scope.asyncIO {  }
@@ -135,11 +152,11 @@ fun foo(scope: CoroutineScope) {
 }
 ```
 
-##### WithContext
+#### WithContext
 
 The [CoroutineContext][CoroutineContext] used for `withContext` comes from the `coroutineContext` top-level suspend property in `kotlin.coroutines`.  It returns the current context, so the `default`, `io`, etc. used here are the ones defined in the `CoroutineScope` of the caller. There is no need to inject any other dependencies.
 
-```kotlin
+``` kotlin
 suspend fun foo() {
   // note that we have no CoroutineContext
   withDefault {  }
@@ -150,11 +167,11 @@ suspend fun foo() {
 }
 ```
 
-##### Flow
+#### Flow
 
 Like `withContext`, `Flow` typically doesn’t get a `CoroutineScope` of its own.  They inherit the `coroutineContext` from the collector in a pattern called [context preservation][context_preservation]. These new operators maintain context preservation (*they’re forced to, actually*), and extract the `coroutineContext` from the collector.
 
-```kotlin
+``` kotlin
 val someFlow = flow {  }
   .flowOnDefault()
   .flowOnIO()
@@ -165,11 +182,11 @@ val someFlow = flow {  }
 
 ---
 
-### Types and Factories
+## Types and Factories
 
-A [CoroutineScope][coroutineScope] may have any type [CoroutineDispatcher][coroutineDispatcher] (*actually it’s a [ContinuationInterceptor][ContinuationInterceptor]*).  What if we have a class which will always use the [Main][Dispatchers.Main] thread, such as a View class?  We have marker interfaces and factories to ensure that the correct type of [CoroutineScope][coroutineScope] is always used.
+A [CoroutineScope] may have any type [CoroutineDispatcher][coroutineDispatcher] (*actually it’s a [ContinuationInterceptor][ContinuationInterceptor]*).  What if we have a class which will always use the [Main][Dispatchers.Main] thread, such as a View class?  We have marker interfaces and factories to ensure that the correct type of [CoroutineScope] is always used.
 
-```kotlin
+``` kotlin
 val someDefaultScope = DefaultCoroutineScope()
 val someNamedMainScope = MainCoroutineScope(CoroutineName("I'm handy for debugging"))
 val someImmediateScope = MainImmediateCoroutineScope()
@@ -181,20 +198,20 @@ val customProviderScope = UnconfinedCoroutineScope(MyCustomDispatcherProvider())
 
 
 We can also write an extension val which returns a default implementation of the `DispatcherProvider`,
-meaning that we're able to immediately utilize the following pattern with [CoroutineScopes][coroutineScope] from unaltered legacy code or another library.
+meaning that we're able to immediately utilize the following pattern with [CoroutineScopes][CoroutineScope] from unaltered legacy code or another library.
 
-```kotlin
+``` kotlin
 val CoroutineContext.dispatcherProvider: DispatcherProvider
   get() = get(DispatcherProvider) ?: DefaultDispatcherProvider()
 ```
 
 ---
 
-### Testing
+## Testing
 
 There's a convenience `TestDispatcherProvider`.
 
-```kotlin
+``` kotlin
 class TestDispatcherProvider(
   override val default: TestCoroutineDispatcher = TestCoroutineDispatcher(),
   override val io: TestCoroutineDispatcher = TestCoroutineDispatcher(),
@@ -206,10 +223,10 @@ class TestDispatcherProvider(
 
 ---
 
-`runBlockingProvided` is really just delegating `runBlocking`, but creates a [CoroutineScope][coroutineScope] which includes  `TestDispatcherProvider`, so "io" here is really a `TestCoroutineDispatcher`.
+`runBlockingProvided` is really just delegating `runBlocking`, but creates a [CoroutineScope] which includes  `TestDispatcherProvider`, so "io" here is really a `TestCoroutineDispatcher`.
 
 
-```kotlin
+``` kotlin
 @Test
 fun `getSomeData should return some data`() = runBlockingProvided {
 
@@ -228,7 +245,7 @@ This delay will be automatically skipped.
 The call to `main` is just a normal `TestCoroutineDispatcher`. There is no use of a service loader or  `MainCoroutineDispatcher`. No use of `Dispatchers.setMain()` or `Dispatchers.resetMain()` either.
 
 
-```kotlin
+``` kotlin
 @Test
 fun `showToast should do Toast magic`() = runBlockingProvidedTest {
 
@@ -242,54 +259,12 @@ fun `showToast should do Toast magic`() = runBlockingProvidedTest {
 
 ---
 
-### Gradle
+## Gradle
 
 In your application or library module(s) gradle file(s):
 
 
-#### Groovy (build.gradle)
-``` groovy
-repositories {
-  mavenCentral()
-}
 
-dependepencies {
-
-  // still add the standard kotlinx-coroutines libraries.  This library just wraps them
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$currentCoroutinesVersion"
-
-  // necessary for Android projects
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$currentCoroutinesVersion"
-
-  // necessary for testing
-  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$currentCoroutinesVersion"
-
-  implementation "com.rickbusarow.dispatch:dispatcher-provider:1.0.0-beta02"
-  testImplementation "com.rickbusarow.dispatch:dispatcher-provider-test:1.0.0-beta02"
-}
-```
-
-#### Kotlin Gradle DSL (build.gradle.kts)
-
-``` kotlin
-repositories {
-  mavenCentral()
-}
-
-dependepencies {
-
-  // still add the standard kotlinx-coroutines libraries.  This library just wraps them
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$currentCoroutinesVersion")
-
-  // necessary for Android projects
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$currentCoroutinesVersion")
-
-  // necessary for testing
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$currentCoroutinesVersion")
-
-  implementation("com.rickbusarow.dispatch:dispatcher-provider:1.0.0-beta02")
-  testImplementation("com.rickbusarow.dispatch:dispatcher-provider-test:1.0.0-beta02")
-}
 ```
 
 ## License
@@ -313,7 +288,7 @@ limitations under the License.
 [ContinuationInterceptor]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines.experimental/-continuation-interceptor/index.html
 [Dispatchers]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html
 [coroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-dispatcher.html
-[coroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
+[CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
 [context_preservation]: https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
 [Dispatchers.Main]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html
 [android-lifecycle]: /docs/module-android-lifecycle.md
