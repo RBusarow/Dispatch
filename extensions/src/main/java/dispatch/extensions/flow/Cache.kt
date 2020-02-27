@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.*
  *
  * @param history the number of items to keep in the [Flow]'s history -- must be greater than 0
  * @sample samples.CacheSample.cacheSample
+ * @sample samples.ShareSample.shareWithCacheSample
  */
 @ExperimentalCoroutinesApi
 @FlowPreview

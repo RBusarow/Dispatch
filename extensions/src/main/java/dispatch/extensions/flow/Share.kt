@@ -40,7 +40,7 @@ import kotlinx.coroutines.flow.*
  *
  * ### Caching
  *
- * When a shared flow is cached, the values are recorded as they are emitted from the source Flow.
+ * When a shared flow is [cached][cache], the values are recorded as they are emitted from the source Flow.
  * They are then replayed for each new subscriber.
  *
  * When a shared flow is reset, the cached values are cleared.
@@ -58,6 +58,8 @@ import kotlinx.coroutines.flow.*
  * @param scope The [CoroutineScope] used to create the [broadcast] coroutine.  Cancellation of this scope
  * will close the underlying [BroadcastChannel].
  * @param cacheHistory (default = 0).  Any value greater than zero will add a [cache] to the shared Flow.
+ *
+ * @see cache
  *
  * @sample samples.ShareSample.shareSample
  * @sample samples.ShareSample.shareWithCacheSample

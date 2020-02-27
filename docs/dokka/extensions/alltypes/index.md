@@ -1,6 +1,6 @@
 
 
-## Contents
+Extension functions for [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html) and [Channel](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/) which have not yet made their way into [kotlinx.coroutines](https://kotlin.github.io/kotlinx.coroutines/).
 
 ### All Types
 

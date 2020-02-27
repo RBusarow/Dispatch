@@ -264,6 +264,9 @@ fun `showToast should do Toast magic`() = runBlockingProvidedTest {
 In your application or library module(s) gradle file(s):
 
 
+
+```
+
 ## License
 
 ``` text
