@@ -76,6 +76,8 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 
 Click to expand a field.
 
+&nbsp;  Groovy
+
 Add to your module's `build.gradle`:
 
 ``` groovy
@@ -97,6 +99,8 @@ dependencies {
   androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 }
 ```
+
+&nbsp;  Kotlin Gradle DSL
 
 Add to your module's `build.gradle.kts`:
 

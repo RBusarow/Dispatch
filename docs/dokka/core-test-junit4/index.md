@@ -60,6 +60,8 @@ Because this is a JUnit 4 Rule, it requires a variant of that artifact.  No exte
 * JUnit 5 "vintage"
   * `org.junit.vintage:junit-vintage-engine:5.5.1`
 
+&nbsp;  Groovy
+
 Add to your module's `build.gradle`:
 
 ``` groovy
@@ -79,6 +81,8 @@ dependencies {
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3"
 }
 ```
+
+&nbsp;  Kotlin Gradle DSL
 
 Add to your module's `build.gradle.kts`:
 
@@ -104,6 +108,8 @@ dependencies {
 
 Junit 5 provides a “vintage” (JUnit 4) artifact for legacy support (such as Robolectric or Android instrumented tests).  Dispatch also supports running both in the same project by just adding both artifacts.
 
+&nbsp;  Groovy
+
 Add to your module's `build.gradle`:
 
 ``` groovy
@@ -124,6 +130,9 @@ dependencies {
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3"
 }
 ```
+
+&nbsp;  Kotlin Gradle DSL 
+Add to your module's `build.gradle`:
 
 ``` kotlin
 repositories {

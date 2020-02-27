@@ -48,7 +48,6 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
   }
 
 }
-
 ```
 
 ## Contents
@@ -130,6 +129,8 @@ These functions are shorthand for [Flow.flowOn](https://kotlin.github.io/kotlinx
 
 Click to expand a field.
 
+&nbsp;  Groovy
+
 Add to your module's `build.gradle`:
 
 ``` groovy
@@ -144,6 +145,8 @@ dependencies {
   implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
 }
 ```
+
+&nbsp;  Kotlin Gradle DSL
 
 Add to your module's `build.gradle.kts`:
 
