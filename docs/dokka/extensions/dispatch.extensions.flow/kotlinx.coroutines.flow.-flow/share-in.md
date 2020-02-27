@@ -2,7 +2,7 @@
 
 # shareIn
 
-`@ExperimentalCoroutinesApi @FlowPreview fun <T> `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>.shareIn(scope: `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`, cacheHistory: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0): `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>` [(source)](https://github.com/RBusarow/Dispatch/tree/master/extensions/src/main/java/dispatch/extensions/flow/Share.kt#L68)
+`@ExperimentalCoroutinesApi @FlowPreview fun <T> `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>.shareIn(scope: `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`, cacheHistory: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0): `[`Flow`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html)`<T>` [(source)](https://github.com/RBusarow/Dispatch/tree/master/extensions/src/main/java/dispatch/extensions/flow/Share.kt#L70)
 
 Creates a [broadcast](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/broadcast.html) coroutine which collects the [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html) receiver and shares with multiple collectors.
 
@@ -20,7 +20,7 @@ By default, this flow is effectively **stateless** in that collectors will only 
 
 ### Caching
 
-When a shared flow is cached, the values are recorded as they are emitted from the source Flow.
+When a shared flow is [cached](cache.md), the values are recorded as they are emitted from the source Flow.
 They are then replayed for each new subscriber.
 
 When a shared flow is reset, the cached values are cleared.
@@ -64,7 +64,7 @@ runBlocking {
       [1, 2, 3, 4, 5]
       ** break **
       start source
-          emit 1
+      emit 1
       emit 2
       emit 3
       emit 4
@@ -141,3 +141,8 @@ runBlocking {
 will close the underlying [BroadcastChannel](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-broadcast-channel/index.html).
 
 `cacheHistory` - (default = 0).  Any value greater than zero will add a [cache](cache.md) to the shared Flow.
+
+**See Also**
+
+[cache](cache.md)
+

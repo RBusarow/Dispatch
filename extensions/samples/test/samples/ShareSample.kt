@@ -52,7 +52,7 @@ class ShareSample {
       [1, 2, 3, 4, 5]
       ** break **
       start source
-          emit 1
+      emit 1
       emit 2
       emit 3
       emit 4

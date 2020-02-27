@@ -51,14 +51,14 @@ suspend fun <T> Flow<T>.any(predicate: (T) -> Boolean): Boolean {
 }
 
 /**
- * Terminal operator which collects the given [Flow] until the predicate [block] returns true.
+ * Terminal operator which collects the given [Flow] until the [predicate] returns true.
  *
  * @sample samples.CollectUntilSample.collectUntilSample
  */
 @ExperimentalCoroutinesApi
 suspend fun <T> Flow<T>.collectUntil(
-  block: suspend (T) -> Boolean
-) = takeWhile { !block(it) }.collect()
+  predicate: suspend (T) -> Boolean
+) = takeWhile { !predicate(it) }.collect()
 
 /**
  * Terminal operator which suspends until the [Flow] has emitted one value, then immediately returns that value.
