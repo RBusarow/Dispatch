@@ -59,10 +59,7 @@ The deprecated version will then be scheduled for removal in a following release
 ## Minimum Gradle Config
 Click to expand a field.
 
-<details open>
-<summary>
-<b>Groovy</b>
-</summary>
+&nbsp;<details open> <summary> <b>Groovy</b> </summary>
 
 Add to your module's `build.gradle`:
 
@@ -82,10 +79,7 @@ dependencies {
 </details>
 
 
-<details>
-<summary>
-<b>Kotlin Gradle DSL</b>
-</summary>
+&nbsp;<details> <summary> <b>Kotlin Gradle DSL</b> </summary>
 
 Add to your module's `build.gradle.kts`:
 
@@ -115,7 +109,7 @@ dependencies {
 [sendBlockingOrNull]: https://rbusarow.github.io/Dispatch/extensions//dispatch.extensions.channel/kotlinx.coroutines.channels.-send-channel/send-blocking-or-null.html
 <!--- END -->
 
-[channel]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/
+[Channel]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/
 [ClosedSendChannelException]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-closed-send-channel-exception/index.html
 [Flow]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html
 [kotlinx.coroutines]: https://kotlin.github.io/kotlinx.coroutines/

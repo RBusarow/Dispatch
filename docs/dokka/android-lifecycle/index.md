@@ -46,6 +46,8 @@
 
 Click to expand a field.
 
+&nbsp;  Groovy
+
 Add to your module's `build.gradle`:
 
 ``` groovy
@@ -60,6 +62,8 @@ dependencies {
   implementation "com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta03"
 }
 ```
+
+&nbsp;  Groovy
 
 Add to your module's `build.gradle.kts`:
 

@@ -175,6 +175,8 @@ I will maintain this artifact until it is implemented AndroidX, or they provide 
 
 Click to expand a field.
 
+&nbsp;  Groovy
+
 Add to your module's `build.gradle`:
 
 ``` groovy
@@ -189,6 +191,8 @@ dependencies {
   implementation "com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta03"
 }
 ```
+
+&nbsp;  Kotlin Gradle DSL
 
 Add to your module's `build.gradle.kts`:
 
