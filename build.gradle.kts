@@ -251,6 +251,7 @@ tasks.register("copyRootFiles").configure {
   dependsOn("cleanDocs")
 
   doLast {
+    copySite()
     copyRootFiles()
   }
 }

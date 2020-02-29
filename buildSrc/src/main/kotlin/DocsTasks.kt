@@ -21,17 +21,10 @@ fun cleanDocs() {
   val root = File("docs")
 
   root.walkTopDown()
-    .maxDepth(1)
-    .filter { file ->
-
-      when {
-        file.parentFile != root                   -> false
-        file.path.startsWith(prefix = "docs/css") -> false
-        else                                      -> true
-      }
-    }
     .forEach {
-      it.deleteRecursively()
+      if (it != root) {
+        it.deleteRecursively()
+      }
     }
 }
 
@@ -98,6 +91,38 @@ fun Project.copyReadMe() {
       val newName = "${rootProject.rootDir}/docs/modules/${projectDir.name}.md"
 
       file.copyTo(File(newName))
+    }
+}
+
+fun Project.copySite() {
+
+  val root = File("$rootDir/site")
+
+  root.walkTopDown()
+    .maxDepth(1)
+    .forEach { file ->
+
+      if (file.name.matches(".*mkdocs.yml".toRegex())) {
+        // TOOD this is probably inefficient.
+        // Fail the build if mkdocs.yml exists in root and has been changed
+        // maybe move the root logic to the "build" dir?
+
+        val rootMkDocs = File("$rootDir/mkdocs.yml")
+
+        val existingFileHasChanges by lazy(LazyThreadSafetyMode.NONE) {
+          !file.deepEquals(rootMkDocs)
+        }
+
+//        val changingRoot = rootMkDocs.exists() && existingFileHasChanges
+        val changingRoot = false
+
+        file.copyTo(
+          target = File("$rootDir/mkdocs.yml"),
+          overwrite = !changingRoot
+        )
+      } else if (file != root) {
+        root.copyRecursively(File("$rootDir"), true)
+      }
     }
 }
 
@@ -226,4 +251,8 @@ private fun String.replace(
     match.destructured.component3(),
     match.destructured.component4()
   )
+}
+
+internal fun File.deepEquals(other: File): Boolean {
+  return this.readText() == other.readText()
 }
