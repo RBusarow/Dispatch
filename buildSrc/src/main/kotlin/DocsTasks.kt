@@ -102,26 +102,8 @@ fun Project.copySite() {
     .maxDepth(1)
     .forEach { file ->
 
-      if (file.name.matches(".*mkdocs.yml".toRegex())) {
-        // TOOD this is probably inefficient.
-        // Fail the build if mkdocs.yml exists in root and has been changed
-        // maybe move the root logic to the "build" dir?
-
-        val rootMkDocs = File("$rootDir/mkdocs.yml")
-
-        val existingFileHasChanges by lazy(LazyThreadSafetyMode.NONE) {
-          !file.deepEquals(rootMkDocs)
-        }
-
-//        val changingRoot = rootMkDocs.exists() && existingFileHasChanges
-        val changingRoot = false
-
-        file.copyTo(
-          target = File("$rootDir/mkdocs.yml"),
-          overwrite = !changingRoot
-        )
-      } else if (file != root) {
-        root.copyRecursively(File("$rootDir"), true)
+      if (!file.name.matches(".*mkdocs.yml".toRegex()) && file != root) {
+        file.copyRecursively(File("$rootDir/docs"), true)
       }
     }
 }
@@ -251,8 +233,4 @@ private fun String.replace(
     match.destructured.component3(),
     match.destructured.component4()
   )
-}
-
-internal fun File.deepEquals(other: File): Boolean {
-  return this.readText() == other.readText()
 }
