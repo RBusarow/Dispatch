@@ -21,17 +21,10 @@ fun cleanDocs() {
   val root = File("docs")
 
   root.walkTopDown()
-    .maxDepth(1)
-    .filter { file ->
-
-      when {
-        file.parentFile != root                   -> false
-        file.path.startsWith(prefix = "docs/css") -> false
-        else                                      -> true
-      }
-    }
     .forEach {
-      it.deleteRecursively()
+      if (it != root) {
+        it.deleteRecursively()
+      }
     }
 }
 
@@ -98,6 +91,20 @@ fun Project.copyReadMe() {
       val newName = "${rootProject.rootDir}/docs/modules/${projectDir.name}.md"
 
       file.copyTo(File(newName))
+    }
+}
+
+fun Project.copySite() {
+
+  val root = File("$rootDir/site")
+
+  root.walkTopDown()
+    .maxDepth(1)
+    .forEach { file ->
+
+      if (!file.name.matches(".*mkdocs.yml".toRegex()) && file != root) {
+        file.copyRecursively(File("$rootDir/docs"), true)
+      }
     }
 }
 
