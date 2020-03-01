@@ -41,10 +41,10 @@ class LifecycleCoroutineScope(
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
    * is at least [Lifecycle.State.CREATED].
    *
-   * [block] is executed using the receiver [CoroutineScope]'s [Job] as a parent,
+   * [block] is executed using the receiver [LifecycleCoroutineScope]'s [Job] as a parent,
    * but always executes using [Dispatchers.Main] as its [CoroutineDispatcher].
    *
-   * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
+   * Execution of [block] is cancelled when the receiver [LifecycleCoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
    *
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
@@ -52,8 +52,8 @@ class LifecycleCoroutineScope(
    * there is no returning from below a [CREATED][Lifecycle.State.CREATED] state,
    * so the [minimumStatePolicy][MinimumStatePolicy] is largely irrelevant.
    *
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnCreateOnceSample
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnCreateRestartingSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnCreateOnceSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnCreateRestartingSample
    */
   fun launchOnCreate(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
@@ -64,16 +64,16 @@ class LifecycleCoroutineScope(
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
    * is at least [Lifecycle.State.STARTED].
    *
-   * [block] is executed using the receiver [CoroutineScope]'s [Job] as a parent,
+   * [block] is executed using the receiver [LifecycleCoroutineScope]'s [Job] as a parent,
    * but always executes using [Dispatchers.Main] as its [CoroutineDispatcher].
    *
-   * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
+   * Execution of [block] is cancelled when the receiver [LifecycleCoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.STARTED].
    *
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
    * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnStartOnceSample
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnStartRestartingSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnStartOnceSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnStartRestartingSample
    */
   fun launchOnStart(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
@@ -84,25 +84,40 @@ class LifecycleCoroutineScope(
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
    * is at least [Lifecycle.State.RESUMED].
    *
-   * [block] is executed using the receiver [CoroutineScope]'s [Job] as a parent,
+   * [block] is executed using the receiver [LifecycleCoroutineScope]'s [Job] as a parent,
    * but always executes using [Dispatchers.Main] as its [CoroutineDispatcher].
    *
-   * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
+   * Execution of [block] is cancelled when the receiver [LifecycleCoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.RESUMED].
    *
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
    * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnResumeOnceSample
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnResumeRestartingSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeOnceSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeRestartingSample
    */
   fun launchOnResume(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
     block: suspend LifecycleCoroutineScope.() -> Unit
   ): Job = launchOn(Lifecycle.State.RESUMED, minimumStatePolicy, block)
 
+  /**
+   * Lifecycle-aware function for collecting a [Flow] while time the [Lifecycle.State]
+   * is at least [Lifecycle.State.CREATED].
+   *
+   * [action] is executed using this [LifecycleCoroutineScope] to create a coroutine,
+   * using [Dispatchers.Main] as its [LifecycleCoroutineScope].
+   *
+   * Execution of [action] and collection are cancelled when this [LifecycleCoroutineScope] is cancelled,
+   * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
+   *
+   * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
+   * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeOnceSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeRestartingSample
+   */
   inline fun <T> Flow<T>.collectedWhileCreated(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
-    crossinline action: suspend (value: T) -> Unit
+    crossinline action: suspend (value: T) -> Unit = {}
   ) {
     launchOnCreate(minimumStatePolicy) {
       collect { value ->
@@ -111,9 +126,24 @@ class LifecycleCoroutineScope(
     }
   }
 
+  /**
+   * Lifecycle-aware function for collecting a [Flow] while time the [Lifecycle.State]
+   * is at least [Lifecycle.State.CREATED].
+   *
+   * [action] is executed using this [LifecycleCoroutineScope] to create a coroutine,
+   * using [Dispatchers.Main] as its [LifecycleCoroutineScope].
+   *
+   * Execution of [action] and collection are cancelled when this [LifecycleCoroutineScope] is cancelled,
+   * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
+   *
+   * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
+   * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeOnceSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeRestartingSample
+   */
   inline fun <T> Flow<T>.collectedWhileStarted(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
-    crossinline action: suspend (value: T) -> Unit
+    crossinline action: suspend (value: T) -> Unit = {}
   ) {
     launchOnStart(minimumStatePolicy) {
       collect { value ->
@@ -122,9 +152,24 @@ class LifecycleCoroutineScope(
     }
   }
 
+  /**
+   * Lifecycle-aware function for collecting a [Flow] while time the [Lifecycle.State]
+   * is at least [Lifecycle.State.CREATED].
+   *
+   * [action] is executed using this [LifecycleCoroutineScope] to create a coroutine,
+   * using [Dispatchers.Main] as its [LifecycleCoroutineScope].
+   *
+   * Execution of [action] and collection are cancelled when this [LifecycleCoroutineScope] is cancelled,
+   * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
+   *
+   * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
+   * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeOnceSample
+   * @sample samples.LifecycleCoroutineScopeLaunchOnSample.launchOnResumeRestartingSample
+   */
   inline fun <T> Flow<T>.collectedWhileResumed(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
-    crossinline action: suspend (value: T) -> Unit
+    crossinline action: suspend (value: T) -> Unit = {}
   ) {
     launchOnResume(minimumStatePolicy) {
       collect { value ->

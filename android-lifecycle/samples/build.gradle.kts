@@ -55,6 +55,7 @@ dependencies {
   implementation(project(":core-test"))
   implementation(project(":core-test-junit5"))
   implementation(project(":extensions"))
+  implementation(project(":internal-test-android"))
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.KotlinTest.junit5runner)

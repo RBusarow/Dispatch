@@ -42,27 +42,27 @@ dependencies {
 
   implementation(Libs.Androidx.Lifecycle.common)
   implementation(Libs.Androidx.Lifecycle.liveData)
-  testImplementation(Libs.Androidx.Lifecycle.runtime)
+  implementation(Libs.Androidx.Lifecycle.runtime)
+
+  implementation(Libs.JUnit.jUnit5)
 
   implementation(Libs.Kotlin.stdlib)
+  implementation(Libs.Kotlin.test)
+  implementation(Libs.Kotlin.testCommon)
+
+  implementation(Libs.KotlinTest.junit5runner)
 
   implementation(Libs.Kotlinx.Coroutines.core)
+  implementation(Libs.Kotlinx.Coroutines.test)
+  implementation(Libs.Kotlinx.Knit.test)
 
   implementation(project(":android-espresso"))
   implementation(project(":android-lifecycle"))
   implementation(project(":android-lifecycle-extensions"))
+
   implementation(project(":core"))
   implementation(project(":core-test"))
   implementation(project(":core-test-junit5"))
   implementation(project(":extensions"))
-  implementation(project(":internal-test-android"))
-
-  testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit5runner)
-
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-
-  testImplementation(Libs.Kotlinx.Coroutines.test)
 
 }

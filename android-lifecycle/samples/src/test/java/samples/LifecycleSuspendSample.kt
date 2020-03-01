@@ -18,6 +18,7 @@ package samples
 import dispatch.android.lifecycle.*
 import dispatch.core.*
 import dispatch.core.test.*
+import dispatch.internal.test.android.*
 import io.kotlintest.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
