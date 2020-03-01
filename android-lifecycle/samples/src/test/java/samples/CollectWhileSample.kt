@@ -20,6 +20,7 @@ import androidx.fragment.app.*
 import androidx.lifecycle.*
 import androidx.test.core.app.*
 import dispatch.android.lifecycle.*
+import dispatch.android.lifecycle.LifecycleCoroutineScope.MinimumStatePolicy.*
 import dispatch.android.lifecycle.lifecycleScope
 import dispatch.core.test.*
 import kotlinx.coroutines.*
@@ -44,7 +45,7 @@ class CollectWhileSample {
   }
 
   @Test
-  fun collectWhileCreatedOnceSample() = runBlocking {
+  fun launchOnCreateRestartingSample() = runBlocking {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -61,8 +62,9 @@ class CollectWhileSample {
 
       val viewModel by viewModels<SomeViewModel>()
 
-      override fun onStart() {
-        super.onStart()
+      override fun onAttach(context: Context) {
+        super.onAttach(context)
+
         viewModel.someFlow.onEach {
           channel.send("$it")
         }
@@ -71,287 +73,149 @@ class CollectWhileSample {
     }
   }
 
-//  @Test
-//  fun collectWhileCreatedRestartingSample() = runBlocking {
-//
-//    val channel = Channel<String>()
-//    val history = mutableListOf<String>()
-//
-//    class SomeViewModel {
-//      val someFlow = flow {
-//        repeat(100) {
-//          emit(it)
-//        }
-//      }
-//    }
-//
-//    class SomeFragment : Fragment() {
-//
-//      val viewModel = SomeViewModel()
-//
-//      init {
-//
-//        lifecycleScope.launchOnCreate {
-//          viewModel.someFlow.collect {
-//            channel.send("$it")
-//          }
-//        }
-//      }
-//    }
-//
-//    val fragment = SomeFragment()
-//
-//    history.add("creating")
-//    fragment.create()
-//
-//    repeat(3) {
-//      history.add(channel.receive())
-//    }
-//
-//    // destroying the lifecycle cancels the lifecycleScope
-//    history.add("destroying")
-//    fragment.destroy()
-//
-//    history shouldBe listOf(
-//      "creating",
-//      "0",
-//      "1",
-//      "2",
-//      "destroying"
-//    )
-//  }
-//
-//  @Test
-//  fun collectWhileStartedOnceSample() = runBlocking {
-//
-//    val channel = Channel<String>()
-//    val history = mutableListOf<String>()
-//
-//    class SomeViewModel {
-//      val someFlow = flow {
-//        repeat(100) {
-//          emit(it)
-//        }
-//      }
-//    }
-//
-//    class SomeFragment : Fragment() {
-//
-//      val viewModel = SomeViewModel()
-//
-//      init {
-//        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) {
-//          viewModel.someFlow.collect {
-//            channel.send("$it")
-//          }
-//        }
-//      }
-//    }
-//
-//    val fragment = SomeFragment()
-//
-//    history.add("starting")
-//    fragment.start()
-//
-//    repeat(3) {
-//      history.add(channel.receive())
-//    }
-//
-//    // stopping the lifecycle cancels the existing Job
-//    history.add("stopping")
-//    fragment.stop()
-//
-//    // starting the lifecycle does not create a new Job
-//
-//    history shouldBe listOf(
-//      "starting",
-//      "0",
-//      "1",
-//      "2",
-//      "stopping"
-//    )
-//  }
-//
-//  @Test
-//  fun collectWhileStartedRestartingSample() = runBlocking {
-//
-//    val channel = Channel<String>()
-//    val history = mutableListOf<String>()
-//
-//    class SomeViewModel {
-//      val someFlow = flow {
-//        repeat(100) {
-//          emit(it)
-//        }
-//      }
-//    }
-//
-//    class SomeFragment : Fragment() {
-//
-//      val viewModel = SomeViewModel()
-//
-//      init {
-//        lifecycleScope.launchOnStart {
-//          viewModel.someFlow.collect {
-//            channel.send("$it")
-//          }
-//        }
-//      }
-//    }
-//
-//    val fragment = SomeFragment()
-//
-//    history.add("starting")
-//    fragment.start()
-//
-//    repeat(3) {
-//      history.add(channel.receive())
-//    }
-//
-//    // stopping the lifecycle cancels the existing Job
-//    history.add("stopping")
-//    fragment.stop()
-//
-//    // starting the lifecycle creates a new Job
-//    history.add("starting")
-//    fragment.start()
-//
-//    repeat(3) {
-//      history.add(channel.receive())
-//    }
-//
-//    history.add("stopping")
-//    fragment.stop()
-//
-//    history shouldBe listOf(
-//      "starting",
-//      "0",
-//      "1",
-//      "2",
-//      "stopping",
-//      "starting",
-//      "0",
-//      "1",
-//      "2",
-//      "stopping"
-//    )
-//  }
-//
-//  @Test
-//  fun collectWhileResumedOnceSample() = runBlocking {
-//
-//    val channel = Channel<String>()
-//    val history = mutableListOf<String>()
-//
-//    class SomeViewModel {
-//      val someFlow = flow {
-//        repeat(100) {
-//          emit(it)
-//        }
-//      }
-//    }
-//
-//    class SomeFragment : Fragment() {
-//
-//      val viewModel = SomeViewModel()
-//
-//      init {
-//        lifecycleScope.launchOnResume(minimumStatePolicy = CANCEL) {
-//          viewModel.someFlow.collect {
-//            channel.send("$it")
-//          }
-//        }
-//      }
-//    }
-//
-//    val fragment = SomeFragment()
-//
-//    history.add("resuming")
-//    fragment.resume()
-//
-//    repeat(3) {
-//      history.add(channel.receive())
-//    }
-//
-//    // pausing the lifecycle cancels the existing Job
-//    history.add("pausing")
-//    fragment.pause()
-//
-//    // resuming the lifecycle does not create a new Job
-//
-//    history shouldBe listOf(
-//      "resuming",
-//      "0",
-//      "1",
-//      "2",
-//      "pausing"
-//    )
-//  }
-//
-//  @Test
-//  fun collectWhileResumedRestartingSample() = runBlocking {
-//
-//    val channel = Channel<String>()
-//    val history = mutableListOf<String>()
-//
-//    class SomeViewModel {
-//      val someFlow = flow {
-//        repeat(100) {
-//          emit(it)
-//        }
-//      }
-//    }
-//
-//    class SomeFragment : Fragment() {
-//
-//      val viewModel = SomeViewModel()
-//
-//      init {
-//        lifecycleScope.launchOnResume {
-//          viewModel.someFlow.collect {
-//            channel.send("$it")
-//          }
-//        }
-//      }
-//    }
-//
-//    val fragment = SomeFragment()
-//
-//    history.add("resuming")
-//    fragment.resume()
-//
-//    repeat(3) {
-//      history.add(channel.receive())
-//    }
-//
-//    // pausing the lifecycle cancels the existing Job
-//    history.add("pausing")
-//    fragment.pause()
-//
-//    // resuming the lifecycle creates a new Job
-//    history.add("resuming")
-//    fragment.resume()
-//
-//    repeat(3) {
-//      history.add(channel.receive())
-//    }
-//
-//    history.add("pausing")
-//    fragment.pause()
-//
-//    history shouldBe listOf(
-//      "resuming",
-//      "0",
-//      "1",
-//      "2",
-//      "pausing",
-//      "resuming",
-//      "0",
-//      "1",
-//      "2",
-//      "pausing"
-//    )
-//  }
+  @Test
+  fun launchOnCreateCancellingSample() = runBlocking {
+
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
+
+    class SomeViewModel : ViewModel() {
+      val someFlow = flow {
+        repeat(100) {
+          emit(it)
+        }
+      }
+    }
+
+    class SomeFragment : Fragment() {
+
+      val viewModel by viewModels<SomeViewModel>()
+
+      override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        viewModel.someFlow.onEach {
+          channel.send("$it")
+        }
+          .launchOnCreate(lifecycleScope, minimumStatePolicy = CANCEL)
+      }
+    }
+  }
+
+  @Test
+  fun launchOnStartRestartingSample() = runBlocking {
+
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
+
+    class SomeViewModel : ViewModel() {
+      val someFlow = flow {
+        repeat(100) {
+          emit(it)
+        }
+      }
+    }
+
+    class SomeFragment : Fragment() {
+
+      val viewModel by viewModels<SomeViewModel>()
+
+      override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        viewModel.someFlow.onEach {
+          channel.send("$it")
+        }
+          .launchOnStart(lifecycleScope)
+      }
+    }
+  }
+
+  @Test
+  fun launchOnStartCancellingSample() = runBlocking {
+
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
+
+    class SomeViewModel : ViewModel() {
+      val someFlow = flow {
+        repeat(100) {
+          emit(it)
+        }
+      }
+    }
+
+    class SomeFragment : Fragment() {
+
+      val viewModel by viewModels<SomeViewModel>()
+
+      override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        viewModel.someFlow.onEach {
+          channel.send("$it")
+        }
+          .launchOnStart(lifecycleScope, minimumStatePolicy = CANCEL)
+      }
+    }
+  }
+
+  @Test
+  fun launchOnResumeRestartingSample() = runBlocking {
+
+    val channel = Channel<String>()
+    val history = mutableListOf<String>()
+
+    class SomeViewModel : ViewModel() {
+      val someFlow = flow {
+        repeat(100) {
+          emit(it)
+        }
+      }
+    }
+
+    class SomeFragment : Fragment() {
+
+      val viewModel by viewModels<SomeViewModel>()
+
+      override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        viewModel.someFlow.onEach {
+          channel.send("$it")
+        }
+          .launchOnResume(lifecycleScope)
+      }
+    }
+  }
+
+  @Test
+  fun launchOnResumeCancellingSample() = runBlocking {
+
+    val channel = Channel<String>()
+
+    class SomeViewModel : ViewModel() {
+      val someFlow = flow {
+        repeat(100) {
+          emit(it)
+        }
+      }
+    }
+
+    class SomeFragment : Fragment() {
+
+      val viewModel by viewModels<SomeViewModel>()
+
+      override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        viewModel.someFlow.onEach {
+          channel.send("$it")
+        }
+          .launchOnResume(lifecycleScope, minimumStatePolicy = CANCEL)
+      }
+    }
+  }
 
 }
 
