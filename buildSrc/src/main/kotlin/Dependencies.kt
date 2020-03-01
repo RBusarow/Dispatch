@@ -42,7 +42,7 @@ object Versions {
   const val targetSdk = 29
 
   const val benManes = "0.27.0"
-  const val gradleWrapper = "3.5.3"
+  const val gradleWrapper = "3.6.1"
   const val dagger = "2.25.2"
   const val kotlin = "1.3.61"
   const val mavenPublish = "0.9.0"
