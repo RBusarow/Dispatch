@@ -15,6 +15,7 @@
 
 package dispatch.sample
 
+import android.annotation.*
 import android.content.*
 import android.os.*
 import android.view.*
@@ -31,19 +32,12 @@ import timber.log.*
 @ExperimentalCoroutinesApi
 class MainFragment : Fragment() {
 
-  val binding: FragmentMainBinding by lazy {
-    FragmentMainBinding.inflate(
-      layoutInflater
-    )
-  }
+  val binding: FragmentMainBinding by lazy { FragmentMainBinding.inflate(layoutInflater) }
 
   val scope = MainCoroutineScope()
 
   private val factory = viewModelFactory {
-    MainViewModel(
-      DefaultCoroutineScope(),
-      SomeRepository(IOCoroutineScope())
-    )
+    MainViewModel(DefaultCoroutineScope(), SomeRepository(IOCoroutineScope()))
   }
   val viewModel: MainViewModel by viewModels { factory }
 
@@ -51,10 +45,9 @@ class MainFragment : Fragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return binding.root
-  }
+  ): View? = binding.root
 
+  @SuppressLint("SetTextI18n")
   override fun onAttach(context: Context) {
     super.onAttach(context)
 

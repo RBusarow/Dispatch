@@ -19,7 +19,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
         android:name="dispatch.sample.MainFragment"
         android:layout_width="0dp"
