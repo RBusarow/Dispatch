@@ -19,6 +19,7 @@ import androidx.lifecycle.*
 import dispatch.android.lifecycle.internal.*
 import dispatch.core.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 /**
  * [MainImmediateCoroutineScope] instance which is tied to a [Lifecycle].
@@ -56,7 +57,7 @@ class LifecycleCoroutineScope(
    */
   fun launchOnCreate(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
-    block: suspend CoroutineScope.() -> Unit
+    block: suspend LifecycleCoroutineScope.() -> Unit
   ): Job = launchOn(Lifecycle.State.CREATED, minimumStatePolicy, block)
 
   /**
@@ -76,7 +77,7 @@ class LifecycleCoroutineScope(
    */
   fun launchOnStart(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
-    block: suspend CoroutineScope.() -> Unit
+    block: suspend LifecycleCoroutineScope.() -> Unit
   ): Job = launchOn(Lifecycle.State.STARTED, minimumStatePolicy, block)
 
   /**
@@ -96,11 +97,44 @@ class LifecycleCoroutineScope(
    */
   fun launchOnResume(
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
-    block: suspend CoroutineScope.() -> Unit
+    block: suspend LifecycleCoroutineScope.() -> Unit
   ): Job = launchOn(Lifecycle.State.RESUMED, minimumStatePolicy, block)
 
+  inline fun <T> Flow<T>.collectedWhileCreated(
+    minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
+    crossinline action: suspend (value: T) -> Unit
+  ) {
+    launchOnCreate(minimumStatePolicy) {
+      collect { value ->
+        action(value)
+      }
+    }
+  }
+
+  inline fun <T> Flow<T>.collectedWhileStarted(
+    minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
+    crossinline action: suspend (value: T) -> Unit
+  ) {
+    launchOnStart(minimumStatePolicy) {
+      collect { value ->
+        action(value)
+      }
+    }
+  }
+
+  inline fun <T> Flow<T>.collectedWhileResumed(
+    minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
+    crossinline action: suspend (value: T) -> Unit
+  ) {
+    launchOnResume(minimumStatePolicy) {
+      collect { value ->
+        action(value)
+      }
+    }
+  }
+
   /**
-   * Describes the way a particular [Job] will behave if the [lifecycle] passes below the minimum state
+   * Describes the way a [LifecycleCoroutineScope] [Job] will behave if the [lifecycle] passes below the minimum state
    * before said [Job] has completed.
    */
   enum class MinimumStatePolicy {

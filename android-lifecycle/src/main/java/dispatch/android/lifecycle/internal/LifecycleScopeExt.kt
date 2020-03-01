@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.*
 internal fun LifecycleCoroutineScope.launchOn(
   minimumState: Lifecycle.State,
   statePolicy: LifecycleCoroutineScope.MinimumStatePolicy,
-  block: suspend CoroutineScope.() -> Unit
+  block: suspend LifecycleCoroutineScope.() -> Unit
 ): Job = when (statePolicy) {
   CANCEL        -> launch { lifecycle.onNext(minimumState, block) }
   RESTART_EVERY -> launchEvery(minimumState, block)
@@ -39,7 +39,7 @@ internal fun LifecycleCoroutineScope.launchOn(
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 internal suspend fun <T> Lifecycle.onNext(
-  minimumState: Lifecycle.State, block: suspend CoroutineScope.() -> T
+  minimumState: Lifecycle.State, block: suspend LifecycleCoroutineScope.() -> T
 ): T? {
 
   var result: T? = null
@@ -51,7 +51,12 @@ internal suspend fun <T> Lifecycle.onNext(
       .onEachLatest { stateIsHighEnough ->
         if (stateIsHighEnough) {
           stateReached.compareAndSet(false, true)
-          coroutineScope { result = block() }
+          coroutineScope {
+            result = LifecycleCoroutineScope(
+              lifecycle = this@onNext,
+              coroutineScope = MainImmediateCoroutineScope(coroutineContext)
+            ).block()
+          }
           throw FlowCancellationException()
         }
       }
@@ -67,7 +72,7 @@ internal suspend fun <T> Lifecycle.onNext(
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 internal fun LifecycleCoroutineScope.launchEvery(
-  minimumState: Lifecycle.State, block: suspend CoroutineScope.() -> Unit
+  minimumState: Lifecycle.State, block: suspend LifecycleCoroutineScope.() -> Unit
 ): Job = lifecycle.eventFlow(minimumState)
   // Respond to every change in the Flow, cancelling execution of the previous onEach if it hasn't already finished.
   // This is responsible for cancelling Jobs when a Lifecycle.State dips below the threshold,
