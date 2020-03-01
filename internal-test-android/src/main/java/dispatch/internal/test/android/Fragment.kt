@@ -20,4 +20,10 @@ import androidx.lifecycle.*
 
 abstract class Fragment(
   initialState: Lifecycle.State = Lifecycle.State.INITIALIZED
-) : FakeLifecycleOwner(initialState = initialState)
+) : FakeLifecycleOwner(initialState = initialState) {
+
+  inline fun <reified T : ViewModel> viewModels() = lazy {
+    T::class.constructors.first()
+      .call()
+  }
+}

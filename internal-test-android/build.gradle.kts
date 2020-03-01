@@ -43,6 +43,7 @@ dependencies {
   implementation(Libs.Androidx.Lifecycle.common)
   implementation(Libs.Androidx.Lifecycle.liveData)
   implementation(Libs.Androidx.Lifecycle.runtime)
+  implementation(Libs.Androidx.Lifecycle.viewModel)
 
   implementation(Libs.JUnit.jUnit5)
 
