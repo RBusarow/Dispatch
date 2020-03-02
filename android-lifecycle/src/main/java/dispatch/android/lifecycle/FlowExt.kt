@@ -31,8 +31,8 @@ import kotlinx.coroutines.flow.*
  *
  * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
  * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
- * @sample samples.CollectWhileSample.launchOnCreateCancellingSample
- * @sample samples.CollectWhileSample.launchOnCreateRestartingSample
+ * @sample samples.FlowExtSample.launchOnCreateCancellingSample
+ * @sample samples.FlowExtSample.launchOnCreateRestartingSample
  */
 fun <T> Flow<T>.launchOnCreate(
   scope: LifecycleCoroutineScope,
@@ -54,8 +54,8 @@ fun <T> Flow<T>.launchOnCreate(
  *
  * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
  * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
- * @sample samples.CollectWhileSample.launchOnStartCancellingSample
- * @sample samples.CollectWhileSample.launchOnStartRestartingSample
+ * @sample samples.FlowExtSample.launchOnStartCancellingSample
+ * @sample samples.FlowExtSample.launchOnStartRestartingSample
  */
 fun <T> Flow<T>.launchOnStart(
   scope: LifecycleCoroutineScope,
@@ -77,8 +77,8 @@ fun <T> Flow<T>.launchOnStart(
  *
  * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
  * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
- * @sample samples.CollectWhileSample.launchOnResumeCancellingSample
- * @sample samples.CollectWhileSample.launchOnResumeRestartingSample
+ * @sample samples.FlowExtSample.launchOnResumeCancellingSample
+ * @sample samples.FlowExtSample.launchOnResumeRestartingSample
  */
 fun <T> Flow<T>.launchOnResume(
   scope: LifecycleCoroutineScope,
