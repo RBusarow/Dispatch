@@ -47,31 +47,7 @@ class FlowExtTest : CoroutineTest {
   inner class `launch every create` {
 
     @Test
-    fun `block should immediately execute if already created`() = runBlocking {
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-
-      var executed = false
-
-      scope.launchOnCreate { executed = true }
-
-      executed shouldBe true
-    }
-
-    @Test
-    fun `block should not immediately execute if screen is not created`() = runBlocking {
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-
-      var executed = false
-
-      scope.launchOnCreate { executed = true }
-
-      executed shouldBe false
-    }
-
-    @Test
-    fun `block should stop when screen is destroyed`() = runBlocking {
+    fun `collect should stop when lifecycle is destroyed`() = runBlocking {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -99,43 +75,7 @@ class FlowExtTest : CoroutineTest {
   inner class `launch every start` {
 
     @Test
-    fun `block should immediately execute if already started`() = runBlocking {
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
-
-      var executed = false
-
-      scope.launchOnStart { executed = true }
-
-      executed shouldBe true
-    }
-
-    @Test
-    fun `block should not immediately execute if screen is not started`() = runBlocking {
-
-      Lifecycle.Event.values()
-        .filter {
-          when (it) {
-            Lifecycle.Event.ON_CREATE  -> true
-            Lifecycle.Event.ON_STOP    -> true
-            Lifecycle.Event.ON_DESTROY -> true
-            else                       -> false
-          }
-        }
-        .forEach { event ->
-
-          lifecycle.handleLifecycleEvent(event)
-
-          var executed = false
-
-          scope.launchOnStart { executed = true }
-
-          executed shouldBe false
-        }
-    }
-
-    @Test
-    fun `block should stop when screen is stopped`() = runBlocking {
+    fun `collect should stop when lifecycle is stopped`() = runBlocking {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -163,45 +103,7 @@ class FlowExtTest : CoroutineTest {
   inner class `launch every resume` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = runBlocking {
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
-
-      var executed = false
-
-      scope.launchOnResume { executed = true }
-
-      executed shouldBe true
-    }
-
-    @Test
-    fun `block should not immediately execute if screen is not resumed`() = runBlocking {
-
-      Lifecycle.Event.values()
-        .filter {
-          when (it) {
-            Lifecycle.Event.ON_CREATE  -> true
-            Lifecycle.Event.ON_START   -> true
-            Lifecycle.Event.ON_PAUSE   -> true
-            Lifecycle.Event.ON_STOP    -> true
-            Lifecycle.Event.ON_DESTROY -> true
-            else                       -> false
-          }
-        }
-        .forEach { event ->
-
-          lifecycle.handleLifecycleEvent(event)
-
-          var executed = false
-
-          scope.launchOnResume { executed = true }
-
-          executed shouldBe false
-        }
-    }
-
-    @Test
-    fun `block should stop when screen is paused`() = runBlocking {
+    fun `collect should stop when lifecycle is paused`() = runBlocking {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -221,6 +123,37 @@ class FlowExtTest : CoroutineTest {
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
       output shouldBe listOf(1, 2, 3)
+      completed shouldBe true
+    }
+
+    @Test
+    fun `collect should resume when lifecycle is resumed`() = runBlocking {
+
+      val input = Channel<Int>()
+      val output = mutableListOf<Int>()
+      var completed = false
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+
+      input.consumeAsFlow()
+        .onCompletion { completed = true }
+        .onEach { output.add(it) }
+        .launchOnResume(scope)
+
+      input.send(1)
+      input.send(2)
+      input.send(3)
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+
+      input.send(4)
+      input.send(5)
+      input.send(6)
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+
+      output shouldBe listOf(1, 2, 3, 4, 5, 6)
       completed shouldBe true
     }
   }
