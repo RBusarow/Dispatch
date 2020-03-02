@@ -32,7 +32,7 @@ import org.robolectric.*
 
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
-class CollectWhileSample {
+class FlowExtSample {
 
   @get:Rule val testScope = TestCoroutineRule()
 
