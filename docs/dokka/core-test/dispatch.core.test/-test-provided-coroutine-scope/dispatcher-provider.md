@@ -1,0 +1,8 @@
+[core-test](../../index.md) / [dispatch.core.test](../index.md) / [TestProvidedCoroutineScope](index.md) / [dispatcherProvider](./dispatcher-provider.md)
+
+# dispatcherProvider
+
+`abstract val dispatcherProvider: `[`DispatcherProvider`](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test/src/main/java/dispatch/core/test/TestProvidedCoroutineScope.kt#L47)
+
+single [DispatcherProvider](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) promise for the [TestProvidedCoroutineScope](index.md)
+

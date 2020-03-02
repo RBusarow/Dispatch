@@ -24,8 +24,7 @@ import kotlinx.coroutines.flow.*
  * Lifecycle-aware function for collecting a [Flow] while time the [Lifecycle.State]
  * is at least [Lifecycle.State.CREATED].
  *
- * [action] is executed using this [LifecycleCoroutineScope] to create a coroutine,
- * using [Dispatchers.Main] as its [LifecycleCoroutineScope].
+ * [Collection][collect] is performed using this [LifecycleCoroutineScope] to create a coroutine.
  *
  * Collection is cancelled when this [LifecycleCoroutineScope] is cancelled,
  * or when the [LifecycleCoroutineScope.lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
@@ -40,7 +39,7 @@ fun <T> Flow<T>.launchOnCreate(
   minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
 ) {
   scope.launchOnCreate(minimumStatePolicy) {
-    collect { }
+    collect()
   }
 }
 
@@ -48,11 +47,10 @@ fun <T> Flow<T>.launchOnCreate(
  * Lifecycle-aware function for collecting a [Flow] while time the [Lifecycle.State]
  * is at least [Lifecycle.State.CREATED].
  *
- * [action] is executed using this [LifecycleCoroutineScope] to create a coroutine,
- * using [Dispatchers.Main] as its [LifecycleCoroutineScope].
+ * [Collection][collect] is performed using this [LifecycleCoroutineScope] to create a coroutine.
  *
  * Collection is cancelled when this [LifecycleCoroutineScope] is cancelled,
- * or when the [LifecycleCoroutineScope.lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
+ * or when the [LifecycleCoroutineScope.lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.STARTED].
  *
  * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
  * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
@@ -64,7 +62,7 @@ fun <T> Flow<T>.launchOnStart(
   minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
 ) {
   scope.launchOnStart(minimumStatePolicy) {
-    collect {}
+    collect()
   }
 }
 
@@ -72,11 +70,10 @@ fun <T> Flow<T>.launchOnStart(
  * Lifecycle-aware function for collecting a [Flow] while time the [Lifecycle.State]
  * is at least [Lifecycle.State.CREATED].
  *
- * [action] is executed using this [LifecycleCoroutineScope] to create a coroutine,
- * using [Dispatchers.Main] as its [LifecycleCoroutineScope].
+ * [Collection][collect] is performed using this [LifecycleCoroutineScope] to create a coroutine.
  *
  * Collection is cancelled when this [LifecycleCoroutineScope] is cancelled,
- * or when the [LifecycleCoroutineScope.lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
+ * or when the [LifecycleCoroutineScope.lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.RESUMED].
  *
  * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
  * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
@@ -88,6 +85,6 @@ fun <T> Flow<T>.launchOnResume(
   minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
 ) {
   scope.launchOnResume(minimumStatePolicy) {
-    collect {}
+    collect()
   }
 }

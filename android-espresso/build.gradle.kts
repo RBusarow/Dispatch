@@ -54,6 +54,8 @@ dependencies {
 
   testImplementation(Libs.KotlinTest.junit5runner)
   testImplementation(Libs.MockK.core)
-  testImplementation(Libs.Robolectric.core)
+  testImplementation(Libs.Robolectric.core) {
+    exclude(group = "com.google.auto.service", module = "auto-service")
+  }
   testImplementation(project(":internal-test"))
 }

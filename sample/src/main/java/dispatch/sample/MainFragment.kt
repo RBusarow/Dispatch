@@ -51,9 +51,6 @@ class MainFragment : Fragment() {
   override fun onAttach(context: Context) {
     super.onAttach(context)
 
-    // share the same Job as the `scope` property above, but use the IO dispatcher as default
-    val ioDefaultScope = scope + Dispatchers.IO
-
     viewModel.message
       .onEach { Timber.v("I'm using the default dispatcher!") }
       // extract the default dispatcher from the CoroutineScope and apply it upstream
@@ -68,8 +65,8 @@ class MainFragment : Fragment() {
       // the dispatcher assigned to "main" out of `ioDefaultScope`
       // and dispatching upstream execution
       .flowOnMain()
-      .onEach { Timber.v("I'm using the IO dispatcher!") }
-      // the default dispatcher in this scope is now Dispatchers.IO
+      .onEach { Timber.v("I'm using the mainImmediate dispatcher!") }
+      // the default dispatcher in this scope is now Dispatchers.Main.immediate
       .launchOnStart(lifecycleScope)
   }
 

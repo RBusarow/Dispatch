@@ -16,6 +16,7 @@
 package samples
 
 import android.content.*
+import androidx.core.app.*
 import androidx.fragment.app.*
 import androidx.lifecycle.*
 import androidx.test.core.app.*
@@ -24,7 +25,6 @@ import dispatch.android.lifecycle.LifecycleCoroutineScope.MinimumStatePolicy.*
 import dispatch.android.lifecycle.lifecycleScope
 import dispatch.core.test.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import org.junit.*
 import org.junit.runner.*
@@ -47,9 +47,6 @@ class CollectWhileSample {
   @Test
   fun launchOnCreateRestartingSample() = runBlocking {
 
-    val channel = Channel<String>()
-    val history = mutableListOf<String>()
-
     class SomeViewModel : ViewModel() {
       val someFlow = flow {
         repeat(100) {
@@ -58,16 +55,21 @@ class CollectWhileSample {
       }
     }
 
-    class SomeFragment : Fragment() {
+    class SomeFragment : ComponentActivity() {
 
-      val viewModel by viewModels<SomeViewModel>()
+      val viewModel = SomeViewModel()
 
-      override fun onAttach(context: Context) {
-        super.onAttach(context)
+      init {
 
+        // "observe" the viewModel's Flow from *every* ON_CREATE event until the following ON_DESTROY event
         viewModel.someFlow.onEach {
-          channel.send("$it")
+          print("collect $it")
         }
+          // A coroutine will be created when the Lifecycle's state reaches CREATED,
+          // and will be cancelled when the state reaches DESTROYED.
+          // If this lifecycle were to somehow reach CREATED again
+          // (which is technically possible in a custom LifecycleOwner implementation),
+          // the coroutine would be recreated.
           .launchOnCreate(lifecycleScope)
       }
     }
@@ -76,9 +78,6 @@ class CollectWhileSample {
   @Test
   fun launchOnCreateCancellingSample() = runBlocking {
 
-    val channel = Channel<String>()
-    val history = mutableListOf<String>()
-
     class SomeViewModel : ViewModel() {
       val someFlow = flow {
         repeat(100) {
@@ -87,16 +86,19 @@ class CollectWhileSample {
       }
     }
 
-    class SomeFragment : Fragment() {
+    class SomeFragment : ComponentActivity() {
 
-      val viewModel by viewModels<SomeViewModel>()
+      val viewModel = SomeViewModel()
 
-      override fun onAttach(context: Context) {
-        super.onAttach(context)
+      init {
 
+        // "observe" the viewModel's Flow from the first ON_CREATE event until the first ON_DESTROY event
         viewModel.someFlow.onEach {
-          channel.send("$it")
+          print("collect $it")
         }
+          // A coroutine will be created when the Lifecycle's state reaches CREATED,
+          // and will be cancelled when the state reaches DESTROYED.
+          // The coroutine will never be recreated.
           .launchOnCreate(lifecycleScope, minimumStatePolicy = CANCEL)
       }
     }
@@ -105,9 +107,6 @@ class CollectWhileSample {
   @Test
   fun launchOnStartRestartingSample() = runBlocking {
 
-    val channel = Channel<String>()
-    val history = mutableListOf<String>()
-
     class SomeViewModel : ViewModel() {
       val someFlow = flow {
         repeat(100) {
@@ -120,12 +119,18 @@ class CollectWhileSample {
 
       val viewModel by viewModels<SomeViewModel>()
 
+      // Note that because this is a Fragment, "observation" must start after onAttach
+      // so that the viewModel can be accessed safely
       override fun onAttach(context: Context) {
         super.onAttach(context)
 
+        // "observe" the viewModel's Flow from *every* ON_START event until the following ON_STOP event
         viewModel.someFlow.onEach {
-          channel.send("$it")
+          print("collect $it")
         }
+          // A coroutine will be created when the Lifecycle's state reaches STARTED,
+          // and will be cancelled when the state reaches CREATED.
+          // If this lifecycle reaches STARTED again, the coroutine will be recreated.
           .launchOnStart(lifecycleScope)
       }
     }
@@ -134,9 +139,6 @@ class CollectWhileSample {
   @Test
   fun launchOnStartCancellingSample() = runBlocking {
 
-    val channel = Channel<String>()
-    val history = mutableListOf<String>()
-
     class SomeViewModel : ViewModel() {
       val someFlow = flow {
         repeat(100) {
@@ -149,12 +151,18 @@ class CollectWhileSample {
 
       val viewModel by viewModels<SomeViewModel>()
 
+      // Note that because this is a Fragment, "observation" must start after onAttach
+      // so that the viewModel can be accessed safely
       override fun onAttach(context: Context) {
         super.onAttach(context)
 
+        // "observe" the viewModel's Flow from the first ON_START event until the first ON_STOP event
         viewModel.someFlow.onEach {
-          channel.send("$it")
+          print("collect $it")
         }
+          // A coroutine will be created when the Lifecycle's state reaches STARTED,
+          // and will be cancelled when the state reaches CREATED.
+          // If this lifecycle reaches STARTED again, the coroutine will NOT be recreated.
           .launchOnStart(lifecycleScope, minimumStatePolicy = CANCEL)
       }
     }
@@ -163,9 +171,6 @@ class CollectWhileSample {
   @Test
   fun launchOnResumeRestartingSample() = runBlocking {
 
-    val channel = Channel<String>()
-    val history = mutableListOf<String>()
-
     class SomeViewModel : ViewModel() {
       val someFlow = flow {
         repeat(100) {
@@ -178,12 +183,18 @@ class CollectWhileSample {
 
       val viewModel by viewModels<SomeViewModel>()
 
+      // Note that because this is a Fragment, "observation" must start after onAttach
+      // so that the viewModel can be accessed safely
       override fun onAttach(context: Context) {
         super.onAttach(context)
 
+        // "observe" the viewModel's Flow from *every* ON_RESUME event until the following ON_PAUSE event
         viewModel.someFlow.onEach {
-          channel.send("$it")
+          print("collect $it")
         }
+          // A coroutine will be created when the Lifecycle's state reaches RESUMED,
+          // and will be cancelled when the state reaches STARTED.
+          // If this lifecycle reaches RESUMED again, the coroutine will be recreated.
           .launchOnResume(lifecycleScope)
       }
     }
@@ -192,8 +203,6 @@ class CollectWhileSample {
   @Test
   fun launchOnResumeCancellingSample() = runBlocking {
 
-    val channel = Channel<String>()
-
     class SomeViewModel : ViewModel() {
       val someFlow = flow {
         repeat(100) {
@@ -206,12 +215,18 @@ class CollectWhileSample {
 
       val viewModel by viewModels<SomeViewModel>()
 
+      // Note that because this is a Fragment, "observation" must start after onAttach
+      // so that the viewModel can be accessed safely
       override fun onAttach(context: Context) {
         super.onAttach(context)
 
+        // "observe" the viewModel's Flow from the first ON_RESUME event until the first ON_PAUSE event
         viewModel.someFlow.onEach {
-          channel.send("$it")
+          print("collect $it")
         }
+          // A coroutine will be created when the Lifecycle's state reaches RESUMED,
+          // and will be cancelled when the state reaches STARTED.
+          // If this lifecycle reaches RESUMED again, the coroutine will NOT be recreated.
           .launchOnResume(lifecycleScope, minimumStatePolicy = CANCEL)
       }
     }

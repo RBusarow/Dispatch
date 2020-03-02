@@ -71,6 +71,8 @@ dependencies {
   testImplementation(Libs.Kotlinx.Coroutines.test)
   testImplementation(Libs.Kotlinx.Knit.test)
 
-  testImplementation(Libs.Robolectric.core)
+  testImplementation(Libs.Robolectric.core) {
+    exclude(group = "com.google.auto.service", module = "auto-service")
+  }
 
 }
