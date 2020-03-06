@@ -2,7 +2,7 @@
 ![CI](https://github.com/RBusarow/Dispatch/workflows/CI/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-# DispatcherProvider
+# Dispatch
 
 Utilities for [kotlinx.coroutines] which make them type-safe, easier to test, and require less code.
 Define your [CoroutineDispatchers][CoroutineDispatcher] once in a [CoroutineScope] factory and never think about them again.

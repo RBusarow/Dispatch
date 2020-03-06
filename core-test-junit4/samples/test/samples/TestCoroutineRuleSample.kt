@@ -33,8 +33,8 @@ class TestCoroutineRuleSample {
     rule.shouldBeInstanceOf<TestProvidedCoroutineScope>()
 
     rule.launch {
-      // use the rule like any other CoroutineScope
-    }
+        // use the rule like any other CoroutineScope
+      }
       .join()
   }
 

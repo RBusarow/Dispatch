@@ -35,8 +35,8 @@ internal class OnEachLatestTest {
       delay(10)
       emit(2)
     }.onEachLatest {
-      output.add(it)
-    }
+        output.add(it)
+      }
       .collect()
 
     output shouldBe listOf(1, 2)
@@ -52,9 +52,9 @@ internal class OnEachLatestTest {
       emit(1)
       emit(2)
     }.onEachLatest {
-      delay(50)
-      output.add(it)
-    }
+        delay(50)
+        output.add(it)
+      }
       .collect()
 
     output shouldBe listOf(2)

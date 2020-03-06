@@ -160,8 +160,8 @@ fun File.updateLibraryVersions(): File {
 
         val newLine = dependencyMatchers.firstOrNull { matcher ->
 
-          matcher.regex.matches(originalLine)
-        }
+            matcher.regex.matches(originalLine)
+          }
           ?.let { matcher ->
 
             originalLine.replace(matcher)
@@ -200,7 +200,8 @@ private fun String.replace(
   "$m1$m2${dependencyMatcher.fullCoordinate}$m3$m4"
 }
 
-private fun String.removeVersionSuffix(): String = split(":").subList(0, 2).joinToString(":")
+private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
+  .joinToString(":")
 
 private fun String.replace(
   regex: Regex, block: (String) -> String

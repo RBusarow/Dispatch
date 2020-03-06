@@ -33,7 +33,8 @@ class BuildersSample {
 
       val myData = Data()
 
-      subject.dataDeferred().await() shouldBe myData
+      subject.dataDeferred()
+        .await() shouldBe myData
 
     }
 
@@ -49,7 +50,8 @@ class BuildersSample {
 
       val myData = Data()
 
-      subject.dataDeferred().await() shouldBe myData
+      subject.dataDeferred()
+        .await() shouldBe myData
 
     }
 

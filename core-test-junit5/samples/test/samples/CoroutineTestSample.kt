@@ -35,7 +35,8 @@ class CoroutineTestSample : CoroutineTest {
   @Test
   fun someSample() = runBlocking {
 
-    someClass.someFunction().await() shouldBe someValue
+    someClass.someFunction()
+      .await() shouldBe someValue
 
   }
 

@@ -77,6 +77,7 @@ class TestDispatcherProvider(
     """.replaceIndentByMargin(" ".repeat(this::class.java.simpleName.length + 2))
   }
 }
+
 /**
  * Convenience factory function for [TestDispatcherProvider], creating an implementation
  * where all properties point to the same underlying [TestCoroutineDispatcher].
