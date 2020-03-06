@@ -44,7 +44,7 @@ object Versions {
   const val benManes = "0.27.0"
   const val gradleWrapper = "3.6.1"
   const val dagger = "2.25.2"
-  const val kotlin = "1.3.61"
+  const val kotlin = "1.3.70"
   const val mavenPublish = "0.9.0"
 
   const val versionName = "1.0.0-beta03"
@@ -149,13 +149,12 @@ object Libs {
   }
 
   object Kotlin {
-    private const val version = "1.3.61"
-    const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
-    const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
-    const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
-    const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
-    const val test = "org.jetbrains.kotlin:kotlin-test:$version"
-    const val testCommon = "org.jetbrains.kotlin:kotlin-test-common:$version"
+    const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+    const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}"
+    const val test = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
+    const val testCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
   }
 
   object KotlinTest {
