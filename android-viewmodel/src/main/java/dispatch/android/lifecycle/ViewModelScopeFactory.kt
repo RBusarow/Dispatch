@@ -35,6 +35,7 @@ import kotlinx.coroutines.*
 public object ViewModelScopeFactory {
 
   private var _factory: () -> CoroutineScope = { MainImmediateCoroutineScope() }
+
   /**
    * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
    * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]

@@ -95,7 +95,8 @@ internal class RegexKtTest {
     ) { str, regexes, expected ->
 
       str.matches(*regexes) shouldBe expected
-      str.reversed().matches(*regexes) shouldBe expected
+      str.reversed()
+        .matches(*regexes) shouldBe expected
     }
 
   }

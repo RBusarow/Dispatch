@@ -32,133 +32,130 @@ internal class LaunchBuildersTest {
     override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
   }
 
+  @Nested
+  inner class `launch default` {
 
+    @Test
+    fun `empty context arg should use receiver context with provided default dispatcher`() =
+      runBlocking<Unit>(testProvider) {
 
-    @Nested
-    inner class `launch default` {
+        val ctx: CoroutineContext = coroutineContext + testProvider.default
 
-      @Test
-      fun `empty context arg should use receiver context with provided default dispatcher`() =
-        runBlocking<Unit>(testProvider) {
+        launchDefault { coroutineContext shouldEqualFolded ctx }
+      }
 
-          val ctx: CoroutineContext = coroutineContext + testProvider.default
+    @Test
+    fun `context should override specified provider dispatcher`() =
+      runBlocking<Unit>(testProvider) {
 
-          launchDefault { coroutineContext shouldEqualFolded ctx }
+        val job = Job()
+        val ctx: CoroutineContext = coroutineContext + testProvider.default
+
+        launchDefault(testProvider.io + job) {
+          coroutineContext shouldEqualFolded ctx + testProvider.io + job
         }
+      }
+  }
 
-      @Test
-      fun `context should override specified provider dispatcher`() =
-        runBlocking<Unit>(testProvider) {
+  @Nested
+  inner class `launch io` {
 
-          val job = Job()
-          val ctx: CoroutineContext = coroutineContext + testProvider.default
+    @Test
+    fun `empty context arg should use receiver context with provided io dispatcher`() =
+      runBlocking<Unit>(testProvider) {
 
-          launchDefault(testProvider.io + job) {
-            coroutineContext shouldEqualFolded ctx + testProvider.io + job
-          }
+        val ctx: CoroutineContext = coroutineContext + testProvider.io
+
+        launchIO { coroutineContext shouldEqualFolded ctx }
+      }
+
+    @Test
+    fun `context should override specified provider dispatcher`() =
+      runBlocking<Unit>(testProvider) {
+
+        val job = Job()
+        val ctx: CoroutineContext = coroutineContext + testProvider.io
+
+        launchIO(testProvider.default + job) {
+          coroutineContext shouldEqualFolded ctx + testProvider.default + job
         }
-    }
+      }
+  }
 
-    @Nested
-    inner class `launch io` {
+  @Nested
+  inner class `launch main` {
 
-      @Test
-      fun `empty context arg should use receiver context with provided io dispatcher`() =
-        runBlocking<Unit>(testProvider) {
+    @Test
+    fun `empty context arg should use receiver context with provided main dispatcher`() =
+      runBlocking<Unit>(testProvider) {
 
-          val ctx: CoroutineContext = coroutineContext + testProvider.io
+        val ctx: CoroutineContext = coroutineContext + testProvider.main
 
-          launchIO { coroutineContext shouldEqualFolded ctx }
+        launchMain { coroutineContext shouldEqualFolded ctx }
+      }
+
+    @Test
+    fun `context should override specified provider dispatcher`() =
+      runBlocking<Unit>(testProvider) {
+
+        val job = Job()
+        val ctx: CoroutineContext = coroutineContext + testProvider.main
+
+        launchMain(testProvider.io + job) {
+          coroutineContext shouldEqualFolded ctx + testProvider.io + job
         }
+      }
+  }
 
-      @Test
-      fun `context should override specified provider dispatcher`() =
-        runBlocking<Unit>(testProvider) {
+  @Nested
+  inner class `launch main immediate` {
 
-          val job = Job()
-          val ctx: CoroutineContext = coroutineContext + testProvider.io
+    @Test
+    fun `empty context arg should use receiver context with provided mainImmediate dispatcher`() =
+      runBlocking<Unit>(testProvider) {
 
-          launchIO(testProvider.default + job) {
-            coroutineContext shouldEqualFolded ctx + testProvider.default + job
-          }
+        val ctx: CoroutineContext = coroutineContext + testProvider.mainImmediate
+
+        launchMainImmediate { coroutineContext shouldEqualFolded ctx }
+      }
+
+    @Test
+    fun `context should override specified provider dispatcher`() =
+      runBlocking<Unit>(testProvider) {
+
+        val job = Job()
+        val ctx: CoroutineContext = coroutineContext + testProvider.mainImmediate
+
+        launchMainImmediate(testProvider.io + job) {
+          coroutineContext shouldEqualFolded ctx + testProvider.io + job
         }
-    }
+      }
+  }
 
-    @Nested
-    inner class `launch main` {
+  @Nested
+  inner class `launch unconfined` {
 
-      @Test
-      fun `empty context arg should use receiver context with provided main dispatcher`() =
-        runBlocking<Unit>(testProvider) {
+    @Test
+    fun `empty context arg should use receiver context with provided mainImmediate dispatcher`() =
+      runBlocking<Unit>(testProvider) {
 
-          val ctx: CoroutineContext = coroutineContext + testProvider.main
+        val ctx: CoroutineContext = coroutineContext + testProvider.unconfined
 
-          launchMain { coroutineContext shouldEqualFolded ctx }
+        launchUnconfined { coroutineContext shouldEqualFolded ctx }
+      }
+
+    @Test
+    fun `context should override specified provider dispatcher`() =
+      runBlocking<Unit>(testProvider) {
+
+        val job = Job()
+        val ctx: CoroutineContext = coroutineContext + testProvider.unconfined
+
+        launchUnconfined(testProvider.io + job) {
+          coroutineContext shouldEqualFolded ctx + testProvider.io + job
         }
-
-      @Test
-      fun `context should override specified provider dispatcher`() =
-        runBlocking<Unit>(testProvider) {
-
-          val job = Job()
-          val ctx: CoroutineContext = coroutineContext + testProvider.main
-
-          launchMain(testProvider.io + job) {
-            coroutineContext shouldEqualFolded ctx + testProvider.io + job
-          }
-        }
-    }
-
-    @Nested
-    inner class `launch main immediate` {
-
-      @Test
-      fun `empty context arg should use receiver context with provided mainImmediate dispatcher`() =
-        runBlocking<Unit>(testProvider) {
-
-          val ctx: CoroutineContext = coroutineContext + testProvider.mainImmediate
-
-          launchMainImmediate { coroutineContext shouldEqualFolded ctx }
-        }
-
-      @Test
-      fun `context should override specified provider dispatcher`() =
-        runBlocking<Unit>(testProvider) {
-
-          val job = Job()
-          val ctx: CoroutineContext = coroutineContext + testProvider.mainImmediate
-
-          launchMainImmediate(testProvider.io + job) {
-            coroutineContext shouldEqualFolded ctx + testProvider.io + job
-          }
-        }
-    }
-
-    @Nested
-    inner class `launch unconfined` {
-
-      @Test
-      fun `empty context arg should use receiver context with provided mainImmediate dispatcher`() =
-        runBlocking<Unit>(testProvider) {
-
-          val ctx: CoroutineContext = coroutineContext + testProvider.unconfined
-
-          launchUnconfined { coroutineContext shouldEqualFolded ctx }
-        }
-
-      @Test
-      fun `context should override specified provider dispatcher`() =
-        runBlocking<Unit>(testProvider) {
-
-          val job = Job()
-          val ctx: CoroutineContext = coroutineContext + testProvider.unconfined
-
-          launchUnconfined(testProvider.io + job) {
-            coroutineContext shouldEqualFolded ctx + testProvider.io + job
-          }
-        }
-    }
-
+      }
+  }
 
 }
 

@@ -87,14 +87,14 @@ internal class ShareInTest : CoroutineTest {
 
     val one = async {
       flow.onEach {
-        lock.receive()
-      }
+          lock.receive()
+        }
         .toList()
     }
     val two = async {
       flow.onEach {
-        lock.send(Unit)
-      }
+          lock.send(Unit)
+        }
         .toList()
     }
 
@@ -130,8 +130,8 @@ internal class ShareInTest : CoroutineTest {
       lock.send(Unit) // emit(3) after this coroutine has started
 
       flow.onEach {
-        lock.send(Unit)
-      }
+          lock.send(Unit)
+        }
         .toList()
     }
 

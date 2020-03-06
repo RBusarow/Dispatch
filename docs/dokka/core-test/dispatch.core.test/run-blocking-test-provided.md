@@ -20,7 +20,8 @@ fun someTest() = runBlockingTestProvided {
 
   val myData = Data()
 
-  subject.dataDeferred().await() shouldBe myData
+  subject.dataDeferred()
+    .await() shouldBe myData
 
 }
 ```
