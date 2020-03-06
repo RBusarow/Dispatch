@@ -1,7 +1,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatcherprovider/dispatcher-provider/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatcherprovider/dispatcher-provider)
 ![CI](https://github.com/RBusarow/Dispatch/workflows/CI/badge.svg)
 
-# DispatcherProvider
+# Dispatch
 
 Utilities for [kotlinx.coroutines][coroutines] which make them type-safe, easier to test, and require less code.  Define your [CoroutineDispatchers][CoroutineDispatcher] once in a [CoroutineScope][CoroutineScope] factory and then never think about them again.
 
