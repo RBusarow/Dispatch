@@ -14,3 +14,32 @@
  */
 
 fun String.matches(vararg regex: Regex) = regex.any { it.matches(this) }
+
+fun String.replace(regex: Regex, block: (String) -> String): String =
+  regex.replace(this) { match ->
+    block(match.destructured.component1())
+  }
+
+fun String.replace(regex: Regex, block: (String, String) -> String): String =
+  regex.replace(this) { match ->
+    block(match.destructured.component1(), match.destructured.component2())
+  }
+
+fun String.replace(regex: Regex, block: (String, String, String) -> String): String =
+  regex.replace(this) { match ->
+    block(
+      match.destructured.component1(),
+      match.destructured.component2(),
+      match.destructured.component3()
+    )
+  }
+
+fun String.replace(regex: Regex, block: (String, String, String, String) -> String): String =
+  regex.replace(this) { match ->
+    block(
+      match.destructured.component1(),
+      match.destructured.component2(),
+      match.destructured.component3(),
+      match.destructured.component4()
+    )
+  }

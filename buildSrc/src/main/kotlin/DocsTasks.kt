@@ -203,35 +203,3 @@ private fun String.replace(
 private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
   .joinToString(":")
 
-private fun String.replace(
-  regex: Regex, block: (String) -> String
-): String = regex.replace(this) { match ->
-  block(match.destructured.component1())
-}
-
-private fun String.replace(
-  regex: Regex, block: (String, String) -> String
-): String = regex.replace(this) { match ->
-  block(match.destructured.component1(), match.destructured.component2())
-}
-
-private fun String.replace(
-  regex: Regex, block: (String, String, String) -> String
-): String = regex.replace(this) { match ->
-  block(
-    match.destructured.component1(),
-    match.destructured.component2(),
-    match.destructured.component3()
-  )
-}
-
-private fun String.replace(
-  regex: Regex, block: (String, String, String, String) -> String
-): String = regex.replace(this) { match ->
-  block(
-    match.destructured.component1(),
-    match.destructured.component2(),
-    match.destructured.component3(),
-    match.destructured.component4()
-  )
-}
