@@ -15,8 +15,8 @@
 
 package dispatch.core
 
-import io.kotlintest.*
-import io.kotlintest.matchers.types.*
+import io.kotest.matchers.*
+import io.kotest.matchers.types.*
 import io.mockk.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
@@ -82,8 +82,7 @@ internal class DispatcherProviderTest {
     @Test
     fun `DispatcherProvider factory should create DefaultDispatcherProvider`() {
 
-      DispatcherProvider()
-        .shouldBeTypeOf<DefaultDispatcherProvider>()
+      DispatcherProvider().shouldBeTypeOf<DefaultDispatcherProvider>()
     }
   }
 

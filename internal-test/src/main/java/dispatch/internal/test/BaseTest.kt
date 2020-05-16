@@ -15,8 +15,7 @@
 
 package dispatch.internal.test
 
-import io.kotlintest.*
-import io.kotlintest.matchers.*
+import io.kotest.matchers.*
 import kotlinx.atomicfu.*
 import org.junit.jupiter.api.*
 
@@ -34,9 +33,7 @@ abstract class BaseTest {
 
     val actualIndex = index.incrementAndGet()
 
-    withClue("actual index of $actualIndex should be $expectedIndex") {
-      actualIndex shouldBe expectedIndex
-    }
+    actualIndex shouldBe expectedIndex
   }
 
   fun finish(expectedIndex: Int) {

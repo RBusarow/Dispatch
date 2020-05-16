@@ -26,7 +26,9 @@ dependencies {
 
   implementation(Libs.JUnit.jUnit5)
   implementation(Libs.JUnit.jUnit5Vintage)
-  implementation(Libs.KotlinTest.junit5runner)
+  implementation(Libs.Kotest.assertions)
+  implementation(Libs.Kotest.properties)
+  implementation(Libs.Kotest.runner)
 
   implementation(Libs.Kotlin.test)
   implementation(Libs.Kotlin.testCommon)

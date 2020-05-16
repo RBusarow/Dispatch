@@ -15,9 +15,9 @@
 
 package dispatch.internal.test
 
-import io.kotlintest.*
+import io.kotest.matchers.*
 import org.junit.rules.*
-import org.junit.runner.Description
+import org.junit.runner.*
 import org.junit.runners.model.*
 
 class ExpectedFailureRule : TestRule {

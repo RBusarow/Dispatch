@@ -16,12 +16,11 @@
 package dispatch.android.espresso
 
 import androidx.test.espresso.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import io.mockk.*
 import org.junit.*
 import org.junit.rules.*
 import org.junit.runner.*
-import org.junit.runner.Description
 import org.robolectric.*
 
 @RunWith(RobolectricTestRunner::class)

@@ -16,8 +16,8 @@
 package samples
 
 import dispatch.core.test.*
-import io.kotlintest.*
-import io.kotlintest.matchers.types.*
+import io.kotest.matchers.*
+import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.*
@@ -30,7 +30,7 @@ class TestCoroutineExtensionSample {
   val extension = TestCoroutineExtension()
 
   @Test
-  fun `extension should be a TestProvidedCoroutineScope`() = runBlocking {
+  fun `extension should be a TestProvidedCoroutineScope`() = runBlocking<Unit> {
 
     extension.testScope.shouldBeInstanceOf<TestProvidedCoroutineScope>()
   }

@@ -221,7 +221,7 @@ subprojects {
       kotlinOptions {
         allWarningsAsErrors = true
 
-        jvmTarget = "1.6"
+        jvmTarget = "1.8"
 
         // https://youtrack.jetbrains.com/issue/KT-24946
         // freeCompilerArgs = listOf(

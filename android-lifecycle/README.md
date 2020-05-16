@@ -95,9 +95,9 @@ dependencies {
 <!--- INDEX  -->
 [LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.html
 [MinimumStatePolicy]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/-minimum-state-policy/index.html
-[launchOnCreate]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-create.html
-[launchOnStart]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-start.html
-[launchOnResume]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-resume.html
+[launchOnCreate]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/kotlinx.coroutines.flow.-flow/launch-on-create.html
+[launchOnStart]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/kotlinx.coroutines.flow.-flow/launch-on-start.html
+[launchOnResume]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/kotlinx.coroutines.flow.-flow/launch-on-resume.html
 [LifecycleOwner.onNextCreate]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-create.html
 [LifecycleOwner.onNextStart]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-start.html
 [LifecycleOwner.onNextResume]: https://rbusarow.github.io/Dispatch/android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-resume.html

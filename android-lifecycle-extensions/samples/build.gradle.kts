@@ -57,7 +57,9 @@ dependencies {
   implementation(project(":extensions"))
 
   testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit5runner)
+  testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.properties)
+  testImplementation(Libs.Kotest.runner)
 
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)

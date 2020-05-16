@@ -16,8 +16,8 @@
 package dispatch.internal.test
 
 import dispatch.core.*
-import io.kotlintest.*
-import io.kotlintest.matchers.collections.*
+import io.kotest.matchers.*
+import io.kotest.matchers.collections.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 

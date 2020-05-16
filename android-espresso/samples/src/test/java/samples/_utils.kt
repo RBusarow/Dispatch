@@ -18,7 +18,7 @@
 package samples
 
 import dispatch.core.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import org.junit.*
 
