@@ -16,7 +16,7 @@
 package samples
 
 import dispatch.core.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 
 class AsyncSample {

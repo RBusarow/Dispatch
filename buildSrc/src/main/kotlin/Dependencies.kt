@@ -157,8 +157,11 @@ object Libs {
     const val testCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
   }
 
-  object KotlinTest {
-    const val junit5runner = "io.kotlintest:kotlintest-runner-junit5:3.4.2"
+  object Kotest {
+    private const val version = "4.0.5"
+    const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
+    const val properties = "io.kotest:kotest-property-jvm:$version"
+    const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
   }
 
   object Kotlinx {

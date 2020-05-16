@@ -52,7 +52,9 @@ dependencies {
   implementation(Libs.Androidx.Test.runner)
   implementation(Libs.Androidx.Test.Espresso.core)
 
-  testImplementation(Libs.KotlinTest.junit5runner)
+  testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.properties)
+  testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.MockK.core)
   testImplementation(Libs.Robolectric.core)
   testImplementation(project(":internal-test"))

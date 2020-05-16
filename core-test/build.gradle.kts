@@ -32,7 +32,9 @@ dependencies {
   implementation(Libs.JUnit.jUnit4)
   implementation(Libs.JUnit.jUnit5)
   implementation(Libs.JUnit.jUnit5Vintage)
-  testImplementation(Libs.KotlinTest.junit5runner)
+  testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.properties)
+  testImplementation(Libs.Kotest.runner)
 
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)

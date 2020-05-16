@@ -17,7 +17,8 @@ package dispatch.extensions
 
 import dispatch.core.test.*
 import dispatch.extensions.flow.*
-import io.kotlintest.*
+import io.kotest.assertions.throwables.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*

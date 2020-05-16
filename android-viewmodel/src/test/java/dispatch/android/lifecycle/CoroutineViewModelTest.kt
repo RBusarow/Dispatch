@@ -18,8 +18,8 @@ package dispatch.android.lifecycle
 import androidx.lifecycle.*
 import dispatch.core.*
 import dispatch.internal.test.*
-import io.kotlintest.*
-import io.kotlintest.matchers.types.*
+import io.kotest.matchers.*
+import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*

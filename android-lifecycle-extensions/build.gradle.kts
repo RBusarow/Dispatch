@@ -62,7 +62,9 @@ dependencies {
   testImplementation(project(":internal-test"))
 
   testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.KotlinTest.junit5runner)
+  testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.properties)
+  testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
   testImplementation(Libs.Androidx.Test.runner)
