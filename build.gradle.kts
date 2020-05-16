@@ -162,18 +162,17 @@ allprojects {
         )
       }
 
-      tasks.register("buildDocs")
-        .configure {
+      val buildDocs by tasks.registering {
 
-          description = "recreates all documentation for the /docs directory"
-          group = "documentation"
+        description = "recreates all documentation for the /docs directory"
+        group = "documentation"
 
-          doFirst {
-            updateReadMeArtifactVersions()
-          }
+        doFirst {
+          updateReadMeArtifactVersions()
+        }
 
-          dependsOn(
-            rootProject.tasks.findByName("cleanDocs"),
+        dependsOn(
+          rootProject.tasks.findByName("cleanDocs"),
             rootProject.tasks.findByName("copyRootFiles"),
             rootProject.tasks.findByName("knit"),
             this@dokkaTask
@@ -210,8 +209,10 @@ fun linkModuleDocs(
   }
 }
 
-tasks.register("clean").configure {
-  delete("build")
+val clean by tasks.registering {
+  doLast {
+    delete("build")
+  }
 }
 
 subprojects {
@@ -234,16 +235,17 @@ subprojects {
     }
 }
 
-tasks.register("cleanDocs").configure {
+val cleanDocs by tasks.registering {
 
   description = "cleans /docs"
   group = "documentation"
 
-  cleanDocs()
-
+  doLast {
+    cleanDocs()
+  }
 }
 
-tasks.register("copyRootFiles").configure {
+val copyRootFiles by tasks.registering {
 
   description = "copies documentation files from the project root into /docs"
   group = "documentation"
