@@ -173,16 +173,16 @@ allprojects {
 
         dependsOn(
           rootProject.tasks.findByName("cleanDocs"),
-            rootProject.tasks.findByName("copyRootFiles"),
-            rootProject.tasks.findByName("knit"),
-            this@dokkaTask
-          )
+          rootProject.tasks.findByName("copyRootFiles"),
+          rootProject.tasks.findByName("knit"),
+          this@dokkaTask
+        )
 
-          doLast {
-            copyKdoc()
-            copyReadMe()
-          }
+        doLast {
+          copyKdoc()
+          copyReadMe()
         }
+      }
     }
   }
 }
