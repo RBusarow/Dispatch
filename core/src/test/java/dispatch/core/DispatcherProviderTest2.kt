@@ -17,33 +17,24 @@ package dispatch.core
 
 import io.kotest.matchers.*
 import io.kotest.matchers.types.*
-import io.mockk.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 internal class DispatcherProviderTest {
 
-  val default: CoroutineDispatcher = mockk()
-  val io: CoroutineDispatcher = mockk()
-  val main: MainCoroutineDispatcher = mockk()
-  val mainImmediate: MainCoroutineDispatcher = mockk()
-  val unconfined: CoroutineDispatcher = mockk()
+  val main = newSingleThreadContext("main dispatcher")
 
-  @BeforeAll
-  fun beforeAll() {
-    mockkStatic(Dispatchers::class)
-
-    every { Dispatchers.Default } returns default
-    every { Dispatchers.IO } returns io
-    every { Dispatchers.Main } returns main
-    every { Dispatchers.Unconfined } returns unconfined
-
-    every { main.immediate } returns mainImmediate
+  @BeforeEach
+  fun beforeEach() {
+    Dispatchers.setMain(main)
   }
 
-  @AfterAll
-  fun afterAll() {
-    unmockkStatic(Dispatchers::class)
+  @AfterEach
+  fun afterEach() {
+    Dispatchers.resetMain()
   }
 
   @Nested
@@ -52,31 +43,31 @@ internal class DispatcherProviderTest {
     @Test
     fun `created provider default dispatcher should use Dispatchers Default`() {
 
-      DispatcherProvider().default shouldBe default
+      DispatcherProvider().default shouldBe Dispatchers.Default
     }
 
     @Test
     fun `created provider io dispatcher should use Dispatchers IO`() {
 
-      DispatcherProvider().io shouldBe io
+      DispatcherProvider().io shouldBe Dispatchers.IO
     }
 
     @Test
     fun `created provider main dispatcher should use Dispatchers Main`() {
 
-      DispatcherProvider().main shouldBe main
+      DispatcherProvider().main shouldBe Dispatchers.Main
     }
 
     @Test
     fun `created provider mainImmediate dispatcher should use Dispatchers Main immediate`() {
 
-      DispatcherProvider().mainImmediate shouldBe mainImmediate
+      DispatcherProvider().mainImmediate shouldBe Dispatchers.Main.immediate
     }
 
     @Test
     fun `created provider unconfined dispatcher should use Dispatchers Unconfined`() {
 
-      DispatcherProvider().unconfined shouldBe unconfined
+      DispatcherProvider().unconfined shouldBe Dispatchers.Unconfined
     }
 
     @Test
@@ -92,31 +83,31 @@ internal class DispatcherProviderTest {
     @Test
     fun `DefaultDispatcherProvider default dispatcher should use Dispatchers Default`() {
 
-      DefaultDispatcherProvider().default shouldBe default
+      DefaultDispatcherProvider().default shouldBe Dispatchers.Default
     }
 
     @Test
     fun `DefaultDispatcherProvider io dispatcher should use Dispatchers IO`() {
 
-      DefaultDispatcherProvider().io shouldBe io
+      DefaultDispatcherProvider().io shouldBe Dispatchers.IO
     }
 
     @Test
     fun `DefaultDispatcherProvider main dispatcher should use Dispatchers Main`() {
 
-      DefaultDispatcherProvider().main shouldBe main
+      DefaultDispatcherProvider().main shouldBe Dispatchers.Main
     }
 
     @Test
     fun `DefaultDispatcherProvider mainImmediate dispatcher should use Dispatchers Main immediate`() {
 
-      DefaultDispatcherProvider().mainImmediate shouldBe mainImmediate
+      DefaultDispatcherProvider().mainImmediate shouldBe Dispatchers.Main.immediate
     }
 
     @Test
     fun `DefaultDispatcherProvider unconfined dispatcher should use Dispatchers Unconfined`() {
 
-      DefaultDispatcherProvider().unconfined shouldBe unconfined
+      DefaultDispatcherProvider().unconfined shouldBe Dispatchers.Unconfined
     }
   }
 

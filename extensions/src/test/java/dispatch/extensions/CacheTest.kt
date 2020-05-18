@@ -25,12 +25,10 @@ import org.junit.jupiter.api.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-internal class CacheTest : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+internal class CacheTest {
 
   @Test
-  fun illegalHistorySizes_throwException() = runBlockingTest {
+  fun illegalHistorySizes_throwException() = testProvided {
 
     shouldThrow<IllegalArgumentException> { flowOf("a").cache(-3) }
     shouldThrow<IllegalArgumentException> { flowOf("a").cache(-2) }
@@ -39,7 +37,7 @@ internal class CacheTest : CoroutineTest {
   }
 
   @Test
-  fun firstCollection_doesNotEmitCache() = runBlockingTest {
+  fun firstCollection_doesNotEmitCache() = testProvided {
 
     val list = listOf(1, 2, 3, 4, 5)
 
@@ -52,7 +50,7 @@ internal class CacheTest : CoroutineTest {
   }
 
   @Test
-  fun secondCollection_receivesCacheFirst() = runBlockingTest {
+  fun secondCollection_receivesCacheFirst() = testProvided {
 
     val list = listOf(1, 2, 3, 4, 5)
 
@@ -67,7 +65,7 @@ internal class CacheTest : CoroutineTest {
   }
 
   @Test
-  fun thirdCollection_getsUpdatedCache() = runBlockingTest {
+  fun thirdCollection_getsUpdatedCache() = testProvided {
 
     val list = listOf(1, 2, 3, 4, 5)
 
@@ -85,7 +83,7 @@ internal class CacheTest : CoroutineTest {
   }
 
   @Test
-  fun largeCache_buildsOverMultipleCollectors() = runBlockingTest {
+  fun largeCache_buildsOverMultipleCollectors() = testProvided {
 
     val list = listOf(1, 2, 3, 4, 5)
 

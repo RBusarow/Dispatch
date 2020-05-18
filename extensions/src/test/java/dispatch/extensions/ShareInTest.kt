@@ -26,12 +26,10 @@ import org.junit.jupiter.api.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-internal class ShareInTest : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+internal class ShareInTest {
 
   @Test
-  fun `one collector should reset the source when done`() = runBlockingTest {
+  fun `one collector should reset the source when done`() = testProvided {
 
     var startInvocations = 0
     var completeInvocations = 0
@@ -51,7 +49,7 @@ internal class ShareInTest : CoroutineTest {
   }
 
   @Test
-  fun `sequential collectors should reset the source each time`() = runBlockingTest {
+  fun `sequential collectors should reset the source each time`() = testProvided {
 
     var startInvocations = 0
     var completeInvocations = 0
@@ -87,14 +85,14 @@ internal class ShareInTest : CoroutineTest {
 
     val one = async {
       flow.onEach {
-          lock.receive()
-        }
+        lock.receive()
+      }
         .toList()
     }
     val two = async {
       flow.onEach {
-          lock.send(Unit)
-        }
+        lock.send(Unit)
+      }
         .toList()
     }
 
@@ -130,8 +128,8 @@ internal class ShareInTest : CoroutineTest {
       lock.send(Unit) // emit(3) after this coroutine has started
 
       flow.onEach {
-          lock.send(Unit)
-        }
+        lock.send(Unit)
+      }
         .toList()
     }
 
@@ -170,7 +168,7 @@ internal class ShareInTest : CoroutineTest {
   }
 
   @Test
-  fun `refCount of zero should reset the cache`() = runBlockingTest {
+  fun `refCount of zero should reset the cache`() = testProvided {
 
     val flow = flowOf(1, 2, 3, 4, 5)
       .shareIn(this, 2)
@@ -186,7 +184,7 @@ internal class ShareInTest : CoroutineTest {
   }
 
   @Test
-  fun `refCount of zero should cancel the internal channel`() = runBlockingTest {
+  fun `refCount of zero should cancel the internal channel`() = testProvided {
 
     val sourceBroadcastChannel = BroadcastChannel<Int>(1)
 

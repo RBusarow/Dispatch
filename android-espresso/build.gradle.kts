@@ -52,8 +52,8 @@ dependencies {
   implementation(Libs.Androidx.Test.runner)
   implementation(Libs.Androidx.Test.Espresso.core)
 
+  testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.MockK.core)
   testImplementation(Libs.Robolectric.core)

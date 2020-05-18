@@ -25,10 +25,11 @@ import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*
 
+@CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeSample : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+class LifecycleCoroutineScopeSample(
+  val testScope: TestProvidedCoroutineScope
+) {
 
   @BeforeEach
   fun beforeEach() {

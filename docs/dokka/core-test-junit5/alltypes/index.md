@@ -10,15 +10,15 @@
 
 ##### [dispatch.core.test.CoroutineTest](../dispatch.core.test/-coroutine-test/index.md)
 
-Convenience interface which tags a test class with a JUnit 5 extension.  This creates a new instance
-of [testScope](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test/test-scope.md) before each test, optionally using a custom [testScopeFactory](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test/test-scope-factory.md).
+Annotation for specifying a custom [CoroutineTestExtension.ScopeFactory](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md) while
+extending a test class or function with [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/index.md).
 
 
 |
 
-##### [dispatch.core.test.TestCoroutineExtension](../dispatch.core.test/-test-coroutine-extension/index.md)
+##### [dispatch.core.test.CoroutineTestExtension](../dispatch.core.test/-coroutine-test-extension/index.md)
 
-Convenience interface for tagging a test class with a JUnit 5 extension.  This creates a new instance
-of [testScope](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-test-coroutine-extension/test-scope.md) before each test, optionally using a custom [factory](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-test-coroutine-extension/factory.md).
+JUnit 5 [ParameterResolver](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/extension.html)[Extension](#) for injecting and managing a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) in a test instance.
+This creates a new instance of [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) each time the scope is injected, optionally using a custom [ScopeFactory](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md).
 
 

@@ -95,15 +95,15 @@ fun some_test() = runBlockingProvided {
 }
 
 @Test
-fun some_test() = runBlockingTestProvided {
+fun some_test() = testProvided {
   someSuspendFunctionWithADelay()
 }
 ```
 
-| **Name**                   | **Description**
-| -------------------        | ---------------
-| [runBlockingProvided](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/run-blocking-provided.html)      | Uses [runBlocking](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html), but injects a [DispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html) into its [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html).  Use this function if you want normal dispatch behavior.
-| [runBlockingTestProvided](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/run-blocking-test-provided.html)  | Uses [runBlockingTest](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/run-blocking-test.html), but injects a [DispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html) into its [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html).  Use this function if you want the explicit time control of [runBlockingTest](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/run-blocking-test.html).
+| **Name**               | **Description**
+| -------------------    | ---------------
+| [runBlockingProvided](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/run-blocking-provided.html)  | Uses [runBlocking](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html), but injects a [DispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html) into its [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html).  Use this function if you want normal dispatch behavior.
+| [testProvided](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/test-provided.html)         | Uses [runBlockingTest](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/run-blocking-test.html), but injects a [DispatcherProvider](https://rbusarow.github.io/Dispatch/core//dispatch.core/-dispatcher-provider/index.html) into its [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html).  Use this function if you want the explicit time control of [runBlockingTest](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/run-blocking-test.html).
 
 ### Minimum Gradle Config
 

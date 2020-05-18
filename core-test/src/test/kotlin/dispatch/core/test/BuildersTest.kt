@@ -89,7 +89,7 @@ internal class BuildersTest {
 
     @Test
     fun `default params should create scope with TestDispatcherProvider`() =
-      runBlockingTestProvided {
+      testProvided {
 
         val dispatcherProvider = coroutineContext.dispatcherProvider
 
@@ -98,7 +98,7 @@ internal class BuildersTest {
 
     @Test
     fun `specified provider param should be used in CoroutineContext`() =
-      runBlockingTestProvided(testProvider) {
+      testProvided(testProvider) {
 
         val dispatcherProvider = coroutineContext.dispatcherProvider
 
@@ -110,21 +110,21 @@ internal class BuildersTest {
 
       val ctx = TestCoroutineContext()
 
-      runBlockingTestProvided(ctx) {
+      testProvided(ctx) {
 
         coroutineContext[TestCoroutineContext] shouldBe ctx
       }
     }
 
     @Test
-    fun `CoroutineScope receiver should be TestCoroutineScope`() = runBlockingTestProvided {
+    fun `CoroutineScope receiver should be TestCoroutineScope`() = testProvided {
 
       this.shouldBeInstanceOf<TestCoroutineScope>()
     }
 
     @Test
     fun `new CoroutineContext should share delay control across all dispatchers`() =
-      runBlockingTestProvided {
+      testProvided {
         launchMain {
           delay(1000)
         }
@@ -133,7 +133,7 @@ internal class BuildersTest {
 
     @Test
     fun `new CoroutineContext should have the same TestCoroutineDispatcher as the DispatcherProvider`() =
-      runBlockingTestProvided {
+      testProvided {
 
         val dispatcher = coroutineContext[ContinuationInterceptor]
 

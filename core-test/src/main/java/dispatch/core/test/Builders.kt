@@ -34,7 +34,7 @@ import kotlin.coroutines.*
  * [EmptyCoroutineContext] is used if one is not provided.
  *
  * @see runBlocking
- * @see runBlockingTestProvided
+ * @see testProvided
  * @sample samples.BuildersSample.runBlockingProvidedSample
  */
 @ExperimentalCoroutinesApi
@@ -67,10 +67,10 @@ fun runBlockingProvided(
  *
  * @see runBlockingTest
  * @see runBlockingProvided
- * @sample samples.BuildersSample.runBlockingTestProvidedSample
+ * @sample samples.BuildersSample.testProvidedSample
  */
 @ExperimentalCoroutinesApi
-fun runBlockingTestProvided(
+fun testProvided(
   context: CoroutineContext = EmptyCoroutineContext,
   testBody: suspend TestCoroutineScope.() -> Unit
 ) {
@@ -83,3 +83,22 @@ fun runBlockingTestProvided(
 
   return runBlockingTest(context = context + dispatcher + dispatcherProvider, testBody = testBody)
 }
+
+/**
+ * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created [TestCoroutineScope].
+ *
+ * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher],
+ * then a new [TestCoroutineDispatcher] will be created.
+ *
+ * If the `context` does not contain a `DispatcherProvider`,
+ * a [TestDispatcherProvider] will be created using the `TestCoroutineDispatcher`.
+ *
+ * @see runBlockingTest
+ * @see runBlockingProvided
+ * @sample samples.BuildersSample.testProvidedSample
+ * @sample samples.BuildersSample.testProvidedExtensionSample
+ */
+@ExperimentalCoroutinesApi
+fun TestProvidedCoroutineScope.testProvided(
+  testBody: suspend TestCoroutineScope.() -> Unit
+) = testProvided(coroutineContext, testBody)
