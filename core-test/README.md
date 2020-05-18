@@ -97,15 +97,15 @@ fun some_test() = runBlockingProvided {
 }
 
 @Test
-fun some_test() = runBlockingTestProvided {
+fun some_test() = testProvided {
   someSuspendFunctionWithADelay()
 }
 ```
 
-| **Name**                   | **Description**
-| -------------------        | ---------------
-| [runBlockingProvided]      | Uses [runBlocking], but injects a [DispatcherProvider] into its [CoroutineScope].  Use this function if you want normal dispatch behavior.
-| [runBlockingTestProvided]  | Uses [runBlockingTest], but injects a [DispatcherProvider] into its [TestCoroutineScope].  Use this function if you want the explicit time control of [runBlockingTest].
+| **Name**               | **Description**
+| -------------------    | ---------------
+| [runBlockingProvided]  | Uses [runBlocking], but injects a [DispatcherProvider] into its [CoroutineScope].  Use this function if you want normal dispatch behavior.
+| [testProvided]         | Uses [runBlockingTest], but injects a [DispatcherProvider] into its [TestCoroutineScope].  Use this function if you want the explicit time control of [runBlockingTest].
 
 
 ### Minimum Gradle Config
@@ -168,7 +168,7 @@ dependencies {
 [TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-dispatcher-provider/index.html
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html
 [runBlockingProvided]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/run-blocking-provided.html
-[runBlockingTestProvided]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/run-blocking-test-provided.html
+[testProvided]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/test-provided.html
 <!--- END -->
 
 [CoroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html

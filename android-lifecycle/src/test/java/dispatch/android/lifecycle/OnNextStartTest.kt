@@ -27,9 +27,7 @@ import org.junit.jupiter.api.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class OnNextStartTest : BaseTest(), CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+class OnNextStartTest : BaseTest() {
 
   lateinit var lifecycleOwner: LifecycleOwner
   lateinit var lifecycle: LifecycleRegistry
@@ -45,7 +43,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already started`() = runBlockingTest {
+    fun `block should immediately execute if already started`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -57,7 +55,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not started`() = runBlockingTest {
+    fun `block should not immediately execute if lifecycle is not started`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
 
@@ -71,7 +69,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = runBlockingTest {
+    fun `block should stop when lifecycle is destroyed`() = testProvided {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -98,7 +96,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is started twice`() = runBlockingTest {
+    fun `block should not execute twice when lifecycle is started twice`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -114,7 +112,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = runBlockingTest {
+    fun `block should return value if allowed to complete`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -124,7 +122,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = runBlockingTest {
+    fun `block should return null if not allowed to complete`() = testProvided {
 
       val lock = Mutex(locked = true)
 
@@ -149,7 +147,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already started`() = runBlockingTest {
+    fun `block should immediately execute if already started`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -161,7 +159,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not started`() = runBlockingTest {
+    fun `block should not immediately execute if lifecycle is not started`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
 
@@ -175,7 +173,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = runBlockingTest {
+    fun `block should stop when lifecycle is destroyed`() = testProvided {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -202,7 +200,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is started twice`() = runBlockingTest {
+    fun `block should not execute twice when lifecycle is started twice`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -218,7 +216,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = runBlockingTest {
+    fun `block should return value if allowed to complete`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -228,7 +226,7 @@ class OnNextStartTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = runBlockingTest {
+    fun `block should return null if not allowed to complete`() = testProvided {
 
       val lock = Mutex(locked = true)
 

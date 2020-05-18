@@ -16,140 +16,21 @@
 package dispatch.core.test
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.extension.*
-import kotlin.coroutines.*
+import kotlin.reflect.*
 
 /**
- * Convenience interface which tags a test class with a JUnit 5 extension.  This creates a new instance
- * of [testScope] before each test, optionally using a custom [testScopeFactory].
+ * Annotation for specifying a custom [CoroutineTestExtension.ScopeFactory] while
+ * extending a test class or function with [CoroutineTestExtension].
  *
- * ### Before Each:
- * * A new [TestProvidedCoroutineScope] is created using [testScopeFactory].
- * * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
- *
- * ### After Each:
- * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are no leaking coroutines.  Any unfinished coroutine
- * will throw an [UncompletedCoroutinesError].
- * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
- *
- * ### Requires JUnit 5.
- * ``` groovy
- * dependencies {
- *   testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
- * }
- * ```
- * @sample samples.CoroutineTestSample
- * @sample samples.CoroutineTestWithFactorySample
- * @see TestCoroutineExtension
+ * @see CoroutineTestExtension
+ * @param scopeFactory *optional* KClass which extends [CoroutineTestExtension.ScopeFactory].
+ * **This class must have a default constructor**
+ * An instance will be automatically initialized inside the [CoroutineTestExtension] and used to create custom [TestProvidedCoroutineScope] instances.
+ * @sample samples.CoroutineTestDefaultFactorySample
+ * @sample samples.CoroutineTestNamedFactorySample
  */
 @ExperimentalCoroutinesApi
-@ExtendWith(TestCoroutineExtension::class)
-interface CoroutineTest {
-
-  /**
-   * Optional parameter for defining a custom [TestProvidedCoroutineScope].
-   *
-   * Each iteration of a test will be a new invocation of this lambda.
-   */
-  val testScopeFactory: () -> TestProvidedCoroutineScope
-    get() = { TestProvidedCoroutineScope() }
-
-  /**
-   * The [TestProvidedCoroutineScope] which is created and managed by the `CoroutineTest`
-   */
-  var testScope: TestProvidedCoroutineScope
-
-  /**
-   * Convenience function for invoking [runBlockingTestProvided] without an additional import.
-   */
-  fun runBlockingTest(
-    context: CoroutineContext = EmptyCoroutineContext,
-    testBody: suspend TestCoroutineScope.() -> Unit
-  ): Unit = runBlockingTestProvided(
-    testScope.coroutineContext + context,
-    testBody
-  )
-}
-
-/**
- * Convenience interface for tagging a test class with a JUnit 5 extension.  This creates a new instance
- * of [testScope] before each test, optionally using a custom [factory].
- *
- * ### Before Each:
- * * A new [TestProvidedCoroutineScope] is created using [factory].
- * * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
- *
- * ### After Each:
- * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are no leaking coroutines.  Any unfinished coroutine
- * will throw an [UncompletedCoroutinesError].
- * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
- *
- * ### Requires JUnit 5.
- * ``` groovy
- * dependencies {
- *   testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
- * }
- * ```
- *
- * @param factory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
- * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
- * @sample samples.TestCoroutineExtensionSample
- * @sample samples.TestCoroutineExtensionWithFactorySample
- */
-@ExperimentalCoroutinesApi
-class TestCoroutineExtension(
-  private val factory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
-) : TestInstancePostProcessor, BeforeEachCallback, AfterEachCallback {
-  /**
-   * The [TestProvidedCoroutineScope] which is created and managed by the `CoroutineTest`
-   */
-  lateinit var testScope: TestProvidedCoroutineScope
-
-  /**
-   * The underlying [TestCoroutineDispatcher] which is responsible for virtual time control.
-   *
-   * @see UncaughtExceptionCaptor
-   * @see DelayController
-   */
-  lateinit var dispatcher: TestCoroutineDispatcher
-
-  private var testInstance: CoroutineTest? = null
-
-  /**
-   * @suppress
-   */
-  override fun postProcessTestInstance(testInstance: Any?, context: ExtensionContext?) {
-
-    // In a nested test, set the testInstance when the root class is initialized
-    // but don't re-set it for the nested classes
-    (testInstance as? CoroutineTest)?.let {
-      this.testInstance = it
-    }
-  }
-
-  /**
-   * @suppress
-   */
-  override fun beforeEach(context: ExtensionContext) {
-
-    testScope = testInstance?.testScopeFactory?.invoke() ?: factory()
-    dispatcher = testScope.coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
-
-    testInstance?.let { instance ->
-
-      instance.testScope = testScope
-    }
-    Dispatchers.setMain(dispatcher)
-  }
-
-  /**
-   * @suppress
-   */
-  override fun afterEach(context: ExtensionContext) {
-    testScope.cleanupTestCoroutines()
-    Dispatchers.resetMain()
-  }
-
-}
+@ExtendWith(CoroutineTestExtension::class)
+public annotation class CoroutineTest(val scopeFactory: KClass<*> = CoroutineTestExtension.ScopeFactory::class)
 

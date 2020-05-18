@@ -1,8 +1,8 @@
-[core-test-junit5](../../index.md) / [dispatch.core.test](../index.md) / [CoroutineTest](./index.md)
+[core-test-junit5](../../index.md) / [dispatch.core.test](../index.md) / [CoroutineTest](index.md) / [&lt;init&gt;](./-init-.md)
 
-# CoroutineTest
+# &lt;init&gt;
 
-`@ExperimentalCoroutinesApi @ExtendWith([NormalClass(value=dispatch/core/test/CoroutineTestExtension)]) annotation class CoroutineTest` [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test-junit5/src/main/java/dispatch/core/test/CoroutineTest.kt#L35)
+`CoroutineTest(scopeFactory: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<*> = CoroutineTestExtension.ScopeFactory::class)`
 
 Annotation for specifying a custom [CoroutineTestExtension.ScopeFactory](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md) while
 extending a test class or function with [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/index.md).
@@ -61,14 +61,3 @@ An instance will be automatically initialized inside the [CoroutineTestExtension
 
 [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/index.md)
 
-### Constructors
-
-| Name | Summary |
-|---|---|
-| [&lt;init&gt;](-init-.md) | Annotation for specifying a custom [CoroutineTestExtension.ScopeFactory](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md) while extending a test class or function with [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/index.md).`CoroutineTest(scopeFactory: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<*> = CoroutineTestExtension.ScopeFactory::class)` |
-
-### Properties
-
-| Name | Summary |
-|---|---|
-| [scopeFactory](scope-factory.md) | *optional* KClass which extends [CoroutineTestExtension.ScopeFactory](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md). **This class must have a default constructor** An instance will be automatically initialized inside the [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-coroutine-test-extension/index.md) and used to create custom [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) instances.`val scopeFactory: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<*>` |

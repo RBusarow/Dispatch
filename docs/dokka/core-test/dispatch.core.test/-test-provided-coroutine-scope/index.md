@@ -19,3 +19,9 @@ regardless of what type of `CoroutineScope` is required.
 | Name | Summary |
 |---|---|
 | [dispatcherProvider](dispatcher-provider.md) | single [DispatcherProvider](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) promise for the [TestProvidedCoroutineScope](./index.md)`abstract val dispatcherProvider: `[`DispatcherProvider`](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) |
+
+### Extension Functions
+
+| Name | Summary |
+|---|---|
+| [testProvided](../test-provided.md) | Delegates to [runBlockingTest](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/run-blocking-test.html), but injects a [DispatcherProvider](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) into the created [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html).`fun `[`TestProvidedCoroutineScope`](./index.md)`.testProvided(testBody: suspend `[`TestCoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

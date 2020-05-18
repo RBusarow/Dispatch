@@ -13,38 +13,30 @@
  * limitations under the License.
  */
 
+@file:Suppress("EXPERIMENTAL_API_USAGE", "EXPERIMENTAL_OVERRIDE")
+
 package samples
 
-import dispatch.android.lifecycle.*
-import dispatch.core.*
+import dispatch.core.test.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
 
-@ExperimentalCoroutinesApi
-class ViewModelScopeSample {
+@CoroutineTest
+class CoroutineTestDefaultFactorySample(
+  val testScope: TestProvidedCoroutineScope
+) {
 
-  @Sample
-  fun viewModelScopeSample() {
+  @Test
+  fun `extension should automatically inject into test class`() = runBlocking {
 
-    class SomeViewModel : CoroutineViewModel() {
+    val subject = SomeClass(testScope)
 
-      init {
+    val resultDeferred = subject.someFunction()
 
-        // auto-created MainImmediateCoroutineScope which is auto-cancelled in onClear()
-        viewModelScope //...
+    testScope.advanceUntilIdle()
 
-        // it works as a normal CoroutineScope (because it is)
-        viewModelScope.launchMain { }
-
-        // this is the same CoroutineScope instance each time
-        viewModelScope.launchMain { }
-
-      }
-
-      override fun onClear() {
-        viewModelScope.isActive shouldBe false
-      }
-    }
-
+    resultDeferred.await() shouldBe someValue
   }
+
 }

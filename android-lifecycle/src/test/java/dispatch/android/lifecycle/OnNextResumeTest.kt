@@ -27,9 +27,7 @@ import org.junit.jupiter.api.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class OnNextResumeTest : BaseTest(), CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+class OnNextResumeTest : BaseTest() {
 
   lateinit var lifecycleOwner: LifecycleOwner
   lateinit var lifecycle: LifecycleRegistry
@@ -45,7 +43,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = runBlockingTest {
+    fun `block should immediately execute if already resumed`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -57,7 +55,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not resumed`() = runBlockingTest {
+    fun `block should not immediately execute if lifecycle is not resumed`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
@@ -71,7 +69,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should pause when lifecycle is destroyed`() = runBlockingTest {
+    fun `block should pause when lifecycle is destroyed`() = testProvided {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -98,7 +96,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is resumed twice`() = runBlockingTest {
+    fun `block should not execute twice when lifecycle is resumed twice`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -114,7 +112,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = runBlockingTest {
+    fun `block should return value if allowed to complete`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -124,7 +122,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = runBlockingTest {
+    fun `block should return null if not allowed to complete`() = testProvided {
 
       val lock = Mutex(locked = true)
 
@@ -149,7 +147,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = runBlockingTest {
+    fun `block should immediately execute if already resumed`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -161,7 +159,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not resumed`() = runBlockingTest {
+    fun `block should not immediately execute if lifecycle is not resumed`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
@@ -175,7 +173,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should pause when lifecycle is destroyed`() = runBlockingTest {
+    fun `block should pause when lifecycle is destroyed`() = testProvided {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -202,7 +200,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is resumed twice`() = runBlockingTest {
+    fun `block should not execute twice when lifecycle is resumed twice`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -218,7 +216,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = runBlockingTest {
+    fun `block should return value if allowed to complete`() = testProvided {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -228,7 +226,7 @@ class OnNextResumeTest : BaseTest(), CoroutineTest {
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = runBlockingTest {
+    fun `block should return null if not allowed to complete`() = testProvided {
 
       val lock = Mutex(locked = true)
 

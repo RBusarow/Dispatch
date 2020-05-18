@@ -13,28 +13,32 @@
  * limitations under the License.
  */
 
+@file:Suppress("EXPERIMENTAL_API_USAGE", "EXPERIMENTAL_OVERRIDE")
+
 package samples
 
 import dispatch.core.test.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.extension.*
 
-@ExperimentalCoroutinesApi
-class TestCoroutineExtensionWithFactorySample {
+class CoroutineTestNamedFactorySample {
 
-  val customScope = TestProvidedCoroutineScope(
-    context = CoroutineName("custom name")
-  )
+  class TestCoroutineScopeWithJobFactory : CoroutineTestExtension.ScopeFactory() {
 
-  @JvmField
-  @RegisterExtension
-  val extension = TestCoroutineExtension { customScope }
+    override fun create(): TestProvidedCoroutineScope {
+      return TestProvidedCoroutineScope(context = Job())
+    }
+  }
 
-  @Test
-  fun `extension should provide a scope from the custom factory`() = runBlocking {
+  @CoroutineTest(TestCoroutineScopeWithJobFactory::class)
+  class CustomFactorySample(val testScope: TestProvidedCoroutineScope) {
 
-    extension.testScope shouldBe customScope
+    @Test
+    fun `injected scope should have a Job context`() = runBlocking {
+
+      testScope.coroutineContext[Job] shouldNotBe null
+    }
+
   }
 }

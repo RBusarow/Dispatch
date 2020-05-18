@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("EXPERIMENTAL_API_USAGE", "EXPERIMENTAL_OVERRIDE")
+
 package samples
 
 import dispatch.core.test.*
@@ -22,28 +24,29 @@ import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.*
 
-@ExperimentalCoroutinesApi
-class TestCoroutineExtensionSample {
+class RegisterSample {
 
   @JvmField
   @RegisterExtension
-  val extension = TestCoroutineExtension()
+  val extension = coroutineTestExtension()
 
   @Test
   fun `extension should be a TestProvidedCoroutineScope`() = runBlocking<Unit> {
 
-    extension.testScope.shouldBeInstanceOf<TestProvidedCoroutineScope>()
+    extension.scope.shouldBeInstanceOf<TestProvidedCoroutineScope>()
   }
 
   @Test
-  fun `the testScope and dispatcher have normal test functionality`() = runBlocking {
+  fun `extension should automatically inject into functions`(scope: TestProvidedCoroutineScope) =
+    runBlocking {
 
-    val subject = SomeClass(extension.testScope)
+      val subject = SomeClass(scope)
 
-    val resultDeferred = subject.someFunction()
+      val resultDeferred = subject.someFunction()
 
-    extension.dispatcher.advanceUntilIdle()
+      scope.advanceUntilIdle()
 
-    resultDeferred.await() shouldBe someValue
-  }
+      resultDeferred.await() shouldBe someValue
+    }
 }
+
