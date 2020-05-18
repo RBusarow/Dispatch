@@ -23,36 +23,15 @@ import org.junit.jupiter.api.extension.*
 import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
-class TestCoroutineExtensionTest {
+class CoroutineTestExtensionRegisteredTest {
 
   val customScope = TestProvidedCoroutineScope()
-  @JvmField @RegisterExtension val customFactoryExtension = TestCoroutineExtension { customScope }
-  @JvmField @RegisterExtension val defaultExtension = TestCoroutineExtension()
-
-  val customHistory = mutableSetOf<TestProvidedCoroutineScope>()
-  val defaultHistory = mutableListOf<TestProvidedCoroutineScope>()
-
-  @BeforeEach
-  fun beforeEach() {
-
-    // by accessing these testScope properties and not crashing,
-    // we also ensure the initialization sequence
-    customHistory.add(customFactoryExtension.testScope)
-    defaultHistory.add(defaultExtension.testScope)
-  }
-
-  @AfterAll
-  fun afterAll() {
-
-    customHistory.size shouldBe 1
-
-    defaultHistory.distinct().size shouldBe 4
-
-  }
+  @JvmField @RegisterExtension val customFactoryExtension = coroutineTestExtension { customScope }
+  @JvmField @RegisterExtension val defaultExtension = CoroutineTestExtension()
 
   @Test
   fun `a no-arg extension should use a default TestProvidedCoroutineScope`() {
-    val dispatcherProvider = defaultExtension.testScope.coroutineContext[DispatcherProvider]!!
+    val dispatcherProvider = defaultExtension.scope.coroutineContext[DispatcherProvider]!!
 
     val allDispatchers = setOf(
       dispatcherProvider.default,
@@ -60,8 +39,7 @@ class TestCoroutineExtensionTest {
       dispatcherProvider.main,
       dispatcherProvider.mainImmediate,
       dispatcherProvider.unconfined,
-      defaultExtension.dispatcher,
-      defaultExtension.testScope.coroutineContext[ContinuationInterceptor]!!
+      defaultExtension.scope.coroutineContext[ContinuationInterceptor]!!
     )
 
     allDispatchers.size shouldBe 1
@@ -70,17 +48,16 @@ class TestCoroutineExtensionTest {
   @Test
   fun `a custom factory extension should use use the custom factory`() {
 
-    val context = customFactoryExtension.testScope.coroutineContext
+    val context = customFactoryExtension.scope.coroutineContext
 
     context shouldBe customScope.coroutineContext
-
   }
 
   @Nested
   inner class `nested classes` {
     @Test
     fun `a no-arg extension should use a default TestProvidedCoroutineScope`() {
-      val dispatcherProvider = defaultExtension.testScope.coroutineContext[DispatcherProvider]!!
+      val dispatcherProvider = defaultExtension.scope.coroutineContext[DispatcherProvider]!!
 
       val allDispatchers = setOf(
         dispatcherProvider.default,
@@ -88,8 +65,7 @@ class TestCoroutineExtensionTest {
         dispatcherProvider.main,
         dispatcherProvider.mainImmediate,
         dispatcherProvider.unconfined,
-        defaultExtension.dispatcher,
-        defaultExtension.testScope.coroutineContext[ContinuationInterceptor]!!
+        defaultExtension.scope.coroutineContext[ContinuationInterceptor]!!
       )
 
       allDispatchers.size shouldBe 1
@@ -98,11 +74,11 @@ class TestCoroutineExtensionTest {
     @Test
     fun `a custom factory extension should use use the custom factory`() {
 
-      val context = customFactoryExtension.testScope.coroutineContext
+      val context = customFactoryExtension.scope.coroutineContext
 
       context shouldBe customScope.coroutineContext
-
     }
   }
 }
+
 

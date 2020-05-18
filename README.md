@@ -254,7 +254,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 
 [runBlockingProvided] is really just delegating [runBlocking], but creates a [CoroutineScope] which includes  `TestDispatcherProvider`, so "io" here is really a `TestCoroutineDispatcher`.
 
-There's also [runBlockingTestProvided], which delegates to [runBlockingTest][kotlinx.runBlockingTest] but creates a [TestCoroutineScope] which includes the [TestDispatcherProvider].
+There's also [testProvided], which delegates to [runBlockingTest][kotlinx.runBlockingTest] but creates a [TestCoroutineScope] which includes the [TestDispatcherProvider].
 
 ``` kotlin
 class Subject {
@@ -284,9 +284,9 @@ fun `sayHello should say hello`() = runBlockingProvided {
 
 | **artifact**                | **features**                                   |
 | --------------------------- | ---------------------------------------------- |
-| [dispatch-core-test]        | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [runBlockingTestProvided]
+| [dispatch-core-test]        | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [testProvided]
 | [dispatch-core-test-junit4] | [TestCoroutineRule]
-| [dispatch-core-test-junit5] | [CoroutineTest] <p> [TestCoroutineExtension]
+| [dispatch-core-test-junit5] | [CoroutineTest] <p> [CoroutineTestExtension]
 
 ### Android
 
@@ -359,7 +359,7 @@ dependencies {
   // This can be used at the same time as :dispatch-core-test-junit5
   testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03" 
   
-  // CoroutineTest, TestCoroutineExtension, and :core-test
+  // CoroutineTest, CoroutineTestExtension, and :core-test
   // This provides :dispatch-core-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-core-test-junit4
   testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03" 
@@ -499,14 +499,14 @@ limitations under the License.
 [TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-dispatcher-provider/index.html
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html
 [runBlockingProvided]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/run-blocking-provided.html
-[runBlockingTestProvided]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/run-blocking-test-provided.html
+[testProvided]: https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/test-provided.html
 <!--- MODULE core-test-junit4-->
 <!--- INDEX  -->
 [TestCoroutineRule]: https://rbusarow.github.io/Dispatch/core-test-junit4//dispatch.core.test/-test-coroutine-rule/index.html
 <!--- MODULE core-test-junit5-->
 <!--- INDEX  -->
 [CoroutineTest]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test/index.html
-[TestCoroutineExtension]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-test-coroutine-extension/index.html
+[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test-extension/index.html
 <!--- MODULE extensions-->
 <!--- INDEX  -->
 <!--- MODULE android-espresso-->

@@ -41,10 +41,29 @@ class BuildersSample {
   }
 
   @Sample
-  fun runBlockingTestProvidedSample() {
+  fun testProvidedSample() {
 
     @Test
-    fun someTest() = runBlockingTestProvided {
+    fun someTest() = testProvided {
+
+      val subject = SomeClass(this)
+
+      val myData = Data()
+
+      subject.dataDeferred()
+        .await() shouldBe myData
+
+    }
+
+  }
+
+  @Sample
+  fun testProvidedExtensionSample() {
+
+    val scope = TestProvidedCoroutineScope()
+
+    @Test
+    fun someTest() = scope.testProvided {
 
       val subject = SomeClass(this)
 

@@ -13,39 +13,27 @@
  * limitations under the License.
  */
 
+@file:Suppress("EXPERIMENTAL_API_USAGE")
+
 package samples
 
 import dispatch.core.test.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
+import org.junit.jupiter.api.extension.*
 
-@ExperimentalCoroutinesApi
-class CoroutineTestSample : CoroutineTest {
+class RegisterWithFactorySample {
 
-  override lateinit var testScope: TestProvidedCoroutineScope
-
-  lateinit var someClass: SomeClass
-
-  @BeforeEach
-  fun beforeEach() {
-    someClass = SomeClass(testScope)
+  @JvmField
+  @RegisterExtension
+  val extension = coroutineTestExtension {
+    TestProvidedCoroutineScope(context = CoroutineName("custom name"))
   }
 
   @Test
-  fun someSample() = runBlocking {
+  fun `extension should provide a scope from the custom factory`() = runBlocking {
 
-    someClass.someFunction()
-      .await() shouldBe someValue
-
+    extension.scope.coroutineContext[CoroutineName] shouldBe CoroutineName("custom name")
   }
-
 }
-
-val someValue = true
-
-class SomeClass(val coroutineScope: CoroutineScope) {
-
-  fun someFunction() = coroutineScope.async { true }
-}
-
