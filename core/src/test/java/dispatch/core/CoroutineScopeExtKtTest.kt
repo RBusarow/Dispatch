@@ -15,8 +15,8 @@
 
 package dispatch.core
 
-import io.kotlintest.*
-import io.kotlintest.matchers.types.*
+import io.kotest.matchers.*
+import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*

@@ -3,6 +3,7 @@ site_description: 'Quality of life coroutine utilities.'
 site_author: '2020 Rick Busarow'
 site_url: 'https://rbusarow.github.io/Dispatch/'
 remote_branch: gh-pages
+docs_dir: '../docs'
 
 # Repository
 repo_name: 'Dispatch'

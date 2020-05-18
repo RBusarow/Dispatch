@@ -16,7 +16,7 @@
 package samples
 
 import dispatch.core.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
 
@@ -35,7 +35,8 @@ class CoroutineTestSample : CoroutineTest {
   @Test
   fun someSample() = runBlocking {
 
-    someClass.someFunction().await() shouldBe someValue
+    someClass.someFunction()
+      .await() shouldBe someValue
 
   }
 

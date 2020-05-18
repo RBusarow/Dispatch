@@ -16,7 +16,7 @@
 package samples
 
 import dispatch.core.test.*
-import io.kotlintest.matchers.types.*
+import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import org.junit.*
 
@@ -33,8 +33,8 @@ class TestCoroutineRuleSample {
     rule.shouldBeInstanceOf<TestProvidedCoroutineScope>()
 
     rule.launch {
-      // use the rule like any other CoroutineScope
-    }
+        // use the rule like any other CoroutineScope
+      }
       .join()
   }
 

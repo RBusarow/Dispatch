@@ -18,7 +18,7 @@
 package samples
 
 import dispatch.core.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.knit.test.*
 import org.junit.jupiter.api.*
@@ -35,7 +35,8 @@ fun Any?.shouldPrint(
   vararg expected: String
 ) = toString() shouldBe expected
 
-fun dispatcherName() = " @coroutine.*".toRegex().replace(Thread.currentThread().name, "")
+fun dispatcherName() = " @coroutine.*".toRegex()
+  .replace(Thread.currentThread().name, "")
 
 val blocking = newSingleThreadContext("runBlocking thread")
 

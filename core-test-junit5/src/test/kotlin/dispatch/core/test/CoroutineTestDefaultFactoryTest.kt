@@ -16,7 +16,7 @@
 package dispatch.core.test
 
 import dispatch.internal.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
 import kotlin.coroutines.*

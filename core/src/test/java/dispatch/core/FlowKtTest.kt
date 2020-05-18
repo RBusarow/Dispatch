@@ -14,7 +14,7 @@
  */
 package dispatch.core
 
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*
@@ -69,8 +69,8 @@ internal class FlowTest {
   fun `flow on default should use provided default dispatcher`() = runTest {
 
     flowOf(1).onEach {
-      delegatedDispatcher = dispatcherStack.pop()
-    }
+        delegatedDispatcher = dispatcherStack.pop()
+      }
       .flowOnDefault()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -85,8 +85,8 @@ internal class FlowTest {
   fun `flow on io should use provided io dispatcher`() = runTest {
 
     flowOf(1).onEach {
-      delegatedDispatcher = dispatcherStack.pop()
-    }
+        delegatedDispatcher = dispatcherStack.pop()
+      }
       .flowOnIO()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -101,8 +101,8 @@ internal class FlowTest {
   fun `flow on main should use provided main dispatcher`() = runTest {
 
     flowOf(1).onEach {
-      delegatedDispatcher = dispatcherStack.pop()
-    }
+        delegatedDispatcher = dispatcherStack.pop()
+      }
       .flowOnMain()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -117,8 +117,8 @@ internal class FlowTest {
   fun `flow on mainImmediate should use provided mainImmediate dispatcher`() = runTest {
 
     flowOf(1).onEach {
-      delegatedDispatcher = dispatcherStack.pop()
-    }
+        delegatedDispatcher = dispatcherStack.pop()
+      }
       .flowOnMainImmediate()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -133,8 +133,8 @@ internal class FlowTest {
   fun `flow on unconfined should use provided unconfined dispatcher`() = runTest {
 
     flowOf(1).onEach {
-      delegatedDispatcher = dispatcherStack.pop()
-    }
+        delegatedDispatcher = dispatcherStack.pop()
+      }
       .flowOnUnconfined()
       .onStart {
         originDispatcher = dispatcherStack.pop()

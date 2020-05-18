@@ -16,8 +16,8 @@
 package samples
 
 import dispatch.core.test.*
-import io.kotlintest.*
-import io.kotlintest.matchers.types.*
+import io.kotest.matchers.*
+import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import org.junit.*
 import org.junit.jupiter.api.Test

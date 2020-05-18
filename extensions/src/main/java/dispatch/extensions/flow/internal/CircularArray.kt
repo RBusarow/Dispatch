@@ -43,13 +43,13 @@ internal class CircularArray<T>(size: Int) : Iterable<T> {
     private val head: Int
       get() = when (count) {
         arraySnapshot.size -> (tailSnapshot + 1) % count
-        else -> 0
+        else               -> 0
       }
 
     @Suppress("UNCHECKED_CAST")
     private fun get(index: Int): T = when (count) {
       arraySnapshot.size -> arraySnapshot[(head + index) % arraySnapshot.size] as T
-      else -> arraySnapshot[index] as T
+      else               -> arraySnapshot[index] as T
     }
 
     override fun hasNext(): Boolean = _index < count

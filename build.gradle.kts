@@ -162,28 +162,27 @@ allprojects {
         )
       }
 
-      tasks.register("buildDocs")
-        .configure {
+      val buildDocs by tasks.registering {
 
-          description = "recreates all documentation for the /docs directory"
-          group = "documentation"
+        description = "recreates all documentation for the /docs directory"
+        group = "documentation"
 
-          doFirst {
-            updateReadMeArtifactVersions()
-          }
-
-          dependsOn(
-            rootProject.tasks.findByName("cleanDocs"),
-            rootProject.tasks.findByName("copyRootFiles"),
-            rootProject.tasks.findByName("knit"),
-            this@dokkaTask
-          )
-
-          doLast {
-            copyKdoc()
-            copyReadMe()
-          }
+        doFirst {
+          updateReadMeArtifactVersions()
         }
+
+        dependsOn(
+          rootProject.tasks.findByName("cleanDocs"),
+          rootProject.tasks.findByName("copyRootFiles"),
+          rootProject.tasks.findByName("knit"),
+          this@dokkaTask
+        )
+
+        doLast {
+          copyKdoc()
+          copyReadMe()
+        }
+      }
     }
   }
 }
@@ -210,8 +209,10 @@ fun linkModuleDocs(
   }
 }
 
-tasks.register("clean").configure {
-  delete("build")
+val clean by tasks.registering {
+  doLast {
+    delete("build")
+  }
 }
 
 subprojects {
@@ -221,7 +222,7 @@ subprojects {
       kotlinOptions {
         allWarningsAsErrors = true
 
-        jvmTarget = "1.6"
+        jvmTarget = "1.8"
 
         // https://youtrack.jetbrains.com/issue/KT-24946
         // freeCompilerArgs = listOf(
@@ -234,16 +235,17 @@ subprojects {
     }
 }
 
-tasks.register("cleanDocs").configure {
+val cleanDocs by tasks.registering {
 
   description = "cleans /docs"
   group = "documentation"
 
-  cleanDocs()
-
+  doLast {
+    cleanDocs()
+  }
 }
 
-tasks.register("copyRootFiles").configure {
+val copyRootFiles by tasks.registering {
 
   description = "copies documentation files from the project root into /docs"
   group = "documentation"
@@ -251,6 +253,7 @@ tasks.register("copyRootFiles").configure {
   dependsOn("cleanDocs")
 
   doLast {
+    copySite()
     copyRootFiles()
   }
 }

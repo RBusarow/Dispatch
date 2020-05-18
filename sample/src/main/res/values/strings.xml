@@ -14,5 +14,5 @@
   -->
 
 <resources>
-  <string name="app_name" translatable="false">DispatcherProvider Sample</string>
+  <string name="app_name" translatable="false">Dispatch Sample</string>
 </resources>

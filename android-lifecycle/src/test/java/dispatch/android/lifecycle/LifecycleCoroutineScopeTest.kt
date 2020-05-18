@@ -17,7 +17,7 @@ package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
 import dispatch.core.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*

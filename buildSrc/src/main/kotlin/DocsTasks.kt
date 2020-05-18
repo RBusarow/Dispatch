@@ -21,17 +21,10 @@ fun cleanDocs() {
   val root = File("docs")
 
   root.walkTopDown()
-    .maxDepth(1)
-    .filter { file ->
-
-      when {
-        file.parentFile != root                   -> false
-        file.path.startsWith(prefix = "docs/css") -> false
-        else                                      -> true
-      }
-    }
     .forEach {
-      it.deleteRecursively()
+      if (it != root) {
+        it.deleteRecursively()
+      }
     }
 }
 
@@ -101,6 +94,20 @@ fun Project.copyReadMe() {
     }
 }
 
+fun Project.copySite() {
+
+  val root = File("$rootDir/site")
+
+  root.walkTopDown()
+    .maxDepth(1)
+    .forEach { file ->
+
+      if (!file.name.matches(".*mkdocs.yml".toRegex()) && file != root) {
+        file.copyRecursively(File("$rootDir/docs"), true)
+      }
+    }
+}
+
 fun Project.updateReadMeArtifactVersions() {
 
   val regex = "$projectDir/README.md".toRegex()
@@ -158,8 +165,8 @@ fun File.updateLibraryVersions(): File {
 
         val newLine = dependencyMatchers.firstOrNull { matcher ->
 
-          matcher.regex.matches(originalLine)
-        }
+            matcher.regex.matches(originalLine)
+          }
           ?.let { matcher ->
 
             originalLine.replace(matcher)
@@ -198,37 +205,6 @@ private fun String.replace(
   "$m1$m2${dependencyMatcher.fullCoordinate}$m3$m4"
 }
 
-private fun String.removeVersionSuffix(): String = split(":").subList(0, 2).joinToString(":")
+private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
+  .joinToString(":")
 
-private fun String.replace(
-  regex: Regex, block: (String) -> String
-): String = regex.replace(this) { match ->
-  block(match.destructured.component1())
-}
-
-private fun String.replace(
-  regex: Regex, block: (String, String) -> String
-): String = regex.replace(this) { match ->
-  block(match.destructured.component1(), match.destructured.component2())
-}
-
-private fun String.replace(
-  regex: Regex, block: (String, String, String) -> String
-): String = regex.replace(this) { match ->
-  block(
-    match.destructured.component1(),
-    match.destructured.component2(),
-    match.destructured.component3()
-  )
-}
-
-private fun String.replace(
-  regex: Regex, block: (String, String, String, String) -> String
-): String = regex.replace(this) { match ->
-  block(
-    match.destructured.component1(),
-    match.destructured.component2(),
-    match.destructured.component3(),
-    match.destructured.component4()
-  )
-}
