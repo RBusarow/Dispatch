@@ -134,6 +134,11 @@ fun File.updateLibraryVersions(): File {
     .use { writer ->
 
       val dependencyMatchers = listOf(
+        Libs.Androidx.Lifecycle.common.toDependencyMatcher(),
+        Libs.Androidx.Lifecycle.extensions.toDependencyMatcher(),
+        Libs.Androidx.Lifecycle.liveData.toDependencyMatcher(),
+        Libs.Androidx.Lifecycle.runtime.toDependencyMatcher(),
+        Libs.Androidx.Lifecycle.viewModel.toDependencyMatcher(),
         Libs.Androidx.Test.runner.toDependencyMatcher(),
         Libs.Androidx.Test.Espresso.core.toDependencyMatcher(),
         Libs.JUnit.jUnit4.toDependencyMatcher(),

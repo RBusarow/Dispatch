@@ -17,14 +17,11 @@ package samples
 
 import dispatch.android.lifecycle.*
 import dispatch.core.*
-import dispatch.core.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 
 @ExperimentalCoroutinesApi
-class ViewModelScopeSample : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+class ViewModelScopeSample {
 
   @Sample
   fun viewModelScopeSample() {

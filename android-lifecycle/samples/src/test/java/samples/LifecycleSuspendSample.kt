@@ -18,14 +18,15 @@ package samples
 import dispatch.android.lifecycle.*
 import dispatch.core.*
 import dispatch.core.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
 
+@CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleSuspendSample : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+class LifecycleSuspendSample(
+  val testScope: TestProvidedCoroutineScope
+) {
 
   @BeforeEach
   fun beforeEach() {

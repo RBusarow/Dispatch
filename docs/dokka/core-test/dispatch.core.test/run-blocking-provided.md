@@ -36,5 +36,5 @@ to use a [TestCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/k
 
 [runBlocking](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/run-blocking.html)
 
-[runBlockingTestProvided](run-blocking-test-provided.md)
+[testProvided](test-provided.md)
 

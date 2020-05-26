@@ -28,7 +28,4 @@ kotlinDslPluginOptions {
 dependencies {
   compileOnly(gradleApi())
 
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
-  testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
-
 }

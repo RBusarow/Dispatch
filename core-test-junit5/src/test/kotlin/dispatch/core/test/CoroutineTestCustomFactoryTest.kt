@@ -13,35 +13,28 @@
  * limitations under the License.
  */
 
+@file:Suppress("EXPERIMENTAL_API_USAGE", "EXPERIMENTAL_OVERRIDE")
+
 package dispatch.core.test
 
 import dispatch.internal.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
+internal val customScope = TestProvidedCoroutineScope()
+
+class CustomFactory : CoroutineTestExtension.ScopeFactory() {
+  override fun create(): TestProvidedCoroutineScope = customScope
+}
+
+@CoroutineTest(CustomFactory::class)
 @ExperimentalCoroutinesApi
-class CoroutineTestCustomFactoryTest : CoroutineTest {
-
-  val customScope = TestProvidedCoroutineScope()
-  override val testScopeFactory = { customScope }
-
-  override lateinit var testScope: TestProvidedCoroutineScope
-
-  val customHistory = mutableSetOf<TestProvidedCoroutineScope>()
-
-  @BeforeEach
-  fun beforeEach() {
-
-    // by accessing this testScope property and not crashing,
-    // we also ensure the initialization sequence
-    customHistory.add(testScope)
-  }
-
-  @AfterEach
-  fun afterEach() {
-    customHistory.size shouldBe 1
-  }
+class CoroutineTestCustomFactoryTest(
+  val testScope: TestProvidedCoroutineScope
+) {
 
   @Test
   fun `a custom factory extension should use use the custom factory`() {
@@ -51,7 +44,7 @@ class CoroutineTestCustomFactoryTest : CoroutineTest {
   }
 
   @Test
-  fun `runBlockingTest with default context should use testScope`() = runBlockingTest {
+  fun `testProvided with default context should use testScope`() = testScope.testProvided {
 
     // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
     coroutineContext shouldEqualFolded testScope.coroutineContext + coroutineContext[Job]!!
@@ -62,7 +55,14 @@ class CoroutineTestCustomFactoryTest : CoroutineTest {
 
     val job = Job()
 
-    runBlockingTest(job) {
+    val dispatcher = testScope.coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
+    val dispatcherProvider = testScope.dispatcherProvider as TestDispatcherProvider
+
+    TestProvidedCoroutineScope(
+      dispatcher,
+      dispatcherProvider,
+      testScope.coroutineContext + job
+    ).testProvided {
 
       // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
       coroutineContext shouldEqualFolded testScope.coroutineContext + job
@@ -80,7 +80,7 @@ class CoroutineTestCustomFactoryTest : CoroutineTest {
     }
 
     @Test
-    fun `runBlockingTest with default context should use testScope`() = runBlockingTest {
+    fun `testProvided with default context should use testScope`() = testScope.testProvided {
 
       // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
       coroutineContext shouldEqualFolded testScope.coroutineContext + coroutineContext[Job]!!
@@ -91,7 +91,15 @@ class CoroutineTestCustomFactoryTest : CoroutineTest {
 
       val job = Job()
 
-      runBlockingTest(job) {
+      val dispatcher =
+        testScope.coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
+      val dispatcherProvider = testScope.dispatcherProvider as TestDispatcherProvider
+
+      TestProvidedCoroutineScope(
+        dispatcher,
+        dispatcherProvider,
+        testScope.coroutineContext + job
+      ).testProvided {
 
         // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
         coroutineContext shouldEqualFolded testScope.coroutineContext + job

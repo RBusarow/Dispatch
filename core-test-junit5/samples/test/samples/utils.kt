@@ -15,32 +15,7 @@
 
 package samples
 
-import dispatch.core.test.*
-import io.kotlintest.*
 import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
-
-@ExperimentalCoroutinesApi
-class CoroutineTestSample : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
-
-  lateinit var someClass: SomeClass
-
-  @BeforeEach
-  fun beforeEach() {
-    someClass = SomeClass(testScope)
-  }
-
-  @Test
-  fun someSample() = runBlocking {
-
-    someClass.someFunction()
-      .await() shouldBe someValue
-
-  }
-
-}
 
 val someValue = true
 

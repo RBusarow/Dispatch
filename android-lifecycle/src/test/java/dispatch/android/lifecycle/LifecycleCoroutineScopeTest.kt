@@ -17,17 +17,18 @@ package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
 import dispatch.core.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*
 
 @FlowPreview
+@CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeTest : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+class LifecycleCoroutineScopeTest(
+  val testScope: TestProvidedCoroutineScope
+) {
 
   lateinit var lifecycleOwner: LifecycleOwner
   lateinit var lifecycle: LifecycleRegistry

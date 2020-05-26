@@ -4,7 +4,7 @@
 
 * [Features](#features)
   * [CoroutineTest example](#coroutinetest-example)
-  * [TestCoroutineExtension example](#testcoroutineextension-example)
+  * [CoroutineTestExtension example](#coroutinetestextension-example)
 * [Setting Dispatchers.Main](#setting-dispatchersmain)
 * [This module replaces core-test](#this-module-replaces-core-test)
 * [JUnit dependencies](#junit-dependencies)
@@ -13,16 +13,17 @@
 
 ## Features
 
-In addition to all the functionality in [dispatch-core-test](https://rbusarow.github.io/Dispatch/core-test//index.html), this module exposes a JUnit 5 [TestCoroutineExtension](https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-test-coroutine-extension/index.html) and [CoroutineTest](https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test/index.html) marker interface to handle set-up and tear-down of a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html).
+In addition to all the functionality in [dispatch-core-test](https://rbusarow.github.io/Dispatch/core-test//index.html), this module exposes a JUnit 5 [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test-extension/index.html) and [CoroutineTest](https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test/index.html) annotation to handle set-up and tear-down of a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html).
 
 Since [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/core-test//dispatch.core.test/-test-provided-coroutine-scope/index.html) is a [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html), this Extension also invokes [cleanupTestCoroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html) after the test.
 
 ### CoroutineTest example
 
 ``` kotlin
-class SomeClassTest : CoroutineTest {
-
-  override val testScope: TestCoroutineScope
+@CoroutineTest(CustomScopeFactory::class)
+class SomeClassTest(
+  val testScope: TestProvidedCoroutineScope
+) {
 
   @Test
   fun `some test`() = runBlocking {
@@ -39,21 +40,25 @@ class SomeClassTest : CoroutineTest {
 class SomeClass(val coroutineScope: CoroutineScope) {
   fun fireAndForget() = launch { }
 }
+
+class CustomScopeFactory : CoroutineTestExtension.ScopeFactory() {
+  override fun create() = TestProvidedCoroutineScope(context = Job())
+}
 ```
 
-### TestCoroutineExtension example
+### CoroutineTestExtension example
 
 ``` kotlin
 class SomeClassTest {
 
   @JvmField
   @RegisterExtension
-  val extension = TestCoroutineExtension()
+  val extension = CoroutineTestExtension()
 
   @Test
-  fun `some test`() = runBlocking {
+  fun `some test`(scope: TestProvidedCoroutineScope) = runBlocking {
 
-    val subject = SomeClass(extension.testScope)
+    val subject = SomeClass(scope)
 
     val job = subject.fireAndForget()
 
@@ -83,7 +88,7 @@ Click to expand a field.
 
 Because this is a JUnit 5 Extension, it requires a the JUnit 5 artifact.  No external libraries are bundled as part of Dispatch, so you’ll need to add it to your `dependencies` block yourself.
 
-* `org.junit.jupiter:junit-jupiter:5.5.1`
+* `org.junit.jupiter:junit-jupiter:5.6.2`
 
 &nbsp;  Groovy
 
@@ -104,7 +109,7 @@ dependencies {
   // the junit5 artifact also provides the dispatch-core-test artifact
   testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03"
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3"
-  testImplementation "org.junit.jupiter:junit-jupiter:5.6.0"
+  testImplementation "org.junit.jupiter:junit-jupiter:5.6.2"
 }
 ```
 
@@ -127,7 +132,7 @@ dependencies {
   // the junit5 artifact also provides the dispatch-core-test artifact
   testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3")
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
 }
 ```
 
@@ -154,8 +159,8 @@ dependencies {
   // the junit4 and junit5 artifacts also provides the dispatch-core-test artifact
   testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03"
   testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03"
-  testImplementation "org.junit.jupiter:junit-jupiter:5.6.0"
-  testImplementation "org.junit.vintage:junit-vintage-engine:5.6.0"
+  testImplementation "org.junit.jupiter:junit-jupiter:5.6.2"
+  testImplementation "org.junit.vintage:junit-vintage-engine:5.6.2"
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3"
 }
 ```
@@ -179,8 +184,8 @@ dependencies {
   // the junit4 and junit5 artifacts also provides the dispatch-core-test artifact
   testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03")
   testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03")
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
-  testImplementation("org.junit.vintage:junit-vintage-engine:5.6.0")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+  testImplementation("org.junit.vintage:junit-vintage-engine:5.6.2")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3")
 }
 ```

@@ -13,39 +13,40 @@
  * limitations under the License.
  */
 
+@file:Suppress("EXPERIMENTAL_API_USAGE", "EXPERIMENTAL_OVERRIDE")
+
 package samples
 
 import dispatch.core.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
+import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
+import org.junit.jupiter.api.extension.*
 
-@ExperimentalCoroutinesApi
-class CoroutineTestWithFactorySample : CoroutineTest {
+class RegisterSample {
 
-  val customScope = TestProvidedCoroutineScope(
-    context = CoroutineName("custom name")
-  )
+  @JvmField
+  @RegisterExtension
+  val extension = coroutineTestExtension()
 
-  override val testScopeFactory = { customScope }
+  @Test
+  fun `extension should be a TestProvidedCoroutineScope`() = runBlocking<Unit> {
 
-  override lateinit var testScope: TestProvidedCoroutineScope
-
-  lateinit var someClass: SomeClass
-
-  @BeforeEach
-  fun beforeEach() {
-    someClass = SomeClass(testScope)
+    extension.scope.shouldBeInstanceOf<TestProvidedCoroutineScope>()
   }
 
   @Test
-  fun someSample() = runBlocking {
+  fun `extension should automatically inject into functions`(scope: TestProvidedCoroutineScope) =
+    runBlocking {
 
-    someClass
-      .coroutineScope
-      .coroutineContext[CoroutineName]!!
-      .name shouldBe "custom name"
-  }
+      val subject = SomeClass(scope)
 
+      val resultDeferred = subject.someFunction()
+
+      scope.advanceUntilIdle()
+
+      resultDeferred.await() shouldBe someValue
+    }
 }
 

@@ -19,16 +19,17 @@ import dispatch.android.lifecycle.*
 import dispatch.android.lifecycle.LifecycleCoroutineScope.MinimumStatePolicy.*
 import dispatch.core.*
 import dispatch.core.test.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*
 
+@CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeSample : CoroutineTest {
-
-  override lateinit var testScope: TestProvidedCoroutineScope
+class LifecycleCoroutineScopeSample(
+  val testScope: TestProvidedCoroutineScope
+) {
 
   @BeforeEach
   fun beforeEach() {

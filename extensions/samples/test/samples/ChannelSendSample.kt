@@ -16,7 +16,7 @@
 package samples
 
 import dispatch.extensions.channel.*
-import io.kotlintest.*
+import io.kotest.matchers.*
 import kotlinx.coroutines.channels.*
 
 class ChannelSendSample {
