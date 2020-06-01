@@ -70,8 +70,8 @@ repositories {
 
 dependencies {
 
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
   implementation "com.rickbusarow.dispatch:dispatch-extensions:1.0.0-beta03"
 }
 ```
@@ -90,8 +90,8 @@ repositories {
 
 dependencies {
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
   implementation("com.rickbusarow.dispatch:dispatch-extensions:1.0.0-beta03")
 }
 ```
