@@ -324,8 +324,8 @@ dependencies {
   */
 
   // core coroutines
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3" 
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3" 
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7" 
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7" 
   
   // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts  
   implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03" 
@@ -349,7 +349,7 @@ dependencies {
   */
    
   // core coroutines-test
-  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3" 
+  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7" 
   
   // you only need this if you don't have the -junit4 or -junit5 artifacts
   testImplementation "com.rickbusarow.dispatch:dispatch-core-test:1.0.0-beta03" 
@@ -396,8 +396,8 @@ dependencies {
   */
 
   // core coroutines
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
   
   // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts  
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03") 
@@ -421,7 +421,7 @@ dependencies {
   */
    
   // core coroutines-test
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
   
   // you only need this if you don't have the -junit4 or -junit5 artifacts
   testImplementation("com.rickbusarow.dispatch:dispatch-core-test:1.0.0-beta03")
@@ -507,8 +507,6 @@ limitations under the License.
 <!--- INDEX  -->
 [CoroutineTest]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test/index.html
 [CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test-extension/index.html
-<!--- MODULE extensions-->
-<!--- INDEX  -->
 <!--- MODULE android-espresso-->
 <!--- INDEX  -->
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html

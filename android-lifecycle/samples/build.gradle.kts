@@ -54,8 +54,6 @@ dependencies {
   implementation(project(":core"))
   implementation(project(":core-test"))
   implementation(project(":core-test-junit5"))
-  implementation(project(":extensions"))
-
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.properties)

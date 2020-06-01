@@ -63,7 +63,6 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":core"))
-  implementation(project(":extensions"))
   implementation(project(":android-lifecycle"))
   implementation(project(":android-lifecycle-extensions"))
   implementation(project(":android-viewmodel"))

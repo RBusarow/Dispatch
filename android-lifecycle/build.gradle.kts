@@ -56,7 +56,6 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   api(project(":core"))
-  implementation(project(":extensions"))
   testImplementation(project(":core-test"))
   testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
