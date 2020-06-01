@@ -57,7 +57,6 @@ dependencies {
 
   api(project(":android-lifecycle"))
   api(project(":core"))
-  implementation(project(":extensions"))
   testImplementation(project(":core-test-junit5"))
   testImplementation(project(":internal-test"))
 

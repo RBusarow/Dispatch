@@ -36,8 +36,6 @@ object Modules {
     ":core-test-junit5:samples",
     ":core-test:samples",
     ":core:samples",
-    ":extensions",
-    ":extensions:samples",
     ":internal-test",
     ":sample"
   )

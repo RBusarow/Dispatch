@@ -223,8 +223,6 @@ dependencies {
 <!--- INDEX  -->
 <!--- MODULE core-test-junit5-->
 <!--- INDEX  -->
-<!--- MODULE extensions-->
-<!--- INDEX  -->
 <!--- MODULE android-espresso-->
 <!--- INDEX  -->
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html

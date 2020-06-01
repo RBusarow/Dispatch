@@ -212,8 +212,6 @@ dependencies {
 <!--- INDEX  -->
 [CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test-extension/index.html
 [CoroutineTest]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test/index.html
-<!--- MODULE extensions-->
-<!--- INDEX  -->
 <!--- MODULE android-espresso-->
 <!--- INDEX  -->
 <!--- MODULE android-lifecycle-->

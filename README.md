@@ -507,8 +507,6 @@ limitations under the License.
 <!--- INDEX  -->
 [CoroutineTest]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test/index.html
 [CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/core-test-junit5//dispatch.core.test/-coroutine-test-extension/index.html
-<!--- MODULE extensions-->
-<!--- INDEX  -->
 <!--- MODULE android-espresso-->
 <!--- INDEX  -->
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html
