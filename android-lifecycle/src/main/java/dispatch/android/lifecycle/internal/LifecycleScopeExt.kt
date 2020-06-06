@@ -20,8 +20,6 @@ import androidx.lifecycle.*
 import dispatch.android.lifecycle.*
 import dispatch.android.lifecycle.LifecycleCoroutineScope.MinimumStatePolicy.*
 import dispatch.core.*
-import dispatch.extensions.channel.*
-import dispatch.extensions.flow.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
@@ -116,3 +114,41 @@ internal fun Lifecycle.eventFlow(
   .distinctUntilChanged()
 
 private class FlowCancellationException : CancellationException("Flow was aborted")
+
+/**
+ * Terminal operator which collects the given [Flow] until the [predicate] returns true.
+ */
+@ExperimentalCoroutinesApi
+private suspend fun <T> Flow<T>.collectUntil(
+  predicate: suspend (T) -> Boolean
+) = takeWhile { !predicate(it) }.collect()
+
+/**
+ * Returns a flow which performs the given [action] on each value of the original flow.
+ *
+ *
+ * The crucial difference from [onEach] is that when the original flow emits a new value, the [action] block for previous
+ * value is cancelled.
+ */
+@ExperimentalCoroutinesApi
+private fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLatest { value ->
+  action(value)
+  return@transformLatest emit(value)
+}
+
+/**
+ * Attempts to add [element] into this channel via [sendBlocking] inside a try/catch for a [ClosedSendChannelException].
+ *
+ * ### Note
+ *
+ * Attempting to send to a cancelled Channel throws a [CancellationException].
+ * This is a more generic Exception which would be unsafe to catch in this manner.
+ *
+ * @return null if this channel is closed for send.
+ * @see sendBlocking
+ */
+private fun <E> SendChannel<E>.sendBlockingOrNull(element: E) = try {
+  sendBlocking(element)
+} catch (e: ClosedSendChannelException) {
+  null
+}

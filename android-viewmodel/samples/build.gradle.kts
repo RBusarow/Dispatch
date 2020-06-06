@@ -46,7 +46,6 @@ dependencies {
 
   implementation(project(":core"))
   implementation(project(":core-test-junit5"))
-  implementation(project(":extensions"))
   implementation(project(":android-espresso"))
   implementation(project(":android-viewmodel"))
 
