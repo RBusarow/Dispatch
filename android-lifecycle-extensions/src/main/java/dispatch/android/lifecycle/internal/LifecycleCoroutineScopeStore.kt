@@ -15,17 +15,13 @@
 
 package dispatch.android.lifecycle.internal
 
-import android.os.Build
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
-import dispatch.android.lifecycle.LifecycleCoroutineScope
-import dispatch.android.lifecycle.LifecycleScopeFactory
-import dispatch.core.MainImmediateCoroutineScope
-import dispatch.core.launchMainImmediate
-import kotlinx.coroutines.cancel
+import android.os.*
+import androidx.lifecycle.*
+import dispatch.android.lifecycle.*
+import dispatch.core.*
+import kotlinx.coroutines.*
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.*
 import kotlin.collections.set
 
 internal object LifecycleCoroutineScopeStore {
