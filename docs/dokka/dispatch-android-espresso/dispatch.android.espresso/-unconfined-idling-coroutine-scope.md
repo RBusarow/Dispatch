@@ -2,7 +2,7 @@
 
 # UnconfinedIdlingCoroutineScope
 
-`interface UnconfinedIdlingCoroutineScope : `[`IdlingCoroutineScope`](-idling-coroutine-scope/index.md)`, `[`UnconfinedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-unconfined-coroutine-scope/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L80)
+`interface UnconfinedIdlingCoroutineScope : `[`IdlingCoroutineScope`](-idling-coroutine-scope/index.md)`, `[`UnconfinedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-unconfined-coroutine-scope/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L84)
 
 Marker interface for an [IdlingCoroutineScope](-idling-coroutine-scope/index.md) which indicates that its [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) is [DispatcherProvider.unconfined](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-dispatcher-provider/unconfined.md)
 
@@ -14,7 +14,7 @@ Marker interface for an [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
 [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
-`fun UnconfinedIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`UnconfinedIdlingCoroutineScope`](./-unconfined-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L195)
+`fun UnconfinedIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`UnconfinedIdlingCoroutineScope`](./-unconfined-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L200)
 
 Factory function for an [UnconfinedIdlingCoroutineScope](./-unconfined-idling-coroutine-scope.md).
 

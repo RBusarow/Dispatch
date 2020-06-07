@@ -208,11 +208,11 @@ object Libs {
         "com.rickbusarow.dispatch:dispatch-android-viewmodel:${Versions.versionName}"
 
       object Test {
-        const val core = "com.rickbusarow.dispatch:dispatch-core-test:${Versions.versionName}"
+        const val core = "com.rickbusarow.dispatch:dispatch-test:${Versions.versionName}"
         const val jUnit4 =
-          "com.rickbusarow.dispatch:dispatch-core-test-junit4:${Versions.versionName}"
+          "com.rickbusarow.dispatch:dispatch-test-junit4:${Versions.versionName}"
         const val jUnit5 =
-          "com.rickbusarow.dispatch:dispatch-core-test-junit5:${Versions.versionName}"
+          "com.rickbusarow.dispatch:dispatch-test-junit5:${Versions.versionName}"
 
       }
     }

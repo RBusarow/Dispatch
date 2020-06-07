@@ -14,7 +14,7 @@ Marker interface for an [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
 [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
-`fun DefaultIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`DefaultIdlingCoroutineScope`](./-default-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L114)
+`fun DefaultIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`DefaultIdlingCoroutineScope`](./-default-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L119)
 
 Factory function for a [DefaultIdlingCoroutineScope](./-default-idling-coroutine-scope.md).
 
