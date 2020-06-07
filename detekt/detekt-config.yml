@@ -630,7 +630,7 @@ style:
 
 dispatch:
   active: true
-  AndroidxLifecycleScopeUsage:
+  AndroidXLifecycleScope:
     active: true
   HardCodedDispatcher:
     active: true

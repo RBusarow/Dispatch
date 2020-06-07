@@ -26,7 +26,7 @@ class DispatchConfigValidator : ConfigValidator {
     val result = mutableListOf<Notification>()
     runCatching {
       config.subConfig("dispatch")
-        .subConfig("AndroidxLifecycleScopeUsage")
+        .subConfig("AndroidXLifecycleScope")
         .valueOrNull<Boolean>("active")
     }.onFailure {
       result.add(ConfigError("'active' property must be of type boolean."))

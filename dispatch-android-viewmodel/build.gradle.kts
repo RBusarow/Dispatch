@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-  implementation(Libs.Androidx.Lifecycle.viewModel)
+  implementation(Libs.AndroidX.Lifecycle.viewModel)
 
   implementation(Libs.Kotlin.stdlib)
 
@@ -58,6 +58,6 @@ dependencies {
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
-  testImplementation(Libs.Androidx.Test.runner)
-  testImplementation(Libs.Androidx.Test.Espresso.core)
+  testImplementation(Libs.AndroidX.Test.runner)
+  testImplementation(Libs.AndroidX.Test.Espresso.core)
 }

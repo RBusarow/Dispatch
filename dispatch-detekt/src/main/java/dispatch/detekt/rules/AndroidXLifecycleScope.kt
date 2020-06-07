@@ -23,16 +23,16 @@ import org.jetbrains.kotlin.psi.psiUtil.*
  * Detects use of `androidx.lifecycle.lifecycleScope`,
  * which shares a namespace with `dispatch.android.lifecycle.lifecycleScope`.
  *
- * The Androidx library uses a hard-coded `Dispatchers.Main` and does not contain a `DispatcherProvider`,
+ * The AndroidX library uses a hard-coded `Dispatchers.Main` and does not contain a `DispatcherProvider`,
  * and also leaks its pausing behavior.
  */
-class AndroidxLifecycleScopeUsage(config: Config = Config.empty) : Rule(config) {
+class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config) {
 
   /**
    * @suppress
    */
   override val issue = Issue(
-    id = "AndroidxLifecycleScopeUsage",
+    id = "AndroidXLifecycleScope",
     severity = Severity.Defect,
     description = "The AndroidX lifecycleScope leaks its pausing behavior and uses hard-coded dispatchers.",
     debt = Debt.FIVE_MINS

@@ -28,7 +28,7 @@ class DispatchRuleSetProvider : RuleSetProvider {
   override fun instance(config: Config): RuleSet = RuleSet(
     id = ruleSetId,
     rules = listOf(
-      AndroidxLifecycleScopeUsage(config),
+      AndroidXLifecycleScope(config),
       HardCodedDispatcher(config)
     )
   )
