@@ -496,17 +496,17 @@ limitations under the License.
 [UnconfinedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-unconfined-coroutine-scope.html
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
-[TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.core.test/-test-dispatcher-provider/index.html
-[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.core.test/-test-provided-coroutine-scope/index.html
-[runBlockingProvided]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.core.test/run-blocking-provided.html
-[testProvided]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.core.test/test-provided.html
+[TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-dispatcher-provider/index.html
+[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html
+[runBlockingProvided]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/run-blocking-provided.html
+[testProvided]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/test-provided.html
 <!--- MODULE dispatch-test-junit4-->
 <!--- INDEX  -->
-[TestCoroutineRule]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//dispatch.core.test/-test-coroutine-rule/index.html
+[TestCoroutineRule]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//dispatch.test/-test-coroutine-rule/index.html
 <!--- MODULE dispatch-test-junit5-->
 <!--- INDEX  -->
-[CoroutineTest]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.core.test/-coroutine-test/index.html
-[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.core.test/-coroutine-test-extension/index.html
+[CoroutineTest]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test/index.html
+[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test-extension/index.html
 <!--- MODULE dispatch-android-espresso-->
 <!--- INDEX  -->
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html

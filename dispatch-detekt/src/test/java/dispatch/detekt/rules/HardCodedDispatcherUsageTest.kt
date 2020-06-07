@@ -125,7 +125,7 @@ internal class HardCodedDispatcherTest : FreeSpec(
       }
     }
 
-    "issue id should be AndroidxLifecycleScopeUsage" - {
+    "issue id should be AndroidXLifecycleScope" - {
 
       val rule = HardCodedDispatcher()
 

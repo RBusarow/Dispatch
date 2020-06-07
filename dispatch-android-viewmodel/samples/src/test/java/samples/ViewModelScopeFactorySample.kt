@@ -18,7 +18,7 @@ package samples
 import dispatch.android.espresso.*
 import dispatch.android.viewmodel.*
 import dispatch.core.*
-import dispatch.core.test.*
+import dispatch.test.*
 import kotlinx.coroutines.*
 
 @ExperimentalCoroutinesApi

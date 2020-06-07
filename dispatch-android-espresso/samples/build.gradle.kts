@@ -56,8 +56,8 @@ dependencies {
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
 
-  testImplementation(Libs.Androidx.Test.runner)
-  testImplementation(Libs.Androidx.Test.Espresso.core)
+  testImplementation(Libs.AndroidX.Test.runner)
+  testImplementation(Libs.AndroidX.Test.Espresso.core)
 
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
