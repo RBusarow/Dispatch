@@ -2,7 +2,7 @@
 
 # HardCodedDispatcher
 
-`class HardCodedDispatcher : Rule` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-detekt/src/main/java/dispatch/detekt/rules/HardCodedDispatcher.kt#L41)
+`class HardCodedDispatcher : Rule` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-detekt/src/main/java/dispatch/detekt/rules/HardCodedDispatcher.kt#L37)
 
 Detects use of a hard-coded reference to the `kotlinx.coroutines.Dispatchers` singleton.
 

@@ -139,27 +139,27 @@ allprojects {
        which point to something in moduleA's kdoc will actually work.
        */
 
-      if (this@proj.name != "core" && this@proj.name != "dispatch-detekt") {
+      if (this@proj.name != "dispatch-core" && this@proj.name != "dispatch-detekt") {
 
         linkModuleDocs(
           matchingModules = emptyList(), // all
           currentProject = this@proj,
           currentTask = this@dokkaTask,
-          dependencyModule = "core"
+          dependencyModule = "dispatch-core"
         )
 
         linkModuleDocs(
           matchingModules = listOf("android-lifecycle-extensions"),
           currentProject = this@proj,
           currentTask = this@dokkaTask,
-          dependencyModule = "android-lifecycle"
+          dependencyModule = "dispatch-android-lifecycle"
         )
 
         linkModuleDocs(
-          matchingModules = listOf("core-test-junit4", "core-test-junit5"),
+          matchingModules = listOf("dispatch-test-junit4", "dispatch-test-junit5"),
           currentProject = this@proj,
           currentTask = this@dokkaTask,
-          dependencyModule = "core-test"
+          dependencyModule = "dispatch-test"
         )
       }
 

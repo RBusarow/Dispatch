@@ -19,26 +19,26 @@ object Modules {
   private val sampleRegex = ".*sample.*".toRegex()
 
   val allPaths = listOf(
-    ":android-espresso",
-    ":android-espresso:samples",
-    ":android-lifecycle",
-    ":android-lifecycle:samples",
-    ":android-lifecycle-extensions",
-    ":android-lifecycle-extensions:samples",
-    ":android-viewmodel",
-    ":android-viewmodel:samples",
-    ":core",
-    ":core-test",
-    ":core-test:samples",
-    ":core-test-junit4",
-    ":core-test-junit4:samples",
-    ":core-test-junit5",
-    ":core-test-junit5:samples",
-    ":core-test:samples",
-    ":core:samples",
+    ":dispatch-android-espresso",
+    ":dispatch-android-espresso:samples",
+    ":dispatch-android-lifecycle",
+    ":dispatch-android-lifecycle-extensions",
+    ":dispatch-android-lifecycle-extensions:samples",
+    ":dispatch-android-lifecycle:samples",
+    ":dispatch-android-viewmodel",
+    ":dispatch-android-viewmodel:samples",
+    ":dispatch-core",
+    ":dispatch-core:samples",
     ":dispatch-detekt",
-    ":internal-test",
-    ":sample"
+    ":dispatch-internal-test",
+    ":dispatch-sample",
+    "dispatch-test",
+    "dispatch-test-junit4",
+    "dispatch-test-junit4:samples",
+    "dispatch-test-junit5",
+    "dispatch-test-junit5:samples",
+    "dispatch-test:samples",
+    "dispatch-test:samples"
   )
   val allInternalPaths = allPaths.filter { it.matches(internalRegex) }
   val allProductionPaths = allPaths.filter { !it.matches(internalRegex, sampleRegex) }
