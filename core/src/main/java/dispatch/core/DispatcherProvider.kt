@@ -17,10 +17,8 @@
 
 package dispatch.core
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainCoroutineDispatcher
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 /**
  * Interface corresponding to the different [CoroutineDispatcher]'s offered by [Dispatchers].
