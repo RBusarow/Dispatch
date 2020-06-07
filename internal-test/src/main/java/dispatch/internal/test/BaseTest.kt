@@ -15,10 +15,11 @@
 
 package dispatch.internal.test
 
-import io.kotest.matchers.*
-import kotlinx.atomicfu.*
-import org.junit.jupiter.api.*
+import io.kotest.matchers.shouldBe
+import kotlinx.atomicfu.atomic
+import org.junit.jupiter.api.AfterEach
 
+@Suppress("UnnecessaryAbstractClass")
 abstract class BaseTest {
 
   private val index = atomic(0)

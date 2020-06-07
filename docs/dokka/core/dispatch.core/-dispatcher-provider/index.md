@@ -2,7 +2,7 @@
 
 # DispatcherProvider
 
-`interface DispatcherProvider : `[`Element`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/DispatcherProvider.kt#L29)
+`interface DispatcherProvider : `[`Element`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/DispatcherProvider.kt#L31)
 
 Interface corresponding to the different [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html)'s offered by [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html).
 

@@ -2,7 +2,7 @@
 
 # TestBasicDispatcherProvider
 
-`@ExperimentalCoroutinesApi fun TestBasicDispatcherProvider(): `[`TestDispatcherProvider`](-test-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test/src/main/java/dispatch/core/test/TestDispatcherProvider.kt#L107)
+`@ExperimentalCoroutinesApi fun TestBasicDispatcherProvider(): `[`TestDispatcherProvider`](-test-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test/src/main/java/dispatch/core/test/TestDispatcherProvider.kt#L109)
 
 "Basic" [TestDispatcherProvider](-test-dispatcher-provider/index.md) which mimics production behavior,
 without the automatic time control of [TestCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-dispatcher/index.html)

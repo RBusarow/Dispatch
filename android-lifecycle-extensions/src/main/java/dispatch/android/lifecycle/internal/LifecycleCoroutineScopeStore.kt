@@ -27,6 +27,7 @@ import kotlin.collections.set
 internal object LifecycleCoroutineScopeStore {
 
   // ConcurrentHashMap can miss "put___" operations on API 21/22 https://issuetracker.google.com/issues/37042460
+  @Suppress("MagicNumber")
   private val map = if (Build.VERSION.SDK_INT < 23) {
     Collections.synchronizedMap<Lifecycle, LifecycleCoroutineScope>(mutableMapOf<Lifecycle, LifecycleCoroutineScope>())
   } else {

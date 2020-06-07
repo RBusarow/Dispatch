@@ -15,17 +15,26 @@
 
 package dispatch.sample
 
-import android.annotation.*
-import android.content.*
-import android.os.*
-import android.view.*
-import androidx.fragment.app.*
-import androidx.lifecycle.*
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.createViewModelLazy
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import dispatch.core.*
-import dispatch.sample.databinding.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import timber.log.*
+import dispatch.sample.databinding.FragmentMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.plus
+import timber.log.Timber
 
 @ExperimentalCoroutinesApi
 class MainFragment : Fragment() {
@@ -45,7 +54,7 @@ class MainFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? = binding.root
 
-  @SuppressLint("SetTextI18n")
+  @Suppress("SetTextI18n", "HardCodedDispatcher")
   override fun onAttach(context: Context) {
     super.onAttach(context)
 

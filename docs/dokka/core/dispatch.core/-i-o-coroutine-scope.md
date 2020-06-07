@@ -2,11 +2,11 @@
 
 # IOCoroutineScope
 
-`interface IOCoroutineScope : `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L29)
+`interface IOCoroutineScope : `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L31)
 
 Marker interface which designates a [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) with a [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) of `io`.
 
-`fun IOCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`DispatcherProvider`](-dispatcher-provider/index.md)` = DefaultDispatcherProvider()): `[`IOCoroutineScope`](./-i-o-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L87)
+`fun IOCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`DispatcherProvider`](-dispatcher-provider/index.md)` = DefaultDispatcherProvider()): `[`IOCoroutineScope`](./-i-o-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L89)
 
 Factory function for an [IOCoroutineScope](./-i-o-coroutine-scope.md) with a [DispatcherProvider](-dispatcher-provider/index.md).
 Dispatch defaults to the `io` property of the `DispatcherProvider`.
@@ -21,7 +21,7 @@ Dispatch defaults to the `io` property of the `DispatcherProvider`.
 
 [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)
 
-`fun IOCoroutineScope(coroutineContext: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`): `[`IOCoroutineScope`](./-i-o-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L104)
+`fun IOCoroutineScope(coroutineContext: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`): `[`IOCoroutineScope`](./-i-o-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L106)
 
 Factory function for a [IOCoroutineScope](./-i-o-coroutine-scope.md) with a [DispatcherProvider](-dispatcher-provider/index.md).
 Dispatch defaults to the `io` property of the `DispatcherProvider`.

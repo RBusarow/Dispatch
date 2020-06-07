@@ -2,7 +2,7 @@
 
 # TestDispatcherProvider
 
-`@ExperimentalCoroutinesApi class TestDispatcherProvider : `[`DispatcherProvider`](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test/src/main/java/dispatch/core/test/TestDispatcherProvider.kt#L28)
+`@ExperimentalCoroutinesApi class TestDispatcherProvider : `[`DispatcherProvider`](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core-test/src/main/java/dispatch/core/test/TestDispatcherProvider.kt#L30)
 
 [DispatcherProvider](https://rbusarow.github.io/Dispatch/core/dispatch.core/-dispatcher-provider/index.md) implementation for testing, where each property defaults to a [TestCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-dispatcher/index.html).
 

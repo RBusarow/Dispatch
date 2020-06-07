@@ -2,11 +2,11 @@
 
 # DefaultCoroutineScope
 
-`interface DefaultCoroutineScope : `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L24)
+`interface DefaultCoroutineScope : `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L26)
 
 Marker interface which designates a [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) with a [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) of `default`.
 
-`fun DefaultCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`DispatcherProvider`](-dispatcher-provider/index.md)` = DefaultDispatcherProvider()): `[`DefaultCoroutineScope`](./-default-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L55)
+`fun DefaultCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`DispatcherProvider`](-dispatcher-provider/index.md)` = DefaultDispatcherProvider()): `[`DefaultCoroutineScope`](./-default-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L57)
 
 Factory function for a [DefaultCoroutineScope](./-default-coroutine-scope.md) with a [DispatcherProvider](-dispatcher-provider/index.md).
 Dispatch defaults to the `default` property of the `DispatcherProvider`.
@@ -21,7 +21,7 @@ Dispatch defaults to the `default` property of the `DispatcherProvider`.
 
 [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)
 
-`fun DefaultCoroutineScope(coroutineContext: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`): `[`DefaultCoroutineScope`](./-default-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L72)
+`fun DefaultCoroutineScope(coroutineContext: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`): `[`DefaultCoroutineScope`](./-default-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L74)
 
 Factory function for a [DefaultCoroutineScope](./-default-coroutine-scope.md) with a [DispatcherProvider](-dispatcher-provider/index.md).
 Dispatch defaults to the `default` property of the `DispatcherProvider`.

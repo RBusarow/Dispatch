@@ -132,6 +132,14 @@ object Libs {
     const val core = "com.google.dagger:dagger:$version"
   }
 
+  object Detekt {
+    const val version = "1.9.1"
+    const val api = "io.gitlab.arturbosch.detekt:detekt-api:$version"
+    const val cli = "io.gitlab.arturbosch.detekt:detekt-cli:$version"
+    const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
+    const val test = "io.gitlab.arturbosch.detekt:detekt-test:$version"
+  }
+
   object JakeWharton {
     const val timber = "com.jakewharton.timber:timber:4.7.1"
   }
@@ -188,6 +196,7 @@ object Libs {
     object Dispatch {
 
       const val core = "com.rickbusarow.dispatch:dispatch-core:${Versions.versionName}"
+      const val detekt = "com.rickbusarow.dispatch:dispatch-detekt:${Versions.versionName}"
       const val espresso =
         "com.rickbusarow.dispatch:dispatch-android-espresso:${Versions.versionName}"
       const val extensions = "com.rickbusarow.dispatch:dispatch-extensions:${Versions.versionName}"

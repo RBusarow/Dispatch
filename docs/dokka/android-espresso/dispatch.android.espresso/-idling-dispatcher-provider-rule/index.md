@@ -2,7 +2,7 @@
 
 # IdlingDispatcherProviderRule
 
-`class IdlingDispatcherProviderRule : `[`TestWatcher`](https://junit.org/junit4/javadoc/latest/org/junit/rules/TestWatcher.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScopeRule.kt#L59)
+`class IdlingDispatcherProviderRule : `[`TestWatcher`](https://junit.org/junit4/javadoc/latest/org/junit/rules/TestWatcher.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProviderRule.kt#L59)
 
 A JUnit 4 [TestRule](https://junit.org/junit4/javadoc/latest/org/junit/rules/TestRule.html) which creates a new [IdlingDispatcherProvider](../-idling-dispatcher-provider/index.md) for each test,
 registering all [IdlingDispatcher](../-idling-dispatcher/index.md)s with [IdlingRegistry](https://developer.android.com/reference/androidx/test/androidx/test/espresso/IdlingRegistry.html) before `@Before` and unregistering them after `@After`.

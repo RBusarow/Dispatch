@@ -15,10 +15,12 @@
 
 package dispatch.sample
 
-import androidx.lifecycle.*
-import dispatch.core.*
+import androidx.lifecycle.ViewModel
+import dispatch.core.DefaultCoroutineScope
+import dispatch.core.defaultDispatcher
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 @ExperimentalCoroutinesApi
 class MainViewModel(
@@ -48,6 +50,7 @@ class MainViewModel(
 
     emit(alsoExpensiveDeferred.await())
 
+    @Suppress("MagicNumber")
     delay(5000)
 
     // explicitly specify the default dispatcher (which is redundant here, but it's an example)

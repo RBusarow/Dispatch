@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("HardCodedDispatcher")
+
 package dispatch.core
 
 import kotlinx.coroutines.*

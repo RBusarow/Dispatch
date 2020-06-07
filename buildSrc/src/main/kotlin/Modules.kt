@@ -36,6 +36,7 @@ object Modules {
     ":core-test-junit5:samples",
     ":core-test:samples",
     ":core:samples",
+    ":dispatch-detekt",
     ":internal-test",
     ":sample"
   )

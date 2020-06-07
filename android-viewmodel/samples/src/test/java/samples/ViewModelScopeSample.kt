@@ -13,12 +13,15 @@
  * limitations under the License.
  */
 
+@file:Suppress("MemberNameEqualsClassName")
+
 package samples
 
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
+import dispatch.android.lifecycle.CoroutineViewModel
+import dispatch.core.launchMain
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.isActive
 
 @ExperimentalCoroutinesApi
 class ViewModelScopeSample {

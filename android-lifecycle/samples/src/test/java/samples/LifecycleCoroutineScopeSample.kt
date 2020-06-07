@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("MemberNameEqualsClassName")
+
 package samples
 
 import dispatch.android.lifecycle.*

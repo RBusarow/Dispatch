@@ -41,7 +41,8 @@ interface IdlingCoroutineScope : CoroutineScope {
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface DefaultIdlingCoroutineScope : IdlingCoroutineScope, DefaultCoroutineScope
+interface DefaultIdlingCoroutineScope : IdlingCoroutineScope,
+                                        DefaultCoroutineScope
 
 /**
  * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.io]
@@ -50,7 +51,8 @@ interface DefaultIdlingCoroutineScope : IdlingCoroutineScope, DefaultCoroutineSc
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface IOIdlingCoroutineScope : IdlingCoroutineScope, IOCoroutineScope
+interface IOIdlingCoroutineScope : IdlingCoroutineScope,
+                                   IOCoroutineScope
 
 /**
  * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.main]
@@ -59,7 +61,8 @@ interface IOIdlingCoroutineScope : IdlingCoroutineScope, IOCoroutineScope
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface MainIdlingCoroutineScope : IdlingCoroutineScope, MainCoroutineScope
+interface MainIdlingCoroutineScope : IdlingCoroutineScope,
+                                     MainCoroutineScope
 
 /**
  * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.mainImmediate]
@@ -68,7 +71,8 @@ interface MainIdlingCoroutineScope : IdlingCoroutineScope, MainCoroutineScope
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface MainImmediateIdlingCoroutineScope : IdlingCoroutineScope, MainImmediateCoroutineScope
+interface MainImmediateIdlingCoroutineScope : IdlingCoroutineScope,
+                                              MainImmediateCoroutineScope
 
 /**
  * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.unconfined]
@@ -77,7 +81,8 @@ interface MainImmediateIdlingCoroutineScope : IdlingCoroutineScope, MainImmediat
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface UnconfinedIdlingCoroutineScope : IdlingCoroutineScope, UnconfinedCoroutineScope
+interface UnconfinedIdlingCoroutineScope : IdlingCoroutineScope,
+                                           UnconfinedCoroutineScope
 
 /**
  * Factory function for an [IdlingCoroutineScope].

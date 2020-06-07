@@ -143,7 +143,8 @@ public class CoroutineTestExtension(
  * @sample samples.RegisterWithFactorySample
  */
 @ExperimentalCoroutinesApi
-public inline fun coroutineTestExtension(crossinline scopeFactory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }) =
-  CoroutineTestExtension(object : CoroutineTestExtension.ScopeFactory() {
-    override fun create(): TestProvidedCoroutineScope = scopeFactory.invoke()
-  })
+public inline fun coroutineTestExtension(
+  crossinline scopeFactory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
+): CoroutineTestExtension = CoroutineTestExtension(object : CoroutineTestExtension.ScopeFactory() {
+  override fun create(): TestProvidedCoroutineScope = scopeFactory.invoke()
+})
