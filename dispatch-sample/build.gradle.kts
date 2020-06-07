@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-import Libs.Androidx.Lifecycle
-
 plugins {
   id(Plugins.androidApplication)
   id(Plugins.kotlinAndroid)
@@ -47,13 +45,13 @@ android {
 
 dependencies {
 
-  implementation(Libs.Androidx.activity)
-  implementation(Libs.Androidx.appcompat)
-  implementation(Libs.Androidx.constraintLayout)
-  implementation(Libs.Androidx.coreKtx)
-  implementation(Libs.Androidx.Fragment.ktx)
-  implementation(Lifecycle.common)
-  implementation(Lifecycle.extensions)
+  implementation(Libs.AndroidX.activity)
+  implementation(Libs.AndroidX.appcompat)
+  implementation(Libs.AndroidX.constraintLayout)
+  implementation(Libs.AndroidX.coreKtx)
+  implementation(Libs.AndroidX.Fragment.ktx)
+  implementation(Libs.AndroidX.Lifecycle.common)
+  implementation(Libs.AndroidX.Lifecycle.extensions)
 
   implementation(Libs.JakeWharton.timber)
 
@@ -79,6 +77,6 @@ dependencies {
 
   androidTestImplementation(project(":dispatch-android-espresso"))
 
-  androidTestImplementation(Libs.Androidx.Test.runner)
-  androidTestImplementation(Libs.Androidx.Test.Espresso.core)
+  androidTestImplementation(Libs.AndroidX.Test.runner)
+  androidTestImplementation(Libs.AndroidX.Test.Espresso.core)
 }

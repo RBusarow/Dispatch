@@ -12,7 +12,7 @@
 
 | **Name**                      | **Description**
 | ----------------------------  | --------------- |
-| [AndroidxLifecycleScopeUsage](https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-androidx-lifecycle-scope-usage/index.html) | Looks for accidental usage of the [androidx lifecyclescope](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44) extension.
+| [AndroidXLifecycleScope](https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-android-x-lifecycle-scope/index.html) | Looks for accidental usage of the [androidx lifecyclescope](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44) extension.
 | [HardCodedDispatcher](https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-hard-coded-dispatcher/index.html)    | Detects use of a hard-coded reference to the [kotlinx.coroutines.Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.
 
 ## Setup
@@ -48,7 +48,7 @@ Then, add the following to the bottom of the `detekt-config.yml` file:
 ``` yaml
 dispatch:
   active: true                             # disables all dispatch checks
-  AndroidxLifecycleScopeUsage:             # incorrect lifecycleScope
+  AndroidXLifecycleScope:             # incorrect lifecycleScope
     active: true
   HardCodedDispatcher:                     # finds usage of Dispatchers.______
     active: true
