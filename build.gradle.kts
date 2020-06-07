@@ -16,11 +16,11 @@
 @file:Suppress("MagicNumber")
 
 import io.gitlab.arturbosch.detekt.Detekt
-import kotlinx.knit.KnitPluginExtension
+import kotlinx.knit.*
 import org.gradle.kotlin.dsl.*
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.net.URL
+import org.jetbrains.dokka.gradle.*
+import org.jetbrains.kotlin.gradle.tasks.*
+import java.net.*
 
 buildscript {
   repositories {
