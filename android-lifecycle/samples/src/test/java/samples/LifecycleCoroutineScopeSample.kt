@@ -17,19 +17,15 @@
 
 package samples
 
-import dispatch.android.lifecycle.LifecycleCoroutineScope.MinimumStatePolicy.CANCEL
-import dispatch.android.lifecycle.LifecycleScopeFactory
-import dispatch.android.lifecycle.lifecycleScope
-import dispatch.core.launchMain
-import dispatch.core.test.CoroutineTest
-import dispatch.core.test.TestProvidedCoroutineScope
-import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.BeforeEach
+import dispatch.android.lifecycle.*
+import dispatch.android.lifecycle.LifecycleCoroutineScope.MinimumStatePolicy.*
+import dispatch.core.*
+import dispatch.core.test.*
+import io.kotest.matchers.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.flow.*
+import org.junit.jupiter.api.*
 
 @CoroutineTest
 @ExperimentalCoroutinesApi
