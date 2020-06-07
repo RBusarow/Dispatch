@@ -15,8 +15,8 @@
 
 @file:Suppress("TooManyFunctions", "MagicNumber")
 
-import org.gradle.api.Project
-import java.io.File
+import org.gradle.api.*
+import java.io.*
 
 fun cleanDocs() {
 

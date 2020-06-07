@@ -67,25 +67,25 @@ dispatch:
 
 There is an [issue](https://github.com/detekt/detekt/issues/2582) with ClassLoader caching which may cause issues the first time running Detekt.  The workaround is to execute `./gradlew --stop` once via command line.  You should only ever need to do this one time, if at all.  The fix for this has already been merged into Detekt.
 
-<!--- MODULE core-->
+<!--- MODULE dispatch-core-->
 <!--- INDEX  -->
-<!--- MODULE core-test-->
+<!--- MODULE dispatch-test-->
 <!--- INDEX  -->
-<!--- MODULE core-test-junit4-->
+<!--- MODULE dispatch-test-junit4-->
 <!--- INDEX  -->
-<!--- MODULE core-test-junit5-->
+<!--- MODULE dispatch-test-junit5-->
 <!--- INDEX  -->
 <!--- MODULE dispatch-detekt-->
 <!--- INDEX  -->
 [AndroidxLifecycleScopeUsage]: https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-androidx-lifecycle-scope-usage/index.html
 [HardCodedDispatcher]: https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-hard-coded-dispatcher/index.html
-<!--- MODULE android-espresso-->
+<!--- MODULE dispatch-android-espresso-->
 <!--- INDEX  -->
-<!--- MODULE android-lifecycle-->
+<!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
-<!--- MODULE android-lifecycle-extensions-->
+<!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
-<!--- MODULE android-viewmodel-->
+<!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
 <!--- END -->
 
