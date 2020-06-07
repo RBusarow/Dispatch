@@ -19,6 +19,7 @@ object Plugins {
   const val androidLibrary = "com.android.library"
 
   const val atomicFu = "kotlinx-atomicfu"
+  const val binaryCompatilibity = "binary-compatibility-validator"
 
   const val dokka = "org.jetbrains.dokka"
   const val knit = "kotlinx-knit"
@@ -41,6 +42,7 @@ object Versions {
   const val minSdk = "21"
   const val targetSdk = 29
 
+  const val binaryCompatibility = "0.2.3"
   const val benManes = "0.27.0"
   const val gradleWrapper = "4.0.0"
   const val dagger = "2.25.2"
@@ -57,6 +59,8 @@ object BuildPlugins {
   const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
   const val knit = "org.jetbrains.kotlinx:kotlinx-knit:${Versions.knit}"
 
+  const val binaryCompatibility =
+    "org.jetbrains.kotlinx:binary-compatibility-validator:${Versions.binaryCompatibility}"
   const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.1"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"

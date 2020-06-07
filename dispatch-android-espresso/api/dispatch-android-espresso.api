@@ -1,0 +1,84 @@
+public final class dispatch/android/espresso/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public static final field VERSION_CODE I
+	public static final field VERSION_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public abstract interface class dispatch/android/espresso/DefaultIdlingCoroutineScope : dispatch/android/espresso/IdlingCoroutineScope, dispatch/core/DefaultCoroutineScope {
+}
+
+public abstract interface class dispatch/android/espresso/IOIdlingCoroutineScope : dispatch/android/espresso/IdlingCoroutineScope, dispatch/core/IOCoroutineScope {
+}
+
+public abstract interface class dispatch/android/espresso/IdlingCoroutineScope : kotlinx/coroutines/CoroutineScope {
+	public abstract fun getIdlingDispatcherProvider ()Ldispatch/android/espresso/IdlingDispatcherProvider;
+}
+
+public final class dispatch/android/espresso/IdlingCoroutineScopeKt {
+	public static final fun DefaultIdlingCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;)Ldispatch/android/espresso/DefaultIdlingCoroutineScope;
+	public static synthetic fun DefaultIdlingCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;ILjava/lang/Object;)Ldispatch/android/espresso/DefaultIdlingCoroutineScope;
+	public static final fun IOIdlingCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;)Ldispatch/android/espresso/IOIdlingCoroutineScope;
+	public static synthetic fun IOIdlingCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;ILjava/lang/Object;)Ldispatch/android/espresso/IOIdlingCoroutineScope;
+	public static final fun IdlingCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;)Ldispatch/android/espresso/IdlingCoroutineScope;
+	public static synthetic fun IdlingCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;ILjava/lang/Object;)Ldispatch/android/espresso/IdlingCoroutineScope;
+	public static final fun MainIdlingCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;)Ldispatch/android/espresso/MainIdlingCoroutineScope;
+	public static synthetic fun MainIdlingCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;ILjava/lang/Object;)Ldispatch/android/espresso/MainIdlingCoroutineScope;
+	public static final fun MainImmediateIdlingCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;)Ldispatch/android/espresso/MainImmediateIdlingCoroutineScope;
+	public static synthetic fun MainImmediateIdlingCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;ILjava/lang/Object;)Ldispatch/android/espresso/MainImmediateIdlingCoroutineScope;
+	public static final fun UnconfinedIdlingCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;)Ldispatch/android/espresso/UnconfinedIdlingCoroutineScope;
+	public static synthetic fun UnconfinedIdlingCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/android/espresso/IdlingDispatcherProvider;ILjava/lang/Object;)Ldispatch/android/espresso/UnconfinedIdlingCoroutineScope;
+}
+
+public final class dispatch/android/espresso/IdlingDispatcher : kotlinx/coroutines/CoroutineDispatcher {
+	public fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;)V
+	public fun dispatch (Lkotlin/coroutines/CoroutineContext;Ljava/lang/Runnable;)V
+	public final fun getCounter ()Landroidx/test/espresso/idling/CountingIdlingResource;
+	public final fun isIdle ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dispatch/android/espresso/IdlingDispatcherProvider : dispatch/core/DispatcherProvider {
+	public fun <init> (Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;)V
+	public fun fold (Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public fun get (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
+	public fun getDefault ()Ldispatch/android/espresso/IdlingDispatcher;
+	public synthetic fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getIo ()Ldispatch/android/espresso/IdlingDispatcher;
+	public synthetic fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
+	public fun getMain ()Ldispatch/android/espresso/IdlingDispatcher;
+	public synthetic fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getMainImmediate ()Ldispatch/android/espresso/IdlingDispatcher;
+	public synthetic fun getMainImmediate ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getUnconfined ()Ldispatch/android/espresso/IdlingDispatcher;
+	public synthetic fun getUnconfined ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun minusKey (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
+	public fun plus (Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class dispatch/android/espresso/IdlingDispatcherProviderKt {
+	public static final fun IdlingDispatcherProvider (Ldispatch/core/DispatcherProvider;)Ldispatch/android/espresso/IdlingDispatcherProvider;
+	public static synthetic fun IdlingDispatcherProvider$default (Ldispatch/core/DispatcherProvider;ILjava/lang/Object;)Ldispatch/android/espresso/IdlingDispatcherProvider;
+	public static final fun registerAllIdlingResources (Ldispatch/android/espresso/IdlingDispatcherProvider;)V
+	public static final fun unregisterAllIdlingResources (Ldispatch/android/espresso/IdlingDispatcherProvider;)V
+}
+
+public final class dispatch/android/espresso/IdlingDispatcherProviderRule : org/junit/rules/TestWatcher {
+	public field dispatcherProvider Ldispatch/android/espresso/IdlingDispatcherProvider;
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public final fun getDispatcherProvider ()Ldispatch/android/espresso/IdlingDispatcherProvider;
+	public final fun setDispatcherProvider (Ldispatch/android/espresso/IdlingDispatcherProvider;)V
+}
+
+public abstract interface class dispatch/android/espresso/MainIdlingCoroutineScope : dispatch/android/espresso/IdlingCoroutineScope, dispatch/core/MainCoroutineScope {
+}
+
+public abstract interface class dispatch/android/espresso/MainImmediateIdlingCoroutineScope : dispatch/android/espresso/IdlingCoroutineScope, dispatch/core/MainImmediateCoroutineScope {
+}
+
+public abstract interface class dispatch/android/espresso/UnconfinedIdlingCoroutineScope : dispatch/android/espresso/IdlingCoroutineScope, dispatch/core/UnconfinedCoroutineScope {
+}
+

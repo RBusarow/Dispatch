@@ -17,6 +17,7 @@
 
 import io.gitlab.arturbosch.detekt.Detekt
 import kotlinx.knit.*
+import kotlinx.validation.*
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
@@ -36,6 +37,7 @@ buildscript {
     classpath(BuildPlugins.androidGradlePlugin)
     classpath(BuildPlugins.atomicFu)
     classpath(BuildPlugins.benManesVersions)
+    classpath(BuildPlugins.binaryCompatibility)
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath(BuildPlugins.gradleMavenPublish)
     classpath(BuildPlugins.dokka)
@@ -352,3 +354,19 @@ val detektAll by tasks.registering(Detekt::class) {
 
 tasks.findByName("detekt")
   ?.finalizedBy(detektAll)
+
+apply(plugin = Plugins.binaryCompatilibity)
+
+extensions.configure<ApiValidationExtension> {
+
+  /**
+   * Packages that are excluded from public API dumps even if they
+   * contain public API.
+   */
+  ignoredPackages = mutableSetOf("sample", "samples")
+
+  /**
+   * Sub-projects that are excluded from API validation
+   */
+  ignoredProjects = mutableSetOf("dispatch-internal-test", "dispatch-sample", "samples")
+}
