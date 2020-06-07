@@ -23,8 +23,7 @@ import org.junit.jupiter.api.extension.*
 @ExperimentalCoroutinesApi
 class CoroutineTestExtensionInjectionTest {
 
-  @JvmField @RegisterExtension val extension =
-    CoroutineTestExtension()
+  @JvmField @RegisterExtension val extension = CoroutineTestExtension()
 
   @Nested
   inner class `nested classes` {

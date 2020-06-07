@@ -26,10 +26,8 @@ import kotlin.coroutines.*
 class CoroutineTestExtensionRegisteredTest {
 
   val customScope = TestProvidedCoroutineScope()
-  @JvmField @RegisterExtension val customFactoryExtension =
-    coroutineTestExtension { customScope }
-  @JvmField @RegisterExtension val defaultExtension =
-    CoroutineTestExtension()
+  @JvmField @RegisterExtension val customFactoryExtension = coroutineTestExtension { customScope }
+  @JvmField @RegisterExtension val defaultExtension = CoroutineTestExtension()
 
   @Test
   fun `a no-arg extension should use a default TestProvidedCoroutineScope`() {

@@ -85,14 +85,13 @@ class TestDispatcherProvider(
 @ExperimentalCoroutinesApi
 fun TestDispatcherProvider(
   dispatcher: CoroutineDispatcher
-): TestDispatcherProvider =
-  TestDispatcherProvider(
-    default = dispatcher,
-    io = dispatcher,
-    main = dispatcher,
-    mainImmediate = dispatcher,
-    unconfined = dispatcher
-  )
+): TestDispatcherProvider = TestDispatcherProvider(
+  default = dispatcher,
+  io = dispatcher,
+  main = dispatcher,
+  mainImmediate = dispatcher,
+  unconfined = dispatcher
+)
 
 /**
  * "Basic" [TestDispatcherProvider] which mimics production behavior,

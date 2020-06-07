@@ -94,8 +94,7 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `scope should contain DispatcherProvider property`() {
 
-      val scope =
-        TestProvidedCoroutineScope(dispatcherProvider = provider)
+      val scope = TestProvidedCoroutineScope(dispatcherProvider = provider)
 
       scope.coroutineContext.dispatcherProvider shouldBe provider
     }
@@ -103,8 +102,7 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `dispatcher arg should be used to create default DispatcherProvider`() {
 
-      val scope =
-        TestProvidedCoroutineScope(dispatcher = dispatcher)
+      val scope = TestProvidedCoroutineScope(dispatcher = dispatcher)
 
       scope.dispatcherProvider.default shouldBe dispatcher
       scope.dispatcherProvider.io shouldBe dispatcher

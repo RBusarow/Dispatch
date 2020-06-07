@@ -72,8 +72,7 @@ fun TestProvidedCoroutineScope(
     dispatcher
   ),
   context: CoroutineContext = EmptyCoroutineContext
-): TestProvidedCoroutineScope =
-  TestProvidedCoroutineScopeImpl(
-    dispatcherProvider = dispatcherProvider,
-    context = context + dispatcher
-  )
+): TestProvidedCoroutineScope = TestProvidedCoroutineScopeImpl(
+  dispatcherProvider = dispatcherProvider,
+  context = context + dispatcher
+)
