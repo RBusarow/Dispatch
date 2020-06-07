@@ -49,8 +49,8 @@ dependencies {
 
   implementation(project(":dispatch-core"))
 
-  implementation(Libs.Androidx.Test.runner)
-  implementation(Libs.Androidx.Test.Espresso.core)
+  implementation(Libs.AndroidX.Test.runner)
+  implementation(Libs.AndroidX.Test.Espresso.core)
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)

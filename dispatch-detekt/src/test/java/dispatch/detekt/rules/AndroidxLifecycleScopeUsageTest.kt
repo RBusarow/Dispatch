@@ -19,7 +19,7 @@ import io.gitlab.arturbosch.detekt.test.*
 import io.kotest.core.spec.style.*
 import io.kotest.matchers.*
 
-internal class AndroidxLifecycleScopeUsageTest : FreeSpec(
+internal class AndroidXLifecycleScopeTest : FreeSpec(
   {
 
     "importing androidx lifecycleScope and using it should report Finding" - {
@@ -39,7 +39,7 @@ internal class AndroidxLifecycleScopeUsageTest : FreeSpec(
       |
     """.trimMargin()
 
-      val rule = AndroidxLifecycleScopeUsage()
+      val rule = AndroidXLifecycleScope()
 
       val findings = rule.lint(text)
 
@@ -61,24 +61,24 @@ internal class AndroidxLifecycleScopeUsageTest : FreeSpec(
       |
     """.trimMargin()
 
-      val rule = AndroidxLifecycleScopeUsage()
+      val rule = AndroidXLifecycleScope()
 
       val findings = rule.lint(text)
 
       findings shouldBe listOf()
     }
 
-    "issue id should be AndroidxLifecycleScopeUsage" - {
+    "issue id should be AndroidXLifecycleScope" - {
 
-      val rule = AndroidxLifecycleScopeUsage()
+      val rule = AndroidXLifecycleScope()
 
-      rule.issue.id shouldBe "AndroidxLifecycleScopeUsage"
+      rule.issue.id shouldBe "AndroidXLifecycleScope"
     }
 
-    "issue should not be reported if suppressing AndroidxLifecycleScopeUsage" - {
+    "issue should not be reported if suppressing AndroidXLifecycleScope" - {
 
       val text = """
-      |@file:Suppress("AndroidxLifecycleScopeUsage")
+      |@file:Suppress("AndroidXLifecycleScope")
       |
       |package a.b.c
       |
@@ -93,7 +93,7 @@ internal class AndroidxLifecycleScopeUsageTest : FreeSpec(
       |}
     """.trimMargin()
 
-      val rule = AndroidxLifecycleScopeUsage()
+      val rule = AndroidXLifecycleScope()
 
       val findings = rule.lint(text)
 
@@ -117,7 +117,7 @@ internal class AndroidxLifecycleScopeUsageTest : FreeSpec(
       |
     """.trimMargin()
 
-      val rule = AndroidxLifecycleScopeUsage()
+      val rule = AndroidXLifecycleScope()
 
       val findings = rule.lint(text)
 
