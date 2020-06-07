@@ -17,7 +17,7 @@
 
 package samples
 
-import dispatch.core.test.*
+import dispatch.test.*
 import io.kotest.matchers.*
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.*

@@ -4,7 +4,7 @@
 
 | Name | Summary |
 |---|---|
-| [dispatch.core.test](dispatch.core.test/index.md) |  |
+| [dispatch.test](dispatch.test/index.md) |  |
 
 ### Index
 
