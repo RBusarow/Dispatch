@@ -1,8 +1,8 @@
-[dispatch-android-viewmodel](../../index.md) / [dispatch.android.lifecycle](../index.md) / [ViewModelScopeFactory](./index.md)
+[dispatch-android-viewmodel](../../index.md) / [dispatch.android.viewmodel](../index.md) / [ViewModelScopeFactory](./index.md)
 
 # ViewModelScopeFactory
 
-`object ViewModelScopeFactory` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-viewmodel/src/main/java/dispatch/android/lifecycle/ViewModelScopeFactory.kt#L35)
+`object ViewModelScopeFactory` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-viewmodel/src/main/java/dispatch/android/viewmodel/ViewModelScopeFactory.kt#L35)
 
 Factory holder for [viewModelScope](../-coroutine-view-model/view-model-scope.md)'s.
 

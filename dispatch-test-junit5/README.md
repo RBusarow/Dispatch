@@ -7,7 +7,7 @@
   * [CoroutineTest example](#coroutinetest-example)
   * [CoroutineTestExtension example](#coroutinetestextension-example)
 * [Setting Dispatchers.Main](#setting-dispatchersmain)
-* [This module replaces core-test](#this-module-replaces-core-test)
+* [This module replaces dispatch-test](#this-module-replaces-dispatch-test)
 * [JUnit dependencies](#junit-dependencies)
   * [Minimum Gradle Config](#minimum-gradle-config)
   * [JUnit 4 interoperability](#junit-4-interoperability)
@@ -16,7 +16,7 @@
 
 ## Features
 
-In addition to all the functionality in [dispatch-core-test], this module exposes a JUnit 5 [CoroutineTestExtension] and [CoroutineTest] annotation to handle set-up and tear-down of a [TestProvidedCoroutineScope].
+In addition to all the functionality in [dispatch-test], this module exposes a JUnit 5 [CoroutineTestExtension] and [CoroutineTest] annotation to handle set-up and tear-down of a [TestProvidedCoroutineScope].
 
 Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Extension also invokes [cleanupTestCoroutines] after the test.
 
@@ -79,9 +79,9 @@ class SomeClass(val coroutineScope: CoroutineScope) {
 
 Even though `dispatch-core` eliminates the need to use `Dispatchers.Main` in internal code, it’s still possible that code which has yet to be migrated, or a third-party library is making use of the hard-coded dispatcher.  Because of this, the extension still calls `Dispatchers.setMain(...)` in its setup and `Dispatchers.resetMain()` afterwards.
 
-## This module replaces core-test
+## This module replaces dispatch-test
 
-If using this module, there is no need to include the `dispatch-core-test` artifact in your dependencies.
+If using this module, there is no need to include the `dispatch-test` artifact in your dependencies.
 
 ## JUnit dependencies
 
@@ -108,8 +108,8 @@ dependencies {
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
   implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
 
-  // the junit5 artifact also provides the dispatch-core-test artifact
-  testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03"
+  // the junit5 artifact also provides the dispatch-test artifact
+  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03"
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
   testImplementation "org.junit.jupiter:junit-jupiter:5.6.2"
 }
@@ -134,8 +134,8 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03")
 
-  // the junit5 artifact also provides the dispatch-core-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03")
+  // the junit5 artifact also provides the dispatch-test artifact
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
   testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
 }
@@ -163,9 +163,9 @@ dependencies {
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
   implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
 
-  // the junit4 and junit5 artifacts also provides the dispatch-core-test artifact
-  testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03"
-  testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03"
+  // the junit4 and junit5 artifacts also provides the dispatch-test artifact
+  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03"
+  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03"
   testImplementation "org.junit.jupiter:junit-jupiter:5.6.2"
   testImplementation "org.junit.vintage:junit-vintage-engine:5.6.2"
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
@@ -190,9 +190,9 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03")
 
-  // the junit4 and junit5 artifacts also provides the dispatch-core-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03")
-  testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit5:1.0.0-beta03")
+  // the junit4 and junit5 artifacts also provides the dispatch-test artifact
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03")
   testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
   testImplementation("org.junit.vintage:junit-vintage-engine:5.6.2")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
@@ -224,6 +224,6 @@ dependencies {
 
 [cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
 
-[dispatch-core-test]: https://rbusarow.github.io/Dispatch/core-test//index.html
+[dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
 
 [TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html

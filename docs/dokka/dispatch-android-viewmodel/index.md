@@ -78,7 +78,7 @@ It exists entirely so that we can have a settable factory.  This gives us a lot 
 
 The way `androidx-lifecycle-viewModel` constructs its [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html) is [hard-coded](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42),
 which eliminates the possibility of using a custom [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/)
-such as a [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html) or [IdlingDispatcher](https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html). With [dispatch-android-lifecycle](https://rbusarow.github.io/Dispatch/android-lifecycle//index.html), we can set a custom factory.
+such as a [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html) or [IdlingDispatcher](https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html). With [dispatch-android-lifecycle](https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//index.html), we can set a custom factory.
 
 ``` kotlin
 class SomeViewModelTest {
@@ -213,7 +213,7 @@ dependencies {
 
 | Name | Summary |
 |---|---|
-| [dispatch.android.lifecycle](dispatch.android.lifecycle/index.md) |  |
+| [dispatch.android.viewmodel](dispatch.android.viewmodel/index.md) |  |
 
 ### Index
 

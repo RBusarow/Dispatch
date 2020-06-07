@@ -1,6 +1,6 @@
 # MODULE dispatch-test
 
-Test helpers for the [dispatch-core] module.  Most of the tools you need to automatically handle [DispatcherProvider] in your tests.  (see [dispatch-core-test-junit4] or [dispatch-core-test-junit5] for the rest.)
+Test helpers for the [dispatch-core] module.  Most of the tools you need to automatically handle [DispatcherProvider] in your tests.  (see [dispatch-test-junit4] or [dispatch-test-junit5] for the rest.)
 
 ## Contents
 <!--- TOC -->
@@ -127,7 +127,7 @@ dependencies {
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
   implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
 
-  testImplementation "com.rickbusarow.dispatch:dispatch-core-test:1.0.0-beta03"
+  testImplementation "com.rickbusarow.dispatch:dispatch-test:1.0.0-beta03"
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
 }
 ```
@@ -151,7 +151,7 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03")
 
-  testImplementation("com.rickbusarow.dispatch:dispatch-core-test:1.0.0-beta03")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta03")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
 }
 ```
@@ -175,10 +175,10 @@ dependencies {
 
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
 
-[dispatch-core-test-junit4]: https://rbusarow.github.io/Dispatch/core-test-junit4//index.html
-[dispatch-core-test-junit5]: https://rbusarow.github.io/Dispatch/core-test-junit5//index.html
+[dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//index.html
+[dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//index.html
 
-[dispatch-core]: https://rbusarow.github.io/Dispatch/core//index.html
+[dispatch-core]: https://rbusarow.github.io/Dispatch/dispatch-core//index.html
 
 [Dispatchers.setMain]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/kotlinx.coroutines.-dispatchers/set-main.html
 [newSingleThreadContext]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/new-single-thread-context.html

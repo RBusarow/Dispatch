@@ -1,8 +1,8 @@
-[dispatch-android-viewmodel](../../index.md) / [dispatch.android.lifecycle](../index.md) / [CoroutineViewModel](./index.md)
+[dispatch-android-viewmodel](../../index.md) / [dispatch.android.viewmodel](../index.md) / [CoroutineViewModel](./index.md)
 
 # CoroutineViewModel
 
-`abstract class CoroutineViewModel : `[`ViewModel`](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-viewmodel/src/main/java/dispatch/android/lifecycle/CoroutineViewModel.kt#L36)
+`abstract class CoroutineViewModel : `[`ViewModel`](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-viewmodel/src/main/java/dispatch/android/viewmodel/CoroutineViewModel.kt#L36)
 
 Base class for [ViewModel](https://developer.android.com/reference/androidx/androidx/lifecycle/ViewModel.html)s which will be using a [viewModelScope](view-model-scope.md).
 

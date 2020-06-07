@@ -1,4 +1,4 @@
-[dispatch-android-viewmodel](../../index.md) / [dispatch.android.lifecycle](../index.md) / [CoroutineViewModel](index.md) / [&lt;init&gt;](./-init-.md)
+[dispatch-android-viewmodel](../../index.md) / [dispatch.android.viewmodel](../index.md) / [CoroutineViewModel](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 
