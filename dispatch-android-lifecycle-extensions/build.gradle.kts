@@ -45,8 +45,8 @@ android {
 
 dependencies {
 
-  implementation(Libs.Androidx.Lifecycle.common)
-  testImplementation(Libs.Androidx.Lifecycle.runtime)
+  implementation(Libs.AndroidX.Lifecycle.common)
+  testImplementation(Libs.AndroidX.Lifecycle.runtime)
 
   implementation(Libs.JakeWharton.timber)
 
@@ -66,6 +66,6 @@ dependencies {
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
-  testImplementation(Libs.Androidx.Test.runner)
-  testImplementation(Libs.Androidx.Test.Espresso.core)
+  testImplementation(Libs.AndroidX.Test.runner)
+  testImplementation(Libs.AndroidX.Test.Espresso.core)
 }

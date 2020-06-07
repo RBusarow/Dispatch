@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dispatch.core.test
+package dispatch.test
 
 import dispatch.core.*
 import dispatch.internal.test.*

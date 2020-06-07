@@ -15,7 +15,7 @@
 
 | **Name**                      | **Description**
 | ----------------------------  | --------------- |
-| [AndroidxLifecycleScopeUsage] | Looks for accidental usage of the [androidx lifecyclescope][androidx-lifecyclescope] extension.
+| [AndroidXLifecycleScope] | Looks for accidental usage of the [androidx lifecyclescope][androidx-lifecyclescope] extension.
 | [HardCodedDispatcher]    | Detects use of a hard-coded reference to the [kotlinx.coroutines.Dispatchers][Dispatchers] singleton.
 
 
@@ -52,7 +52,7 @@ Then, add the following to the bottom of the `detekt-config.yml` file:
 ``` yaml
 dispatch:
   active: true                             # disables all dispatch checks
-  AndroidxLifecycleScopeUsage:             # incorrect lifecycleScope
+  AndroidXLifecycleScope:             # incorrect lifecycleScope
     active: true
   HardCodedDispatcher:                     # finds usage of Dispatchers.______
     active: true
@@ -77,7 +77,7 @@ There is an [issue](https://github.com/detekt/detekt/issues/2582) with ClassLoad
 <!--- INDEX  -->
 <!--- MODULE dispatch-detekt-->
 <!--- INDEX  -->
-[AndroidxLifecycleScopeUsage]: https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-androidx-lifecycle-scope-usage/index.html
+[AndroidXLifecycleScope]: https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-android-x-lifecycle-scope/index.html
 [HardCodedDispatcher]: https://rbusarow.github.io/Dispatch/dispatch-detekt//dispatch.detekt.rules/-hard-coded-dispatcher/index.html
 <!--- MODULE dispatch-android-espresso-->
 <!--- INDEX  -->

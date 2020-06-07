@@ -8,7 +8,7 @@
 |---|---|
 |
 
-##### [dispatch.detekt.rules.AndroidxLifecycleScopeUsage](../dispatch.detekt.rules/-androidx-lifecycle-scope-usage/index.md)
+##### [dispatch.detekt.rules.AndroidXLifecycleScope](../dispatch.detekt.rules/-android-x-lifecycle-scope/index.md)
 
 Detects use of `androidx.lifecycle.lifecycleScope`,
 which shares a namespace with `dispatch.android.lifecycle.lifecycleScope`.
