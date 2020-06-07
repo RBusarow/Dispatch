@@ -284,7 +284,7 @@ fun `sayHello should say hello`() = runBlockingProvided {
 
 | **artifact**                | **features**                                   |
 | --------------------------- | ---------------------------------------------- |
-| [dispatch-dispatch-test]        | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [testProvided]
+| [dispatch-test]        | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [testProvided]
 | [dispatch-test-junit4] | [TestCoroutineRule]
 | [dispatch-test-junit5] | [CoroutineTest] <p> [CoroutineTestExtension]
 
@@ -352,15 +352,15 @@ dependencies {
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7" 
   
   // you only need this if you don't have the -junit4 or -junit5 artifacts
-  testImplementation "com.rickbusarow.dispatch:dispatch-dispatch-test:1.0.0-beta03" 
+  testImplementation "com.rickbusarow.dispatch:dispatch-test:1.0.0-beta03" 
   
   // TestCoroutineRule and :dispatch-test
-  // This provides :dispatch-dispatch-test via "api", so you don't need to declare both
+  // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit5
   testImplementation "com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03" 
   
   // CoroutineTest, CoroutineTestExtension, and :dispatch-test
-  // This provides :dispatch-dispatch-test via "api", so you don't need to declare both
+  // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit4
   testImplementation "com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03" 
   
@@ -424,15 +424,15 @@ dependencies {
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
   
   // you only need this if you don't have the -junit4 or -junit5 artifacts
-  testImplementation("com.rickbusarow.dispatch:dispatch-dispatch-test:1.0.0-beta03")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta03")
   
   // CoroutineTestRule and :dispatch-test
-  // This provides :dispatch-dispatch-test via "api", so you don't need to declare both
+  // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit5
   testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
   
   // CoroutineTest, CoroutineTestExtension, and :dispatch-test
-  // This provides :dispatch-dispatch-test via "api", so you don't need to declare both
+  // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit4
   testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
   
@@ -544,7 +544,7 @@ limitations under the License.
 [dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-viewmodel//index.html
 [dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//index.html
 [dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//index.html
-[dispatch-dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
+[dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
 [dispatch-core]: https://rbusarow.github.io/Dispatch/dispatch-core//index.html
 [dispatch-detekt]: https://rbusarow.github.io/Dispatch/dispatch-detekt//index.html
 [Dispatchers.Default]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html

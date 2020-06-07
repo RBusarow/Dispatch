@@ -4,7 +4,7 @@
 
 `object ViewModelScopeFactory` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-viewmodel/src/main/java/dispatch/android/viewmodel/ViewModelScopeFactory.kt#L35)
 
-Factory holder for [viewModelScope](#)'s.
+Factory holder for [viewModelScope](../-coroutine-view-model/view-model-scope.md)'s.
 
 By default, `create` returns a [MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md), but may return any [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html).
 

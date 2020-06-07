@@ -17,6 +17,6 @@ Base class for [ViewModel](https://developer.android.com/reference/androidx/andr
 
 ##### [dispatch.android.viewmodel.ViewModelScopeFactory](../dispatch.android.viewmodel/-view-model-scope-factory/index.md)
 
-Factory holder for [viewModelScope](#)'s.
+Factory holder for [viewModelScope](../dispatch.android.viewmodel/-coroutine-view-model/view-model-scope.md)'s.
 
 

@@ -123,7 +123,7 @@ There is an [issue](https://github.com/detekt/detekt/issues/2582) with ClassLoad
 [dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-viewmodel//index.html
 [dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//index.html
 [dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//index.html
-[dispatch-dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
+[dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
 [dispatch-core]: https://rbusarow.github.io/Dispatch/dispatch-core//index.html
 [dispatch-extensions]: https://rbusarow.github.io/Dispatch/extensions//index.html
 [Dispatchers.Default]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html
