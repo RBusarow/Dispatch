@@ -15,14 +15,13 @@
 
 package dispatch.core.test
 
-import dispatch.core.test.CoroutineTestExtension.ScopeFactory
-import dispatch.core.test.internal.getAnnotationRecursive
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import dispatch.core.test.CoroutineTestExtension.*
+import dispatch.core.test.internal.*
+import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.extension.*
-import org.junit.jupiter.api.extension.support.TypeBasedParameterResolver
-import kotlin.coroutines.CoroutineContext
+import org.junit.jupiter.api.extension.support.*
+import kotlin.coroutines.*
 
 /**
  * JUnit 5 [ParameterResolver] [extension][Extension] for injecting and managing a [TestProvidedCoroutineScope] in a test instance.
@@ -146,7 +145,6 @@ public class CoroutineTestExtension(
 @ExperimentalCoroutinesApi
 public inline fun coroutineTestExtension(
   crossinline scopeFactory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
-) =
-  CoroutineTestExtension(object : CoroutineTestExtension.ScopeFactory() {
-    override fun create(): TestProvidedCoroutineScope = scopeFactory.invoke()
-  })
+): CoroutineTestExtension = CoroutineTestExtension(object : CoroutineTestExtension.ScopeFactory() {
+  override fun create(): TestProvidedCoroutineScope = scopeFactory.invoke()
+})

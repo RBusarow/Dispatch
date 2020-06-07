@@ -17,12 +17,10 @@
 
 package samples
 
-import dispatch.core.DispatcherProvider
-import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.newSingleThreadContext
-import org.junit.jupiter.api.Test
+import dispatch.core.*
+import io.kotest.matchers.*
+import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
 
 typealias Sample = Test
 
