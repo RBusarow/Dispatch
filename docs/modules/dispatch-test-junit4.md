@@ -132,8 +132,8 @@ dependencies {
   implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation "com.rickbusarow.dispatch:dispatch--dispatch-test-junit4:1.0.0-beta03"
-  testImplementation "com.rickbusarow.dispatch:dispatch--dispatch-test-junit5:1.0.0-beta03"
+  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03"
+  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03"
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
 }
 ```
@@ -156,8 +156,8 @@ dependencies {
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03")
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation("ccom.rickbusarow.dispatch:dispatch--dispatch-test-junit4:1.0.0-beta03")
-  testImplementation("ccom.rickbusarow.dispatch:dispatch--dispatch-test-junit5:1.0.0-beta03")
+  testImplementation("ccom.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
+  testImplementation("ccom.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
 }
 ```
