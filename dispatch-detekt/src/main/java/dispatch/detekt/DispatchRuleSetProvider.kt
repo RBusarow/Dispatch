@@ -15,11 +15,8 @@
 
 package dispatch.detekt
 
-import dispatch.detekt.rules.AndroidxLifecycleScopeUsage
-import dispatch.detekt.rules.HardCodedDispatcher
-import io.gitlab.arturbosch.detekt.api.Config
-import io.gitlab.arturbosch.detekt.api.RuleSet
-import io.gitlab.arturbosch.detekt.api.RuleSetProvider
+import dispatch.detekt.rules.*
+import io.gitlab.arturbosch.detekt.api.*
 
 /**
  * @suppress

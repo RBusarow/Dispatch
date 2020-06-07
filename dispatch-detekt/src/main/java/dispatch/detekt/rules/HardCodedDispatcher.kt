@@ -16,14 +16,10 @@
 package dispatch.detekt.rules
 
 import io.gitlab.arturbosch.detekt.api.*
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
-import org.jetbrains.kotlin.psi.KtImportDirective
-import org.jetbrains.kotlin.psi.KtReferenceExpression
-import org.jetbrains.kotlin.psi.psiUtil.isDotReceiver
-import org.jetbrains.kotlin.psi.psiUtil.isDotSelector
-import org.jetbrains.kotlin.psi.psiUtil.isInImportDirective
-import org.jetbrains.kotlin.resolve.calls.callUtil.getCalleeExpressionIfAny
+import org.jetbrains.kotlin.com.intellij.psi.*
+import org.jetbrains.kotlin.psi.*
+import org.jetbrains.kotlin.psi.psiUtil.*
+import org.jetbrains.kotlin.resolve.calls.callUtil.*
 
 /**
  * Detects use of a hard-coded reference to the `kotlinx.coroutines.Dispatchers` singleton.

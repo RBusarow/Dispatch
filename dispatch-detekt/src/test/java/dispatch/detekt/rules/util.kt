@@ -15,7 +15,7 @@
 
 package dispatch.detekt.rules
 
-import io.gitlab.arturbosch.detekt.api.Finding
+import io.gitlab.arturbosch.detekt.api.*
 
 val List<Finding>.messages: List<String>
   get() = map { it.message }

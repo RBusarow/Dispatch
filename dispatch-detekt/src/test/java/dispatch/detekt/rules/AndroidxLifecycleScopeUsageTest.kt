@@ -15,9 +15,9 @@
 
 package dispatch.detekt.rules
 
-import io.gitlab.arturbosch.detekt.test.lint
-import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.shouldBe
+import io.gitlab.arturbosch.detekt.test.*
+import io.kotest.core.spec.style.*
+import io.kotest.matchers.*
 
 internal class AndroidxLifecycleScopeUsageTest : FreeSpec(
   {

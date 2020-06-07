@@ -16,9 +16,8 @@
 package dispatch.detekt.rules
 
 import io.gitlab.arturbosch.detekt.api.*
-import org.jetbrains.kotlin.psi.KtImportDirective
-import org.jetbrains.kotlin.psi.KtReferenceExpression
-import org.jetbrains.kotlin.psi.psiUtil.isInImportDirective
+import org.jetbrains.kotlin.psi.*
+import org.jetbrains.kotlin.psi.psiUtil.*
 
 /**
  * Detects use of `androidx.lifecycle.lifecycleScope`,

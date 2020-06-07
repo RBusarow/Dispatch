@@ -15,15 +15,12 @@
 
 package dispatch.detekt.rules
 
-import io.gitlab.arturbosch.detekt.test.TestConfig
-import io.gitlab.arturbosch.detekt.test.lint
-import io.kotest.core.spec.style.FreeSpec
-import io.kotest.data.forAll
-import io.kotest.data.row
-import io.kotest.matchers.shouldBe
-import io.kotest.property.Exhaustive
-import io.kotest.property.checkAll
-import io.kotest.property.exhaustive.boolean
+import io.gitlab.arturbosch.detekt.test.*
+import io.kotest.core.spec.style.*
+import io.kotest.data.*
+import io.kotest.matchers.*
+import io.kotest.property.*
+import io.kotest.property.exhaustive.*
 
 internal class HardCodedDispatcherTest : FreeSpec(
   {

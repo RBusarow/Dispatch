@@ -15,9 +15,7 @@
 
 package dispatch.detekt
 
-import io.gitlab.arturbosch.detekt.api.Config
-import io.gitlab.arturbosch.detekt.api.ConfigValidator
-import io.gitlab.arturbosch.detekt.api.Notification
+import io.gitlab.arturbosch.detekt.api.*
 
 /**
  * @suppress
