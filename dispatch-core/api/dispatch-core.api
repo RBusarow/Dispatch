@@ -1,0 +1,129 @@
+public final class dispatch/core/AsyncKt {
+	public static final fun asyncDefault (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Deferred;
+	public static synthetic fun asyncDefault$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Deferred;
+	public static final fun asyncIO (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Deferred;
+	public static synthetic fun asyncIO$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Deferred;
+	public static final fun asyncMain (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Deferred;
+	public static synthetic fun asyncMain$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Deferred;
+	public static final fun asyncMainImmediate (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Deferred;
+	public static synthetic fun asyncMainImmediate$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Deferred;
+	public static final fun asyncUnconfined (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Deferred;
+	public static synthetic fun asyncUnconfined$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Deferred;
+}
+
+public final class dispatch/core/CoroutineScopeExtKt {
+	public static final fun getDefaultDispatcher (Lkotlinx/coroutines/CoroutineScope;)Lkotlinx/coroutines/CoroutineDispatcher;
+	public static final fun getDispatcherProvider (Lkotlin/coroutines/CoroutineContext;)Ldispatch/core/DispatcherProvider;
+	public static final fun getDispatcherProvider (Lkotlinx/coroutines/CoroutineScope;)Ldispatch/core/DispatcherProvider;
+	public static final fun getIoDispatcher (Lkotlinx/coroutines/CoroutineScope;)Lkotlinx/coroutines/CoroutineDispatcher;
+	public static final fun getMainDispatcher (Lkotlinx/coroutines/CoroutineScope;)Lkotlinx/coroutines/CoroutineDispatcher;
+	public static final fun getMainImmediateDispatcher (Lkotlinx/coroutines/CoroutineScope;)Lkotlinx/coroutines/CoroutineDispatcher;
+	public static final fun getUnconfinedDispatcher (Lkotlinx/coroutines/CoroutineScope;)Lkotlinx/coroutines/CoroutineDispatcher;
+}
+
+public final class dispatch/core/CoroutineScopesKt {
+	public static final fun DefaultCoroutineScope (Lkotlin/coroutines/CoroutineContext;)Ldispatch/core/DefaultCoroutineScope;
+	public static final fun DefaultCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;)Ldispatch/core/DefaultCoroutineScope;
+	public static synthetic fun DefaultCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;ILjava/lang/Object;)Ldispatch/core/DefaultCoroutineScope;
+	public static final fun IOCoroutineScope (Lkotlin/coroutines/CoroutineContext;)Ldispatch/core/IOCoroutineScope;
+	public static final fun IOCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;)Ldispatch/core/IOCoroutineScope;
+	public static synthetic fun IOCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;ILjava/lang/Object;)Ldispatch/core/IOCoroutineScope;
+	public static final fun MainCoroutineScope (Lkotlin/coroutines/CoroutineContext;)Ldispatch/core/MainCoroutineScope;
+	public static final fun MainCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;)Ldispatch/core/MainCoroutineScope;
+	public static synthetic fun MainCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;ILjava/lang/Object;)Ldispatch/core/MainCoroutineScope;
+	public static final fun MainImmediateCoroutineScope (Lkotlin/coroutines/CoroutineContext;)Ldispatch/core/MainImmediateCoroutineScope;
+	public static final fun MainImmediateCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;)Ldispatch/core/MainImmediateCoroutineScope;
+	public static synthetic fun MainImmediateCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;ILjava/lang/Object;)Ldispatch/core/MainImmediateCoroutineScope;
+	public static final fun UnconfinedCoroutineScope (Lkotlin/coroutines/CoroutineContext;)Ldispatch/core/UnconfinedCoroutineScope;
+	public static final fun UnconfinedCoroutineScope (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;)Ldispatch/core/UnconfinedCoroutineScope;
+	public static synthetic fun UnconfinedCoroutineScope$default (Lkotlinx/coroutines/Job;Ldispatch/core/DispatcherProvider;ILjava/lang/Object;)Ldispatch/core/UnconfinedCoroutineScope;
+}
+
+public abstract interface class dispatch/core/DefaultCoroutineScope : kotlinx/coroutines/CoroutineScope {
+}
+
+public final class dispatch/core/DefaultDispatcherProvider : dispatch/core/DispatcherProvider {
+	public fun <init> ()V
+	public fun fold (Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public fun get (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
+	public fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
+	public fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getMainImmediate ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getUnconfined ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun minusKey (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
+	public fun plus (Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
+}
+
+public abstract interface class dispatch/core/DispatcherProvider : kotlin/coroutines/CoroutineContext$Element {
+	public static final field Key Ldispatch/core/DispatcherProvider$Key;
+	public abstract fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public abstract fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public abstract fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
+	public abstract fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public abstract fun getMainImmediate ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public abstract fun getUnconfined ()Lkotlinx/coroutines/CoroutineDispatcher;
+}
+
+public final class dispatch/core/DispatcherProvider$DefaultImpls {
+	public static fun fold (Ldispatch/core/DispatcherProvider;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public static fun get (Ldispatch/core/DispatcherProvider;Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
+	public static fun getKey (Ldispatch/core/DispatcherProvider;)Lkotlin/coroutines/CoroutineContext$Key;
+	public static fun minusKey (Ldispatch/core/DispatcherProvider;Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
+	public static fun plus (Ldispatch/core/DispatcherProvider;Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class dispatch/core/DispatcherProvider$Key : kotlin/coroutines/CoroutineContext$Key {
+}
+
+public final class dispatch/core/DispatcherProviderKt {
+	public static final fun DispatcherProvider ()Ldispatch/core/DispatcherProvider;
+}
+
+public final class dispatch/core/FlowKt {
+	public static final fun flowOnDefault (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun flowOnIO (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun flowOnMain (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun flowOnMainImmediate (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun flowOnUnconfined (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract interface class dispatch/core/IOCoroutineScope : kotlinx/coroutines/CoroutineScope {
+}
+
+public final class dispatch/core/LaunchKt {
+	public static final fun launchDefault (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchDefault$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public static final fun launchIO (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchIO$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public static final fun launchMain (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchMain$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public static final fun launchMainImmediate (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchMainImmediate$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public static final fun launchUnconfined (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchUnconfined$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/CoroutineContext;Lkotlinx/coroutines/CoroutineStart;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+}
+
+public abstract interface class dispatch/core/MainCoroutineScope : kotlinx/coroutines/CoroutineScope {
+}
+
+public abstract interface class dispatch/core/MainImmediateCoroutineScope : kotlinx/coroutines/CoroutineScope {
+}
+
+public final class dispatch/core/SuspendKt {
+	public static final fun withDefault (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withDefault$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun withIO (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withIO$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun withMain (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withMain$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun withMainImmediate (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withMainImmediate$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun withUnconfined (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withUnconfined$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public abstract interface class dispatch/core/UnconfinedCoroutineScope : kotlinx/coroutines/CoroutineScope {
+}
+

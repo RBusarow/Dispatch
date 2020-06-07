@@ -1,0 +1,51 @@
+public final class dispatch/detekt/ConfigError : io/gitlab/arturbosch/detekt/api/Notification {
+	public fun <init> (Ljava/lang/String;Lio/gitlab/arturbosch/detekt/api/Notification$Level;)V
+	public synthetic fun <init> (Ljava/lang/String;Lio/gitlab/arturbosch/detekt/api/Notification$Level;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getLevel ()Lio/gitlab/arturbosch/detekt/api/Notification$Level;
+	public fun getMessage ()Ljava/lang/String;
+	public fun isError ()Z
+}
+
+public final class dispatch/detekt/DispatchConfigValidator : io/gitlab/arturbosch/detekt/api/ConfigValidator {
+	public fun <init> ()V
+	public fun getId ()Ljava/lang/String;
+	public fun getPriority ()I
+	public fun init (Lio/gitlab/arturbosch/detekt/api/Config;)V
+	public fun init (Lio/gitlab/arturbosch/detekt/api/SetupContext;)V
+	public fun validate (Lio/gitlab/arturbosch/detekt/api/Config;)Ljava/util/Collection;
+}
+
+public final class dispatch/detekt/DispatchRuleSetProvider : io/gitlab/arturbosch/detekt/api/RuleSetProvider {
+	public fun <init> ()V
+	public fun buildRuleset (Lio/gitlab/arturbosch/detekt/api/Config;)Lio/gitlab/arturbosch/detekt/api/RuleSet;
+	public fun getRuleSetId ()Ljava/lang/String;
+	public fun instance (Lio/gitlab/arturbosch/detekt/api/Config;)Lio/gitlab/arturbosch/detekt/api/RuleSet;
+}
+
+public final class dispatch/detekt/rules/AndroidXLifecycleScope : io/gitlab/arturbosch/detekt/api/Rule {
+	public static final field Companion Ldispatch/detekt/rules/AndroidXLifecycleScope$Companion;
+	public static final field functionName Ljava/lang/String;
+	public fun <init> ()V
+	public fun <init> (Lio/gitlab/arturbosch/detekt/api/Config;)V
+	public synthetic fun <init> (Lio/gitlab/arturbosch/detekt/api/Config;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getIssue ()Lio/gitlab/arturbosch/detekt/api/Issue;
+	public fun visitImportDirective (Lorg/jetbrains/kotlin/psi/KtImportDirective;)V
+	public fun visitReferenceExpression (Lorg/jetbrains/kotlin/psi/KtReferenceExpression;)V
+}
+
+public final class dispatch/detekt/rules/AndroidXLifecycleScope$Companion {
+	public final fun getExplicitImportRegex ()Lkotlin/text/Regex;
+	public final fun getStarImportRegex ()Lkotlin/text/Regex;
+}
+
+public final class dispatch/detekt/rules/HardCodedDispatcher : io/gitlab/arturbosch/detekt/api/Rule {
+	public static final field Companion Ldispatch/detekt/rules/HardCodedDispatcher$Companion;
+	public fun <init> ()V
+	public fun <init> (Lio/gitlab/arturbosch/detekt/api/Config;)V
+	public synthetic fun <init> (Lio/gitlab/arturbosch/detekt/api/Config;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getIssue ()Lio/gitlab/arturbosch/detekt/api/Issue;
+	public fun visitDotQualifiedExpression (Lorg/jetbrains/kotlin/psi/KtDotQualifiedExpression;)V
+	public fun visitImportDirective (Lorg/jetbrains/kotlin/psi/KtImportDirective;)V
+	public fun visitReferenceExpression (Lorg/jetbrains/kotlin/psi/KtReferenceExpression;)V
+}
+
