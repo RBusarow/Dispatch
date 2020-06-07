@@ -1,0 +1,39 @@
+public final class dispatch/test/BuildersKt {
+	public static final fun runBlockingProvided (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;)V
+	public static synthetic fun runBlockingProvided$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)V
+	public static final fun testProvided (Ldispatch/test/TestProvidedCoroutineScope;Lkotlin/jvm/functions/Function2;)V
+	public static final fun testProvided (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;)V
+	public static synthetic fun testProvided$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)V
+}
+
+public final class dispatch/test/TestDispatcherProvider : dispatch/core/DispatcherProvider {
+	public fun <init> ()V
+	public fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)V
+	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun fold (Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
+	public fun get (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
+	public fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
+	public fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getMainImmediate ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getUnconfined ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun minusKey (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
+	public fun plus (Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dispatch/test/TestDispatcherProviderKt {
+	public static final fun TestBasicDispatcherProvider ()Ldispatch/test/TestDispatcherProvider;
+	public static final fun TestDispatcherProvider (Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/test/TestDispatcherProvider;
+}
+
+public abstract interface class dispatch/test/TestProvidedCoroutineScope : dispatch/core/DefaultCoroutineScope, dispatch/core/IOCoroutineScope, dispatch/core/MainCoroutineScope, dispatch/core/MainImmediateCoroutineScope, dispatch/core/UnconfinedCoroutineScope, kotlinx/coroutines/test/TestCoroutineScope {
+	public abstract fun getDispatcherProvider ()Ldispatch/core/DispatcherProvider;
+}
+
+public final class dispatch/test/TestProvidedCoroutineScopeKt {
+	public static final fun TestProvidedCoroutineScope (Lkotlinx/coroutines/test/TestCoroutineDispatcher;Ldispatch/test/TestDispatcherProvider;Lkotlin/coroutines/CoroutineContext;)Ldispatch/test/TestProvidedCoroutineScope;
+	public static synthetic fun TestProvidedCoroutineScope$default (Lkotlinx/coroutines/test/TestCoroutineDispatcher;Ldispatch/test/TestDispatcherProvider;Lkotlin/coroutines/CoroutineContext;ILjava/lang/Object;)Ldispatch/test/TestProvidedCoroutineScope;
+}
+

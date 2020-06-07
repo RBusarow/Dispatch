@@ -1,0 +1,25 @@
+public abstract interface annotation class dispatch/test/CoroutineTest : java/lang/annotation/Annotation {
+	public abstract fun scopeFactory ()Ljava/lang/Class;
+}
+
+public final class dispatch/test/CoroutineTestExtension : org/junit/jupiter/api/extension/support/TypeBasedParameterResolver, org/junit/jupiter/api/extension/AfterEachCallback, org/junit/jupiter/api/extension/BeforeEachCallback {
+	public fun <init> ()V
+	public fun <init> (Ldispatch/test/CoroutineTestExtension$ScopeFactory;)V
+	public synthetic fun <init> (Ldispatch/test/CoroutineTestExtension$ScopeFactory;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun afterEach (Lorg/junit/jupiter/api/extension/ExtensionContext;)V
+	public fun beforeEach (Lorg/junit/jupiter/api/extension/ExtensionContext;)V
+	public final fun getScope ()Ldispatch/test/TestProvidedCoroutineScope;
+	public fun resolveParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Ldispatch/test/TestProvidedCoroutineScope;
+	public synthetic fun resolveParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Ljava/lang/Object;
+}
+
+public class dispatch/test/CoroutineTestExtension$ScopeFactory {
+	public fun <init> ()V
+	public fun create ()Ldispatch/test/TestProvidedCoroutineScope;
+}
+
+public final class dispatch/test/CoroutineTestExtensionKt {
+	public static final fun coroutineTestExtension (Lkotlin/jvm/functions/Function0;)Ldispatch/test/CoroutineTestExtension;
+	public static synthetic fun coroutineTestExtension$default (Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Ldispatch/test/CoroutineTestExtension;
+}
+

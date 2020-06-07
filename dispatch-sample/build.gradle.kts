@@ -31,9 +31,7 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
-  viewBinding {
-    isEnabled = true
-  }
+  buildFeatures.viewBinding = true
 
   buildTypes {
     getByName("release") {
