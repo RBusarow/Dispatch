@@ -15,6 +15,6 @@
 
 ##### [dispatch.android.lifecycle.LifecycleScopeFactory](../dispatch.android.lifecycle/-lifecycle-scope-factory/index.md)
 
-Factory holder for [LifecycleCoroutineScope](#)'s.
+Factory holder for [LifecycleCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.md)'s.
 
 

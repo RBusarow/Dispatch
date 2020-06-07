@@ -60,11 +60,18 @@ public class CoroutineTestExtension(
     AfterEachCallback {
 
   private val lazyScope = lazy { scopeFactory.create() }
+
+  /**
+   * A single `TestProvidedCoroutineScope` instance which is reset via [cleanUpTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] after each test.
+   */
   val scope: TestProvidedCoroutineScope
     get() = lazyScope.value
 
   private val contextScopeMap = mutableMapOf<ExtensionContext, TestProvidedCoroutineScope>()
 
+  /**
+   * @suppress
+   */
   override fun resolveParameter(
     parameterContext: ParameterContext,
     extensionContext: ExtensionContext
@@ -125,9 +132,21 @@ public class CoroutineTestExtension(
     Dispatchers.resetMain()
   }
 
+  /**
+   * Class used to create the [TestProvidedCoroutineScope] used in [CoroutineTestExtension].
+   *
+   * In order to provide a custom implementation of [TestProvidedCoroutineScope]:
+   * 1. Create a custom factory which has a default constructor and extends this `ScopeFactory`
+   * 2. Annotate your test class with [CoroutineTest] and pass your custom factory's `KClass` in as its parameter.
+   *
+   * @sample samples.CoroutineTestNamedFactorySample
+   */
   @ExperimentalCoroutinesApi
   open class ScopeFactory {
 
+    /**
+     * Creates an instance of [TestProvidedCoroutineScope].  Uses the no-arg factory by default.
+     */
     open fun create(): TestProvidedCoroutineScope = TestProvidedCoroutineScope()
   }
 }
@@ -144,6 +163,11 @@ public class CoroutineTestExtension(
  */
 @ExperimentalCoroutinesApi
 public inline fun coroutineTestExtension(
+  /**
+   * This factory lambda creates the [TestProvidedCoroutineScope] which is managed by the [CoroutineTestExtension].
+   *
+   * By default, it creates a standard [TestProvidedCoroutineScope].
+   */
   crossinline scopeFactory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
 ): CoroutineTestExtension = CoroutineTestExtension(object : CoroutineTestExtension.ScopeFactory() {
   override fun create(): TestProvidedCoroutineScope = scopeFactory.invoke()

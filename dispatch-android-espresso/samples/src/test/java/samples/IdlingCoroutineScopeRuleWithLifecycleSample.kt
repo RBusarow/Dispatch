@@ -17,6 +17,7 @@ package samples
 
 import dispatch.android.espresso.*
 import dispatch.android.lifecycle.*
+import dispatch.android.viewmodel.*
 import dispatch.core.*
 import kotlinx.coroutines.*
 import org.junit.*

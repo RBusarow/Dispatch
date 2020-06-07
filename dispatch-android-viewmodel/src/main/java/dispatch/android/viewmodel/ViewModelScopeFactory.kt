@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-package dispatch.android.lifecycle
+package dispatch.android.viewmodel
 
-import dispatch.android.lifecycle.ViewModelScopeFactory.reset
+import dispatch.android.viewmodel.ViewModelScopeFactory.reset
 import dispatch.core.*
 import kotlinx.coroutines.*
 
 /**
- * Factory holder for [viewModelScope][dispatch.android.lifecycle.CoroutineViewModel.viewModelScope]'s.
+ * Factory holder for [viewModelScope][dispatch.android.viewmodel.CoroutineViewModel.viewModelScope]'s.
  *
  * By default, `create` returns a [MainImmediateCoroutineScope], but may return any [CoroutineScope].
  *

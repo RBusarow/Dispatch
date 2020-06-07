@@ -2,7 +2,7 @@
 
 # IOIdlingCoroutineScope
 
-`interface IOIdlingCoroutineScope : `[`IdlingCoroutineScope`](-idling-coroutine-scope/index.md)`, `[`IOCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-i-o-coroutine-scope/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L53)
+`interface IOIdlingCoroutineScope : `[`IdlingCoroutineScope`](-idling-coroutine-scope/index.md)`, `[`IOCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-i-o-coroutine-scope/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L54)
 
 Marker interface for an [IdlingCoroutineScope](-idling-coroutine-scope/index.md) which indicates that its [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) is [DispatcherProvider.io](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-dispatcher-provider/io.md)
 
@@ -14,7 +14,7 @@ Marker interface for an [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
 [IdlingCoroutineScope](-idling-coroutine-scope/index.md)
 
-`fun IOIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`IOIdlingCoroutineScope`](./-i-o-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L134)
+`fun IOIdlingCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md)` = IdlingDispatcherProvider()): `[`IOIdlingCoroutineScope`](./-i-o-idling-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingCoroutineScope.kt#L139)
 
 Factory function for an [IOIdlingCoroutineScope](./-i-o-idling-coroutine-scope.md).
 

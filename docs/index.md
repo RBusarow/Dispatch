@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatch/core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.dispatch/core)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.Dispatch/dispatch-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.Dispatch/dispatch-core)
 ![CI](https://github.com/RBusarow/Dispatch/workflows/CI/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -284,9 +284,9 @@ fun `sayHello should say hello`() = runBlockingProvided {
 
 | **artifact**                | **features**                                   |
 | --------------------------- | ---------------------------------------------- |
-| [dispatch-core-test]        | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [testProvided]
-| [dispatch-core-test-junit4] | [TestCoroutineRule]
-| [dispatch-core-test-junit5] | [CoroutineTest] <p> [CoroutineTestExtension]
+| [dispatch-test]        | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [testProvided]
+| [dispatch-test-junit4] | [TestCoroutineRule]
+| [dispatch-test-junit5] | [CoroutineTest] <p> [CoroutineTestExtension]
 
 ### Android
 
@@ -352,17 +352,17 @@ dependencies {
   testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7" 
   
   // you only need this if you don't have the -junit4 or -junit5 artifacts
-  testImplementation "com.rickbusarow.dispatch:dispatch-core-test:1.0.0-beta03" 
+  testImplementation "com.rickbusarow.dispatch:dispatch-test:1.0.0-beta03" 
   
-  // TestCoroutineRule and :core-test
-  // This provides :dispatch-core-test via "api", so you don't need to declare both
-  // This can be used at the same time as :dispatch-core-test-junit5
-  testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03" 
+  // TestCoroutineRule and :dispatch-test
+  // This provides :dispatch-test via "api", so you don't need to declare both
+  // This can be used at the same time as :dispatch-test-junit5
+  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03" 
   
-  // CoroutineTest, CoroutineTestExtension, and :core-test
-  // This provides :dispatch-core-test via "api", so you don't need to declare both
-  // This can be used at the same time as :dispatch-core-test-junit4
-  testImplementation "com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03" 
+  // CoroutineTest, CoroutineTestExtension, and :dispatch-test
+  // This provides :dispatch-test via "api", so you don't need to declare both
+  // This can be used at the same time as :dispatch-test-junit4
+  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03" 
   
   /*
   Android testing
@@ -424,17 +424,17 @@ dependencies {
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
   
   // you only need this if you don't have the -junit4 or -junit5 artifacts
-  testImplementation("com.rickbusarow.dispatch:dispatch-core-test:1.0.0-beta03")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta03")
   
-  // CoroutineTestRule and :core-test
-  // This provides :dispatch-core-test via "api", so you don't need to declare both
-  // This can be used at the same time as :dispatch-core-test-junit5
-  testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03")
+  // CoroutineTestRule and :dispatch-test
+  // This provides :dispatch-test via "api", so you don't need to declare both
+  // This can be used at the same time as :dispatch-test-junit5
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
   
-  // CoroutineTest, CoroutineTestExtension, and :core-test
-  // This provides :dispatch-core-test via "api", so you don't need to declare both
-  // This can be used at the same time as :dispatch-core-test-junit4
-  testImplementation("com.rickbusarow.dispatch:dispatch-core-test-junit4:1.0.0-beta03")
+  // CoroutineTest, CoroutineTestExtension, and :dispatch-test
+  // This provides :dispatch-test via "api", so you don't need to declare both
+  // This can be used at the same time as :dispatch-test-junit4
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
   
   /*
   Android testing
@@ -525,8 +525,8 @@ limitations under the License.
 [lifecycleScope]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-extensions//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/lifecycle-scope.html
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
-[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.lifecycle/-coroutine-view-model/index.html
-[viewModelScope]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.lifecycle/-coroutine-view-model/view-model-scope.html
+[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.viewmodel/-coroutine-view-model/index.html
+[viewModelScope]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.viewmodel/-coroutine-view-model/view-model-scope.html
 <!--- END -->
 
 [Channel]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.channels/-channel/
@@ -538,14 +538,14 @@ limitations under the License.
 [CoroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
 [Deferred]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html
-[dispatch-android-espresso]: https://rbusarow.github.io/Dispatch/android-espresso//index.html
-[dispatch-android-lifecycle-extensions]: https://rbusarow.github.io/Dispatch/android-lifecycle-extensions//index.html
-[dispatch-android-lifecycle]: https://rbusarow.github.io/Dispatch/android-lifecycle//index.html
-[dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/android-lifecycle-viewmodel//index.html
-[dispatch-core-test-junit4]: https://rbusarow.github.io/Dispatch/core-test-junit4//index.html
-[dispatch-core-test-junit5]: https://rbusarow.github.io/Dispatch/core-test-junit5//index.html
-[dispatch-core-test]: https://rbusarow.github.io/Dispatch/core-test//index.html
-[dispatch-core]: https://rbusarow.github.io/Dispatch/core//index.html
+[dispatch-android-espresso]: https://rbusarow.github.io/Dispatch/dispatch-android-espresso//index.html
+[dispatch-android-lifecycle-extensions]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-extensions//index.html
+[dispatch-android-lifecycle]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//index.html
+[dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-viewmodel//index.html
+[dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//index.html
+[dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//index.html
+[dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
+[dispatch-core]: https://rbusarow.github.io/Dispatch/dispatch-core//index.html
 [dispatch-detekt]: https://rbusarow.github.io/Dispatch/dispatch-detekt//index.html
 [Dispatchers.Default]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html
 [Dispatchers.IO]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-io.html

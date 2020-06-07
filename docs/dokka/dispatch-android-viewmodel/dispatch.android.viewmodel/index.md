@@ -1,6 +1,6 @@
-[dispatch-android-viewmodel](../index.md) / [dispatch.android.lifecycle](./index.md)
+[dispatch-android-viewmodel](../index.md) / [dispatch.android.viewmodel](./index.md)
 
-## Package dispatch.android.lifecycle
+## Package dispatch.android.viewmodel
 
 ### Types
 

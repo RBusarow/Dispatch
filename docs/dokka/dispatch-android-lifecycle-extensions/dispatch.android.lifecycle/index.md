@@ -6,7 +6,7 @@
 
 | Name | Summary |
 |---|---|
-| [LifecycleScopeFactory](-lifecycle-scope-factory/index.md) | Factory holder for [LifecycleCoroutineScope](#)'s.`object LifecycleScopeFactory` |
+| [LifecycleScopeFactory](-lifecycle-scope-factory/index.md) | Factory holder for [LifecycleCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.md)'s.`object LifecycleScopeFactory` |
 
 ### Extensions for External Classes
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dispatch.android.lifecycle
+package dispatch.android.viewmodel
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.*

@@ -15,7 +15,7 @@
 
 package samples
 
-import dispatch.android.lifecycle.*
+import dispatch.android.viewmodel.*
 import dispatch.core.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*

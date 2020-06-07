@@ -26,25 +26,25 @@ nav:
   - 'Intro': index.md
   #  - 'Getting Started': getting-started.md
   - 'Modules':
-      - 'Core': modules/core.md
-      - 'Extensions': modules/extensions.md
-      - 'Test-Core': modules/core-test.md
-      - 'Test-JUnit4': modules/core-test-junit4.md
-      - 'Test-JUnit5': modules/core-test-junit5.md
-      - 'Android-Espresso': modules/android-espresso.md
-      - 'android-lifecycle': modules/android-lifecycle.md
-      - 'Android-viewmodel': modules/android-viewmodel.md
+      - 'Core': modules/dispatch-core.md
+      - 'Detekt': modules/dispatch-detekt.md
+      - 'Test-Core': modules/dispatch-test.md
+      - 'Test-JUnit4': modules/dispatch-test-junit4.md
+      - 'Test-JUnit5': modules/dispatch-test-junit5.md
+      - 'Android-Espresso': modules/dispatch-android-espresso.md
+      - 'android-lifecycle': modules/dispatch-android-lifecycle.md
+      - 'Android-viewmodel': modules/dispatch-android-viewmodel.md
   #  - 'Change Log':
   - 'Change Log': CHANGELOG.md
   - 'KDoc':
-      - 'core': kdoc/core/index.md
-      - 'extensions': kdoc/extensions/index.md
-      - 'test-core': kdoc/core-test/index.md
-      - 'test-junit4': kdoc/core-test-junit4/index.md
-      - 'test-junit5': kdoc/core-test-junit5/index.md
-      - 'android-espresso': kdoc/android-espresso/index.md
-      - 'android-lifecycle': kdoc/android-lifecycle/index.md
-      - 'android-viewmodel': kdoc/android-viewmodel/index.md
+      - 'core': kdoc/dispatch-core/index.md
+      - 'dtekt': kdoc/dispatch-detekt/index.md
+      - 'test-core': kdoc/dispatch-test/index.md
+      - 'test-junit4': kdoc/dispatch-test-junit4/index.md
+      - 'test-junit5': kdoc/dispatch-test-junit5/index.md
+      - 'android-espresso': kdoc/dispatch-android-espresso/index.md
+      - 'android-lifecycle': kdoc/dispatch-android-lifecycle/index.md
+      - 'android-viewmodel': kdoc/dispatch-android-viewmodel/index.md
 
 theme:
   name: 'material'
