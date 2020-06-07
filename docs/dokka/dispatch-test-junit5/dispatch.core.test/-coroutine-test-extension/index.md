@@ -102,7 +102,7 @@ the resultant scope uses the same [TestCoroutineDispatcher](https://kotlin.githu
 
 | Name | Summary |
 |---|---|
-| [ScopeFactory](-scope-factory/index.md) | `class ScopeFactory` |
+| [ScopeFactory](-scope-factory/index.md) | Class used to create the [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) used in [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/index.md).`class ScopeFactory` |
 
 ### Constructors
 
@@ -114,10 +114,4 @@ the resultant scope uses the same [TestCoroutineDispatcher](https://kotlin.githu
 
 | Name | Summary |
 |---|---|
-| [scope](scope.md) | `val scope: `[`TestProvidedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) |
-
-### Functions
-
-| Name | Summary |
-|---|---|
-| [resolveParameter](resolve-parameter.md) | `fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): `[`TestProvidedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) |
+| [scope](scope.md) | A single `TestProvidedCoroutineScope` instance which is reset via [cleanUpTestCoroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html) after each test.`val scope: `[`TestProvidedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) |
