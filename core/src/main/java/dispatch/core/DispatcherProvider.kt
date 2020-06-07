@@ -13,10 +13,14 @@
  * limitations under the License.
  */
 
+@file:Suppress("HardCodedDispatcher")
+
 package dispatch.core
 
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainCoroutineDispatcher
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Interface corresponding to the different [CoroutineDispatcher]'s offered by [Dispatchers].

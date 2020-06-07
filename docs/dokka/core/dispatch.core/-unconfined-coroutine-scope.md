@@ -2,11 +2,11 @@
 
 # UnconfinedCoroutineScope
 
-`interface UnconfinedCoroutineScope : `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L44)
+`interface UnconfinedCoroutineScope : `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L46)
 
 Marker interface which designates a [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html) with a [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) of `unconfined`.
 
-`fun UnconfinedCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`DispatcherProvider`](-dispatcher-provider/index.md)` = DefaultDispatcherProvider()): `[`UnconfinedCoroutineScope`](./-unconfined-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L184)
+`fun UnconfinedCoroutineScope(job: `[`Job`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html)` = SupervisorJob(), dispatcherProvider: `[`DispatcherProvider`](-dispatcher-provider/index.md)` = DefaultDispatcherProvider()): `[`UnconfinedCoroutineScope`](./-unconfined-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L186)
 
 Factory function for a [UnconfinedCoroutineScope](./-unconfined-coroutine-scope.md) with a [DispatcherProvider](-dispatcher-provider/index.md).
 Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.
@@ -21,7 +21,7 @@ Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.
 
 [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)
 
-`fun UnconfinedCoroutineScope(coroutineContext: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`): `[`UnconfinedCoroutineScope`](./-unconfined-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L201)
+`fun UnconfinedCoroutineScope(coroutineContext: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`): `[`UnconfinedCoroutineScope`](./-unconfined-coroutine-scope.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/CoroutineScopes.kt#L203)
 
 Factory function for a [UnconfinedCoroutineScope](./-unconfined-coroutine-scope.md) with a [DispatcherProvider](-dispatcher-provider/index.md).
 Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.

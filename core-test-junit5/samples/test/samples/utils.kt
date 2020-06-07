@@ -15,9 +15,10 @@
 
 package samples
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 
-val someValue = true
+const val someValue = true
 
 class SomeClass(val coroutineScope: CoroutineScope) {
 

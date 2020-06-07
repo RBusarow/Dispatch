@@ -2,7 +2,7 @@
 
 # DispatcherProvider
 
-`fun DispatcherProvider(): `[`DispatcherProvider`](-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/DispatcherProvider.kt#L92)
+`fun DispatcherProvider(): `[`DispatcherProvider`](-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/core/src/main/java/dispatch/core/DispatcherProvider.kt#L94)
 
 Creates a default implementation of [DispatcherProvider](-dispatcher-provider/index.md).
 

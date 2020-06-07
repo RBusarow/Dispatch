@@ -13,11 +13,13 @@
  * limitations under the License.
  */
 
+@file:Suppress("HardCodedDispatcher")
+
 package dispatch.core.test
 
-import dispatch.core.*
+import dispatch.core.DispatcherProvider
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 
 /**
  * [DispatcherProvider] implementation for testing, where each property defaults to a [TestCoroutineDispatcher].

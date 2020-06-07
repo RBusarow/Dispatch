@@ -15,18 +15,23 @@
 
 package dispatch.android.lifecycle.internal
 
-import android.os.*
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import kotlinx.coroutines.*
+import android.os.Build
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import dispatch.android.lifecycle.LifecycleCoroutineScope
+import dispatch.android.lifecycle.LifecycleScopeFactory
+import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.launchMainImmediate
+import kotlinx.coroutines.cancel
 import java.util.*
-import java.util.concurrent.*
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.collections.set
 
 internal object LifecycleCoroutineScopeStore {
 
   // ConcurrentHashMap can miss "put___" operations on API 21/22 https://issuetracker.google.com/issues/37042460
+  @Suppress("MagicNumber")
   private val map = if (Build.VERSION.SDK_INT < 23) {
     Collections.synchronizedMap<Lifecycle, LifecycleCoroutineScope>(mutableMapOf<Lifecycle, LifecycleCoroutineScope>())
   } else {

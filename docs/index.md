@@ -278,7 +278,7 @@ fun `sayHello should say hello`() = runBlockingProvided {
 | **artifact**           | **features**                                   |
 | ---------------------- | ---------------------------------------------- |
 | [dispatch-core]        | Dispatcher-specific types and factories <p> Dispatcher-specific coroutine builders
-| [dispatch-extensions]  | [Flow] intermediary and terminal operators <p> [Channel] operators
+| [dispatch-detekt]      | [Detekt] rules for common auto-imported-the-wrong-thing problems
 
 ### JVM Testing
 
@@ -546,13 +546,14 @@ limitations under the License.
 [dispatch-core-test-junit5]: https://rbusarow.github.io/Dispatch/core-test-junit5//index.html
 [dispatch-core-test]: https://rbusarow.github.io/Dispatch/core-test//index.html
 [dispatch-core]: https://rbusarow.github.io/Dispatch/core//index.html
-[dispatch-extensions]: https://rbusarow.github.io/Dispatch/extensions//index.html
+[dispatch-detekt]: https://rbusarow.github.io/Dispatch/dispatch-detekt//index.html
 [Dispatchers.Default]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html
 [Dispatchers.IO]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-io.html
 [Dispatchers.Main.immediate]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html
 [Dispatchers.Main]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html
 [Dispatchers.Unconfined]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-unconfined.html
 [Dispatchers]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html
+[Detekt]: https://github.com/detekt/detekt
 [Flow]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html
 [Job]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html
 [kotlin.coroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/coroutine-context.html

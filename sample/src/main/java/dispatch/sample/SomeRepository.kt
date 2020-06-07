@@ -15,13 +15,16 @@
 
 package dispatch.sample
 
-import dispatch.core.*
-import kotlinx.coroutines.*
+import dispatch.core.IOCoroutineScope
+import dispatch.core.asyncIO
+import dispatch.core.withIO
+import kotlinx.coroutines.delay
 
 /**
  * This would normally be a singleton,
  * but we don't have a DI framework here, so we'll just _suspend_ disbelief.
  */
+@Suppress("MagicNumber")
 class SomeRepository(private val coroutineScope: IOCoroutineScope) {
 
   suspend fun getSomethingExpensive() = withIO {

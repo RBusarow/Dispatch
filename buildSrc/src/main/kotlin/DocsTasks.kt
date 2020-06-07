@@ -13,8 +13,10 @@
  * limitations under the License.
  */
 
-import org.gradle.api.*
-import java.io.*
+@file:Suppress("TooManyFunctions", "MagicNumber")
+
+import org.gradle.api.Project
+import java.io.File
 
 fun cleanDocs() {
 
@@ -150,6 +152,7 @@ fun File.updateLibraryVersions(): File {
         Libs.Kotlinx.Coroutines.core.toDependencyMatcher(),
         Libs.Kotlinx.Coroutines.android.toDependencyMatcher(),
         Libs.Kotlinx.Coroutines.test.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.detekt.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.espresso.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.extensions.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.lifecycleExtensions.toDependencyMatcher(),

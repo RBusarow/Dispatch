@@ -13,11 +13,14 @@
  * limitations under the License.
  */
 
-import kotlinx.knit.*
+@file:Suppress("MagicNumber")
+
+import io.gitlab.arturbosch.detekt.Detekt
+import kotlinx.knit.KnitPluginExtension
 import org.gradle.kotlin.dsl.*
-import org.jetbrains.dokka.gradle.*
-import org.jetbrains.kotlin.gradle.tasks.*
-import java.net.*
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URL
 
 buildscript {
   repositories {
@@ -40,6 +43,10 @@ buildscript {
   }
 }
 
+plugins {
+  id("io.gitlab.arturbosch.detekt") version Libs.Detekt.version
+}
+
 allprojects {
 
   repositories {
@@ -53,6 +60,7 @@ allprojects {
   }
 
   afterEvaluate proj@{
+
     tasks.withType<DokkaTask> dokkaTask@{
 
       /*
@@ -131,7 +139,7 @@ allprojects {
        which point to something in moduleA's kdoc will actually work.
        */
 
-      if (this@proj.name != "core") {
+      if (this@proj.name != "core" && this@proj.name != "dispatch-detekt") {
 
         linkModuleDocs(
           matchingModules = emptyList(), // all
@@ -155,6 +163,7 @@ allprojects {
         )
       }
 
+      @Suppress("unused")
       val buildDocs by tasks.registering {
 
         description = "recreates all documentation for the /docs directory"
@@ -267,3 +276,78 @@ extensions.configure<KnitPluginExtension> {
 tasks.getByName("knitPrepare") {
   dependsOn(subprojects.mapNotNull { it.tasks.findByName("dokka") })
 }
+
+subprojects {
+
+  apply {
+    plugin("io.gitlab.arturbosch.detekt")
+  }
+
+  detekt {
+    parallel = true
+    config = files("$rootDir/detekt/detekt-config.yml")
+
+    val unique = "${rootProject.relativePath(projectDir)}/${project.name}"
+
+    idea {
+      path = "$rootDir/.idea"
+      codeStyleScheme = "$rootDir/.idea/Project.xml"
+      inspectionsProfile = "$rootDir/.idea/Project-Default.xml"
+      report = "${project.projectDir}/reports/build/detekt-reports"
+      mask = "*.kt"
+    }
+
+    reports {
+      xml {
+        enabled = false
+        destination = file("$rootDir/build/detekt-reports/$unique-detekt.xml")
+      }
+      html {
+        enabled = true
+        destination = file("$rootDir/build/detekt-reports/$unique-detekt.html")
+      }
+      txt {
+        enabled = false
+        destination = file("$rootDir/build/detekt-reports/$unique-detekt.txt")
+      }
+    }
+  }
+}
+
+allprojects {
+  dependencies {
+    detekt(Libs.Detekt.cli)
+    detektPlugins(project(path = ":dispatch-detekt"))
+  }
+}
+
+val analysisDir = file(projectDir)
+val baselineFile = file("$rootDir/detekt/project-baseline.xml")
+val configFile = file("$rootDir/detekt/detekt-config.yml")
+val formatConfigFile = file("$rootDir/config/detekt/format.yml")
+val statisticsConfigFile = file("$rootDir/config/detekt/statistics.yml")
+
+val kotlinFiles = "**/*.kt"
+val kotlinScriptFiles = "**/*.kts"
+val resourceFiles = "**/resources/**"
+val buildFiles = "**/build/**"
+val testFiles = "**/src/test/**"
+
+val detektAll by tasks.registering(Detekt::class) {
+
+  description = "Runs the whole project at once."
+  parallel = true
+  buildUponDefaultConfig = true
+  setSource(files(rootDir))
+  config.setFrom(files(configFile))
+  include(kotlinFiles, kotlinScriptFiles)
+  exclude(resourceFiles, buildFiles, testFiles)
+  reports {
+    xml.enabled = false
+    html.enabled = false
+    txt.enabled = false
+  }
+}
+
+tasks.findByName("detekt")
+  ?.finalizedBy(detektAll)
