@@ -166,10 +166,10 @@ dependencies {
 
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
-[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.core.test/-test-provided-coroutine-scope/index.html
+[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html
 <!--- MODULE dispatch-test-junit4-->
 <!--- INDEX  -->
-[TestCoroutineRule]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//dispatch.core.test/-test-coroutine-rule/index.html
+[TestCoroutineRule]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//dispatch.test/-test-coroutine-rule/index.html
 <!--- END -->
 
 [cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
