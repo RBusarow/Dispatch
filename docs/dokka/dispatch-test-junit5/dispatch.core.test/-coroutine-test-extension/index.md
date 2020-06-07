@@ -2,12 +2,12 @@
 
 # CoroutineTestExtension
 
-`@ExperimentalCoroutinesApi class CoroutineTestExtension : TypeBasedParameterResolver<`[`TestProvidedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md)`>, BeforeEachCallback, AfterEachCallback` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-test-junit5/src/main/java/dispatch/core/test/CoroutineTestExtension.kt#L56)
+`@ExperimentalCoroutinesApi class CoroutineTestExtension : `[`TypeBasedParameterResolver`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/support/TypeBasedParameterResolver.html)`<`[`TestProvidedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md)`>, `[`BeforeEachCallback`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/BeforeEachCallback.html)`, `[`AfterEachCallback`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/AfterEachCallback.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-test-junit5/src/main/java/dispatch/core/test/CoroutineTestExtension.kt#L56)
 
-JUnit 5 [ParameterResolver](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/extension.html)[Extension](#) for injecting and managing a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) in a test instance.
+JUnit 5 [ParameterResolver](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/extension.html)[Extension](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/Extension.html) for injecting and managing a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) in a test instance.
 This creates a new instance of [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) each time the scope is injected, optionally using a custom [ScopeFactory](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md).
 
-If this extension is initialized via [RegisterExtension](#), there is also a [scope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/scope.md) property which is automatically managed.
+If this extension is initialized via [RegisterExtension](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/RegisterExtension.html), there is also a [scope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/scope.md) property which is automatically managed.
 
 ### Before Each:
 
@@ -108,7 +108,7 @@ the resultant scope uses the same [TestCoroutineDispatcher](https://kotlin.githu
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | JUnit 5 [ParameterResolver](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/extension.html)[Extension](#) for injecting and managing a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) in a test instance. This creates a new instance of [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) each time the scope is injected, optionally using a custom [ScopeFactory](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md).`CoroutineTestExtension(scopeFactory: `[`ScopeFactory`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md)` = ScopeFactory())` |
+| [&lt;init&gt;](-init-.md) | JUnit 5 [ParameterResolver](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/extension.html)[Extension](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/Extension.html) for injecting and managing a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) in a test instance. This creates a new instance of [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-test-provided-coroutine-scope/index.md) each time the scope is injected, optionally using a custom [ScopeFactory](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md).`CoroutineTestExtension(scopeFactory: `[`ScopeFactory`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.core.test/-coroutine-test-extension/-scope-factory/index.md)` = ScopeFactory())` |
 
 ### Properties
 

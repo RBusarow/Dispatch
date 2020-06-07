@@ -101,6 +101,7 @@ allprojects {
           )
         }
         externalDocumentationLink { url = URL("https://junit.org/junit4/javadoc/latest/") }
+        externalDocumentationLink { url = URL("https://junit.org/junit5/docs/current/api/") }
         externalDocumentationLink {
           url = URL(
             "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/"
@@ -149,7 +150,7 @@ allprojects {
         )
 
         linkModuleDocs(
-          matchingModules = listOf("android-lifecycle-extensions"),
+          matchingModules = listOf("dispatch-android-lifecycle-extensions"),
           currentProject = this@proj,
           currentTask = this@dokkaTask,
           dependencyModule = "dispatch-android-lifecycle"
@@ -163,7 +164,7 @@ allprojects {
         )
       }
 
-      @Suppress("unused")
+      @Suppress("UNUSED_VARIABLE")
       val buildDocs by tasks.registering {
 
         description = "recreates all documentation for the /docs directory"
