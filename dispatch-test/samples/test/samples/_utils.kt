@@ -46,4 +46,5 @@ class SomeClass(val coroutineScope: CoroutineScope) {
   fun dataDeferred() = coroutineScope.async { Data() }
 }
 
+@Suppress("FunctionOnlyReturningConstant")
 fun Data() = 1

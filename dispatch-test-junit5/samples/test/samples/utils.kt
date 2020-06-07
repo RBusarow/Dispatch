@@ -17,7 +17,7 @@ package samples
 
 import kotlinx.coroutines.*
 
-val someValue = true
+const val someValue = true
 
 class SomeClass(val coroutineScope: CoroutineScope) {
 
