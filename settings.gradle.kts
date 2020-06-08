@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Rick Busarow
+ * Copyright (C) 2020 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,6 +13,23 @@
  * limitations under the License.
  */
 
-include(":dispatcher-provider")
-include(":dispatcher-provider-test")
-include(":sample")
+include(":dispatch-android-espresso")
+include(":dispatch-android-espresso:samples")
+include(":dispatch-android-lifecycle")
+include(":dispatch-android-lifecycle-extensions")
+include(":dispatch-android-lifecycle-extensions:samples")
+include(":dispatch-android-lifecycle:samples")
+include(":dispatch-android-viewmodel")
+include(":dispatch-android-viewmodel:samples")
+include(":dispatch-core")
+include(":dispatch-test")
+include(":dispatch-test-junit4")
+include(":dispatch-test-junit4:samples")
+include(":dispatch-test-junit5")
+include(":dispatch-test-junit5:samples")
+include(":dispatch-test:samples")
+include(":dispatch-core:samples")
+include(":dispatch-detekt")
+include(":dispatch-detekt:samples")
+include(":dispatch-internal-test")
+include(":dispatch-sample")

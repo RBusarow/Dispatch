@@ -1,0 +1,19 @@
+public final class dispatch/android/lifecycle/LifecycleScopeFactory {
+	public static final field INSTANCE Ldispatch/android/lifecycle/LifecycleScopeFactory;
+	public final fun reset ()V
+	public final fun set (Lkotlin/jvm/functions/Function0;)V
+}
+
+public final class dispatch/android/lifecycle/LifecycleScopeKt {
+	public static final fun getLifecycleScope (Landroidx/lifecycle/LifecycleOwner;)Ldispatch/android/lifecycle/LifecycleCoroutineScope;
+}
+
+public final class dispatch/android/lifecycle/extensions/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public static final field VERSION_CODE I
+	public static final field VERSION_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
