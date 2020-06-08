@@ -1,6 +1,7 @@
 # MODULE dispatch-android-lifecycle
 
 [CoroutineScope] functionality linked with an [Android Lifecycle].
+
 ## Contents
 <!--- TOC -->
 
@@ -46,32 +47,6 @@
 
 
 ## Minimum Gradle Config
-Click to expand a field.
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
-
-Add to your module's `build.gradle`:
-
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta03"
-  
-  implementation "androidx.lifecycle:lifecycle-common:2.2.0" 
-}
-```
-
-</details>
-
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
 
 Add to your module's `build.gradle.kts`:
 
@@ -89,8 +64,6 @@ dependencies {
   implementation("androidx.lifecycle:lifecycle-common:2.2.0")
 }
 ```
-
-</details>
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->

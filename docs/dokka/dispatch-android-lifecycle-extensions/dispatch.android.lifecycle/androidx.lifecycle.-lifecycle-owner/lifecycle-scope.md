@@ -15,6 +15,28 @@ The type of [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx
 The `viewModelScope` is automatically cancelled when the [LifecycleOwner](https://developer.android.com/reference/androidx/androidx/lifecycle/LifecycleOwner.html)'s [lifecycle](https://developer.android.com/reference/androidx/androidx/lifecycle/LifecycleOwner.html#getLifecycle())'s [Lifecycle.State](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html) drops to [Lifecycle.State.DESTROYED](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html#DESTROYED).
 
 ``` kotlin
-//Unresolved: samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeSample
+// This could be any LifecycleOwner -- Fragments, Activities, Services...
+class SomeFragment : Fragment() {
+
+  init {
+
+    // auto-created MainImmediateCoroutineScope which is lifecycle-aware
+    lifecycleScope //...
+
+    // active only when "resumed".  starts a fresh coroutine each time
+    // this is a rough proxy for LiveData behavior
+    lifecycleScope.launchOnResume { }
+
+    // active only when "started".  starts a fresh coroutine each time
+    lifecycleScope.launchOnStart { }
+
+    // launch when created, automatically stop on destroy
+    lifecycleScope.launchOnCreate { }
+
+    // it works as a normal CoroutineScope as well (because it is)
+    lifecycleScope.launchMain { }
+
+  }
+}
 ```
 

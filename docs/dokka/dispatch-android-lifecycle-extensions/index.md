@@ -7,7 +7,6 @@
 * [Difference from AndroidX](#difference-from-androidx)
 * [Custom CoroutineScope factories](#custom-coroutinescope-factories)
 * [Automatic lifecycle jobs](#automatic-lifecycle-jobs)
-* [Future plans](#future-plans)
 * [Minimum Gradle Config](#minimum-gradle-config)
 
 ## Api
@@ -126,36 +125,7 @@ class SomeFragment : Fragment() {
 
 This has the desired effect of not leaking backpressure upstream (which in this example is the `viewModel`).
 
-## Future plans
-
-This artifact exists primarily as a solution to the bug, but also for the sake of the factory.  I'll be working to make this change in AndroidX as well, since it has value even outside of `DispatcherProvider`.  But I can get it released and usable a lot faster in my own project, so here we are.
-
-I will maintain this artifact until the pausing bug is fixed in production AndroidX and it has a settable factory, or some other suitable solution for custom scopes.
-
 ## Minimum Gradle Config
-
-Click to expand a field.
-
-&nbsp;  Groovy
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta03"
-  
-  implementation "androidx.lifecycle:lifecycle-common:2.2.0" 
-}
-```
-
-&nbsp;  Kotlin Gradle DSL
 
 Add to your module's `build.gradle.kts`:
 

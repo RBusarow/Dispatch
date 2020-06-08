@@ -86,39 +86,10 @@ If using this module, there is no need to include the `dispatch-test` artifact i
 ## JUnit dependencies
 
 ### Minimum Gradle Config
-Click to expand a field.
 
 Because this is a JUnit 5 Extension, it requires a the JUnit 5 artifact.  No external libraries are bundled as part of Dispatch, so you’ll need to add it to your `dependencies` block yourself.
 
 - `org.junit.jupiter:junit-jupiter:5.6.2`
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  // core
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
-
-  // the junit5 artifact also provides the dispatch-test artifact
-  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03"
-  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
-  testImplementation "org.junit.jupiter:junit-jupiter:5.6.2"
-}
-```
-
-</details>
-
-
-&nbsp;<details> <summary> <b>Kotlin Gradle DSL</b> </summary>
 
 Add to your module's `build.gradle.kts`:
 
@@ -141,40 +112,9 @@ dependencies {
 }
 ```
 
-</details>
-
 ### JUnit 4 interoperability
 
 Junit 4 provides a “vintage” (JUnit 4) artifact for legacy support (such as Robolectric or Android instrumented tests).  Dispatch also supports running both in the same project by just adding both artifacts.
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  // core
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
-
-  // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03"
-  testImplementation "com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03"
-  testImplementation "org.junit.jupiter:junit-jupiter:5.6.2"
-  testImplementation "org.junit.vintage:junit-vintage-engine:5.6.2"
-  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
-}
-```
-</details>
-
-
-&nbsp;<details> <summary> <b>Kotlin Gradle DSL</b> </summary>
 
 Add to your module's `build.gradle.kts`:
 
@@ -198,8 +138,6 @@ dependencies {
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
 }
 ```
-
-</details>
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->

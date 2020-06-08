@@ -173,27 +173,6 @@ I will maintain this artifact until it is implemented AndroidX, or they provide 
 
 ## Minimum Gradle Config
 
-Click to expand a field.
-
-&nbsp;  Groovy
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta03"
-}
-```
-
-&nbsp;  Kotlin Gradle DSL
-
 Add to your module's `build.gradle.kts`:
 
 ``` kotlin

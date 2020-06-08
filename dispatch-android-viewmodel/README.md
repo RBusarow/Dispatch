@@ -173,29 +173,6 @@ I'll be suggesting to make this change in AndroidX as well, but I can get it rel
 I will maintain this artifact until it is implemented AndroidX, or they provide some other suitable solution for custom scopes.
 
 ## Minimum Gradle Config
-Click to expand a field.
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta03"
-}
-```
-
-</details>
-
-
-&nbsp;<details> <summary> <b>Kotlin Gradle DSL</b> </summary>
 
 Add to your module's `build.gradle.kts`:
 
@@ -211,8 +188,6 @@ dependencies {
   implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta03")
 }
 ```
-
-</details>
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->
