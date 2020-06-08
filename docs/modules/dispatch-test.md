@@ -109,33 +109,6 @@ fun some_test() = testProvided {
 
 
 ### Minimum Gradle Config
-Click to expand a field.
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  // core
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
-
-  testImplementation "com.rickbusarow.dispatch:dispatch-test:1.0.0-beta03"
-  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
-}
-```
-
-</details>
-
-
-&nbsp;<details> <summary> <b>Kotlin Gradle DSL</b> </summary>
 
 Add to your module's `build.gradle.kts`:
 
@@ -155,9 +128,6 @@ dependencies {
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
 }
 ```
-
-</details>
-
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->

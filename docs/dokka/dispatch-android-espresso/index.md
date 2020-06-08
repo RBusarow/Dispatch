@@ -74,34 +74,6 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 
 ## Minimum Gradle Config
 
-Click to expand a field.
-
-&nbsp;  Groovy
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  // core
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
-
-  androidTestImplementation "com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta03"
-
-  // android
-  androidTestImplementation "androidx.test:runner:1.2.0"
-  androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
-}
-```
-
-&nbsp;  Kotlin Gradle DSL
-
 Add to your module's `build.gradle.kts`:
 
 ``` kotlin

@@ -10,7 +10,6 @@ The artifact I hope you don't need, but if you're not doing dependency injection
 * [Automatic cancellation in onCleared()](#automatic-cancellation-in-oncleared)
 * [viewModelScope is not lifecycleScope](#viewmodelscope-is-not-lifecyclescope)
 * [Extending ViewModel](#extending-viewmodel)
-* [Future plans](#future-plans)
 * [Minimum Gradle Config](#minimum-gradle-config)
 
 <!--- END -->
@@ -166,36 +165,7 @@ class SomeViewModel : CoroutineViewModel() {
 
 Since nothing about the `clear` event is actually exposed outside of `ViewModel`, it's necessary to extend `ViewModel` in order to consume it for cancelling the `viewModelScope`.  This is especially galling since `ViewModel` could absolutely have just been an interface to begin with.
 
-## Future plans
-
-I'll be suggesting to make this change in AndroidX as well, but I can get it released and usable a lot faster in my own project, so here we are.
-
-I will maintain this artifact until it is implemented AndroidX, or they provide some other suitable solution for custom scopes.
-
 ## Minimum Gradle Config
-Click to expand a field.
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
-
-Add to your module's `build.gradle`:
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta03"
-}
-```
-
-</details>
-
-
-&nbsp;<details> <summary> <b>Kotlin Gradle DSL</b> </summary>
 
 Add to your module's `build.gradle.kts`:
 
@@ -211,8 +181,6 @@ dependencies {
   implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta03")
 }
 ```
-
-</details>
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->

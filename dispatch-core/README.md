@@ -56,11 +56,10 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 * [Types](#types)
   * [Marker interfaces and factories](#marker-interfaces-and-factories)
 * [Extensions](#extensions)
-  * [async](#async)
-  * [launch](#launch)
+  * [Launch](#launch)
+  * [Async](#async)
+  * [WithContext](#withcontext)
   * [Flow](#flow)
-* [Builders](#builders)
-  * [suspend](#suspend)
 * [Minimum Gradle Config](#minimum-gradle-config)
 
 <!--- END -->
@@ -75,88 +74,75 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 
 ### Marker interfaces and factories
 
-| **Name**                        | **Description**
+| **Name**                        | **Dispatcher**
 | -------------                   | --------------- |
-| [DefaultCoroutineScope]         | A [CoroutineScope] with a [CoroutineDispatcher] of [DispatcherProvider.default]
-| [IOCoroutineScope]              | A [CoroutineScope] with a [CoroutineDispatcher] of [DispatcherProvider.io]
-| [MainCoroutineScope]            | A [CoroutineScope] with a [CoroutineDispatcher] of [DispatcherProvider.main]
-| [MainImmediateCoroutineScope]   | A [CoroutineScope] with a [CoroutineDispatcher] of [DispatcherProvider.mainImmediate]
-| [UnconfinedCoroutineScope]      | A [CoroutineScope] with a [CoroutineDispatcher] of [DispatcherProvider.unconfined]
+| [DefaultCoroutineScope]         | [DispatcherProvider.default]
+| [IOCoroutineScope]              | [DispatcherProvider.io]
+| [MainCoroutineScope]            | [DispatcherProvider.main]
+| [MainImmediateCoroutineScope]   | [DispatcherProvider.mainImmediate]
+| [UnconfinedCoroutineScope]      | [DispatcherProvider.unconfined]
 
 ## Extensions
 
-### async
-
-| **Name**                    | **Description**
-| -------------------         | ---------------
-| [asyncDefault]             | Creates a [Deferred] using [DispatcherProvider.default]
-| [asyncIO]                  | Creates a [Deferred] using [DispatcherProvider.io]
-| [asyncMain]                | Creates a [Deferred] using [DispatcherProvider.main]
-| [asyncMainImmediate]       | Creates a [Deferred] using [DispatcherProvider.mainImmediate]
-| [asyncUnconfined]          | Creates a [Deferred] using [DispatcherProvider.unconfined]
-
-### launch
-
-| **Name**                    | **Description**
-| -------------------         | ---------------
-| [launchDefault]             | Creates a [Job] using [DispatcherProvider.default]
-| [launchIO]                  | Creates a [Job] using [DispatcherProvider.io]
-| [launchMain]                | Creates a [Job] using [DispatcherProvider.main]
-| [launchMainImmediate]       | Creates a [Job] using [DispatcherProvider.mainImmediate]
-| [launchUnconfined]          | Creates a [Job] using [DispatcherProvider.unconfined]
-
-### Flow
-
-These functions are shorthand for [Flow.flowOn] with a [DispatcherProvider]
-
-| **Name**                    | **Description**
-| -------------------         | ---------------
-| [flowOnDefault]             | Dispatches an upstream [Flow] using [DispatcherProvider.default]
-| [flowOnIO]                  | Dispatches an upstream [Flow] using [DispatcherProvider.io]
-| [flowOnMain]                | Dispatches an upstream [Flow] using [DispatcherProvider.main]
-| [flowOnMainImmediate]       | Dispatches an upstream [Flow] using [DispatcherProvider.mainImmediate]
-| [flowOnUnconfined]          | Dispatches an upstream [Flow] using [DispatcherProvider.unconfined]
-
-## Builders
-
-### suspend
-
-| **Name**                    | **Description**
-| -------------------         | ---------------
-| [withDefault]               | Calls [withContext] in a [suspend] function using [DispatcherProvider.default]
-| [withIO]                    | Calls [withContext] in a [suspend] function using [DispatcherProvider.io]
-| [withMain]                  | Calls [withContext] in a [suspend] function using [DispatcherProvider.main]
-| [withMainImmediate]         | Calls [withContext] in a [suspend] function using [DispatcherProvider.mainImmediate]
-| [withUnconfined]            | Calls [withContext] in a [suspend] function using [DispatcherProvider.unconfined]
+|              | **Default**     | **IO**     | **Main**     | **Main.immediate**    | **Unconfined**     |
+| ------------ | --------------- | ---------- | ------------ | --------------------- | ------------------ |
+| [Job]        | [launchDefault] | [launchIO] | [launchMain] | [launchMainImmediate] | [launchUnconfined]
+| [Deferred]   | [asyncDefault]  | [asyncIO]  | [asyncMain]  | [asyncMainImmediate]  | [asyncUnconfined]
+| `suspend T`  | [withDefault]   | [withIO]   | [withMain]   | [withMainImmediate]   | [withUnconfined]
+| `Flow<T>`    | [flowOnDefault] | [flowOnIO] | [flowOnMain] | [flowOnMainImmediate] | [flowOnUnconfined]
 
 
 
-
-## Minimum Gradle Config
-Click to expand a field.
-
-&nbsp;<details open> <summary> <b>Groovy</b> </summary>
-
-Add to your module's `build.gradle`:
-
-
-``` groovy
-repositories {
-  mavenCentral()
-}
-
-dependencies {
-
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
-  implementation "com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03"
+### Launch
+``` kotlin
+fun foo(scope: CoroutineScope) {
+  scope.launchDefault {  }
+  scope.launchIO {  }
+  scope.launchMain {  }
+  scope.launchMainImmediate {  }
+  scope.launchUnconfined {  }
 }
 ```
 
-</details>
+### Async
+``` kotlin
+fun foo(scope: CoroutineScope) {
+  scope.asyncDefault {  }
+  scope.asyncIO {  }
+  scope.asyncMain {  }
+  scope.asyncMainImmediate {  }
+  scope.asyncUnconfined {  }
+}
+```
 
+### WithContext
 
-&nbsp;<details> <summary> <b>Kotlin Gradle DSL</b> </summary>
+The [CoroutineContext] used for [withContext] comes from the [coroutineContext][kotlin.coroutineContext] top-level suspend property in [kotlin.coroutines].  It returns the current context, so the `default`, `io`, etc. used here are the ones defined in the [CoroutineScope] of the caller. There is no need to inject any other dependencies.
+
+``` kotlin
+suspend fun foo() {
+  // note that we have no CoroutineContext
+  withDefault {  }
+  withIO {  }
+  withMain {  }
+  withMainImmediate {  }
+  withUnconfined {  }
+}
+```
+
+###  Flow
+Like [withContext], [Flow] typically doesn’t get a [CoroutineScope] of its own.  They inherit the [coroutineContext][kotlin.coroutineContext] from the collector in a pattern called [context preservation][context_preservation]. These new operators maintain context preservation (*they’re forced to, actually*), and extract the [coroutineContext][kotlin.coroutineContext] from the collector.
+
+``` kotlin
+val someFlow = flow {  }
+  .flowOnDefault()
+  .flowOnIO()
+  .flowOnMain()
+  .flowOnMainImmediate()
+  .flowOnUnconfined()
+```
+
+## Minimum Gradle Config
 
 Add to your module's `build.gradle.kts`:
 
@@ -173,8 +159,6 @@ dependencies {
 }
 ```
 
-</details>
-
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->
 [DispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html
@@ -189,36 +173,37 @@ dependencies {
 [DispatcherProvider.mainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/main-immediate.html
 [UnconfinedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-unconfined-coroutine-scope.html
 [DispatcherProvider.unconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/unconfined.html
-[asyncDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-default.html
-[asyncIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-i-o.html
-[asyncMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main.html
-[asyncMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main-immediate.html
-[asyncUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-unconfined.html
 [launchDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-default.html
 [launchIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-i-o.html
 [launchMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-main.html
 [launchMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-main-immediate.html
 [launchUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-unconfined.html
-[flowOnDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-default.html
-[flowOnIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-i-o.html
-[flowOnMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main.html
-[flowOnMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main-immediate.html
-[flowOnUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-unconfined.html
+[asyncDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-default.html
+[asyncIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-i-o.html
+[asyncMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main.html
+[asyncMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main-immediate.html
+[asyncUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-unconfined.html
 [withDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-default.html
 [withIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-i-o.html
 [withMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-main.html
 [withMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-main-immediate.html
 [withUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-unconfined.html
+[flowOnDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-default.html
+[flowOnIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-i-o.html
+[flowOnMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main.html
+[flowOnMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main-immediate.html
+[flowOnUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-unconfined.html
 <!--- END -->
 
 
+[context_preservation]: https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
 [CoroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
 [CoroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
 [Deferred]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html
 [Dispatchers]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html
-[Flow.flowOn]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/flow-on.html
 [Flow]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html
 [Job]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html
-[suspend]: https://kotlinlang.org/docs/reference/coroutines/composing-suspending-functions.html
+[kotlin.coroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/coroutine-context.html
+[kotlin.coroutines]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/index.html
 [withContext]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-context.html
