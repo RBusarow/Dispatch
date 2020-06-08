@@ -10,7 +10,6 @@ The artifact I hope you don't need, but if you're not doing dependency injection
 * [Automatic cancellation in onCleared()](#automatic-cancellation-in-oncleared)
 * [viewModelScope is not lifecycleScope](#viewmodelscope-is-not-lifecyclescope)
 * [Extending ViewModel](#extending-viewmodel)
-* [Future plans](#future-plans)
 * [Minimum Gradle Config](#minimum-gradle-config)
 
 ## Examples
@@ -164,12 +163,6 @@ class SomeViewModel : CoroutineViewModel() {
 ## Extending ViewModel
 
 Since nothing about the `clear` event is actually exposed outside of `ViewModel`, it's necessary to extend `ViewModel` in order to consume it for cancelling the `viewModelScope`.  This is especially galling since `ViewModel` could absolutely have just been an interface to begin with.
-
-## Future plans
-
-I'll be suggesting to make this change in AndroidX as well, but I can get it released and usable a lot faster in my own project, so here we are.
-
-I will maintain this artifact until it is implemented AndroidX, or they provide some other suitable solution for custom scopes.
 
 ## Minimum Gradle Config
 
