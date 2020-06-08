@@ -40,8 +40,6 @@ class MyTest {
 }
 ```
 
----
-
 ## Contents
 <!--- TOC -->
 
@@ -93,8 +91,6 @@ val someCoroutineScope = CoroutineScope(
 The default implementation of this interface simply delegates to that [Dispatchers] singleton,
 as that is what we typically want for production usage.
 
----
-
 ## Types and Factories
 
 A [CoroutineScope] may have any type of [CoroutineDispatcher].  What if we have a View class which
@@ -125,8 +121,6 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 }
 ```
 
----
-
 ## Referencing dispatchers
 
 These [dispatcher][CoroutineDispatcher] settings can then be accessed via extension functions upon
@@ -151,8 +145,6 @@ class MyClass(val coroutineScope: IOCoroutineScope) {
 
 }
 ```
-
----
 
 ## Android Lifecycle
 
@@ -192,8 +184,6 @@ more analogous to the behavior of [LiveData] to which many developers are accust
 There are two built-in ways to define a custom LifecycleCoroutineScope - by simply constructing one
 directly inside a Lifecycle class, or by statically setting a custom [LifecycleScopeFactory]. This
 second option can be very useful when utilizing an [IdlingCoroutineScope].
-
----
 
 ## Android Espresso
 
@@ -244,8 +234,6 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 }
 ```
 
----
-
 ## Android ViewModel
 
 The [AndroidX ViewModel][androidx-lifecycle-viewmodel-ktx] library offers a
@@ -292,8 +280,6 @@ more analogous to the behavior of [LiveData] to which many developers are accust
 There are two built-in ways to define a custom LifecycleCoroutineScope - by simply constructing one
 directly inside a Lifecycle class, or by statically setting a custom [LifecycleScopeFactory]. This
 second option can be very useful when utilizing an [IdlingCoroutineScope].
-
----
 
 ## Testing
 
@@ -360,8 +346,6 @@ fun `sayHello should say hello`() = runBlockingProvided {
 | [dispatch-test-junit4]                  | [TestCoroutineRule]
 | [dispatch-test-junit5]                  | [CoroutineTest] <p> [CoroutineTestExtension]
 | [dispatch-test]                         | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [testProvided]
-
----
 
 ## Full Gradle Config
 
