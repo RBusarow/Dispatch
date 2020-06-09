@@ -1,5 +1,7 @@
 
 
+[CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html) functionality linked with an [Android Lifecycle](https://developer.android.com/reference/androidx/lifecycle/Lifecycle.html).
+
 ### All Types
 
 | Name | Summary |
