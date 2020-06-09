@@ -2,7 +2,7 @@
 
 # ScopeFactory
 
-`@ExperimentalCoroutinesApi class ScopeFactory` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-test-junit5/src/main/java/dispatch/test/CoroutineTestExtension.kt#L145)
+`@ExperimentalCoroutinesApi class ScopeFactory` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-test-junit5/src/main/java/dispatch/test/CoroutineTestExtension.kt#L152)
 
 Class used to create the [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.md) used in [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.test/-coroutine-test-extension/index.md).
 

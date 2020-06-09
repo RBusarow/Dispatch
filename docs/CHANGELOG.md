@@ -1,5 +1,13 @@
 # Change log for Dispatch
 
+## Version 1.0.0-beta04
+
+### Bug fixes
+
+* [CoroutineTestExtension] will now properly call `Dispatchers.setMain(...)` when injecting a
+  CoroutineScope into a function or when not injecting at all.
+  ([#130](https://github.com/RBusarow/Dispatch/issues/130))
+
 ## Version 1.0.0-beta03
 
 ### Renames
@@ -51,6 +59,7 @@
 <!--- INDEX  -->
 <!--- MODULE dispatch-test-junit5-->
 <!--- INDEX  -->
+[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test-extension/index.html
 <!--- MODULE dispatch-android-espresso-->
 <!--- INDEX  -->
 <!--- MODULE dispatch-android-lifecycle-->
