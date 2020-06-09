@@ -1,4 +1,4 @@
-# MODULE dispatch-core
+# Module dispatch-core
 
 Never reference [Dispatchers] again, and never inject a `dispatchers` interface into your classes.
 
@@ -155,7 +155,7 @@ dependencies {
 
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta03")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
 }
 ```
 

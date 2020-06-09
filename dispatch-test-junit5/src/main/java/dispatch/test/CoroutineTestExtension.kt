@@ -53,7 +53,7 @@ import kotlin.coroutines.*
  * @sample samples.CoroutineTestExtensionExtendWithSample
  */
 @ExperimentalCoroutinesApi
-@Suppress("newApi") // Android Lint complains that the project build target is 21, but that obviously doesn't matter here and JUnit5 requires Java 8
+@Suppress("newApi") // this arbitrary build target is 21, but JUnit5 requires Java 8
 public class CoroutineTestExtension(
   private val scopeFactory: ScopeFactory = ScopeFactory()
 ) : TypeBasedParameterResolver<TestProvidedCoroutineScope>(),
