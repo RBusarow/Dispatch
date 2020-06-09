@@ -1,5 +1,5 @@
 #!/bin/zsh
 
-# mkdocs gh-pages
+# mkdocs gh-deploy
 # mkdocs serve
 # mkdocs serve --no-livereload
