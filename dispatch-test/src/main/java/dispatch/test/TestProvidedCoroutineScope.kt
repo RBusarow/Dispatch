@@ -20,24 +20,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import kotlin.coroutines.*
 
-interface TestJob {
-  fun cancelFinal(cause: CancellationException? = null)
-}
-
-fun TestJob(parent: Job = Job()) = TestJobImpl(parent)
-
-class TestJobImpl(private val parent: Job) : Job by parent,
-                                             TestJob {
-
-  override fun cancel(cause: CancellationException?) {
-    cancelChildren(cause)
-  }
-
-  override fun cancelFinal(cause: CancellationException?) {
-    parent.cancel(cause)
-  }
-}
-
 /**
  * A polymorphic testing [CoroutineScope] interface.
  *
@@ -86,10 +68,8 @@ internal class TestProvidedCoroutineScopeImpl(
 @ExperimentalCoroutinesApi
 fun TestProvidedCoroutineScope(
   dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),
-  dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(
-    dispatcher
-  ),
-  context: CoroutineContext = EmptyCoroutineContext
+  dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
+  context: CoroutineContext = TestJob()
 ): TestProvidedCoroutineScope = TestProvidedCoroutineScopeImpl(
   dispatcherProvider = dispatcherProvider,
   context = context + dispatcher
