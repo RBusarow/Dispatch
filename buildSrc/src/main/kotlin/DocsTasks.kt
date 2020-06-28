@@ -155,21 +155,25 @@ fun File.updateLibraryVersions(): File {
         Libs.RickBusarow.Dispatch.detekt.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.espresso.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.extensions.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.lifecycleExtensions.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.lifecycle.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.lifecycleExtensions.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.viewModel.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.Test.core.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.Test.jUnit4.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.Test.jUnit5.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.Test.core.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.core.toDependencyMatcher()
+        Libs.RickBusarow.Dispatch.core.toDependencyMatcher(),
+        Libs.Kotest.assertions.toDependencyMatcher(),
+        Libs.Kotest.consoleRunner.toDependencyMatcher(),
+        Libs.Kotest.properties.toDependencyMatcher(),
+        Libs.Kotest.runner.toDependencyMatcher()
       )
 
       forEachLine { originalLine ->
 
         val newLine = dependencyMatchers.firstOrNull { matcher ->
 
-            matcher.regex.matches(originalLine)
-          }
+          matcher.regex.matches(originalLine)
+        }
           ?.let { matcher ->
 
             originalLine.replace(matcher)
@@ -209,5 +213,5 @@ private fun String.replace(
 }
 
 private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
-  .joinToString(":")
+  .joinToString(":") + ":"
 

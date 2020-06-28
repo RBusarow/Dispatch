@@ -160,6 +160,14 @@ object Libs {
     const val jUnit5Vintage = "org.junit.vintage:junit-vintage-engine:$version"
   }
 
+  object Kotest {
+    private const val version = "4.1.0"
+    const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
+    const val consoleRunner = "io.kotest:kotest-runner-console-jvm:$version"
+    const val properties = "io.kotest:kotest-property-jvm:$version"
+    const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
+  }
+
   object Kotlin {
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
@@ -168,14 +176,6 @@ object Libs {
     const val test = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     const val testCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
   }
-
-  object Kotest {
-    private const val version = "4.0.5"
-    const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
-    const val properties = "io.kotest:kotest-property-jvm:$version"
-    const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
-  }
-
   object Kotlinx {
 
     object Coroutines {
