@@ -53,6 +53,7 @@ dependencies {
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
 
