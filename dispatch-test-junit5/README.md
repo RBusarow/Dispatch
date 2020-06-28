@@ -106,7 +106,7 @@ dependencies {
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
 
   // the junit5 artifact also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta04")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
   testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
 }
@@ -131,8 +131,8 @@ dependencies {
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta04")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
   testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
   testImplementation("org.junit.vintage:junit-vintage-engine:5.6.2")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
