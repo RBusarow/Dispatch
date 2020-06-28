@@ -16,7 +16,10 @@
 package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
+import dispatch.internal.test.android.*
 import dispatch.test.*
+import hermit.test.*
+import hermit.test.junit.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -24,28 +27,45 @@ import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*
 
 @FlowPreview
-@CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeTest(
-  val testScope: TestProvidedCoroutineScope
-) {
+class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
-  lateinit var lifecycleOwner: LifecycleOwner
-  lateinit var lifecycle: LifecycleRegistry
+  val testScope by resets { TestProvidedCoroutineScope(context = Job()) }
 
-  lateinit var scope: LifecycleCoroutineScope
+  val lifecycleOwner by resets { FakeLifecycleOwner() }
+  val lifecycle by resets { lifecycleOwner.lifecycle }
+  val scope by resets { LifecycleCoroutineScope(lifecycle, testScope) }
 
-  @BeforeEach
-  fun beforeEach() {
+  @Nested
+  inner class cancellation {
 
-    lifecycleOwner = LifecycleOwner { lifecycle }
-    lifecycle = LifecycleRegistry(lifecycleOwner)
+    @Test
+    fun `scope with Job should cancel on init if lifecycle is destroyed`() = runBlocking {
 
-    scope = LifecycleCoroutineScope(lifecycle, testScope)
+      lifecycleOwner.destroy()
+
+      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+
+      scope.isActive shouldBe false
+    }
+
+    @Test
+    fun `scope should cancel when lifecycle is destroyed`() = runBlocking {
+
+      lifecycleOwner.create()
+
+      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+
+      scope.isActive shouldBe true
+
+      lifecycleOwner.destroy()
+
+      scope.isActive shouldBe false
+    }
   }
 
   @Nested
-  inner class `launch every create` {
+  inner class `launch on create` {
 
     @Test
     fun `block should immediately execute if already created`() = runBlocking {
@@ -61,8 +81,6 @@ class LifecycleCoroutineScopeTest(
 
     @Test
     fun `block should not immediately execute if screen is not created`() = runBlocking {
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
       var executed = false
 
@@ -98,7 +116,7 @@ class LifecycleCoroutineScopeTest(
   }
 
   @Nested
-  inner class `launch every start` {
+  inner class `launch on start` {
 
     @Test
     fun `block should immediately execute if already started`() = runBlocking {
@@ -163,7 +181,7 @@ class LifecycleCoroutineScopeTest(
   }
 
   @Nested
-  inner class `launch every resume` {
+  inner class `launch on resume` {
 
     @Test
     fun `block should immediately execute if already resumed`() = runBlocking {

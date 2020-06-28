@@ -28,7 +28,8 @@ import kotlinx.coroutines.*
  *
  * The type of [CoroutineScope] created is configurable via [LifecycleScopeFactory.set].
  *
- * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
+ * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s
+ * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
  *
  * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeSample
  */

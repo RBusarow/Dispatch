@@ -11,6 +11,9 @@ which will automatically start upon reaching their associated [Lifecycle.Event](
 then automatically cancel upon the [lifecycle](lifecycle.md) dropping below that state.  Reaching
 that state again will start a new [Job](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html).
 
+If this `CoroutineScope` has a [Job](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html), it will be cancelled automatically
+as soon as the [lifecycle](lifecycle.md) reaches [DESTROYED](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html#DESTROYED).
+
 ``` kotlin
 runBlocking {
 

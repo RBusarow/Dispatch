@@ -19,6 +19,7 @@ import androidx.lifecycle.*
 import dispatch.android.lifecycle.internal.*
 import dispatch.core.*
 import kotlinx.coroutines.*
+import java.util.concurrent.CancellationException
 
 /**
  * [MainImmediateCoroutineScope] instance which is tied to a [Lifecycle].
@@ -28,6 +29,9 @@ import kotlinx.coroutines.*
  * then automatically cancel upon the [lifecycle] dropping below that state.  Reaching
  * that state again will start a new [Job].
  *
+ * If this `CoroutineScope` has a [Job], it will be cancelled automatically
+ * as soon as the [lifecycle] reaches [DESTROYED][Lifecycle.State.DESTROYED].
+ *
  * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeSample
  * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
  */
@@ -35,6 +39,10 @@ class LifecycleCoroutineScope(
   val lifecycle: Lifecycle,
   private val coroutineScope: MainImmediateCoroutineScope
 ) : MainImmediateCoroutineScope by coroutineScope {
+
+  init {
+    LifecycleCoroutineScopeBinding(lifecycle, coroutineScope).bind()
+  }
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
@@ -129,3 +137,8 @@ class LifecycleCoroutineScope(
     RESTART_EVERY
   }
 }
+
+internal class LifecycleCancellationException(
+  lifecycle: Lifecycle,
+  minimumState: Lifecycle.State
+) : CancellationException("Lifecycle $lifecycle dropped below minimum state: $minimumState")

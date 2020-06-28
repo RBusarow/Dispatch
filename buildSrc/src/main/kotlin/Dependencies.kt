@@ -49,7 +49,7 @@ object Versions {
   const val kotlin = "1.3.70"
   const val mavenPublish = "0.9.0"
 
-  const val versionName = "1.0.0-beta03"
+  const val versionName = "1.0.0-beta04"
 }
 
 object BuildPlugins {
@@ -217,6 +217,15 @@ object Libs {
         const val jUnit5 = "com.rickbusarow.dispatch:dispatch-test-junit5:${Versions.versionName}"
 
       }
+    }
+
+    object Hermit {
+      private const val version = "0.9.2"
+      const val core = "com.rickbusarow.hermit:hermit-core:$version"
+      const val junit4 = "com.rickbusarow.hermit:hermit-junit4:$version"
+      const val junit5 = "com.rickbusarow.hermit:hermit-junit5:$version"
+      const val mockk = "com.rickbusarow.hermit:hermit-mockk:$version"
+      const val coroutines = "com.rickbusarow.hermit:hermit-coroutines:$version"
     }
   }
 

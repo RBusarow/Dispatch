@@ -15,6 +15,7 @@
 
 package dispatch.android.lifecycle
 
+import androidx.lifecycle.*
 import dispatch.android.lifecycle.LifecycleScopeFactory.reset
 import dispatch.core.*
 
@@ -47,7 +48,7 @@ public object LifecycleScopeFactory {
     _factory = factory
   }
 
-  internal fun create() = _factory.invoke()
+  internal fun create(lifecycle: Lifecycle) = LifecycleCoroutineScope(lifecycle, _factory.invoke())
 
   /**
    * Immediately resets the factory function to its default.
