@@ -213,5 +213,5 @@ private fun String.replace(
 }
 
 private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
-  .joinToString(":")
+  .joinToString(":") + ":"
 

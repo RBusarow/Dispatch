@@ -30,7 +30,7 @@ allprojects {
   dependencies {
     detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.9.1")
     
-    detektPlugins("com.rickbusarow.dispatch:dispatch-detekt:1.0.0-beta03")
+    detektPlugins("com.rickbusarow.dispatch:dispatch-detekt:1.0.0-beta04")
   }
 }
 ```
