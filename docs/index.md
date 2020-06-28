@@ -375,7 +375,7 @@ dependencies {
   
   // lifecycleScope extension function with a settable factory.  Use this if you don't DI your CoroutineScopes
   // This provides :dispatch-android-lifecycle via "api", so you don't need to declare both
-  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta04")
+  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta04")
   
   // ViewModelScope for Android ViewModels
   implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta04")
@@ -394,12 +394,12 @@ dependencies {
   // CoroutineTestRule and :dispatch-test
   // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit5
-  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
   
   // CoroutineTest, CoroutineTestExtension, and :dispatch-test
   // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit4
-  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
   
   /*
   Android testing

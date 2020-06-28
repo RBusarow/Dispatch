@@ -76,7 +76,7 @@ dependencies {
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
 
   // the junit4 artifact also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
 }
 ```
