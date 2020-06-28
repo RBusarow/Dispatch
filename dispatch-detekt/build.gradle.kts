@@ -27,6 +27,7 @@ dependencies {
   testImplementation(Libs.Detekt.test)
   testImplementation(Libs.JUnit.jUnit5Api)
   testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
 
