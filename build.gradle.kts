@@ -368,5 +368,10 @@ extensions.configure<ApiValidationExtension> {
   /**
    * Sub-projects that are excluded from API validation
    */
-  ignoredProjects = mutableSetOf("dispatch-internal-test", "dispatch-sample", "samples")
+  ignoredProjects = mutableSetOf(
+    "dispatch-internal-test",
+    "dispatch-internal-test-android",
+    "dispatch-sample",
+    "samples"
+  )
 }
