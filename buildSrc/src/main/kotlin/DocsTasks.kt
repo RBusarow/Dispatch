@@ -162,11 +162,17 @@ fun File.updateLibraryVersions(): File {
         Libs.RickBusarow.Dispatch.Test.jUnit4.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.Test.jUnit5.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.core.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.core.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.junit4.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.junit5.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.mockk.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.coroutines.toDependencyMatcher(),
         Libs.Kotest.assertions.toDependencyMatcher(),
         Libs.Kotest.consoleRunner.toDependencyMatcher(),
         Libs.Kotest.properties.toDependencyMatcher(),
         Libs.Kotest.runner.toDependencyMatcher()
       )
+
 
       forEachLine { originalLine ->
 
