@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-package samples
+package dispatch.internal.test.android
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 open class FakeLifecycleOwner(
-  private val mainDispatcher: CoroutineDispatcher = fakeMainDispatcher(),
-  initialState: Lifecycle.State = Lifecycle.State.INITIALIZED
+  initialState: Lifecycle.State = Lifecycle.State.INITIALIZED,
+  private val mainDispatcher: CoroutineDispatcher = fakeMainDispatcher()
 ) : LifecycleOwner {
 
   private val registry: LifecycleRegistry by lazy { LifecycleRegistry(this) }
@@ -37,6 +37,24 @@ open class FakeLifecycleOwner(
   }
 
   override fun getLifecycle(): LifecycleRegistry = registry
+
+  fun stepDown() = when (lifecycle.currentState) {
+    Lifecycle.State.DESTROYED   -> throw IllegalArgumentException("already destroyed")
+    Lifecycle.State.INITIALIZED -> throw IllegalArgumentException(
+      "cannot transition straight from initialized to destroyed"
+    )
+    Lifecycle.State.CREATED     -> destroy()
+    Lifecycle.State.STARTED     -> stop()
+    Lifecycle.State.RESUMED     -> pause()
+  }
+
+  fun stepUp() = when (lifecycle.currentState) {
+    Lifecycle.State.DESTROYED   -> throw IllegalArgumentException("already destroyed")
+    Lifecycle.State.INITIALIZED -> create()
+    Lifecycle.State.CREATED     -> start()
+    Lifecycle.State.STARTED     -> resume()
+    Lifecycle.State.RESUMED     -> throw IllegalArgumentException("already resumed")
+  }
 
   fun create() = runBlocking(mainDispatcher) {
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)

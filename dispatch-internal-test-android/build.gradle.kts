@@ -33,37 +33,19 @@ android {
   buildTypes {
     getByName("release") {
       isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro"
+      )
     }
   }
 }
-
 dependencies {
-
+  implementation(Libs.AndroidX.Fragment.core)
   implementation(Libs.AndroidX.Lifecycle.common)
-  implementation(Libs.AndroidX.Lifecycle.liveData)
-  testImplementation(Libs.AndroidX.Lifecycle.runtime)
-
+  implementation(Libs.AndroidX.Lifecycle.runtime)
+  implementation(Libs.Kotlin.reflect)
   implementation(Libs.Kotlin.stdlib)
-
+  implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
-
-  implementation(project(":dispatch-android-espresso"))
-  implementation(project(":dispatch-android-lifecycle"))
-  implementation(project(":dispatch-android-lifecycle-extensions"))
-  implementation(project(":dispatch-core"))
-  implementation(project(":dispatch-internal-test-android"))
-  implementation(project(":dispatch-test"))
-  implementation(project(":dispatch-test-junit5"))
-  testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.consoleRunner)
-  testImplementation(Libs.Kotest.properties)
-  testImplementation(Libs.Kotest.runner)
-
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-
-  testImplementation(Libs.Kotlinx.Coroutines.test)
-
 }
