@@ -52,6 +52,7 @@ dependencies {
   implementation(project(":dispatch-android-lifecycle"))
   implementation(project(":dispatch-android-lifecycle-extensions"))
   implementation(project(":dispatch-core"))
+  implementation(project(":dispatch-internal-test-android"))
   implementation(project(":dispatch-test"))
   implementation(project(":dispatch-test-junit5"))
   testImplementation(Libs.JUnit.jUnit5)
