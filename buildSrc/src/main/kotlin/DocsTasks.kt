@@ -141,35 +141,41 @@ fun File.updateLibraryVersions(): File {
         Libs.AndroidX.Lifecycle.liveData.toDependencyMatcher(),
         Libs.AndroidX.Lifecycle.runtime.toDependencyMatcher(),
         Libs.AndroidX.Lifecycle.viewModel.toDependencyMatcher(),
-        Libs.AndroidX.Test.runner.toDependencyMatcher(),
         Libs.AndroidX.Test.Espresso.core.toDependencyMatcher(),
-        Libs.JUnit.jUnit4.toDependencyMatcher(),
-        Libs.JUnit.jUnit5Vintage.toDependencyMatcher(),
-        Libs.JUnit.jUnit5Runtime.toDependencyMatcher(),
-        Libs.JUnit.jUnit5Params.toDependencyMatcher(),
+        Libs.AndroidX.Test.runner.toDependencyMatcher(),
         Libs.JUnit.jUnit5Api.toDependencyMatcher(),
+        Libs.JUnit.jUnit5Params.toDependencyMatcher(),
+        Libs.JUnit.jUnit5Runtime.toDependencyMatcher(),
+        Libs.JUnit.jUnit5Vintage.toDependencyMatcher(),
+        Libs.JUnit.jUnit4.toDependencyMatcher(),
         Libs.JUnit.jUnit5.toDependencyMatcher(),
-        Libs.Kotlinx.Coroutines.core.toDependencyMatcher(),
+        Libs.Kotest.assertions.toDependencyMatcher(),
+        Libs.Kotest.consoleRunner.toDependencyMatcher(),
+        Libs.Kotest.properties.toDependencyMatcher(),
+        Libs.Kotest.runner.toDependencyMatcher(),
         Libs.Kotlinx.Coroutines.android.toDependencyMatcher(),
+        Libs.Kotlinx.Coroutines.core.toDependencyMatcher(),
         Libs.Kotlinx.Coroutines.test.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.core.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.detekt.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.espresso.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.extensions.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.lifecycleExtensions.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.lifecycle.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.viewModel.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.lifecycleExtensions.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.Test.core.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.Test.jUnit4.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.Test.jUnit5.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.Test.core.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.core.toDependencyMatcher()
+        Libs.RickBusarow.Dispatch.viewModel.toDependencyMatcher()
       )
+
+
 
       forEachLine { originalLine ->
 
         val newLine = dependencyMatchers.firstOrNull { matcher ->
 
-            matcher.regex.matches(originalLine)
-          }
+          matcher.regex.matches(originalLine)
+        }
           ?.let { matcher ->
 
             originalLine.replace(matcher)
