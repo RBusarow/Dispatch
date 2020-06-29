@@ -17,6 +17,9 @@ package dispatch.android.lifecycle
 
 import dispatch.core.*
 import dispatch.internal.test.*
+import dispatch.internal.test.android.*
+import hermit.test.*
+import hermit.test.junit.*
 import io.kotest.matchers.*
 import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
@@ -26,7 +29,7 @@ import kotlin.coroutines.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class LifecycleScopeFactoryTest {
+internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
   val job = Job()
   val dispatcher = newSingleThreadContext("single thread dispatcher")
@@ -37,6 +40,8 @@ internal class LifecycleScopeFactoryTest {
   val originContext = job + dispatcher + dispatcherProvider + exceptionHandler + coroutineName
 
   val mainDispatcher = newSingleThreadContext("main dispatcher")
+
+  val lifecycleOwner by resets { FakeLifecycleOwner() }
 
   @BeforeAll
   fun beforeAll() {

@@ -16,7 +16,10 @@
 package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
+import dispatch.internal.test.android.*
 import dispatch.test.*
+import hermit.test.*
+import hermit.test.junit.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -26,26 +29,16 @@ import org.junit.jupiter.api.*
 @FlowPreview
 @CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeTest(
-  val testScope: TestProvidedCoroutineScope
-) {
+class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
-  lateinit var lifecycleOwner: LifecycleOwner
-  lateinit var lifecycle: LifecycleRegistry
+  val testScope by resets { TestProvidedCoroutineScope(context = Job()) }
 
-  lateinit var scope: LifecycleCoroutineScope
-
-  @BeforeEach
-  fun beforeEach() {
-
-    lifecycleOwner = LifecycleOwner { lifecycle }
-    lifecycle = LifecycleRegistry(lifecycleOwner)
-
-    scope = LifecycleCoroutineScope(lifecycle, testScope)
-  }
+  val lifecycleOwner by resets { FakeLifecycleOwner() }
+  val lifecycle by resets { lifecycleOwner.lifecycle }
+  val scope by resets { LifecycleCoroutineScope(lifecycle, testScope) }
 
   @Nested
-  inner class `launch every create` {
+  inner class `launch on create` {
 
     @Test
     fun `block should immediately execute if already created`() = runBlocking {
@@ -98,7 +91,7 @@ class LifecycleCoroutineScopeTest(
   }
 
   @Nested
-  inner class `launch every start` {
+  inner class `launch on start` {
 
     @Test
     fun `block should immediately execute if already started`() = runBlocking {
@@ -163,7 +156,7 @@ class LifecycleCoroutineScopeTest(
   }
 
   @Nested
-  inner class `launch every resume` {
+  inner class `launch on resume` {
 
     @Test
     fun `block should immediately execute if already resumed`() = runBlocking {
