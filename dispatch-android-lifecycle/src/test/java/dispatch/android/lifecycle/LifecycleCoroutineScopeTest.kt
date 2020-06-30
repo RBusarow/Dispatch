@@ -62,6 +62,20 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
       scope.isActive shouldBe false
     }
+
+    @Test
+    fun `lifecycle observer should be removed when scope is cancelled`() = runBlocking {
+
+      lifecycleOwner.create()
+
+      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+
+      lifecycle.observerCount shouldBe 1
+
+      scope.cancel()
+
+      lifecycle.observerCount shouldBe 0
+    }
   }
 
   @Nested

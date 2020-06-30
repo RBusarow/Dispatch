@@ -24,7 +24,7 @@ open class FakeLifecycleOwner(
   private val mainDispatcher: CoroutineDispatcher = fakeMainDispatcher()
 ) : LifecycleOwner {
 
-  private val registry: LifecycleRegistry by lazy { LifecycleRegistry(this) }
+  val fakeLifecycle: FakeLifecycle by lazy { FakeLifecycle(this) }
 
   init {
     when (initialState) {
@@ -36,7 +36,7 @@ open class FakeLifecycleOwner(
     }
   }
 
-  override fun getLifecycle(): LifecycleRegistry = registry
+  override fun getLifecycle(): FakeLifecycle = fakeLifecycle
 
   fun stepDown() = when (lifecycle.currentState) {
     Lifecycle.State.DESTROYED   -> throw IllegalArgumentException("already destroyed")
@@ -84,7 +84,7 @@ open class FakeLifecycleOwner(
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
   }
 
-  fun getObserverCount(): Int = runBlocking(mainDispatcher) { registry.observerCount }
+  fun getObserverCount(): Int = runBlocking(mainDispatcher) { fakeLifecycle.observerCount }
 }
 
 @Suppress("EXPERIMENTAL_API_USAGE")

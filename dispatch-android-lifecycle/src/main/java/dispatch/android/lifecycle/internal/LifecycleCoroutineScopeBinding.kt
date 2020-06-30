@@ -31,6 +31,7 @@ internal class LifecycleCoroutineScopeBinding(
       cancelDestroyed()
     } else {
       coroutineScope.launchMainImmediate {
+
         if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
           cancelDestroyed()
         } else {
@@ -38,9 +39,13 @@ internal class LifecycleCoroutineScopeBinding(
         }
       }
     }
+    coroutineScope.coroutineContext[Job]?.invokeOnCompletion {
+      lifecycle.removeObserver(this)
+    }
   }
 
   private fun cancelDestroyed() {
+    lifecycle.removeObserver(this)
     coroutineScope.coroutineContext.cancel(
       LifecycleCancellationException(
         lifecycle = lifecycle,

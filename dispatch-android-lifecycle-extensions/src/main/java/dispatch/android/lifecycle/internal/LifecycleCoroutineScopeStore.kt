@@ -49,6 +49,10 @@ internal object LifecycleCoroutineScopeStore : LifecycleEventObserver {
         map.computeIfAbsent(lifecycle) { bindLifecycle(lifecycle) }
       }
       Build.VERSION.SDK_INT == 23 -> {
+        /*
+        `getOrPut` by itself isn't atomic.  It is guaranteed to only ever return one instance
+         for a given key, but the lambda argument may be invoked unnecessarily.
+         */
         (map as ConcurrentMap).atomicGetOrPut(lifecycle) { bindLifecycle(lifecycle) }
       }
       else                        -> {

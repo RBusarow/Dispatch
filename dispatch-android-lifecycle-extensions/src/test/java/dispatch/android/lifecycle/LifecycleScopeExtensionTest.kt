@@ -74,88 +74,86 @@ internal class LifecycleScopeExtensionTest : BehaviorSpec() {
       }
     }
 
-    fun activeTests(initialState: Lifecycle.State) = behaviorSpec {
+    include(activeTests(Lifecycle.State.INITIALIZED, storeMap))
+    include(activeTests(Lifecycle.State.CREATED, storeMap))
+    include(activeTests(Lifecycle.State.STARTED, storeMap))
+    include(activeTests(Lifecycle.State.RESUMED, storeMap))
+  }
+}
 
-      given("initial lifecycle of $initialState") {
+fun activeTests(
+  initialState: Lifecycle.State,
+  storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope>
+) = behaviorSpec {
 
-        val lifecycleOwner = FakeLifecycleOwner(initialState = initialState)
+  given("initial lifecycle of $initialState") {
 
-        `when`("scope is created") {
+    val lifecycleOwner = FakeLifecycleOwner(initialState = initialState)
 
-          val scope = lifecycleOwner.lifecycleScope
+    `when`("scope is created") {
 
-          then("scope and job should be active") {
+      val scope = lifecycleOwner.lifecycleScope
 
-            scope.isActive shouldBe true
-          }
+      then("scope and job should be active") {
 
-          then("scope should be cached") {
+        scope.isActive shouldBe true
+      }
 
-            storeMap[lifecycleOwner.lifecycle] shouldBe scope
-          }
+      then("scope should be cached") {
 
-          then("repeated access should return the same scope") {
+        storeMap[lifecycleOwner.lifecycle] shouldBe scope
+      }
 
-            lifecycleOwner.lifecycleScope shouldBe scope
-          }
+      then("repeated access should return the same scope") {
 
-          and("lifecycle passes to destroyed") {
+        lifecycleOwner.lifecycleScope shouldBe scope
+      }
 
-            // special case for Initialized state
-            if (lifecycleOwner.lifecycle.currentState == Lifecycle.State.INITIALIZED) {
-              lifecycleOwner.create()
-            }
+      and("lifecycle passes to destroyed") {
 
-            lifecycleOwner.destroy()
-
-            then("scope should be cancelled") {
-
-              scope.isActive shouldBe false
-            }
-
-            then("scope should be removed from the cache") {
-
-              storeMap[lifecycleOwner.lifecycle] shouldBe null
-            }
-          }
+        // special case for Initialized state
+        if (lifecycleOwner.lifecycle.currentState == Lifecycle.State.INITIALIZED) {
+          lifecycleOwner.create()
         }
 
-        `when`("multiple threads access lifecycleScope at once") {
+        lifecycleOwner.destroy()
 
-          then("all threads should get the same instance").config(invocations = 10) {
+        then("scope should be cancelled") {
 
-            val hugeExecutor = ThreadPoolExecutor(
-              200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
-            )
+          scope.isActive shouldBe false
+        }
 
-            val dispatcher = hugeExecutor.asCoroutineDispatcher()
+        then("scope should be removed from the cache") {
 
-            val lock = CompletableDeferred<Unit>()
-
-            val all = List(200) {
-              async(dispatcher) {
-                lock.await()
-                lifecycleOwner.lifecycleScope
-              }
-            }
-
-            yield()
-            lock.complete(Unit)
-
-            all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
-          }
+          storeMap[lifecycleOwner.lifecycle] shouldBe null
         }
       }
     }
 
-    listOf(
-      Lifecycle.State.INITIALIZED,
-      Lifecycle.State.CREATED,
-      Lifecycle.State.STARTED,
-      Lifecycle.State.RESUMED
-    ).forEach { initialState ->
-      include(activeTests(initialState))
-    }
+    `when`("multiple threads access lifecycleScope at once") {
 
+      then("all threads should get the same instance") {
+
+        val hugeExecutor = ThreadPoolExecutor(
+          200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
+        )
+
+        val dispatcher = hugeExecutor.asCoroutineDispatcher()
+
+        val lock = CompletableDeferred<Unit>()
+
+        val all = List(200) {
+          async(dispatcher) {
+            lock.await()
+            lifecycleOwner.lifecycleScope
+          }
+        }
+
+        yield()
+        lock.complete(Unit)
+
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+      }
+    }
   }
 }

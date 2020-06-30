@@ -17,31 +17,44 @@ package dispatch.android.lifecycle.internal
 
 import androidx.lifecycle.*
 import dispatch.android.lifecycle.*
+import dispatch.core.*
 import kotlinx.coroutines.*
 import java.util.concurrent.*
 
 /**
- * Concurrent getOrPut, that is safe for concurrent maps.
+ * Normal [getOrPut] is guaranteed to only return a single instance for a given key,
+ * but the [defaultValue] lambda may be invoked unnecessarily.  This would create a new instance
+ * of [LifecycleCoroutineScope] without actually returning it.
  *
- * Returns the value for the given [key]. If the key is not found in the map, calls the [defaultValue] function,
- * puts its result into the map under the given key and returns it.
+ * This extra [LifecycleCoroutineScope] would still be active and observing the [lifecycle][key].
  *
- * This method guarantees not to put the value into the map if the key is already there,
- * but the [defaultValue] function may be invoked even if the key is already in the map.
+ * This function compares the result of the lambda to the result of [getOrPut],
+ * and cancels the lambda's result if it's different.
+ *
+ * @see getOrPut
  */
 internal inline fun ConcurrentMap<Lifecycle, LifecycleCoroutineScope>.atomicGetOrPut(
   key: Lifecycle,
   defaultValue: () -> LifecycleCoroutineScope
 ): LifecycleCoroutineScope {
 
-  val existingOrNew = getOrPut(key, defaultValue)
+  var newInstance: LifecycleCoroutineScope? = null
 
-  val secondGet = get(key)!!
-
-  if (existingOrNew != secondGet) {
-    existingOrNew.coroutineContext.cancel()
-    existingOrNew.lifecycle.removeObserver(LifecycleCoroutineScopeStore)
+  val existingOrNew = getOrPut(key) {
+    newInstance = defaultValue.invoke()
+    newInstance!!
   }
 
-  return secondGet
+  // If the second value is different, that means the first was never inserted into the map.
+  // Cancel the observer for `newInstance` and cancel the coroutineContext.
+  newInstance?.let { new ->
+    if (new != existingOrNew) {
+      existingOrNew.launchMainImmediate {
+
+        new.coroutineContext[Job]?.cancel()
+      }
+    }
+  }
+
+  return existingOrNew
 }
