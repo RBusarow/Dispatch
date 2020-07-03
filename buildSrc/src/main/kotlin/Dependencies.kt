@@ -161,7 +161,7 @@ object Libs {
   }
 
   object Kotest {
-    private const val version = "4.1.0"
+    private const val version = "4.1.1"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
     const val consoleRunner = "io.kotest:kotest-runner-console-jvm:$version"
     const val properties = "io.kotest:kotest-property-jvm:$version"

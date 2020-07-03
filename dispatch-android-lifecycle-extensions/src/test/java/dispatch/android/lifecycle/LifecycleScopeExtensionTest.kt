@@ -32,19 +32,16 @@ internal class LifecycleScopeExtensionTest : BehaviorSpec() {
 
   override fun isolationMode() = IsolationMode.InstancePerLeaf
 
-  val main = newSingleThreadContext("main")
-
-  val storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope> =
-    LifecycleCoroutineScopeStore.getPrivateObjectFieldByName("map")
-
   init {
+
+    val storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope> =
+      LifecycleCoroutineScopeStore.getPrivateObjectFieldByName("map")
+
+    val main = newSingleThreadContext("main")
 
     beforeTest { Dispatchers.setMain(main) }
 
-    afterTest {
-      storeMap.clear()
-      Dispatchers.resetMain()
-    }
+    afterTest { Dispatchers.resetMain() }
 
     given("lifecycle is already destroyed") {
 
