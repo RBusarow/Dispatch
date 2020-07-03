@@ -19,127 +19,148 @@ import androidx.lifecycle.*
 import dispatch.android.lifecycle.internal.*
 import dispatch.internal.test.*
 import dispatch.internal.test.android.*
-import io.kotest.core.spec.*
-import io.kotest.core.spec.style.*
+import dispatch.test.*
+import hermit.test.*
+import hermit.test.junit.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
+import org.junit.jupiter.api.*
 import java.util.concurrent.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class LifecycleScopeExtensionTest : BehaviorSpec() {
+internal class LifecycleScopeExtensionTest : HermitJUnit5() {
 
-  override fun isolationMode() = IsolationMode.InstancePerLeaf
+  val storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope> =
+    LifecycleCoroutineScopeStore.getPrivateObjectFieldByName("map")
 
-  init {
+  val main = newSingleThreadContext("main")
 
-    val storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope> =
-      LifecycleCoroutineScopeStore.getPrivateObjectFieldByName("map")
+  @BeforeEach
+  fun beforeEach() {
+//    Dispatchers.setMain(main)
 
-    val main = newSingleThreadContext("main")
+    val dispatcher = TestCoroutineDispatcher()
 
-    beforeTest { Dispatchers.setMain(main) }
+    LifecycleScopeFactory.set {
+      TestProvidedCoroutineScope(
+        dispatcher,
+        TestDispatcherProvider(dispatcher),
+        Job()
+      )
+    }
+  }
 
-    afterTest { Dispatchers.resetMain() }
+  @AfterEach
+  fun afterEach() {
+//    Dispatchers.resetMain()
+    storeMap.clear()
+  }
 
-    given("lifecycle is already destroyed") {
+  @Nested
+  inner class `lifecycle is already destroyed` {
 
-      val lifecycleOwner = FakeLifecycleOwner(initialState = Lifecycle.State.DESTROYED)
+    val lifecycleOwner by resets { FakeLifecycleOwner(initialState = Lifecycle.State.DESTROYED) }
 
-      `when`("scope is created") {
+    @Nested
+    inner class `scope is created` {
 
-        val scope = lifecycleOwner.lifecycleScope
+      val scope by resets { lifecycleOwner.lifecycleScope }
 
-        then("scope and job should already be cancelled") {
+      @Test
+      fun `scope and job should already be cancelled`() = runBlocking {
 
-          scope.isActive shouldBe false
-          scope.coroutineContext[Job]!!.isActive shouldBe false
-        }
+        scope.isActive shouldBe false
+        scope.coroutineContext[Job]!!.isActive shouldBe false
+      }
 
-        then("scope should not be cached") {
+      @Test
+      fun `scope should not be cached`() {
 
-          storeMap[lifecycleOwner.lifecycle] shouldBe null
-        }
+        storeMap[lifecycleOwner.lifecycle] shouldBe null
+      }
 
-        // This is a change detector.
-        // This isn't actually desired, but the precondition should be impossible.
-        then("additional scopes should be unique") {
+      // This is a change detector.
+      // This isn't actually desired, but the precondition should be impossible.
+      @Test
+      fun `additional scopes should be unique`() {
 
-          lifecycleOwner.lifecycleScope shouldNotBe scope
-        }
+        lifecycleOwner.lifecycleScope shouldNotBe scope
       }
     }
-
-    include(activeTests(Lifecycle.State.INITIALIZED, storeMap))
-    include(activeTests(Lifecycle.State.CREATED, storeMap))
-    include(activeTests(Lifecycle.State.STARTED, storeMap))
-    include(activeTests(Lifecycle.State.RESUMED, storeMap))
   }
-}
 
-fun activeTests(
-  initialState: Lifecycle.State,
-  storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope>
-) = behaviorSpec {
+  @Nested
+  inner class `initial lifecycle of Lifecycle State INITIALIZED` {
 
-  given("initial lifecycle of $initialState") {
+    val lifecycleOwner by resets { FakeLifecycleOwner(initialState = Lifecycle.State.INITIALIZED) }
 
-    val lifecycleOwner = FakeLifecycleOwner(initialState = initialState)
+    @Nested
+    inner class `scope is created` {
 
-    `when`("scope is created") {
+      val scope by resets { lifecycleOwner.lifecycleScope }
 
-      val scope = lifecycleOwner.lifecycleScope
-
-      then("scope and job should be active") {
+      @Test
+      fun `scope and job should be active`() {
 
         scope.isActive shouldBe true
       }
 
-      then("scope should be cached") {
+      @Test
+      fun `scope should be cached`() {
+
+        scope
 
         storeMap[lifecycleOwner.lifecycle] shouldBe scope
       }
 
-      then("repeated access should return the same scope") {
+      @Test
+      fun `repeated access should return the same scope`() {
 
         lifecycleOwner.lifecycleScope shouldBe scope
       }
 
-      and("lifecycle passes to destroyed") {
+      @Nested
+      inner class `lifecycle passes to destroyed` {
 
-        // special case for Initialized state
-        if (lifecycleOwner.lifecycle.currentState == Lifecycle.State.INITIALIZED) {
+        @BeforeEach
+        fun beforeEach() {
+          // special case for Initialized state
           lifecycleOwner.create()
+
+          lifecycleOwner.destroy()
         }
 
-        lifecycleOwner.destroy()
-
-        then("scope should be cancelled") {
+        @Test
+        fun `scope should be cancelled`() {
 
           scope.isActive shouldBe false
         }
 
-        then("scope should be removed from the cache") {
+        @Test
+        fun `scope should be removed from the cache`() {
 
           storeMap[lifecycleOwner.lifecycle] shouldBe null
         }
       }
     }
 
-    `when`("multiple threads access lifecycleScope at once") {
+    @Nested
+    inner class `multiple threads access lifecycleScope at once` {
 
-      then("all threads should get the same instance") {
+      @Test
+      fun `all threads should get the same instance`() = runBlocking {
 
         val hugeExecutor = ThreadPoolExecutor(
-          50, 50, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
+          200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
         )
 
         val dispatcher = hugeExecutor.asCoroutineDispatcher()
 
         val lock = CompletableDeferred<Unit>()
 
-        val all = List(50) {
+        val all = List(200) {
           async(dispatcher) {
             lock.await()
             lifecycleOwner.lifecycleScope
@@ -153,4 +174,249 @@ fun activeTests(
       }
     }
   }
+
+  @Nested
+  inner class `initial lifecycle of CREATED` {
+
+    val lifecycleOwner by resets { FakeLifecycleOwner(initialState = Lifecycle.State.CREATED) }
+
+    @Nested
+    inner class `scope is created` {
+
+      val scope by resets { lifecycleOwner.lifecycleScope }
+
+      @Test
+      fun `scope and job should be active`() {
+
+        scope.isActive shouldBe true
+      }
+
+      @Test
+      fun `scope should be cached`() {
+
+        scope
+
+        storeMap[lifecycleOwner.lifecycle] shouldBe scope
+      }
+
+      @Test
+      fun `repeated access should return the same scope`() {
+
+        lifecycleOwner.lifecycleScope shouldBe scope
+      }
+
+      @Nested
+      inner class `lifecycle passes to destroyed` {
+
+        @BeforeEach
+        fun beforeEach() {
+          lifecycleOwner.destroy()
+        }
+
+        @Test
+        fun `scope should be cancelled`() {
+
+          scope.isActive shouldBe false
+        }
+
+        @Test
+        fun `scope should be removed from the cache`() {
+
+          storeMap[lifecycleOwner.lifecycle] shouldBe null
+        }
+      }
+    }
+
+    @Nested
+    inner class `multiple threads access lifecycleScope at once` {
+
+      @Test
+      fun `all threads should get the same instance`() = runBlocking {
+
+        val hugeExecutor = ThreadPoolExecutor(
+          200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
+        )
+
+        val dispatcher = hugeExecutor.asCoroutineDispatcher()
+
+        val lock = CompletableDeferred<Unit>()
+
+        val all = List(200) {
+          async(dispatcher) {
+            lock.await()
+            lifecycleOwner.lifecycleScope
+          }
+        }
+
+        yield()
+        lock.complete(Unit)
+
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+      }
+    }
+  }
+
+  @Nested
+  inner class `initial lifecycle of STARTED` {
+
+    val lifecycleOwner by resets { FakeLifecycleOwner(initialState = Lifecycle.State.STARTED) }
+
+    @Nested
+    inner class `scope is created` {
+
+      val scope by resets { lifecycleOwner.lifecycleScope }
+
+      @Test
+      fun `scope and job should be active`() {
+
+        scope.isActive shouldBe true
+      }
+
+      @Test
+      fun `scope should be cached`() {
+
+        scope
+
+        storeMap[lifecycleOwner.lifecycle] shouldBe scope
+      }
+
+      @Test
+      fun `repeated access should return the same scope`() {
+
+        lifecycleOwner.lifecycleScope shouldBe scope
+      }
+
+      @Nested
+      inner class `lifecycle passes to destroyed` {
+
+        @BeforeEach
+        fun beforeEach() {
+          lifecycleOwner.destroy()
+        }
+
+        @Test
+        fun `scope should be cancelled`() {
+
+          scope.isActive shouldBe false
+        }
+
+        @Test
+        fun `scope should be removed from the cache`() {
+
+          storeMap[lifecycleOwner.lifecycle] shouldBe null
+        }
+      }
+    }
+
+    @Nested
+    inner class `multiple threads access lifecycleScope at once` {
+
+      @Test
+      fun `all threads should get the same instance`() = runBlocking {
+
+        val hugeExecutor = ThreadPoolExecutor(
+          200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
+        )
+
+        val dispatcher = hugeExecutor.asCoroutineDispatcher()
+
+        val lock = CompletableDeferred<Unit>()
+
+        val all = List(200) {
+          async(dispatcher) {
+            lock.await()
+            lifecycleOwner.lifecycleScope
+          }
+        }
+
+        yield()
+        lock.complete(Unit)
+
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+      }
+    }
+  }
+
+  @Nested
+  inner class `initial lifecycle of RESUMED` {
+
+    val lifecycleOwner by resets { FakeLifecycleOwner(initialState = Lifecycle.State.RESUMED) }
+
+    @Nested
+    inner class `scope is created` {
+
+      val scope by resets { lifecycleOwner.lifecycleScope }
+
+      @Test
+      fun `scope and job should be active`() {
+
+        scope.isActive shouldBe true
+      }
+
+      @Test
+      fun `scope should be cached`() {
+
+        scope
+
+        storeMap[lifecycleOwner.lifecycle] shouldBe scope
+      }
+
+      @Test
+      fun `repeated access should return the same scope`() {
+
+        lifecycleOwner.lifecycleScope shouldBe scope
+      }
+
+      @Nested
+      inner class `lifecycle passes to destroyed` {
+
+        @BeforeEach
+        fun beforeEach() {
+
+          lifecycleOwner.destroy()
+        }
+
+        @Test
+        fun `scope should be cancelled`() {
+
+          scope.isActive shouldBe false
+        }
+
+        @Test
+        fun `scope should be removed from the cache`() {
+
+          storeMap[lifecycleOwner.lifecycle] shouldBe null
+        }
+      }
+    }
+
+    @Nested
+    inner class `multiple threads access lifecycleScope at once` {
+
+      @Test
+      fun `all threads should get the same instance`() = runBlocking {
+
+        val hugeExecutor = ThreadPoolExecutor(
+          200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
+        )
+
+        val dispatcher = hugeExecutor.asCoroutineDispatcher()
+
+        val lock = CompletableDeferred<Unit>()
+
+        val all = List(200) {
+          async(dispatcher) {
+            lock.await()
+            lifecycleOwner.lifecycleScope
+          }
+        }
+
+        yield()
+        lock.complete(Unit)
+
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+      }
+    }
+  }
+
 }
