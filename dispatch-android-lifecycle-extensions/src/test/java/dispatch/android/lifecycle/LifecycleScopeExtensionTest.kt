@@ -35,11 +35,8 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
   val storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope> =
     LifecycleCoroutineScopeStore.getPrivateObjectFieldByName("map")
 
-  val main = newSingleThreadContext("main")
-
   @BeforeEach
   fun beforeEach() {
-//    Dispatchers.setMain(main)
 
     val dispatcher = TestCoroutineDispatcher()
 
@@ -54,7 +51,6 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
 
   @AfterEach
   fun afterEach() {
-//    Dispatchers.resetMain()
     storeMap.clear()
   }
 
