@@ -132,14 +132,14 @@ fun activeTests(
       then("all threads should get the same instance") {
 
         val hugeExecutor = ThreadPoolExecutor(
-          200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
+          50, 50, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
         )
 
         val dispatcher = hugeExecutor.asCoroutineDispatcher()
 
         val lock = CompletableDeferred<Unit>()
 
-        val all = List(200) {
+        val all = List(50) {
           async(dispatcher) {
             lock.await()
             lifecycleOwner.lifecycleScope
