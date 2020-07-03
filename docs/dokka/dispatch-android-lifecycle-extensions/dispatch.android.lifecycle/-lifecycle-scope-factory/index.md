@@ -2,7 +2,7 @@
 
 # LifecycleScopeFactory
 
-`object LifecycleScopeFactory` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle-extensions/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L33)
+`object LifecycleScopeFactory` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle-extensions/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L34)
 
 Factory holder for [LifecycleCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.md)'s.
 

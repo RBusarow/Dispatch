@@ -20,6 +20,7 @@ plugins {
 }
 
 dependencies {
+  implementation(Libs.Kotlin.reflect)
   implementation(Libs.Kotlin.stdlib)
 
   implementation(Libs.Kotlinx.Coroutines.core)

@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*
 
 @FlowPreview
-@CoroutineTest
 @ExperimentalCoroutinesApi
 class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
@@ -36,6 +35,48 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
   val lifecycleOwner by resets { FakeLifecycleOwner() }
   val lifecycle by resets { lifecycleOwner.lifecycle }
   val scope by resets { LifecycleCoroutineScope(lifecycle, testScope) }
+
+  @Nested
+  inner class cancellation {
+
+    @Test
+    fun `scope with Job should cancel on init if lifecycle is destroyed`() = runBlocking {
+
+      lifecycleOwner.destroy()
+
+      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+
+      scope.isActive shouldBe false
+    }
+
+    @Test
+    fun `scope should cancel when lifecycle is destroyed`() = runBlocking {
+
+      lifecycleOwner.create()
+
+      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+
+      scope.isActive shouldBe true
+
+      lifecycleOwner.destroy()
+
+      scope.isActive shouldBe false
+    }
+
+    @Test
+    fun `lifecycle observer should be removed when scope is cancelled`() = runBlocking {
+
+      lifecycleOwner.create()
+
+      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+
+      lifecycle.observerCount shouldBe 1
+
+      scope.cancel()
+
+      lifecycle.observerCount shouldBe 0
+    }
+  }
 
   @Nested
   inner class `launch on create` {
@@ -54,8 +95,6 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
     @Test
     fun `block should not immediately execute if screen is not created`() = runBlocking {
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
       var executed = false
 

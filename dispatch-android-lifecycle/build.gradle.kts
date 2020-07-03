@@ -47,7 +47,7 @@ dependencies {
 
   implementation(Libs.AndroidX.Fragment.core)
   implementation(Libs.AndroidX.Lifecycle.common)
-  testImplementation(Libs.AndroidX.Lifecycle.runtime)
+  implementation(Libs.AndroidX.Lifecycle.liveData)
 
   implementation(Libs.Kotlin.stdlib)
 
@@ -78,6 +78,8 @@ dependencies {
   testImplementation(Libs.RickBusarow.Hermit.coroutines)
   testImplementation(Libs.RickBusarow.Hermit.junit5)
 
-  testImplementation(Libs.AndroidX.Test.runner)
-  testImplementation(Libs.AndroidX.Test.Espresso.core)
+  testImplementation(Libs.RickBusarow.Hermit.coroutines)
+  testImplementation(Libs.RickBusarow.Hermit.junit5)
+
+  testImplementation(Libs.Robolectric.core)
 }

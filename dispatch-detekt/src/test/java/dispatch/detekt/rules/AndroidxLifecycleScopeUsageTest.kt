@@ -124,6 +124,3 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       findings shouldBe emptyList()
     }
   })
-
-
-

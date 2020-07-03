@@ -2,7 +2,7 @@
 
 # CANCEL
 
-`CANCEL` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle/src/main/java/dispatch/android/lifecycle/LifecycleCoroutineScope.kt#L116)
+`CANCEL` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle/src/main/java/dispatch/android/lifecycle/LifecycleCoroutineScope.kt#L124)
 
 When using `CANCEL`, a coroutine will be created the first time the [lifecycle](../lifecycle.md) meets the minimum state,
 and cancelled upon dropping below it.

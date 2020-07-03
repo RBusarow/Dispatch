@@ -2,7 +2,7 @@
 
 # RESTART_EVERY
 
-`RESTART_EVERY` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle/src/main/java/dispatch/android/lifecycle/LifecycleCoroutineScope.kt#L129)
+`RESTART_EVERY` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle/src/main/java/dispatch/android/lifecycle/LifecycleCoroutineScope.kt#L137)
 
 When using `RESTART_EVERY`, a coroutine will be created every time the [lifecycle](../lifecycle.md) meets the minimum state,
 and will be cancelled upon dropping below it.

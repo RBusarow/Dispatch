@@ -19,57 +19,57 @@ import android.os.*
 import androidx.lifecycle.*
 import dispatch.android.lifecycle.*
 import dispatch.core.*
-import kotlinx.coroutines.*
-import java.util.*
 import java.util.concurrent.*
-import kotlin.collections.set
 
-internal object LifecycleCoroutineScopeStore {
+@Suppress("MagicNumber")
+internal object LifecycleCoroutineScopeStore : LifecycleEventObserver {
 
   // ConcurrentHashMap can miss "put___" operations on API 21/22 https://issuetracker.google.com/issues/37042460
-  @Suppress("MagicNumber")
-  private val map = if (Build.VERSION.SDK_INT < 23) {
-    Collections.synchronizedMap<Lifecycle, LifecycleCoroutineScope>(mutableMapOf<Lifecycle, LifecycleCoroutineScope>())
-  } else {
-    ConcurrentHashMap<Lifecycle, LifecycleCoroutineScope>()
+  private val map: MutableMap<Lifecycle, LifecycleCoroutineScope> =
+    if (Build.VERSION.SDK_INT < 23) {
+      mutableMapOf()
+    } else {
+      ConcurrentHashMap()
+    }
+
+  override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+    if (source.lifecycle.currentState <= Lifecycle.State.DESTROYED) {
+      map.remove(source.lifecycle)
+    }
   }
 
   fun get(lifecycle: Lifecycle): LifecycleCoroutineScope {
 
-    return map[lifecycle] ?: bindLifecycle(lifecycle, LifecycleScopeFactory.create())
-  }
-
-  private fun bindLifecycle(
-    lifecycle: Lifecycle, coroutineScope: MainImmediateCoroutineScope
-  ): LifecycleCoroutineScope {
-
-    val scope = LifecycleCoroutineScope(lifecycle, coroutineScope)
-
-    map[lifecycle] = scope
-
-    if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
-      scope.coroutineContext.cancel()
-      return scope
+    if (lifecycle.currentState <= Lifecycle.State.DESTROYED) {
+      return LifecycleScopeFactory.create(lifecycle)
     }
 
-    val observer = object : LifecycleEventObserver {
-
-      override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-
-        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
-
-          scope.coroutineContext.cancel()
-          lifecycle.removeObserver(this)
+    return when {
+      Build.VERSION.SDK_INT >= 24 -> {
+        map.computeIfAbsent(lifecycle) { bindLifecycle(lifecycle) }
+      }
+      Build.VERSION.SDK_INT == 23 -> {
+        /*
+        `getOrPut` by itself isn't atomic.  It is guaranteed to only ever return one instance
+         for a given key, but the lambda argument may be invoked unnecessarily.
+         */
+        (map as ConcurrentMap).atomicGetOrPut(lifecycle) { bindLifecycle(lifecycle) }
+      }
+      else                        -> {
+        synchronized(map) {
+          map.getOrPut(lifecycle) { bindLifecycle(lifecycle) }
         }
       }
     }
+  }
+
+  private fun bindLifecycle(lifecycle: Lifecycle): LifecycleCoroutineScope {
+
+    val scope = LifecycleScopeFactory.create(lifecycle)
 
     scope.launchMainImmediate {
-
-      if (lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
-        lifecycle.addObserver(observer)
-      } else {
-        scope.coroutineContext.cancel()
+      if (lifecycle.currentState >= Lifecycle.State.INITIALIZED) {
+        lifecycle.addObserver(this@LifecycleCoroutineScopeStore)
       }
     }
 
@@ -77,4 +77,3 @@ internal object LifecycleCoroutineScopeStore {
   }
 
 }
-
