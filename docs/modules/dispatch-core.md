@@ -1,4 +1,4 @@
-# MODULE dispatch-core
+# Module dispatch-core
 
 Never reference [Dispatchers] again, and never inject a `dispatchers` interface into your classes.
 

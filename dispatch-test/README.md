@@ -1,4 +1,4 @@
-# MODULE dispatch-test
+# Module dispatch-test
 
 Test helpers for the [dispatch-core] module.  Most of the tools you need to automatically handle [DispatcherProvider] in your tests.  (see [dispatch-test-junit4] or [dispatch-test-junit5] for the rest.)
 

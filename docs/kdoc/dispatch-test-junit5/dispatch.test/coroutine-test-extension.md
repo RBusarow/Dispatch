@@ -2,7 +2,7 @@
 
 # coroutineTestExtension
 
-`@ExperimentalCoroutinesApi inline fun coroutineTestExtension(crossinline scopeFactory: () -> `[`TestProvidedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.md)` = { TestProvidedCoroutineScope() }): `[`CoroutineTestExtension`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.test/-coroutine-test-extension/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-test-junit5/src/main/java/dispatch/test/CoroutineTestExtension.kt#L166)
+`@ExperimentalCoroutinesApi inline fun coroutineTestExtension(crossinline scopeFactory: () -> `[`TestProvidedCoroutineScope`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.md)` = { TestProvidedCoroutineScope() }): `[`CoroutineTestExtension`](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.test/-coroutine-test-extension/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-test-junit5/src/main/java/dispatch/test/CoroutineTestExtension.kt#L174)
 
 Factory function for creating a [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/dispatch-test/dispatch.test/-coroutine-test-extension/index.md).
 

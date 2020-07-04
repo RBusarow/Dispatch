@@ -1,7 +1,6 @@
-# Module dispatch-test-junit5
+[dispatch-test-junit5](./index.md)
 
 ## Contents
-<!--- TOC -->
 
 * [Features](#features)
   * [CoroutineTest example](#coroutinetest-example)
@@ -12,13 +11,11 @@
   * [Minimum Gradle Config](#minimum-gradle-config)
   * [JUnit 4 interoperability](#junit-4-interoperability)
 
-<!--- END -->
-
 ## Features
 
-In addition to all the functionality in [dispatch-test], this module exposes a JUnit 5 [CoroutineTestExtension] and [CoroutineTest] annotation to handle set-up and tear-down of a [TestProvidedCoroutineScope].
+In addition to all the functionality in [dispatch-test](https://rbusarow.github.io/Dispatch/dispatch-test//index.html), this module exposes a JUnit 5 [CoroutineTestExtension](https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test-extension/index.html) and [CoroutineTest](https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test/index.html) annotation to handle set-up and tear-down of a [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html).
 
-Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Extension also invokes [cleanupTestCoroutines] after the test.
+Since [TestProvidedCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html) is a [TestCoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html), this Extension also invokes [cleanupTestCoroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html) after the test.
 
 ### CoroutineTest example
 
@@ -89,7 +86,7 @@ If using this module, there is no need to include the `dispatch-test` artifact i
 
 Because this is a JUnit 5 Extension, it requires a the JUnit 5 artifact.  No external libraries are bundled as part of Dispatch, so you’ll need to add it to your `dependencies` block yourself.
 
-- `org.junit.jupiter:junit-jupiter:5.6.2`
+* `org.junit.jupiter:junit-jupiter:5.6.2`
 
 Add to your module's `build.gradle.kts`:
 
@@ -139,29 +136,12 @@ dependencies {
 }
 ```
 
-<!--- MODULE dispatch-core-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-test-->
-<!--- INDEX  -->
-[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html
-<!--- MODULE dispatch-test-junit4-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-test-junit5-->
-<!--- INDEX  -->
-[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test-extension/index.html
-[CoroutineTest]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test/index.html
-<!--- MODULE dispatch-android-espresso-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-android-lifecycle-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-android-viewmodel-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-android-viewmodel-->
-<!--- INDEX  -->
-<!--- END -->
+### Packages
 
-[cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
+| Name | Summary |
+|---|---|
+| [dispatch.test](dispatch.test/index.md) |  |
 
-[dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
+### Index
 
-[TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html
+[All Types](alltypes/index.md)

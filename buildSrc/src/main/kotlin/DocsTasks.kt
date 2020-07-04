@@ -72,7 +72,7 @@ fun Project.copyKdoc() {
     }
     .forEach { file ->
 
-      file.copyRecursively(File("docs/dokka/${projectDir.name}"))
+      file.copyRecursively(File("docs/kdoc/${projectDir.name}"))
     }
 }
 

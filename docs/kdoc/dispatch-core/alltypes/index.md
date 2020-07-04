@@ -1,5 +1,7 @@
 
 
+Never reference [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) again, and never inject a `dispatchers` interface into your classes.
+
 ### All Types
 
 | Name | Summary |

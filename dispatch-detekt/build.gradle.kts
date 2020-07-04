@@ -15,6 +15,7 @@
 
 plugins {
   id(Plugins.kotlin)
+  id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
 

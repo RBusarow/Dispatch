@@ -1,4 +1,4 @@
-# MODULE dispatch-test-junit5
+# Module dispatch-test-junit5
 
 ## Contents
 <!--- TOC -->

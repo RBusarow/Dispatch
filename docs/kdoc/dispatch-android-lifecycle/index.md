@@ -56,8 +56,17 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
   implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta04")
+  
   implementation("androidx.lifecycle:lifecycle-common:2.2.0")
 }
 ```
 
 ### Packages
+
+| Name | Summary |
+|---|---|
+| [dispatch.android.lifecycle](dispatch.android.lifecycle/index.md) |  |
+
+### Index
+
+[All Types](alltypes/index.md)

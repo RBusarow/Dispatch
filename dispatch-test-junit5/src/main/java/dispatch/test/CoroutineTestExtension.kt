@@ -53,6 +53,7 @@ import kotlin.coroutines.*
  * @sample samples.CoroutineTestExtensionExtendWithSample
  */
 @ExperimentalCoroutinesApi
+@Suppress("newApi") // this arbitrary build target is 21, but JUnit5 requires Java 8
 public class CoroutineTestExtension(
   private val scopeFactory: ScopeFactory = ScopeFactory()
 ) : TypeBasedParameterResolver<TestProvidedCoroutineScope>(),
@@ -93,19 +94,20 @@ public class CoroutineTestExtension(
       val factoryClass = annotation.scopeFactory
 
       val factory = factoryClass.java.getConstructor().newInstance() as? ScopeFactory
-        ?: throw ParameterResolutionException(
-          """A ${CoroutineTest::class.simpleName} annotation was found with an incompatible factory type.
-            |
-            |The specified factory must be <${ScopeFactory::class.qualifiedName}> or a subtype.
-            |
-            |The provided factory type was:  <${factoryClass.qualifiedName}>
-            |""".trimMargin()
-        )
+        ?: throw resolutionException(factoryClass)
 
       factory.create()
     }
 
     contextScopeMap[extensionContext] = newScope
+
+    /*
+    If injecting a function, then the scope isn't created until after beforeEach,
+    so we have to setMain here
+     */
+    extensionContext.testMethod.ifPresent {
+      Dispatchers.setMain(newScope.dispatcherProvider.main)
+    }
 
     return newScope
   }
@@ -114,9 +116,14 @@ public class CoroutineTestExtension(
    * @suppress
    */
   override fun beforeEach(context: ExtensionContext) {
-    contextScopeMap[context]?.dispatcherProvider?.main?.let {
-      Dispatchers.setMain(it)
-    }
+
+    /*
+    In case of using RegisterExtension with the internal scope without resolving a parameter,
+    make sure it's registered as Dispatchers.Main.
+     */
+    val scope = contextScopeMap[context] ?: this.scope
+
+    Dispatchers.setMain(scope.dispatcherProvider.main)
   }
 
   /**
@@ -150,6 +157,7 @@ public class CoroutineTestExtension(
     open fun create(): TestProvidedCoroutineScope =
       TestProvidedCoroutineScope()
   }
+
 }
 
 /**
