@@ -1,8 +1,8 @@
-[dispatch-android-lifecycle](../../index.md) / [dispatch.android.lifecycle](../index.md) / [LifecycleCoroutineScope](index.md) / [&lt;init&gt;](./-init-.md)
+[dispatch-android-lifecycle](../../index.md) / [dispatch.android.lifecycle](../index.md) / [LifecycleCoroutineScope](index.md) / [invoke](./invoke.md)
 
-# &lt;init&gt;
+# invoke
 
-`LifecycleCoroutineScope(lifecycle: `[`Lifecycle`](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html)`, coroutineContext: `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)` = MainImmediateContext())`
+`operator fun invoke(lifecycle: `[`Lifecycle`](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html)`, coroutineScope: `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`): `[`LifecycleCoroutineScope`](index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle/src/main/java/dispatch/android/lifecycle/LifecycleCoroutineScope.kt#L178)
 
 [MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md) which is tied to a [Lifecycle](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html).
 
@@ -11,48 +11,18 @@ which will automatically start upon reaching their associated [Lifecycle.Event](
 then automatically cancel upon the lifecycle dropping below that state.  Reaching
 that state again will start a new [Job](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html).
 
-This `CoroutineScope`'s [Job](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html) will be cancelled automatically
+If this `CoroutineScope` has a [Job](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html), it will be cancelled automatically
 as soon as the `lifecycle` reaches [DESTROYED](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle/State.html#DESTROYED).
 
 ``` kotlin
 runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
-    class SomeFragment : Fragment() {
+    class SomeFragment @Inject constructor(
+      coroutineScope: CoroutineScope // could be any type of CoroutineScope
+    ) : Fragment() {
 
-      val lifecycleScope = LifecycleCoroutineScope(lifecycle)
-
-      init {
-
-        // active only when "resumed".  starts a fresh coroutine each time
-        lifecycleScope.launchOnResume { }
-
-        // active only when "started".  starts a fresh coroutine each time
-        // this is a rough proxy for LiveData behavior
-        lifecycleScope.launchOnStart { }
-
-        // active after only the first "started" event, and never re-started
-        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) { }
-
-        // launch when created, automatically stop on destroy
-        lifecycleScope.launchOnCreate { }
-
-        // it works as a normal CoroutineScope as well (because it is)
-        lifecycleScope.launchMain { }
-      }
-    }
-  }
-```
-
-``` kotlin
-runBlocking {
-
-    // This could be any LifecycleOwner -- Fragments, Activities, Services...
-    class SomeFragment : Fragment() {
-
-      val context = Job() + DispatcherProvider()
-
-      val lifecycleScope = LifecycleCoroutineScope(lifecycle, context)
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, coroutineScope)
 
       init {
 
@@ -81,5 +51,5 @@ runBlocking {
 
 `lifecycle` - the lifecycle to which this [MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md) is linked.
 
-`coroutineContext` - the source CoroutineContext which will be converted to a [MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md).
-Its [Elements](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html) will be re-used, except:
+`coroutineScope` - the source CoroutineScope which will be converted to a [MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md).
+Its [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html) will be re-used, except:
