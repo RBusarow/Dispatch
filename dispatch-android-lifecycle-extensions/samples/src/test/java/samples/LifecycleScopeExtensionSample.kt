@@ -18,10 +18,10 @@ package samples
 import dispatch.android.lifecycle.*
 import dispatch.core.*
 
-class LifecycleScopeSample {
+class LifecycleScopeExtensionSample {
 
   @Sample
-  fun lifecycleScopeSample() {
+  fun lifecycleScopeExtensionSample() {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {

@@ -31,7 +31,7 @@ import kotlinx.coroutines.*
  * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s
  * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
  *
- * @sample samples.LifecycleScopeSample.lifecycleScopeSample
+ * @sample samples.LifecycleScopeExtensionSample.lifecycleScopeExtensionSample
  */
 val LifecycleOwner.lifecycleScope: LifecycleCoroutineScope
   get() = LifecycleCoroutineScopeStore.get(this.lifecycle)
