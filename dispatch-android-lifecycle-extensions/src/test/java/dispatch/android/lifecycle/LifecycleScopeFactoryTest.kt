@@ -60,7 +60,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
   }
 
   @Test
-  fun `default factory should be a default MainImmediateProvidedContext`() = runBlockingTest {
+  fun `default factory should be a default MainImmediateContext`() = runBlockingTest {
 
     val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
