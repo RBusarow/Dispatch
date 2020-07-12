@@ -151,8 +151,8 @@ public fun MainCoroutineScope(
  * @see CoroutineScope
  */
 public fun MainImmediateCoroutineScope(
-  job: Job = SupervisorJob(), dispatcherProvider:
-  DispatcherProvider = DefaultDispatcherProvider()
+  job: Job = SupervisorJob(),
+  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
 ): MainImmediateCoroutineScope = object : MainImmediateCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.mainImmediate +
       dispatcherProvider
