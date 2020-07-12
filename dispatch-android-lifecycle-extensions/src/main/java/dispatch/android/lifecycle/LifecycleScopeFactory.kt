@@ -23,7 +23,7 @@ import kotlin.coroutines.*
 /**
  * Factory holder for [LifecycleCoroutineScope]'s.
  *
- * By default, `create` returns a [MainImmediateProvidedContext].
+ * By default, `create` returns a [MainImmediateContext].
  *
  * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
  * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate],
@@ -33,7 +33,7 @@ import kotlin.coroutines.*
  *
  * [reset] may be used to reset the factory to default at any time.
  *
- * @see MainImmediateProvidedContext
+ * @see MainImmediateContext
  * @see LifecycleCoroutineScope
  * @see LifecycleCoroutineScopeFactory
  * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
@@ -42,7 +42,7 @@ import kotlin.coroutines.*
 object LifecycleScopeFactory {
 
   private val defaultFactory: LifecycleCoroutineScopeFactory
-    get() = LifecycleCoroutineScopeFactory { MainImmediateProvidedContext() }
+    get() = LifecycleCoroutineScopeFactory { MainImmediateContext() }
 
   private var factoryInstance = defaultFactory
 

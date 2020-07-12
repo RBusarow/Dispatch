@@ -31,7 +31,7 @@ class LifecycleScopeFactorySample {
 
       override fun onCreate() {
 
-        LifecycleScopeFactory.set { MyCustomElement() + MainImmediateProvidedContext() }
+        LifecycleScopeFactory.set { MyCustomElement() + MainImmediateContext() }
       }
     }
   }

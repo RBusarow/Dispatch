@@ -26,7 +26,7 @@ import kotlin.coroutines.*
  *
  * @see MainImmediateCoroutineScope
  */
-public fun MainImmediateProvidedContext(): CoroutineContext {
+public fun MainImmediateContext(): CoroutineContext {
   val dispatcherProvider = DefaultDispatcherProvider()
 
   return SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
@@ -54,7 +54,7 @@ public fun MainImmediateProvidedContext(): CoroutineContext {
  */
 open class LifecycleCoroutineScope(
   val lifecycle: Lifecycle,
-  coroutineContext: CoroutineContext = MainImmediateProvidedContext()
+  coroutineContext: CoroutineContext = MainImmediateContext()
 ) : MainImmediateCoroutineScope by MainImmediateCoroutineScope(coroutineContext) {
 
   init {
