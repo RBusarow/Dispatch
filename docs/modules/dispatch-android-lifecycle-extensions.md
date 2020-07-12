@@ -51,7 +51,7 @@ class SomeApplication : Application() {
   override fun onCreate() {
     super.onCreate()
     // A custom factory can be set to add elements to the CoroutineContext
-    LifecycleScopeFactory.set { MainImmediateProvidedCoroutineContext() + SomeCustomElement() }
+    LifecycleScopeFactory.set { MainImmediateContext() + SomeCustomElement() }
   }
 }
 ```
@@ -93,7 +93,7 @@ class SomeFragmentEspressoTest {
   fun setUp() {
     // set a custom factory which is applied to all newly created lifecycleScopes
     LifecycleScopeFactory.set {
-      MainImmediateProvidedCoroutineContext() + idlingRule.dispatcherProvider
+      MainImmediateContext() + idlingRule.dispatcherProvider
     }
 
     // now SomeFragment will use an IdlingDispatcher in its CoroutineScope
@@ -142,7 +142,7 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
   implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta04")
-  
+
   implementation("androidx.lifecycle:lifecycle-common:2.2.0")
 }
 ```
