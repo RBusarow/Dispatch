@@ -17,24 +17,11 @@ package samples
 
 import dispatch.android.lifecycle.*
 import dispatch.core.*
-import dispatch.test.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
 
-@CoroutineTest
-@ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeSample(
-  val testScope: TestProvidedCoroutineScope
-) {
-
-  @BeforeEach
-  fun beforeEach() {
-
-    LifecycleScopeFactory.set { testScope }
-  }
+class LifecycleScopeSample {
 
   @Sample
-  fun lifecycleCoroutineScopeSample() {
+  fun lifecycleScopeSample() {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {

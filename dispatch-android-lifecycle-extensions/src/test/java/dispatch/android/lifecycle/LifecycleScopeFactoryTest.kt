@@ -45,6 +45,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
   @BeforeAll
   fun beforeAll() {
+    LifecycleScopeFactory.reset()
     Dispatchers.setMain(mainDispatcher)
   }
 
@@ -59,7 +60,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
   }
 
   @Test
-  fun `default factory should be a default MainImmediateCoroutineScope`() = runBlockingTest {
+  fun `default factory should be a default MainImmediateContext`() = runBlockingTest {
 
     val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
@@ -68,14 +69,12 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
     scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
 
     scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main
-
-    scope.shouldBeInstanceOf<MainImmediateCoroutineScope>()
   }
 
   @Test
   fun `a custom factory should be used after being set`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    LifecycleScopeFactory.set { originContext }
 
     val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
@@ -85,7 +84,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
   @Test
   fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    LifecycleScopeFactory.set { originContext }
 
     val custom = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 

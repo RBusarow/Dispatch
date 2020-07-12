@@ -20,6 +20,7 @@ package samples
 import dispatch.android.espresso.*
 import dispatch.android.lifecycle.*
 import dispatch.core.*
+import kotlinx.coroutines.*
 
 class LifecycleScopeFactorySample {
 
@@ -29,7 +30,8 @@ class LifecycleScopeFactorySample {
     class MyApplication : Application {
 
       override fun onCreate() {
-        LifecycleScopeFactory.set { MainImmediateCoroutineScope() }
+
+        LifecycleScopeFactory.set { MyCustomElement() + MainImmediateContext() }
       }
     }
   }
@@ -41,19 +43,25 @@ class LifecycleScopeFactorySample {
 
       @Before
       fun setUp() {
-        LifecycleScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+
+        val dispatcherProvider = IdlingDispatcherProvider()
+
+        LifecycleScopeFactory.set { SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate }
       }
     }
   }
 
   @Sample
-  fun lifecycleScopeFactoryResetSample() {
+  fun LifecycleScopeFactoryResetSample() {
 
     class MyEspressoTest {
 
       @Before
       fun setUp() {
-        LifecycleScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+
+        val dispatcherProvider = DefaultDispatcherProvider()
+
+        LifecycleScopeFactory.set { SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate }
       }
 
       @After

@@ -75,9 +75,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 
   @Before
   fun setUp() {
-    LifecycleScopeFactory.set {
-      MainImmediateCoroutineScope(customDispatcherProvider)
-    }
+    LifecycleScopeFactory.set { customDispatcherProvider }
     ViewModelScopeFactory.set {
       MainImmediateCoroutineScope(customDispatcherProvider)
     }

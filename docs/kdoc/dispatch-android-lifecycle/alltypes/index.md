@@ -15,7 +15,15 @@
 
 ##### [dispatch.android.lifecycle.LifecycleCoroutineScope](../dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.md)
 
-[MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md) instance which is tied to a [Lifecycle](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html).
+[MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md) which is tied to a [Lifecycle](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html).
+
+
+|
+
+##### [dispatch.android.lifecycle.LifecycleCoroutineScopeFactory](../dispatch.android.lifecycle/-lifecycle-coroutine-scope-factory/index.md)
+
+Factory for [LifecycleCoroutineScope](../dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.md)s.  This may be injected into a lifecycle-aware class
+to provide custom [CoroutineContexts](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html).
 
 
 | (extensions in package dispatch.android.lifecycle)

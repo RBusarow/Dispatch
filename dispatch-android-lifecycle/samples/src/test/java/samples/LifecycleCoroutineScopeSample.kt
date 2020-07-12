@@ -23,7 +23,8 @@ import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
-import org.junit.jupiter.api.*
+
+annotation class Inject
 
 @CoroutineTest
 @ExperimentalCoroutinesApi
@@ -31,29 +32,27 @@ class LifecycleCoroutineScopeSample(
   val testScope: TestProvidedCoroutineScope
 ) {
 
-  @BeforeEach
-  fun beforeEach() {
-
-    LifecycleScopeFactory.set { testScope }
-  }
-
   @Sample
-  fun lifecycleCoroutineScopeSample() = runBlocking {
+  fun lifecycleCoroutineScopeFromScopeSample() = runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
-    class SomeFragment : Fragment() {
+    class SomeFragment @Inject constructor(
+      coroutineScope: CoroutineScope // could be any type of CoroutineScope
+    ) : Fragment() {
+
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, coroutineScope)
 
       init {
 
-        // auto-created MainImmediateCoroutineScope which is lifecycle-aware
-        lifecycleScope //...
-
         // active only when "resumed".  starts a fresh coroutine each time
-        // this is a rough proxy for LiveData behavior
         lifecycleScope.launchOnResume { }
 
         // active only when "started".  starts a fresh coroutine each time
+        // this is a rough proxy for LiveData behavior
         lifecycleScope.launchOnStart { }
+
+        // active after only the first "started" event, and never re-started
+        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) { }
 
         // launch when created, automatically stop on destroy
         lifecycleScope.launchOnCreate { }
@@ -61,6 +60,67 @@ class LifecycleCoroutineScopeSample(
         // it works as a normal CoroutineScope as well (because it is)
         lifecycleScope.launchMain { }
 
+      }
+    }
+  }
+
+  @Sample
+  fun lifecycleCoroutineScopeFromContextSample() = runBlocking {
+
+    // This could be any LifecycleOwner -- Fragments, Activities, Services...
+    class SomeFragment : Fragment() {
+
+      val context = Job() + DispatcherProvider()
+
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle, context)
+
+      init {
+
+        // active only when "resumed".  starts a fresh coroutine each time
+        lifecycleScope.launchOnResume { }
+
+        // active only when "started".  starts a fresh coroutine each time
+        // this is a rough proxy for LiveData behavior
+        lifecycleScope.launchOnStart { }
+
+        // active after only the first "started" event, and never re-started
+        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) { }
+
+        // launch when created, automatically stop on destroy
+        lifecycleScope.launchOnCreate { }
+
+        // it works as a normal CoroutineScope as well (because it is)
+        lifecycleScope.launchMain { }
+
+      }
+    }
+  }
+
+  @Sample
+  fun lifecycleCoroutineScopeDefaultSample() = runBlocking {
+
+    // This could be any LifecycleOwner -- Fragments, Activities, Services...
+    class SomeFragment : Fragment() {
+
+      val lifecycleScope = LifecycleCoroutineScope(lifecycle)
+
+      init {
+
+        // active only when "resumed".  starts a fresh coroutine each time
+        lifecycleScope.launchOnResume { }
+
+        // active only when "started".  starts a fresh coroutine each time
+        // this is a rough proxy for LiveData behavior
+        lifecycleScope.launchOnStart { }
+
+        // active after only the first "started" event, and never re-started
+        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) { }
+
+        // launch when created, automatically stop on destroy
+        lifecycleScope.launchOnCreate { }
+
+        // it works as a normal CoroutineScope as well (because it is)
+        lifecycleScope.launchMain { }
       }
     }
   }

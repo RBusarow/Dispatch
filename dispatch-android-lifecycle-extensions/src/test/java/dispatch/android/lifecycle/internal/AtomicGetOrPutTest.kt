@@ -20,69 +20,67 @@ import dispatch.android.lifecycle.LifecycleCoroutineScope
 import dispatch.core.*
 import dispatch.internal.test.android.*
 import dispatch.test.*
-import io.kotest.core.spec.*
-import io.kotest.core.spec.style.*
+import hermit.test.junit.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
+import org.junit.jupiter.api.*
 import java.util.concurrent.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class AtomicGetOrPutTest : BehaviorSpec() {
+internal class AtomicGetOrPutTest : HermitJUnit5() {
 
-  override fun isolationMode(): IsolationMode? = IsolationMode.InstancePerTest
+  @Nested
+  inner class `API level 23` {
 
-  init {
+    @Nested
+    inner class `multiple threads access lifecycleScope at once` {
+      @Test
+      fun `all threads should get the same instance`() = runBlocking {
 
-    given("API level 23") {
+        val main = newSingleThreadContext("main")
 
-      `when`("multiple threads access lifecycleScope at once") {
+        val storeMap = ConcurrentHashMap<Lifecycle, LifecycleCoroutineScope>()
 
-        then("all threads should get the same instance").config(invocations = 10) {
+        val lifecycleOwner = FakeLifecycleOwner(Lifecycle.State.INITIALIZED)
 
-          val main = newSingleThreadContext("main")
+        val androidLifecycle = lifecycleOwner.lifecycle
 
-          val storeMap = ConcurrentHashMap<Lifecycle, LifecycleCoroutineScope>()
+        val hugeExecutor = ThreadPoolExecutor(
+          200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
+        ).asCoroutineDispatcher()
 
-          val lifecycleOwner = FakeLifecycleOwner(Lifecycle.State.INITIALIZED)
+        val lock = CompletableDeferred<Unit>()
 
-          val androidLifecycle = lifecycleOwner.lifecycle
+        val all = List(200) {
+          async(hugeExecutor) {
 
-          val hugeExecutor = ThreadPoolExecutor(
-            200, 200, 5000, TimeUnit.MILLISECONDS, LinkedBlockingQueue()
-          ).asCoroutineDispatcher()
+            lock.await()
 
-          val lock = CompletableDeferred<Unit>()
+            storeMap.atomicGetOrPut(androidLifecycle) {
+              val scope = LifecycleCoroutineScope(
+                lifecycle = androidLifecycle,
+                coroutineScope = MainImmediateCoroutineScope(Job(), TestDispatcherProvider(main))
+              )
+              withContext(main) {
 
-          val all = List(200) {
-            async(hugeExecutor) {
-
-              lock.await()
-
-              storeMap.atomicGetOrPut(androidLifecycle) {
-                val scope = LifecycleCoroutineScope(
-                  lifecycle = androidLifecycle,
-                  coroutineScope = MainImmediateCoroutineScope(Job(), TestDispatcherProvider(main))
-                )
-                withContext(main) {
-
-                  androidLifecycle.addObserver(LifecycleCoroutineScopeStore)
-                }
-                scope
+                androidLifecycle.addObserver(LifecycleCoroutineScopeStore)
               }
+              scope
             }
           }
-
-          yield()
-          lock.complete(Unit)
-
-          all.awaitAll().distinct().size shouldBe 1
-
-          delay(100)
-
-          androidLifecycle.observerCount shouldBe 2
         }
+
+        yield()
+        lock.complete(Unit)
+
+        all.awaitAll().distinct().size shouldBe 1
+
+        delay(100)
+
+        androidLifecycle.observerCount shouldBe 2
       }
+
     }
   }
 }
