@@ -19,39 +19,56 @@ import androidx.lifecycle.*
 import dispatch.android.lifecycle.internal.*
 import dispatch.core.*
 import kotlinx.coroutines.*
-import java.util.concurrent.CancellationException
+import kotlin.coroutines.*
 
 /**
- * [MainImmediateCoroutineScope] instance which is tied to a [Lifecycle].
+ * Default implementation of a [CoroutineContext] as seen in a `MainImmediateCoroutineScope`.
+ *
+ * @see MainImmediateCoroutineScope
+ */
+public fun MainImmediateProvidedContext(): CoroutineContext {
+  val dispatcherProvider = DefaultDispatcherProvider()
+
+  return SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
+}
+
+/**
+ * [MainImmediateCoroutineScope] which is tied to a [Lifecycle].
  *
  * The [CoroutineScope] provides lifecycle-aware [launch] functions
  * which will automatically start upon reaching their associated [Lifecycle.Event],
- * then automatically cancel upon the [lifecycle] dropping below that state.  Reaching
+ * then automatically cancel upon the lifecycle dropping below that state.  Reaching
  * that state again will start a new [Job].
  *
- * If this `CoroutineScope` has a [Job], it will be cancelled automatically
- * as soon as the [lifecycle] reaches [DESTROYED][Lifecycle.State.DESTROYED].
+ * This `CoroutineScope`'s [Job] will be cancelled automatically
+ * as soon as the `lifecycle` reaches [DESTROYED][Lifecycle.State.DESTROYED].
  *
- * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeSample
+ * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeDefaultSample
+ * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeFromContextSample
  * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
+ * @param coroutineContext the source CoroutineContext which will be converted to a [MainImmediateCoroutineScope].
+ * Its [Elements][CoroutineContext.Element] will be re-used, except:
+ * 1. If a [DispatcherProvider] element isn't present, a [DefaultDispatcherProvider] will be added.
+ * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
+ * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
  */
-class LifecycleCoroutineScope(
+open class LifecycleCoroutineScope(
   val lifecycle: Lifecycle,
-  private val coroutineScope: MainImmediateCoroutineScope
-) : MainImmediateCoroutineScope by coroutineScope {
+  coroutineContext: CoroutineContext = MainImmediateProvidedContext()
+) : MainImmediateCoroutineScope by MainImmediateCoroutineScope(coroutineContext) {
 
   init {
-    LifecycleCoroutineScopeBinding(lifecycle, coroutineScope).bind()
+    LifecycleCoroutineScopeBinding(lifecycle, coroutineContext).bind()
   }
 
   /**
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
    * is at least [Lifecycle.State.CREATED].
    *
-   * [block] is executed using the receiver [CoroutineScope]'s [Job] as a parent,
+   * `block` is executed using the receiver [CoroutineScope]'s [Job] as a parent,
    * but always executes using [Dispatchers.Main] as its [CoroutineDispatcher].
    *
-   * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
+   * Execution of `block` is cancelled when the receiver [CoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
    *
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
@@ -71,10 +88,10 @@ class LifecycleCoroutineScope(
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
    * is at least [Lifecycle.State.STARTED].
    *
-   * [block] is executed using the receiver [CoroutineScope]'s [Job] as a parent,
+   * `block` is executed using the receiver [CoroutineScope]'s [Job] as a parent,
    * but always executes using [Dispatchers.Main] as its [CoroutineDispatcher].
    *
-   * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
+   * Execution of `block` is cancelled when the receiver [CoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.STARTED].
    *
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
@@ -91,10 +108,10 @@ class LifecycleCoroutineScope(
    * Lifecycle-aware function for launching a coroutine any time the [Lifecycle.State]
    * is at least [Lifecycle.State.RESUMED].
    *
-   * [block] is executed using the receiver [CoroutineScope]'s [Job] as a parent,
+   * `block` is executed using the receiver [CoroutineScope]'s [Job] as a parent,
    * but always executes using [Dispatchers.Main] as its [CoroutineDispatcher].
    *
-   * Execution of [block] is cancelled when the receiver [CoroutineScope] is cancelled,
+   * Execution of `block` is cancelled when the receiver [CoroutineScope] is cancelled,
    * or when [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.RESUMED].
    *
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
@@ -136,9 +153,34 @@ class LifecycleCoroutineScope(
      */
     RESTART_EVERY
   }
-}
 
-internal class LifecycleCancellationException(
-  lifecycle: Lifecycle,
-  minimumState: Lifecycle.State
-) : CancellationException("Lifecycle $lifecycle dropped below minimum state: $minimumState")
+  companion object {
+
+    /**
+     * [MainImmediateCoroutineScope] which is tied to a [Lifecycle].
+     *
+     * The [CoroutineScope] provides lifecycle-aware [launch] functions
+     * which will automatically start upon reaching their associated [Lifecycle.Event],
+     * then automatically cancel upon the lifecycle dropping below that state.  Reaching
+     * that state again will start a new [Job].
+     *
+     * If this `CoroutineScope` has a [Job], it will be cancelled automatically
+     * as soon as the `lifecycle` reaches [DESTROYED][Lifecycle.State.DESTROYED].
+     *
+     * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeFromScopeSample
+     * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
+     * @param coroutineScope the source CoroutineScope which will be converted to a [MainImmediateCoroutineScope].
+     * Its [CoroutineContext][kotlin.coroutines.CoroutineContext] will be re-used, except:
+     * 1. If a [DispatcherProvider] element isn't present, a [DefaultDispatcherProvider] will be added.
+     * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
+     * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
+     */
+    operator fun invoke(
+      lifecycle: Lifecycle,
+      coroutineScope: CoroutineScope
+    ): LifecycleCoroutineScope = LifecycleCoroutineScope(
+      lifecycle, coroutineScope.coroutineContext
+    )
+
+  }
+}

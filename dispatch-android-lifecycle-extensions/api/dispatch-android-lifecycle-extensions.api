@@ -1,6 +1,7 @@
 public final class dispatch/android/lifecycle/LifecycleScopeFactory {
 	public static final field INSTANCE Ldispatch/android/lifecycle/LifecycleScopeFactory;
 	public final fun reset ()V
+	public final fun set (Ldispatch/android/lifecycle/LifecycleCoroutineScopeFactory;)V
 	public final fun set (Lkotlin/jvm/functions/Function0;)V
 }
 

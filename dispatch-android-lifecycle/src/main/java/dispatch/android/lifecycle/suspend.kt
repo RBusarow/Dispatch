@@ -20,9 +20,9 @@ import dispatch.android.lifecycle.internal.*
 import kotlinx.coroutines.*
 
 /**
- * Executes [block] one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
  *
- * If the lifecycle is already in this state, [block] will be executed immediately.
+ * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnCreate] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
@@ -32,9 +32,9 @@ suspend fun <T> LifecycleOwner.onNextCreate(
 ): T? = lifecycle.onNext(Lifecycle.State.CREATED, block)
 
 /**
- * Executes [block] one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
  *
- * If the lifecycle is already in this state, [block] will be executed immediately.
+ * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnCreate] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextCreateSample
@@ -44,9 +44,9 @@ suspend fun <T> Lifecycle.onNextCreate(
 ): T? = onNext(Lifecycle.State.CREATED, block)
 
 /**
- * Executes [block] one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
  *
- * If the lifecycle is already in this state, [block] will be executed immediately.
+ * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnStart] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
@@ -56,9 +56,9 @@ suspend fun <T> LifecycleOwner.onNextStart(
 ): T? = lifecycle.onNext(Lifecycle.State.STARTED, block)
 
 /**
- * Executes [block] one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
  *
- * If the lifecycle is already in this state, [block] will be executed immediately.
+ * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnStart] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextStartSample
@@ -68,9 +68,9 @@ suspend fun <T> Lifecycle.onNextStart(
 ): T? = onNext(Lifecycle.State.STARTED, block)
 
 /**
- * Executes [block] one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
  *
- * If the lifecycle is already in this state, [block] will be executed immediately.
+ * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnResume] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
@@ -80,9 +80,9 @@ suspend fun <T> LifecycleOwner.onNextResume(
 ): T? = lifecycle.onNext(Lifecycle.State.RESUMED, block)
 
 /**
- * Executes [block] one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
  *
- * If the lifecycle is already in this state, [block] will be executed immediately.
+ * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnResume] for repeating behavior.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextResumeSample

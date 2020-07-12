@@ -41,7 +41,7 @@ internal object LifecycleCoroutineScopeStore : LifecycleEventObserver {
   fun get(lifecycle: Lifecycle): LifecycleCoroutineScope {
 
     if (lifecycle.currentState <= Lifecycle.State.DESTROYED) {
-      return LifecycleScopeFactory.create(lifecycle)
+      return LifecycleScopeFactory.get().create(lifecycle)
     }
 
     return when {
@@ -65,7 +65,7 @@ internal object LifecycleCoroutineScopeStore : LifecycleEventObserver {
 
   private fun bindLifecycle(lifecycle: Lifecycle): LifecycleCoroutineScope {
 
-    val scope = LifecycleScopeFactory.create(lifecycle)
+    val scope = LifecycleScopeFactory.get().create(lifecycle)
 
     scope.launchMainImmediate {
       if (lifecycle.currentState >= Lifecycle.State.INITIALIZED) {

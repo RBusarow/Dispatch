@@ -40,17 +40,12 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
 
     val dispatcher = TestCoroutineDispatcher()
 
-    LifecycleScopeFactory.set {
-      TestProvidedCoroutineScope(
-        dispatcher,
-        TestDispatcherProvider(dispatcher),
-        Job()
-      )
-    }
+    LifecycleScopeFactory.set { dispatcher + TestDispatcherProvider(dispatcher) + Job() }
   }
 
   @AfterEach
   fun afterEach() {
+    LifecycleScopeFactory.reset()
     storeMap.clear()
   }
 

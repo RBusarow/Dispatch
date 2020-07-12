@@ -16,13 +16,14 @@
 package dispatch.android.lifecycle.internal
 
 import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
 import dispatch.core.*
 import kotlinx.coroutines.*
+import java.util.concurrent.CancellationException
+import kotlin.coroutines.*
 
 internal class LifecycleCoroutineScopeBinding(
   private val lifecycle: Lifecycle,
-  private val coroutineScope: CoroutineScope
+  private val coroutineContext: CoroutineContext
 ) : LifecycleEventObserver {
 
   fun bind() {
@@ -30,7 +31,7 @@ internal class LifecycleCoroutineScopeBinding(
     if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
       cancelDestroyed()
     } else {
-      coroutineScope.launchMainImmediate {
+      CoroutineScope(coroutineContext).launchMainImmediate {
 
         if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
           cancelDestroyed()
@@ -39,14 +40,14 @@ internal class LifecycleCoroutineScopeBinding(
         }
       }
     }
-    coroutineScope.coroutineContext[Job]?.invokeOnCompletion {
+    coroutineContext[Job]?.invokeOnCompletion {
       lifecycle.removeObserver(this)
     }
   }
 
   private fun cancelDestroyed() {
     lifecycle.removeObserver(this)
-    coroutineScope.coroutineContext.cancel(
+    coroutineContext.cancel(
       LifecycleCancellationException(
         lifecycle = lifecycle,
         minimumState = Lifecycle.State.INITIALIZED
@@ -60,3 +61,8 @@ internal class LifecycleCoroutineScopeBinding(
     }
   }
 }
+
+internal class LifecycleCancellationException(
+  lifecycle: Lifecycle,
+  minimumState: Lifecycle.State
+) : CancellationException("Lifecycle $lifecycle dropped below minimum state: $minimumState")

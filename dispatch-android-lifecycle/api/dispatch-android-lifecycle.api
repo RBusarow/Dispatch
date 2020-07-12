@@ -7,8 +7,10 @@ public final class dispatch/android/lifecycle/BuildConfig {
 	public fun <init> ()V
 }
 
-public final class dispatch/android/lifecycle/LifecycleCoroutineScope : dispatch/core/MainImmediateCoroutineScope {
-	public fun <init> (Landroidx/lifecycle/Lifecycle;Ldispatch/core/MainImmediateCoroutineScope;)V
+public class dispatch/android/lifecycle/LifecycleCoroutineScope : dispatch/core/MainImmediateCoroutineScope {
+	public static final field Companion Ldispatch/android/lifecycle/LifecycleCoroutineScope$Companion;
+	public fun <init> (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;)V
+	public synthetic fun <init> (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCoroutineContext ()Lkotlin/coroutines/CoroutineContext;
 	public final fun getLifecycle ()Landroidx/lifecycle/Lifecycle;
 	public final fun launchOnCreate (Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
@@ -19,6 +21,10 @@ public final class dispatch/android/lifecycle/LifecycleCoroutineScope : dispatch
 	public static synthetic fun launchOnStart$default (Ldispatch/android/lifecycle/LifecycleCoroutineScope;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
 }
 
+public final class dispatch/android/lifecycle/LifecycleCoroutineScope$Companion {
+	public final fun invoke (Landroidx/lifecycle/Lifecycle;Lkotlinx/coroutines/CoroutineScope;)Ldispatch/android/lifecycle/LifecycleCoroutineScope;
+}
+
 public final class dispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy : java/lang/Enum {
 	public static final field CANCEL Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;
 	public static final field RESTART_EVERY Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;
@@ -26,7 +32,16 @@ public final class dispatch/android/lifecycle/LifecycleCoroutineScope$MinimumSta
 	public static fun values ()[Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;
 }
 
-public final class dispatch/android/lifecycle/LifecycleSuspendExtKt {
+public final class dispatch/android/lifecycle/LifecycleCoroutineScopeFactory {
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public final fun create (Landroidx/lifecycle/Lifecycle;)Ldispatch/android/lifecycle/LifecycleCoroutineScope;
+}
+
+public final class dispatch/android/lifecycle/LifecycleCoroutineScopeKt {
+	public static final fun MainImmediateProvidedContext ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class dispatch/android/lifecycle/SuspendKt {
 	public static final fun onNextCreate (Landroidx/lifecycle/Lifecycle;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static final fun onNextCreate (Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static final fun onNextResume (Landroidx/lifecycle/Lifecycle;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
