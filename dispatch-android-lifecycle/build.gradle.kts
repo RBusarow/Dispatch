@@ -78,8 +78,5 @@ dependencies {
   testImplementation(Libs.RickBusarow.Hermit.coroutines)
   testImplementation(Libs.RickBusarow.Hermit.junit5)
 
-  testImplementation(Libs.RickBusarow.Hermit.coroutines)
-  testImplementation(Libs.RickBusarow.Hermit.junit5)
-
   testImplementation(Libs.Robolectric.core)
 }

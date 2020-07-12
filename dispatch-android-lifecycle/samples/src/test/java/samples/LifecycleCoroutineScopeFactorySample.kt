@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-@file:Suppress("EXPERIMENTAL_API_USAGE")
-
 package samples
 
 import dispatch.android.lifecycle.*
@@ -46,7 +44,8 @@ class LifecycleCoroutineScopeFactorySample {
   }
 }
 
-private annotation class Before
-private annotation class After
-private annotation class Module
-private annotation class Provides
+internal annotation class Before
+internal annotation class After
+internal annotation class Module
+internal annotation class Provides
+internal annotation class Inject
