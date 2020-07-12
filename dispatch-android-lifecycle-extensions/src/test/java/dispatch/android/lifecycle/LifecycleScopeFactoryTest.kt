@@ -62,7 +62,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
   @Test
   fun `default factory should be a default MainImmediateProvidedContext`() = runBlockingTest {
 
-    val scope = LifecycleScopeFactory.get().create(lifecycleOwner.lifecycle)
+    val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
     scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
 
@@ -76,7 +76,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
     LifecycleScopeFactory.set { originContext }
 
-    val scope = LifecycleScopeFactory.get().create(lifecycleOwner.lifecycle)
+    val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
     scope.coroutineContext shouldEqualFolded originContext + mainDispatcher
   }
@@ -86,13 +86,13 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
     LifecycleScopeFactory.set { originContext }
 
-    val custom = LifecycleScopeFactory.get().create(lifecycleOwner.lifecycle)
+    val custom = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
     custom.coroutineContext shouldEqualFolded originContext + mainDispatcher
 
     LifecycleScopeFactory.reset()
 
-    val default = LifecycleScopeFactory.get().create(lifecycleOwner.lifecycle)
+    val default = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
     default.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
 

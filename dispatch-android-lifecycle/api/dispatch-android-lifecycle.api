@@ -38,7 +38,7 @@ public final class dispatch/android/lifecycle/LifecycleCoroutineScopeFactory {
 }
 
 public final class dispatch/android/lifecycle/LifecycleCoroutineScopeKt {
-	public static final fun MainImmediateProvidedContext ()Lkotlin/coroutines/CoroutineContext;
+	public static final fun MainImmediateContext ()Lkotlin/coroutines/CoroutineContext;
 }
 
 public final class dispatch/android/lifecycle/SuspendKt {
