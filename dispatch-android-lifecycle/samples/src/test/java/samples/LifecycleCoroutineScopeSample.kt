@@ -24,8 +24,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 
-annotation class Inject
-
 @CoroutineTest
 @ExperimentalCoroutinesApi
 class LifecycleCoroutineScopeSample(
