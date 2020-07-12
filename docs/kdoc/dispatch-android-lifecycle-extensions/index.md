@@ -65,7 +65,7 @@ class SomeEspressoTest {
   @After
   fun tearDown() {
     // The factory can also be reset to default
-    LifecycleCoroutineScopeFactory.reset()
+    LifecycleScopeFactory.reset()
   }
 }
 ```
