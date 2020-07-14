@@ -15,10 +15,9 @@
 
 @file:Suppress("MagicNumber")
 
-import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.*
 import kotlinx.knit.*
 import kotlinx.validation.*
-import org.gradle.kotlin.dsl.*
 import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
 import java.net.*
@@ -291,14 +290,6 @@ subprojects {
     config = files("$rootDir/detekt/detekt-config.yml")
 
     val unique = "${rootProject.relativePath(projectDir)}/${project.name}"
-
-    idea {
-      path = "$rootDir/.idea"
-      codeStyleScheme = "$rootDir/.idea/Project.xml"
-      inspectionsProfile = "$rootDir/.idea/Project-Default.xml"
-      report = "${project.projectDir}/reports/build/detekt-reports"
-      mask = "*.kt"
-    }
 
     reports {
       xml {
