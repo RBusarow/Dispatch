@@ -48,6 +48,8 @@ plugins {
   id("io.gitlab.arturbosch.detekt") version Libs.Detekt.version
 }
 
+apply(plugin = "base")
+
 allprojects {
 
   repositories {
@@ -213,12 +215,6 @@ fun linkModuleDocs(
   }
 }
 
-val clean by tasks.registering {
-  doLast {
-    delete("build")
-  }
-}
-
 subprojects {
   tasks.withType<KotlinCompile>()
     .configureEach {
@@ -260,23 +256,6 @@ val copyRootFiles by tasks.registering {
     copySite()
     copyRootFiles()
   }
-}
-
-apply(plugin = Plugins.knit)
-
-extensions.configure<KnitPluginExtension> {
-
-  //  rootDir = File(".")
-  //  moduleRoots = listOf( )
-
-  moduleDocs = "build/dokka"
-  moduleMarkers = listOf("build.gradle", "build.gradle.kts")
-  siteRoot = "https://rbusarow.github.io/Dispatch"
-}
-
-// Build API docs for all modules with dokka before running Knit
-tasks.getByName("knitPrepare") {
-  dependsOn(subprojects.mapNotNull { it.tasks.findByName("dokka") })
 }
 
 subprojects {
@@ -365,4 +344,21 @@ extensions.configure<ApiValidationExtension> {
     "dispatch-sample",
     "samples"
   )
+}
+
+apply(plugin = Plugins.knit)
+
+extensions.configure<KnitPluginExtension> {
+
+  //  rootDir = File(".")
+  //  moduleRoots = listOf( )
+
+  moduleDocs = "build/dokka"
+  moduleMarkers = listOf("build.gradle", "build.gradle.kts")
+  siteRoot = "https://rbusarow.github.io/Dispatch"
+}
+
+// Build API docs for all modules with dokka before running Knit
+tasks.getByName("knitPrepare") {
+  dependsOn(subprojects.mapNotNull { it.tasks.findByName("dokka") })
 }
