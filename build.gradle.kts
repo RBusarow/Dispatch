@@ -258,72 +258,32 @@ val copyRootFiles by tasks.registering {
   }
 }
 
-subprojects {
+detekt {
+  parallel = true
+  config = files("$rootDir/detekt/detekt-config.yml")
 
-  apply {
-    plugin("io.gitlab.arturbosch.detekt")
-  }
+  val unique = "${rootProject.relativePath(projectDir)}/${project.name}"
 
-  detekt {
-    parallel = true
-    config = files("$rootDir/detekt/detekt-config.yml")
-
-    val unique = "${rootProject.relativePath(projectDir)}/${project.name}"
-
-    reports {
-      xml {
-        enabled = false
-        destination = file("$rootDir/build/detekt-reports/$unique-detekt.xml")
-      }
-      html {
-        enabled = true
-        destination = file("$rootDir/build/detekt-reports/$unique-detekt.html")
-      }
-      txt {
-        enabled = false
-        destination = file("$rootDir/build/detekt-reports/$unique-detekt.txt")
-      }
+  reports {
+    xml {
+      enabled = false
+      destination = file("$rootDir/build/detekt-reports/$unique-detekt.xml")
+    }
+    html {
+      enabled = true
+      destination = file("$rootDir/build/detekt-reports/$unique-detekt.html")
+    }
+    txt {
+      enabled = false
+      destination = file("$rootDir/build/detekt-reports/$unique-detekt.txt")
     }
   }
 }
 
-allprojects {
-  dependencies {
-    detekt(Libs.Detekt.cli)
-    detektPlugins(project(path = ":dispatch-detekt"))
-  }
+dependencies {
+  detekt(Libs.Detekt.cli)
+  detektPlugins(project(path = ":dispatch-detekt"))
 }
-
-val analysisDir = file(projectDir)
-val baselineFile = file("$rootDir/detekt/project-baseline.xml")
-val configFile = file("$rootDir/detekt/detekt-config.yml")
-val formatConfigFile = file("$rootDir/config/detekt/format.yml")
-val statisticsConfigFile = file("$rootDir/config/detekt/statistics.yml")
-
-val kotlinFiles = "**/*.kt"
-val kotlinScriptFiles = "**/*.kts"
-val resourceFiles = "**/resources/**"
-val buildFiles = "**/build/**"
-val testFiles = "**/src/test/**"
-
-val detektAll by tasks.registering(Detekt::class) {
-
-  description = "Runs the whole project at once."
-  parallel = true
-  buildUponDefaultConfig = true
-  setSource(files(rootDir))
-  config.setFrom(files(configFile))
-  include(kotlinFiles, kotlinScriptFiles)
-  exclude(resourceFiles, buildFiles, testFiles)
-  reports {
-    xml.enabled = false
-    html.enabled = false
-    txt.enabled = false
-  }
-}
-
-tasks.findByName("detekt")
-  ?.finalizedBy(detektAll)
 
 apply(plugin = Plugins.binaryCompatilibity)
 
