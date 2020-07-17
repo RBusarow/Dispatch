@@ -322,3 +322,13 @@ extensions.configure<KnitPluginExtension> {
 tasks.getByName("knitPrepare") {
   dependsOn(subprojects.mapNotNull { it.tasks.findByName("dokka") })
 }
+
+val generateDependencyGraph by tasks.registering {
+
+  description = "generate a visual dependency graph"
+  group = "refactor"
+
+  doLast {
+    createDependencyGraph()
+  }
+}
