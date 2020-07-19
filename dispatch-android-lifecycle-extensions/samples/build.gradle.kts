@@ -40,6 +40,7 @@ android {
 
 dependencies {
 
+  implementation(Libs.AndroidX.Fragment.ktx)
   implementation(Libs.AndroidX.Lifecycle.common)
   implementation(Libs.AndroidX.Lifecycle.liveData)
   testImplementation(Libs.AndroidX.Lifecycle.runtime)
@@ -65,5 +66,10 @@ dependencies {
   testImplementation(Libs.Kotlin.testCommon)
 
   testImplementation(Libs.Kotlinx.Coroutines.test)
+
+  testImplementation(Libs.AndroidX.Test.Arch.core)
+  testImplementation(Libs.AndroidX.Test.runner)
+  testImplementation(Libs.AndroidX.Test.Espresso.core)
+  testImplementation(Libs.Robolectric.core)
 
 }

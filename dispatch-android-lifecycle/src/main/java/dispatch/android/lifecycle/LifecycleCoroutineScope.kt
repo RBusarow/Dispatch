@@ -27,7 +27,7 @@ import kotlin.coroutines.*
  * @see MainImmediateCoroutineScope
  */
 public fun MainImmediateContext(): CoroutineContext {
-  val dispatcherProvider = DefaultDispatcherProvider.get()
+  val dispatcherProvider = DispatcherProvider()
 
   return SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
 }

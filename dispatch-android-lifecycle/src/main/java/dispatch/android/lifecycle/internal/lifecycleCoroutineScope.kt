@@ -126,12 +126,11 @@ private suspend fun <T> Flow<T>.collectUntil(
 /**
  * Returns a flow which performs the given [action] on each value of the original flow.
  *
- *
  * The crucial difference from [onEach] is that when the original flow emits a new value, the [action] block for previous
  * value is cancelled.
  */
 @ExperimentalCoroutinesApi
-private fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLatest { value ->
+internal fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLatest { value ->
   action(value)
   return@transformLatest emit(value)
 }
