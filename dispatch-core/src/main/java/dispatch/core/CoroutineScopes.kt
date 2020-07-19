@@ -50,13 +50,13 @@ public interface UnconfinedCoroutineScope : CoroutineScope
  * Dispatch defaults to the `default` property of the `DispatcherProvider`.
  *
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
  *
  * @see CoroutineScope
  */
 public fun DefaultCoroutineScope(
   job: Job = SupervisorJob(),
-  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
+  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider.get()
 ): DefaultCoroutineScope = object : DefaultCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.default + dispatcherProvider
 }
@@ -67,7 +67,7 @@ public fun DefaultCoroutineScope(
  *
  * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
  * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  *
  * @see CoroutineScope
  */
@@ -82,13 +82,13 @@ public fun DefaultCoroutineScope(
  * Dispatch defaults to the `io` property of the `DispatcherProvider`.
  *
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
  *
  * @see CoroutineScope
  */
 public fun IOCoroutineScope(
   job: Job = SupervisorJob(),
-  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
+  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider.get()
 ): IOCoroutineScope = object : IOCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.io + dispatcherProvider
 }
@@ -99,7 +99,7 @@ public fun IOCoroutineScope(
  *
  * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
  * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  *
  * @see CoroutineScope
  */
@@ -114,13 +114,13 @@ public fun IOCoroutineScope(
  * Dispatch defaults to the `main` property of the `DispatcherProvider`.
  *
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
  *
  * @see CoroutineScope
  */
 public fun MainCoroutineScope(
   job: Job = SupervisorJob(),
-  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
+  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider.get()
 ): MainCoroutineScope = object : MainCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.main + dispatcherProvider
 }
@@ -131,7 +131,7 @@ public fun MainCoroutineScope(
  *
  * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
  * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  *
  * @see CoroutineScope
  */
@@ -146,13 +146,13 @@ public fun MainCoroutineScope(
  * Dispatch defaults to the `mainImmediate` property of the `DispatcherProvider`.
  *
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
  *
  * @see CoroutineScope
  */
 public fun MainImmediateCoroutineScope(
   job: Job = SupervisorJob(),
-  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
+  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider.get()
 ): MainImmediateCoroutineScope = object : MainImmediateCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.mainImmediate +
       dispatcherProvider
@@ -164,7 +164,7 @@ public fun MainImmediateCoroutineScope(
  *
  * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
  * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  *
  * @see CoroutineScope
  */
@@ -179,13 +179,13 @@ public fun MainImmediateCoroutineScope(
  * Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.
  *
  * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses a [DefaultDispatcherProvider] if one is not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
  *
  * @see CoroutineScope
  */
 public fun UnconfinedCoroutineScope(
   job: Job = SupervisorJob(),
-  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
+  dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider.get()
 ): UnconfinedCoroutineScope = object : UnconfinedCoroutineScope {
   override val coroutineContext = job + dispatcherProvider.unconfined + dispatcherProvider
 }
@@ -196,7 +196,7 @@ public fun UnconfinedCoroutineScope(
  *
  * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
  * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, a [DefaultDispatcherProvider] will be added.
+ * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  *
  * @see CoroutineScope
  */
@@ -211,7 +211,7 @@ private inline fun CoroutineContext.withDefaultElements(
 ): CoroutineContext {
 
   val job = get(Job) ?: SupervisorJob()
-  val provider = get(DispatcherProvider) ?: DefaultDispatcherProvider()
+  val provider = get(DispatcherProvider) ?: DefaultDispatcherProvider.get()
 
   return this + job + provider + provider.dispatcherPromise()
 }

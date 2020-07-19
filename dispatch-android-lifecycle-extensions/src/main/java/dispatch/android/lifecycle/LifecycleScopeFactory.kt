@@ -66,7 +66,7 @@ object LifecycleScopeFactory {
    *
    * @param factory sets a custom [CoroutineContext] factory to be used for all new instance creations until reset.
    * Its [Elements][CoroutineContext.Element] will be re-used, except:
-   * 1. If a [DispatcherProvider] element isn't present, a [DefaultDispatcherProvider] will be added.
+   * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be added.
    * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
    * the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
@@ -85,7 +85,7 @@ object LifecycleScopeFactory {
    *
    * @param factory sets a custom [CoroutineContext] factory to be used for all new instance creations until reset.
    * Its [Elements][CoroutineContext.Element] will be re-used, except:
-   * 1. If a [DispatcherProvider] element isn't present, a [DefaultDispatcherProvider] will be added.
+   * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be added.
    * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
    * the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.

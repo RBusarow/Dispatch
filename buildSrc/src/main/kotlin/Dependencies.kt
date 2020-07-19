@@ -61,7 +61,7 @@ object BuildPlugins {
 
   const val binaryCompatibility =
     "org.jetbrains.kotlinx:binary-compatibility-validator:${Versions.binaryCompatibility}"
-  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.1"
+  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.3"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
