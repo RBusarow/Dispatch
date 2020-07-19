@@ -81,7 +81,7 @@ internal class CoroutineViewModelTest {
 
     val scope = TestViewModel().viewModelScope
 
-    scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
 
     scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
 

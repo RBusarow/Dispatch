@@ -59,7 +59,7 @@ class LifecycleScopeFactorySample {
       @Before
       fun setUp() {
 
-        val dispatcherProvider = DefaultDispatcherProvider()
+        val dispatcherProvider = DispatcherProvider()
 
         LifecycleScopeFactory.set { SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate }
       }

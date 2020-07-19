@@ -16,7 +16,6 @@
 package dispatch.core
 
 import io.kotest.matchers.*
-import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
@@ -73,42 +72,9 @@ internal class DispatcherProviderTest {
     @Test
     fun `DispatcherProvider factory should create DefaultDispatcherProvider`() {
 
-      DispatcherProvider().shouldBeTypeOf<DefaultDispatcherProvider>()
+      DispatcherProvider() shouldBe DefaultDispatcherProvider.get()
     }
   }
 
-  @Nested
-  inner class `Default DispatcherProvider` {
-
-    @Test
-    fun `DefaultDispatcherProvider default dispatcher should use Dispatchers Default`() {
-
-      DefaultDispatcherProvider().default shouldBe Dispatchers.Default
-    }
-
-    @Test
-    fun `DefaultDispatcherProvider io dispatcher should use Dispatchers IO`() {
-
-      DefaultDispatcherProvider().io shouldBe Dispatchers.IO
-    }
-
-    @Test
-    fun `DefaultDispatcherProvider main dispatcher should use Dispatchers Main`() {
-
-      DefaultDispatcherProvider().main shouldBe Dispatchers.Main
-    }
-
-    @Test
-    fun `DefaultDispatcherProvider mainImmediate dispatcher should use Dispatchers Main immediate`() {
-
-      DefaultDispatcherProvider().mainImmediate shouldBe Dispatchers.Main.immediate
-    }
-
-    @Test
-    fun `DefaultDispatcherProvider unconfined dispatcher should use Dispatchers Unconfined`() {
-
-      DefaultDispatcherProvider().unconfined shouldBe Dispatchers.Unconfined
-    }
-  }
 
 }

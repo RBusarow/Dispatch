@@ -58,7 +58,7 @@ internal class ViewModelScopeFactoryTest {
 
     val scope = ViewModelScopeFactory.create()
 
-    scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
 
     scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
 
@@ -90,7 +90,7 @@ internal class ViewModelScopeFactoryTest {
 
     val default = ViewModelScopeFactory.create()
 
-    default.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    default.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
 
     default.coroutineContext[Job]!!.shouldBeSupervisorJob()
 

@@ -27,7 +27,7 @@ import kotlin.coroutines.*
  * @see MainImmediateCoroutineScope
  */
 public fun MainImmediateContext(): CoroutineContext {
-  val dispatcherProvider = DefaultDispatcherProvider()
+  val dispatcherProvider = DefaultDispatcherProvider.get()
 
   return SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
 }
@@ -48,7 +48,7 @@ public fun MainImmediateContext(): CoroutineContext {
  * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
  * @param coroutineContext the source CoroutineContext which will be converted to a [MainImmediateCoroutineScope].
  * Its [Elements][CoroutineContext.Element] will be re-used, except:
- * 1. If a [DispatcherProvider] element isn't present, a [DefaultDispatcherProvider] will be added.
+ * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be added.
  * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
  * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
  */
@@ -171,7 +171,7 @@ open class LifecycleCoroutineScope(
      * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
      * @param coroutineScope the source CoroutineScope which will be converted to a [MainImmediateCoroutineScope].
      * Its [CoroutineContext][kotlin.coroutines.CoroutineContext] will be re-used, except:
-     * 1. If a [DispatcherProvider] element isn't present, a [DefaultDispatcherProvider] will be added.
+     * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be added.
      * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
      * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
      */

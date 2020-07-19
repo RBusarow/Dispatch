@@ -60,6 +60,9 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
   * [Async](#async)
   * [WithContext](#withcontext)
   * [Flow](#flow)
+* [DefaultDispatcherProvider](#defaultdispatcherprovider)
+  * [Out-of-box default functionality](#out-of-box-default-functionality)
+  * [Easy global dispatcher overrides](#easy-global-dispatcher-overrides)
 * [Minimum Gradle Config](#minimum-gradle-config)
 
 <!--- END -->
@@ -69,8 +72,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 | **Name**                     | **Description**
 | -------------                | --------------- |
 | [DispatcherProvider]         | Interface which provides the 5 standard [CoroutineDispatcher] properties of the [Dispatchers] object, but which can be embedded in a [CoroutineContext]
-| [DefaultDispatcherProvider]  | Default implementation of [DispatcherProvider] which simply delegates to the corresponding properties in the [Dispatchers] singleton
-
+| [DefaultDispatcherProvider]  | Mutable singleton holder for an implementation of [DispatcherProvider]. By default, it simply delegates to the corresponding properties in the [Dispatchers] singleton.  Whenever a [CoroutineContext] does not have a [DispatcherProvider], this singleton's value will be used by default.
 
 ### Marker interfaces and factories
 
@@ -90,8 +92,6 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 | [Deferred]   | [asyncDefault]  | [asyncIO]  | [asyncMain]  | [asyncMainImmediate]  | [asyncUnconfined]
 | `suspend T`  | [withDefault]   | [withIO]   | [withMain]   | [withMainImmediate]   | [withUnconfined]
 | `Flow<T>`    | [flowOnDefault] | [flowOnIO] | [flowOnMain] | [flowOnMainImmediate] | [flowOnUnconfined]
-
-
 
 ### Launch
 ``` kotlin
@@ -131,6 +131,7 @@ suspend fun foo() {
 ```
 
 ###  Flow
+
 Like [withContext], [Flow] typically doesn’t get a [CoroutineScope] of its own.  They inherit the [coroutineContext][kotlin.coroutineContext] from the collector in a pattern called [context preservation][context_preservation]. These new operators maintain context preservation (*they’re forced to, actually*), and extract the [coroutineContext][kotlin.coroutineContext] from the collector.
 
 ``` kotlin
@@ -141,6 +142,53 @@ val someFlow = flow {  }
   .flowOnMainImmediate()
   .flowOnUnconfined()
 ```
+
+## DefaultDispatcherProvider
+
+The simplest way to get up and running with Dispatch. All library access to a
+[CoroutineContext's][CoroutineContext] [DispatcherProvider] filters through a single extension
+property:
+
+``` kotlin
+public val CoroutineContext.dispatcherProvider: DispatcherProvider
+  get() = get(DispatcherProvider) ?: DefaultDispatcherProvider.get() 
+```
+
+If the receiver does not have a `DispatcherProvider`, the value from [DefaultDispatcherProvider]
+will be returned. In practice, this brings at least two benefits:
+
+### Out-of-box default functionality
+
+Calls such as `launchIO { ... }`or `withMain { ... }` are safe to use (guaranteed to have a
+`DispatcherProvider`) regardless of the source of the `CoroutineContext` or [CoroutineScope] and
+without any additional configuration. By default, they will access the corresponding
+[CoroutineDispatchers][CoroutineDispatcher] from the [Dispatchers] singleton.
+
+### Easy global dispatcher overrides
+
+`DefaultDispatcherProvider` has similar
+[set][DefaultDispatcherProvider.set]/[reset][DefaultDispatcherProvider.set] functionality to the
+[Dispatchers.setMain]/[Dispatchers.resetMain] extensions in `kotlinx-coroutines-test`, except it
+doesn't need to be confined to testing.
+
+You can use [DefaultDispatcherProvider.set] to globally set a custom implementation at the beginning
+of an application's lifecycle, but the most likely use-case is certainly in testing.
+
+``` kotlin
+@Test
+fun `my test`() = runBlocking {
+
+  DefaultDispatcherProvider.set(TestDispatcherProvider())
+  
+  withMain {
+    // this would normally crash without using Dispatchers.setMain
+    // but "main" here comes from the TestDispatcherProvider created above -- not Dispatchers.Main
+  }
+  
+  DefaultDispatcherProvider.reset() // from dispatch-test
+} 
+```
+> See [dispatch-test] and [TestDispatcherProvider]
 
 ## Minimum Gradle Config
 
@@ -193,14 +241,20 @@ dependencies {
 [flowOnMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main.html
 [flowOnMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main-immediate.html
 [flowOnUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-unconfined.html
+[DefaultDispatcherProvider.set]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/set.html
+<!--- MODULE dispatch-test-->
+<!--- INDEX  -->
+[TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-dispatcher-provider/index.html
 <!--- END -->
-
 
 [context_preservation]: https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
 [CoroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
 [CoroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
 [Deferred]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html
+[dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
+[Dispatchers.resetMain]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/kotlinx.coroutines.-dispatchers/reset-main.html
+[Dispatchers.setMain]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/kotlinx.coroutines.-dispatchers/set-main.html
 [Dispatchers]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html
 [Flow]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html
 [Job]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html

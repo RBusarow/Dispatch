@@ -59,6 +59,9 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
   * [Async](#async)
   * [WithContext](#withcontext)
   * [Flow](#flow)
+* [DefaultDispatcherProvider](#defaultdispatcherprovider)
+  * [Out-of-box default functionality](#out-of-box-default-functionality)
+  * [Easy global dispatcher overrides](#easy-global-dispatcher-overrides)
 * [Minimum Gradle Config](#minimum-gradle-config)
 
 ## Types
@@ -66,7 +69,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 | **Name**                     | **Description**
 | -------------                | --------------- |
 | [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html)         | Interface which provides the 5 standard [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) properties of the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) object, but which can be embedded in a [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/)
-| [DefaultDispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/index.html)  | Default implementation of [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html) which simply delegates to the corresponding properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton
+| [DefaultDispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/index.html)  | Mutable singleton holder for an implementation of [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html). By default, it simply delegates to the corresponding properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.  Whenever a [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/) does not have a [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html), this singleton's value will be used by default.
 
 ### Marker interfaces and factories
 
@@ -139,6 +142,54 @@ val someFlow = flow {  }
   .flowOnUnconfined()
 ```
 
+## DefaultDispatcherProvider
+
+The simplest way to get up and running with Dispatch. All library access to a
+[CoroutineContext's](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/) [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html) filters through a single extension
+property:
+
+``` kotlin
+public val CoroutineContext.dispatcherProvider: DispatcherProvider
+  get() = get(DispatcherProvider) ?: DefaultDispatcherProvider.get() 
+```
+
+If the receiver does not have a `DispatcherProvider`, the value from [DefaultDispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/index.html)
+will be returned. In practice, this brings at least two benefits:
+
+### Out-of-box default functionality
+
+Calls such as `launchIO { ... }`or `withMain { ... }` are safe to use (guaranteed to have a
+`DispatcherProvider`) regardless of the source of the `CoroutineContext` or [CoroutineScope](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html) and
+without any additional configuration. By default, they will access the corresponding
+[CoroutineDispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) from the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.
+
+### Easy global dispatcher overrides
+
+`DefaultDispatcherProvider` has similar
+[set](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/set.html)/[reset](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/set.html) functionality to the
+[Dispatchers.setMain](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/kotlinx.coroutines.-dispatchers/set-main.html)/[Dispatchers.resetMain](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/kotlinx.coroutines.-dispatchers/reset-main.html) extensions in `kotlinx-coroutines-test`, except it
+doesn't need to be confined to testing.
+
+You can use [DefaultDispatcherProvider.set](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/set.html) to globally set a custom implementation at the beginning
+of an application's lifecycle, but the most likely use-case is certainly in testing.
+
+``` kotlin
+@Test
+fun `my test`() = runBlocking {
+
+  DefaultDispatcherProvider.set(TestDispatcherProvider())
+  
+  withMain {
+    // this would normally crash without using Dispatchers.setMain
+    // but "main" here comes from the TestDispatcherProvider created above -- not Dispatchers.Main
+  }
+  
+  DefaultDispatcherProvider.reset() // from dispatch-test
+} 
+```
+
+See [dispatch-test](https://rbusarow.github.io/Dispatch/dispatch-test//index.html) and [TestDispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-dispatcher-provider/index.html)
+
 ## Minimum Gradle Config
 
 Add to your module's `build.gradle.kts`:
@@ -150,8 +201,8 @@ repositories {
 
 dependencies {
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
 }
 ```

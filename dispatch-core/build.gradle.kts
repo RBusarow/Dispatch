@@ -18,6 +18,7 @@ plugins {
   id(Plugins.kotlin)
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
+  id(Plugins.atomicFu)
 }
 
 dependencies {
@@ -37,6 +38,8 @@ dependencies {
   testImplementation(Libs.MockK.core)
 
   testImplementation(Libs.Kotlinx.Coroutines.test)
+
+  testImplementation(Libs.RickBusarow.Hermit.junit5)
 
   testImplementation(project(":dispatch-internal-test"))
 

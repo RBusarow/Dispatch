@@ -6,6 +6,10 @@ public final class dispatch/test/BuildersKt {
 	public static synthetic fun testProvided$default (Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)V
 }
 
+public final class dispatch/test/DefaultDispatcherProviderKt {
+	public static final fun reset (Ldispatch/core/DefaultDispatcherProvider;)V
+}
+
 public final class dispatch/test/TestDispatcherProvider : dispatch/core/DispatcherProvider {
 	public fun <init> ()V
 	public fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)V

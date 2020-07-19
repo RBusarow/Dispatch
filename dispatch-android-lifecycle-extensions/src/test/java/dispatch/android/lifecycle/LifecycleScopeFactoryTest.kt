@@ -64,7 +64,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
     val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
-    scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
 
     scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
 
@@ -94,7 +94,7 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
     val default = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
-    default.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    default.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
 
     default.coroutineContext[Job]!!.shouldBeSupervisorJob()
 
