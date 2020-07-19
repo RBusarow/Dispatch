@@ -53,7 +53,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 ## Contents
 
 * [Types](#types)
-* [Marker interfaces and factories](#marker-interfaces-and-factories)
+  * [Marker interfaces and factories](#marker-interfaces-and-factories)
 * [Extensions](#extensions)
   * [Launch](#launch)
   * [Async](#async)
@@ -71,7 +71,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 | [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html)         | Interface which provides the 5 standard [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) properties of the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) object, but which can be embedded in a [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/)
 | [DefaultDispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/index.html)  | Mutable singleton holder for an implementation of [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html). By default, it simply delegates to the corresponding properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.  Whenever a [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/) does not have a [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html), this singleton's value will be used by default.
 
-## Marker interfaces and factories
+### Marker interfaces and factories
 
 | **Name**                        | **Dispatcher**
 | -------------                   | --------------- |

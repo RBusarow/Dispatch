@@ -54,7 +54,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 <!--- TOC -->
 
 * [Types](#types)
-* [Marker interfaces and factories](#marker-interfaces-and-factories)
+  * [Marker interfaces and factories](#marker-interfaces-and-factories)
 * [Extensions](#extensions)
   * [Launch](#launch)
   * [Async](#async)
@@ -74,7 +74,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 | [DispatcherProvider]         | Interface which provides the 5 standard [CoroutineDispatcher] properties of the [Dispatchers] object, but which can be embedded in a [CoroutineContext]
 | [DefaultDispatcherProvider]  | Mutable singleton holder for an implementation of [DispatcherProvider]. By default, it simply delegates to the corresponding properties in the [Dispatchers] singleton.  Whenever a [CoroutineContext] does not have a [DispatcherProvider], this singleton's value will be used by default.
 
-## Marker interfaces and factories
+### Marker interfaces and factories
 
 | **Name**                        | **Dispatcher**
 | -------------                   | --------------- |
