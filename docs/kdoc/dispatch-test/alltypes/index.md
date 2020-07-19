@@ -6,6 +6,11 @@ Test helpers for the [dispatch-core](https://rbusarow.github.io/Dispatch/dispatc
 
 | Name | Summary |
 |---|---|
+| (extensions in package dispatch.test)
+
+##### [dispatch.core.DefaultDispatcherProvider](../dispatch.test/dispatch.core.-default-dispatcher-provider/index.md)
+
+
 |
 
 ##### [dispatch.test.TestDispatcherProvider](../dispatch.test/-test-dispatcher-provider/index.md)

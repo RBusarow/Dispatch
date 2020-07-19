@@ -27,8 +27,7 @@ Marker interface which designates a [CoroutineScope](https://kotlin.github.io/ko
 
 ##### [dispatch.core.DefaultDispatcherProvider](../dispatch.core/-default-dispatcher-provider/index.md)
 
-Default implementation of [DispatcherProvider](../dispatch.core/-dispatcher-provider/index.md) which simply delegates to the corresponding
-properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.
+Holder singleton for a [DispatcherProvider](../dispatch.core/-dispatcher-provider/index.md) instance.
 
 
 |

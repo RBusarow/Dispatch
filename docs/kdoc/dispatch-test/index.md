@@ -117,12 +117,12 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
 
   testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8")
 }
 ```
 

@@ -2,6 +2,9 @@
 
 ## Version 1.0.0-beta04
 
+### Features
+* [DefaultDispatcherProvider] is now a mutable singleton which allows for a custom global default.
+
 ### Bug fixes
 
 #### dispatch-test-junit5
@@ -18,6 +21,17 @@
   they are destroyed. ([#136](https://github.com/RBusarow/Dispatch/issues/136))
 * Fixed a race condition where multiple [LifecycleCoroutineScopes][LifecycleCoroutineScope] may be
   created for concurrent cache misses. ([#136](https://github.com/RBusarow/Dispatch/issues/136))
+
+### Deprecations
+* The [DefaultDispatcherProvider] class constructor has been changed to an object factory function
+  (`operator fun invoke(): DispatcherProvider`) and deprecated. This function will be removed prior
+  to the 1.0 release.
+
+### Breaking changes
+* [DefaultDispatcherProvider] has been changed from a `class` to an `object`, and its functionality
+  changed. It is now a singleton holder for a default `DispatcherProvider` instance. To create a
+  default `DispatcherProvider`, use the interface's companion object factory function
+  (`DispatcherProvider()`).
 
 ## Version 1.0.0-beta03
 
@@ -63,6 +77,7 @@
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->
+[DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/index.html
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html

@@ -2,7 +2,7 @@
 
 # IdlingDispatcherProvider
 
-`fun IdlingDispatcherProvider(delegate: `[`DispatcherProvider`](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-dispatcher-provider/index.md)` = DefaultDispatcherProvider()): `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L71)
+`fun IdlingDispatcherProvider(delegate: `[`DispatcherProvider`](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-dispatcher-provider/index.md)` = DefaultDispatcherProvider.get()): `[`IdlingDispatcherProvider`](-idling-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-espresso/src/main/java/dispatch/android/espresso/IdlingDispatcherProvider.kt#L71)
 
 [IdlingDispatcherProvider](-idling-dispatcher-provider/index.md) factory function, which creates an instance using an existing [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-dispatcher-provider/index.md).
 
@@ -10,7 +10,7 @@
 
 `delegate` - *optional* Use this [DispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-dispatcher-provider/index.md) to create a single [IdlingDispatcher](-idling-dispatcher/index.md)
 which is used as all properties for the [IdlingDispatcherProvider](-idling-dispatcher-provider/index.md).
-Uses a [DefaultDispatcherProvider](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-default-dispatcher-provider/index.md) if no instance provided.
+Uses [DefaultDispatcherProvider.get](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-default-dispatcher-provider/get.md) if no instance provided.
 
 **See Also**
 
