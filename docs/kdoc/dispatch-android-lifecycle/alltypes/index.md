@@ -8,6 +8,11 @@
 |---|---|
 | (extensions in package dispatch.android.lifecycle)
 
+##### [kotlinx.coroutines.CoroutineScope](../dispatch.android.lifecycle/kotlinx.coroutines.-coroutine-scope/index.md)
+
+
+| (extensions in package dispatch.android.lifecycle)
+
 ##### [androidx.lifecycle.Lifecycle](../dispatch.android.lifecycle/androidx.lifecycle.-lifecycle/index.md)
 
 
@@ -29,5 +34,12 @@ to provide custom [CoroutineContexts](https://kotlinlang.org/api/latest/jvm/stdl
 | (extensions in package dispatch.android.lifecycle)
 
 ##### [androidx.lifecycle.LifecycleOwner](../dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/index.md)
+
+
+|
+
+##### [dispatch.android.lifecycle.ViewLifecycleCoroutineScope](../dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/index.md)
+
+[LifecycleCoroutineScope](../dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.md) instance which is tied to a [Fragment's](https://developer.android.com/reference/androidx/androidx/fragment/app/Fragment.html) View [lifecycle](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html).
 
 

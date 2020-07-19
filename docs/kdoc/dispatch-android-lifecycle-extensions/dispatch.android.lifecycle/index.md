@@ -12,4 +12,5 @@
 
 | Name | Summary |
 |---|---|
+| [androidx.fragment.app.Fragment](androidx.fragment.app.-fragment/index.md) |  |
 | [androidx.lifecycle.LifecycleOwner](androidx.lifecycle.-lifecycle-owner/index.md) |  |

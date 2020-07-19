@@ -50,3 +50,13 @@ public final class dispatch/android/lifecycle/SuspendKt {
 	public static final fun onNextStart (Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public final class dispatch/android/lifecycle/ViewLifecycleCoroutineScope : dispatch/android/lifecycle/LifecycleCoroutineScope {
+	public final fun launchOnCreate (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/Job;
+	public final fun launchOnResume (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/Job;
+	public final fun launchOnStart (Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/Job;
+}
+
+public final class dispatch/android/lifecycle/ViewLifecycleCoroutineScopeKt {
+	public static final fun withViewLifecycle (Lkotlinx/coroutines/CoroutineScope;Landroidx/fragment/app/Fragment;Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/Job;
+}
+

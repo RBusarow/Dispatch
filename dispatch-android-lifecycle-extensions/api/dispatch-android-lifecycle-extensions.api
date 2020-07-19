@@ -9,6 +9,10 @@ public final class dispatch/android/lifecycle/LifecycleScopeKt {
 	public static final fun getLifecycleScope (Landroidx/lifecycle/LifecycleOwner;)Ldispatch/android/lifecycle/LifecycleCoroutineScope;
 }
 
+public final class dispatch/android/lifecycle/WithViewLifecycleScopeKt {
+	public static final fun withViewLifecycleScope (Landroidx/fragment/app/Fragment;Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/Job;
+}
+
 public final class dispatch/android/lifecycle/extensions/BuildConfig {
 	public static final field BUILD_TYPE Ljava/lang/String;
 	public static final field DEBUG Z

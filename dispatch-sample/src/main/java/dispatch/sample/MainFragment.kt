@@ -15,11 +15,13 @@
 
 package dispatch.sample
 
+import android.annotation.*
 import android.content.*
 import android.os.*
 import android.view.*
 import androidx.fragment.app.*
 import androidx.lifecycle.*
+import dispatch.android.lifecycle.*
 import dispatch.core.*
 import dispatch.sample.databinding.*
 import kotlinx.coroutines.*
@@ -37,6 +39,26 @@ class MainFragment : Fragment() {
     MainViewModel(DefaultCoroutineScope(), SomeRepository(IOCoroutineScope()))
   }
   val viewModel: MainViewModel by viewModels { factory }
+
+  @SuppressLint("SetTextI18n")
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    scope.withViewLifecycle(this) {
+
+      launchOnCreate {
+
+        var count = 0
+
+        while (true) {
+          @Suppress("MagicNumber")
+          delay(1000)
+          binding.tvMessage.text = "new message with a count of ${++count}"
+        }
+      }
+    }
+
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,

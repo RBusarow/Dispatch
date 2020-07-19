@@ -115,3 +115,9 @@ Its [Elements](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-c
 | Name | Summary |
 |---|---|
 | [invoke](invoke.md) | [MainImmediateCoroutineScope](https://rbusarow.github.io/Dispatch/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.md) which is tied to a [Lifecycle](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html).`operator fun invoke(lifecycle: `[`Lifecycle`](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html)`, coroutineScope: `[`CoroutineScope`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html)`): `[`LifecycleCoroutineScope`](./index.md) |
+
+### Inheritors
+
+| Name | Summary |
+|---|---|
+| [ViewLifecycleCoroutineScope](../-view-lifecycle-coroutine-scope/index.md) | [LifecycleCoroutineScope](./index.md) instance which is tied to a [Fragment's](https://developer.android.com/reference/androidx/androidx/fragment/app/Fragment.html) View [lifecycle](https://developer.android.com/reference/androidx/androidx/lifecycle/Lifecycle.html).`class ViewLifecycleCoroutineScope : `[`LifecycleCoroutineScope`](./index.md) |

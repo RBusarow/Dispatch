@@ -1,4 +1,5 @@
 $dokka.format:gfm
 $dokka.linkExtension:md
 $dokka.location:dispatch.android.lifecycle$lifecycleScope#androidx.lifecycle.LifecycleOwnerdispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/lifecycle-scope.md
+$dokka.location:dispatch.android.lifecycle$withViewLifecycleScope(androidx.fragment.app.Fragment, kotlin.Function1((dispatch.android.lifecycle.ViewLifecycleCoroutineScope, kotlin.Unit)))dispatch.android.lifecycle/androidx.fragment.app.-fragment/with-view-lifecycle-scope.md
 dispatch.android.lifecycle

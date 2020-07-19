@@ -16,6 +16,7 @@
 package dispatch.internal.test
 
 import dispatch.core.*
+import io.kotest.assertions.*
 import io.kotest.matchers.*
 import io.kotest.matchers.collections.*
 import kotlinx.coroutines.*
@@ -45,5 +46,15 @@ infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
   get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
   get(CoroutineName) shouldBe other[CoroutineName]
   get(DispatcherProvider) shouldBe other[DispatcherProvider]
+}
+
+infix fun CoroutineContext.shouldNotEqualFolded(other: CoroutineContext) {
+  shouldFail {
+    get(Job) shouldBeOrChildOf other[Job]
+    get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]
+    get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
+    get(CoroutineName) shouldBe other[CoroutineName]
+    get(DispatcherProvider) shouldBe other[DispatcherProvider]
+  }
 }
 
