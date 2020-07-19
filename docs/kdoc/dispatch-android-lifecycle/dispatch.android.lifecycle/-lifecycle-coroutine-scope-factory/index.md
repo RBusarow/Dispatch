@@ -9,11 +9,10 @@ to provide custom [CoroutineContexts](https://kotlinlang.org/api/latest/jvm/stdl
 
 ``` kotlin
 @Provides
-fun provideFactory(): LifecycleCoroutineScopeFactory =
-  LifecycleCoroutineScopeFactory {
-    // other elements are added automatically
-    MyCustomElement()
-  }
+fun provideFactory(): LifecycleCoroutineScopeFactory = LifecycleCoroutineScopeFactory {
+  // other elements are added automatically
+  MyCustomElement()
+}
 
 class MyFragment @Inject constructor(
   factory: LifecycleCoroutineScopeFactory

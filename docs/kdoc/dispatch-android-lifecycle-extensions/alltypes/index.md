@@ -8,6 +8,11 @@
 |---|---|
 | (extensions in package dispatch.android.lifecycle)
 
+##### [androidx.fragment.app.Fragment](../dispatch.android.lifecycle/androidx.fragment.app.-fragment/index.md)
+
+
+| (extensions in package dispatch.android.lifecycle)
+
 ##### [androidx.lifecycle.LifecycleOwner](../dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/index.md)
 
 
