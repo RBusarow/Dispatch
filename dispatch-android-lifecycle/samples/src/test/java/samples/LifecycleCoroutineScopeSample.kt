@@ -26,9 +26,7 @@ import kotlinx.coroutines.flow.*
 
 @CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeSample(
-  val testScope: TestProvidedCoroutineScope
-) {
+class LifecycleCoroutineScopeSample {
 
   @Sample
   fun lifecycleCoroutineScopeFromScopeSample() = runBlocking {

@@ -23,11 +23,10 @@ class LifecycleCoroutineScopeFactorySample {
   fun factorySample() {
 
     @Provides
-    fun provideFactory(): LifecycleCoroutineScopeFactory =
-      LifecycleCoroutineScopeFactory {
-        // other elements are added automatically
-        MyCustomElement()
-      }
+    fun provideFactory(): LifecycleCoroutineScopeFactory = LifecycleCoroutineScopeFactory {
+      // other elements are added automatically
+      MyCustomElement()
+    }
 
     class MyFragment @Inject constructor(
       factory: LifecycleCoroutineScopeFactory
