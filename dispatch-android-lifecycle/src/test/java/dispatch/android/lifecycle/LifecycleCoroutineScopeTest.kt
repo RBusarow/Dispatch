@@ -16,6 +16,7 @@
 package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
+import dispatch.core.*
 import dispatch.internal.test.android.*
 import dispatch.test.*
 import hermit.test.*
@@ -25,6 +26,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -104,6 +106,20 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
     }
 
     @Test
+    fun `block context should respect context parameter`() = runBlocking {
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+
+      var dispatcher: ContinuationInterceptor? = null
+
+      scope.launchOnCreate(testScope.ioDispatcher) {
+        dispatcher = coroutineContext[ContinuationInterceptor]
+      }
+
+      dispatcher shouldBe testScope.ioDispatcher
+    }
+
+    @Test
     fun `block should stop when screen is destroyed`() = runBlocking {
 
       val input = Channel<Int>()
@@ -166,6 +182,20 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
           executed shouldBe false
         }
+    }
+
+    @Test
+    fun `block context should respect context parameter`() = runBlocking {
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+
+      var dispatcher: ContinuationInterceptor? = null
+
+      scope.launchOnStart(testScope.ioDispatcher) {
+        dispatcher = coroutineContext[ContinuationInterceptor]
+      }
+
+      dispatcher shouldBe testScope.ioDispatcher
     }
 
     @Test
@@ -233,6 +263,20 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
           executed shouldBe false
         }
+    }
+
+    @Test
+    fun `block context should respect context parameter`() = runBlocking {
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+
+      var dispatcher: ContinuationInterceptor? = null
+
+      scope.launchOnResume(testScope.ioDispatcher) {
+        dispatcher = coroutineContext[ContinuationInterceptor]
+      }
+
+      dispatcher shouldBe testScope.ioDispatcher
     }
 
     @Test

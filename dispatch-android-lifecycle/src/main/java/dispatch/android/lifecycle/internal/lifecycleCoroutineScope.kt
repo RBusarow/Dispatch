@@ -24,20 +24,24 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import java.util.concurrent.atomic.*
+import kotlin.coroutines.*
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 internal fun LifecycleCoroutineScope.launchOn(
+  context: CoroutineContext,
   minimumState: Lifecycle.State,
   statePolicy: LifecycleCoroutineScope.MinimumStatePolicy,
   block: suspend CoroutineScope.() -> Unit
 ): Job = when (statePolicy) {
-  CANCEL        -> launch { lifecycle.onNext(minimumState, block) }
-  RESTART_EVERY -> launchEvery(minimumState, block)
+  CANCEL        -> launch { lifecycle.onNext(context, minimumState, block) }
+  RESTART_EVERY -> launchEvery(context, minimumState, block)
 }
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 internal suspend fun <T> Lifecycle.onNext(
-  minimumState: Lifecycle.State, block: suspend CoroutineScope.() -> T
+  context: CoroutineContext,
+  minimumState: Lifecycle.State,
+  block: suspend CoroutineScope.() -> T
 ): T? {
 
   var result: T? = null
@@ -49,7 +53,11 @@ internal suspend fun <T> Lifecycle.onNext(
       .onEachLatest { stateIsHighEnough ->
         if (stateIsHighEnough) {
           stateReached.compareAndSet(false, true)
-          coroutineScope { result = block() }
+          coroutineScope {
+            withContext(context + coroutineContext[Job]!!) {
+              result = block()
+            }
+          }
           throw FlowCancellationException()
         }
       }
@@ -65,7 +73,9 @@ internal suspend fun <T> Lifecycle.onNext(
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 internal fun LifecycleCoroutineScope.launchEvery(
-  minimumState: Lifecycle.State, block: suspend CoroutineScope.() -> Unit
+  context: CoroutineContext,
+  minimumState: Lifecycle.State,
+  block: suspend CoroutineScope.() -> Unit
 ): Job = lifecycle.eventFlow(minimumState)
   // Respond to every change in the Flow, cancelling execution of the previous onEach if it hasn't already finished.
   // This is responsible for cancelling Jobs when a Lifecycle.State dips below the threshold,
@@ -76,7 +86,9 @@ internal fun LifecycleCoroutineScope.launchEvery(
       // Create a CoroutineScope which is tied to the receiver LifecycleCoroutineScope.
       // This new CoroutineScope will be automatically cancelled when the parent scope is cancelled,
       // or when onEachLatest executes for a new value.
-      coroutineScope { block() }
+      coroutineScope {
+        withContext(context + coroutineContext[Job]!!) { block() }
+      }
     }
   }
   // Use the receiver LifecycleCoroutineScope's Job, but ensure that this coroutine is launch immediately from Main.

@@ -35,21 +35,27 @@ class ViewLifecycleCoroutineScope internal constructor(
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
-  fun <T> Flow<T>.launchOnCreate() = launchOnCreate(MinimumStatePolicy.RESTART_EVERY) { collect() }
+  fun <T> Flow<T>.launchOnCreate() = launchOnCreate(
+    minimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
+  ) { collect() }
 
   /**
    * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches [STARTED][androidx.lifecycle.Lifecycle.State.STARTED], create a new coroutine and collect this [Flow].
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
-  fun <T> Flow<T>.launchOnStart() = launchOnStart(MinimumStatePolicy.RESTART_EVERY) { collect() }
+  fun <T> Flow<T>.launchOnStart() = launchOnStart(
+    minimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
+  ) { collect() }
 
   /**
    * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches [RESUMED][androidx.lifecycle.Lifecycle.State.RESUMED], create a new coroutine and collect this [Flow].
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
-  fun <T> Flow<T>.launchOnResume() = launchOnResume(MinimumStatePolicy.RESTART_EVERY) { collect() }
+  fun <T> Flow<T>.launchOnResume() = launchOnResume(
+    minimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
+  ) { collect() }
 }
 
 /**
