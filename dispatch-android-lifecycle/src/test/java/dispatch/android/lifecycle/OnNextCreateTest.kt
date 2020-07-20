@@ -16,6 +16,7 @@
 package  dispatch.android.lifecycle
 
 import androidx.lifecycle.*
+import dispatch.core.*
 import dispatch.internal.test.*
 import dispatch.test.*
 import io.kotest.matchers.*
@@ -24,6 +25,7 @@ import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.*
 import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -141,6 +143,20 @@ class OnNextCreateTest : BaseTest() {
 
       resultDeferred.await() shouldBe null
     }
+
+    @Test
+    fun `block context should respect context parameter`() = testProvided {
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+
+      var dispatcher: ContinuationInterceptor? = null
+
+      lifecycle.onNextCreate(ioDispatcher) {
+        dispatcher = coroutineContext[ContinuationInterceptor]
+      }
+
+      dispatcher shouldBe ioDispatcher
+    }
   }
 
   @Nested
@@ -153,7 +169,7 @@ class OnNextCreateTest : BaseTest() {
 
       var executed = false
 
-      launch { lifecycle.onNextCreate { executed = true } }
+      launch { lifecycleOwner.onNextCreate { executed = true } }
 
       executed shouldBe true
     }
@@ -165,7 +181,7 @@ class OnNextCreateTest : BaseTest() {
 
       var executed = false
 
-      val job = launch { lifecycle.onNextCreate { executed = true } }
+      val job = launch { lifecycleOwner.onNextCreate { executed = true } }
 
       executed shouldBe false
 
@@ -182,7 +198,7 @@ class OnNextCreateTest : BaseTest() {
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
       launch {
-        lifecycle.onNextCreate {
+        lifecycleOwner.onNextCreate {
           input.consumeAsFlow()
             .onCompletion { completed = true }
             .collect { output.add(it) }
@@ -204,7 +220,7 @@ class OnNextCreateTest : BaseTest() {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      lifecycle.onNextCreate { expect(1) }
+      lifecycleOwner.onNextCreate { expect(1) }
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
@@ -220,7 +236,7 @@ class OnNextCreateTest : BaseTest() {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      val result = lifecycle.onNextCreate { true }
+      val result = lifecycleOwner.onNextCreate { true }
 
       result shouldBe true
     }
@@ -233,7 +249,7 @@ class OnNextCreateTest : BaseTest() {
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
       val resultDeferred = async {
-        lifecycle.onNextCreate {
+        lifecycleOwner.onNextCreate {
           lock.withLock {
             // unreachable
             true
@@ -244,6 +260,20 @@ class OnNextCreateTest : BaseTest() {
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
       resultDeferred.await() shouldBe null
+    }
+
+    @Test
+    fun `block context should respect context parameter`() = testProvided {
+
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+
+      var dispatcher: ContinuationInterceptor? = null
+
+      lifecycleOwner.onNextCreate(ioDispatcher) {
+        dispatcher = coroutineContext[ContinuationInterceptor]
+      }
+
+      dispatcher shouldBe ioDispatcher
     }
   }
 }
