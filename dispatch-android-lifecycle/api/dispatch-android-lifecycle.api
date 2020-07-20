@@ -13,12 +13,12 @@ public class dispatch/android/lifecycle/LifecycleCoroutineScope : dispatch/core/
 	public synthetic fun <init> (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun getCoroutineContext ()Lkotlin/coroutines/CoroutineContext;
 	public final fun getLifecycle ()Landroidx/lifecycle/Lifecycle;
-	public final fun launchOnCreate (Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
-	public static synthetic fun launchOnCreate$default (Ldispatch/android/lifecycle/LifecycleCoroutineScope;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
-	public final fun launchOnResume (Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
-	public static synthetic fun launchOnResume$default (Ldispatch/android/lifecycle/LifecycleCoroutineScope;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
-	public final fun launchOnStart (Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
-	public static synthetic fun launchOnStart$default (Ldispatch/android/lifecycle/LifecycleCoroutineScope;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public final fun launchOnCreate (Lkotlin/coroutines/CoroutineContext;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchOnCreate$default (Ldispatch/android/lifecycle/LifecycleCoroutineScope;Lkotlin/coroutines/CoroutineContext;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public final fun launchOnResume (Lkotlin/coroutines/CoroutineContext;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchOnResume$default (Ldispatch/android/lifecycle/LifecycleCoroutineScope;Lkotlin/coroutines/CoroutineContext;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public final fun launchOnStart (Lkotlin/coroutines/CoroutineContext;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/Job;
+	public static synthetic fun launchOnStart$default (Ldispatch/android/lifecycle/LifecycleCoroutineScope;Lkotlin/coroutines/CoroutineContext;Ldispatch/android/lifecycle/LifecycleCoroutineScope$MinimumStatePolicy;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
 }
 
 public final class dispatch/android/lifecycle/LifecycleCoroutineScope$Companion {
@@ -42,12 +42,18 @@ public final class dispatch/android/lifecycle/LifecycleCoroutineScopeKt {
 }
 
 public final class dispatch/android/lifecycle/SuspendKt {
-	public static final fun onNextCreate (Landroidx/lifecycle/Lifecycle;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun onNextCreate (Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun onNextResume (Landroidx/lifecycle/Lifecycle;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun onNextResume (Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun onNextStart (Landroidx/lifecycle/Lifecycle;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun onNextStart (Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun onNextCreate (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun onNextCreate (Landroidx/lifecycle/LifecycleOwner;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun onNextCreate$default (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun onNextCreate$default (Landroidx/lifecycle/LifecycleOwner;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun onNextResume (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun onNextResume (Landroidx/lifecycle/LifecycleOwner;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun onNextResume$default (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun onNextResume$default (Landroidx/lifecycle/LifecycleOwner;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun onNextStart (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun onNextStart (Landroidx/lifecycle/LifecycleOwner;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun onNextStart$default (Landroidx/lifecycle/Lifecycle;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun onNextStart$default (Landroidx/lifecycle/LifecycleOwner;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
 public final class dispatch/android/lifecycle/ViewLifecycleCoroutineScope : dispatch/android/lifecycle/LifecycleCoroutineScope {

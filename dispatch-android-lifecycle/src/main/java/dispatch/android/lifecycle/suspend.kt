@@ -18,6 +18,7 @@ package dispatch.android.lifecycle
 import androidx.lifecycle.*
 import dispatch.android.lifecycle.internal.*
 import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 /**
  * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
@@ -25,11 +26,13 @@ import kotlinx.coroutines.*
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnCreate] for repeating behavior.
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
  */
 suspend fun <T> LifecycleOwner.onNextCreate(
+  context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T? = lifecycle.onNext(Lifecycle.State.CREATED, block)
+): T? = lifecycle.onNext(context, Lifecycle.State.CREATED, block)
 
 /**
  * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
@@ -37,11 +40,13 @@ suspend fun <T> LifecycleOwner.onNextCreate(
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnCreate] for repeating behavior.
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextCreateSample
  */
 suspend fun <T> Lifecycle.onNextCreate(
+  context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T? = onNext(Lifecycle.State.CREATED, block)
+): T? = onNext(context, Lifecycle.State.CREATED, block)
 
 /**
  * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
@@ -49,11 +54,13 @@ suspend fun <T> Lifecycle.onNextCreate(
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnStart] for repeating behavior.
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
  */
 suspend fun <T> LifecycleOwner.onNextStart(
+  context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T? = lifecycle.onNext(Lifecycle.State.STARTED, block)
+): T? = lifecycle.onNext(context, Lifecycle.State.STARTED, block)
 
 /**
  * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
@@ -61,11 +68,13 @@ suspend fun <T> LifecycleOwner.onNextStart(
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnStart] for repeating behavior.
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextStartSample
  */
 suspend fun <T> Lifecycle.onNextStart(
+  context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T? = onNext(Lifecycle.State.STARTED, block)
+): T? = onNext(context, Lifecycle.State.STARTED, block)
 
 /**
  * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
@@ -73,11 +82,13 @@ suspend fun <T> Lifecycle.onNextStart(
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnResume] for repeating behavior.
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
  * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
  */
 suspend fun <T> LifecycleOwner.onNextResume(
+  context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T? = lifecycle.onNext(Lifecycle.State.RESUMED, block)
+): T? = lifecycle.onNext(context, Lifecycle.State.RESUMED, block)
 
 /**
  * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
@@ -85,9 +96,11 @@ suspend fun <T> LifecycleOwner.onNextResume(
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
  * @see [LifecycleCoroutineScope.launchOnResume] for repeating behavior.
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
  * @sample samples.LifecycleSuspendSample.lifecycleOnNextResumeSample
  */
 suspend fun <T> Lifecycle.onNextResume(
+  context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
-): T? = onNext(Lifecycle.State.RESUMED, block)
+): T? = onNext(context, Lifecycle.State.RESUMED, block)
 
