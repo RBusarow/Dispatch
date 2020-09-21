@@ -31,9 +31,7 @@ dependencies {
 
   compileOnly(gradleApi())
 
-//  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9") // update Dependencies.kt as well
   implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.4.10") // update Dependencies.kt as well
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10") // update Dependencies.kt as well
   implementation("com.android.tools.build:gradle:4.0.0") // update Dependencies.kt as well
-//  implementation("com.squareup:kotlinpoet:1.6.0") // update Dependencies.kt as well
 }
