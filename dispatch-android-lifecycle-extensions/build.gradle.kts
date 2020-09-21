@@ -45,10 +45,9 @@ android {
 
 dependencies {
 
+  implementation(Libs.AndroidX.Fragment.core)
   implementation(Libs.AndroidX.Lifecycle.common)
   testImplementation(Libs.AndroidX.Lifecycle.runtime)
-
-  implementation(Libs.JakeWharton.timber)
 
   implementation(Libs.Kotlin.stdlib)
 
@@ -57,15 +56,22 @@ dependencies {
 
   api(project(":dispatch-android-lifecycle"))
   api(project(":dispatch-core"))
+  testImplementation(project(":dispatch-test-junit4"))
   testImplementation(project(":dispatch-test-junit5"))
   testImplementation(project(":dispatch-internal-test"))
+  testImplementation(project(":dispatch-internal-test-android"))
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
   testImplementation(Libs.AndroidX.Test.runner)
   testImplementation(Libs.AndroidX.Test.Espresso.core)
+  testImplementation(Libs.AndroidX.Test.Arch.core)
+  testImplementation(Libs.Robolectric.core)
+
+  testImplementation(Libs.RickBusarow.Hermit.junit5)
 }

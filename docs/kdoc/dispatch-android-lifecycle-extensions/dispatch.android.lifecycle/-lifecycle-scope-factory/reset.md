@@ -2,7 +2,7 @@
 
 # reset
 
-`fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle-extensions/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L57)
+`fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-android-lifecycle-extensions/src/main/java/dispatch/android/lifecycle/LifecycleScopeFactory.kt#L59)
 
 Immediately resets the factory function to its default.
 
@@ -11,7 +11,10 @@ class MyEspressoTest {
 
   @Before
   fun setUp() {
-    LifecycleScopeFactory.set { MainImmediateIdlingCoroutineScope() }
+
+    val dispatcherProvider = DispatcherProvider()
+
+    LifecycleScopeFactory.set { SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate }
   }
 
   @After

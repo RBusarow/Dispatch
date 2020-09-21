@@ -2,11 +2,36 @@
 
 ## Version 1.0.0-beta04
 
+### Features
+* [DefaultDispatcherProvider] is now a mutable singleton which allows for a custom global default.
+
 ### Bug fixes
 
+#### dispatch-test-junit5
 * [CoroutineTestExtension] will now properly call `Dispatchers.setMain(...)` when injecting a
   CoroutineScope into a function or when not injecting at all.
   ([#130](https://github.com/RBusarow/Dispatch/issues/130))
+
+#### dispatch-android-lifecycle
+* [LifecycleCoroutineScope] will now be automatically cancelled when the associated [Lifecycle][Android Lifecycle] drops to the [Destroyed][Android Lifecycle] state.
+  ([#135](https://github.com/RBusarow/Dispatch/issues/135))
+
+#### dispatch-android-lifecycle-extensions
+* Cached [LifecycleCoroutineScopes][LifecycleCoroutineScope] will now be removed from the cache when
+  they are destroyed. ([#136](https://github.com/RBusarow/Dispatch/issues/136))
+* Fixed a race condition where multiple [LifecycleCoroutineScopes][LifecycleCoroutineScope] may be
+  created for concurrent cache misses. ([#136](https://github.com/RBusarow/Dispatch/issues/136))
+
+### Deprecations
+* The [DefaultDispatcherProvider] class constructor has been changed to an object factory function
+  (`operator fun invoke(): DispatcherProvider`) and deprecated. This function will be removed prior
+  to the 1.0 release.
+
+### Breaking changes
+* [DefaultDispatcherProvider] has been changed from a `class` to an `object`, and its functionality
+  changed. It is now a singleton holder for a default `DispatcherProvider` instance. To create a
+  default `DispatcherProvider`, use the interface's companion object factory function
+  (`DispatcherProvider()`).
 
 ## Version 1.0.0-beta03
 
@@ -52,6 +77,7 @@
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->
+[DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-dispatcher-provider/index.html
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html
@@ -64,6 +90,7 @@
 <!--- INDEX  -->
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
+[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.html
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
 [lifecycleScope]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-extensions//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/lifecycle-scope.html
@@ -72,6 +99,7 @@
 [viewModelScope]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.viewmodel/-coroutine-view-model/view-model-scope.html
 <!--- END -->
 
+[Android Lifecycle]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.html
 [androidx-lifecycleScope]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44
 [Detekt]: https://github.com/detekt/detekt
 [dispatch-android-espresso]: https://rbusarow.github.io/Dispatch/android-espresso//index.html

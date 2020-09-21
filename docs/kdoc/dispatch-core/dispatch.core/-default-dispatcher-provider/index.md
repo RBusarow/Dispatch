@@ -2,25 +2,27 @@
 
 # DefaultDispatcherProvider
 
-`class DefaultDispatcherProvider : `[`DispatcherProvider`](../-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-core/src/main/java/dispatch/core/DispatcherProvider.kt#L101)
+`object DefaultDispatcherProvider` [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-core/src/main/java/dispatch/core/DefaultDispatcherProvider.kt#L30)
 
-Default implementation of [DispatcherProvider](../-dispatcher-provider/index.md) which simply delegates to the corresponding
-properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.
+Holder singleton for a [DispatcherProvider](../-dispatcher-provider/index.md) instance.
 
-This should be suitable for most production code.
+If [CoroutineScope.dispatcherProvider](../kotlinx.coroutines.-coroutine-scope/dispatcher-provider.md) or [CoroutineContext.dispatcherProvider](../kotlinx.coroutines.-coroutine-scope/dispatcher-provider.md) is referenced
+in a [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html) which does not have one,
+it will use a default defined by this object.
 
-### Constructors
+``` kotlin
+val custom = CustomDispatcherProvider()
+DefaultDispatcherProvider.set(custom)
+
+val scope = MainImmediateCoroutineScope()
+
+scope.mainImmediateDispatcher shouldBe custom.mainImmediate
+DefaultDispatcherProvider.get().mainImmediate shouldBe custom.mainImmediate
+```
+
+### Functions
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Default implementation of [DispatcherProvider](../-dispatcher-provider/index.md) which simply delegates to the corresponding properties in the [Dispatchers](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html) singleton.`DefaultDispatcherProvider()` |
-
-### Properties
-
-| Name | Summary |
-|---|---|
-| [default](default.md) | [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) generally intended for cpu-bound tasks.`val default: `[`CoroutineDispatcher`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) |
-| [io](io.md) | [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) generally intended for blocking I/O tasks.`val io: `[`CoroutineDispatcher`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) |
-| [main](main.md) | [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) which is confined to the "main" thread.`val main: `[`CoroutineDispatcher`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) |
-| [mainImmediate](main-immediate.md) | [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) which is confined to the "main" thread with immediate dispatch.`val mainImmediate: `[`CoroutineDispatcher`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) |
-| [unconfined](unconfined.md) | [CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) which is unconfined.`val unconfined: `[`CoroutineDispatcher`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html) |
+| [get](get.md) | Returns the current configured default [DispatcherProvider](../-dispatcher-provider/index.md)`fun get(): `[`DispatcherProvider`](../-dispatcher-provider/index.md) |
+| [set](set.md) | Atomically sets a default [DispatcherProvider](../-dispatcher-provider/index.md) instance.`fun set(value: `[`DispatcherProvider`](../-dispatcher-provider/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

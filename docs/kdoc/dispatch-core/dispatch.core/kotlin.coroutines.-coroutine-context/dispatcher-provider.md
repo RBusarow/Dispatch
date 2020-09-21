@@ -2,10 +2,10 @@
 
 # dispatcherProvider
 
-`val `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`.dispatcherProvider: `[`DispatcherProvider`](../-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-core/src/main/java/dispatch/core/CoroutineScopeExt.kt#L90)
+`val `[`CoroutineContext`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html)`.dispatcherProvider: `[`DispatcherProvider`](../-dispatcher-provider/index.md) [(source)](https://github.com/RBusarow/Dispatch/tree/master/dispatch-core/src/main/java/dispatch/core/CoroutineScopeExt.kt#L102)
 
 Extracts the [DispatcherProvider](../-dispatcher-provider/index.md) out of the [CoroutineContext](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html),
-or returns a new instance of a [DefaultDispatcherProvider](../-default-dispatcher-provider/index.md) if the `CoroutineContext`
+or returns a default from [DefaultDispatcherProvider.get](../-default-dispatcher-provider/get.md) if the `CoroutineContext`
 does not have one specified.
 
 Note that `CoroutineContext` is immutable, so if a new `DefaultDispatcherProvider` is needed,

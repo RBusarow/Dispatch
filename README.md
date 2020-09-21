@@ -361,8 +361,8 @@ dependencies {
   */
 
   // core coroutines
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
   
   // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts  
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04") 
@@ -386,7 +386,7 @@ dependencies {
   */
    
   // core coroutines-test
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8")
   
   // you only need this if you don't have the -junit4 or -junit5 artifacts
   testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
@@ -480,9 +480,9 @@ limitations under the License.
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
 [LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.html
-[launchOnCreate]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-create.html
-[launchOnStart]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-start.html
-[launchOnResume]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-resume.html
+[launchOnCreate]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/launch-on-create.html
+[launchOnStart]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/launch-on-start.html
+[launchOnResume]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/launch-on-resume.html
 [onNextCreate]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-create.html
 [onNextStart]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-start.html
 [onNextResume]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-resume.html

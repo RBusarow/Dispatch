@@ -41,7 +41,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Default
    */
-  val default: CoroutineDispatcher
+  val default: CoroutineDispatcher get() = Dispatchers.Default
 
   /**
    * [CoroutineDispatcher] generally intended for blocking I/O tasks.
@@ -50,7 +50,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.IO
    */
-  val io: CoroutineDispatcher
+  val io: CoroutineDispatcher get() = Dispatchers.IO
 
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread.
@@ -59,7 +59,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Main
    */
-  val main: CoroutineDispatcher
+  val main: CoroutineDispatcher get() = Dispatchers.Main
 
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
@@ -68,7 +68,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see MainCoroutineDispatcher.immediate
    */
-  val mainImmediate: CoroutineDispatcher
+  val mainImmediate: CoroutineDispatcher get() = Dispatchers.Main.immediate
 
   /**
    * [CoroutineDispatcher] which is unconfined.
@@ -77,32 +77,21 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Unconfined
    */
-  val unconfined: CoroutineDispatcher
+  val unconfined: CoroutineDispatcher get() = Dispatchers.Unconfined
 
   /**
    * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the [CoroutineContext].
    */
-  companion object Key : CoroutineContext.Key<DispatcherProvider>
-}
+  companion object Key : CoroutineContext.Key<DispatcherProvider> {
 
-/**
- * Creates a default implementation of [DispatcherProvider].
- *
- * @see DefaultDispatcherProvider
- */
-public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()
-
-/**
- * Default implementation of [DispatcherProvider] which simply delegates to the corresponding
- * properties in the [Dispatchers] singleton.
- *
- * This should be suitable for most production code.
- */
-public class DefaultDispatcherProvider : DispatcherProvider {
-
-  override val default: CoroutineDispatcher = Dispatchers.Default
-  override val io: CoroutineDispatcher = Dispatchers.IO
-  override val main: CoroutineDispatcher get() = Dispatchers.Main
-  override val mainImmediate: CoroutineDispatcher get() = Dispatchers.Main.immediate
-  override val unconfined: CoroutineDispatcher = Dispatchers.Unconfined
+    /**
+     * Default implementation of [DispatcherProvider] which simply delegates to the corresponding
+     * properties in the [Dispatchers] singleton.
+     *
+     * This should be suitable for most production code.
+     *
+     * @see DefaultDispatcherProvider
+     */
+    operator fun invoke(): DispatcherProvider = DefaultDispatcherProvider.get()
+  }
 }

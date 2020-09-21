@@ -36,7 +36,7 @@ object Plugins {
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "0.10.1"
-  const val knit = "0.1.1"
+  const val knit = "0.1.4"
 
   const val compileSdk = 29
   const val minSdk = "21"
@@ -61,7 +61,7 @@ object BuildPlugins {
 
   const val binaryCompatibility =
     "org.jetbrains.kotlinx:binary-compatibility-validator:${Versions.binaryCompatibility}"
-  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.1"
+  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.3"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -137,7 +137,7 @@ object Libs {
   }
 
   object Detekt {
-    const val version = "1.9.1"
+    const val version = "1.10.0"
     const val api = "io.gitlab.arturbosch.detekt:detekt-api:$version"
     const val cli = "io.gitlab.arturbosch.detekt:detekt-cli:$version"
     const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
@@ -160,6 +160,14 @@ object Libs {
     const val jUnit5Vintage = "org.junit.vintage:junit-vintage-engine:$version"
   }
 
+  object Kotest {
+    private const val version = "4.1.1"
+    const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
+    const val consoleRunner = "io.kotest:kotest-runner-console-jvm:$version"
+    const val properties = "io.kotest:kotest-property-jvm:$version"
+    const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
+  }
+
   object Kotlin {
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
@@ -168,18 +176,10 @@ object Libs {
     const val test = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     const val testCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
   }
-
-  object Kotest {
-    private const val version = "4.0.5"
-    const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
-    const val properties = "io.kotest:kotest-property-jvm:$version"
-    const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
-  }
-
   object Kotlinx {
 
     object Coroutines {
-      private const val version = "1.3.7"
+      private const val version = "1.3.8"
       const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
       const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
       const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -217,6 +217,15 @@ object Libs {
         const val jUnit5 = "com.rickbusarow.dispatch:dispatch-test-junit5:${Versions.versionName}"
 
       }
+    }
+
+    object Hermit {
+      private const val version = "0.9.2"
+      const val core = "com.rickbusarow.hermit:hermit-core:$version"
+      const val junit4 = "com.rickbusarow.hermit:hermit-junit4:$version"
+      const val junit5 = "com.rickbusarow.hermit:hermit-junit5:$version"
+      const val mockk = "com.rickbusarow.hermit:hermit-mockk:$version"
+      const val coroutines = "com.rickbusarow.hermit:hermit-coroutines:$version"
     }
   }
 

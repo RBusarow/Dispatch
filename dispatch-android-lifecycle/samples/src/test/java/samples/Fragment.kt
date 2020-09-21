@@ -17,6 +17,7 @@
 package samples
 
 import androidx.lifecycle.*
+import dispatch.internal.test.android.*
 
 abstract class Fragment(
   initialState: Lifecycle.State = Lifecycle.State.INITIALIZED

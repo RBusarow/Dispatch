@@ -20,6 +20,7 @@ plugins {
 }
 
 dependencies {
+  implementation(Libs.Kotlin.reflect)
   implementation(Libs.Kotlin.stdlib)
 
   implementation(Libs.Kotlinx.Coroutines.core)
@@ -27,6 +28,7 @@ dependencies {
   implementation(Libs.JUnit.jUnit5)
   implementation(Libs.JUnit.jUnit5Vintage)
   implementation(Libs.Kotest.assertions)
+  implementation(Libs.Kotest.consoleRunner)
   implementation(Libs.Kotest.properties)
   implementation(Libs.Kotest.runner)
 
