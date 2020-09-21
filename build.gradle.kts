@@ -15,6 +15,7 @@
 
 @file:Suppress("MagicNumber")
 
+import formatting.sortDependencies
 import io.gitlab.arturbosch.detekt.*
 import kotlinx.knit.*
 import kotlinx.validation.*
@@ -330,6 +331,16 @@ val generateDependencyGraph by tasks.registering {
 
   doLast {
     createDependencyGraph()
+  }
+}
+
+val sortDependencies by tasks.registering {
+
+  description = "sort all dependencies in a gradle kts file"
+  group = "refactor"
+
+  doLast {
+    sortDependencies()
   }
 }
 

@@ -42,20 +42,19 @@ android {
 
 dependencies {
 
+  implementation(Libs.AndroidX.Test.Espresso.core)
+  implementation(Libs.AndroidX.Test.runner)
   implementation(Libs.Kotlin.stdlib)
-
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":dispatch-core"))
-
-  implementation(Libs.AndroidX.Test.runner)
-  implementation(Libs.AndroidX.Test.Espresso.core)
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.MockK.core)
   testImplementation(Libs.Robolectric.core)
+
   testImplementation(project(":dispatch-internal-test"))
 }

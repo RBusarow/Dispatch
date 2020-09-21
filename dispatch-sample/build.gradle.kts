@@ -43,6 +43,11 @@ android {
 
 dependencies {
 
+  androidTestImplementation(Libs.AndroidX.Test.Espresso.core)
+  androidTestImplementation(Libs.AndroidX.Test.runner)
+
+  androidTestImplementation(project(":dispatch-android-espresso"))
+
   implementation(Libs.AndroidX.activity)
   implementation(Libs.AndroidX.appcompat)
   implementation(Libs.AndroidX.constraintLayout)
@@ -50,18 +55,15 @@ dependencies {
   implementation(Libs.AndroidX.Fragment.ktx)
   implementation(Libs.AndroidX.Lifecycle.common)
   implementation(Libs.AndroidX.Lifecycle.extensions)
-
   implementation(Libs.JakeWharton.timber)
-
   implementation(Libs.Kotlin.stdlib)
-
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(project(":dispatch-core"))
   implementation(project(":dispatch-android-lifecycle"))
   implementation(project(":dispatch-android-lifecycle-extensions"))
   implementation(project(":dispatch-android-viewmodel"))
+  implementation(project(":dispatch-core"))
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.JUnit.jUnit5)
@@ -72,9 +74,4 @@ dependencies {
 
   testImplementation(project(":dispatch-test-junit4"))
   testImplementation(project(":dispatch-test-junit5"))
-
-  androidTestImplementation(project(":dispatch-android-espresso"))
-
-  androidTestImplementation(Libs.AndroidX.Test.runner)
-  androidTestImplementation(Libs.AndroidX.Test.Espresso.core)
 }
