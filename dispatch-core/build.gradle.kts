@@ -22,22 +22,18 @@ plugins {
 }
 
 dependencies {
-  implementation(Libs.Kotlin.stdlib)
 
+  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.core)
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
-
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
-
-  testImplementation(Libs.MockK.core)
-
   testImplementation(Libs.Kotlinx.Coroutines.test)
-
+  testImplementation(Libs.MockK.core)
   testImplementation(Libs.RickBusarow.Hermit.junit5)
 
   testImplementation(project(":dispatch-internal-test"))

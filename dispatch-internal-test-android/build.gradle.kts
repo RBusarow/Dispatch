@@ -41,6 +41,7 @@ android {
   }
 }
 dependencies {
+
   implementation(Libs.AndroidX.Fragment.core)
   implementation(Libs.AndroidX.Lifecycle.common)
   implementation(Libs.AndroidX.Lifecycle.runtime)

@@ -20,22 +20,18 @@ plugins {
 }
 
 dependencies {
-  implementation(Libs.Kotlin.reflect)
-  implementation(Libs.Kotlin.stdlib)
-
-  implementation(Libs.Kotlinx.Coroutines.core)
+  api(project(":dispatch-core"))
 
   implementation(Libs.JUnit.jUnit5)
   implementation(Libs.JUnit.jUnit5Vintage)
   implementation(Libs.Kotest.assertions)
   implementation(Libs.Kotest.properties)
   implementation(Libs.Kotest.runner)
-
+  implementation(Libs.Kotlin.reflect)
+  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlin.test)
   implementation(Libs.Kotlin.testCommon)
-
+  implementation(Libs.Kotlinx.Coroutines.core)
   implementation(Libs.Kotlinx.Coroutines.test)
-
-  api(project(":dispatch-core"))
 
 }

@@ -45,37 +45,30 @@ android {
 
 dependencies {
 
+  api(project(":dispatch-core"))
+
   implementation(Libs.AndroidX.Fragment.core)
   implementation(Libs.AndroidX.Lifecycle.common)
   implementation(Libs.AndroidX.Lifecycle.liveData)
-
   implementation(Libs.Kotlin.stdlib)
-
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  api(project(":dispatch-core"))
-  testImplementation(project(":dispatch-test-junit4"))
-  testImplementation(project(":dispatch-test-junit5"))
-  testImplementation(project(":dispatch-internal-test"))
-  testImplementation(project(":dispatch-internal-test-android"))
-
   testImplementation(Libs.AndroidX.Lifecycle.runtime)
-
   testImplementation(Libs.AndroidX.Test.Arch.core)
   testImplementation(Libs.AndroidX.Test.Espresso.core)
   testImplementation(Libs.AndroidX.Test.runner)
-
   testImplementation(Libs.JUnit.jUnit5)
-
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
-
   testImplementation(Libs.Kotlinx.Coroutines.test)
-
   testImplementation(Libs.RickBusarow.Hermit.coroutines)
   testImplementation(Libs.RickBusarow.Hermit.junit5)
-
   testImplementation(Libs.Robolectric.core)
+
+  testImplementation(project(":dispatch-internal-test"))
+  testImplementation(project(":dispatch-internal-test-android"))
+  testImplementation(project(":dispatch-test-junit4"))
+  testImplementation(project(":dispatch-test-junit5"))
 }

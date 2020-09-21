@@ -39,31 +39,27 @@ android {
 }
 
 dependencies {
-  implementation(Libs.Kotlin.stdlib)
 
+  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(project(":dispatch-core"))
   implementation(project(":dispatch-android-espresso"))
   implementation(project(":dispatch-android-lifecycle"))
   implementation(project(":dispatch-android-lifecycle-extensions"))
   implementation(project(":dispatch-android-viewmodel"))
+  implementation(project(":dispatch-core"))
 
-  testImplementation(project(":dispatch-internal-test"))
-
+  testImplementation(Libs.AndroidX.Test.Espresso.core)
+  testImplementation(Libs.AndroidX.Test.runner)
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
-
-  testImplementation(Libs.AndroidX.Test.runner)
-  testImplementation(Libs.AndroidX.Test.Espresso.core)
-
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
-
+  testImplementation(Libs.Kotlinx.Coroutines.test)
   testImplementation(Libs.Robolectric.core)
 
-  testImplementation(Libs.Kotlinx.Coroutines.test)
+  testImplementation(project(":dispatch-internal-test"))
 
 }
