@@ -172,7 +172,6 @@ fun File.updateLibraryVersions(): File {
         Libs.RickBusarow.Hermit.mockk.toDependencyMatcher(),
         Libs.RickBusarow.Hermit.coroutines.toDependencyMatcher(),
         Libs.Kotest.assertions.toDependencyMatcher(),
-        Libs.Kotest.consoleRunner.toDependencyMatcher(),
         Libs.Kotest.properties.toDependencyMatcher(),
         Libs.Kotest.runner.toDependencyMatcher()
       )

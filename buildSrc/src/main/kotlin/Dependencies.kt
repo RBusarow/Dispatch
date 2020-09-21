@@ -46,7 +46,7 @@ object Versions {
   const val benManes = "0.27.0"
   const val gradleWrapper = "4.0.0"
   const val dagger = "2.25.2"
-  const val kotlin = "1.3.70"
+  const val kotlin = "1.4.10"
   const val mavenPublish = "0.9.0"
 
   const val versionName = "1.0.0-beta04"
@@ -161,9 +161,8 @@ object Libs {
   }
 
   object Kotest {
-    private const val version = "4.1.1"
+    private const val version = "4.2.5"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
-    const val consoleRunner = "io.kotest:kotest-runner-console-jvm:$version"
     const val properties = "io.kotest:kotest-property-jvm:$version"
     const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
   }
@@ -179,7 +178,7 @@ object Libs {
   object Kotlinx {
 
     object Coroutines {
-      private const val version = "1.3.8"
+      private const val version = "1.3.9"
       const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
       const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
       const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"

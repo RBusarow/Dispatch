@@ -339,6 +339,7 @@ subprojects {
   configurations.all {
     resolutionStrategy {
       force(
+        Libs.Kotlin.reflect,
         // androidx is currently leaking coroutines 1.1.1 everywhere
         Libs.Kotlinx.Coroutines.core,
         Libs.Kotlinx.Coroutines.test,
