@@ -33,7 +33,6 @@ dependencies {
   implementation(Libs.JUnit.jUnit5)
   implementation(Libs.JUnit.jUnit5Vintage)
   testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
 

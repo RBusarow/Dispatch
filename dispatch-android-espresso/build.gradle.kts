@@ -54,7 +54,6 @@ dependencies {
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.MockK.core)
   testImplementation(Libs.Robolectric.core)
