@@ -229,6 +229,6 @@ object Libs {
   }
 
   object Robolectric {
-    const val core = "org.robolectric:robolectric:4.3.1"
+    const val core = "org.robolectric:robolectric:4.4"
   }
 }
