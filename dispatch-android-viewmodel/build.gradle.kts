@@ -49,8 +49,6 @@ dependencies {
   implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
 
-  implementation(project(":dispatch-core"))
-
   testImplementation(Libs.AndroidX.Test.Espresso.core)
   testImplementation(Libs.AndroidX.Test.runner)
   testImplementation(Libs.JUnit.jUnit5)
@@ -59,6 +57,7 @@ dependencies {
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
+  testImplementation(project(":dispatch-core"))
   testImplementation(project(":dispatch-internal-test"))
   testImplementation(project(":dispatch-test-junit5"))
 }
