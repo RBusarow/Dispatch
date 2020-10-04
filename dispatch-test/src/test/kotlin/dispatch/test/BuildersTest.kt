@@ -23,6 +23,7 @@ import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
 import kotlin.coroutines.*
 
+@Suppress("HardCodedDispatcher")
 @ExperimentalCoroutinesApi
 internal class BuildersTest {
 

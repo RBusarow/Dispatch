@@ -24,6 +24,11 @@ dependencies {
   implementation(Libs.Detekt.api)
   implementation(Libs.Kotlin.stdlib)
 
+  // detekt-test leaks transitive dependencies upon AssertJ and Spek
+  // https://github.com/detekt/detekt/issues/3082
+  testImplementation("org.assertj:assertj-core:3.17.2")
+  testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.13")
+
   testImplementation(Libs.Detekt.api)
   testImplementation(Libs.Detekt.test)
   testImplementation(Libs.JUnit.jUnit5Api)
