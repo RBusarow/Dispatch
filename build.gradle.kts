@@ -15,7 +15,7 @@
 
 @file:Suppress("MagicNumber")
 
-import formatting.sortDependencies
+import formatting.*
 import io.gitlab.arturbosch.detekt.*
 import kotlinx.knit.*
 import kotlinx.validation.*
@@ -34,6 +34,7 @@ buildscript {
     maven("https://dl.bintray.com/kotlin/kotlinx")
   }
   dependencies {
+
     classpath(BuildPlugins.androidGradlePlugin)
     classpath(BuildPlugins.atomicFu)
     classpath(BuildPlugins.benManesVersions)
@@ -46,6 +47,7 @@ buildscript {
 }
 
 plugins {
+  id(Plugins.dependencyAnalysis) version Versions.dependencyAnalysis
   id("io.gitlab.arturbosch.detekt") version Libs.Detekt.version
 }
 
@@ -282,6 +284,7 @@ detekt {
 }
 
 dependencies {
+
   detekt(Libs.Detekt.cli)
   detektPlugins(project(path = ":dispatch-detekt"))
 }
@@ -366,6 +369,14 @@ subprojects {
         Libs.RickBusarow.Dispatch.Test.jUnit4,
         Libs.RickBusarow.Dispatch.Test.jUnit5
       )
+    }
+  }
+}
+
+dependencyAnalysis {
+  issues {
+    all {
+      ignoreKtx(false) // default is false
     }
   }
 }

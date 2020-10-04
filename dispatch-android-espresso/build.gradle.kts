@@ -16,7 +16,6 @@
 plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinAndroidExtensions)
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -42,15 +41,15 @@ android {
 
 dependencies {
 
-  implementation(Libs.AndroidX.Test.Espresso.core)
-  implementation(Libs.AndroidX.Test.runner)
+  api(Libs.AndroidX.Test.Espresso.idlingResource)
+  api(Libs.JUnit.jUnit4)
+  api(Libs.Kotlinx.Coroutines.core)
+
+  api(project(":dispatch-core"))
+
   implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
-  implementation(Libs.Kotlinx.Coroutines.core)
 
-  implementation(project(":dispatch-core"))
-
-  testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.MockK.core)

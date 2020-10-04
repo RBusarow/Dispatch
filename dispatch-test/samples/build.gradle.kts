@@ -16,7 +16,6 @@
 import kotlinx.atomicfu.plugin.gradle.*
 
 plugins {
-  id(Plugins.javaLibrary)
   id(Plugins.kotlin)
 }
 
@@ -28,7 +27,6 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":dispatch-core"))
-  implementation(project(":dispatch-test"))
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
@@ -37,5 +35,7 @@ dependencies {
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
   testImplementation(Libs.Kotlinx.Coroutines.test)
+
+  testImplementation(project(":dispatch-test"))
 
 }

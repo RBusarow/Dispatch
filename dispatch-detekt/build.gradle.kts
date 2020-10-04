@@ -21,7 +21,9 @@ plugins {
 
 dependencies {
 
-  implementation(Libs.Detekt.api)
+  api(Libs.Detekt.api)
+  api(Libs.Kotlin.compiler)
+
   implementation(Libs.Kotlin.stdlib)
 
   testImplementation(Libs.Detekt.api)
