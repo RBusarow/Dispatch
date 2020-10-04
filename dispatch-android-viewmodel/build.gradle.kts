@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+  api(project(":dispatch-core"))
 
   api(Libs.AndroidX.Lifecycle.viewModel)
   api(Libs.Kotlinx.Coroutines.core)
