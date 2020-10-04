@@ -15,7 +15,6 @@
 
 plugins {
   id(Plugins.atomicFu)
-  id(Plugins.javaLibrary)
   id(Plugins.kotlin)
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
@@ -23,14 +22,15 @@ plugins {
 
 dependencies {
 
-  implementation(Libs.JUnit.jUnit4)
+  api(Libs.Kotlinx.Coroutines.core)
+  api(Libs.Kotlinx.Coroutines.test)
+
+  api(project(":dispatch-core"))
+
   implementation(Libs.JUnit.jUnit5)
+  implementation(Libs.JUnit.jUnit5Api)
   implementation(Libs.JUnit.jUnit5Vintage)
   implementation(Libs.Kotlin.stdlib)
-  implementation(Libs.Kotlinx.Coroutines.core)
-  implementation(Libs.Kotlinx.Coroutines.test)
-
-  implementation(project(":dispatch-core"))
 
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.properties)

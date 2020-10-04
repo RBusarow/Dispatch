@@ -16,7 +16,6 @@
 plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinAndroidExtensions)
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -43,10 +42,13 @@ android {
 dependencies {
   api(project(":dispatch-core"))
 
-  implementation(Libs.AndroidX.Lifecycle.viewModel)
+  api(Libs.AndroidX.Lifecycle.viewModel)
+  api(Libs.Kotlinx.Coroutines.core)
+  api(Libs.Kotlinx.Coroutines.coreJvm)
+
+  implementation(Libs.AndroidX.Lifecycle.viewModelKtx)
   implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
-  implementation(Libs.Kotlinx.Coroutines.core)
 
   testImplementation(Libs.AndroidX.Test.Espresso.core)
   testImplementation(Libs.AndroidX.Test.runner)
@@ -56,6 +58,7 @@ dependencies {
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
 
+  testImplementation(project(":dispatch-core"))
   testImplementation(project(":dispatch-internal-test"))
   testImplementation(project(":dispatch-test-junit5"))
 }

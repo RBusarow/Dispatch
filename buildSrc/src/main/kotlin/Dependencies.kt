@@ -21,6 +21,8 @@ object Plugins {
   const val atomicFu = "kotlinx-atomicfu"
   const val binaryCompatilibity = "binary-compatibility-validator"
 
+  const val dependencyAnalysis = "com.autonomousapps.dependency-analysis"
+
   const val dokka = "org.jetbrains.dokka"
   const val knit = "kotlinx-knit"
 
@@ -36,6 +38,7 @@ object Plugins {
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "0.10.1"
+  const val dependencyAnalysis = "0.59.0"
   const val knit = "0.1.4"
 
   const val compileSdk = 29
@@ -96,9 +99,12 @@ object Libs {
 
       const val common = "androidx.lifecycle:lifecycle-common:$version"
       const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
-      const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
-      const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
-      const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+      const val liveData = "androidx.lifecycle:lifecycle-livedata-core:$version"
+      const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+      const val runtime = "androidx.lifecycle:lifecycle-runtime:$version"
+      const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
+      const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:$version"
+      const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
 
     object Test {
@@ -121,6 +127,7 @@ object Libs {
 
         const val contrib = "androidx.test.espresso:espresso-contrib:$version"
         const val core = "androidx.test.espresso:espresso-core:$version"
+        const val idlingResource = "androidx.test.espresso:espresso-idling-resource:$version"
         const val intents = "androidx.test.espresso:espresso-intents:$version"
         const val web = "androidx.test.espresso:espresso-web:$version"
       }
@@ -167,11 +174,14 @@ object Libs {
   object Kotest {
     private const val version = "4.2.5"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
+    const val assertionsShared = "io.kotest:kotest-assertions-shared-jvm:$version"
+    const val commonJvm = "io.kotest:kotest-common-jvm:$version"
     const val properties = "io.kotest:kotest-property-jvm:$version"
     const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
   }
 
   object Kotlin {
+    const val compiler = "org.jetbrains.kotlin:kotlin-compiler-embeddable:${Versions.kotlin}"
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -179,11 +189,13 @@ object Libs {
     const val test = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     const val testCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
   }
+
   object Kotlinx {
 
     object Coroutines {
       private const val version = "1.3.9"
       const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+      const val coreJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$version"
       const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
       const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
