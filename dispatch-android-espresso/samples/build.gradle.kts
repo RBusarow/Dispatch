@@ -48,7 +48,6 @@ dependencies {
   testImplementation(Libs.AndroidX.Test.runner)
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlin.test)

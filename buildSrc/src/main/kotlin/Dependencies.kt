@@ -22,6 +22,7 @@ object Plugins {
   const val binaryCompatilibity = "binary-compatibility-validator"
 
   const val dependencyAnalysis = "com.autonomousapps.dependency-analysis"
+  const val detekt = "io.gitlab.arturbosch.detekt"
 
   const val dokka = "org.jetbrains.dokka"
   const val knit = "kotlinx-knit"
@@ -193,7 +194,6 @@ object Libs {
   object Kotlinx {
 
     object Coroutines {
-      private const val version = "1.3.8"
       private const val version = "1.3.9"
       const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
       const val coreJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$version"

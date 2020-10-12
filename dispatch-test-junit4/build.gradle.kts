@@ -33,7 +33,6 @@ dependencies {
   implementation(Libs.Kotlinx.Coroutines.coreJvm)
 
   testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlin.test)
