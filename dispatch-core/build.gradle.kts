@@ -29,12 +29,15 @@ dependencies {
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
+  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
   testImplementation(Libs.Kotlinx.Coroutines.test)
   testImplementation(Libs.MockK.core)
+  testImplementation(Libs.RickBusarow.Hermit.junit5)
+
   testImplementation(Libs.RickBusarow.Hermit.junit5)
 
   testImplementation(project(":dispatch-internal-test"))

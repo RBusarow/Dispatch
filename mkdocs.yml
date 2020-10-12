@@ -1,0 +1,75 @@
+site_name: Dispatch
+site_description: Quality of life coroutine utilities.
+site_author: 2020 Rick Busarow
+site_url: https://rbusarow.github.io/Dispatch/
+remote_branch: gh-pages
+docs_dir: './docs'
+
+# Repository
+repo_name: Dispatch
+repo_url: https://github.com/rbusarow/dispatch
+edit_uri: blob/main/docs/
+
+# Copyright
+copyright: 'Copyright &copy; 2020 Rick Busarow'
+
+theme:
+  icon:
+    repo: fontawesome/brands/github
+  name: material
+  palette:
+    scheme: slate
+    primary: blue
+    accent: blue
+  #  logo: 'images/logo.png'
+  features:
+    - search.highlight
+    #    - tabs
+    - instant
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rbusarow/dispatch
+
+nav:
+  - 'Intro': index.md
+  #  - 'Getting Started': getting-started.md
+  - 'Modules':
+      - 'core': dispatch-core.md
+      - 'detekt': dispatch-detekt.md
+      - 'test-core': dispatch-test.md
+      - 'test-junit4': dispatch-test-junit4.md
+      - 'test-junit5': dispatch-test-junit5.md
+      - 'android-espresso': dispatch-android-espresso.md
+      - 'android-lifecycle': dispatch-android-lifecycle.md
+      - 'android-lifecycle-extensions': dispatch-android-lifecycle-extensions.md
+      - 'android-viewmodel': dispatch-android-viewmodel.md
+  #  - 'Change Log':
+  - 'Change Log': CHANGELOG.md
+  - 'API':
+      - 'core': api/dispatch-core/dispatch.core/index.html
+      - 'detekt': api/dispatch-detekt/dispatch.detekt/index.html
+      - 'test-core': api/dispatch-test/dispatch.test/index.html
+      - 'test-junit4': api/dispatch-test-junit4/dispatch.test/index.html
+      - 'test-junit5': api/dispatch-test-junit5/dispatch.test/index.html
+      - 'android-espresso': api/dispatch-android-espresso/dispatch.android.espresso/index.html
+      - 'android-lifecycle': api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html
+      - 'android-lifecycle-extensions': api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html
+      - 'android-viewmodel': api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      use_pygments: true
+  - toc:
+      permalink: true
