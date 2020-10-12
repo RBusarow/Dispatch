@@ -49,6 +49,7 @@ plugins {
   id(Plugins.detekt) version Libs.Detekt.version
   kotlin("jvm")
   id(Plugins.dokka) version Versions.dokka
+  id(Plugins.taskTree) version Versions.taskTree
   base
 }
 
