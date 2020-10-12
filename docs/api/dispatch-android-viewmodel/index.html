@@ -1,0 +1,381 @@
+<!--
+  ~ Copyright (C) 2020 Rick Busarow
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+<head>
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1" name="viewport">
+    <title>dispatch-android-viewmodel</title>
+    <link href="../images/logo-icon.svg" rel="icon" type="image/svg">
+    <link href="../styles/style.css" rel="Stylesheet">
+    <script async="async" src="../scripts/navigationLoader.js" type="text/javascript"></script>
+    <script async="async" src="../scripts/platformContentHandler.js"
+            type="text/javascript"></script>
+    <script async="async" src="../scripts/sourceset_dependencies.js"
+            type="text/javascript"></script>
+    <script async="async" src="../scripts/clipboard.js" type="text/javascript"></script>
+    <link href="../styles/jetbrains-mono.css" rel="Stylesheet">
+    <script>var pathToRoot = "../";</script>
+</head>
+<body>
+<div id="container">
+    <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <div id="searchBar"></div>
+        <script src="../scripts/pages.js" type="text/javascript"></script>
+        <script src="../scripts/main.js" type="text/javascript"></script>
+        <div id="content" pageIds="////PointingToDeclaration/">
+            <div class="breadcrumbs"><a href="index.html">dispatch-android-viewmodel</a></div>
+            <div class="cover ">
+                <h1 class="cover"><a data-name="dispatch-android-viewmodel"></a><span>dispatch-android-viewmodel</span>
+                </h1>
+                <div class="platform-hinted UnderCoverText"
+                     data-platform-hinted="data-platform-hinted">
+                    <div class="content sourceset-depenent-content" data-active=""
+                         data-togglable=":dispatch-android-viewmodel:dokkaHtml/release"><p
+                            class="paragraph">
+                        <p class="paragraph">The artifact I hope you don't need, but if you're not
+                            doing dependency injection, you probably do.</p>
+                        <h2 class=""><a></a> Contents</h2>
+                        <p class="paragraph">&lt;!--- TOC --&gt;</p>
+                        <ul>
+                            <li><p class="paragraph">#examples</p></li>
+                            <li><p class="paragraph">#difference-from-androidx</p></li>
+                            <li><p class="paragraph">#custom-coroutinescope-factories</p></li>
+                            <li><p class="paragraph">#automatic-cancellation-in-oncleared</p></li>
+                            <li><p class="paragraph">#viewmodelscope-is-not-lifecyclescope</p></li>
+                            <li><p class="paragraph">#extending-viewmodel</p></li>
+                            <li><p class="paragraph">#minimum-gradle-config</p></li>
+                        </ul>
+                        <p class="paragraph">&lt;!--- END --&gt;</p>
+                        <h2 class=""><a></a> Examples</h2>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>import dispatch.android.*<br><br>// CoroutineViewModel is just a ViewModel with a lazy viewModelScope<br>class SomeViewModel : CoroutineViewModel() {<br>  // ...<br><br>  init {<br><br>    // auto-creates a MainImmediateCoroutineScope which is closed in onCleared()<br>    viewModelScope. //...<br><br>    // multiple invocations use the same instance<br>    viewModelScope.launch {  }<br><br>    // it works as a normal CoroutineScope (because it is)<br>    viewModelScope.launchMain {  }<br><br>  }<br>}<br><br>class SomeApplication : Application() {<br>  override fun onCreate() {<br>    super.onCreate()<br>    // A custom factory can be set to add elements to the CoroutineContext<br>    ViewModelScopeFactory.set { MainImmediateCoroutineScope() + SomeCustomElement() }<br>  }<br>}<br><br>class SomeViewModelTest {<br><br>  val viewModel = SomeViewModel()<br><br>  @Before<br>  fun setUp() {<br>    // This custom factory can be used to use custom scopes for testing<br>    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }<br>  }<br><br>  @After<br>  fun tearDown() {<br>    // The factory can also be reset to default<br>    ViewModelScopeFactory.reset()<br>  }<br><br>  @Test<br>  fun someTest() = runBlocking {<br>    // the AndroidX version is public, so it's public here as well.<br>    viewModel.viewModelScope.launch {  }<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Difference from AndroidX</h2>
+                        <p class="paragraph">This module is essentially a fork of <a
+                                href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42">androidx-lifecycle-viewmodel-ktx</a>
+                            — the library which gives us the <a
+                                    href="https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope">viewModelScope</a>
+                            property.</p>
+                        <p class="paragraph">It exists entirely so that we can have a settable
+                            factory. This gives us a lot more options for JVM or instrumented tests,
+                            with custom dispatchers or other custom <code>CoroutineContext</code>
+                            elements.</p>
+                        <h2 class=""><a></a> Custom CoroutineScope factories</h2>
+                        <p class="paragraph">The way <code>androidx-lifecycle-viewModel</code>
+                            constructs its <a
+                                    href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html">CoroutineScope</a>
+                            is
+                            <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42">hard-coded</a>,
+                            which eliminates the possibility of using a custom <a
+                                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/">CoroutineContext</a>
+                            such as a <a
+                                    href="https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html">DispatcherProvider</a>
+                            or
+                            <a href="https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html">IdlingDispatcher</a>.
+                            With
+                            <a href="https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//index.html">dispatch-android-lifecycle</a>,
+                            we can set a custom factory.</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>class SomeViewModelTest {<br><br>  @Before<br>  fun setUp() {<br>    // This custom factory can be used to use custom scopes for testing<br>    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }<br><br>    // it could also return a specific instance<br>    val someTestScope = TestProvidedCoroutineScope()<br>    ViewModelScopeFactory.set { someTestScope }<br>  }<br><br>  @After<br>  fun tearDown() {<br>    // The factory can also be reset to default<br>    ViewModelScopeFactory.reset()<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Automatic cancellation in onCleared()</h2>
+                        <p class="paragraph">Just like AndroidX, this version of <code>viewModelScope</code>
+                            is automatically cancelled in <code>ViewModel.onCleared()</code>.</p>
+                        <h2 class=""><a></a> viewModelScope is not lifecycleScope</h2>
+                        <p class="paragraph">It's important to remember that
+                            <code>onCleared()</code> is only called when a <code>ViewModel</code> is
+                            about to be destroyed -- when its associated <code>LifecycleOwner</code>(s)
+                            are all destroyed. This means that a <code>viewModelScope</code> is
+                            active while the <code>LifecycleOwner</code> is in the backstack.</p>
+                        <p class="paragraph">Consider this example:</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>// Don't do this<br>class SomeViewModel : CoroutineViewModel() {<br><br>  init {<br>    viewModelScope.launch {<br>      // this job will continue forever even if the ViewModel is on the backstack.<br>      someRepository.dataFlow.collect {<br>        parseData(it)<br>      }<br>    }<br>  }<br>}</pre>
+                        </code></div>
+                        <p class="paragraph">A <code>CoroutineScope</code> in a
+                            <code>ViewModel</code> is better utilized for single-shot requests which
+                            shouldn't be restarted in the event of a configuration change. &quot;Observer&quot;
+                            behavior should be scoped to the associated view.</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>// Maybe do this<br>class SomeFragment : Fragment() {<br><br>  val viewModel: SomeViewModel by viewModels()<br><br>  init {<br>    lifecycleScope.launchWhenResumed {<br>      viewModel.dataFlow.collect {  }<br>    }<br>  }<br>}<br><br>class SomeViewModel : CoroutineViewModel() {<br><br>  // a single shot request is made using the viewModelScope<br>  val lazyData by lazy {<br>    CompletableDeferred&lt;Data&gt;().apply {<br>      viewModelScope.launch {<br>        complete(someRepository.getData())<br>      }<br>    }<br>  }<br><br>  // collection of the Flow is done using the view's lifecycleScope,<br>  // meaning that it will stop as soon as the screen is in the backstack<br>  val dataFlow = someRepository.dataFlow.onEach {<br>    parseData(it)<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Extending ViewModel</h2>
+                        <p class="paragraph">Since nothing about the <code>clear</code> event is
+                            actually exposed outside of <code>ViewModel</code>, it's necessary to
+                            extend <code>ViewModel</code> in order to consume it for cancelling the
+                            <code>viewModelScope</code>. This is especially galling since <code>ViewModel</code>
+                            could absolutely have just been an interface to begin with.</p>
+                        <h2 class=""><a></a> Minimum Gradle Config</h2>
+                        <p class="paragraph">Add to your module's <code>build.gradle.kts</code>:</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>repositories {<br>  mavenCentral()<br>}<br><br>dependencies {<br><br>  implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8&quot;)<br>  implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8&quot;)<br>  implementation(&quot;com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta04&quot;)<br>}</pre>
+                        </code></div>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-core--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test-junit4--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test-junit5--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-espresso--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-lifecycle--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-viewmodel--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-viewmodel--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- END --&gt;</p></p><p class="paragraph">
+                        <p class="paragraph">The artifact I hope you don't need, but if you're not
+                            doing dependency injection, you probably do.</p>
+                        <h2 class=""><a></a> Contents</h2>
+                        <p class="paragraph">&lt;!--- TOC --&gt;</p>
+                        <ul>
+                            <li><p class="paragraph">#examples</p></li>
+                            <li><p class="paragraph">#difference-from-androidx</p></li>
+                            <li><p class="paragraph">#custom-coroutinescope-factories</p></li>
+                            <li><p class="paragraph">#automatic-cancellation-in-oncleared</p></li>
+                            <li><p class="paragraph">#viewmodelscope-is-not-lifecyclescope</p></li>
+                            <li><p class="paragraph">#extending-viewmodel</p></li>
+                            <li><p class="paragraph">#minimum-gradle-config</p></li>
+                        </ul>
+                        <p class="paragraph">&lt;!--- END --&gt;</p>
+                        <h2 class=""><a></a> Examples</h2>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>import dispatch.android.*<br><br>// CoroutineViewModel is just a ViewModel with a lazy viewModelScope<br>class SomeViewModel : CoroutineViewModel() {<br>  // ...<br><br>  init {<br><br>    // auto-creates a MainImmediateCoroutineScope which is closed in onCleared()<br>    viewModelScope. //...<br><br>    // multiple invocations use the same instance<br>    viewModelScope.launch {  }<br><br>    // it works as a normal CoroutineScope (because it is)<br>    viewModelScope.launchMain {  }<br><br>  }<br>}<br><br>class SomeApplication : Application() {<br>  override fun onCreate() {<br>    super.onCreate()<br>    // A custom factory can be set to add elements to the CoroutineContext<br>    ViewModelScopeFactory.set { MainImmediateCoroutineScope() + SomeCustomElement() }<br>  }<br>}<br><br>class SomeViewModelTest {<br><br>  val viewModel = SomeViewModel()<br><br>  @Before<br>  fun setUp() {<br>    // This custom factory can be used to use custom scopes for testing<br>    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }<br>  }<br><br>  @After<br>  fun tearDown() {<br>    // The factory can also be reset to default<br>    ViewModelScopeFactory.reset()<br>  }<br><br>  @Test<br>  fun someTest() = runBlocking {<br>    // the AndroidX version is public, so it's public here as well.<br>    viewModel.viewModelScope.launch {  }<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Difference from AndroidX</h2>
+                        <p class="paragraph">This module is essentially a fork of <a
+                                href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42">androidx-lifecycle-viewmodel-ktx</a>
+                            — the library which gives us the <a
+                                    href="https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope">viewModelScope</a>
+                            property.</p>
+                        <p class="paragraph">It exists entirely so that we can have a settable
+                            factory. This gives us a lot more options for JVM or instrumented tests,
+                            with custom dispatchers or other custom <code>CoroutineContext</code>
+                            elements.</p>
+                        <h2 class=""><a></a> Custom CoroutineScope factories</h2>
+                        <p class="paragraph">The way <code>androidx-lifecycle-viewModel</code>
+                            constructs its <a
+                                    href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html">CoroutineScope</a>
+                            is
+                            <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42">hard-coded</a>,
+                            which eliminates the possibility of using a custom <a
+                                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/">CoroutineContext</a>
+                            such as a <a
+                                    href="https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html">DispatcherProvider</a>
+                            or
+                            <a href="https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html">IdlingDispatcher</a>.
+                            With
+                            <a href="https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//index.html">dispatch-android-lifecycle</a>,
+                            we can set a custom factory.</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>class SomeViewModelTest {<br><br>  @Before<br>  fun setUp() {<br>    // This custom factory can be used to use custom scopes for testing<br>    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }<br><br>    // it could also return a specific instance<br>    val someTestScope = TestProvidedCoroutineScope()<br>    ViewModelScopeFactory.set { someTestScope }<br>  }<br><br>  @After<br>  fun tearDown() {<br>    // The factory can also be reset to default<br>    ViewModelScopeFactory.reset()<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Automatic cancellation in onCleared()</h2>
+                        <p class="paragraph">Just like AndroidX, this version of <code>viewModelScope</code>
+                            is automatically cancelled in <code>ViewModel.onCleared()</code>.</p>
+                        <h2 class=""><a></a> viewModelScope is not lifecycleScope</h2>
+                        <p class="paragraph">It's important to remember that
+                            <code>onCleared()</code> is only called when a <code>ViewModel</code> is
+                            about to be destroyed -- when its associated <code>LifecycleOwner</code>(s)
+                            are all destroyed. This means that a <code>viewModelScope</code> is
+                            active while the <code>LifecycleOwner</code> is in the backstack.</p>
+                        <p class="paragraph">Consider this example:</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>// Don't do this<br>class SomeViewModel : CoroutineViewModel() {<br><br>  init {<br>    viewModelScope.launch {<br>      // this job will continue forever even if the ViewModel is on the backstack.<br>      someRepository.dataFlow.collect {<br>        parseData(it)<br>      }<br>    }<br>  }<br>}</pre>
+                        </code></div>
+                        <p class="paragraph">A <code>CoroutineScope</code> in a
+                            <code>ViewModel</code> is better utilized for single-shot requests which
+                            shouldn't be restarted in the event of a configuration change. &quot;Observer&quot;
+                            behavior should be scoped to the associated view.</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>// Maybe do this<br>class SomeFragment : Fragment() {<br><br>  val viewModel: SomeViewModel by viewModels()<br><br>  init {<br>    lifecycleScope.launchWhenResumed {<br>      viewModel.dataFlow.collect {  }<br>    }<br>  }<br>}<br><br>class SomeViewModel : CoroutineViewModel() {<br><br>  // a single shot request is made using the viewModelScope<br>  val lazyData by lazy {<br>    CompletableDeferred&lt;Data&gt;().apply {<br>      viewModelScope.launch {<br>        complete(someRepository.getData())<br>      }<br>    }<br>  }<br><br>  // collection of the Flow is done using the view's lifecycleScope,<br>  // meaning that it will stop as soon as the screen is in the backstack<br>  val dataFlow = someRepository.dataFlow.onEach {<br>    parseData(it)<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Extending ViewModel</h2>
+                        <p class="paragraph">Since nothing about the <code>clear</code> event is
+                            actually exposed outside of <code>ViewModel</code>, it's necessary to
+                            extend <code>ViewModel</code> in order to consume it for cancelling the
+                            <code>viewModelScope</code>. This is especially galling since <code>ViewModel</code>
+                            could absolutely have just been an interface to begin with.</p>
+                        <h2 class=""><a></a> Minimum Gradle Config</h2>
+                        <p class="paragraph">Add to your module's <code>build.gradle.kts</code>:</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>repositories {<br>  mavenCentral()<br>}<br><br>dependencies {<br><br>  implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8&quot;)<br>  implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8&quot;)<br>  implementation(&quot;com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta04&quot;)<br>}</pre>
+                        </code></div>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-core--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test-junit4--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test-junit5--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-espresso--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-lifecycle--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-viewmodel--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-viewmodel--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- END --&gt;</p></p><p class="paragraph">
+                        <p class="paragraph">The artifact I hope you don't need, but if you're not
+                            doing dependency injection, you probably do.</p>
+                        <h2 class=""><a></a> Contents</h2>
+                        <p class="paragraph">&lt;!--- TOC --&gt;</p>
+                        <ul>
+                            <li><p class="paragraph">#examples</p></li>
+                            <li><p class="paragraph">#difference-from-androidx</p></li>
+                            <li><p class="paragraph">#custom-coroutinescope-factories</p></li>
+                            <li><p class="paragraph">#automatic-cancellation-in-oncleared</p></li>
+                            <li><p class="paragraph">#viewmodelscope-is-not-lifecyclescope</p></li>
+                            <li><p class="paragraph">#extending-viewmodel</p></li>
+                            <li><p class="paragraph">#minimum-gradle-config</p></li>
+                        </ul>
+                        <p class="paragraph">&lt;!--- END --&gt;</p>
+                        <h2 class=""><a></a> Examples</h2>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>import dispatch.android.*<br><br>// CoroutineViewModel is just a ViewModel with a lazy viewModelScope<br>class SomeViewModel : CoroutineViewModel() {<br>  // ...<br><br>  init {<br><br>    // auto-creates a MainImmediateCoroutineScope which is closed in onCleared()<br>    viewModelScope. //...<br><br>    // multiple invocations use the same instance<br>    viewModelScope.launch {  }<br><br>    // it works as a normal CoroutineScope (because it is)<br>    viewModelScope.launchMain {  }<br><br>  }<br>}<br><br>class SomeApplication : Application() {<br>  override fun onCreate() {<br>    super.onCreate()<br>    // A custom factory can be set to add elements to the CoroutineContext<br>    ViewModelScopeFactory.set { MainImmediateCoroutineScope() + SomeCustomElement() }<br>  }<br>}<br><br>class SomeViewModelTest {<br><br>  val viewModel = SomeViewModel()<br><br>  @Before<br>  fun setUp() {<br>    // This custom factory can be used to use custom scopes for testing<br>    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }<br>  }<br><br>  @After<br>  fun tearDown() {<br>    // The factory can also be reset to default<br>    ViewModelScopeFactory.reset()<br>  }<br><br>  @Test<br>  fun someTest() = runBlocking {<br>    // the AndroidX version is public, so it's public here as well.<br>    viewModel.viewModelScope.launch {  }<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Difference from AndroidX</h2>
+                        <p class="paragraph">This module is essentially a fork of <a
+                                href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42">androidx-lifecycle-viewmodel-ktx</a>
+                            — the library which gives us the <a
+                                    href="https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope">viewModelScope</a>
+                            property.</p>
+                        <p class="paragraph">It exists entirely so that we can have a settable
+                            factory. This gives us a lot more options for JVM or instrumented tests,
+                            with custom dispatchers or other custom <code>CoroutineContext</code>
+                            elements.</p>
+                        <h2 class=""><a></a> Custom CoroutineScope factories</h2>
+                        <p class="paragraph">The way <code>androidx-lifecycle-viewModel</code>
+                            constructs its <a
+                                    href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html">CoroutineScope</a>
+                            is
+                            <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42">hard-coded</a>,
+                            which eliminates the possibility of using a custom <a
+                                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/">CoroutineContext</a>
+                            such as a <a
+                                    href="https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html">DispatcherProvider</a>
+                            or
+                            <a href="https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html">IdlingDispatcher</a>.
+                            With
+                            <a href="https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//index.html">dispatch-android-lifecycle</a>,
+                            we can set a custom factory.</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>class SomeViewModelTest {<br><br>  @Before<br>  fun setUp() {<br>    // This custom factory can be used to use custom scopes for testing<br>    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }<br><br>    // it could also return a specific instance<br>    val someTestScope = TestProvidedCoroutineScope()<br>    ViewModelScopeFactory.set { someTestScope }<br>  }<br><br>  @After<br>  fun tearDown() {<br>    // The factory can also be reset to default<br>    ViewModelScopeFactory.reset()<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Automatic cancellation in onCleared()</h2>
+                        <p class="paragraph">Just like AndroidX, this version of <code>viewModelScope</code>
+                            is automatically cancelled in <code>ViewModel.onCleared()</code>.</p>
+                        <h2 class=""><a></a> viewModelScope is not lifecycleScope</h2>
+                        <p class="paragraph">It's important to remember that
+                            <code>onCleared()</code> is only called when a <code>ViewModel</code> is
+                            about to be destroyed -- when its associated <code>LifecycleOwner</code>(s)
+                            are all destroyed. This means that a <code>viewModelScope</code> is
+                            active while the <code>LifecycleOwner</code> is in the backstack.</p>
+                        <p class="paragraph">Consider this example:</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>// Don't do this<br>class SomeViewModel : CoroutineViewModel() {<br><br>  init {<br>    viewModelScope.launch {<br>      // this job will continue forever even if the ViewModel is on the backstack.<br>      someRepository.dataFlow.collect {<br>        parseData(it)<br>      }<br>    }<br>  }<br>}</pre>
+                        </code></div>
+                        <p class="paragraph">A <code>CoroutineScope</code> in a
+                            <code>ViewModel</code> is better utilized for single-shot requests which
+                            shouldn't be restarted in the event of a configuration change. &quot;Observer&quot;
+                            behavior should be scoped to the associated view.</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>// Maybe do this<br>class SomeFragment : Fragment() {<br><br>  val viewModel: SomeViewModel by viewModels()<br><br>  init {<br>    lifecycleScope.launchWhenResumed {<br>      viewModel.dataFlow.collect {  }<br>    }<br>  }<br>}<br><br>class SomeViewModel : CoroutineViewModel() {<br><br>  // a single shot request is made using the viewModelScope<br>  val lazyData by lazy {<br>    CompletableDeferred&lt;Data&gt;().apply {<br>      viewModelScope.launch {<br>        complete(someRepository.getData())<br>      }<br>    }<br>  }<br><br>  // collection of the Flow is done using the view's lifecycleScope,<br>  // meaning that it will stop as soon as the screen is in the backstack<br>  val dataFlow = someRepository.dataFlow.onEach {<br>    parseData(it)<br>  }<br>}</pre>
+                        </code></div>
+                        <h2 class=""><a></a> Extending ViewModel</h2>
+                        <p class="paragraph">Since nothing about the <code>clear</code> event is
+                            actually exposed outside of <code>ViewModel</code>, it's necessary to
+                            extend <code>ViewModel</code> in order to consume it for cancelling the
+                            <code>viewModelScope</code>. This is especially galling since <code>ViewModel</code>
+                            could absolutely have just been an interface to begin with.</p>
+                        <h2 class=""><a></a> Minimum Gradle Config</h2>
+                        <p class="paragraph">Add to your module's <code>build.gradle.kts</code>:</p>
+                        <div class="sample-container"><code class="" theme="idea">
+                            <pre>repositories {<br>  mavenCentral()<br>}<br><br>dependencies {<br><br>  implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8&quot;)<br>  implementation(&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8&quot;)<br>  implementation(&quot;com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta04&quot;)<br>}</pre>
+                        </code></div>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-core--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test-junit4--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-test-junit5--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-espresso--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-lifecycle--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-viewmodel--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- MODULE dispatch-android-viewmodel--&gt;</p>
+                        <p class="paragraph">&lt;!--- INDEX --&gt;</p>
+                        <p class="paragraph">&lt;!--- END --&gt;</p></p></div>
+                </div>
+            </div>
+            <h2 class=""><a data-name="packages"></a>Packages</h2>
+            <div class="table"><a
+                    data-name="dispatch.android.viewmodel////PointingToDeclaration/"></a>
+                <div class="table-row"
+                     data-filterable-current=":dispatch-android-viewmodel:dokkaHtml/release"
+                     data-filterable-set=":dispatch-android-viewmodel:dokkaHtml/release">
+                    <div class="main-subrow "><span><a href="dispatch.android.viewmodel/index.html">dispatch.android.viewmodel</a><span
+                            class="anchor-wrapper"><span class="anchor-icon"
+                                                         pointing-to="dispatch.android.viewmodel////PointingToDeclaration/"><svg
+                            fill="none" height="24" viewBox="0 0 24 24" width="24"
+                            xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                    <div class="copy-popup-wrapper "><svg fill="none" height="18"
+                                                          viewBox="0 0 18 18" width="18"
+                                                          xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z"
+          fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#container"><svg fill="none"
+                                                                                   height="10"
+                                                                                   viewBox="0 0 12 10"
+                                                                                   width="12"
+                                                                                   xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.3337 9.66683H0.666992L6.00033 3.66683L11.3337 9.66683Z" fill="black"/>
+    <path d="M0.666992 0.333496H11.3337V1.66683H0.666992V0.333496Z" fill="black"/>
+</svg></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a
+                href="https://github.com/Kotlin/dokka"><span class="padded-icon"><svg fill="none"
+                                                                                      height="8"
+                                                                                      viewBox="0 0 8 8"
+                                                                                      width="8"
+                                                                                      xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 0H2.3949L4.84076 2.44586L0 7.28662L0.713376 8L5.55414 3.15924L8 5.6051V0Z"
+          fill="black"/>
+</svg></span></a></span></div>
+    </div>
+</div>
+</body>
+</html>
+

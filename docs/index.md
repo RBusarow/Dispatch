@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.Dispatch/dispatch-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.rickbusarow.Dispatch/dispatch-core)
+[<img src="https://img.shields.io/maven-central/v/com.rickbusarow.dispatch/dispatch-core.svg?label=Maven%20Central"/>](https://search.maven.org/search?q=com.rickbusarow.dispatch)
 ![CI](https://github.com/RBusarow/Dispatch/workflows/CI/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -367,9 +367,6 @@ dependencies {
   // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts  
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04") 
   
-  // extensions for Flow and Channel
-  implementation("com.rickbusarow.dispatch:dispatch-extensions:1.0.0-beta04")
-  
   // LifecycleCoroutineScope for Android Fragments, Activities, etc.
   implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta04")
   
@@ -414,8 +411,6 @@ dependencies {
 }
 ```
 
-</details>
-
 ## License
 
 ``` text
@@ -433,68 +428,68 @@ limitations under the License.
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->
-[DispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-dispatcher-provider/index.html
-[DefaultCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-default-coroutine-scope.html
-[IOCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-i-o-coroutine-scope.html
-[MainCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-main-coroutine-scope.html
-[MainImmediateCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-main-immediate-coroutine-scope.html
-[UnconfinedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/-unconfined-coroutine-scope.html
-[launchDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-default.html
-[launchIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-i-o.html
-[launchMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-main.html
-[launchMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-main-immediate.html
-[launchUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/launch-unconfined.html
-[asyncDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-default.html
-[asyncIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-i-o.html
-[asyncMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main.html
-[asyncMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-main-immediate.html
-[asyncUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.-coroutine-scope/async-unconfined.html
-[withDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-default.html
-[withIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-i-o.html
-[withMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-main.html
-[withMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-main-immediate.html
-[withUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/with-unconfined.html
-[flowOnDefault]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-default.html
-[flowOnIO]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-i-o.html
-[flowOnMain]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main.html
-[flowOnMainImmediate]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-main-immediate.html
-[flowOnUnconfined]: https://rbusarow.github.io/Dispatch/dispatch-core//dispatch.core/kotlinx.coroutines.flow.-flow/flow-on-unconfined.html
+[DispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html
+[DefaultCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-coroutine-scope/index.html
+[IOCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-i-o-coroutine-scope/index.html
+[MainCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-main-coroutine-scope/index.html
+[MainImmediateCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.html
+[UnconfinedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-unconfined-coroutine-scope/index.html
+[launchDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-default.html
+[launchIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-i-o.html
+[launchMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-main.html
+[launchMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-main-immediate.html
+[launchUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-unconfined.html
+[asyncDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-default.html
+[asyncIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-i-o.html
+[asyncMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-main.html
+[asyncMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-main-immediate.html
+[asyncUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-unconfined.html
+[withDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-default.html
+[withIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-i-o.html
+[withMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-main.html
+[withMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-main-immediate.html
+[withUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-unconfined.html
+[flowOnDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-default.html
+[flowOnIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-i-o.html
+[flowOnMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-main.html
+[flowOnMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-main-immediate.html
+[flowOnUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-unconfined.html
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
-[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-provided-coroutine-scope/index.html
-[TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/-test-dispatcher-provider/index.html
-[testProvided]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/test-provided.html
-[runBlockingProvided]: https://rbusarow.github.io/Dispatch/dispatch-test//dispatch.test/run-blocking-provided.html
+[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
+[TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-dispatcher-provider/index.html
+[testProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/test-provided.html
+[runBlockingProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/run-blocking-provided.html
 <!--- MODULE dispatch-test-junit4-->
 <!--- INDEX  -->
-[TestCoroutineRule]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//dispatch.test/-test-coroutine-rule/index.html
+[TestCoroutineRule]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/-test-coroutine-rule/index.html
 <!--- MODULE dispatch-test-junit5-->
 <!--- INDEX  -->
-[CoroutineTest]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test/index.html
-[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//dispatch.test/-coroutine-test-extension/index.html
+[CoroutineTest]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test/index.html
+[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html
 <!--- MODULE dispatch-android-espresso-->
 <!--- INDEX  -->
-[IdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-coroutine-scope/index.html
-[IdlingDispatcher]: https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher/index.html
-[IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/dispatch-android-espresso//dispatch.android.espresso/-idling-dispatcher-provider/index.html
+[IdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-coroutine-scope/index.html
+[IdlingDispatcher]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher/index.html
+[IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher-provider/index.html
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
-[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.html
-[launchOnCreate]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/launch-on-create.html
-[launchOnStart]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/launch-on-start.html
-[launchOnResume]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/launch-on-resume.html
-[onNextCreate]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-create.html
-[onNextStart]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-start.html
-[onNextResume]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/on-next-resume.html
+[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.html
+[launchOnCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-create.html
+[launchOnStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-start.html
+[launchOnResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-resume.html
+[onNextCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-create.html
+[onNextStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-start.html
+[onNextResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-resume.html
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
-[LifecycleScopeFactory]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-extensions//dispatch.android.lifecycle/-lifecycle-scope-factory/index.html
-[lifecycleScope]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-extensions//dispatch.android.lifecycle/androidx.lifecycle.-lifecycle-owner/lifecycle-scope.html
+[LifecycleScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/-lifecycle-scope-factory/index.html
+[lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
-[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.viewmodel/-coroutine-view-model/index.html
-[viewModelScope]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.viewmodel/-coroutine-view-model/view-model-scope.html
-[ViewModelScopeFactory]: https://rbusarow.github.io/Dispatch/dispatch-android-viewmodel//dispatch.android.viewmodel/-view-model-scope-factory/index.html
+[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-coroutine-view-model/index.html
+[viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-coroutine-view-model/index.html#dispatch.android.viewmodel/CoroutineViewModel/viewModelScope/#/PointingToDeclaration/
+[ViewModelScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-view-model-scope-factory/index.html
 <!--- END -->
 
 [androidx-lifecycle-runtime-ktx]: https://developer.android.com/jetpack/androidx/releases/lifecycle
@@ -507,15 +502,15 @@ limitations under the License.
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
 [Deferred]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html
 [Detekt]: https://github.com/detekt/detekt
-[dispatch-android-espresso]: https://rbusarow.github.io/Dispatch/dispatch-android-espresso//index.html
-[dispatch-android-lifecycle-extensions]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-extensions//index.html
-[dispatch-android-lifecycle]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle//index.html
-[dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/dispatch-android-lifecycle-viewmodel//index.html
-[dispatch-core]: https://rbusarow.github.io/Dispatch/dispatch-core//index.html
-[dispatch-detekt]: https://rbusarow.github.io/Dispatch/dispatch-detekt//index.html
-[dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/dispatch-test-junit4//index.html
-[dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/dispatch-test-junit5//index.html
-[dispatch-test]: https://rbusarow.github.io/Dispatch/dispatch-test//index.html
+[dispatch-android-espresso]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/index.html
+[dispatch-android-lifecycle-extensions]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html
+[dispatch-android-lifecycle]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html
+[dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html
+[dispatch-core]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/index.html
+[dispatch-detekt]: https://rbusarow.github.io/Dispatch/api/dispatch-detekt/dispatch.detekt/index.html
+[dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/index.html
+[dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/index.html
+[dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
 [Dispatchers.Default]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html
 [Dispatchers.IO]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-io.html
 [Dispatchers.Main.immediate]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html

@@ -35,8 +35,8 @@ object Plugins {
 
 object Versions {
   const val ktlint = "0.35.0"
-  const val dokka = "0.10.1"
-  const val knit = "0.1.4"
+  const val dokka = "1.4.10"
+  const val knit = "0.2.2"
 
   const val compileSdk = 29
   const val minSdk = "21"
@@ -47,7 +47,7 @@ object Versions {
   const val gradleWrapper = "4.0.0"
   const val dagger = "2.25.2"
   const val kotlin = "1.3.70"
-  const val mavenPublish = "0.9.0"
+  const val mavenPublish = "0.13.0"
 
   const val versionName = "1.0.0-beta04"
 }
@@ -203,7 +203,6 @@ object Libs {
       const val detekt = "com.rickbusarow.dispatch:dispatch-detekt:${Versions.versionName}"
       const val espresso =
         "com.rickbusarow.dispatch:dispatch-android-espresso:${Versions.versionName}"
-      const val extensions = "com.rickbusarow.dispatch:dispatch-extensions:${Versions.versionName}"
       const val lifecycle =
         "com.rickbusarow.dispatch:dispatch-android-lifecycle:${Versions.versionName}"
       const val lifecycleExtensions =

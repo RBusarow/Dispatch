@@ -1,4 +1,0 @@
-$dokka.format:gfm
-$dokka.linkExtension:md
-$dokka.location:dispatch.test$reset(dispatch.core.DefaultDispatcherProvider)dispatch.test/dispatch.core.-default-dispatcher-provider/reset.md
-dispatch.test

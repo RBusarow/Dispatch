@@ -20,7 +20,6 @@ import kotlinx.knit.*
 import kotlinx.validation.*
 import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
-import java.net.*
 
 buildscript {
   repositories {
@@ -33,19 +32,21 @@ buildscript {
     maven("https://dl.bintray.com/kotlin/kotlinx")
   }
   dependencies {
+
     classpath(BuildPlugins.androidGradlePlugin)
     classpath(BuildPlugins.atomicFu)
     classpath(BuildPlugins.benManesVersions)
     classpath(BuildPlugins.binaryCompatibility)
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath(BuildPlugins.gradleMavenPublish)
-    classpath(BuildPlugins.dokka)
     classpath(BuildPlugins.knit)
   }
 }
 
 plugins {
   id("io.gitlab.arturbosch.detekt") version Libs.Detekt.version
+  kotlin("jvm") version Versions.kotlin
+  id(Plugins.dokka) version Versions.dokka
 }
 
 apply(plugin = "base")
@@ -61,156 +62,72 @@ allprojects {
   tasks.withType<Test> {
     useJUnitPlatform()
   }
+}
 
-  afterEvaluate proj@{
+tasks.dokkaHtmlMultiModule.configure {
 
-    tasks.withType<DokkaTask> dokkaTask@{
+  outputDirectory.set(buildDir.resolve("dokka"))
 
-      /*
-      Basic Dokka config
-       */
+  // missing from 1.4.10  https://github.com/Kotlin/dokka/issues/1530
+  // documentationFileName.set("README.md")
+}
 
-      outputFormat = "gfm"
-      outputDirectory = "${project.buildDir}/dokka"
+subprojects {
 
-      subProjects = Modules.allProduction
+  tasks.withType<DokkaTask>().configureEach {
 
-      configuration {
+    dependsOn(allprojects.mapNotNull { it.tasks.findByName("assemble") })
 
-        jdkVersion = 6
-        reportUndocumented = true
-        skipDeprecated = true
-        skipEmptyPackages = true
+    outputDirectory.set(buildDir.resolve("dokka"))
 
-        samples = listOf("samples")
-        includes = listOf("README.md")
+    dokkaSourceSets.configureEach {
 
-        externalDocumentationLink {
-          url = URL("https://developer.android.com/reference/androidx/")
-          packageListUrl = URL(
-            "https://developer.android.com/reference/androidx/package-list"
-          )
-        }
-        externalDocumentationLink {
-          url = URL("https://developer.android.com/reference/androidx/test/")
-          packageListUrl = URL(
-            "https://developer.android.com/reference/androidx/test/package-list"
-          )
-        }
-        externalDocumentationLink {
-          url = URL("https://developer.android.com/reference/")
-          packageListUrl = URL(
-            "https://developer.android.com/reference/android/support/package-list"
-          )
-        }
-        externalDocumentationLink { url = URL("https://junit.org/junit4/javadoc/latest/") }
-        externalDocumentationLink { url = URL("https://junit.org/junit5/docs/current/api/") }
-        externalDocumentationLink {
-          url = URL(
-            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/"
-          )
-          packageListUrl = URL(
-            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-android/package-list"
-          )
-        }
-        externalDocumentationLink {
-          url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
-          packageListUrl = URL(
-            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/package-list"
-          )
-        }
-        externalDocumentationLink {
-          url = URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/")
-          packageListUrl = URL(
-            "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/package-list"
-          )
-        }
+      jdkVersion.set(8)
+      reportUndocumented.set(true)
+      skipEmptyPackages.set(true)
+      noAndroidSdkLink.set(false)
 
-        sourceLink {
-          // Unix based directory relative path to the root of the project (where you execute gradle respectively).
-          path = "./"
+      samples.from(files("samples"))
 
-          // URL showing where the source code can be accessed through the web browser
-          url = "https://github.com/RBusarow/Dispatch/tree/master"
-
-          // Suffix which is used to append the line number to the URL. Use #L for GitHub
-          lineSuffix = "#L"
-        }
+      if (File("$projectDir/README.md").exists()) {
+        includes.from(files("README.md"))
       }
 
-      /*
-       Module-specific linking fixes.  This makes it so that links in moduleB's kdoc
-       which point to something in moduleA's kdoc will actually work.
-       */
+      sourceLink {
 
-      if (this@proj.name != "dispatch-core" && this@proj.name != "dispatch-detekt") {
+        val modulePath = this@subprojects.path.replace(":", "/").replaceFirst("/", "")
 
-        linkModuleDocs(
-          matchingModules = emptyList(), // all
-          currentProject = this@proj,
-          currentTask = this@dokkaTask,
-          dependencyModule = "dispatch-core"
-        )
+        // Unix based directory relative path to the root of the project (where you execute gradle respectively).
+        localDirectory.set(file("src/main"))
 
-        linkModuleDocs(
-          matchingModules = listOf("dispatch-android-lifecycle-extensions"),
-          currentProject = this@proj,
-          currentTask = this@dokkaTask,
-          dependencyModule = "dispatch-android-lifecycle"
-        )
-
-        linkModuleDocs(
-          matchingModules = listOf("dispatch-test-junit4", "dispatch-test-junit5"),
-          currentProject = this@proj,
-          currentTask = this@dokkaTask,
-          dependencyModule = "dispatch-test"
-        )
-      }
-
-      @Suppress("UNUSED_VARIABLE")
-      val buildDocs by tasks.registering {
-
-        description = "recreates all documentation for the /docs directory"
-        group = "documentation"
-
-        doFirst {
-          updateReadMeArtifactVersions()
-        }
-
-        dependsOn(
-          rootProject.tasks.findByName("cleanDocs"),
-          rootProject.tasks.findByName("copyRootFiles"),
-          rootProject.tasks.findByName("knit"),
-          this@dokkaTask
-        )
-
-        doLast {
-          copyKdoc()
-          copyReadMe()
-        }
+        // URL showing where the source code can be accessed through the web browser
+        remoteUrl.set(uri("https://github.com/RBusarow/Dispatch/blob/main/$modulePath/src/main").toURL())
+        // Suffix which is used to append the line number to the URL. Use #L for GitHub
+        remoteLineSuffix.set("#L")
       }
     }
   }
 }
+subprojects {
+  @Suppress("UNUSED_VARIABLE")
+  val buildDocs by tasks.registering {
 
-fun linkModuleDocs(
-  matchingModules: List<String>,
-  currentProject: Project,
-  currentTask: DokkaTask,
-  dependencyModule: String
-) {
+    description = "recreates all documentation for the /docs directory"
+    group = "documentation"
 
-  if (matchingModules.contains(currentProject.name) || matchingModules.isEmpty()) {
+    doFirst {
+      updateReadMeArtifactVersions()
+    }
 
-    currentTask.dependsOn(project(":$dependencyModule").tasks.withType<DokkaTask>())
+    dependsOn(
+      rootProject.tasks.findByName("cleanDocs"),
+      rootProject.tasks.findByName("copyRootFiles"),
+      rootProject.tasks.findByName("knit")
+    )
 
-    currentTask.configuration {
-      externalDocumentationLink {
-        url = URL("https://rbusarow.github.io/Dispatch/$dependencyModule/")
-        packageListUrl = URL(
-          "file://$projectDir/$dependencyModule/build/dokka/$dependencyModule/package-list"
-        )
-      }
+    doLast {
+      copyKdoc()
+      copyReadMe()
     }
   }
 }
@@ -310,17 +227,20 @@ apply(plugin = Plugins.knit)
 
 extensions.configure<KnitPluginExtension> {
 
-  //  rootDir = File(".")
-  //  moduleRoots = listOf( )
+  rootDir = rootProject.rootDir
+  moduleRoots = listOf(".")
 
   moduleDocs = "build/dokka"
   moduleMarkers = listOf("build.gradle", "build.gradle.kts")
-  siteRoot = "https://rbusarow.github.io/Dispatch"
+  siteRoot = "https://rbusarow.github.io/Dispatch/api"
 }
 
 // Build API docs for all modules with dokka before running Knit
-tasks.getByName("knitPrepare") {
-  dependsOn(subprojects.mapNotNull { it.tasks.findByName("dokka") })
+tasks.withType<KnitTask> {
+  dependsOn(allprojects.mapNotNull { it.tasks.findByName("dokkaHtml") })
+  doLast {
+    fixDocsReferencePaths()
+  }
 }
 
 val generateDependencyGraph by tasks.registering {
