@@ -23,6 +23,7 @@ object Plugins {
 
   const val dependencyAnalysis = "com.autonomousapps.dependency-analysis"
   const val detekt = "io.gitlab.arturbosch.detekt"
+  const val gradleDoctor = "com.osacky.doctor"
 
   const val dokka = "org.jetbrains.dokka"
   const val knit = "kotlinx-knit"
@@ -41,6 +42,7 @@ object Versions {
   const val dokka = "1.4.10"
   const val dependencyAnalysis = "0.59.0"
   const val knit = "0.2.2"
+  const val gradleDoctor = "0.6.2"
 
   const val compileSdk = 29
   const val minSdk = "21"

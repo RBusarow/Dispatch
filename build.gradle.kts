@@ -45,6 +45,7 @@ buildscript {
 
 plugins {
   id(Plugins.dependencyAnalysis) version Versions.dependencyAnalysis
+  id(Plugins.gradleDoctor) version Versions.gradleDoctor
   id(Plugins.detekt) version Libs.Detekt.version
   kotlin("jvm")
   id(Plugins.dokka) version Versions.dokka
