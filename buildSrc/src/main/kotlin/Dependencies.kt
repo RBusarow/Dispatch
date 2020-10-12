@@ -34,6 +34,7 @@ object Plugins {
   const val kotlinAndroidExtensions = "kotlin-android-extensions"
 
   const val mavenPublish = "com.vanniktech.maven.publish"
+  const val taskTree = "com.dorongold.task-tree"
 }
 
 object Versions {
@@ -53,6 +54,7 @@ object Versions {
   const val kotlin = "1.4.10"
   const val mavenPublish = "0.13.0"
 
+  const val taskTree = "1.5"
   const val versionName = "1.0.0-beta04"
 }
 
