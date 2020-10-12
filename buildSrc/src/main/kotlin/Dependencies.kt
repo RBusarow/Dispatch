@@ -177,7 +177,7 @@ object Libs {
   }
 
   object Kotest {
-    private const val version = "4.2.5"
+    private const val version = "4.3.0"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
     const val assertionsShared = "io.kotest:kotest-assertions-shared-jvm:$version"
     const val commonJvm = "io.kotest:kotest-common-jvm:$version"
