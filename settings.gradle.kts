@@ -34,3 +34,10 @@ include(":dispatch-detekt:samples")
 include(":dispatch-internal-test")
 include(":dispatch-internal-test-android")
 include(":dispatch-sample")
+
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    jcenter()
+  }
+}
