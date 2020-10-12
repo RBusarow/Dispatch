@@ -37,11 +37,11 @@ import kotlin.coroutines.*
  *
  * ### Requires JUnit 4.
  *
- * ``` groovy
+ * ``` Kotlin
  * dependencies {
- *   testImplementation "junit:junit:4.12"
+ *   testImplementation("junit:junit:4.12")
  *   -- or --
- *   testImplementation "org.junit.vintage:junit-vintage-engine:5.5.1"
+ *   testImplementation("org.junit.vintage:junit-vintage-engine:5.5.1")
  * }
  * ```
  *

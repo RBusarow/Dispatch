@@ -42,11 +42,78 @@
           <div class="breadcrumbs"><a href="../../index.html">dispatch-test-junit4</a>/<a href="../index.html">dispatch.test</a>/<a href="index.html">TestCoroutineRule</a></div>
           <div class="cover ">
             <h1 class="cover"><a data-name="testcoroutinerule"></a><span>Test</span><wbr></wbr><span>Coroutine</span><wbr></wbr><span>Rule</span></h1>
-            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-test-junit4:dokkaHtml/main"><p class="paragraph"><p class="paragraph">A basic JUnit 4 <span data-unresolved-link="org.junit.rules/TestRule///PointingToDeclaration/">TestRule</span> which creates a new <span data-unresolved-link="dispatch.test//TestProvidedCoroutineScope/#kotlinx.coroutines.test.TestCoroutineDispatcher#dispatch.test.TestDispatcherProvider#kotlin.coroutines.CoroutineContext/PointingToDeclaration/">TestProvidedCoroutineScope</span> for each test, sets <span data-unresolved-link="kotlinx.coroutines/Dispatchers/Main/#/PointingToDeclaration/">Dispatchers.Main</span>, and calls <span data-unresolved-link="dispatch.test/TestCoroutineRule/cleanupTestCoroutines/#/PointingToDeclaration/">cleanupTestCoroutines</span> afterwards.</p><p class="paragraph">The rule itself implements <span data-unresolved-link="dispatch.test//TestProvidedCoroutineScope/#kotlinx.coroutines.test.TestCoroutineDispatcher#dispatch.test.TestDispatcherProvider#kotlin.coroutines.CoroutineContext/PointingToDeclaration/">TestProvidedCoroutineScope</span>, so it can be used as follows:</p><h3 class=""><a></a> Before the test:</h3><ul><li><p class="paragraph"><span data-unresolved-link="kotlinx.coroutines/Dispatchers/Main/#/PointingToDeclaration/">Dispatchers.Main</span> is set to the <span data-unresolved-link="kotlinx.coroutines.test/TestCoroutineDispatcher///PointingToDeclaration/">TestCoroutineDispatcher</span> used by the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>.</p></li></ul><h3 class=""><a></a> After the test:</h3><ul><li><p class="paragraph"><span data-unresolved-link="dispatch.test/TestCoroutineRule/cleanupTestCoroutines/#/PointingToDeclaration/">cleanupTestCoroutines</span> is called to ensure there are no leaking coroutines.  Any unfinished coroutine will throw an <span data-unresolved-link="kotlinx.coroutines.test/UncompletedCoroutinesError///PointingToDeclaration/">UncompletedCoroutinesError</span>.</p></li><li><p class="paragraph"><span data-unresolved-link="kotlinx.coroutines/Dispatchers/Main/#/PointingToDeclaration/">Dispatchers.Main</span> is reset via <span data-unresolved-link="kotlinx.coroutines.test//resetMain/kotlinx.coroutines.Dispatchers#/PointingToDeclaration/">Dispatchers.resetMain</span>.</p></li></ul><h3 class=""><a></a> Requires JUnit 4.</h3><div class="sample-container"><code class="" theme="idea"><pre>dependencies {<br>  testImplementation &quot;junit:junit:4.12&quot;<br>  -- or --<br>  testImplementation &quot;org.junit.vintage:junit-vintage-engine:5.5.1&quot;<br>}</pre></code></div></p><div class="symbol monospace"><div class="block"><div class="block">@<span data-unresolved-link="kotlinx.coroutines/ExperimentalCoroutinesApi///PointingToDeclaration/">ExperimentalCoroutinesApi</span>()</div></div>class <a href="index.html">TestCoroutineRule</a>(factory: () -&gt; <span data-unresolved-link="dispatch.test/TestProvidedCoroutineScope///PointingToDeclaration/">TestProvidedCoroutineScope</span>) : <span data-unresolved-link="org.junit.rules/TestWatcher///PointingToDeclaration/">TestWatcher</span>, <span data-unresolved-link="dispatch.test/TestProvidedCoroutineScope///PointingToDeclaration/">TestProvidedCoroutineScope</span><span class="top-right-position"><span class="copy-icon"><svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z" fill="black" fill-rule="evenodd"/>
-                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
-    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
-</svg><span>Content copied to clipboard</span></div></span></div></div></div>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted">
+                <div class="content sourceset-depenent-content" data-active=""
+                     data-togglable=":dispatch-test-junit4:dokkaHtml/main"><p class="paragraph">
+                    <p class="paragraph">A basic JUnit 4 <span
+                            data-unresolved-link="org.junit.rules/TestRule///PointingToDeclaration/">TestRule</span>
+                        which creates a new <span
+                                data-unresolved-link="dispatch.test//TestProvidedCoroutineScope/#kotlinx.coroutines.test.TestCoroutineDispatcher#dispatch.test.TestDispatcherProvider#kotlin.coroutines.CoroutineContext/PointingToDeclaration/">TestProvidedCoroutineScope</span>
+                        for each test, sets <span
+                                data-unresolved-link="kotlinx.coroutines/Dispatchers/Main/#/PointingToDeclaration/">Dispatchers.Main</span>,
+                        and calls <span
+                                data-unresolved-link="dispatch.test/TestCoroutineRule/cleanupTestCoroutines/#/PointingToDeclaration/">cleanupTestCoroutines</span>
+                        afterwards.</p>
+                    <p class="paragraph">The rule itself implements <span
+                            data-unresolved-link="dispatch.test//TestProvidedCoroutineScope/#kotlinx.coroutines.test.TestCoroutineDispatcher#dispatch.test.TestDispatcherProvider#kotlin.coroutines.CoroutineContext/PointingToDeclaration/">TestProvidedCoroutineScope</span>,
+                        so it can be used as follows:</p>
+                    <h3 class=""><a></a> Before the test:</h3>
+                    <ul>
+                        <li><p class="paragraph"><span
+                                data-unresolved-link="kotlinx.coroutines/Dispatchers/Main/#/PointingToDeclaration/">Dispatchers.Main</span>
+                            is set to the <span
+                                    data-unresolved-link="kotlinx.coroutines.test/TestCoroutineDispatcher///PointingToDeclaration/">TestCoroutineDispatcher</span>
+                            used by the <a
+                                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>.
+                        </p></li>
+                    </ul>
+                    <h3 class=""><a></a> After the test:</h3>
+                    <ul>
+                        <li><p class="paragraph"><span
+                                data-unresolved-link="dispatch.test/TestCoroutineRule/cleanupTestCoroutines/#/PointingToDeclaration/">cleanupTestCoroutines</span>
+                            is called to ensure there are no leaking coroutines. Any unfinished
+                            coroutine will throw an <span
+                                    data-unresolved-link="kotlinx.coroutines.test/UncompletedCoroutinesError///PointingToDeclaration/">UncompletedCoroutinesError</span>.
+                        </p></li>
+                        <li><p class="paragraph"><span
+                                data-unresolved-link="kotlinx.coroutines/Dispatchers/Main/#/PointingToDeclaration/">Dispatchers.Main</span>
+                            is reset via <span
+                                    data-unresolved-link="kotlinx.coroutines.test//resetMain/kotlinx.coroutines.Dispatchers#/PointingToDeclaration/">Dispatchers.resetMain</span>.
+                        </p></li>
+                    </ul>
+                    <h3 class=""><a></a> Requires JUnit 4.</h3>
+                    <div class="sample-container"><code class="" theme="idea">
+                        <pre>dependencies {<br>  testImplementation(&quot;junit:junit:4.12&quot;)<br>  -- or --<br>  testImplementation(&quot;org.junit.vintage:junit-vintage-engine:5.5.1&quot;)<br>}</pre>
+                    </code></div>
+                    </p>
+                    <div class="symbol monospace">
+                        <div class="block">
+                            <div class="block">@<span
+                                    data-unresolved-link="kotlinx.coroutines/ExperimentalCoroutinesApi///PointingToDeclaration/">ExperimentalCoroutinesApi</span>()
+                            </div>
+                        </div>
+                        class <a href="index.html">TestCoroutineRule</a>(factory: () -&gt; <span
+                            data-unresolved-link="dispatch.test/TestProvidedCoroutineScope///PointingToDeclaration/">TestProvidedCoroutineScope</span>)
+                        : <span
+                            data-unresolved-link="org.junit.rules/TestWatcher///PointingToDeclaration/">TestWatcher</span>,
+                        <span data-unresolved-link="dispatch.test/TestProvidedCoroutineScope///PointingToDeclaration/">TestProvidedCoroutineScope</span><span
+                            class="top-right-position"><span class="copy-icon"><svg fill="none"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    width="24"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" d="M5 4H15V16H5V4ZM17 7H19V18V20H17H8V18H17V7Z"
+                              fill="black" fill-rule="evenodd"/>
+                       </svg></span><div class="copy-popup-wrapper popup-to-left"><svg fill="none"
+                                                                                       height="18"
+                                                                                       viewBox="0 0 18 18"
+                                                                                       width="18"
+                                                                                       xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z"
+          fill="#4DBB5F"/>
+</svg><span>Content copied to clipboard</span></div></span></div>
+                </div>
+            </div>
           </div>
           <div class="tabbedcontent">
             <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button><button class="section-tab" data-togglable="Sources">Sources</button><button class="section-tab" data-togglable="Samples">Samples</button><button class="section-tab" data-togglable="See also">See also</button></div>

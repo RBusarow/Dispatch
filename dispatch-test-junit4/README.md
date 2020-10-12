@@ -100,8 +100,8 @@ dependencies {
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation("ccom.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
-  testImplementation("ccom.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta04")
   testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
 }
 ```
@@ -114,8 +114,6 @@ dependencies {
 <!--- INDEX  -->
 [TestCoroutineRule]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/-test-coroutine-rule/index.html
 <!--- END -->
-
-[cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
 
 [dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
 [TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html

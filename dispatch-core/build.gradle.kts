@@ -37,8 +37,6 @@ dependencies {
   testImplementation(Libs.MockK.core)
   testImplementation(Libs.RickBusarow.Hermit.junit5)
 
-  testImplementation(Libs.RickBusarow.Hermit.junit5)
-
   testImplementation(project(":dispatch-internal-test"))
 
 }
