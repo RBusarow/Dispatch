@@ -72,16 +72,25 @@ fun runBlockingProvided(
 @ExperimentalCoroutinesApi
 fun testProvided(
   context: CoroutineContext = EmptyCoroutineContext,
-  testBody: suspend TestCoroutineScope.() -> Unit
+  testBody: suspend TestProvidedCoroutineScope.() -> Unit
 ) {
 
-  val dispatcher =
-    (context[ContinuationInterceptor] as? TestCoroutineDispatcher) ?: TestCoroutineDispatcher()
-  val dispatcherProvider = context[DispatcherProvider] ?: TestDispatcherProvider(
-    dispatcher
-  )
+  val dispatcher = (context[ContinuationInterceptor] as? TestCoroutineDispatcher)
+    ?: TestCoroutineDispatcher()
 
-  return runBlockingTest(context = context + dispatcher + dispatcherProvider, testBody = testBody)
+  val dispatcherProvider = context[DispatcherProvider]
+    ?: TestDispatcherProvider(dispatcher)
+
+  val combinedContext = context + dispatcher + dispatcherProvider
+
+  return runBlockingTest(context = combinedContext) {
+
+    val providedScope = TestProvidedCoroutineScopeImpl(
+      dispatcherProvider = dispatcherProvider,
+      context = combinedContext + coroutineContext
+    )
+    testBody.invoke(providedScope)
+  }
 }
 
 /**
@@ -100,5 +109,5 @@ fun testProvided(
  */
 @ExperimentalCoroutinesApi
 fun TestProvidedCoroutineScope.testProvided(
-  testBody: suspend TestCoroutineScope.() -> Unit
+  testBody: suspend TestProvidedCoroutineScope.() -> Unit
 ) = testProvided(coroutineContext, testBody)
