@@ -118,6 +118,12 @@ internal class BuildersTest {
     }
 
     @Test
+    fun `CoroutineScope receiver should be TestProvidedCoroutineScope`() = testProvided {
+
+      this.shouldBeInstanceOf<TestProvidedCoroutineScope>()
+    }
+
+    @Test
     fun `CoroutineScope receiver should be TestCoroutineScope`() = testProvided {
 
       this.shouldBeInstanceOf<TestCoroutineScope>()
