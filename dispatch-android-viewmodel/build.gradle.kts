@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
+  kotlin("android")
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -47,7 +47,6 @@ dependencies {
   api(Libs.Kotlinx.Coroutines.coreJvm)
 
   implementation(Libs.AndroidX.Lifecycle.viewModelKtx)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
 
   testImplementation(Libs.AndroidX.Test.Espresso.core)

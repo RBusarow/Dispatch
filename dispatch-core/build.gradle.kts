@@ -14,7 +14,7 @@
  */
 
 plugins {
-  id(Plugins.kotlin)
+  kotlin("jvm")
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
   id(Plugins.atomicFu)
@@ -24,8 +24,6 @@ dependencies {
 
   api(Libs.Kotlinx.Coroutines.core)
   api(Libs.Kotlinx.Coroutines.coreJvm)
-
-  implementation(Libs.Kotlin.stdlib)
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)

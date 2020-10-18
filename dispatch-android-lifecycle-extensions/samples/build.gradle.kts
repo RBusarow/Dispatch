@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
+  kotlin("android")
 }
 
 android {
@@ -42,7 +42,6 @@ dependencies {
   implementation(Libs.AndroidX.Fragment.core)
   implementation(Libs.AndroidX.Lifecycle.common)
   implementation(Libs.JUnit.jUnit4)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":dispatch-android-espresso"))

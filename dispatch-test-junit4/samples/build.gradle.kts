@@ -14,14 +14,12 @@
  */
 
 plugins {
-  id(Plugins.kotlin)
+  kotlin("jvm")
 }
 
 sourceSets["test"].java.srcDir("test")
 
 dependencies {
-
-  implementation(Libs.Kotlin.stdlib)
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)
