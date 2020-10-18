@@ -14,7 +14,7 @@
  */
 
 plugins {
-  id(Plugins.kotlin)
+  kotlin("jvm")
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -23,8 +23,6 @@ dependencies {
 
   api(Libs.Detekt.api)
   api(Libs.Kotlin.compiler)
-
-  implementation(Libs.Kotlin.stdlib)
 
   // detekt-test leaks transitive dependencies upon AssertJ and Spek
   // https://github.com/detekt/detekt/issues/3082

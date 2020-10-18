@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
+  kotlin("android")
 }
 
 android {
@@ -38,8 +38,6 @@ android {
 }
 
 dependencies {
-
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.coreJvm)
 
   implementation(project(":dispatch-core"))

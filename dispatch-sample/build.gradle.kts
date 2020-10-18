@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.androidApplication)
-  id(Plugins.kotlinAndroid)
+  kotlin("android")
   id(Plugins.kotlinAndroidExtensions)
 }
 
@@ -56,7 +56,6 @@ dependencies {
   implementation(Libs.AndroidX.Lifecycle.common)
   implementation(Libs.AndroidX.Lifecycle.extensions)
   implementation(Libs.JakeWharton.timber)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 
