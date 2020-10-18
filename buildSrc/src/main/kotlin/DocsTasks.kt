@@ -60,39 +60,48 @@ fun copyRootFiles() {
 
 fun Project.copyKdoc() {
 
-  val root = File("$buildDir/dokka")
+  mkdir("$rootDir/docs/api")
 
-  val dirName = "$buildDir/dokka/${projectDir.name}"
+  val root = File("$buildDir/dokka/${projectDir.name}")
 
-  root.walkTopDown()
-    .maxDepth(1)
-    .filter { file ->
-
-      file.isDirectory && file.path == dirName
-    }
-    .forEach { file ->
-
-      file.copyRecursively(File("docs/dokka/${projectDir.name}"))
-    }
+  if (root.exists()) {
+    root.copyRecursively(File("$rootDir/docs/api/${projectDir.name}"), overwrite = true)
+  }
 }
 
 fun Project.copyReadMe() {
 
-  val regex = "$projectDir/README.md".toRegex()
+  mkdir("$rootDir/docs")
 
-  projectDir.walkTopDown()
-    // A depth of 3 allows for nested modules to introduce their README's.
-    // This probably won't ever be necessary but it's like 10ms.
-    .maxDepth(3)
+  val readme = File("$projectDir/README.md")
+
+  if (readme.exists()) {
+
+    val newName = "$rootDir/docs/${projectDir.name}.md"
+
+    readme.copyTo(File(newName))
+  }
+}
+
+fun Project.fixDocsReferencePaths() {
+
+  val pathRegex = """https://rbusarow.github.io/Dispatch(.*)""".toRegex()
+
+  rootDir.walkTopDown()
     .filter { file ->
+      file.path.endsWith(".md")
+    }.forEach { file ->
 
-      file.path.matches(regex)
-    }
-    .forEach { file ->
+      val matches = pathRegex.findAll(file.readText())
 
-      val newName = "${rootProject.rootDir}/docs/modules/${projectDir.name}.md"
+      val newText = matches.fold(file.readText()) { acc, matchResult ->
 
-      file.copyTo(File(newName))
+        val oldPath = matchResult.destructured.component1()
+        val newPath = oldPath.replace("//", "/")
+        acc.replace(oldPath, newPath)
+      }
+
+      file.writeText(newText)
     }
 }
 
@@ -105,7 +114,7 @@ fun Project.copySite() {
     .forEach { file ->
 
       if (!file.name.matches(".*mkdocs.yml".toRegex()) && file != root) {
-        file.copyRecursively(File("$rootDir/docs"), true)
+        file.copyRecursively(File("$rootDir/docs/api"), true)
       }
     }
 }
@@ -143,6 +152,10 @@ fun File.updateLibraryVersions(): File {
         Libs.AndroidX.Lifecycle.viewModel.toDependencyMatcher(),
         Libs.AndroidX.Test.runner.toDependencyMatcher(),
         Libs.AndroidX.Test.Espresso.core.toDependencyMatcher(),
+        Libs.Detekt.api.toDependencyMatcher(),
+        Libs.Detekt.cli.toDependencyMatcher(),
+        Libs.Detekt.formatting.toDependencyMatcher(),
+        Libs.Detekt.test.toDependencyMatcher(),
         Libs.JUnit.jUnit4.toDependencyMatcher(),
         Libs.JUnit.jUnit5Vintage.toDependencyMatcher(),
         Libs.JUnit.jUnit5Runtime.toDependencyMatcher(),
@@ -154,22 +167,30 @@ fun File.updateLibraryVersions(): File {
         Libs.Kotlinx.Coroutines.test.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.detekt.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.espresso.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.extensions.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.lifecycleExtensions.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.lifecycle.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.lifecycleExtensions.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.viewModel.toDependencyMatcher(),
+        Libs.RickBusarow.Dispatch.Test.core.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.Test.jUnit4.toDependencyMatcher(),
         Libs.RickBusarow.Dispatch.Test.jUnit5.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.Test.core.toDependencyMatcher(),
-        Libs.RickBusarow.Dispatch.core.toDependencyMatcher()
+        Libs.RickBusarow.Dispatch.core.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.core.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.junit4.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.junit5.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.mockk.toDependencyMatcher(),
+        Libs.RickBusarow.Hermit.coroutines.toDependencyMatcher(),
+        Libs.Kotest.assertions.toDependencyMatcher(),
+        Libs.Kotest.properties.toDependencyMatcher(),
+        Libs.Kotest.runner.toDependencyMatcher()
       )
+
 
       forEachLine { originalLine ->
 
         val newLine = dependencyMatchers.firstOrNull { matcher ->
 
-            matcher.regex.matches(originalLine)
-          }
+          matcher.regex.matches(originalLine)
+        }
           ?.let { matcher ->
 
             originalLine.replace(matcher)
@@ -209,5 +230,5 @@ private fun String.replace(
 }
 
 private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
-  .joinToString(":")
+  .joinToString(":") + ":"
 

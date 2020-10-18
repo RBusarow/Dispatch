@@ -42,18 +42,15 @@ public final class dispatch/core/CoroutineScopesKt {
 public abstract interface class dispatch/core/DefaultCoroutineScope : kotlinx/coroutines/CoroutineScope {
 }
 
-public final class dispatch/core/DefaultDispatcherProvider : dispatch/core/DispatcherProvider {
-	public fun <init> ()V
-	public fun fold (Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
-	public fun get (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
-	public fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
-	public fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun getMainImmediate ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun getUnconfined ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun minusKey (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
-	public fun plus (Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
+public final class dispatch/core/DefaultDispatcherProvider {
+	public static final field INSTANCE Ldispatch/core/DefaultDispatcherProvider;
+	public final fun get ()Ldispatch/core/DispatcherProvider;
+	public final synthetic fun invoke ()Ldispatch/core/DispatcherProvider;
+	public final fun set (Ldispatch/core/DispatcherProvider;)V
+}
+
+public synthetic class dispatch/core/DefaultDispatcherProviderHolderRefVolatile {
+	public fun <init> (Ljava/lang/Object;)V
 }
 
 public abstract interface class dispatch/core/DispatcherProvider : kotlin/coroutines/CoroutineContext$Element {
@@ -69,16 +66,18 @@ public abstract interface class dispatch/core/DispatcherProvider : kotlin/corout
 public final class dispatch/core/DispatcherProvider$DefaultImpls {
 	public static fun fold (Ldispatch/core/DispatcherProvider;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
 	public static fun get (Ldispatch/core/DispatcherProvider;Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
+	public static fun getDefault (Ldispatch/core/DispatcherProvider;)Lkotlinx/coroutines/CoroutineDispatcher;
+	public static fun getIo (Ldispatch/core/DispatcherProvider;)Lkotlinx/coroutines/CoroutineDispatcher;
 	public static fun getKey (Ldispatch/core/DispatcherProvider;)Lkotlin/coroutines/CoroutineContext$Key;
+	public static fun getMain (Ldispatch/core/DispatcherProvider;)Lkotlinx/coroutines/CoroutineDispatcher;
+	public static fun getMainImmediate (Ldispatch/core/DispatcherProvider;)Lkotlinx/coroutines/CoroutineDispatcher;
+	public static fun getUnconfined (Ldispatch/core/DispatcherProvider;)Lkotlinx/coroutines/CoroutineDispatcher;
 	public static fun minusKey (Ldispatch/core/DispatcherProvider;Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
 	public static fun plus (Ldispatch/core/DispatcherProvider;Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
 }
 
 public final class dispatch/core/DispatcherProvider$Key : kotlin/coroutines/CoroutineContext$Key {
-}
-
-public final class dispatch/core/DispatcherProviderKt {
-	public static final fun DispatcherProvider ()Ldispatch/core/DispatcherProvider;
+	public final fun invoke ()Ldispatch/core/DispatcherProvider;
 }
 
 public final class dispatch/core/FlowKt {

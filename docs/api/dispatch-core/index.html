@@ -1,0 +1,71 @@
+<!--
+  ~ Copyright (C) 2020 Rick Busarow
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+  <head>
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1" name="viewport">
+    <title>dispatch-core</title>
+    <link href="../images/logo-icon.svg" rel="icon" type="image/svg">
+    <link href="../styles/style.css" rel="Stylesheet">
+    <script async="async" src="../scripts/navigationLoader.js" type="text/javascript"></script>
+    <script async="async" src="../scripts/platformContentHandler.js" type="text/javascript"></script>
+    <script async="async" src="../scripts/sourceset_dependencies.js" type="text/javascript"></script>
+    <script async="async" src="../scripts/clipboard.js" type="text/javascript"></script>
+    <link href="../styles/jetbrains-mono.css" rel="Stylesheet">
+    <script>var pathToRoot = "../";</script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <div id="searchBar"></div>
+        <script src="../scripts/pages.js" type="text/javascript"></script>
+        <script src="../scripts/main.js" type="text/javascript"></script>
+        <div id="content" pageIds="////PointingToDeclaration/">
+          <div class="breadcrumbs"><a href="index.html">dispatch-core</a></div>
+          <div class="cover ">
+            <h1 class="cover"><a data-name="dispatch-core"></a><span>dispatch-core</span></h1>
+            <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-core:dokkaHtml/main"><p class="paragraph"><p class="paragraph">Never reference Dispatchers again, and never inject a <code>dispatchers</code> interface into your classes.</p><p class="paragraph">All the standard CoroutineDispatcher types are embedded in a CoroutineContext and can be accessed explicitly or via convenient #extensions.</p><div class="sample-container"><code class="" theme="idea"><pre>fun foo(scope: CoroutineScope) {<br>  scope.launchDefault {  }<br>  scope.launchIO {  }<br>  scope.launchMain {  }<br>  scope.launchMainImmediate {  }<br>  scope.launchUnconfined {  }<br>}</pre></code></div><p class="paragraph">You can define custom mappings via a #marker-interfaces-and-factories, making testing much easier, or use the default, which simply maps to Dispatchers.</p><div class="sample-container"><code class="" theme="idea"><pre>// a standard DispatcherProvider is easy to create<br>val myDefaultDispatchProvider = DispatcherProvider()<br><br>// but they're also very extensible.  This version is interchangeable and is convenient in some test scenarios.<br>val myCustomDispatcherProvider = object: DispatcherProvider {<br><br>  override val default: CoroutineDispatcher = newSingleThreadCoroutineContext(&quot;default&quot;)<br>  override val io: CoroutineDispatcher = newSingleThreadCoroutineContext(&quot;io&quot;)<br>  override val main: CoroutineDispatcher get() = newSingleThreadCoroutineContext(&quot;main&quot;)<br>  override val mainImmediate: CoroutineDispatcher get() = newSingleThreadCoroutineContext(&quot;mainImmediate&quot;)<br>  override val unconfined: CoroutineDispatcher = newSingleThreadCoroutineContext(&quot;unconfined&quot;)<br>}</pre></code></div><p class="paragraph">Custom CoroutineScope interfaces allow for more granularity when defining a class or function with a CoroutineScope dependency.</p><p class="paragraph">There are also factory functions for conveniently creating any implementation, with a built-in DispatcherProvider.</p><div class="sample-container"><code class="" theme="idea"><pre>val mainScope = MainCoroutineScope()<br><br>val someUIClass = SomeUIClass(mainScope)<br><br>class SomeUIClass(val coroutineScope: MainCoroutineScope) {<br><br>  fun foo() = coroutineScope.launch {<br>    // ...<br>  }<br><br>}</pre></code></div><h2 class=""><a></a> Contents</h2><p class="paragraph">&lt;!--- TOC --&gt;</p><ul><li><p class="paragraph">#types</p></li><ul><li><p class="paragraph">#marker-interfaces-and-factories</p></li></ul><li><p class="paragraph">#extensions</p></li><ul><li><p class="paragraph">#launch</p></li><li><p class="paragraph">#async</p></li><li><p class="paragraph">#withcontext</p></li><li><p class="paragraph">#flow</p></li></ul><li><p class="paragraph">#defaultdispatcherprovider</p></li><ul><li><p class="paragraph">#out-of-box-default-functionality</p></li><li><p class="paragraph">#easy-global-dispatcher-overrides</p></li></ul><li><p class="paragraph">#minimum-gradle-config</p></li></ul><p class="paragraph">&lt;!--- END --&gt;</p><h2 class=""><a></a> Types</h2><table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>DispatcherProvider</td><td> Interface which provides the 5 standard CoroutineDispatcher properties of the Dispatchers object, but which can be embedded in a CoroutineContext</td></tr><tr><td>DefaultDispatcherProvider</td><td> Mutable singleton holder for an implementation of DispatcherProvider. By default, it simply delegates to the corresponding properties in the Dispatchers singleton.  Whenever a CoroutineContext does not have a DispatcherProvider, this singleton's value will be used by default.</td></tr></tbody></table><h3 class=""><a></a> Marker interfaces and factories</h3><table><thead><tr><th>Name</th><th>Dispatcher</th></tr></thead><tbody><tr><td>DefaultCoroutineScope</td><td>DispatcherProvider.default</td></tr><tr><td>IOCoroutineScope</td><td>DispatcherProvider.io</td></tr><tr><td>MainCoroutineScope</td><td>DispatcherProvider.main</td></tr><tr><td>MainImmediateCoroutineScope</td><td>DispatcherProvider.mainImmediate</td></tr><tr><td>UnconfinedCoroutineScope</td><td>DispatcherProvider.unconfined</td></tr></tbody></table><h2 class=""><a></a> Extensions</h2><table><thead><tr><th></th><th>Default</th><th>IO</th><th>Main</th><th>Main.immediate</th><th>Unconfined</th></tr></thead><tbody><tr><td>Job</td><td>launchDefault</td><td>launchIO</td><td>launchMain</td><td>launchMainImmediate</td><td>launchUnconfined</td></tr><tr><td>Deferred</td><td>asyncDefault</td><td>asyncIO</td><td>asyncMain</td><td>asyncMainImmediate</td><td>asyncUnconfined</td></tr><tr><td><code>suspend T</code></td><td>withDefault</td><td>withIO</td><td>withMain</td><td>withMainImmediate</td><td>withUnconfined</td></tr><tr><td><code>Flow&lt;T&gt;</code></td><td>flowOnDefault</td><td>flowOnIO</td><td>flowOnMain</td><td>flowOnMainImmediate</td><td>flowOnUnconfined</td></tr></tbody></table><h3 class=""><a></a> Launch</h3><div class="sample-container"><code class="" theme="idea"><pre>fun foo(scope: CoroutineScope) {<br>  scope.launchDefault {  }<br>  scope.launchIO {  }<br>  scope.launchMain {  }<br>  scope.launchMainImmediate {  }<br>  scope.launchUnconfined {  }<br>}</pre></code></div><h3 class=""><a></a> Async</h3><div class="sample-container"><code class="" theme="idea"><pre>fun foo(scope: CoroutineScope) {<br>  scope.asyncDefault {  }<br>  scope.asyncIO {  }<br>  scope.asyncMain {  }<br>  scope.asyncMainImmediate {  }<br>  scope.asyncUnconfined {  }<br>}</pre></code></div><h3 class=""><a></a> WithContext</h3><p class="paragraph">The CoroutineContext used for withContext comes from the kotlin.coroutineContext top-level suspend property in <span data-unresolved-link="////PointingToDeclaration/">kotlin.coroutines</span>.  It returns the current context, so the <code>default</code>, <code>io</code>, etc. used here are the ones defined in the CoroutineScope of the caller. There is no need to inject any other dependencies.</p><div class="sample-container"><code class="" theme="idea"><pre>suspend fun foo() {<br>  // note that we have no CoroutineContext<br>  withDefault {  }<br>  withIO {  }<br>  withMain {  }<br>  withMainImmediate {  }<br>  withUnconfined {  }<br>}</pre></code></div><h3 class=""><a></a>  Flow</h3><p class="paragraph">Like withContext, Flow typically doesn’t get a CoroutineScope of its own.  They inherit the kotlin.coroutineContext from the collector in a pattern called context_preservation. These new operators maintain context preservation (they’re forced to, actually), and extract the kotlin.coroutineContext from the collector.</p><div class="sample-container"><code class="" theme="idea"><pre>val someFlow = flow {  }<br>  .flowOnDefault()<br>  .flowOnIO()<br>  .flowOnMain()<br>  .flowOnMainImmediate()<br>  .flowOnUnconfined()</pre></code></div><h2 class=""><a></a> DefaultDispatcherProvider</h2><p class="paragraph">The simplest way to get up and running with Dispatch. All library access to a CoroutineContextDispatcherProvider filters through a single extension property:</p><div class="sample-container"><code class="" theme="idea"><pre>public val CoroutineContext.dispatcherProvider: DispatcherProvider<br>  get() = get(DispatcherProvider) ?: DefaultDispatcherProvider.get() </pre></code></div><p class="paragraph">If the receiver does not have a <code>DispatcherProvider</code>, the value from DefaultDispatcherProvider will be returned. In practice, this brings at least two benefits:</p><h3 class=""><a></a> Out-of-box default functionality</h3><p class="paragraph">Calls such as <code>launchIO { ... }</code>or <code>withMain { ... }</code> are safe to use (guaranteed to have a <code>DispatcherProvider</code>) regardless of the source of the <code>CoroutineContext</code> or CoroutineScope and without any additional configuration. By default, they will access the corresponding CoroutineDispatcher from the Dispatchers singleton.</p><h3 class=""><a></a> Easy global dispatcher overrides</h3><p class="paragraph"><code>DefaultDispatcherProvider</code> has similar DefaultDispatcherProvider.set/DefaultDispatcherProvider.set functionality to the Dispatchers.setMain/Dispatchers.resetMain extensions in <code>kotlinx-coroutines-test</code>, except it doesn't need to be confined to testing.</p><p class="paragraph">You can use DefaultDispatcherProvider.set to globally set a custom implementation at the beginning of an application's lifecycle, but the most likely use-case is certainly in testing.</p><div class="sample-container"><code class="" theme="idea"><pre></pre></code></div></p></div></div>
+          </div>
+          <h2 class=""><a data-name="packages"></a>Packages</h2>
+          <div class="table"><a data-name="dispatch.core////PointingToDeclaration/"></a>
+            <div class="table-row" data-filterable-current=":dispatch-core:dokkaHtml/main" data-filterable-set=":dispatch-core:dokkaHtml/main">
+              <div class="main-subrow "><span><a href="dispatch.core/index.html">dispatch.core</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="dispatch.core////PointingToDeclaration/"><svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21.2496 5.3C20.3496 4.5 19.2496 4 18.0496 4C16.8496 4 15.6496 4.5 14.8496 5.3L10.3496 9.8L11.7496 11.2L16.2496 6.7C17.2496 5.7 18.8496 5.7 19.8496 6.7C20.8496 7.7 20.8496 9.3 19.8496 10.3L15.3496 14.8L16.7496 16.2L21.2496 11.7C22.1496 10.8 22.5496 9.7 22.5496 8.5C22.5496 7.3 22.1496 6.2 21.2496 5.3Z"/>
+    <path d="M8.35 16.7998C7.35 17.7998 5.75 17.7998 4.75 16.7998C3.75 15.7998 3.75 14.1998 4.75 13.1998L9.25 8.6998L7.85 7.2998L3.35 11.7998C1.55 13.5998 1.55 16.3998 3.35 18.1998C4.25 19.0998 5.35 19.4998 6.55 19.4998C7.75 19.4998 8.85 19.0998 9.75 18.1998L14.25 13.6998L12.85 12.2998L8.35 16.7998Z"/>
+</svg></span>
+                    <div class="copy-popup-wrapper "><svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 9C18 14 14 18 9 18C4 18 0 14 0 9C0 4 4 0 9 0C14 0 18 4 18 9ZM14.2 6.2L12.8 4.8L7.5 10.1L5.3 7.8L3.8 9.2L7.5 13L14.2 6.2Z" fill="#4DBB5F"/>
+</svg><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#container"><svg fill="none" height="10" viewBox="0 0 12 10" width="12" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.3337 9.66683H0.666992L6.00033 3.66683L11.3337 9.66683Z" fill="black"/>
+    <path d="M0.666992 0.333496H11.3337V1.66683H0.666992V0.333496Z" fill="black"/>
+</svg></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"><svg fill="none" height="8" viewBox="0 0 8 8" width="8" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 0H2.3949L4.84076 2.44586L0 7.28662L0.713376 8L5.55414 3.15924L8 5.6051V0Z" fill="black"/>
+</svg></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+

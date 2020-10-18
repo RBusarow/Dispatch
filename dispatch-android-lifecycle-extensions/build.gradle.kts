@@ -16,7 +16,6 @@
 plugins {
   id(Plugins.androidLibrary)
   id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinAndroidExtensions)
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -45,27 +44,32 @@ android {
 
 dependencies {
 
-  implementation(Libs.AndroidX.Lifecycle.common)
-  testImplementation(Libs.AndroidX.Lifecycle.runtime)
-
-  implementation(Libs.JakeWharton.timber)
-
-  implementation(Libs.Kotlin.stdlib)
-
-  implementation(Libs.Kotlinx.Coroutines.android)
-  implementation(Libs.Kotlinx.Coroutines.core)
+  api(Libs.AndroidX.Fragment.core)
+  api(Libs.AndroidX.Lifecycle.common)
+  api(Libs.Kotlinx.Coroutines.core)
+  api(Libs.Kotlinx.Coroutines.coreJvm)
 
   api(project(":dispatch-android-lifecycle"))
-  api(project(":dispatch-core"))
-  testImplementation(project(":dispatch-test-junit5"))
-  testImplementation(project(":dispatch-internal-test"))
 
+  implementation(Libs.Kotlin.stdlib)
+  implementation(Libs.Kotlinx.Coroutines.android)
+
+  implementation(project(":dispatch-core"))
+
+  testImplementation(Libs.AndroidX.Lifecycle.runtime)
+  testImplementation(Libs.AndroidX.Test.Arch.core)
+  testImplementation(Libs.AndroidX.Test.Espresso.core)
+  testImplementation(Libs.AndroidX.Test.runner)
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
   testImplementation(Libs.Kotlinx.Coroutines.test)
+  testImplementation(Libs.RickBusarow.Hermit.junit5)
+  testImplementation(Libs.Robolectric.core)
 
-  testImplementation(Libs.AndroidX.Test.runner)
-  testImplementation(Libs.AndroidX.Test.Espresso.core)
+  testImplementation(project(":dispatch-internal-test"))
+  testImplementation(project(":dispatch-internal-test-android"))
+  testImplementation(project(":dispatch-test-junit4"))
+  testImplementation(project(":dispatch-test-junit5"))
 }

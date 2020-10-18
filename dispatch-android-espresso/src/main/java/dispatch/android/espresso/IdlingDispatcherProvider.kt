@@ -61,7 +61,7 @@ class IdlingDispatcherProvider(
  *
  * @param delegate *optional* Use this [DispatcherProvider] to create a single [IdlingDispatcher]
  * which is used as all properties for the [IdlingDispatcherProvider].
- * Uses a [DefaultDispatcherProvider] if no instance provided.
+ * Uses [DefaultDispatcherProvider.get] if no instance provided.
  *
  * @see IdlingResource
  * @see DispatcherProvider
@@ -69,7 +69,7 @@ class IdlingDispatcherProvider(
  * @see CoroutineDispatcher
  */
 fun IdlingDispatcherProvider(
-  delegate: DispatcherProvider = DefaultDispatcherProvider()
+  delegate: DispatcherProvider = DefaultDispatcherProvider.get()
 ): IdlingDispatcherProvider = IdlingDispatcherProvider(
   default = IdlingDispatcher(delegate.default),
   io = IdlingDispatcher(delegate.io),

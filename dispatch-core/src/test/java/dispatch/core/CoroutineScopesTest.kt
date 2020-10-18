@@ -17,7 +17,6 @@ package dispatch.core
 
 import dispatch.internal.test.*
 import io.kotest.matchers.*
-import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
@@ -73,7 +72,7 @@ internal class CoroutineScopesTest {
 
         val scope = DefaultCoroutineScope()
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -117,7 +116,7 @@ internal class CoroutineScopesTest {
 
         val scope = DefaultCoroutineScope(EmptyCoroutineContext)
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -165,7 +164,7 @@ internal class CoroutineScopesTest {
 
         val scope = IOCoroutineScope()
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -209,7 +208,7 @@ internal class CoroutineScopesTest {
 
         val scope = IOCoroutineScope(EmptyCoroutineContext)
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -256,7 +255,7 @@ internal class CoroutineScopesTest {
 
         val scope = MainCoroutineScope()
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -300,7 +299,7 @@ internal class CoroutineScopesTest {
 
         val scope = MainCoroutineScope(EmptyCoroutineContext)
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -349,7 +348,7 @@ internal class CoroutineScopesTest {
 
         val scope = MainImmediateCoroutineScope()
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -394,7 +393,7 @@ internal class CoroutineScopesTest {
 
         val scope = MainImmediateCoroutineScope(EmptyCoroutineContext)
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -441,7 +440,7 @@ internal class CoroutineScopesTest {
 
         val scope = UnconfinedCoroutineScope()
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test
@@ -485,7 +484,7 @@ internal class CoroutineScopesTest {
 
         val scope = UnconfinedCoroutineScope(EmptyCoroutineContext)
 
-        scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+        scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
       }
 
       @Test

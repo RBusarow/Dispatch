@@ -31,14 +31,15 @@ object Modules {
     ":dispatch-core:samples",
     ":dispatch-detekt",
     ":dispatch-internal-test",
+    ":dispatch-internal-test-android",
     ":dispatch-sample",
-    "dispatch-test",
-    "dispatch-test-junit4",
-    "dispatch-test-junit4:samples",
-    "dispatch-test-junit5",
-    "dispatch-test-junit5:samples",
-    "dispatch-test:samples",
-    "dispatch-test:samples"
+    ":dispatch-test",
+    ":dispatch-test-junit4",
+    ":dispatch-test-junit4:samples",
+    ":dispatch-test-junit5",
+    ":dispatch-test-junit5:samples",
+    ":dispatch-test:samples",
+    ":dispatch-test:samples"
   )
   val allInternalPaths = allPaths.filter { it.matches(internalRegex) }
   val allProductionPaths = allPaths.filter { !it.matches(internalRegex, sampleRegex) }

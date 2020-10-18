@@ -17,6 +17,9 @@ package dispatch.android.lifecycle
 
 import dispatch.core.*
 import dispatch.internal.test.*
+import dispatch.internal.test.android.*
+import hermit.test.*
+import hermit.test.junit.*
 import io.kotest.matchers.*
 import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
@@ -26,7 +29,7 @@ import kotlin.coroutines.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class LifecycleScopeFactoryTest {
+internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
   val job = Job()
   val dispatcher = newSingleThreadContext("single thread dispatcher")
@@ -38,8 +41,11 @@ internal class LifecycleScopeFactoryTest {
 
   val mainDispatcher = newSingleThreadContext("main dispatcher")
 
+  val lifecycleOwner by resets { FakeLifecycleOwner() }
+
   @BeforeAll
   fun beforeAll() {
+    LifecycleScopeFactory.reset()
     Dispatchers.setMain(mainDispatcher)
   }
 
@@ -54,25 +60,23 @@ internal class LifecycleScopeFactoryTest {
   }
 
   @Test
-  fun `default factory should be a default MainImmediateCoroutineScope`() = runBlockingTest {
+  fun `default factory should be a default MainImmediateContext`() = runBlockingTest {
 
-    val scope = LifecycleScopeFactory.create()
+    val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
-    scope.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    scope.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
 
     scope.coroutineContext[Job]!!.shouldBeSupervisorJob()
 
     scope.coroutineContext[ContinuationInterceptor] shouldBe Dispatchers.Main
-
-    scope.shouldBeInstanceOf<MainImmediateCoroutineScope>()
   }
 
   @Test
   fun `a custom factory should be used after being set`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    LifecycleScopeFactory.set { originContext }
 
-    val scope = LifecycleScopeFactory.create()
+    val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
     scope.coroutineContext shouldEqualFolded originContext + mainDispatcher
   }
@@ -80,17 +84,17 @@ internal class LifecycleScopeFactoryTest {
   @Test
   fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
 
-    LifecycleScopeFactory.set { MainImmediateCoroutineScope(originContext) }
+    LifecycleScopeFactory.set { originContext }
 
-    val custom = LifecycleScopeFactory.create()
+    val custom = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
     custom.coroutineContext shouldEqualFolded originContext + mainDispatcher
 
     LifecycleScopeFactory.reset()
 
-    val default = LifecycleScopeFactory.create()
+    val default = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
-    default.coroutineContext[DispatcherProvider]!!.shouldBeTypeOf<DefaultDispatcherProvider>()
+    default.coroutineContext[DispatcherProvider] shouldBe DefaultDispatcherProvider.get()
 
     default.coroutineContext[Job]!!.shouldBeSupervisorJob()
 

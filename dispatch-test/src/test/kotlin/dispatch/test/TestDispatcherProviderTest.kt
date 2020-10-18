@@ -22,6 +22,7 @@ import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
 import java.util.concurrent.atomic.*
 
+@Suppress("HardCodedDispatcher")
 @ExperimentalCoroutinesApi
 internal class TestDispatcherProviderTest {
 
