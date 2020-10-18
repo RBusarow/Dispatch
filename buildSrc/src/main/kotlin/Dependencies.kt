@@ -84,14 +84,14 @@ object BuildPlugins {
 object Libs {
 
   object AndroidX {
-    const val activity = "androidx.activity:activity-ktx:1.0.0"
-    const val appcompat = "androidx.appcompat:appcompat:1.1.0"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
-    const val coreKtx = "androidx.core:core-ktx:1.1.0"
+    const val activity = "androidx.activity:activity-ktx:1.1.0"
+    const val appcompat = "androidx.appcompat:appcompat:1.2.0"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.2"
+    const val coreKtx = "androidx.core:core-ktx:1.3.2"
 
     object Fragment {
 
-      private const val version = "1.2.0"
+      private const val version = "1.2.5"
 
       const val core = "androidx.fragment:fragment:$version"
       const val ktx = "androidx.fragment:fragment-ktx:$version"
@@ -113,10 +113,10 @@ object Libs {
     }
 
     object Test {
-      private const val version = "1.2.0"
+      private const val version = "1.3.0"
 
       const val core = "androidx.test:core:$version"
-      const val jUnit = "androidx.test.ext:junit:1.1.1"
+      const val jUnit = "androidx.test.ext:junit:1.1.2"
       const val orchestrator = "androidx.test:orchestrator:$version"
       const val rules = "androidx.test:rules:$version"
       const val runner = "androidx.test:runner:$version"
@@ -128,7 +128,7 @@ object Libs {
 
       object Espresso {
 
-        private const val version = "3.2.0"
+        private const val version = "3.3.0"
 
         const val contrib = "androidx.test.espresso:espresso-contrib:$version"
         const val core = "androidx.test.espresso:espresso-core:$version"
