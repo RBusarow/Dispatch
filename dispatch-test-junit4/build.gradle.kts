@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.atomicFu)
-  id(Plugins.kotlin)
+  kotlin("jvm")
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -27,8 +27,6 @@ dependencies {
 
   api(project(":dispatch-core"))
   api(project(":dispatch-test"))
-
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.core)
   implementation(Libs.Kotlinx.Coroutines.coreJvm)
 

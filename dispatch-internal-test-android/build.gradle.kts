@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
+  kotlin("android")
 }
 
 android {
@@ -50,6 +50,5 @@ dependencies {
 
   implementation(Libs.AndroidX.Lifecycle.runtimeKtx)
   implementation(Libs.Kotlin.reflect)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
 }

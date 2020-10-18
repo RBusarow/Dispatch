@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
+  kotlin("android")
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -54,7 +54,6 @@ dependencies {
   implementation(Libs.AndroidX.Lifecycle.liveData)
   implementation(Libs.AndroidX.Lifecycle.liveDataKtx)
   implementation(Libs.AndroidX.Lifecycle.runtime)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
 
   testImplementation(Libs.AndroidX.Lifecycle.runtime)

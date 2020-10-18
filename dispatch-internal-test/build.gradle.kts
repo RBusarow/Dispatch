@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.atomicFu)
-  id(Plugins.kotlin)
+  kotlin("jvm")
 }
 
 dependencies {
@@ -32,7 +32,6 @@ dependencies {
   implementation(Libs.Kotest.commonJvm)
   implementation(Libs.Kotest.runner)
   implementation(Libs.Kotlin.reflect)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlin.test)
   implementation(Libs.Kotlin.testCommon)
   implementation(Libs.Kotlinx.Coroutines.test)

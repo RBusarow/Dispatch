@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
+  kotlin("android")
 }
 
 android {
@@ -46,7 +46,6 @@ dependencies {
   implementation(Libs.AndroidX.Lifecycle.viewModel)
   implementation(Libs.JUnit.jUnit4)
   implementation(Libs.JUnit.jUnit5Api)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.core)
 
   implementation(project(":dispatch-android-lifecycle"))

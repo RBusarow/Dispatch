@@ -16,14 +16,12 @@
 import kotlinx.atomicfu.plugin.gradle.*
 
 plugins {
-  id(Plugins.kotlin)
+  kotlin("jvm")
 }
 
 sourceSets["test"].java.srcDir("test")
 
 dependencies {
-
-  implementation(Libs.Kotlin.stdlib)
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
