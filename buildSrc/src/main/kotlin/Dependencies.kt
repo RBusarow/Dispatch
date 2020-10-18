@@ -167,7 +167,7 @@ object Libs {
   object JUnit {
     const val jUnit4 = "junit:junit:4.12"
 
-    private const val version = "5.6.2"
+    private const val version = "5.7.0"
 
     const val jUnit5 = "org.junit.jupiter:junit-jupiter:$version"
     const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:$version"
