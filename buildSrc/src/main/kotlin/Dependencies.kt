@@ -149,11 +149,7 @@ object Libs {
   }
 
   object Detekt {
-    /*
-    TODO - When updating, check to see if Spek and AssertJ can be removed from :detekt:extensions
-    https://github.com/detekt/detekt/issues/3082
-     */
-    const val version = "1.14.1"
+    const val version = "1.14.2"
     const val api = "io.gitlab.arturbosch.detekt:detekt-api:$version"
     const val cli = "io.gitlab.arturbosch.detekt:detekt-cli:$version"
     const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
