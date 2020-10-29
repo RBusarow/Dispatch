@@ -21,7 +21,7 @@ import kotlinx.coroutines.*
 import java.util.concurrent.CancellationException
 import kotlin.coroutines.*
 
-internal class LifecycleCoroutineScopeBinding(
+internal class DispatchLifecycleScopeBinding(
   private val lifecycle: Lifecycle,
   private val coroutineContext: CoroutineContext
 ) : LifecycleEventObserver {
@@ -36,7 +36,7 @@ internal class LifecycleCoroutineScopeBinding(
         if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
           cancelDestroyed()
         } else {
-          lifecycle.addObserver(this@LifecycleCoroutineScopeBinding)
+          lifecycle.addObserver(this@DispatchLifecycleScopeBinding)
         }
       }
     }

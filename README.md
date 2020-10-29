@@ -166,7 +166,7 @@ import kotlinx.coroutines.flow.*
 class MyActivity : Activity() {
 
   init {
-    lifecycleScope.launchOnCreate {
+    dispatchLifecycleScope.launchOnCreate {
           viewModel.someFlow.collect {
             channel.send("$it")
           }
@@ -175,7 +175,7 @@ class MyActivity : Activity() {
 }
 ```
 
-The [LifecycleCoroutineScope] may be configured with any dispatcher, since
+The [DispatchLifecycleScope] may be configured with any dispatcher, since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -271,7 +271,7 @@ class MyViewModel : CoroutineViewModel() {
 }
 ```
 
-The [LifecycleCoroutineScope] may be configured with any dispatcher, since
+The [DispatchLifecycleScope] may be configured with any dispatcher, since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -338,8 +338,8 @@ fun `sayHello should say hello`() = runBlockingProvided {
 | **artifact**                            | **features**                                   |
 | --------------------------------------  | ---------------------------------------------- |
 | [dispatch-android-espresso]             | [IdlingDispatcher] <p> [IdlingDispatcherProvider]
-| [dispatch-android-lifecycle-extensions] | [lifecycleScope]
-| [dispatch-android-lifecycle]            | [LifecycleCoroutineScope] <p> [launchOnCreate] <p> [launchOnStart] <p> [launchOnResume] <p> [onNextCreate] <p> [onNextStart] <p> [onNextResume]
+| [dispatch-android-lifecycle-extensions] | [dispatchLifecycleScope]
+| [dispatch-android-lifecycle]            | [DispatchLifecycleScope] <p> [launchOnCreate] <p> [launchOnStart] <p> [launchOnResume] <p> [onNextCreate] <p> [onNextStart] <p> [onNextResume]
 | [dispatch-android-viewmodel]            | [CoroutineViewModel] <p> [viewModelScope]
 | [dispatch-core]                         | Dispatcher-specific types and factories <p> Dispatcher-specific coroutine builders
 | [dispatch-detekt]                       | [Detekt] rules for common auto-imported-the-wrong-thing problems
@@ -474,17 +474,17 @@ limitations under the License.
 [IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher-provider/index.html
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
-[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.html
-[launchOnCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-create.html
-[launchOnStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-start.html
-[launchOnResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/launch-on-resume.html
+[DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
+[LifecycleScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleScopeFactory//PointingToDeclaration/
+[launchOnCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-create.html
+[launchOnStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-start.html
+[launchOnResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-resume.html
 [onNextCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-create.html
 [onNextStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-start.html
 [onNextResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-resume.html
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
-[LifecycleScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/-lifecycle-scope-factory/index.html
-[lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
+[dispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/dispatchLifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
 [CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-coroutine-view-model/index.html

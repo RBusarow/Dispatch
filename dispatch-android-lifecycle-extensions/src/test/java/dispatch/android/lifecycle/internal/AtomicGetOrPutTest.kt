@@ -16,7 +16,7 @@
 package dispatch.android.lifecycle.internal
 
 import androidx.lifecycle.*
-import dispatch.android.lifecycle.LifecycleCoroutineScope
+import dispatch.android.lifecycle.DispatchLifecycleScope
 import dispatch.core.*
 import dispatch.internal.test.android.*
 import dispatch.test.*
@@ -40,7 +40,7 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
 
         val main = newSingleThreadContext("main")
 
-        val storeMap = ConcurrentHashMap<Lifecycle, LifecycleCoroutineScope>()
+        val storeMap = ConcurrentHashMap<Lifecycle, DispatchLifecycleScope>()
 
         val lifecycleOwner = FakeLifecycleOwner(Lifecycle.State.INITIALIZED)
 
@@ -58,13 +58,13 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
             lock.await()
 
             storeMap.atomicGetOrPut(androidLifecycle) {
-              val scope = LifecycleCoroutineScope(
+              val scope = DispatchLifecycleScope(
                 lifecycle = androidLifecycle,
                 coroutineScope = MainImmediateCoroutineScope(Job(), TestDispatcherProvider(main))
               )
               withContext(main) {
 
-                androidLifecycle.addObserver(LifecycleCoroutineScopeStore)
+                androidLifecycle.addObserver(DispatchLifecycleScopeStore)
               }
               scope
             }
