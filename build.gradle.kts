@@ -14,6 +14,7 @@
  */
 @file:Suppress("MagicNumber")
 
+import com.github.benmanes.gradle.versions.updates.*
 import formatting.*
 import io.gitlab.arturbosch.detekt.*
 import kotlinx.knit.*
@@ -35,7 +36,6 @@ buildscript {
 
     classpath(BuildPlugins.androidGradlePlugin)
     classpath(BuildPlugins.atomicFu)
-    classpath(BuildPlugins.benManesVersions)
     classpath(BuildPlugins.binaryCompatibility)
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath(BuildPlugins.gradleMavenPublish)
@@ -44,6 +44,7 @@ buildscript {
 }
 
 plugins {
+  id(Plugins.benManes) version Versions.benManes
   id(Plugins.dependencyAnalysis) version Versions.dependencyAnalysis
   id(Plugins.gradleDoctor) version Versions.gradleDoctor
   id(Plugins.detekt) version Libs.Detekt.version
@@ -310,5 +311,19 @@ dependencyAnalysis {
     all {
       ignoreKtx(false) // default is false
     }
+  }
+}
+
+
+fun isNonStable(version: String): Boolean {
+  val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+  val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+  val isStable = stableKeyword || regex.matches(version)
+  return isStable.not()
+}
+
+tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
+  rejectVersionIf {
+    isNonStable(candidate.version) && !isNonStable(currentVersion)
   }
 }
