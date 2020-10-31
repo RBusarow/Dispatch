@@ -18,8 +18,8 @@ The artifact I hope you don't need, but if you're not doing dependency injection
 ```Kotlin
 import dispatch.android.*
 
-// CoroutineViewModel is just a ViewModel with a lazy viewModelScope
-class SomeViewModel : CoroutineViewModel() {
+// DispatchViewModel is just a ViewModel with a lazy viewModelScope
+class SomeViewModel : DispatchViewModel() {
   // ...
 
   init {
@@ -113,7 +113,7 @@ Consider this example:
 
 ``` kotlin
 // Don't do this
-class SomeViewModel : CoroutineViewModel() {
+class SomeViewModel : DispatchViewModel() {
 
   init {
     viewModelScope.launch {
@@ -141,7 +141,7 @@ class SomeFragment : Fragment() {
   }
 }
 
-class SomeViewModel : CoroutineViewModel() {
+class SomeViewModel : DispatchViewModel() {
 
   // a single shot request is made using the viewModelScope
   val lazyData by lazy {
@@ -176,9 +176,9 @@ repositories {
 
 dependencies {
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta05")
 }
 ```
 

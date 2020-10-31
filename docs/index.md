@@ -85,7 +85,7 @@ interface DispatcherProvider : CoroutineContext.Element {
 
 val someCoroutineScope = CoroutineScope(
   Job() + Dispatchers.Main + DispatcherProvider()
-) 
+)
 ```
 
 The default implementation of this interface simply delegates to that [Dispatchers] singleton,
@@ -115,7 +115,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 
   fun foo() = coroutineScope.launch {
     // because of the dependency type,
-    // we're guaranteed to be on the main dispatcher even though we didn't specify it 
+    // we're guaranteed to be on the main dispatcher even though we didn't specify it
   }
 
 }
@@ -166,7 +166,7 @@ import kotlinx.coroutines.flow.*
 class MyActivity : Activity() {
 
   init {
-    lifecycleScope.launchOnCreate {
+    dispatchLifecycleScope.launchOnCreate {
           viewModel.someFlow.collect {
             channel.send("$it")
           }
@@ -175,7 +175,7 @@ class MyActivity : Activity() {
 }
 ```
 
-The [LifecycleCoroutineScope] may be configured with any dispatcher, since
+The [DispatchLifecycleScope] may be configured with any dispatcher, since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -271,7 +271,7 @@ class MyViewModel : CoroutineViewModel() {
 }
 ```
 
-The [LifecycleCoroutineScope] may be configured with any dispatcher, since
+The [DispatchLifecycleScope] may be configured with any dispatcher, since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -338,8 +338,8 @@ fun `sayHello should say hello`() = runBlockingProvided {
 | **artifact**                            | **features**                                   |
 | --------------------------------------  | ---------------------------------------------- |
 | [dispatch-android-espresso]             | [IdlingDispatcher] <p> [IdlingDispatcherProvider]
-| [dispatch-android-lifecycle-extensions] | [lifecycleScope]
-| [dispatch-android-lifecycle]            | [LifecycleCoroutineScope] <p> [launchOnCreate] <p> [launchOnStart] <p> [launchOnResume] <p> [onNextCreate] <p> [onNextStart] <p> [onNextResume]
+| [dispatch-android-lifecycle-extensions] | [dispatchLifecycleScope]
+| [dispatch-android-lifecycle]            | [DispatchLifecycleScope] <p> [launchOnCreate] <p> [launchOnStart] <p> [launchOnResume] <p> [onNextCreate] <p> [onNextStart] <p> [onNextResume]
 | [dispatch-android-viewmodel]            | [CoroutineViewModel] <p> [viewModelScope]
 | [dispatch-core]                         | Dispatcher-specific types and factories <p> Dispatcher-specific coroutine builders
 | [dispatch-detekt]                       | [Detekt] rules for common auto-imported-the-wrong-thing problems
@@ -361,53 +361,53 @@ dependencies {
   */
 
   // core coroutines
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-  
-  // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts  
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04") 
-  
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+
+  // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta05")
+
   // LifecycleCoroutineScope for Android Fragments, Activities, etc.
-  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta04")
-  
+  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta05")
+
   // lifecycleScope extension function with a settable factory.  Use this if you don't DI your CoroutineScopes
   // This provides :dispatch-android-lifecycle via "api", so you don't need to declare both
-  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta04")
-  
+  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta05")
+
   // ViewModelScope for Android ViewModels
-  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta04")
-  
-  
+  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta05")
+
+
   /*
   jvm testing
   */
-   
+
   // core coroutines-test
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
-  
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0")
+
   // you only need this if you don't have the -junit4 or -junit5 artifacts
-  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta04")
-  
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta05")
+
   // CoroutineTestRule and :dispatch-test
   // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit5
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
-  
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta05")
+
   // CoroutineTest, CoroutineTestExtension, and :dispatch-test
   // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit4
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
-  
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta05")
+
   /*
   Android testing
   */
 
   // core android
-  androidTestImplementation("androidx.test:runner:1.2.0") 
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
-  
+  androidTestImplementation("androidx.test:runner:1.3.0")
+  androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+
   // IdlingDispatcher, IdlingDispatcherProvider, and IdlingCoroutineScope
-  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta04") 
+  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta05")
 }
 ```
 
@@ -474,7 +474,7 @@ limitations under the License.
 [IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher-provider/index.html
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
-[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleCoroutineScope//PointingToDeclaration/
+[DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
 [LifecycleScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleScopeFactory//PointingToDeclaration/
 [launchOnCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-create.html
 [launchOnStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-start.html
@@ -484,11 +484,11 @@ limitations under the License.
 [onNextResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-resume.html
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
-[lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
+[dispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/dispatchLifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
-[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-coroutine-view-model/index.html
-[viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-coroutine-view-model/index.html#dispatch.android.viewmodel/CoroutineViewModel/viewModelScope/#/PointingToDeclaration/
+[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
+[viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html#dispatch.android.viewmodel/DispatchViewModel/viewModelScope/#/PointingToDeclaration/
 [ViewModelScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-view-model-scope-factory/index.html
 <!--- END -->
 
