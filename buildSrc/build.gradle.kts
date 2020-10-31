@@ -33,5 +33,5 @@ dependencies {
 
   implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.4.10") // update Dependencies.kt as well
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10") // update Dependencies.kt as well
-  implementation("com.android.tools.build:gradle:4.0.0") // update Dependencies.kt as well
+  implementation("com.android.tools.build:gradle:4.1.0") // update Dependencies.kt as well
 }
