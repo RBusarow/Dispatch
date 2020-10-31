@@ -90,7 +90,7 @@
 <!--- INDEX  -->
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
-[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-lifecycle-coroutine-scope/index.html
+[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleCoroutineScope//PointingToDeclaration/
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
 [lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/

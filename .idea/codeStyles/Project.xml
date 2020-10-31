@@ -60,12 +60,6 @@
         <option name="TAB_SIZE" value="2" />
       </indentOptions>
     </codeStyleSettings>
-    <codeStyleSettings language="Markdown">
-      <option name="RIGHT_MARGIN" value="-1" />
-      <indentOptions>
-        <option name="INDENT_SIZE" value="2" />
-      </indentOptions>
-    </codeStyleSettings>
     <codeStyleSettings language="XML">
       <indentOptions>
         <option name="CONTINUATION_INDENT_SIZE" value="4" />
