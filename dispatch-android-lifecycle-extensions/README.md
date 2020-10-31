@@ -139,9 +139,9 @@ repositories {
 
 dependencies {
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta05")
 
   implementation("androidx.lifecycle:lifecycle-common:2.2.0")
 }
