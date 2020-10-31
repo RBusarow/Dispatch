@@ -36,22 +36,23 @@ object Plugins {
 
   const val mavenPublish = "com.vanniktech.maven.publish"
   const val taskTree = "com.dorongold.task-tree"
+  const val benManes = "com.github.ben-manes.versions"
 }
 
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "1.4.10"
-  const val dependencyAnalysis = "0.59.0"
+  const val dependencyAnalysis = "0.64.0"
   const val knit = "0.2.2"
-  const val gradleDoctor = "0.6.2"
+  const val gradleDoctor = "0.6.3"
 
   const val compileSdk = 29
   const val minSdk = "21"
   const val targetSdk = 29
 
   const val binaryCompatibility = "0.2.3"
-  const val benManes = "0.27.0"
-  const val gradleWrapper = "4.0.0"
+  const val benManes = "0.33.0"
+  const val gradleWrapper = "4.1.0"
   const val dagger = "2.25.2"
   const val kotlin = "1.4.10"
   const val mavenPublish = "0.13.0"
@@ -69,7 +70,7 @@ object BuildPlugins {
 
   const val binaryCompatibility =
     "org.jetbrains.kotlinx:binary-compatibility-validator:${Versions.binaryCompatibility}"
-  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.3"
+  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.4"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -86,7 +87,7 @@ object Libs {
   object AndroidX {
     const val activity = "androidx.activity:activity-ktx:1.1.0"
     const val appcompat = "androidx.appcompat:appcompat:1.2.0"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.2"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val coreKtx = "androidx.core:core-ktx:1.3.2"
 
     object Fragment {
@@ -173,7 +174,7 @@ object Libs {
   }
 
   object Kotest {
-    private const val version = "4.3.0"
+    private const val version = "4.3.1"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
     const val assertionsShared = "io.kotest:kotest-assertions-shared-jvm:$version"
     const val commonJvm = "io.kotest:kotest-common-jvm:$version"

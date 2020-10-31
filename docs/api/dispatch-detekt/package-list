@@ -1,6 +1,0 @@
-$dokka.format:html-v1
-$dokka.linkExtension:html
-
-dispatch.detekt
-dispatch.detekt.rules
-
