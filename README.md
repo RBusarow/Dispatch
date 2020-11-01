@@ -175,7 +175,7 @@ class MyActivity : Activity() {
 }
 ```
 
-The [DispatchLifecycleScope] may be configured with any dispatcher, since
+The [DispatchLifecycleScope][DispatchLifecycleScope-class] may be configured with any dispatcher, since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -271,7 +271,7 @@ class MyViewModel : CoroutineViewModel() {
 }
 ```
 
-The [DispatchLifecycleScope] may be configured with any dispatcher, since
+The [DispatchLifecycleScope][DispatchLifecycleScope-class] may be configured with any dispatcher, since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -338,8 +338,8 @@ fun `sayHello should say hello`() = runBlockingProvided {
 | **artifact**                            | **features**                                   |
 | --------------------------------------  | ---------------------------------------------- |
 | [dispatch-android-espresso]             | [IdlingDispatcher] <p> [IdlingDispatcherProvider]
-| [dispatch-android-lifecycle-extensions] | [dispatchLifecycleScope]
-| [dispatch-android-lifecycle]            | [DispatchLifecycleScope] <p> [launchOnCreate] <p> [launchOnStart] <p> [launchOnResume] <p> [onNextCreate] <p> [onNextStart] <p> [onNextResume]
+| [dispatch-android-lifecycle-extensions] | [dispatchLifecycleScope][dispatchLifecycleScope-extension]
+| [dispatch-android-lifecycle]            | [DispatchLifecycleScope][DispatchLifecycleScope-class] <p> [launchOnCreate] <p> [launchOnStart] <p> [launchOnResume] <p> [onNextCreate] <p> [onNextStart] <p> [onNextResume]
 | [dispatch-android-viewmodel]            | [CoroutineViewModel] <p> [viewModelScope]
 | [dispatch-core]                         | Dispatcher-specific types and factories <p> Dispatcher-specific coroutine builders
 | [dispatch-detekt]                       | [Detekt] rules for common auto-imported-the-wrong-thing problems
@@ -465,7 +465,6 @@ limitations under the License.
 [IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher-provider/index.html
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
-[DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
 [LifecycleScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleScopeFactory//PointingToDeclaration/
 [launchOnCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-create.html
 [launchOnStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-start.html
@@ -475,7 +474,6 @@ limitations under the License.
 [onNextResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-resume.html
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
-[dispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/dispatchLifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
 [CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
@@ -521,3 +519,6 @@ limitations under the License.
 [ViewModel.onCleared]: https://developer.android.com/reference/androidx/lifecycle/ViewModel#onCleared()
 [ViewModel]: https://developer.android.com/reference/androidx/lifecycle/ViewModel
 
+
+[DispatchLifecycleScope-class]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
+[dispatchLifecycleScope-extension]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/dispatchLifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/

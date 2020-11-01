@@ -1,5 +1,22 @@
 # Change log for Dispatch
 
+## Version 1.0.0-beta05
+
+### Api changes
+* [ViewLifecycleCoroutineScope] is a special [DispatchLifecycleScope] meant for binding a scope to a [Fragment]'s **view** lifecycle. ([#179](https://github.com/RBusarow/Dispatch/issues/179))  
+* Make [testProvided] receive [TestProvidedCoroutineScope] ([#157](https://github.com/RBusarow/Dispatch/issues/157))
+* [LifecycleCoroutineScope] has been renamed to [DispatchLifecycleScope], along with its extension function. The old names are still functional with a deprecated typealias.  They will be removed in the future. ([#186](https://github.com/RBusarow/Dispatch/pull/186))  
+* [CoroutineViewModel] has been renamed to [DispatchViewModel]. The old names are still functional with a deprecated typealias.  They will be removed in the future. ([#186](https://github.com/RBusarow/Dispatch/pull/186))
+
+### Bug fixes
+* Use [currentCoroutineContext] to resolve the inner [CoroutineContext] in `flowOn___` functions. ([#181](https://github.com/RBusarow/Dispatch/issues/181))  
+
+### Housekeeping
+* Set the project JDK target to 8. This only affects the build environment since all previous builds were done on a JDK 8 machine. ([#187](https://github.com/RBusarow/Dispatch/pull/187))  
+* Coroutines has been updated to 1.4.0 ([#183](https://github.com/RBusarow/Dispatch/pull/183))
+* Detekt has been updated to 1.4.2 ([#184](https://github.com/RBusarow/Dispatch/pull/184))
+* JUnit6 has been updated to 5.7.0 ([#178](https://github.com/RBusarow/Dispatch/pull/178))
+
 ## Version 1.0.0-beta04
 
 ### Features
@@ -80,6 +97,7 @@
 [DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
+[testProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/test-provided.html
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
 <!--- MODULE dispatch-test-junit4-->
 <!--- INDEX  -->
@@ -90,15 +108,20 @@
 <!--- INDEX  -->
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
+[ViewLifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/index.html
+[DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
 [LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleCoroutineScope//PointingToDeclaration/
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
 [lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
+[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
+[DispatchViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html
 [viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html#dispatch.android.viewmodel/DispatchViewModel/viewModelScope/#/PointingToDeclaration/
 <!--- END -->
 
+[Fragment]: https://developer.android.com/reference/androidx/fragment/app/Fragment
 [Android Lifecycle]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.html
 [androidx-lifecycleScope]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44
 [Detekt]: https://github.com/detekt/detekt
@@ -111,3 +134,6 @@
 [dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/index.html
 [dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/index.html
 [IdlingResource]: https://developer.android.com/training/testing/espresso/idling-resource
+
+[CoroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
+[currentCoroutineContext]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/current-coroutine-context
