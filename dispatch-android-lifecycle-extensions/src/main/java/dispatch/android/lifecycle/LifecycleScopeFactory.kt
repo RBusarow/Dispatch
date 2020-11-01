@@ -22,7 +22,7 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
 /**
- * Factory holder for [LifecycleCoroutineScope]'s.
+ * Factory holder for [DispatchLifecycleScope]'s.
  *
  * By default, `create` returns a [MainImmediateContext].
  *
@@ -35,19 +35,19 @@ import kotlin.coroutines.*
  * [reset] may be used to reset the factory to default at any time.
  *
  * @see MainImmediateContext
- * @see LifecycleCoroutineScope
- * @see LifecycleCoroutineScopeFactory
+ * @see DispatchLifecycleScope
+ * @see DispatchLifecycleScopeFactory
  * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
  * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
  */
 object LifecycleScopeFactory {
 
-  private val defaultFactory: LifecycleCoroutineScopeFactory
-    get() = LifecycleCoroutineScopeFactory { MainImmediateContext() }
+  private val defaultFactory: DispatchLifecycleScopeFactory
+    get() = DispatchLifecycleScopeFactory { MainImmediateContext() }
 
   private var factoryInstance = defaultFactory
 
-  internal fun create(lifecycle: Lifecycle): LifecycleCoroutineScope =
+  internal fun create(lifecycle: Lifecycle): DispatchLifecycleScope =
     factoryInstance.create(lifecycle)
 
   /**
@@ -75,7 +75,7 @@ object LifecycleScopeFactory {
    * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
    */
   @Suppress("UNUSED")
-  public fun set(factory: LifecycleCoroutineScopeFactory) {
+  public fun set(factory: DispatchLifecycleScopeFactory) {
     factoryInstance = factory
   }
 
@@ -95,7 +95,7 @@ object LifecycleScopeFactory {
    */
   @Suppress("UNUSED")
   public fun set(factory: () -> CoroutineContext) {
-    factoryInstance = LifecycleCoroutineScopeFactory(factory)
+    factoryInstance = DispatchLifecycleScopeFactory(factory)
   }
 
 }

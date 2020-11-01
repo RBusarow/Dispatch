@@ -42,7 +42,7 @@ class LifecycleSuspendSample(
       var invocations = 0
 
       init {
-        lifecycleScope.launchMainImmediate {
+        dispatchLifecycleScope.launchMainImmediate {
           onNextCreate { invocations++ }
         }
       }
@@ -66,7 +66,7 @@ class LifecycleSuspendSample(
       var invocations = 0
 
       init {
-        lifecycleScope.launchMainImmediate {
+        dispatchLifecycleScope.launchMainImmediate {
           lifecycle.onNextCreate { invocations++ }
         }
       }
@@ -90,7 +90,7 @@ class LifecycleSuspendSample(
       var invocations = 0
 
       init {
-        lifecycleScope.launchMainImmediate {
+        dispatchLifecycleScope.launchMainImmediate {
           onNextStart { invocations++ }
         }
       }
@@ -119,7 +119,7 @@ class LifecycleSuspendSample(
       var invocations = 0
 
       init {
-        lifecycleScope.launchMainImmediate {
+        dispatchLifecycleScope.launchMainImmediate {
           lifecycle.onNextStart { invocations++ }
         }
       }
@@ -148,7 +148,7 @@ class LifecycleSuspendSample(
       var invocations = 0
 
       init {
-        lifecycleScope.launchMainImmediate {
+        dispatchLifecycleScope.launchMainImmediate {
           onNextResume { invocations++ }
         }
       }
@@ -177,7 +177,7 @@ class LifecycleSuspendSample(
       var invocations = 0
 
       init {
-        lifecycleScope.launchMainImmediate {
+        dispatchLifecycleScope.launchMainImmediate {
           lifecycle.onNextResume { invocations++ }
         }
       }

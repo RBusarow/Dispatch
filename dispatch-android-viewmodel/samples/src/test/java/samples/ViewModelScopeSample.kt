@@ -26,7 +26,7 @@ class ViewModelScopeSample {
   @Sample
   fun viewModelScopeSample() {
 
-    class SomeViewModel : CoroutineViewModel() {
+    class SomeViewModel : DispatchViewModel() {
 
       init {
 

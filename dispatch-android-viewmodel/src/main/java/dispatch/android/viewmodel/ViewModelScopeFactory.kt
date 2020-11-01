@@ -20,7 +20,7 @@ import dispatch.core.*
 import kotlinx.coroutines.*
 
 /**
- * Factory holder for [viewModelScope][dispatch.android.viewmodel.CoroutineViewModel.viewModelScope]'s.
+ * Factory holder for [viewModelScope][dispatch.android.viewmodel.DispatchViewModel.viewModelScope]'s.
  *
  * By default, `create` returns a [MainImmediateCoroutineScope], but may return any [CoroutineScope].
  *

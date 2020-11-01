@@ -16,7 +16,7 @@
 package samples
 
 import dispatch.android.lifecycle.*
-import dispatch.android.lifecycle.LifecycleCoroutineScope.MinimumStatePolicy.*
+import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.*
 import dispatch.core.*
 import dispatch.test.*
 import io.kotest.matchers.*
@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.*
 
 @CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeSample {
+class DispatchLifecycleScopeSample {
 
   @Sample
   fun lifecycleCoroutineScopeFromScopeSample() = runBlocking {
@@ -36,7 +36,7 @@ class LifecycleCoroutineScopeSample {
       coroutineScope: CoroutineScope // could be any type of CoroutineScope
     ) : Fragment() {
 
-      val lifecycleScope = LifecycleCoroutineScope(lifecycle, coroutineScope)
+      val lifecycleScope = DispatchLifecycleScope(lifecycle, coroutineScope)
 
       init {
 
@@ -68,7 +68,7 @@ class LifecycleCoroutineScopeSample {
 
       val context = Job() + DispatcherProvider()
 
-      val lifecycleScope = LifecycleCoroutineScope(lifecycle, context)
+      val lifecycleScope = DispatchLifecycleScope(lifecycle, context)
 
       init {
 
@@ -98,7 +98,7 @@ class LifecycleCoroutineScopeSample {
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {
 
-      val lifecycleScope = LifecycleCoroutineScope(lifecycle)
+      val lifecycleScope = DispatchLifecycleScope(lifecycle)
 
       init {
 
@@ -141,7 +141,7 @@ class LifecycleCoroutineScopeSample {
 
       init {
 
-        lifecycleScope.launchOnCreate(minimumStatePolicy = CANCEL) {
+        dispatchLifecycleScope.launchOnCreate(minimumStatePolicy = CANCEL) {
           viewModel.someFlow.collect {
             channel.send("$it")
           }
@@ -191,7 +191,7 @@ class LifecycleCoroutineScopeSample {
 
       init {
 
-        lifecycleScope.launchOnCreate {
+        dispatchLifecycleScope.launchOnCreate {
           viewModel.someFlow.collect {
             channel.send("$it")
           }
@@ -240,7 +240,7 @@ class LifecycleCoroutineScopeSample {
       val viewModel = SomeViewModel()
 
       init {
-        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) {
+        dispatchLifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) {
           viewModel.someFlow.collect {
             channel.send("$it")
           }
@@ -291,7 +291,7 @@ class LifecycleCoroutineScopeSample {
       val viewModel = SomeViewModel()
 
       init {
-        lifecycleScope.launchOnStart {
+        dispatchLifecycleScope.launchOnStart {
           viewModel.someFlow.collect {
             channel.send("$it")
           }
@@ -356,7 +356,7 @@ class LifecycleCoroutineScopeSample {
       val viewModel = SomeViewModel()
 
       init {
-        lifecycleScope.launchOnResume(minimumStatePolicy = CANCEL) {
+        dispatchLifecycleScope.launchOnResume(minimumStatePolicy = CANCEL) {
           viewModel.someFlow.collect {
             channel.send("$it")
           }
@@ -407,7 +407,7 @@ class LifecycleCoroutineScopeSample {
       val viewModel = SomeViewModel()
 
       init {
-        lifecycleScope.launchOnResume {
+        dispatchLifecycleScope.launchOnResume {
           viewModel.someFlow.collect {
             channel.send("$it")
           }

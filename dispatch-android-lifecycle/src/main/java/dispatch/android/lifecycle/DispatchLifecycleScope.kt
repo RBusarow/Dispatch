@@ -32,6 +32,12 @@ public fun MainImmediateContext(): CoroutineContext {
   return SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
 }
 
+@Deprecated(
+  "Use DispatchLifecycleScope to avoid collisions with the Androidx library",
+  replaceWith = ReplaceWith("DispatchLifecycleScope")
+)
+typealias LifecycleCoroutineScope = DispatchLifecycleScope
+
 /**
  * [MainImmediateCoroutineScope] which is tied to a [Lifecycle].
  *
@@ -43,8 +49,8 @@ public fun MainImmediateContext(): CoroutineContext {
  * This `CoroutineScope`'s [Job] will be cancelled automatically
  * as soon as the `lifecycle` reaches [DESTROYED][Lifecycle.State.DESTROYED].
  *
- * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeDefaultSample
- * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeFromContextSample
+ * @sample samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeDefaultSample
+ * @sample samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeFromContextSample
  * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
  * @param coroutineContext the source CoroutineContext which will be converted to a [MainImmediateCoroutineScope].
  * Its [Elements][CoroutineContext.Element] will be re-used, except:
@@ -52,13 +58,13 @@ public fun MainImmediateContext(): CoroutineContext {
  * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
  * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
  */
-open class LifecycleCoroutineScope(
+open class DispatchLifecycleScope(
   val lifecycle: Lifecycle,
   coroutineContext: CoroutineContext = MainImmediateContext()
 ) : MainImmediateCoroutineScope by MainImmediateCoroutineScope(coroutineContext) {
 
   init {
-    LifecycleCoroutineScopeBinding(lifecycle, coroutineContext).bind()
+    DispatchLifecycleScopeBinding(lifecycle, coroutineContext).bind()
   }
 
   /**
@@ -77,8 +83,8 @@ open class LifecycleCoroutineScope(
    * there is no returning from below a [CREATED][Lifecycle.State.CREATED] state,
    * so the [minimumStatePolicy][MinimumStatePolicy] is largely irrelevant.
    *
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnCreateOnceSample
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnCreateRestartingSample
+   * @sample samples.DispatchLifecycleScopeSample.launchOnCreateOnceSample
+   * @sample samples.DispatchLifecycleScopeSample.launchOnCreateRestartingSample
    */
   fun launchOnCreate(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -99,8 +105,8 @@ open class LifecycleCoroutineScope(
    * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
    * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnStartOnceSample
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnStartRestartingSample
+   * @sample samples.DispatchLifecycleScopeSample.launchOnStartOnceSample
+   * @sample samples.DispatchLifecycleScopeSample.launchOnStartRestartingSample
    */
   fun launchOnStart(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -121,8 +127,8 @@ open class LifecycleCoroutineScope(
    * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
    * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnResumeOnceSample
-   * @sample samples.LifecycleCoroutineScopeSample.launchOnResumeRestartingSample
+   * @sample samples.DispatchLifecycleScopeSample.launchOnResumeOnceSample
+   * @sample samples.DispatchLifecycleScopeSample.launchOnResumeRestartingSample
    */
   fun launchOnResume(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -173,7 +179,7 @@ open class LifecycleCoroutineScope(
      * If this `CoroutineScope` has a [Job], it will be cancelled automatically
      * as soon as the `lifecycle` reaches [DESTROYED][Lifecycle.State.DESTROYED].
      *
-     * @sample samples.LifecycleCoroutineScopeSample.lifecycleCoroutineScopeFromScopeSample
+     * @sample samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeFromScopeSample
      * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
      * @param coroutineScope the source CoroutineScope which will be converted to a [MainImmediateCoroutineScope].
      * Its [CoroutineContext][kotlin.coroutines.CoroutineContext] will be re-used, except:
@@ -184,7 +190,7 @@ open class LifecycleCoroutineScope(
     operator fun invoke(
       lifecycle: Lifecycle,
       coroutineScope: CoroutineScope
-    ): LifecycleCoroutineScope = LifecycleCoroutineScope(
+    ): DispatchLifecycleScope = DispatchLifecycleScope(
       lifecycle, coroutineScope.coroutineContext
     )
 
