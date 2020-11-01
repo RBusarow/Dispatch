@@ -19,6 +19,11 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.*
 
+/**
+ * **Deprecated** in favor of [DispatchViewModel].
+ *
+ * @see DispatchViewModel
+ */
 @Deprecated(
   "Use DispatchViewModel",
   replaceWith = ReplaceWith("DispatchViewModel")

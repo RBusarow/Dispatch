@@ -18,6 +18,11 @@ package dispatch.android.lifecycle
 import androidx.lifecycle.*
 import kotlin.coroutines.*
 
+/**
+ * **Deprecated** in favor of [DispatchLifecycleScopeFactory] in order to avoid name collisions with Androidx.
+ *
+ * @see DispatchLifecycleScopeFactory
+ */
 @Deprecated(
   "Use DispatchLifecycleScopeFactory to avoid collisions with the Androidx library",
   replaceWith = ReplaceWith("DispatchLifecycleScopeFactory")

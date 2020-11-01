@@ -32,6 +32,11 @@ public fun MainImmediateContext(): CoroutineContext {
   return SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
 }
 
+/**
+ * **Deprecated** in favor of [DispatchLifecycleScope] in order to avoid name collisions with Androidx.
+ *
+ * @see DispatchLifecycleScope
+ */
 @Deprecated(
   "Use DispatchLifecycleScope to avoid collisions with the Androidx library",
   replaceWith = ReplaceWith("DispatchLifecycleScope")
@@ -166,6 +171,7 @@ open class DispatchLifecycleScope(
     RESTART_EVERY
   }
 
+  /** @suppress */
   companion object {
 
     /**
