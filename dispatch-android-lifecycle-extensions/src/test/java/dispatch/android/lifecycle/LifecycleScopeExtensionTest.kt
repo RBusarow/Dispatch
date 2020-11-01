@@ -32,8 +32,8 @@ import java.util.concurrent.*
 @ExperimentalCoroutinesApi
 internal class LifecycleScopeExtensionTest : HermitJUnit5() {
 
-  val storeMap: MutableMap<Lifecycle, LifecycleCoroutineScope> =
-    LifecycleCoroutineScopeStore.getPrivateObjectFieldByName("map")
+  val storeMap: MutableMap<Lifecycle, DispatchLifecycleScope> =
+    DispatchLifecycleScopeStore.getPrivateObjectFieldByName("map")
 
   @BeforeEach
   fun beforeEach() {
@@ -57,7 +57,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
     @Nested
     inner class `scope is created` {
 
-      val scope by resets { lifecycleOwner.lifecycleScope }
+      val scope by resets { lifecycleOwner.dispatchLifecycleScope }
 
       @Test
       fun `scope and job should already be cancelled`() = runBlocking {
@@ -77,7 +77,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
       @Test
       fun `additional scopes should be unique`() {
 
-        lifecycleOwner.lifecycleScope shouldNotBe scope
+        lifecycleOwner.dispatchLifecycleScope shouldNotBe scope
       }
     }
   }
@@ -90,7 +90,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
     @Nested
     inner class `scope is created` {
 
-      val scope by resets { lifecycleOwner.lifecycleScope }
+      val scope by resets { lifecycleOwner.dispatchLifecycleScope }
 
       @Test
       fun `scope and job should be active`() {
@@ -109,7 +109,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
       @Test
       fun `repeated access should return the same scope`() {
 
-        lifecycleOwner.lifecycleScope shouldBe scope
+        lifecycleOwner.dispatchLifecycleScope shouldBe scope
       }
 
       @Nested
@@ -154,14 +154,14 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
         val all = List(200) {
           async(dispatcher) {
             lock.await()
-            lifecycleOwner.lifecycleScope
+            lifecycleOwner.dispatchLifecycleScope
           }
         }
 
         yield()
         lock.complete(Unit)
 
-        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.dispatchLifecycleScope)
       }
     }
   }
@@ -174,7 +174,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
     @Nested
     inner class `scope is created` {
 
-      val scope by resets { lifecycleOwner.lifecycleScope }
+      val scope by resets { lifecycleOwner.dispatchLifecycleScope }
 
       @Test
       fun `scope and job should be active`() {
@@ -193,7 +193,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
       @Test
       fun `repeated access should return the same scope`() {
 
-        lifecycleOwner.lifecycleScope shouldBe scope
+        lifecycleOwner.dispatchLifecycleScope shouldBe scope
       }
 
       @Nested
@@ -235,14 +235,14 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
         val all = List(200) {
           async(dispatcher) {
             lock.await()
-            lifecycleOwner.lifecycleScope
+            lifecycleOwner.dispatchLifecycleScope
           }
         }
 
         yield()
         lock.complete(Unit)
 
-        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.dispatchLifecycleScope)
       }
     }
   }
@@ -255,7 +255,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
     @Nested
     inner class `scope is created` {
 
-      val scope by resets { lifecycleOwner.lifecycleScope }
+      val scope by resets { lifecycleOwner.dispatchLifecycleScope }
 
       @Test
       fun `scope and job should be active`() {
@@ -274,7 +274,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
       @Test
       fun `repeated access should return the same scope`() {
 
-        lifecycleOwner.lifecycleScope shouldBe scope
+        lifecycleOwner.dispatchLifecycleScope shouldBe scope
       }
 
       @Nested
@@ -316,14 +316,14 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
         val all = List(200) {
           async(dispatcher) {
             lock.await()
-            lifecycleOwner.lifecycleScope
+            lifecycleOwner.dispatchLifecycleScope
           }
         }
 
         yield()
         lock.complete(Unit)
 
-        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.dispatchLifecycleScope)
       }
     }
   }
@@ -336,7 +336,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
     @Nested
     inner class `scope is created` {
 
-      val scope by resets { lifecycleOwner.lifecycleScope }
+      val scope by resets { lifecycleOwner.dispatchLifecycleScope }
 
       @Test
       fun `scope and job should be active`() {
@@ -355,7 +355,7 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
       @Test
       fun `repeated access should return the same scope`() {
 
-        lifecycleOwner.lifecycleScope shouldBe scope
+        lifecycleOwner.dispatchLifecycleScope shouldBe scope
       }
 
       @Nested
@@ -398,14 +398,14 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
         val all = List(200) {
           async(dispatcher) {
             lock.await()
-            lifecycleOwner.lifecycleScope
+            lifecycleOwner.dispatchLifecycleScope
           }
         }
 
         yield()
         lock.complete(Unit)
 
-        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.lifecycleScope)
+        all.awaitAll().distinct() shouldBe listOf(lifecycleOwner.dispatchLifecycleScope)
       }
     }
   }

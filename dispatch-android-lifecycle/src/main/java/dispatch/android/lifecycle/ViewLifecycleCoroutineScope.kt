@@ -23,12 +23,12 @@ import kotlinx.coroutines.flow.*
 import kotlin.coroutines.*
 
 /**
- * [LifecycleCoroutineScope] instance which is tied to a [Fragment's][Fragment] View [lifecycle][Lifecycle].
+ * [DispatchLifecycleScope] instance which is tied to a [Fragment's][Fragment] View [lifecycle][Lifecycle].
  */
 class ViewLifecycleCoroutineScope internal constructor(
   lifecycle: Lifecycle,
   coroutineContext: CoroutineContext
-) : LifecycleCoroutineScope(lifecycle, coroutineContext) {
+) : DispatchLifecycleScope(lifecycle, coroutineContext) {
 
   /**
    * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches [CREATED][androidx.lifecycle.Lifecycle.State.CREATED], create a new coroutine and collect this [Flow].

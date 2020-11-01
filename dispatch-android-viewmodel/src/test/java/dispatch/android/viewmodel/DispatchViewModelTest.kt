@@ -27,7 +27,7 @@ import kotlin.coroutines.*
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class CoroutineViewModelTest {
+internal class DispatchViewModelTest {
 
   val job = Job()
   val dispatcher = newSingleThreadContext("single thread dispatcher")
@@ -118,6 +118,6 @@ internal class CoroutineViewModelTest {
     scope.isActive shouldBe false
   }
 
-  class TestViewModel : CoroutineViewModel()
+  class TestViewModel : DispatchViewModel()
 
 }

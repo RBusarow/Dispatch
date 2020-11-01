@@ -1,12 +1,13 @@
+public final class dispatch/android/lifecycle/LifecycleOwnerKt {
+	public static final fun getDispatchLifecycleScope (Landroidx/lifecycle/LifecycleOwner;)Ldispatch/android/lifecycle/DispatchLifecycleScope;
+	public static final fun getLifecycleScope (Landroidx/lifecycle/LifecycleOwner;)Ldispatch/android/lifecycle/DispatchLifecycleScope;
+}
+
 public final class dispatch/android/lifecycle/LifecycleScopeFactory {
 	public static final field INSTANCE Ldispatch/android/lifecycle/LifecycleScopeFactory;
 	public final fun reset ()V
-	public final fun set (Ldispatch/android/lifecycle/LifecycleCoroutineScopeFactory;)V
+	public final fun set (Ldispatch/android/lifecycle/DispatchLifecycleScopeFactory;)V
 	public final fun set (Lkotlin/jvm/functions/Function0;)V
-}
-
-public final class dispatch/android/lifecycle/LifecycleScopeKt {
-	public static final fun getLifecycleScope (Landroidx/lifecycle/LifecycleOwner;)Ldispatch/android/lifecycle/LifecycleCoroutineScope;
 }
 
 public final class dispatch/android/lifecycle/WithViewLifecycleScopeKt {

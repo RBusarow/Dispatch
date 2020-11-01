@@ -30,13 +30,13 @@ import kotlin.coroutines.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class LifecycleCoroutineScopeTest : HermitJUnit5() {
+class DispatchLifecycleScopeTest : HermitJUnit5() {
 
   val testScope by resets { TestProvidedCoroutineScope(context = Job()) }
 
   val lifecycleOwner by resets { FakeLifecycleOwner() }
   val lifecycle by resets { lifecycleOwner.lifecycle }
-  val scope by resets { LifecycleCoroutineScope(lifecycle, testScope) }
+  val scope by resets { DispatchLifecycleScope(lifecycle, testScope) }
 
   @Nested
   inner class cancellation {
@@ -46,7 +46,7 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
       lifecycleOwner.destroy()
 
-      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+      val scope = DispatchLifecycleScope(lifecycle, testScope)
 
       scope.isActive shouldBe false
     }
@@ -56,7 +56,7 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
       lifecycleOwner.create()
 
-      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+      val scope = DispatchLifecycleScope(lifecycle, testScope)
 
       scope.isActive shouldBe true
 
@@ -70,7 +70,7 @@ class LifecycleCoroutineScopeTest : HermitJUnit5() {
 
       lifecycleOwner.create()
 
-      val scope = LifecycleCoroutineScope(lifecycle, testScope)
+      val scope = DispatchLifecycleScope(lifecycle, testScope)
 
       lifecycle.observerCount shouldBe 1
 

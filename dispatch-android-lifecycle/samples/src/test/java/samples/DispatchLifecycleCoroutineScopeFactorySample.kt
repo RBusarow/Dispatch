@@ -17,19 +17,19 @@ package samples
 
 import dispatch.android.lifecycle.*
 
-class LifecycleCoroutineScopeFactorySample {
+class DispatchLifecycleScopeFactorySample {
 
   @Sample
   fun factorySample() {
 
     @Provides
-    fun provideFactory(): LifecycleCoroutineScopeFactory = LifecycleCoroutineScopeFactory {
+    fun provideFactory(): DispatchLifecycleScopeFactory = DispatchLifecycleScopeFactory {
       // other elements are added automatically
       MyCustomElement()
     }
 
     class MyFragment @Inject constructor(
-      factory: LifecycleCoroutineScopeFactory
+      factory: DispatchLifecycleScopeFactory
     ) : Fragment() {
 
       val lifecycleScope = factory.create(lifecycle)

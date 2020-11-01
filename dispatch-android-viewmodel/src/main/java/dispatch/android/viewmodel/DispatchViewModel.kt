@@ -19,6 +19,12 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.*
 
+@Deprecated(
+  "Use DispatchViewModel",
+  replaceWith = ReplaceWith("DispatchViewModel")
+)
+typealias CoroutineViewModel = DispatchViewModel
+
 /**
  * Base class for [ViewModel]s which will be using a [viewModelScope].
  *
@@ -33,12 +39,12 @@ import java.util.concurrent.atomic.*
  *
  * @sample samples.ViewModelScopeSample.viewModelScopeSample
  */
-abstract class CoroutineViewModel : ViewModel() {
+abstract class DispatchViewModel : ViewModel() {
 
   private val _coroutineScope = AtomicReference<CoroutineScope?>(null)
 
   /**
-   * [CoroutineScope] instance for the [CoroutineViewModel].
+   * [CoroutineScope] instance for the [DispatchViewModel].
    * By default, it uses the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher
    *
    * The `viewModelScope` instance is created automatically upon first access

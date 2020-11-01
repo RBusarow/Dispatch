@@ -18,23 +18,29 @@ package dispatch.android.lifecycle
 import androidx.lifecycle.*
 import kotlin.coroutines.*
 
+@Deprecated(
+  "Use DispatchLifecycleScopeFactory to avoid collisions with the Androidx library",
+  replaceWith = ReplaceWith("DispatchLifecycleScopeFactory")
+)
+typealias LifecycleScopeFactory = DispatchLifecycleScopeFactory
+
 /**
- * Factory for [LifecycleCoroutineScope]s.  This may be injected into a lifecycle-aware class
+ * Factory for [DispatchLifecycleScope]s.  This may be injected into a lifecycle-aware class
  * to provide custom [CoroutineContexts][CoroutineContext].
  *
- * @sample samples.LifecycleCoroutineScopeFactorySample.factorySample
+ * @sample samples.DispatchLifecycleScopeFactorySample.factorySample
  * @param coroutineContextFactory the lambda defining the creating of a [CoroutineContext]
  */
-public class LifecycleCoroutineScopeFactory(
+public class DispatchLifecycleScopeFactory(
   private val coroutineContextFactory: () -> CoroutineContext
 ) {
 
   /**
-   * Creates a new [LifecycleCoroutineScope] using `coroutineContextFactory`
+   * Creates a new [DispatchLifecycleScope] using `coroutineContextFactory`
    *
-   * @param lifecycle the lifecycle which will be bound to the [LifecycleCoroutineScope]
+   * @param lifecycle the lifecycle which will be bound to the [DispatchLifecycleScope]
    */
   public fun create(
     lifecycle: Lifecycle
-  ): LifecycleCoroutineScope = LifecycleCoroutineScope(lifecycle, coroutineContextFactory.invoke())
+  ): DispatchLifecycleScope = DispatchLifecycleScope(lifecycle, coroutineContextFactory.invoke())
 }

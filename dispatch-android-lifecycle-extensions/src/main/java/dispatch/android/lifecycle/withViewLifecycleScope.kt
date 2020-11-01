@@ -29,4 +29,4 @@ import kotlinx.coroutines.*
 @ExperimentalCoroutinesApi
 fun Fragment.withViewLifecycleScope(
   block: ViewLifecycleCoroutineScope.() -> Unit
-): Job = lifecycleScope.withViewLifecycle(this, block)
+): Job = dispatchLifecycleScope.withViewLifecycle(this, block)

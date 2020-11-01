@@ -22,10 +22,10 @@ import dispatch.core.*
 import java.util.concurrent.*
 
 @Suppress("MagicNumber")
-internal object LifecycleCoroutineScopeStore : LifecycleEventObserver {
+internal object DispatchLifecycleScopeStore : LifecycleEventObserver {
 
   // ConcurrentHashMap can miss "put___" operations on API 21/22 https://issuetracker.google.com/issues/37042460
-  private val map: MutableMap<Lifecycle, LifecycleCoroutineScope> =
+  private val map: MutableMap<Lifecycle, DispatchLifecycleScope> =
     if (Build.VERSION.SDK_INT < 23) {
       mutableMapOf()
     } else {
@@ -38,7 +38,7 @@ internal object LifecycleCoroutineScopeStore : LifecycleEventObserver {
     }
   }
 
-  fun get(lifecycle: Lifecycle): LifecycleCoroutineScope {
+  fun get(lifecycle: Lifecycle): DispatchLifecycleScope {
 
     if (lifecycle.currentState <= Lifecycle.State.DESTROYED) {
       return LifecycleScopeFactory.create(lifecycle)
@@ -63,13 +63,13 @@ internal object LifecycleCoroutineScopeStore : LifecycleEventObserver {
     }
   }
 
-  private fun bindLifecycle(lifecycle: Lifecycle): LifecycleCoroutineScope {
+  private fun bindLifecycle(lifecycle: Lifecycle): DispatchLifecycleScope {
 
     val scope = LifecycleScopeFactory.create(lifecycle)
 
     scope.launchMainImmediate {
       if (lifecycle.currentState >= Lifecycle.State.INITIALIZED) {
-        lifecycle.addObserver(this@LifecycleCoroutineScopeStore)
+        lifecycle.addObserver(this@DispatchLifecycleScopeStore)
       }
     }
 
