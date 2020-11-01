@@ -135,6 +135,17 @@ subprojects {
   }
 }
 
+allprojects {
+  // force Java 8 source when building java-only artifacts.  This is different than the Kotlin jvm target.
+  pluginManager.withPlugin("java") {
+    configure<JavaPluginExtension> {
+      sourceCompatibility = JavaVersion.VERSION_1_8
+      targetCompatibility = JavaVersion.VERSION_1_8
+    }
+  }
+}
+
+
 subprojects {
   tasks.withType<KotlinCompile>()
     .configureEach {
