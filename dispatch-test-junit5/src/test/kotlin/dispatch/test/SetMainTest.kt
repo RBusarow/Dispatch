@@ -21,6 +21,7 @@ import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.*
 
+@Suppress("HardCodedDispatcher")
 @ExperimentalCoroutinesApi
 class SetMainTest {
 

@@ -71,13 +71,13 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta05")
 
   // the junit4 artifact also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta05")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0")
 }
 ```
 
@@ -95,14 +95,14 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta05")
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation("ccom.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta03")
-  testImplementation("ccom.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta03")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta05")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta05")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0")
 }
 ```
 
@@ -114,8 +114,6 @@ dependencies {
 <!--- INDEX  -->
 [TestCoroutineRule]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/-test-coroutine-rule/index.html
 <!--- END -->
-
-[cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
 
 [dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
 [TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html

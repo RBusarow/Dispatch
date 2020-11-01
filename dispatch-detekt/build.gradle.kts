@@ -14,21 +14,20 @@
  */
 
 plugins {
-  id(Plugins.kotlin)
+  kotlin("jvm")
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
 
 dependencies {
 
-  implementation(Libs.Detekt.api)
-  implementation(Libs.Kotlin.stdlib)
+  api(Libs.Detekt.api)
+  api(Libs.Kotlin.compiler)
 
   testImplementation(Libs.Detekt.api)
   testImplementation(Libs.Detekt.test)
   testImplementation(Libs.JUnit.jUnit5Api)
   testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
 

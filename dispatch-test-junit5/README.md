@@ -101,14 +101,14 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta05")
 
   // the junit5 artifact also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta04")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8")
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta05")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
 ```
 
@@ -126,16 +126,16 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta05")
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta04")
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta04")
-  testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
-  testImplementation("org.junit.vintage:junit-vintage-engine:5.6.2")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta05")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta05")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
+  testImplementation("org.junit.vintage:junit-vintage-engine:5.7.0")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0")
 }
 ```
 
@@ -160,8 +160,6 @@ dependencies {
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
 <!--- END -->
-
-[cleanupTestCoroutines]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/cleanup-test-coroutines.html
 
 [dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
 

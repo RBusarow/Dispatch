@@ -17,7 +17,6 @@ package dispatch.core
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlin.coroutines.*
 
 /**
  * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
@@ -29,7 +28,7 @@ import kotlin.coroutines.*
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
-  flowOn(coroutineContext.dispatcherProvider.default)
+  flowOn(currentCoroutineContext().dispatcherProvider.default)
     .collect { emit(it) }
 }
 
@@ -43,7 +42,7 @@ public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
-  flowOn(coroutineContext.dispatcherProvider.io)
+  flowOn(currentCoroutineContext().dispatcherProvider.io)
     .collect { emit(it) }
 }
 
@@ -57,7 +56,7 @@ public fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
-  flowOn(coroutineContext.dispatcherProvider.main)
+  flowOn(currentCoroutineContext().dispatcherProvider.main)
     .collect { emit(it) }
 }
 
@@ -71,7 +70,7 @@ public fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
-  flowOn(coroutineContext.dispatcherProvider.mainImmediate)
+  flowOn(currentCoroutineContext().dispatcherProvider.mainImmediate)
     .collect { emit(it) }
 }
 
@@ -85,6 +84,6 @@ public fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
  */
 @ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnUnconfined(): Flow<T> = flow {
-  flowOn(coroutineContext.dispatcherProvider.unconfined)
+  flowOn(currentCoroutineContext().dispatcherProvider.unconfined)
     .collect { emit(it) }
 }

@@ -21,6 +21,10 @@ object Plugins {
   const val atomicFu = "kotlinx-atomicfu"
   const val binaryCompatilibity = "binary-compatibility-validator"
 
+  const val dependencyAnalysis = "com.autonomousapps.dependency-analysis"
+  const val detekt = "io.gitlab.arturbosch.detekt"
+  const val gradleDoctor = "com.osacky.doctor"
+
   const val dokka = "org.jetbrains.dokka"
   const val knit = "kotlinx-knit"
 
@@ -31,25 +35,30 @@ object Plugins {
   const val kotlinAndroidExtensions = "kotlin-android-extensions"
 
   const val mavenPublish = "com.vanniktech.maven.publish"
+  const val taskTree = "com.dorongold.task-tree"
+  const val benManes = "com.github.ben-manes.versions"
 }
 
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "1.4.10"
+  const val dependencyAnalysis = "0.64.0"
   const val knit = "0.2.2"
+  const val gradleDoctor = "0.6.3"
 
   const val compileSdk = 29
   const val minSdk = "21"
   const val targetSdk = 29
 
   const val binaryCompatibility = "0.2.3"
-  const val benManes = "0.27.0"
-  const val gradleWrapper = "4.0.0"
+  const val benManes = "0.33.0"
+  const val gradleWrapper = "4.1.0"
   const val dagger = "2.25.2"
-  const val kotlin = "1.3.70"
+  const val kotlin = "1.4.10"
   const val mavenPublish = "0.13.0"
 
-  const val versionName = "1.0.0-beta04"
+  const val taskTree = "1.5"
+  const val versionName = "1.0.0-beta05"
 }
 
 object BuildPlugins {
@@ -61,7 +70,7 @@ object BuildPlugins {
 
   const val binaryCompatibility =
     "org.jetbrains.kotlinx:binary-compatibility-validator:${Versions.binaryCompatibility}"
-  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.3"
+  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.4"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -76,14 +85,14 @@ object BuildPlugins {
 object Libs {
 
   object AndroidX {
-    const val activity = "androidx.activity:activity-ktx:1.0.0"
-    const val appcompat = "androidx.appcompat:appcompat:1.1.0"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
-    const val coreKtx = "androidx.core:core-ktx:1.1.0"
+    const val activity = "androidx.activity:activity-ktx:1.1.0"
+    const val appcompat = "androidx.appcompat:appcompat:1.2.0"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+    const val coreKtx = "androidx.core:core-ktx:1.3.2"
 
     object Fragment {
 
-      private const val version = "1.2.0"
+      private const val version = "1.2.5"
 
       const val core = "androidx.fragment:fragment:$version"
       const val ktx = "androidx.fragment:fragment-ktx:$version"
@@ -96,16 +105,19 @@ object Libs {
 
       const val common = "androidx.lifecycle:lifecycle-common:$version"
       const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
-      const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
-      const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
-      const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+      const val liveData = "androidx.lifecycle:lifecycle-livedata-core:$version"
+      const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
+      const val runtime = "androidx.lifecycle:lifecycle-runtime:$version"
+      const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
+      const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:$version"
+      const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
 
     object Test {
-      private const val version = "1.2.0"
+      private const val version = "1.3.0"
 
       const val core = "androidx.test:core:$version"
-      const val jUnit = "androidx.test.ext:junit:1.1.1"
+      const val jUnit = "androidx.test.ext:junit:1.1.2"
       const val orchestrator = "androidx.test:orchestrator:$version"
       const val rules = "androidx.test:rules:$version"
       const val runner = "androidx.test:runner:$version"
@@ -117,10 +129,11 @@ object Libs {
 
       object Espresso {
 
-        private const val version = "3.2.0"
+        private const val version = "3.3.0"
 
         const val contrib = "androidx.test.espresso:espresso-contrib:$version"
         const val core = "androidx.test.espresso:espresso-core:$version"
+        const val idlingResource = "androidx.test.espresso:espresso-idling-resource:$version"
         const val intents = "androidx.test.espresso:espresso-intents:$version"
         const val web = "androidx.test.espresso:espresso-web:$version"
       }
@@ -137,7 +150,7 @@ object Libs {
   }
 
   object Detekt {
-    const val version = "1.10.0"
+    const val version = "1.14.2"
     const val api = "io.gitlab.arturbosch.detekt:detekt-api:$version"
     const val cli = "io.gitlab.arturbosch.detekt:detekt-cli:$version"
     const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
@@ -151,7 +164,7 @@ object Libs {
   object JUnit {
     const val jUnit4 = "junit:junit:4.12"
 
-    private const val version = "5.6.2"
+    private const val version = "5.7.0"
 
     const val jUnit5 = "org.junit.jupiter:junit-jupiter:$version"
     const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:$version"
@@ -161,14 +174,16 @@ object Libs {
   }
 
   object Kotest {
-    private const val version = "4.1.1"
+    private const val version = "4.3.1"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
-    const val consoleRunner = "io.kotest:kotest-runner-console-jvm:$version"
+    const val assertionsShared = "io.kotest:kotest-assertions-shared-jvm:$version"
+    const val commonJvm = "io.kotest:kotest-common-jvm:$version"
     const val properties = "io.kotest:kotest-property-jvm:$version"
     const val runner = "io.kotest:kotest-runner-junit5-jvm:$version"
   }
 
   object Kotlin {
+    const val compiler = "org.jetbrains.kotlin:kotlin-compiler-embeddable:${Versions.kotlin}"
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -176,11 +191,13 @@ object Libs {
     const val test = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
     const val testCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
   }
+
   object Kotlinx {
 
     object Coroutines {
-      private const val version = "1.3.8"
+      private const val version = "1.4.0"
       const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+      const val coreJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$version"
       const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
       const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
     }
@@ -229,6 +246,6 @@ object Libs {
   }
 
   object Robolectric {
-    const val core = "org.robolectric:robolectric:4.3.1"
+    const val core = "org.robolectric:robolectric:4.4"
   }
 }

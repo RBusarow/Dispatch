@@ -15,8 +15,7 @@
 
 plugins {
   id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinAndroidExtensions)
+  kotlin("android")
 }
 
 android {
@@ -41,11 +40,15 @@ android {
   }
 }
 dependencies {
-  implementation(Libs.AndroidX.Fragment.core)
-  implementation(Libs.AndroidX.Lifecycle.common)
-  implementation(Libs.AndroidX.Lifecycle.runtime)
+
+  api(Libs.AndroidX.Fragment.core)
+  api(Libs.AndroidX.Lifecycle.common)
+  api(Libs.AndroidX.Lifecycle.liveData)
+  api(Libs.AndroidX.Lifecycle.runtime)
+  api(Libs.Kotlinx.Coroutines.core)
+  api(Libs.Kotlinx.Coroutines.coreJvm)
+
+  implementation(Libs.AndroidX.Lifecycle.runtimeKtx)
   implementation(Libs.Kotlin.reflect)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
-  implementation(Libs.Kotlinx.Coroutines.core)
 }

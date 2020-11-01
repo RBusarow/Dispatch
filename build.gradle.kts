@@ -12,9 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 @file:Suppress("MagicNumber")
 
+import com.github.benmanes.gradle.versions.updates.*
+import formatting.*
 import io.gitlab.arturbosch.detekt.*
 import kotlinx.knit.*
 import kotlinx.validation.*
@@ -35,7 +36,6 @@ buildscript {
 
     classpath(BuildPlugins.androidGradlePlugin)
     classpath(BuildPlugins.atomicFu)
-    classpath(BuildPlugins.benManesVersions)
     classpath(BuildPlugins.binaryCompatibility)
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath(BuildPlugins.gradleMavenPublish)
@@ -44,12 +44,15 @@ buildscript {
 }
 
 plugins {
-  id("io.gitlab.arturbosch.detekt") version Libs.Detekt.version
-  kotlin("jvm") version Versions.kotlin
+  id(Plugins.benManes) version Versions.benManes
+  id(Plugins.dependencyAnalysis) version Versions.dependencyAnalysis
+  id(Plugins.gradleDoctor) version Versions.gradleDoctor
+  id(Plugins.detekt) version Libs.Detekt.version
+  kotlin("jvm")
   id(Plugins.dokka) version Versions.dokka
+  id(Plugins.taskTree) version Versions.taskTree
+  base
 }
-
-apply(plugin = "base")
 
 allprojects {
 
@@ -132,6 +135,17 @@ subprojects {
   }
 }
 
+allprojects {
+  // force Java 8 source when building java-only artifacts.  This is different than the Kotlin jvm target.
+  pluginManager.withPlugin("java") {
+    configure<JavaPluginExtension> {
+      sourceCompatibility = JavaVersion.VERSION_1_8
+      targetCompatibility = JavaVersion.VERSION_1_8
+    }
+  }
+}
+
+
 subprojects {
   tasks.withType<KotlinCompile>()
     .configureEach {
@@ -175,31 +189,45 @@ val copyRootFiles by tasks.registering {
   }
 }
 
+@Suppress("DEPRECATION")
 detekt {
+
   parallel = true
   config = files("$rootDir/detekt/detekt-config.yml")
 
-  val unique = "${rootProject.relativePath(projectDir)}/${project.name}"
-
   reports {
-    xml {
-      enabled = false
-      destination = file("$rootDir/build/detekt-reports/$unique-detekt.xml")
-    }
-    html {
-      enabled = true
-      destination = file("$rootDir/build/detekt-reports/$unique-detekt.html")
-    }
-    txt {
-      enabled = false
-      destination = file("$rootDir/build/detekt-reports/$unique-detekt.txt")
-    }
+    xml.enabled = false
+    html.enabled = true
+    txt.enabled = false
   }
 }
 
 dependencies {
+
   detekt(Libs.Detekt.cli)
   detektPlugins(project(path = ":dispatch-detekt"))
+}
+
+tasks.withType<DetektCreateBaselineTask> {
+
+  setSource(files(rootDir))
+
+  include("**/*.kt", "**/*.kts")
+  exclude("**/resources/**", "**/build/**", "**/src/test/java**")
+
+  // Target version of the generated JVM bytecode. It is used for type resolution.
+  this.jvmTarget = "1.8"
+}
+
+tasks.withType<Detekt> {
+
+  setSource(files(rootDir))
+
+  include("**/*.kt", "**/*.kts")
+  exclude("**/resources/**", "**/build/**", "**/src/test/java**")
+
+  // Target version of the generated JVM bytecode. It is used for type resolution.
+  this.jvmTarget = "1.8"
 }
 
 apply(plugin = Plugins.binaryCompatilibity)
@@ -253,12 +281,23 @@ val generateDependencyGraph by tasks.registering {
   }
 }
 
+val sortDependencies by tasks.registering {
+
+  description = "sort all dependencies in a gradle kts file"
+  group = "refactor"
+
+  doLast {
+    sortDependencies()
+  }
+}
+
 subprojects {
 
   // force update all transitive dependencies (prevents some library leaking an old version)
   configurations.all {
     resolutionStrategy {
       force(
+        Libs.Kotlin.reflect,
         // androidx is currently leaking coroutines 1.1.1 everywhere
         Libs.Kotlinx.Coroutines.core,
         Libs.Kotlinx.Coroutines.test,
@@ -275,5 +314,27 @@ subprojects {
         Libs.RickBusarow.Dispatch.Test.jUnit5
       )
     }
+  }
+}
+
+dependencyAnalysis {
+  issues {
+    all {
+      ignoreKtx(false) // default is false
+    }
+  }
+}
+
+
+fun isNonStable(version: String): Boolean {
+  val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+  val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+  val isStable = stableKeyword || regex.matches(version)
+  return isStable.not()
+}
+
+tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
+  rejectVersionIf {
+    isNonStable(candidate.version) && !isNonStable(currentVersion)
   }
 }

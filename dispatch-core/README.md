@@ -201,9 +201,9 @@ repositories {
 
 dependencies {
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta05")
 }
 ```
 

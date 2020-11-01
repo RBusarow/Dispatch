@@ -23,6 +23,7 @@ import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
 import kotlin.coroutines.*
 
+@Suppress("HardCodedDispatcher")
 @ExperimentalCoroutinesApi
 internal class BuildersTest {
 
@@ -114,6 +115,12 @@ internal class BuildersTest {
 
         coroutineContext[TestCoroutineContext] shouldBe ctx
       }
+    }
+
+    @Test
+    fun `CoroutineScope receiver should be TestProvidedCoroutineScope`() = testProvided {
+
+      this.shouldBeInstanceOf<TestProvidedCoroutineScope>()
     }
 
     @Test

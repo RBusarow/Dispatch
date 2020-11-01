@@ -14,31 +14,25 @@
  */
 
 plugins {
-  id(Plugins.javaLibrary)
-  id(Plugins.kotlin)
+  kotlin("jvm")
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
   id(Plugins.atomicFu)
 }
 
 dependencies {
-  implementation(Libs.Kotlin.stdlib)
 
-  implementation(Libs.Kotlinx.Coroutines.core)
+  api(Libs.Kotlinx.Coroutines.core)
+  api(Libs.Kotlinx.Coroutines.coreJvm)
 
   testImplementation(Libs.JUnit.jUnit5)
   testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.consoleRunner)
   testImplementation(Libs.Kotest.properties)
   testImplementation(Libs.Kotest.runner)
-
   testImplementation(Libs.Kotlin.test)
   testImplementation(Libs.Kotlin.testCommon)
-
-  testImplementation(Libs.MockK.core)
-
   testImplementation(Libs.Kotlinx.Coroutines.test)
-
+  testImplementation(Libs.MockK.core)
   testImplementation(Libs.RickBusarow.Hermit.junit5)
 
   testImplementation(project(":dispatch-internal-test"))

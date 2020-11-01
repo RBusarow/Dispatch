@@ -21,6 +21,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import org.junit.jupiter.api.*
 
+@Suppress("HardCodedDispatcher")
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 class DefaultDispatcherProviderSample {
