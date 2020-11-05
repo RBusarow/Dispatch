@@ -19,7 +19,7 @@
 * Set the project JDK target to 8. This only affects the build environment since all previous builds were done on a JDK 8 machine. ([#187](https://github.com/RBusarow/Dispatch/pull/187))
 * Coroutines has been updated to 1.4.0 ([#183](https://github.com/RBusarow/Dispatch/pull/183))
 * Detekt has been updated to 1.4.2 ([#184](https://github.com/RBusarow/Dispatch/pull/184))
-* JUnit6 has been updated to 5.7.0 ([#178](https://github.com/RBusarow/Dispatch/pull/178))
+* JUnit5 has been updated to 5.7.0 ([#178](https://github.com/RBusarow/Dispatch/pull/178))
 
 ## Version 1.0.0-beta04
 
