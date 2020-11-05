@@ -58,7 +58,7 @@ object Versions {
   const val mavenPublish = "0.13.0"
 
   const val taskTree = "1.5"
-  const val versionName = "1.0.0-beta05"
+  const val versionName = "1.0.0-beta06"
 }
 
 object BuildPlugins {
@@ -195,7 +195,7 @@ object Libs {
   object Kotlinx {
 
     object Coroutines {
-      private const val version = "1.4.0"
+      private const val version = "1.4.1"
       const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
       const val coreJvm = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$version"
       const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
