@@ -1,5 +1,9 @@
 # Change log for Dispatch
 
+## Version 1.0.0-beta06
+
+* Update to coroutines to [1.4.1](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.4.1) in order to fix [an issue with SharedFlow](https://github.com/Kotlin/kotlinx.coroutines/pull/2359)([#189](https://github.com/RBusarow/Dispatch/issues/189))
+
 ## Version 1.0.0-beta05
 
 ### Api changes
