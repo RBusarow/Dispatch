@@ -1,18 +1,22 @@
 # Change log for Dispatch
 
+## Version 1.0.0-beta06
+
+* Update to coroutines to [1.4.1](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.4.1) in order to fix [an issue with SharedFlow](https://github.com/Kotlin/kotlinx.coroutines/pull/2359)([#189](https://github.com/RBusarow/Dispatch/issues/189))
+
 ## Version 1.0.0-beta05
 
 ### Api changes
-* [ViewLifecycleCoroutineScope] is a special [DispatchLifecycleScope] meant for binding a scope to a [Fragment]'s **view** lifecycle. ([#179](https://github.com/RBusarow/Dispatch/issues/179))  
+* [ViewLifecycleCoroutineScope] is a special [DispatchLifecycleScope] meant for binding a scope to a [Fragment]'s **view** lifecycle. ([#179](https://github.com/RBusarow/Dispatch/issues/179))
 * Make [testProvided] receive [TestProvidedCoroutineScope] ([#157](https://github.com/RBusarow/Dispatch/issues/157))
-* [LifecycleCoroutineScope] has been renamed to [DispatchLifecycleScope], along with its extension function. The old names are still functional with a deprecated typealias.  They will be removed in the future. ([#186](https://github.com/RBusarow/Dispatch/pull/186))  
+* [LifecycleCoroutineScope] has been renamed to [DispatchLifecycleScope], along with its extension function. The old names are still functional with a deprecated typealias.  They will be removed in the future. ([#186](https://github.com/RBusarow/Dispatch/pull/186))
 * [CoroutineViewModel] has been renamed to [DispatchViewModel]. The old names are still functional with a deprecated typealias.  They will be removed in the future. ([#186](https://github.com/RBusarow/Dispatch/pull/186))
 
 ### Bug fixes
-* Use [currentCoroutineContext] to resolve the inner [CoroutineContext] in `flowOn___` functions. ([#181](https://github.com/RBusarow/Dispatch/issues/181))  
+* Use [currentCoroutineContext] to resolve the inner [CoroutineContext] in `flowOn___` functions. ([#181](https://github.com/RBusarow/Dispatch/issues/181))
 
 ### Housekeeping
-* Set the project JDK target to 8. This only affects the build environment since all previous builds were done on a JDK 8 machine. ([#187](https://github.com/RBusarow/Dispatch/pull/187))  
+* Set the project JDK target to 8. This only affects the build environment since all previous builds were done on a JDK 8 machine. ([#187](https://github.com/RBusarow/Dispatch/pull/187))
 * Coroutines has been updated to 1.4.0 ([#183](https://github.com/RBusarow/Dispatch/pull/183))
 * Detekt has been updated to 1.4.2 ([#184](https://github.com/RBusarow/Dispatch/pull/184))
 * JUnit6 has been updated to 5.7.0 ([#178](https://github.com/RBusarow/Dispatch/pull/178))

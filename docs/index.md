@@ -361,35 +361,35 @@ dependencies {
   */
 
   // core coroutines
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
 
   // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta05")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta06")
   // LifecycleCoroutineScope for Android Fragments, Activities, etc.
-  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta05")
+  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta06")
   // lifecycleScope extension function with a settable factory.  Use this if you don't DI your CoroutineScopes
   // This provides :dispatch-android-lifecycle via "api", so you don't need to declare both
-  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta05")
+  implementation("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta06")
   // ViewModelScope for Android ViewModels
-  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta05")
+  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta06")
 
   /*
   jvm testing
   */
 
   // core coroutines-test
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1")
   // you only need this if you don't have the -junit4 or -junit5 artifacts
-  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta05")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta06")
   // CoroutineTestRule and :dispatch-test
   // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit5
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta05")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta06")
   // CoroutineTest, CoroutineTestExtension, and :dispatch-test
   // This provides :dispatch-test via "api", so you don't need to declare both
   // This can be used at the same time as :dispatch-test-junit4
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta05")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta06")
   /*
   Android testing
   */
@@ -398,7 +398,7 @@ dependencies {
   androidTestImplementation("androidx.test:runner:1.3.0")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
   // IdlingDispatcher, IdlingDispatcherProvider, and IdlingCoroutineScope
-  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta05")
+  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta06")
 }
 ```
 
