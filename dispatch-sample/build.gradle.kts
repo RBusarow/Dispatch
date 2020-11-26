@@ -16,7 +16,7 @@
 plugins {
   id(Plugins.androidApplication)
   kotlin("android")
-  id(Plugins.kotlinAndroidExtensions)
+  id(Plugins.kotlinParcelize)
 }
 
 android {

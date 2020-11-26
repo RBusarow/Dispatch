@@ -32,7 +32,7 @@ object Plugins {
 
   const val kotlin = "kotlin"
   const val kotlinAndroid = "kotlin-android"
-  const val kotlinAndroidExtensions = "kotlin-android-extensions"
+  const val kotlinParcelize = "kotlin-parcelize"
 
   const val mavenPublish = "com.vanniktech.maven.publish"
   const val taskTree = "com.dorongold.task-tree"
