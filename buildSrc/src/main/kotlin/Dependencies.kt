@@ -32,7 +32,7 @@ object Plugins {
 
   const val kotlin = "kotlin"
   const val kotlinAndroid = "kotlin-android"
-  const val kotlinAndroidExtensions = "kotlin-android-extensions"
+  const val kotlinParcelize = "kotlin-parcelize"
 
   const val mavenPublish = "com.vanniktech.maven.publish"
   const val taskTree = "com.dorongold.task-tree"
@@ -54,7 +54,7 @@ object Versions {
   const val benManes = "0.33.0"
   const val gradleWrapper = "4.1.0"
   const val dagger = "2.25.2"
-  const val kotlin = "1.4.10"
+  const val kotlin = "1.4.20"
   const val mavenPublish = "0.13.0"
 
   const val taskTree = "1.5"
