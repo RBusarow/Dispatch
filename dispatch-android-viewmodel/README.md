@@ -176,9 +176,9 @@ repositories {
 
 dependencies {
 
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
-  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta06")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
+  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta07")
 }
 ```
 
