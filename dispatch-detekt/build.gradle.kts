@@ -14,7 +14,7 @@
  */
 
 plugins {
-  kotlin("jvm")
+  javaLibrary
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }

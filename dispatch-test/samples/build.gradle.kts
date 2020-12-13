@@ -16,7 +16,7 @@
 import kotlinx.atomicfu.plugin.gradle.*
 
 plugins {
-  kotlin("jvm")
+  javaLibrary
 }
 
 sourceSets["test"].java.srcDir("test")

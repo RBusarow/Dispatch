@@ -14,7 +14,7 @@
  */
 
 plugins {
-  kotlin("jvm")
+  javaLibrary
 }
 
 sourceSets["test"].java.srcDir("test")
