@@ -1,5 +1,10 @@
 # Change log for Dispatch
 
+## Version 1.0.0-beta08
+
+* Remove FlowCancellationException ([#196](https://github.com/RBusarow/Dispatch/issues/196))
+* Update Kotlin to [1.4.21](https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md#1421)
+
 ## Version 1.0.0-beta07
 
 * Update to coroutines to [1.4.2](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.4.2)

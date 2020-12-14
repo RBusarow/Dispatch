@@ -13,26 +13,16 @@
  * limitations under the License.
  */
 
-import kotlinx.atomicfu.plugin.gradle.*
+apply(plugin = "com.android.library")
+apply(plugin = "org.jetbrains.kotlin.android")
 
-plugins {
-  javaLibrary
+commonAndroid()
+common()
+
+val testJvm by tasks.registering {
+  dependsOn("testDebugUnitTest")
 }
 
-sourceSets["test"].java.srcDir("test")
-
-dependencies {
-  implementation(Libs.Kotlinx.Coroutines.test)
-
-  testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.properties)
-  testImplementation(Libs.Kotest.runner)
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-  testImplementation(Libs.Kotlinx.Coroutines.core)
-
-  testImplementation(project(":dispatch-test"))
-  testImplementation(project(":dispatch-test-junit5"))
-
+val buildTests by tasks.registering {
+  dependsOn("assembleDebugUnitTest")
 }

@@ -14,29 +14,9 @@
  */
 
 plugins {
-  id(Plugins.androidLibrary)
-  kotlin("android")
+  androidLibrary
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
-}
-
-android {
-  compileSdkVersion(Versions.compileSdk)
-
-  defaultConfig {
-    minSdkVersion(Versions.minSdk)
-    targetSdkVersion(Versions.targetSdk)
-    versionName = Versions.versionName
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-    }
-  }
 }
 
 dependencies {
