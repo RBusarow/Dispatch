@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.atomicFu)
-  kotlin("jvm")
+  javaLibrary
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }

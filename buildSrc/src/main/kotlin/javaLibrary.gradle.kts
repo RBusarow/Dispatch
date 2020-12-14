@@ -13,26 +13,29 @@
  * limitations under the License.
  */
 
-import kotlinx.atomicfu.plugin.gradle.*
-
 plugins {
-  javaLibrary
+  kotlin("jvm")
 }
 
-sourceSets["test"].java.srcDir("test")
+common()
+
+java {
+  // force Java 8 source when building java-only artifacts.
+  // This is different than the Kotlin jvm target.
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+val testJvm by tasks.registering {
+  dependsOn("test")
+}
+
+val buildTests by tasks.registering {
+  dependsOn("testClasses")
+}
 
 dependencies {
-  implementation(Libs.Kotlinx.Coroutines.test)
 
-  testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.properties)
-  testImplementation(Libs.Kotest.runner)
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-  testImplementation(Libs.Kotlinx.Coroutines.core)
-
-  testImplementation(project(":dispatch-test"))
-  testImplementation(project(":dispatch-test-junit5"))
-
+  api(Libs.Kotlinx.Coroutines.core)
+  api(Libs.Kotlinx.Coroutines.coreJvm)
 }

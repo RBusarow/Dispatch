@@ -136,37 +136,6 @@ subprojects {
   }
 }
 
-allprojects {
-  // force Java 8 source when building java-only artifacts.  This is different than the Kotlin jvm target.
-  pluginManager.withPlugin("java") {
-    configure<JavaPluginExtension> {
-      sourceCompatibility = JavaVersion.VERSION_1_8
-      targetCompatibility = JavaVersion.VERSION_1_8
-    }
-  }
-}
-
-
-subprojects {
-  tasks.withType<KotlinCompile>()
-    .configureEach {
-
-      kotlinOptions {
-        allWarningsAsErrors = true
-
-        jvmTarget = "1.8"
-
-        // https://youtrack.jetbrains.com/issue/KT-24946
-        // freeCompilerArgs = listOf(
-        //     "-progressive",
-        //     "-Xskip-runtime-version-check",
-        //     "-Xdisable-default-scripting-plugin",
-        //     "-Xuse-experimental=kotlin.Experimental"
-        // )
-      }
-    }
-}
-
 val cleanDocs by tasks.registering {
 
   description = "cleans /docs"
@@ -289,32 +258,6 @@ val sortDependencies by tasks.registering {
 
   doLast {
     sortDependencies()
-  }
-}
-
-subprojects {
-
-  // force update all transitive dependencies (prevents some library leaking an old version)
-  configurations.all {
-    resolutionStrategy {
-      force(
-        Libs.Kotlin.reflect,
-        // androidx is currently leaking coroutines 1.1.1 everywhere
-        Libs.Kotlinx.Coroutines.core,
-        Libs.Kotlinx.Coroutines.test,
-        Libs.Kotlinx.Coroutines.android,
-        // prevent dependency libraries from leaking their own old version of this library
-        Libs.RickBusarow.Dispatch.core,
-        Libs.RickBusarow.Dispatch.detekt,
-        Libs.RickBusarow.Dispatch.espresso,
-        Libs.RickBusarow.Dispatch.lifecycle,
-        Libs.RickBusarow.Dispatch.lifecycleExtensions,
-        Libs.RickBusarow.Dispatch.viewModel,
-        Libs.RickBusarow.Dispatch.Test.core,
-        Libs.RickBusarow.Dispatch.Test.jUnit4,
-        Libs.RickBusarow.Dispatch.Test.jUnit5
-      )
-    }
   }
 }
 
