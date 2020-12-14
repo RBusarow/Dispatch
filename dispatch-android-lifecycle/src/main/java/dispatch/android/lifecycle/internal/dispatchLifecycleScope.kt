@@ -46,27 +46,25 @@ internal suspend fun <T> Lifecycle.onNext(
 
   var result: T? = null
   val stateReached = AtomicBoolean(false)
+  var completed = false
 
-  try {
-    // suspend until the lifecycle's flow has reached the minimum state, then move on
-    eventFlow(minimumState)
-      .onEachLatest { stateIsHighEnough ->
-        if (stateIsHighEnough) {
-          stateReached.compareAndSet(false, true)
-          coroutineScope {
-            withContext(context + coroutineContext[Job]!!) {
-              result = block()
-            }
+  // suspend until the lifecycle's flow has reached the minimum state, then move on
+  eventFlow(minimumState)
+    .onEachLatest { stateIsHighEnough ->
+      if (stateIsHighEnough) {
+        stateReached.compareAndSet(false, true)
+        coroutineScope {
+          withContext(context + coroutineContext[Job]!!) {
+            result = block()
           }
-          throw FlowCancellationException()
         }
+        completed = true
       }
-      .collectUntil { stateIsHighEnough ->
-        !stateIsHighEnough && stateReached.get()
-      }
-  } catch (e: FlowCancellationException) {
-    // do nothing
-  }
+    }
+    .takeWhile { !completed }
+    .collectUntil { stateIsHighEnough ->
+      !stateIsHighEnough && stateReached.get()
+    }
 
   return result
 }
@@ -124,8 +122,6 @@ internal fun Lifecycle.eventFlow(
   .flowOnMainImmediate()
   // Don't send [true, true] since the second true would cancel the already-active block.
   .distinctUntilChanged()
-
-private class FlowCancellationException : CancellationException("Flow was aborted")
 
 /**
  * Terminal operator which collects the given [Flow] until the [predicate] returns true.
