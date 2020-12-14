@@ -58,7 +58,7 @@ object Versions {
   const val mavenPublish = "0.13.0"
 
   const val taskTree = "1.5"
-  const val versionName = "1.0.0-beta07"
+  const val versionName = "1.0.0-beta08"
 }
 
 object BuildPlugins {
