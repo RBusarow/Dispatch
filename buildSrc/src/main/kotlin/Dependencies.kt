@@ -54,7 +54,7 @@ object Versions {
   const val benManes = "0.33.0"
   const val gradleWrapper = "4.1.0"
   const val dagger = "2.25.2"
-  const val kotlin = "1.4.20"
+  const val kotlin = "1.4.21"
   const val mavenPublish = "0.13.0"
 
   const val taskTree = "1.5"
