@@ -57,4 +57,3 @@ infix fun CoroutineContext.shouldNotEqualFolded(other: CoroutineContext) {
     get(DispatcherProvider) shouldBe other[DispatcherProvider]
   }
 }
-

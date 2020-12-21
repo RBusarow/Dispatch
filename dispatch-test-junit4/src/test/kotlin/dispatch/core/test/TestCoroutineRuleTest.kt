@@ -56,7 +56,6 @@ class TestCoroutineRuleTest {
     val context = customFactoryRule.coroutineContext
 
     context shouldBe customScope.coroutineContext
-
   }
 
   /**
@@ -73,6 +72,4 @@ class TestCoroutineRuleTest {
     // Job should run well past completion -- making the coroutine leak
     defaultRule.launch { delay(100000) }
   }
-
 }
-

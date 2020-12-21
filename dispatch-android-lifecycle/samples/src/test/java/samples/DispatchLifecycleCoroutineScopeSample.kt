@@ -55,7 +55,6 @@ class DispatchLifecycleScopeSample {
 
         // it works as a normal CoroutineScope as well (because it is)
         lifecycleScope.launchMain { }
-
       }
     }
   }
@@ -87,7 +86,6 @@ class DispatchLifecycleScopeSample {
 
         // it works as a normal CoroutineScope as well (because it is)
         lifecycleScope.launchMain { }
-
       }
     }
   }
@@ -452,5 +450,4 @@ class DispatchLifecycleScopeSample {
       "pausing"
     )
   }
-
 }

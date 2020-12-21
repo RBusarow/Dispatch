@@ -56,7 +56,6 @@ internal class ViewLifecycleScopeFlowCollectionTest {
     val flow = MutableStateFlow(0)
     val collected = mutableListOf<Int>()
 
-
     rule.withViewLifecycle(fragment) {
       flow.onEach { collected.add(it) }.launchOnCreate()
     }
@@ -141,6 +140,5 @@ internal class ViewLifecycleScopeFlowCollectionTest {
     flow.value = 2
 
     collected shouldBe listOf(0, 1)
-
   }
 }

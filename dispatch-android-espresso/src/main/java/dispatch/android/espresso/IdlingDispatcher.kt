@@ -68,4 +68,3 @@ class IdlingDispatcher(
    */
   override fun toString(): String = "CountingDispatcher delegating to $delegate"
 }
-

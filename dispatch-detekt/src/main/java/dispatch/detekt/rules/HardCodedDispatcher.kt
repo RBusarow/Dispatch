@@ -96,9 +96,9 @@ class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
 
     if (expression.isInImportDirective()) return
 
-    if (!expression.isDotReceiver()
-      && expression.text != "Dispatchers.Main.immediate"
-      && matchers.any { matcher -> matcher.matches(expression) }
+    if (!expression.isDotReceiver() &&
+      expression.text != "Dispatchers.Main.immediate" &&
+      matchers.any { matcher -> matcher.matches(expression) }
     ) {
       report(CodeSmell(issue, Entity.from(expression), message(expression.text)))
       return
@@ -189,12 +189,12 @@ class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
 
       val text = expression.text
 
-      return text == fullyQualifiedName
-          || expression.parent?.text == fullyQualifiedName
-          || trimmedImports.any { import ->
+      return text == fullyQualifiedName ||
+        expression.parent?.text == fullyQualifiedName ||
+        trimmedImports.any { import ->
 
-        ((text == reference && import == fullyQualifiedName) || "$import.$text" == fullyQualifiedName)
-      }
+          ((text == reference && import == fullyQualifiedName) || "$import.$text" == fullyQualifiedName)
+        }
     }
   }
 }

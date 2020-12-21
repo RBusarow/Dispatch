@@ -36,10 +36,10 @@ fun Project.createDependencyGraph() {
 
   var dotText = """
     digraph {
-      graph [label="${name}",labelloc=t,fontsize=30,ranksep=1.4];
+      graph [label="$name",labelloc=t,fontsize=30,ranksep=1.4];
       node [style=filled, fillcolor="#bbbbbb"];
       rankdir=TB;
-      
+
   """.trimIndent()
 
   val rootProjects = mutableListOf<Project>()
@@ -95,20 +95,17 @@ fun Project.createDependencyGraph() {
             .toMutableList()
 
           if (config.name.toLowerCase(Locale.getDefault())
-              .endsWith("implementation")
+            .endsWith("implementation")
           ) {
             traits.add("style=dotted")
           }
 
           dependencies[graphKey] = traits
         }
-
     }
-
   }
 
   val sortedProjects = projects.sortedBy { it.path }
-
 
   dotText += "\n  # Projects\n\n"
 
@@ -122,10 +119,10 @@ fun Project.createDependencyGraph() {
 
     val color = when {
       multiPlatformProjects.contains(project) -> "#ffd2b3"
-      jsProjects.contains(project)            -> "#ffffba"
-      androidProjects.contains(project)       -> "#baffc9"
-      javaProjects.contains(project)          -> "#ffb3ba"
-      else                                    -> "#eeeeee"
+      jsProjects.contains(project) -> "#ffffba"
+      androidProjects.contains(project) -> "#baffc9"
+      javaProjects.contains(project) -> "#ffb3ba"
+      else -> "#eeeeee"
     }
 
     traits.add("fillcolor=\"$color\"")
@@ -164,7 +161,7 @@ fun Project.createDependencyGraph() {
   val process = execute("dot -Tpng -O project.dot", arrayOf(""), dot.parentFile)
   process.waitFor()
   if (process.exitValue() != 0) {
-    throw  RuntimeException(process.errorStream.toString())
+    throw RuntimeException(process.errorStream.toString())
   }
 
   println("file at ${File("$dot.png")}")

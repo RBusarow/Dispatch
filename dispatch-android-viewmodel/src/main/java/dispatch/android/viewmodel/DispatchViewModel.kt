@@ -94,5 +94,4 @@ abstract class DispatchViewModel : ViewModel() {
    * prevent a leak of this ViewModel.
    */
   protected open fun onClear() {}
-
 }

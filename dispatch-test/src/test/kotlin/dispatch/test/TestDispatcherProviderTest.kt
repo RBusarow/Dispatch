@@ -116,5 +116,4 @@ internal class TestDispatcherProviderTest {
       provider.shouldBeTypeOf<TestDispatcherProvider>()
     }
   }
-
 }

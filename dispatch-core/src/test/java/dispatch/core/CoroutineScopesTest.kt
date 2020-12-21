@@ -318,7 +318,6 @@ internal class CoroutineScopesTest {
         scope.coroutineContext shouldEqualFolded originContext + Dispatchers.Main
       }
     }
-
   }
 
   @Nested

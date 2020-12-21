@@ -33,4 +33,3 @@ import kotlin.reflect.*
 @ExperimentalCoroutinesApi
 @ExtendWith(CoroutineTestExtension::class)
 public annotation class CoroutineTest(val scopeFactory: KClass<*> = CoroutineTestExtension.ScopeFactory::class)
-

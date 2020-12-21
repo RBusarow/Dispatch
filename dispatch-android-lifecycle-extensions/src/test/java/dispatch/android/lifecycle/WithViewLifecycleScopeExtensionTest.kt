@@ -92,7 +92,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     invocations shouldBe 3
-
   }
 
   @Test
@@ -119,7 +118,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     invocations shouldBe 3
-
   }
 
   @Test
@@ -144,7 +142,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     viewLifecycleOwner.destroy()
 
     job.isCancelled shouldBe true
-
   }
 
   @Test
@@ -169,7 +166,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragmentLifecycleOwner.destroy()
 
     job.isActive shouldBe false
-
   }
 
   @Test
@@ -184,7 +180,6 @@ internal class WithViewLifecycleScopeExtensionTest {
         job = launch {
 
           lifecycle shouldBeSameInstanceAs viewLifecycleOwner.lifecycle
-
         }
       }
     }
@@ -192,7 +187,5 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     job.join()
-
   }
 }
-

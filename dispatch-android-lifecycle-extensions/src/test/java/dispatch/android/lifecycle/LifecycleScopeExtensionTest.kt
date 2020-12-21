@@ -409,5 +409,4 @@ internal class LifecycleScopeExtensionTest : HermitJUnit5() {
       }
     }
   }
-
 }

@@ -16,7 +16,7 @@
 package dispatch.android.lifecycle.internal
 
 import androidx.lifecycle.*
-import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.android.lifecycle.*
 import dispatch.core.*
 import dispatch.internal.test.android.*
 import dispatch.test.*
@@ -80,7 +80,6 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
 
         androidLifecycle.observerCount shouldBe 2
       }
-
     }
   }
 }

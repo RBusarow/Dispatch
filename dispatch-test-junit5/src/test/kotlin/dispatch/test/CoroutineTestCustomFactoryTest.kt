@@ -40,7 +40,6 @@ class CoroutineTestCustomFactoryTest(
   fun `a custom factory extension should use use the custom factory`() {
 
     testScope shouldBe customScope
-
   }
 
   @Test
@@ -76,7 +75,6 @@ class CoroutineTestCustomFactoryTest(
     fun `a custom factory extension should use use the custom factory`() {
 
       testScope shouldBe customScope
-
     }
 
     @Test

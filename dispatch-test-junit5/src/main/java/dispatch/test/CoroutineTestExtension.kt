@@ -57,8 +57,8 @@ import kotlin.coroutines.*
 public class CoroutineTestExtension(
   private val scopeFactory: ScopeFactory = ScopeFactory()
 ) : TypeBasedParameterResolver<TestProvidedCoroutineScope>(),
-    BeforeEachCallback,
-    AfterEachCallback {
+  BeforeEachCallback,
+  AfterEachCallback {
 
   private val lazyScope = lazy { scopeFactory.create() }
 
@@ -157,7 +157,6 @@ public class CoroutineTestExtension(
     open fun create(): TestProvidedCoroutineScope =
       TestProvidedCoroutineScope()
   }
-
 }
 
 /**

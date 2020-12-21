@@ -57,7 +57,6 @@ class MainFragment : Fragment() {
         }
       }
     }
-
   }
 
   override fun onCreateView(
@@ -91,15 +90,14 @@ class MainFragment : Fragment() {
       // the default dispatcher in this scope is now Dispatchers.IO
       .launchIn(ioDefaultScope)
   }
-
 }
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified VM : ViewModel> viewModelFactory(crossinline f: () -> VM):
-    ViewModelProvider.Factory =
-  object : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
-  }
+  ViewModelProvider.Factory =
+    object : ViewModelProvider.Factory {
+      override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
+    }
 
 inline fun <reified VM : ViewModel> Fragment.viewModels(
   noinline ownerProducer: () -> ViewModelStoreOwner = { this },

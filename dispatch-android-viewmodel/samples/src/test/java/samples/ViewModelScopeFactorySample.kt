@@ -78,5 +78,4 @@ class ViewModelScopeFactorySample {
 
   private annotation class Before
   private annotation class After
-
 }

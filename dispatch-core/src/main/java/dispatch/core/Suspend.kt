@@ -95,7 +95,8 @@ public suspend fun <T> withMain(
  * @see withContext
  */
 public suspend fun <T> withMainImmediate(
-  context: CoroutineContext = EmptyCoroutineContext, block: suspend CoroutineScope.() -> T
+  context: CoroutineContext = EmptyCoroutineContext,
+  block: suspend CoroutineScope.() -> T
 ): T {
   val newContext = context + coroutineContext.dispatcherProvider.mainImmediate
   return withContext(newContext, block)

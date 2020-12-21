@@ -29,7 +29,7 @@ class LifecycleScopeExtensionSample {
       init {
 
         // auto-created MainImmediateCoroutineScope which is lifecycle-aware
-        dispatchLifecycleScope //...
+        dispatchLifecycleScope // ...
 
         // active only when "resumed".  starts a fresh coroutine each time
         // this is a rough proxy for LiveData behavior
@@ -43,9 +43,7 @@ class LifecycleScopeExtensionSample {
 
         // it works as a normal CoroutineScope as well (because it is)
         dispatchLifecycleScope.launchMain { }
-
       }
     }
   }
-
 }

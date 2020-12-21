@@ -102,7 +102,6 @@ internal class SuspendBuildersTest {
         coroutineContext shouldEqualFolded ctx + job
       }
     }
-
   }
 
   @Nested
@@ -156,5 +155,4 @@ internal class SuspendBuildersTest {
   fun runBlockingProvided(
     block: suspend CoroutineScope.() -> Unit
   ) = runBlocking(testProvider, block)
-
 }

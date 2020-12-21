@@ -35,12 +35,13 @@ import kotlin.coroutines.*
  * regardless of what type of `CoroutineScope` is required.
  */
 @ExperimentalCoroutinesApi
-interface TestProvidedCoroutineScope : TestCoroutineScope,
-                                       DefaultCoroutineScope,
-                                       IOCoroutineScope,
-                                       MainCoroutineScope,
-                                       MainImmediateCoroutineScope,
-                                       UnconfinedCoroutineScope {
+interface TestProvidedCoroutineScope :
+  TestCoroutineScope,
+  DefaultCoroutineScope,
+  IOCoroutineScope,
+  MainCoroutineScope,
+  MainImmediateCoroutineScope,
+  UnconfinedCoroutineScope {
   /**
    * single [DispatcherProvider] promise for the [TestProvidedCoroutineScope]
    */
@@ -55,7 +56,7 @@ internal class TestProvidedCoroutineScopeImpl(
   override val dispatcherProvider: DispatcherProvider,
   context: CoroutineContext = EmptyCoroutineContext
 ) : TestProvidedCoroutineScope,
-    TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
+  TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
 
 /**
  * Creates a [TestProvidedCoroutineScope] implementation with optional parameters of
