@@ -241,16 +241,6 @@ tasks.withType<KnitTask> {
   }
 }
 
-val generateDependencyGraph by tasks.registering {
-
-  description = "generate a visual dependency graph"
-  group = "refactor"
-
-  doLast {
-    createDependencyGraph()
-  }
-}
-
 val sortDependencies by tasks.registering {
 
   description = "sort all dependencies in a gradle kts file"
