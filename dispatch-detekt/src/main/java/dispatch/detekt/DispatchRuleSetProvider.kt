@@ -21,9 +21,9 @@ import io.gitlab.arturbosch.detekt.api.*
 /**
  * @suppress
  */
-class DispatchRuleSetProvider : RuleSetProvider {
+public class DispatchRuleSetProvider : RuleSetProvider {
 
-  override val ruleSetId = "dispatch"
+  override val ruleSetId: String = "dispatch"
 
   override fun instance(config: Config): RuleSet = RuleSet(
     id = ruleSetId,

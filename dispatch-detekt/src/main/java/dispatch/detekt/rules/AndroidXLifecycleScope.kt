@@ -26,12 +26,12 @@ import org.jetbrains.kotlin.psi.psiUtil.*
  * The AndroidX library uses a hard-coded `Dispatchers.Main` and does not contain a `DispatcherProvider`,
  * and also leaks its pausing behavior.
  */
-class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config) {
+public class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config) {
 
   /**
    * @suppress
    */
-  override val issue = Issue(
+  override val issue: Issue = Issue(
     id = "AndroidXLifecycleScope",
     severity = Severity.Defect,
     description = "The AndroidX lifecycleScope leaks its pausing behavior and uses hard-coded dispatchers.",
@@ -41,10 +41,10 @@ class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config) {
   /**
    * @suppress
    */
-  companion object {
-    val starImportRegex = "androidx\\.lifecycle\\.\\*".toRegex()
-    val explicitImportRegex = "androidx\\.lifecycle\\.lifecycleScope".toRegex()
-    const val functionName = "lifecycleScope"
+  private companion object {
+    private val starImportRegex = "androidx\\.lifecycle\\.\\*".toRegex()
+    private val explicitImportRegex = "androidx\\.lifecycle\\.lifecycleScope".toRegex()
+    private const val functionName = "lifecycleScope"
   }
 
   private val calls = mutableListOf<KtReferenceExpression>()

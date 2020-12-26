@@ -21,7 +21,7 @@ import kotlin.reflect.*
  * Indicates that a test **function** is expected to fail with the given exception type.
  */
 @Target(AnnotationTarget.FUNCTION)
-annotation class Fails(
+public annotation class Fails(
   /**
    * The KClass of the expected Throwable
    */

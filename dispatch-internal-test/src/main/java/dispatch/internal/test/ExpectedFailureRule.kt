@@ -20,12 +20,12 @@ import org.junit.rules.*
 import org.junit.runner.*
 import org.junit.runners.model.*
 
-class ExpectedFailureRule : TestRule {
+public class ExpectedFailureRule : TestRule {
 
   override fun apply(
     base: Statement,
     description: Description
-  ) = object : Statement() {
+  ): Statement = object : Statement() {
 
     override fun evaluate() {
       try {

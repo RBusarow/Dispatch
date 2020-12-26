@@ -18,12 +18,12 @@ package dispatch.internal.test
 import kotlinx.atomicfu.*
 import org.junit.jupiter.api.extension.*
 
-class AtomicCounterExtension : AfterEachCallback {
+public class AtomicCounterExtension : AfterEachCallback {
 
   private val index = atomic(0)
   private val finished = atomic(false)
 
-  fun expect(expectedIndex: Int) {
+  public fun expect(expectedIndex: Int) {
 
     val actualIndex = index.incrementAndGet()
 
@@ -32,7 +32,7 @@ class AtomicCounterExtension : AfterEachCallback {
     }
   }
 
-  fun finish(expectedIndex: Int) {
+  public fun finish(expectedIndex: Int) {
     expect(expectedIndex)
     assert(!finished.getAndSet(true)) { "Should call 'finish(...)' at most once" }
   }
@@ -41,7 +41,7 @@ class AtomicCounterExtension : AfterEachCallback {
     resetIndex()
   }
 
-  fun resetIndex() {
+  public fun resetIndex() {
     assert(index.value == 0) { "Expecting that 'finish(...)' was invoked, but it was not" }
     index.value = 0
     finished.value = false
