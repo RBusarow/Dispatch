@@ -30,8 +30,7 @@ class LifecycleSuspendSample(
 
   @BeforeEach
   fun beforeEach() {
-
-    DispatchLifecycleScopeFactory.set { testScope.coroutineContext }
+    LifecycleScopeFactory.set { testScope.coroutineContext }
   }
 
   @Sample
