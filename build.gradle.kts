@@ -285,7 +285,7 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
 
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
   kotlin {
-    target("**/src/**/*.kt", "**/src/**/*.kt")
+    target("**/src/**/*.kt")
     ktlint("0.40.0")
       .userData(
         mapOf(
