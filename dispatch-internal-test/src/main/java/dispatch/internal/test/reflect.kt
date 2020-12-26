@@ -18,7 +18,7 @@ package dispatch.internal.test
 import kotlin.reflect.full.*
 import kotlin.reflect.jvm.*
 
-inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(name: String): R {
+public inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(name: String): R {
 
   val kClass = T::class
 
@@ -31,7 +31,7 @@ inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(name
   return property.call() as R
 }
 
-inline fun <reified T : Any, reified R : Any> T.getPrivateFieldByName(name: String): R {
+public inline fun <reified T : Any, reified R : Any> T.getPrivateFieldByName(name: String): R {
 
   val kClass = T::class
 

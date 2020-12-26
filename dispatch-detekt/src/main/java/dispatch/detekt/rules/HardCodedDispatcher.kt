@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.resolve.calls.callUtil.*
  * - allowMainImmediateDispatcher
  * - allowUnconfinedDispatcher
  */
-class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
+public class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
 
   private companion object {
     private const val coroutinesStarImport = "kotlinx.coroutines.*"
@@ -56,7 +56,7 @@ class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
   /**
    * @suppress
    */
-  override val issue = Issue(
+  override val issue: Issue = Issue(
     id = "HardCodedDispatcher",
     severity = Severity.Defect,
     description = "Dispatchers properties do not contain DispatcherProviders and don't work with this library.",

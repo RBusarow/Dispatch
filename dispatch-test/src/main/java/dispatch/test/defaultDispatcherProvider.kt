@@ -25,6 +25,6 @@ import dispatch.core.*
  * @sample samples.DefaultDispatcherProviderExtensionSample.defaultDispatcherProviderResetSample
  */
 @Suppress("unused")
-fun DefaultDispatcherProvider.reset() {
+public fun DefaultDispatcherProvider.reset() {
   set(object : DispatcherProvider {})
 }

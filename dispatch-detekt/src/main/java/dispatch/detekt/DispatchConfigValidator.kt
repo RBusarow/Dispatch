@@ -20,7 +20,7 @@ import io.gitlab.arturbosch.detekt.api.*
 /**
  * @suppress
  */
-class DispatchConfigValidator : ConfigValidator {
+public class DispatchConfigValidator : ConfigValidator {
 
   override fun validate(config: Config): Collection<Notification> {
     val result = mutableListOf<Notification>()
@@ -71,7 +71,7 @@ class DispatchConfigValidator : ConfigValidator {
 /**
  * @suppress
  */
-class ConfigError(
+public class ConfigError(
   override val message: String,
   override val level: Notification.Level = Notification.Level.Error
 ) : Notification

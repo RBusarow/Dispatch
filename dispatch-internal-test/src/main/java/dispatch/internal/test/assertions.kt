@@ -22,12 +22,12 @@ import io.kotest.matchers.collections.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
-fun Job.shouldBeSupervisorJob() {
+public fun Job.shouldBeSupervisorJob() {
 
   this::class.simpleName shouldBe "SupervisorJobImpl"
 }
 
-infix fun Job?.shouldBeOrChildOf(other: Job?) {
+public infix fun Job?.shouldBeOrChildOf(other: Job?) {
 
   if (this == null) return
 
@@ -40,7 +40,7 @@ infix fun Job?.shouldBeOrChildOf(other: Job?) {
   }
 }
 
-infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
+public infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
   get(Job) shouldBeOrChildOf other[Job]
   get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]
   get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
@@ -48,7 +48,7 @@ infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
   get(DispatcherProvider) shouldBe other[DispatcherProvider]
 }
 
-infix fun CoroutineContext.shouldNotEqualFolded(other: CoroutineContext) {
+public infix fun CoroutineContext.shouldNotEqualFolded(other: CoroutineContext) {
   shouldFail {
     get(Job) shouldBeOrChildOf other[Job]
     get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]

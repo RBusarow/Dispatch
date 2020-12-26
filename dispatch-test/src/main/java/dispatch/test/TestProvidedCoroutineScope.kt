@@ -35,16 +35,16 @@ import kotlin.coroutines.*
  * regardless of what type of `CoroutineScope` is required.
  */
 @ExperimentalCoroutinesApi
-interface TestProvidedCoroutineScope : TestCoroutineScope,
-                                       DefaultCoroutineScope,
-                                       IOCoroutineScope,
-                                       MainCoroutineScope,
-                                       MainImmediateCoroutineScope,
-                                       UnconfinedCoroutineScope {
+public interface TestProvidedCoroutineScope : TestCoroutineScope,
+                                              DefaultCoroutineScope,
+                                              IOCoroutineScope,
+                                              MainCoroutineScope,
+                                              MainImmediateCoroutineScope,
+                                              UnconfinedCoroutineScope {
   /**
    * single [DispatcherProvider] promise for the [TestProvidedCoroutineScope]
    */
-  val dispatcherProvider: DispatcherProvider
+  public val dispatcherProvider: DispatcherProvider
 }
 
 /**
@@ -66,7 +66,7 @@ internal class TestProvidedCoroutineScopeImpl(
  * and the [ContinuationInterceptor] Key of the `CoroutineContext` will also return that `TestCoroutineDispatcher`.
  */
 @ExperimentalCoroutinesApi
-fun TestProvidedCoroutineScope(
+public fun TestProvidedCoroutineScope(
   dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),
   dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
   context: CoroutineContext = EmptyCoroutineContext
