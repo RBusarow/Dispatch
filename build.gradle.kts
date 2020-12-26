@@ -242,16 +242,6 @@ tasks.withType<KnitTask> {
   }
 }
 
-val generateDependencyGraph by tasks.registering {
-
-  description = "generate a visual dependency graph"
-  group = "refactor"
-
-  doLast {
-    createDependencyGraph()
-  }
-}
-
 val sortDependencies by tasks.registering {
 
   description = "sort all dependencies in a gradle kts file"
@@ -285,7 +275,7 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
 
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
   kotlin {
-    target("**/src/**/*.kt", "**/src/**/*.kt")
+    target("**/src/**/*.kt")
     ktlint("0.40.0")
       .userData(
         mapOf(
