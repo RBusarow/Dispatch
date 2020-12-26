@@ -23,7 +23,8 @@ import org.junit.runners.model.*
 public class ExpectedFailureRule : TestRule {
 
   override fun apply(
-    base: Statement, description: Description
+    base: Statement,
+    description: Description
   ): Statement = object : Statement() {
 
     override fun evaluate() {
@@ -43,5 +44,3 @@ public class ExpectedFailureRule : TestRule {
     }
   }
 }
-
-

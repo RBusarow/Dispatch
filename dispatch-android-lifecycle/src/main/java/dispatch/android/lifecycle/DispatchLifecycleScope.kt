@@ -199,6 +199,5 @@ open class DispatchLifecycleScope(
     ): DispatchLifecycleScope = DispatchLifecycleScope(
       lifecycle, coroutineScope.coroutineContext
     )
-
   }
 }

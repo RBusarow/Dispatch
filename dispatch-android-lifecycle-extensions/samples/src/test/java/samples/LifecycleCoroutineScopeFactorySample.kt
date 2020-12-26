@@ -73,6 +73,4 @@ class LifecycleScopeFactorySample {
 
   private annotation class Before
   private annotation class After
-
 }
-

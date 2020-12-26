@@ -98,5 +98,4 @@ internal class ViewModelScopeFactoryTest {
 
     default.shouldBeInstanceOf<MainCoroutineScope>()
   }
-
 }

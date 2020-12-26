@@ -32,7 +32,5 @@ class MainActivity : AppCompatActivity() {
     setContentView(ActivityMainBinding.inflate(layoutInflater).root)
 
     Timber.plant(Timber.DebugTree())
-
   }
 }
-

@@ -71,7 +71,6 @@ public class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config
         report(finding)
       }
     }
-
   }
 
   /**
@@ -102,6 +101,3 @@ public class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config
     super.visitImportDirective(importDirective)
   }
 }
-
-
-

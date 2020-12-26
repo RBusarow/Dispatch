@@ -59,5 +59,4 @@ public object ViewModelScopeFactory {
   public fun reset() {
     _factory = { MainCoroutineScope() }
   }
-
 }

@@ -166,10 +166,10 @@ class DispatchLifecycleScopeTest : HermitJUnit5() {
       Lifecycle.Event.values()
         .filter {
           when (it) {
-            Lifecycle.Event.ON_CREATE  -> true
-            Lifecycle.Event.ON_STOP    -> true
+            Lifecycle.Event.ON_CREATE -> true
+            Lifecycle.Event.ON_STOP -> true
             Lifecycle.Event.ON_DESTROY -> true
-            else                       -> false
+            else -> false
           }
         }
         .forEach { event ->
@@ -245,12 +245,12 @@ class DispatchLifecycleScopeTest : HermitJUnit5() {
       Lifecycle.Event.values()
         .filter {
           when (it) {
-            Lifecycle.Event.ON_CREATE  -> true
-            Lifecycle.Event.ON_START   -> true
-            Lifecycle.Event.ON_PAUSE   -> true
-            Lifecycle.Event.ON_STOP    -> true
+            Lifecycle.Event.ON_CREATE -> true
+            Lifecycle.Event.ON_START -> true
+            Lifecycle.Event.ON_PAUSE -> true
+            Lifecycle.Event.ON_STOP -> true
             Lifecycle.Event.ON_DESTROY -> true
-            else                       -> false
+            else -> false
           }
         }
         .forEach { event ->

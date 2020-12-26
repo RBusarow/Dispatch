@@ -48,17 +48,17 @@ internal fun bindViewLifecycleCoroutineScope(
         )
 
         viewScope.block()
-
       }
     }.flowOnMainImmediate()
     .launchIn(receiverScope)
 
-  fragment.lifecycle.addObserver(LifecycleEventObserver { _, event ->
-    if (event == Lifecycle.Event.ON_DESTROY) {
-      observerJob.cancel()
+  fragment.lifecycle.addObserver(
+    LifecycleEventObserver { _, event ->
+      if (event == Lifecycle.Event.ON_DESTROY) {
+        observerJob.cancel()
+      }
     }
-  })
+  )
 
   return observerJob
 }
-

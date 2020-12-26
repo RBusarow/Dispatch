@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-
 package samples
 
 import androidx.lifecycle.*

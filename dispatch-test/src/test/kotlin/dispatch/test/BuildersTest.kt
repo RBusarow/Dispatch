@@ -82,7 +82,6 @@ internal class BuildersTest {
 
         provider.main shouldNotBe Dispatchers.Main
       }
-
   }
 
   @Nested
@@ -150,7 +149,6 @@ internal class BuildersTest {
         dispatcher shouldBe dispatcherProvider.mainImmediate
         dispatcher shouldBe dispatcherProvider.unconfined
       }
-
   }
 
   class TestCoroutineContext : CoroutineContext.Element {
@@ -158,5 +156,4 @@ internal class BuildersTest {
 
     companion object Key : CoroutineContext.Key<TestCoroutineContext>
   }
-
 }

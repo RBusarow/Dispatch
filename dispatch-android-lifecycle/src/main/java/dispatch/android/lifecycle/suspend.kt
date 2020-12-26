@@ -103,4 +103,3 @@ suspend fun <T> Lifecycle.onNextResume(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T? = onNext(context, Lifecycle.State.RESUMED, block)
-

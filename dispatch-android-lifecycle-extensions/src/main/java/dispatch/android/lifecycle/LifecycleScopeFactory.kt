@@ -97,5 +97,4 @@ object LifecycleScopeFactory {
   public fun set(factory: () -> CoroutineContext) {
     factoryInstance = DispatchLifecycleScopeFactory(factory)
   }
-
 }

@@ -29,31 +29,31 @@ open class FakeLifecycleOwner(
   init {
     when (initialState) {
       Lifecycle.State.DESTROYED -> destroy()
-      Lifecycle.State.CREATED   -> create()
-      Lifecycle.State.STARTED   -> start()
-      Lifecycle.State.RESUMED   -> resume()
-      else                      -> Unit
+      Lifecycle.State.CREATED -> create()
+      Lifecycle.State.STARTED -> start()
+      Lifecycle.State.RESUMED -> resume()
+      else -> Unit
     }
   }
 
   override fun getLifecycle(): FakeLifecycle = fakeLifecycle
 
   fun stepDown() = when (lifecycle.currentState) {
-    Lifecycle.State.DESTROYED   -> throw IllegalArgumentException("already destroyed")
+    Lifecycle.State.DESTROYED -> throw IllegalArgumentException("already destroyed")
     Lifecycle.State.INITIALIZED -> throw IllegalArgumentException(
       "cannot transition straight from initialized to destroyed"
     )
-    Lifecycle.State.CREATED     -> destroy()
-    Lifecycle.State.STARTED     -> stop()
-    Lifecycle.State.RESUMED     -> pause()
+    Lifecycle.State.CREATED -> destroy()
+    Lifecycle.State.STARTED -> stop()
+    Lifecycle.State.RESUMED -> pause()
   }
 
   fun stepUp() = when (lifecycle.currentState) {
-    Lifecycle.State.DESTROYED   -> throw IllegalArgumentException("already destroyed")
+    Lifecycle.State.DESTROYED -> throw IllegalArgumentException("already destroyed")
     Lifecycle.State.INITIALIZED -> create()
-    Lifecycle.State.CREATED     -> start()
-    Lifecycle.State.STARTED     -> resume()
-    Lifecycle.State.RESUMED     -> throw IllegalArgumentException("already resumed")
+    Lifecycle.State.CREATED -> start()
+    Lifecycle.State.STARTED -> resume()
+    Lifecycle.State.RESUMED -> throw IllegalArgumentException("already resumed")
   }
 
   fun create() = runBlocking(mainDispatcher) {

@@ -55,7 +55,7 @@ internal class TestProvidedCoroutineScopeImpl(
   override val dispatcherProvider: DispatcherProvider,
   context: CoroutineContext = EmptyCoroutineContext
 ) : TestProvidedCoroutineScope,
-    TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
+  TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
 
 /**
  * Creates a [TestProvidedCoroutineScope] implementation with optional parameters of

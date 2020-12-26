@@ -99,7 +99,6 @@ fun IdlingDispatcherProvider.registerAllIdlingResources() {
     IdlingRegistry.getInstance()
       .register(it.counter)
   }
-
 }
 
 /**
@@ -124,5 +123,4 @@ fun IdlingDispatcherProvider.unregisterAllIdlingResources() {
     IdlingRegistry.getInstance()
       .unregister(it.counter)
   }
-
 }

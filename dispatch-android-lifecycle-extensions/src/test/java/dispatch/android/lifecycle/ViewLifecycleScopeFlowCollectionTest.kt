@@ -146,6 +146,5 @@ internal class ViewLifecycleScopeFlowCollectionTest {
     flow.value = 2
 
     collected shouldBe listOf(0, 1)
-
   }
 }

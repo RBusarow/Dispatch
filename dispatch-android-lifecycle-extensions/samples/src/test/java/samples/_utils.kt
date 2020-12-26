@@ -49,4 +49,3 @@ fun MyCustomElement(): CoroutineContext {
 interface Application {
   fun onCreate()
 }
-

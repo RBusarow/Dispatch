@@ -184,7 +184,6 @@ fun File.updateLibraryVersions(): File {
         Libs.Kotest.runner.toDependencyMatcher()
       )
 
-
       forEachLine { originalLine ->
 
         val newLine = dependencyMatchers.firstOrNull { matcher ->
@@ -231,4 +230,3 @@ private fun String.replace(
 
 private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
   .joinToString(":") + ":"
-

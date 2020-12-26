@@ -34,7 +34,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |  init {
       |    lifecycleScope.launch { println(1) }
       |  }
-      |  
+      |
       |}
       |
     """.trimMargin()
@@ -56,7 +56,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |import androidx.lifecycle.lifecycleScope
       |
       |class MyActivity : Activity() {
-      |  
+      |
       |}
       |
     """.trimMargin()
@@ -68,14 +68,14 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       findings shouldBe listOf()
     }
 
-    "issue id should be AndroidXLifecycleScope"  {
+    "issue id should be AndroidXLifecycleScope" {
 
       val rule = AndroidXLifecycleScope()
 
       rule.issue.id shouldBe "AndroidXLifecycleScope"
     }
 
-    "issue should not be reported if suppressing AndroidXLifecycleScope"  {
+    "issue should not be reported if suppressing AndroidXLifecycleScope" {
 
       val text = """
       |@file:Suppress("AndroidXLifecycleScope")
@@ -89,7 +89,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |  init {
       |    lifecycleScope.launch { println(1) }
       |  }
-      |  
+      |
       |}
     """.trimMargin()
 
@@ -100,7 +100,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       findings shouldBe listOf()
     }
 
-    "using Dispatch lifecycleScope should not report Finding"  {
+    "using Dispatch lifecycleScope should not report Finding" {
 
       val text = """
       |package a.b.c
@@ -112,7 +112,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |  init {
       |    lifecycleScope.launch { println(1) }
       |  }
-      |  
+      |
       |}
       |
     """.trimMargin()
