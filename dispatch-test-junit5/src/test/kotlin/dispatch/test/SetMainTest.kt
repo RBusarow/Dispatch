@@ -63,7 +63,5 @@ class SetMainTest {
 
       beforeSet shouldBe Dispatchers.Main
     }
-
   }
-
 }

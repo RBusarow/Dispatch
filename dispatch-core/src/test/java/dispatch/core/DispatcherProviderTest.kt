@@ -75,6 +75,4 @@ internal class DispatcherProviderTest {
       DispatcherProvider() shouldBe DefaultDispatcherProvider.get()
     }
   }
-
-
 }

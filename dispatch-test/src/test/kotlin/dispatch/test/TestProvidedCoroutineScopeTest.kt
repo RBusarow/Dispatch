@@ -85,7 +85,6 @@ internal class TestProvidedCoroutineScopeTest {
 
       scope.coroutineContext.dispatcherProvider shouldBe provider
     }
-
   }
 
   @Nested

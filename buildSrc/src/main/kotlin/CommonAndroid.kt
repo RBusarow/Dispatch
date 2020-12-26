@@ -65,4 +65,3 @@ fun Project.commonAndroid() {
     }
   }
 }
-

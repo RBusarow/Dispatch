@@ -102,5 +102,4 @@ internal class LifecycleScopeFactoryTest : HermitJUnit5() {
 
     default.shouldBeInstanceOf<MainImmediateCoroutineScope>()
   }
-
 }

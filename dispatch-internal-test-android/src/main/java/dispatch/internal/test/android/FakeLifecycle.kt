@@ -51,5 +51,4 @@ class FakeLifecycle(lifecycleOwner: FakeLifecycleOwner) : Lifecycle() {
   fun handleLifecycleEvent(event: Event) {
     delegate.handleLifecycleEvent(event)
   }
-
 }

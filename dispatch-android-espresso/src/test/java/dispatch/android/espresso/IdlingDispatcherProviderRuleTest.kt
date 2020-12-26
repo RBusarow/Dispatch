@@ -47,9 +47,7 @@ class IdlingDispatcherProviderRuleTest {
     verify { registry.register(idlingDispatcherProvider.main.counter) }
     verify { registry.register(idlingDispatcherProvider.mainImmediate.counter) }
     verify { registry.register(idlingDispatcherProvider.unconfined.counter) }
-
   }
-
 }
 
 class EspressoMockingWrapper : TestWatcher() {

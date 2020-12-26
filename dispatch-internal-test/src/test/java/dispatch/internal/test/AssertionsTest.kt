@@ -72,7 +72,5 @@ internal class AssertionsTest {
 
       assertFails { a shouldBeOrChildOf b }
     }
-
   }
 }
-

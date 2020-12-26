@@ -55,7 +55,6 @@ class CoroutineTestExtensionInjectionTest {
     fun `beforeAll should be injected before a function is called`() {
 
       beforeAllInjectedScope shouldNotBe null
-
     }
 
     @Test

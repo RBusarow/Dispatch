@@ -19,17 +19,6 @@ import androidx.lifecycle.*
 import kotlin.coroutines.*
 
 /**
- * **Deprecated** in favor of [DispatchLifecycleScopeFactory] in order to avoid name collisions with Androidx.
- *
- * @see DispatchLifecycleScopeFactory
- */
-@Deprecated(
-  "Use DispatchLifecycleScopeFactory to avoid collisions with the Androidx library",
-  replaceWith = ReplaceWith("DispatchLifecycleScopeFactory")
-)
-typealias LifecycleScopeFactory = DispatchLifecycleScopeFactory
-
-/**
  * Factory for [DispatchLifecycleScope]s.  This may be injected into a lifecycle-aware class
  * to provide custom [CoroutineContexts][CoroutineContext].
  *

@@ -30,7 +30,6 @@ class LifecycleSuspendSample(
 
   @BeforeEach
   fun beforeEach() {
-
     LifecycleScopeFactory.set { testScope.coroutineContext }
   }
 
@@ -197,5 +196,4 @@ class LifecycleSuspendSample(
     fragment.resume()
     fragment.invocations shouldBe 1
   }
-
 }

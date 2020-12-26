@@ -119,5 +119,4 @@ internal class DispatchViewModelTest {
   }
 
   class TestViewModel : DispatchViewModel()
-
 }

@@ -22,14 +22,12 @@ internal inline fun <reified T : Annotation> ExtensionContext.getAnnotationRecur
 
   return this.elementOrNull()
     ?.getAnnotation(T::class.java) ?: parentOrNull()?.getAnnotationRecursive(T::class.java)
-
 }
 
 internal fun <T : Annotation> ExtensionContext.getAnnotationRecursive(aClass: Class<T>): T? {
 
   return this.elementOrNull()
     ?.getAnnotation(aClass) ?: parentOrNull()?.getAnnotationRecursive(aClass)
-
 }
 
 @Suppress("NewApi")

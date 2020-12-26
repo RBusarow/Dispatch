@@ -156,6 +156,4 @@ internal class LaunchBuildersTest {
         }
       }
   }
-
 }
-

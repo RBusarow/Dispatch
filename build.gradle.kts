@@ -51,6 +51,7 @@ plugins {
   kotlin("jvm")
   id(Plugins.dokka) version Versions.dokka
   id(Plugins.taskTree) version Versions.taskTree
+  id(Plugins.spotless) version Versions.spotless
   base
 }
 
@@ -259,7 +260,6 @@ dependencyAnalysis {
   }
 }
 
-
 fun isNonStable(version: String): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
   val regex = "^[0-9,.v-]+(-r)?$".toRegex()
@@ -270,5 +270,36 @@ fun isNonStable(version: String): Boolean {
 tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
   rejectVersionIf {
     isNonStable(candidate.version) && !isNonStable(currentVersion)
+  }
+}
+
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+  kotlin {
+    target("**/src/**/*.kt")
+    ktlint("0.40.0")
+      .userData(
+        mapOf(
+          "indent_size" to "2",
+          "continuation_indent_size" to "2",
+          "max_line_length" to "off",
+          "disabled_rules" to "no-wildcard-imports",
+          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
+        )
+      )
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  kotlinGradle {
+    target("*.gradle.kts")
+    ktlint("0.40.0")
+      .userData(
+        mapOf(
+          "indent_size" to "2",
+          "continuation_indent_size" to "2",
+          "max_line_length" to "off",
+          "disabled_rules" to "no-wildcard-imports",
+          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
+        )
+      )
   }
 }

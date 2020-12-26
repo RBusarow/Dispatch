@@ -55,7 +55,7 @@ internal object DispatchLifecycleScopeStore : LifecycleEventObserver {
          */
         (map as ConcurrentMap).atomicGetOrPut(lifecycle) { bindLifecycle(lifecycle) }
       }
-      else                        -> {
+      else -> {
         synchronized(map) {
           map.getOrPut(lifecycle) { bindLifecycle(lifecycle) }
         }
@@ -75,5 +75,4 @@ internal object DispatchLifecycleScopeStore : LifecycleEventObserver {
 
     return scope
   }
-
 }
