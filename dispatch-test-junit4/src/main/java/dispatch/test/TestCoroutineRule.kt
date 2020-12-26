@@ -58,7 +58,7 @@ import kotlin.coroutines.*
 public class TestCoroutineRule(
   factory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
 ) : TestWatcher(),
-    TestProvidedCoroutineScope by factory() {
+  TestProvidedCoroutineScope by factory() {
 
   /**
    * The underlying [TestCoroutineDispatcher] which is responsible for virtual time control.
