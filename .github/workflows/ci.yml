@@ -30,8 +30,8 @@ jobs:
           java-version: 14
 
       # formats all Kotlin src files
-      - name: ktlint format
-        run: ./gradlew formatKotlin
+      - name: spotless format
+        run: ./gradlew spotlessApply
 
       # If sortDependencies or formatKotlin generated changes, commit and push those changes.
       - name: commit changes
