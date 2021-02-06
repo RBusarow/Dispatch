@@ -43,7 +43,7 @@ object Plugins {
 object Versions {
   const val ktlint = "0.35.0"
   const val dokka = "1.4.20"
-  const val dependencyAnalysis = "0.72.0"
+  const val dependencyAnalysis = "0.70.0"
   const val knit = "0.2.3"
   const val gradleDoctor = "0.7.0"
 
