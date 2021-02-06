@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -42,23 +42,23 @@ object Plugins {
 
 object Versions {
   const val ktlint = "0.35.0"
-  const val dokka = "1.4.10"
-  const val dependencyAnalysis = "0.64.0"
-  const val knit = "0.2.2"
-  const val gradleDoctor = "0.6.3"
+  const val dokka = "1.4.20"
+  const val dependencyAnalysis = "0.72.0"
+  const val knit = "0.2.3"
+  const val gradleDoctor = "0.7.0"
 
   const val compileSdk = 29
   const val minSdk = "21"
   const val targetSdk = 29
 
-  const val binaryCompatibility = "0.2.3"
-  const val benManes = "0.33.0"
-  const val gradleWrapper = "4.1.0"
+  const val binaryCompatibility = "0.4.0"
+  const val benManes = "0.36.0"
+  const val gradleWrapper = "4.1.2"
   const val dagger = "2.25.2"
-  const val kotlin = "1.4.21"
+  const val kotlin = "1.4.30"
   const val mavenPublish = "0.13.0"
 
-  const val spotless = "5.8.2"
+  const val spotless = "5.9.0"
   const val taskTree = "1.5"
   const val versionName = "1.0.0-beta08"
 }
@@ -151,7 +151,7 @@ object Libs {
   }
 
   object Detekt {
-    const val version = "1.14.2"
+    const val version = "1.15.0"
     const val api = "io.gitlab.arturbosch.detekt:detekt-api:$version"
     const val cli = "io.gitlab.arturbosch.detekt:detekt-cli:$version"
     const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
@@ -163,9 +163,9 @@ object Libs {
   }
 
   object JUnit {
-    const val jUnit4 = "junit:junit:4.12"
+    const val jUnit4 = "junit:junit:4.13.1"
 
-    private const val version = "5.7.0"
+    private const val version = "5.7.1"
 
     const val jUnit5 = "org.junit.jupiter:junit-jupiter:$version"
     const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:$version"
@@ -175,7 +175,7 @@ object Libs {
   }
 
   object Kotest {
-    private const val version = "4.3.1"
+    private const val version = "4.4.0"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
     const val assertionsShared = "io.kotest:kotest-assertions-shared-jvm:$version"
     const val commonJvm = "io.kotest:kotest-common-jvm:$version"
@@ -209,7 +209,7 @@ object Libs {
   }
 
   object MockK {
-    const val core = "io.mockk:mockk:1.9.2"
+    const val core = "io.mockk:mockk:1.10.5"
   }
 
   object RickBusarow {
@@ -245,6 +245,6 @@ object Libs {
   }
 
   object Robolectric {
-    const val core = "org.robolectric:robolectric:4.4"
+    const val core = "org.robolectric:robolectric:4.5.1"
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,7 +31,7 @@ dependencies {
 
   compileOnly(gradleApi())
 
-  implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.4.21") // update Dependencies.kt as well
-  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21") // update Dependencies.kt as well
-  implementation("com.android.tools.build:gradle:4.1.0") // update Dependencies.kt as well
+  implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.4.30") // update Dependencies.kt as well
+  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30") // update Dependencies.kt as well
+  implementation("com.android.tools.build:gradle:4.1.2") // update Dependencies.kt as well
 }
