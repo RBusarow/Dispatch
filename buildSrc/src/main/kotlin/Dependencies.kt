@@ -60,7 +60,7 @@ object Versions {
 
   const val spotless = "5.11.0"
   const val taskTree = "1.5"
-  const val versionName = "1.0.0-beta08"
+  const val versionName = "1.0.0-beta09"
 }
 
 object BuildPlugins {
