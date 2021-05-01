@@ -41,6 +41,11 @@ fun Project.common() {
         Libs.Kotlinx.Coroutines.test,
         Libs.Kotlinx.Coroutines.android
       )
+      eachDependency {
+        when {
+          requested.group == "org.jetbrains.kotlin" -> useVersion(Versions.kotlin)
+        }
+      }
     }
   }
 }

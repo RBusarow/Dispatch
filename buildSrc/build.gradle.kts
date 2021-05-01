@@ -23,15 +23,12 @@ repositories {
   maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
-kotlinDslPluginOptions {
-  experimentalWarning.set(false)
-}
-
 dependencies {
 
   compileOnly(gradleApi())
 
-  implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.4.31") // update Dependencies.kt as well
-  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31") // update Dependencies.kt as well
-  implementation("com.android.tools.build:gradle:4.1.2") // update Dependencies.kt as well
+  implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.5.0") // update Dependencies.kt as well
+  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0") // update Dependencies.kt as well
+  implementation("com.android.tools.build:gradle:4.1.3") // update Dependencies.kt as well
+  implementation("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1") // update Dependencies.kt as well
 }
