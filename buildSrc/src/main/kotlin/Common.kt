@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-@file:Suppress("LongMethod", "TopLevelPropertyNaming")
-
 import org.gradle.api.*
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.*
