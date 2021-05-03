@@ -93,4 +93,4 @@ public interface DispatcherProvider : CoroutineContext.Element {
  *
  * @see DefaultDispatcherProvider
  */
-public fun DispatcherProvider() : DispatcherProvider  = DefaultDispatcherProvider.get()
+public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider.get()
