@@ -42,8 +42,8 @@ object Plugins {
 
 object Versions {
   const val ktlint = "0.35.0"
-  const val dokka = "1.4.20"
-  const val dependencyAnalysis = "0.71.0"
+  const val dokka = "1.4.32"
+  const val dependencyAnalysis = "0.72.0"
   const val knit = "0.2.3"
   const val gradleDoctor = "0.7.0"
 
@@ -51,14 +51,14 @@ object Versions {
   const val minSdk = "21"
   const val targetSdk = 29
 
-  const val binaryCompatibility = "0.4.0"
+  const val binaryCompatibility = "0.5.0"
   const val benManes = "0.38.0"
-  const val gradleWrapper = "4.1.2"
+  const val gradleWrapper = "4.1.3"
   const val dagger = "2.25.2"
-  const val kotlin = "1.4.31"
+  const val kotlin = "1.5.0"
   const val mavenPublish = "0.13.0"
 
-  const val spotless = "5.11.0"
+  const val spotless = "5.12.4"
   const val taskTree = "1.5"
   const val versionName = "1.0.0-beta09"
 }
@@ -72,7 +72,7 @@ object BuildPlugins {
 
   const val binaryCompatibility =
     "org.jetbrains.kotlinx:binary-compatibility-validator:${Versions.binaryCompatibility}"
-  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.14.4"
+  const val atomicFu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1"
 
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleWrapper}"
   const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -86,14 +86,14 @@ object BuildPlugins {
 object Libs {
 
   object AndroidX {
-    const val activity = "androidx.activity:activity-ktx:1.2.0"
+    const val activity = "androidx.activity:activity-ktx:1.2.2"
     const val appcompat = "androidx.appcompat:appcompat:1.2.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val coreKtx = "androidx.core:core-ktx:1.3.2"
 
     object Fragment {
 
-      private const val version = "1.3.0"
+      private const val version = "1.3.3"
 
       const val core = "androidx.fragment:fragment:$version"
       const val ktx = "androidx.fragment:fragment-ktx:$version"
@@ -102,7 +102,7 @@ object Libs {
 
     object Lifecycle {
 
-      private const val version = "2.3.0"
+      private const val version = "2.3.1"
 
       const val common = "androidx.lifecycle:lifecycle-common:$version"
       const val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
@@ -151,7 +151,7 @@ object Libs {
   }
 
   object Detekt {
-    const val version = "1.15.0"
+    const val version = "1.16.0"
     const val api = "io.gitlab.arturbosch.detekt:detekt-api:$version"
     const val cli = "io.gitlab.arturbosch.detekt:detekt-cli:$version"
     const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
@@ -175,7 +175,7 @@ object Libs {
   }
 
   object Kotest {
-    private const val version = "4.4.2"
+    private const val version = "4.4.3"
     const val assertions = "io.kotest:kotest-assertions-core-jvm:$version"
     const val assertionsShared = "io.kotest:kotest-assertions-shared-jvm:$version"
     const val commonJvm = "io.kotest:kotest-common-jvm:$version"
@@ -209,7 +209,7 @@ object Libs {
   }
 
   object MockK {
-    const val core = "io.mockk:mockk:1.10.6"
+    const val core = "io.mockk:mockk:1.11.0"
   }
 
   object RickBusarow {
