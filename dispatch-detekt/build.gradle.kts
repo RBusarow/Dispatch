@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,7 +14,7 @@
  */
 
 plugins {
-  id(Plugins.kotlin)
+  javaLibrary
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -23,13 +23,6 @@ dependencies {
 
   api(Libs.Detekt.api)
   api(Libs.Kotlin.compiler)
-
-  implementation(Libs.Kotlin.stdlib)
-
-  // detekt-test leaks transitive dependencies upon AssertJ and Spek
-  // https://github.com/detekt/detekt/issues/3082
-  testImplementation("org.assertj:assertj-core:3.17.2")
-  testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.13")
 
   testImplementation(Libs.Detekt.api)
   testImplementation(Libs.Detekt.test)

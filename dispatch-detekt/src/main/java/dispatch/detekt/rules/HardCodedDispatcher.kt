@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.resolve.calls.callUtil.*
  * - allowMainImmediateDispatcher
  * - allowUnconfinedDispatcher
  */
-class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
+public class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
 
   private companion object {
     private const val coroutinesStarImport = "kotlinx.coroutines.*"
@@ -56,7 +56,7 @@ class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
   /**
    * @suppress
    */
-  override val issue = Issue(
+  override val issue: Issue = Issue(
     id = "HardCodedDispatcher",
     severity = Severity.Defect,
     description = "Dispatchers properties do not contain DispatcherProviders and don't work with this library.",
@@ -96,9 +96,9 @@ class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
 
     if (expression.isInImportDirective()) return
 
-    if (!expression.isDotReceiver()
-      && expression.text != "Dispatchers.Main.immediate"
-      && matchers.any { matcher -> matcher.matches(expression) }
+    if (!expression.isDotReceiver() &&
+      expression.text != "Dispatchers.Main.immediate" &&
+      matchers.any { matcher -> matcher.matches(expression) }
     ) {
       report(CodeSmell(issue, Entity.from(expression), message(expression.text)))
       return
@@ -189,12 +189,12 @@ class HardCodedDispatcher(config: Config = Config.empty) : Rule(config) {
 
       val text = expression.text
 
-      return text == fullyQualifiedName
-          || expression.parent?.text == fullyQualifiedName
-          || trimmedImports.any { import ->
+      return text == fullyQualifiedName ||
+        expression.parent?.text == fullyQualifiedName ||
+        trimmedImports.any { import ->
 
-        ((text == reference && import == fullyQualifiedName) || "$import.$text" == fullyQualifiedName)
-      }
+          ((text == reference && import == fullyQualifiedName) || "$import.$text" == fullyQualifiedName)
+        }
     }
   }
 }

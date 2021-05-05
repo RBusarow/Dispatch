@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,30 +14,7 @@
  */
 
 plugins {
-  id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
-}
-
-android {
-  compileSdkVersion(Versions.compileSdk)
-
-  defaultConfig {
-    minSdkVersion(Versions.minSdk)
-    targetSdkVersion(Versions.targetSdk)
-    versionName = Versions.versionName
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
-      )
-    }
-  }
+  androidLibrary
 }
 dependencies {
 
@@ -47,9 +24,9 @@ dependencies {
   api(Libs.AndroidX.Lifecycle.runtime)
   api(Libs.Kotlinx.Coroutines.core)
   api(Libs.Kotlinx.Coroutines.coreJvm)
+  api(Libs.JUnit.jUnit5Api)
 
   implementation(Libs.AndroidX.Lifecycle.runtimeKtx)
   implementation(Libs.Kotlin.reflect)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
 }

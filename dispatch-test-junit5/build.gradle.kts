@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,7 @@
 
 plugins {
   id(Plugins.atomicFu)
-  id(Plugins.kotlin)
+  javaLibrary
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
 }
@@ -28,7 +28,6 @@ dependencies {
 
   implementation(Libs.JUnit.jUnit5)
   implementation(Libs.Kotlin.reflect)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.core)
   implementation(Libs.Kotlinx.Coroutines.coreJvm)
   implementation(Libs.Kotlinx.Coroutines.test)

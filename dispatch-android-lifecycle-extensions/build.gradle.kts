@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,32 +14,9 @@
  */
 
 plugins {
-  id(Plugins.androidLibrary)
-  id(Plugins.kotlinAndroid)
+  androidLibrary
   id(Plugins.mavenPublish)
   id(Plugins.dokka)
-}
-
-android {
-  compileSdkVersion(Versions.compileSdk)
-
-  defaultConfig {
-    minSdkVersion(Versions.minSdk)
-    targetSdkVersion(Versions.targetSdk)
-    versionName = Versions.versionName
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
-      )
-    }
-  }
 }
 
 dependencies {
@@ -50,8 +27,6 @@ dependencies {
   api(Libs.Kotlinx.Coroutines.coreJvm)
 
   api(project(":dispatch-android-lifecycle"))
-
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
 
   implementation(project(":dispatch-core"))

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,6 +14,7 @@
  */
 @file:Suppress("MagicNumber")
 
+import com.github.benmanes.gradle.versions.updates.*
 import formatting.*
 import io.gitlab.arturbosch.detekt.*
 import kotlinx.knit.*
@@ -35,7 +36,6 @@ buildscript {
 
     classpath(BuildPlugins.androidGradlePlugin)
     classpath(BuildPlugins.atomicFu)
-    classpath(BuildPlugins.benManesVersions)
     classpath(BuildPlugins.binaryCompatibility)
     classpath(BuildPlugins.kotlinGradlePlugin)
     classpath(BuildPlugins.gradleMavenPublish)
@@ -44,18 +44,21 @@ buildscript {
 }
 
 plugins {
+  id(Plugins.benManes) version Versions.benManes
   id(Plugins.dependencyAnalysis) version Versions.dependencyAnalysis
   id(Plugins.gradleDoctor) version Versions.gradleDoctor
   id(Plugins.detekt) version Libs.Detekt.version
   kotlin("jvm")
   id(Plugins.dokka) version Versions.dokka
   id(Plugins.taskTree) version Versions.taskTree
+  id(Plugins.spotless) version Versions.spotless
   base
 }
 
 allprojects {
 
   repositories {
+    mavenLocal()
     mavenCentral()
     google()
     jcenter()
@@ -134,24 +137,14 @@ subprojects {
   }
 }
 
-subprojects {
-  tasks.withType<KotlinCompile>()
-    .configureEach {
+val updateDocsVersions by tasks.registering {
 
-      kotlinOptions {
-        allWarningsAsErrors = true
+  description = "updates all artifact versions used in documentation"
+  group = "documentation"
 
-        jvmTarget = "1.8"
-
-        // https://youtrack.jetbrains.com/issue/KT-24946
-        // freeCompilerArgs = listOf(
-        //     "-progressive",
-        //     "-Xskip-runtime-version-check",
-        //     "-Xdisable-default-scripting-plugin",
-        //     "-Xuse-experimental=kotlin.Experimental"
-        // )
-      }
-    }
+  doLast {
+    allprojects { updateReadMeArtifactVersions() }
+  }
 }
 
 val cleanDocs by tasks.registering {
@@ -259,16 +252,6 @@ tasks.withType<KnitTask> {
   }
 }
 
-val generateDependencyGraph by tasks.registering {
-
-  description = "generate a visual dependency graph"
-  group = "refactor"
-
-  doLast {
-    createDependencyGraph()
-  }
-}
-
 val sortDependencies by tasks.registering {
 
   description = "sort all dependencies in a gradle kts file"
@@ -279,36 +262,58 @@ val sortDependencies by tasks.registering {
   }
 }
 
-subprojects {
-
-  // force update all transitive dependencies (prevents some library leaking an old version)
-  configurations.all {
-    resolutionStrategy {
-      force(
-        Libs.Kotlin.reflect,
-        // androidx is currently leaking coroutines 1.1.1 everywhere
-        Libs.Kotlinx.Coroutines.core,
-        Libs.Kotlinx.Coroutines.test,
-        Libs.Kotlinx.Coroutines.android,
-        // prevent dependency libraries from leaking their own old version of this library
-        Libs.RickBusarow.Dispatch.core,
-        Libs.RickBusarow.Dispatch.detekt,
-        Libs.RickBusarow.Dispatch.espresso,
-        Libs.RickBusarow.Dispatch.lifecycle,
-        Libs.RickBusarow.Dispatch.lifecycleExtensions,
-        Libs.RickBusarow.Dispatch.viewModel,
-        Libs.RickBusarow.Dispatch.Test.core,
-        Libs.RickBusarow.Dispatch.Test.jUnit4,
-        Libs.RickBusarow.Dispatch.Test.jUnit5
-      )
-    }
-  }
-}
-
 dependencyAnalysis {
   issues {
     all {
       ignoreKtx(false) // default is false
     }
   }
+}
+
+fun isNonStable(version: String): Boolean {
+  val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+  val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+  val isStable = stableKeyword || regex.matches(version)
+  return isStable.not()
+}
+
+tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
+  rejectVersionIf {
+    isNonStable(candidate.version) && !isNonStable(currentVersion)
+  }
+}
+
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+  kotlin {
+    target("**/src/**/*.kt")
+    ktlint("0.40.0")
+      .userData(
+        mapOf(
+          "indent_size" to "2",
+          "continuation_indent_size" to "2",
+          "max_line_length" to "off",
+          "disabled_rules" to "no-wildcard-imports",
+          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
+        )
+      )
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  kotlinGradle {
+    target("*.gradle.kts")
+    ktlint("0.40.0")
+      .userData(
+        mapOf(
+          "indent_size" to "2",
+          "continuation_indent_size" to "2",
+          "max_line_length" to "off",
+          "disabled_rules" to "no-wildcard-imports",
+          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
+        )
+      )
+  }
+}
+
+configure<com.osacky.doctor.DoctorExtension> {
+  negativeAvoidanceThreshold.set(500)
 }

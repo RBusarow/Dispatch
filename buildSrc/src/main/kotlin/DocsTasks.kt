@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -184,7 +184,6 @@ fun File.updateLibraryVersions(): File {
         Libs.Kotest.runner.toDependencyMatcher()
       )
 
-
       forEachLine { originalLine ->
 
         val newLine = dependencyMatchers.firstOrNull { matcher ->
@@ -231,4 +230,3 @@ private fun String.replace(
 
 private fun String.removeVersionSuffix(): String = split(":").subList(0, 2)
   .joinToString(":") + ":"
-

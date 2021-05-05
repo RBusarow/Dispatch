@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -55,9 +55,10 @@ import kotlin.coroutines.*
  * @sample samples.TestCoroutineRuleWithFactorySample
  */
 @ExperimentalCoroutinesApi
-class TestCoroutineRule(
+public class TestCoroutineRule(
   factory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
-) : TestWatcher(), TestProvidedCoroutineScope by factory() {
+) : TestWatcher(),
+  TestProvidedCoroutineScope by factory() {
 
   /**
    * The underlying [TestCoroutineDispatcher] which is responsible for virtual time control.
@@ -65,7 +66,8 @@ class TestCoroutineRule(
    * @see UncaughtExceptionCaptor
    * @see DelayController
    */
-  val dispatcher = coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
+  public val dispatcher: TestCoroutineDispatcher =
+    coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
 
   /**
    * @suppress

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,14 +22,12 @@ internal inline fun <reified T : Annotation> ExtensionContext.getAnnotationRecur
 
   return this.elementOrNull()
     ?.getAnnotation(T::class.java) ?: parentOrNull()?.getAnnotationRecursive(T::class.java)
-
 }
 
 internal fun <T : Annotation> ExtensionContext.getAnnotationRecursive(aClass: Class<T>): T? {
 
   return this.elementOrNull()
     ?.getAnnotation(aClass) ?: parentOrNull()?.getAnnotationRecursive(aClass)
-
 }
 
 @Suppress("NewApi")

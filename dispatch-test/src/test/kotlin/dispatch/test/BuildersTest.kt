@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -82,7 +82,6 @@ internal class BuildersTest {
 
         provider.main shouldNotBe Dispatchers.Main
       }
-
   }
 
   @Nested
@@ -118,6 +117,12 @@ internal class BuildersTest {
     }
 
     @Test
+    fun `CoroutineScope receiver should be TestProvidedCoroutineScope`() = testProvided {
+
+      this.shouldBeInstanceOf<TestProvidedCoroutineScope>()
+    }
+
+    @Test
     fun `CoroutineScope receiver should be TestCoroutineScope`() = testProvided {
 
       this.shouldBeInstanceOf<TestCoroutineScope>()
@@ -144,7 +149,6 @@ internal class BuildersTest {
         dispatcher shouldBe dispatcherProvider.mainImmediate
         dispatcher shouldBe dispatcherProvider.unconfined
       }
-
   }
 
   class TestCoroutineContext : CoroutineContext.Element {
@@ -152,5 +156,4 @@ internal class BuildersTest {
 
     companion object Key : CoroutineContext.Key<TestCoroutineContext>
   }
-
 }

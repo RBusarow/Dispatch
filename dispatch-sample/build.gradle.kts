@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,8 +15,8 @@
 
 plugins {
   id(Plugins.androidApplication)
-  id(Plugins.kotlinAndroid)
-  id(Plugins.kotlinAndroidExtensions)
+  kotlin("android")
+  id(Plugins.kotlinParcelize)
 }
 
 android {
@@ -32,6 +32,11 @@ android {
   }
 
   buildFeatures.viewBinding = true
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+  }
 
   buildTypes {
     getByName("release") {
@@ -54,9 +59,7 @@ dependencies {
   implementation(Libs.AndroidX.coreKtx)
   implementation(Libs.AndroidX.Fragment.ktx)
   implementation(Libs.AndroidX.Lifecycle.common)
-  implementation(Libs.AndroidX.Lifecycle.extensions)
   implementation(Libs.JakeWharton.timber)
-  implementation(Libs.Kotlin.stdlib)
   implementation(Libs.Kotlinx.Coroutines.android)
   implementation(Libs.Kotlinx.Coroutines.core)
 

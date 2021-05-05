@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,7 @@ import dispatch.core.*
 import kotlinx.coroutines.*
 
 /**
- * Factory holder for [viewModelScope][dispatch.android.viewmodel.CoroutineViewModel.viewModelScope]'s.
+ * Factory holder for [viewModelScope][dispatch.android.viewmodel.DispatchViewModel.viewModelScope]'s.
  *
  * By default, `create` returns a [MainImmediateCoroutineScope], but may return any [CoroutineScope].
  *
@@ -59,5 +59,4 @@ public object ViewModelScopeFactory {
   public fun reset() {
     _factory = { MainCoroutineScope() }
   }
-
 }

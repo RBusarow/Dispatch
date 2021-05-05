@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,7 +18,7 @@ package dispatch.internal.test
 import kotlin.reflect.full.*
 import kotlin.reflect.jvm.*
 
-inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(name: String): R {
+public inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(name: String): R {
 
   val kClass = T::class
 
@@ -31,7 +31,7 @@ inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(name
   return property.call() as R
 }
 
-inline fun <reified T : Any, reified R : Any> T.getPrivateFieldByName(name: String): R {
+public inline fun <reified T : Any, reified R : Any> T.getPrivateFieldByName(name: String): R {
 
   val kClass = T::class
 

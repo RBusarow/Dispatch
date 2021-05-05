@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,7 +25,7 @@ import kotlinx.coroutines.test.*
  * A default version will create a different `TestCoroutineDispatcher` for each property.
  */
 @ExperimentalCoroutinesApi
-class TestDispatcherProvider(
+public class TestDispatcherProvider(
   /**
    * [CoroutineDispatcher] generally intended for cpu-bound tasks.
    *
@@ -83,7 +83,7 @@ class TestDispatcherProvider(
  * where all properties point to the same underlying [TestCoroutineDispatcher].
  */
 @ExperimentalCoroutinesApi
-fun TestDispatcherProvider(
+public fun TestDispatcherProvider(
   dispatcher: CoroutineDispatcher
 ): TestDispatcherProvider = TestDispatcherProvider(
   default = dispatcher,
@@ -105,7 +105,7 @@ fun TestDispatcherProvider(
  */
 @ExperimentalCoroutinesApi
 @Suppress("HardCodedDispatcher")
-fun TestBasicDispatcherProvider(): TestDispatcherProvider {
+public fun TestBasicDispatcherProvider(): TestDispatcherProvider {
 
   @Suppress("EXPERIMENTAL_API_USAGE")
   val mainThread = newSingleThreadContext("main thread proxy")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,12 +38,11 @@ include(":dispatch-sample")
 pluginManagement {
   repositories {
     gradlePluginPortal()
-    jcenter()
   }
 }
 
 plugins {
-  id("com.gradle.enterprise").version("3.1.1")
+  id("com.gradle.enterprise").version("3.5.2")
 }
 
 gradleEnterprise {
@@ -53,3 +52,7 @@ gradleEnterprise {
     publishAlwaysIf(System.getenv("GITHUB_ACTIONS")?.toBoolean() == true)
   }
 }
+
+rootProject.name = "Dispatch"
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

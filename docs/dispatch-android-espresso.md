@@ -88,15 +88,15 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta04")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta08")
 
-  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta04")
+  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta08")
 
   // android
-  androidTestImplementation("androidx.test:runner:1.2.0")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+  androidTestImplementation("androidx.test:runner:1.3.0")
+  androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }
 ```
 

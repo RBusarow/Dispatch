@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,21 +24,21 @@ import java.util.concurrent.*
 /**
  * Normal [getOrPut] is guaranteed to only return a single instance for a given key,
  * but the [defaultValue] lambda may be invoked unnecessarily.  This would create a new instance
- * of [LifecycleCoroutineScope] without actually returning it.
+ * of [DispatchLifecycleScope] without actually returning it.
  *
- * This extra [LifecycleCoroutineScope] would still be active and observing the [lifecycle][key].
+ * This extra [DispatchLifecycleScope] would still be active and observing the [lifecycle][key].
  *
  * This function compares the result of the lambda to the result of [getOrPut],
  * and cancels the lambda's result if it's different.
  *
  * @see getOrPut
  */
-internal inline fun ConcurrentMap<Lifecycle, LifecycleCoroutineScope>.atomicGetOrPut(
+internal inline fun ConcurrentMap<Lifecycle, DispatchLifecycleScope>.atomicGetOrPut(
   key: Lifecycle,
-  defaultValue: () -> LifecycleCoroutineScope
-): LifecycleCoroutineScope {
+  defaultValue: () -> DispatchLifecycleScope
+): DispatchLifecycleScope {
 
-  var newInstance: LifecycleCoroutineScope? = null
+  var newInstance: DispatchLifecycleScope? = null
 
   val existingOrNew = getOrPut(key) {
     newInstance = defaultValue.invoke()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,12 +23,12 @@ import kotlinx.coroutines.flow.*
 import kotlin.coroutines.*
 
 /**
- * [LifecycleCoroutineScope] instance which is tied to a [Fragment's][Fragment] View [lifecycle][Lifecycle].
+ * [DispatchLifecycleScope] instance which is tied to a [Fragment's][Fragment] View [lifecycle][Lifecycle].
  */
 class ViewLifecycleCoroutineScope internal constructor(
   lifecycle: Lifecycle,
   coroutineContext: CoroutineContext
-) : LifecycleCoroutineScope(lifecycle, coroutineContext) {
+) : DispatchLifecycleScope(lifecycle, coroutineContext) {
 
   /**
    * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches [CREATED][androidx.lifecycle.Lifecycle.State.CREATED], create a new coroutine and collect this [Flow].

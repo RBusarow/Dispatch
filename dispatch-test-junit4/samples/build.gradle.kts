@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,14 +14,12 @@
  */
 
 plugins {
-  id(Plugins.kotlin)
+  javaLibrary
 }
 
 sourceSets["test"].java.srcDir("test")
 
 dependencies {
-
-  implementation(Libs.Kotlin.stdlib)
 
   testImplementation(Libs.JUnit.jUnit4)
   testImplementation(Libs.Kotest.assertions)

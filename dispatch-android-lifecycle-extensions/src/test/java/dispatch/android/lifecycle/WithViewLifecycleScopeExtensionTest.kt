@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,7 +29,7 @@ import org.robolectric.annotation.*
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
 @ExperimentalCoroutinesApi
-internal class WithViewLifecycleScopeExtensionTest {
+internal class WithViewLifecycleScopeExtensionTest : LiveDataTest {
 
   @JvmField
   @Rule
@@ -92,7 +92,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     invocations shouldBe 3
-
   }
 
   @Test
@@ -119,7 +118,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     invocations shouldBe 3
-
   }
 
   @Test
@@ -144,7 +142,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     viewLifecycleOwner.destroy()
 
     job.isCancelled shouldBe true
-
   }
 
   @Test
@@ -169,7 +166,6 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragmentLifecycleOwner.destroy()
 
     job.isActive shouldBe false
-
   }
 
   @Test
@@ -184,7 +180,6 @@ internal class WithViewLifecycleScopeExtensionTest {
         job = launch {
 
           lifecycle shouldBeSameInstanceAs viewLifecycleOwner.lifecycle
-
         }
       }
     }
@@ -192,7 +187,5 @@ internal class WithViewLifecycleScopeExtensionTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     job.join()
-
   }
 }
-
