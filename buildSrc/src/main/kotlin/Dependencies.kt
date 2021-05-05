@@ -53,7 +53,7 @@ object Versions {
 
   const val binaryCompatibility = "0.5.0"
   const val benManes = "0.38.0"
-  const val gradleWrapper = "4.1.3"
+  const val gradleWrapper = "4.2.0"
   const val dagger = "2.25.2"
   const val kotlin = "1.5.0"
   const val mavenPublish = "0.13.0"
