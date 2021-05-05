@@ -37,7 +37,9 @@ plugins {
 common()
 
 kotlin {
-  explicitApi = ExplicitApiMode.Strict
+  if (!path.endsWith("samples")) {
+    explicitApi = ExplicitApiMode.Strict
+  }
 }
 
 java {

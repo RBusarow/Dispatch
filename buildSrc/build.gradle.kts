@@ -29,6 +29,6 @@ dependencies {
 
   implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.5.0") // update Dependencies.kt as well
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0") // update Dependencies.kt as well
-  implementation("com.android.tools.build:gradle:4.1.3") // update Dependencies.kt as well
+  implementation("com.android.tools.build:gradle:4.2.0") // update Dependencies.kt as well
   implementation("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1") // update Dependencies.kt as well
 }
