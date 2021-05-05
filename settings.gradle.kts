@@ -38,12 +38,11 @@ include(":dispatch-sample")
 pluginManagement {
   repositories {
     gradlePluginPortal()
-    jcenter()
   }
 }
 
 plugins {
-  id("com.gradle.enterprise").version("3.1.1")
+  id("com.gradle.enterprise").version("3.5.2")
 }
 
 gradleEnterprise {
@@ -53,3 +52,7 @@ gradleEnterprise {
     publishAlwaysIf(System.getenv("GITHUB_ACTIONS")?.toBoolean() == true)
   }
 }
+
+rootProject.name = "Dispatch"
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
