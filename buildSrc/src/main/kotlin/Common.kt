@@ -34,14 +34,13 @@ fun Project.common() {
   configurations.all {
     resolutionStrategy {
       force(
-        Libs.Kotlin.reflect,
-        Libs.Kotlinx.Coroutines.core,
-        Libs.Kotlinx.Coroutines.test,
-        Libs.Kotlinx.Coroutines.android
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
       )
       eachDependency {
         when {
-          requested.group == "org.jetbrains.kotlin" -> useVersion(Versions.kotlin)
+          requested.group == "org.jetbrains.kotlin" -> useVersion("1.5.0")
         }
       }
     }

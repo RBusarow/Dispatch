@@ -13,24 +13,25 @@
  * limitations under the License.
  */
 
-plugins {
-  javaLibrary
+pluginManagement {
+
+  resolutionStrategy {
+    eachPlugin {
+      when {
+        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.0")
+      }
+    }
+  }
 }
 
-sourceSets["test"].java.srcDir("test")
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-dependencies {
-
-  testImplementation(libs.junit.junit4)
-  testImplementation(libs.kotest.assertions)
-  testImplementation(libs.kotest.properties)
-  testImplementation(libs.kotest.runner)
-  testImplementation(libs.kotlin.test)
-  testImplementation(libs.kotlin.testCommon)
-  testImplementation(libs.kotlinx.coroutines.core)
-  testImplementation(libs.kotlinx.coroutines.test)
-
-  testImplementation(projects.dispatchTest)
-  testImplementation(projects.dispatchTestJunit4)
-
+@Suppress("UnstableApiUsage")
+dependencyResolutionManagement {
+  versionCatalogs {
+    create("libs") {
+      from(files("../gradle/libs.versions.toml"))
+    }
+  }
 }
