@@ -23,22 +23,12 @@ import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
 
 buildscript {
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    google()
-    jcenter()
-    gradlePluginPortal()
-    maven("https://dl.bintray.com/kotlin/kotlinx")
-  }
   dependencies {
-
     classpath("com.android.tools.build:gradle:4.2.0")
     classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1")
     classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.5.0")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
-    classpath("com.vanniktech:gradle-maven-publish-plugin:0.13.0")
+    classpath("com.vanniktech:gradle-maven-publish-plugin:0.15.1")
     classpath("org.jetbrains.kotlinx:kotlinx-knit:0.2.3")
   }
 }
@@ -56,20 +46,6 @@ plugins {
   // can be removed for Kotlin Gradle Plugin 1.5.10
   // workaround for https://youtrack.jetbrains.com/issue/KT-46368#focus=Comments-27-4868598.0-0
   id("dev.zacsweers.kgp-150-leak-patcher") version "1.0.1"
-}
-
-allprojects {
-
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    google()
-    jcenter()
-  }
-
-  tasks.withType<Test> {
-    useJUnitPlatform()
-  }
 }
 
 tasks.dokkaHtmlMultiModule.configure {

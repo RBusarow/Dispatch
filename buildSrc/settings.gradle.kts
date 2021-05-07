@@ -14,11 +14,31 @@
  */
 
 pluginManagement {
-
+  repositories {
+    gradlePluginPortal()
+    mavenCentral()
+    google()
+  }
   resolutionStrategy {
     eachPlugin {
       when {
         requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.0")
+      }
+    }
+  }
+}
+
+dependencyResolutionManagement {
+  @Suppress("UnstableApiUsage")
+  repositories {
+    google()
+    mavenCentral()
+    jcenter {
+      content {
+        // needed for Detekt
+        includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
+        // https://youtrack.jetbrains.com/issue/IDEA-261387
+        includeModule("org.jetbrains.trove4j", "trove4j")
       }
     }
   }

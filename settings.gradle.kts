@@ -13,6 +13,53 @@
  * limitations under the License.
  */
 
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    mavenCentral()
+    google()
+  }
+  resolutionStrategy {
+    eachPlugin {
+      when {
+        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.0")
+      }
+    }
+  }
+}
+
+dependencyResolutionManagement {
+  @Suppress("UnstableApiUsage")
+  repositories {
+    google()
+    mavenCentral()
+    jcenter {
+      content {
+        // needed for Detekt
+        includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
+        // https://youtrack.jetbrains.com/issue/IDEA-261387
+        includeModule("org.jetbrains.trove4j", "trove4j")
+      }
+    }
+  }
+}
+
+plugins {
+  id("com.gradle.enterprise").version("3.5.2")
+}
+
+gradleEnterprise {
+  buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "yes"
+    publishAlwaysIf(System.getenv("GITHUB_ACTIONS")?.toBoolean() == true)
+  }
+}
+
+rootProject.name = "Dispatch"
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":dispatch-android-espresso")
 include(":dispatch-android-espresso:samples")
 include(":dispatch-android-lifecycle")
@@ -34,25 +81,3 @@ include(":dispatch-detekt:samples")
 include(":dispatch-internal-test")
 include(":dispatch-internal-test-android")
 include(":dispatch-sample")
-
-pluginManagement {
-  repositories {
-    gradlePluginPortal()
-  }
-}
-
-plugins {
-  id("com.gradle.enterprise").version("3.5.2")
-}
-
-gradleEnterprise {
-  buildScan {
-    termsOfServiceUrl = "https://gradle.com/terms-of-service"
-    termsOfServiceAgree = "yes"
-    publishAlwaysIf(System.getenv("GITHUB_ACTIONS")?.toBoolean() == true)
-  }
-}
-
-rootProject.name = "Dispatch"
-enableFeaturePreview("VERSION_CATALOGS")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

@@ -1,5 +1,13 @@
 # Change log for Dispatch
 
+## Version 1.0.0-beta09
+
+* [CoroutineTestExtension] now creates a new [scope][CoroutineTestExtension.scope] instance for each test.
+* Update Kotlin to [1.5.0](https://github.com/JetBrains/kotlin/releases/tag/v1.5.0)
+* Update coroutines to [1.4.3](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.4.3)
+* Update Android Gradle Plugin to [4.2.0](https://developer.android.com/studio/releases/gradle-plugin#4-2-0)
+* Update Androidx Lifecycle to [2.3.1](https://developer.android.com/jetpack/androidx/releases/lifecycle#version_231_2)
+
 ## Version 1.0.0-beta08
 
 * Remove FlowCancellationException ([#196](https://github.com/RBusarow/Dispatch/issues/196))
@@ -107,7 +115,7 @@
 * Lower JDK version to 1.6
 
 <!--- MODULE dispatch-core-->
-<!--- INDEX  -->
+<!--- INDEX -->
 [DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->

@@ -17,18 +17,12 @@ plugins {
   `kotlin-dsl`
 }
 
-repositories {
-  google()
-  jcenter()
-  maven("https://oss.sonatype.org/content/repositories/snapshots")
-}
-
 dependencies {
 
   compileOnly(gradleApi())
 
-  implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.5.0") // update Dependencies.kt as well
-  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0") // update Dependencies.kt as well
-  implementation("com.android.tools.build:gradle:4.2.0") // update Dependencies.kt as well
-  implementation("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1") // update Dependencies.kt as well
+  implementation(libs.kotlin.compiler)
+  implementation(libs.kotlin.gradlePlugin)
+  implementation(libs.androidGradlePlugin)
+  implementation(libs.kotlinx.atomicfu)
 }
