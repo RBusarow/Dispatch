@@ -35,7 +35,10 @@ dependencyResolutionManagement {
     mavenCentral()
     jcenter {
       content {
-        // needed for Detekt
+        // dokka
+        includeGroup("org.jetbrains.dokka")
+        includeModule("org.jetbrains", "markdown")
+        // Detekt && dokka
         includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
         // https://youtrack.jetbrains.com/issue/IDEA-261387
         includeModule("org.jetbrains.trove4j", "trove4j")

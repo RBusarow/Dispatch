@@ -209,8 +209,46 @@ dependencies {
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX  -->
+
+[DispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html
+[DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
+[DefaultCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-coroutine-scope/index.html
+[DispatcherProvider.default]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html#dispatch.core/DispatcherProvider/default/#/PointingToDeclaration/
+[IOCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-i-o-coroutine-scope/index.html
+[DispatcherProvider.io]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html#dispatch.core/DispatcherProvider/io/#/PointingToDeclaration/
+[MainCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-main-coroutine-scope/index.html
+[DispatcherProvider.main]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html#dispatch.core/DispatcherProvider/main/#/PointingToDeclaration/
+[MainImmediateCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.html
+[DispatcherProvider.mainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html#dispatch.core/DispatcherProvider/mainImmediate/#/PointingToDeclaration/
+[UnconfinedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-unconfined-coroutine-scope/index.html
+[DispatcherProvider.unconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html#dispatch.core/DispatcherProvider/unconfined/#/PointingToDeclaration/
+[launchDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-default.html
+[launchIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-i-o.html
+[launchMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-main.html
+[launchMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-main-immediate.html
+[launchUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-unconfined.html
+[asyncDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-default.html
+[asyncIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-i-o.html
+[asyncMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-main.html
+[asyncMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-main-immediate.html
+[asyncUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-unconfined.html
+[withDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-default.html
+[withIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-i-o.html
+[withMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-main.html
+[withMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-main-immediate.html
+[withUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-unconfined.html
+[flowOnDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-default.html
+[flowOnIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-i-o.html
+[flowOnMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-main.html
+[flowOnMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-main-immediate.html
+[flowOnUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-unconfined.html
+[DefaultDispatcherProvider.set]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/set.html
+
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
+
+[TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-dispatcher-provider/index.html
+
 <!--- END -->
 
 [context_preservation]: https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
