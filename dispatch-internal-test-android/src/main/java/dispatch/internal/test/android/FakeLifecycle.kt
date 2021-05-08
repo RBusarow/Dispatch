@@ -35,12 +35,12 @@ class FakeLifecycle(lifecycleOwner: FakeLifecycleOwner) : Lifecycle() {
 
   override fun addObserver(observer: LifecycleObserver) {
     delegate.addObserver(observer)
-    observerEvents.sendBlocking(ObserverEvent.Add(observer))
+    observerEvents.trySendBlocking(ObserverEvent.Add(observer))
   }
 
   override fun removeObserver(observer: LifecycleObserver) {
     delegate.removeObserver(observer)
-    observerEvents.sendBlocking(ObserverEvent.Remove(observer))
+    observerEvents.trySendBlocking(ObserverEvent.Remove(observer))
   }
 
   override fun getCurrentState(): State = delegate.currentState

@@ -32,7 +32,7 @@ internal fun DispatchLifecycleScope.launchOn(
   statePolicy: DispatchLifecycleScope.MinimumStatePolicy,
   block: suspend CoroutineScope.() -> Unit
 ): Job = when (statePolicy) {
-  CANCEL -> launch { lifecycle.onNext(context, minimumState, block) }
+  CANCEL        -> launch { lifecycle.onNext(context, minimumState, block) }
   RESTART_EVERY -> launchEvery(context, minimumState, block)
 }
 
@@ -100,27 +100,25 @@ internal fun DispatchLifecycleScope.launchEvery(
 @Suppress("EXPERIMENTAL_API_USAGE")
 internal fun Lifecycle.eventFlow(
   minimumState: Lifecycle.State
-): Flow<Boolean> = callbackFlow<Boolean> {
+): Flow<Boolean> {
+
+  val flow = MutableSharedFlow<Lifecycle.State>()
 
   val observer = LifecycleEventObserver { _, _ ->
 
     // send true if the state is high enough, false if not
-    sendBlockingOrNull(currentState.isAtLeast(minimumState))
-
-    // if lifecycle is destroyed, send the last value to cancel the last block and then close the channel
-    if (currentState == Lifecycle.State.DESTROYED) {
-      channel.close()
-    }
+    flow.tryEmit(currentState)
   }
 
   addObserver(observer)
 
-  // When the channel is closed, remove the observer.
-  awaitClose { removeObserver(observer) }
+  return flow.onCompletion { removeObserver(observer) }
+    .takeWhile { it != Lifecycle.State.DESTROYED }
+    .mapLatest { it.isAtLeast(minimumState) }
+    .flowOnMainImmediate()
+    // Don't send [true, true] since the second true would cancel the already-active block.
+    .distinctUntilChanged()
 }
-  .flowOnMainImmediate()
-  // Don't send [true, true] since the second true would cancel the already-active block.
-  .distinctUntilChanged()
 
 /**
  * Terminal operator which collects the given [Flow] until the [predicate] returns true.
@@ -142,19 +140,3 @@ internal fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLa
   return@transformLatest emit(value)
 }
 
-/**
- * Attempts to add [element] into this channel via [sendBlocking] inside a try/catch for a [ClosedSendChannelException].
- *
- * ### Note
- *
- * Attempting to send to a cancelled Channel throws a [CancellationException].
- * This is a more generic Exception which would be unsafe to catch in this manner.
- *
- * @return null if this channel is closed for send.
- * @see sendBlocking
- */
-private fun <E> SendChannel<E>.sendBlockingOrNull(element: E) = try {
-  sendBlocking(element)
-} catch (e: ClosedSendChannelException) {
-  null
-}
