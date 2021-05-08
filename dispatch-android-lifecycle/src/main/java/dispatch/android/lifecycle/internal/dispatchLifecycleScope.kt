@@ -32,7 +32,7 @@ internal fun DispatchLifecycleScope.launchOn(
   statePolicy: DispatchLifecycleScope.MinimumStatePolicy,
   block: suspend CoroutineScope.() -> Unit
 ): Job = when (statePolicy) {
-  CANCEL        -> launch { lifecycle.onNext(context, minimumState, block) }
+  CANCEL -> launch { lifecycle.onNext(context, minimumState, block) }
   RESTART_EVERY -> launchEvery(context, minimumState, block)
 }
 
@@ -102,7 +102,13 @@ internal fun Lifecycle.eventFlow(
   minimumState: Lifecycle.State
 ): Flow<Boolean> {
 
-  val flow = MutableSharedFlow<Lifecycle.State>()
+  val flow = MutableSharedFlow<Lifecycle.State>(
+    // replay of 1 emits the current value to new collectors
+    replay = 1
+  )
+
+  // immediately send the current state.  Otherwise there's no events until the lifecycle changes.
+  flow.tryEmit(currentState)
 
   val observer = LifecycleEventObserver { _, _ ->
 
@@ -112,9 +118,23 @@ internal fun Lifecycle.eventFlow(
 
   addObserver(observer)
 
-  return flow.onCompletion { removeObserver(observer) }
-    .takeWhile { it != Lifecycle.State.DESTROYED }
+  return flow
+    .takeWhile {
+      // stop collecting when the lifecycle is destroyed.  This triggers `onCompletion` below
+      it != Lifecycle.State.DESTROYED
+    }
     .mapLatest { it.isAtLeast(minimumState) }
+    .onCompletion {
+      // remove the LifecycleEventObserver from the Lifecycle receiver when the flow collection ends
+      removeObserver(observer)
+      if (minimumState == Lifecycle.State.CREATED) {
+        // If minimumState is CREATED, then we're listening for the DESTROYED state to send false.
+        // But DESTROYED is filtered out above and cancels the Flow, so `false` is never sent.
+        // If we reach this point with a CREATED minimumState, then the lifecycle is DESTROYED,
+        // so we send a final `false` so that the downstream collectors know they can stop.
+        emit(false)
+      }
+    }
     .flowOnMainImmediate()
     // Don't send [true, true] since the second true would cancel the already-active block.
     .distinctUntilChanged()
@@ -139,4 +159,3 @@ internal fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLa
   action(value)
   return@transformLatest emit(value)
 }
-
