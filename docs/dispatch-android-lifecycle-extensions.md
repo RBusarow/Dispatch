@@ -158,6 +158,9 @@ dependencies {
 <!--- INDEX  -->
 <!--- MODULE dispatch-android-espresso-->
 <!--- INDEX  -->
+
+[IdlingDispatcher]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher/index.html
+
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
 <!--- MODULE dispatch-android-viewmodel-->

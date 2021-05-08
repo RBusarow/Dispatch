@@ -116,31 +116,44 @@
 
 <!--- MODULE dispatch-core-->
 <!--- INDEX -->
+
 [DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
+
 <!--- MODULE dispatch-test-->
 <!--- INDEX  -->
+
 [testProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/test-provided.html
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
+
 <!--- MODULE dispatch-test-junit4-->
 <!--- INDEX  -->
 <!--- MODULE dispatch-test-junit5-->
 <!--- INDEX  -->
+
 [CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html
+[CoroutineTestExtension.scope]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html#dispatch.test/CoroutineTestExtension/scope/#/PointingToDeclaration/
+
 <!--- MODULE dispatch-android-espresso-->
 <!--- INDEX  -->
 <!--- MODULE dispatch-android-lifecycle-->
 <!--- INDEX  -->
+
 [ViewLifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/index.html
 [DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
 [LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleCoroutineScope//PointingToDeclaration/
+
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
+
 [lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
+
 <!--- MODULE dispatch-android-viewmodel-->
 <!--- INDEX  -->
+
 [CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
 [DispatchViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html
 [viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html#dispatch.android.viewmodel/DispatchViewModel/viewModelScope/#/PointingToDeclaration/
+
 <!--- END -->
 
 [Fragment]: https://developer.android.com/reference/androidx/fragment/app/Fragment
