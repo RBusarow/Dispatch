@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -35,16 +35,17 @@ import kotlin.coroutines.*
  * regardless of what type of `CoroutineScope` is required.
  */
 @ExperimentalCoroutinesApi
-interface TestProvidedCoroutineScope : TestCoroutineScope,
-                                       DefaultCoroutineScope,
-                                       IOCoroutineScope,
-                                       MainCoroutineScope,
-                                       MainImmediateCoroutineScope,
-                                       UnconfinedCoroutineScope {
+public interface TestProvidedCoroutineScope :
+  TestCoroutineScope,
+  DefaultCoroutineScope,
+  IOCoroutineScope,
+  MainCoroutineScope,
+  MainImmediateCoroutineScope,
+  UnconfinedCoroutineScope {
   /**
    * single [DispatcherProvider] promise for the [TestProvidedCoroutineScope]
    */
-  val dispatcherProvider: DispatcherProvider
+  public val dispatcherProvider: DispatcherProvider
 }
 
 /**
@@ -55,7 +56,7 @@ internal class TestProvidedCoroutineScopeImpl(
   override val dispatcherProvider: DispatcherProvider,
   context: CoroutineContext = EmptyCoroutineContext
 ) : TestProvidedCoroutineScope,
-    TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
+  TestCoroutineScope by TestCoroutineScope(context + dispatcherProvider)
 
 /**
  * Creates a [TestProvidedCoroutineScope] implementation with optional parameters of
@@ -66,7 +67,7 @@ internal class TestProvidedCoroutineScopeImpl(
  * and the [ContinuationInterceptor] Key of the `CoroutineContext` will also return that `TestCoroutineDispatcher`.
  */
 @ExperimentalCoroutinesApi
-fun TestProvidedCoroutineScope(
+public fun TestProvidedCoroutineScope(
   dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),
   dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
   context: CoroutineContext = EmptyCoroutineContext

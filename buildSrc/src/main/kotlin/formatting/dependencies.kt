@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,14 @@
 
 package formatting
 
-
-import formatting.GradleDependencyVisitor.Properties
-import org.gradle.api.Project
+import formatting.GradleDependencyVisitor.*
+import org.gradle.api.*
 import org.jetbrains.kotlin.psi.*
-import util.psi.asKtFile
-import util.psi.visitor.KotlinVisitor
-import java.io.File
-import kotlin.properties.Delegates
-import kotlin.system.measureTimeMillis
+import util.psi.*
+import util.psi.visitor.*
+import java.io.*
+import kotlin.properties.*
+import kotlin.system.*
 
 fun Project.sortDependencies() {
 
@@ -50,7 +49,6 @@ fun Project.sortDependencies() {
   }
 
   println("total parsing time: $totalParseTime ms")
-
 }
 
 class GradleDependencyVisitor : KotlinVisitor<Properties>() {

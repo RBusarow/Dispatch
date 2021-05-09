@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,15 +23,15 @@ sourceSets["test"].java.srcDir("test")
 
 dependencies {
 
-  testImplementation(Libs.JUnit.jUnit5)
-  testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.properties)
-  testImplementation(Libs.Kotest.runner)
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-  testImplementation(Libs.Kotlinx.Coroutines.core)
-  testImplementation(Libs.Kotlinx.Coroutines.test)
+  testImplementation(libs.junit.jupiter)
+  testImplementation(libs.kotest.assertions)
+  testImplementation(libs.kotest.properties)
+  testImplementation(libs.kotest.runner)
+  testImplementation(libs.kotlin.test)
+  testImplementation(libs.kotlin.testCommon)
+  testImplementation(libs.kotlinx.coroutines.core)
+  testImplementation(libs.kotlinx.coroutines.test)
 
-  testImplementation(project(":dispatch-core"))
+  testImplementation(projects.dispatchCore)
 
 }

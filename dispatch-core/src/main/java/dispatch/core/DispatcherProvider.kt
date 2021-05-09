@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -41,7 +41,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Default
    */
-  val default: CoroutineDispatcher get() = Dispatchers.Default
+  public val default: CoroutineDispatcher get() = Dispatchers.Default
 
   /**
    * [CoroutineDispatcher] generally intended for blocking I/O tasks.
@@ -50,7 +50,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.IO
    */
-  val io: CoroutineDispatcher get() = Dispatchers.IO
+  public val io: CoroutineDispatcher get() = Dispatchers.IO
 
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread.
@@ -59,7 +59,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Main
    */
-  val main: CoroutineDispatcher get() = Dispatchers.Main
+  public val main: CoroutineDispatcher get() = Dispatchers.Main
 
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
@@ -68,7 +68,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see MainCoroutineDispatcher.immediate
    */
-  val mainImmediate: CoroutineDispatcher get() = Dispatchers.Main.immediate
+  public val mainImmediate: CoroutineDispatcher get() = Dispatchers.Main.immediate
 
   /**
    * [CoroutineDispatcher] which is unconfined.
@@ -77,21 +77,20 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Unconfined
    */
-  val unconfined: CoroutineDispatcher get() = Dispatchers.Unconfined
+  public val unconfined: CoroutineDispatcher get() = Dispatchers.Unconfined
 
   /**
    * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the [CoroutineContext].
    */
-  companion object Key : CoroutineContext.Key<DispatcherProvider> {
-
-    /**
-     * Default implementation of [DispatcherProvider] which simply delegates to the corresponding
-     * properties in the [Dispatchers] singleton.
-     *
-     * This should be suitable for most production code.
-     *
-     * @see DefaultDispatcherProvider
-     */
-    operator fun invoke(): DispatcherProvider = DefaultDispatcherProvider.get()
-  }
+  public companion object Key : CoroutineContext.Key<DispatcherProvider>
 }
+
+/**
+ * Default implementation of [DispatcherProvider] which simply delegates to the corresponding
+ * properties in the [Dispatchers] singleton.
+ *
+ * This should be suitable for most production code.
+ *
+ * @see DefaultDispatcherProvider
+ */
+public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider.get()

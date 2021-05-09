@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@
 package dispatch.android.lifecycle.internal
 
 import androidx.lifecycle.*
-import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.android.lifecycle.*
 import dispatch.core.*
 import dispatch.internal.test.android.*
 import dispatch.test.*
@@ -24,8 +24,10 @@ import hermit.test.junit.*
 import io.kotest.matchers.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
+import org.junit.jupiter.api.extension.*
 import java.util.concurrent.*
 
+@ExtendWith(InstantTaskExecutorExtension::class)
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 internal class AtomicGetOrPutTest : HermitJUnit5() {
@@ -80,7 +82,6 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
 
         androidLifecycle.observerCount shouldBe 2
       }
-
     }
   }
 }

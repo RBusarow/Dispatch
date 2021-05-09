@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,11 +13,19 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.dsl.*
+
 plugins {
   kotlin("jvm")
 }
 
 common()
+
+kotlin {
+  if (!path.endsWith("samples")) {
+    explicitApi = ExplicitApiMode.Strict
+  }
+}
 
 java {
   // force Java 8 source when building java-only artifacts.
@@ -32,10 +40,4 @@ val testJvm by tasks.registering {
 
 val buildTests by tasks.registering {
   dependsOn("testClasses")
-}
-
-dependencies {
-
-  api(Libs.Kotlinx.Coroutines.core)
-  api(Libs.Kotlinx.Coroutines.coreJvm)
 }

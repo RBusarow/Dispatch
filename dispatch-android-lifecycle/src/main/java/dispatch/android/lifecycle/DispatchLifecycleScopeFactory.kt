@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,17 +17,6 @@ package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
 import kotlin.coroutines.*
-
-/**
- * **Deprecated** in favor of [DispatchLifecycleScopeFactory] in order to avoid name collisions with Androidx.
- *
- * @see DispatchLifecycleScopeFactory
- */
-@Deprecated(
-  "Use DispatchLifecycleScopeFactory to avoid collisions with the Androidx library",
-  replaceWith = ReplaceWith("DispatchLifecycleScopeFactory")
-)
-typealias LifecycleScopeFactory = DispatchLifecycleScopeFactory
 
 /**
  * Factory for [DispatchLifecycleScope]s.  This may be injected into a lifecycle-aware class

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -90,7 +90,6 @@ internal class WithViewLifecycleTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     invocations shouldBe 3
-
   }
 
   @Test
@@ -115,7 +114,6 @@ internal class WithViewLifecycleTest {
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     invocations shouldBe 3
-
   }
 
   @Test
@@ -138,7 +136,6 @@ internal class WithViewLifecycleTest {
     viewLifecycleOwner.destroy()
 
     job.isCancelled shouldBe true
-
   }
 
   @Test
@@ -161,7 +158,6 @@ internal class WithViewLifecycleTest {
     fragmentLifecycleOwner.destroy()
 
     job.isActive shouldBe false
-
   }
 
   @Test
@@ -175,14 +171,12 @@ internal class WithViewLifecycleTest {
       job = launch {
 
         lifecycle shouldBeSameInstanceAs viewLifecycleOwner.lifecycle
-
       }
     }
 
     fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
 
     job.join()
-
   }
 
   @Test
@@ -209,7 +203,6 @@ internal class WithViewLifecycleTest {
           internalScope = this
 
           lifecycle shouldBeSameInstanceAs viewLifecycleOwner.lifecycle
-
         }
       }
 
@@ -239,7 +232,6 @@ internal class WithViewLifecycleTest {
           internalScope = this
 
           lifecycle shouldBeSameInstanceAs viewLifecycleOwner.lifecycle
-
         }
       }
 
@@ -258,6 +250,4 @@ internal class WithViewLifecycleTest {
 
       receiverContext + internalJob shouldEqualFolded internalContext
     }
-
 }
-

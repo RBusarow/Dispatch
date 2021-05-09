@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,11 +20,12 @@ import org.junit.rules.*
 import org.junit.runner.*
 import org.junit.runners.model.*
 
-class ExpectedFailureRule : TestRule {
+public class ExpectedFailureRule : TestRule {
 
   override fun apply(
-    base: Statement, description: Description
-  ) = object : Statement() {
+    base: Statement,
+    description: Description
+  ): Statement = object : Statement() {
 
     override fun evaluate() {
       try {
@@ -43,5 +44,3 @@ class ExpectedFailureRule : TestRule {
     }
   }
 }
-
-

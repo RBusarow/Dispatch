@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -69,8 +69,8 @@ internal class FlowTest {
   fun `flow on default should use provided default dispatcher`() = runTest {
 
     flowOf(1).onEach {
-        delegatedDispatcher = dispatcherStack.pop()
-      }
+      delegatedDispatcher = dispatcherStack.pop()
+    }
       .flowOnDefault()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -85,8 +85,8 @@ internal class FlowTest {
   fun `flow on io should use provided io dispatcher`() = runTest {
 
     flowOf(1).onEach {
-        delegatedDispatcher = dispatcherStack.pop()
-      }
+      delegatedDispatcher = dispatcherStack.pop()
+    }
       .flowOnIO()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -101,8 +101,8 @@ internal class FlowTest {
   fun `flow on main should use provided main dispatcher`() = runTest {
 
     flowOf(1).onEach {
-        delegatedDispatcher = dispatcherStack.pop()
-      }
+      delegatedDispatcher = dispatcherStack.pop()
+    }
       .flowOnMain()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -117,8 +117,8 @@ internal class FlowTest {
   fun `flow on mainImmediate should use provided mainImmediate dispatcher`() = runTest {
 
     flowOf(1).onEach {
-        delegatedDispatcher = dispatcherStack.pop()
-      }
+      delegatedDispatcher = dispatcherStack.pop()
+    }
       .flowOnMainImmediate()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -133,8 +133,8 @@ internal class FlowTest {
   fun `flow on unconfined should use provided unconfined dispatcher`() = runTest {
 
     flowOf(1).onEach {
-        delegatedDispatcher = dispatcherStack.pop()
-      }
+      delegatedDispatcher = dispatcherStack.pop()
+    }
       .flowOnUnconfined()
       .onStart {
         originDispatcher = dispatcherStack.pop()
@@ -174,7 +174,7 @@ internal class FlowTest {
       .flowOn(testProvider.default)
       .launchIn(originalScope + testProvider.default)
 
-    dispatchCount.get() shouldBe 1  // ChannelFlow does not re-dispatch for the same dispatcher
+    dispatchCount.get() shouldBe 1 // ChannelFlow does not re-dispatch for the same dispatcher
 
     dispatchCount.set(0)
 
@@ -184,7 +184,7 @@ internal class FlowTest {
       .flowOn(testProvider.main)
       .launchIn(originalScope + testProvider.default)
 
-    dispatchCount.get() shouldBe 3  // sanity check -- switching should increment the count
+    dispatchCount.get() shouldBe 3 // sanity check -- switching should increment the count
   }
 
   @Test

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,49 +23,29 @@ import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
 
 buildscript {
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    maven("https://oss.sonatype.org/content/repositories/snapshots")
-    google()
-    jcenter()
-    gradlePluginPortal()
-    maven("https://dl.bintray.com/kotlin/kotlinx")
-  }
   dependencies {
-
-    classpath(BuildPlugins.androidGradlePlugin)
-    classpath(BuildPlugins.atomicFu)
-    classpath(BuildPlugins.binaryCompatibility)
-    classpath(BuildPlugins.kotlinGradlePlugin)
-    classpath(BuildPlugins.gradleMavenPublish)
-    classpath(BuildPlugins.knit)
+    classpath("com.android.tools.build:gradle:4.2.0")
+    classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1")
+    classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.5.0")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
+    classpath("com.vanniktech:gradle-maven-publish-plugin:0.15.1")
+    classpath("org.jetbrains.kotlinx:kotlinx-knit:0.2.3")
   }
 }
 
 plugins {
-  id(Plugins.benManes) version Versions.benManes
-  id(Plugins.dependencyAnalysis) version Versions.dependencyAnalysis
-  id(Plugins.gradleDoctor) version Versions.gradleDoctor
-  id(Plugins.detekt) version Libs.Detekt.version
+  id("com.github.ben-manes.versions") version "0.38.0"
+  id("com.autonomousapps.dependency-analysis") version "0.72.0"
+  id("com.osacky.doctor") version "0.7.0"
+  id("io.gitlab.arturbosch.detekt") version "1.16.0"
   kotlin("jvm")
-  id(Plugins.dokka) version Versions.dokka
-  id(Plugins.taskTree) version Versions.taskTree
+  id("org.jetbrains.dokka") version "1.4.10"
+  id("com.dorongold.task-tree") version "1.5"
+  id("com.diffplug.spotless") version "5.12.4"
   base
-}
-
-allprojects {
-
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    google()
-    jcenter()
-  }
-
-  tasks.withType<Test> {
-    useJUnitPlatform()
-  }
+  // can be removed for Kotlin Gradle Plugin 1.5.10
+  // workaround for https://youtrack.jetbrains.com/issue/KT-46368#focus=Comments-27-4868598.0-0
+  id("dev.zacsweers.kgp-150-leak-patcher") version "1.0.1"
 }
 
 tasks.dokkaHtmlMultiModule.configure {
@@ -136,6 +116,16 @@ subprojects {
   }
 }
 
+val updateDocsVersions by tasks.registering {
+
+  description = "updates all artifact versions used in documentation"
+  group = "documentation"
+
+  doLast {
+    allprojects { updateReadMeArtifactVersions() }
+  }
+}
+
 val cleanDocs by tasks.registering {
 
   description = "cleans /docs"
@@ -174,8 +164,8 @@ detekt {
 
 dependencies {
 
-  detekt(Libs.Detekt.cli)
-  detektPlugins(project(path = ":dispatch-detekt"))
+  detekt(libs.detekt.cli)
+  detektPlugins(projects.dispatchDetekt)
 }
 
 tasks.withType<DetektCreateBaselineTask> {
@@ -200,7 +190,7 @@ tasks.withType<Detekt> {
   this.jvmTarget = "1.8"
 }
 
-apply(plugin = Plugins.binaryCompatilibity)
+apply(plugin = "binary-compatibility-validator")
 
 extensions.configure<ApiValidationExtension> {
 
@@ -221,7 +211,7 @@ extensions.configure<ApiValidationExtension> {
   )
 }
 
-apply(plugin = Plugins.knit)
+apply(plugin = "kotlinx-knit")
 
 extensions.configure<KnitPluginExtension> {
 
@@ -238,16 +228,6 @@ tasks.withType<KnitTask> {
   dependsOn(allprojects.mapNotNull { it.tasks.findByName("dokkaHtml") })
   doLast {
     fixDocsReferencePaths()
-  }
-}
-
-val generateDependencyGraph by tasks.registering {
-
-  description = "generate a visual dependency graph"
-  group = "refactor"
-
-  doLast {
-    createDependencyGraph()
   }
 }
 
@@ -269,7 +249,6 @@ dependencyAnalysis {
   }
 }
 
-
 fun isNonStable(version: String): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
   val regex = "^[0-9,.v-]+(-r)?$".toRegex()
@@ -281,4 +260,39 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
   rejectVersionIf {
     isNonStable(candidate.version) && !isNonStable(currentVersion)
   }
+}
+
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+  kotlin {
+    target("**/src/**/*.kt")
+    ktlint("0.40.0")
+      .userData(
+        mapOf(
+          "indent_size" to "2",
+          "continuation_indent_size" to "2",
+          "max_line_length" to "off",
+          "disabled_rules" to "no-wildcard-imports",
+          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
+        )
+      )
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  kotlinGradle {
+    target("*.gradle.kts")
+    ktlint("0.40.0")
+      .userData(
+        mapOf(
+          "indent_size" to "2",
+          "continuation_indent_size" to "2",
+          "max_line_length" to "off",
+          "disabled_rules" to "no-wildcard-imports",
+          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
+        )
+      )
+  }
+}
+
+configure<com.osacky.doctor.DoctorExtension> {
+  negativeAvoidanceThreshold.set(500)
 }
