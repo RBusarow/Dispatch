@@ -1,11 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - dev
-      - main
-      - release/*
   pull_request:
     branches:
       - dev
@@ -19,12 +14,54 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      # cancel previous jobs
+      - uses: khan/pull-request-workflow-cancel@1.0.0
+        with:
+          workflows: "ci.yml"
+        env:
+          GITHUB_TOKEN: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
+
+      - uses: actions/checkout@v2
+        with:
+          # use a personal access token to check out so that this action can trigger other actions
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: all tests
-        run: ./gradlew test
+
+      # update artifact versions in documentation samples
+      - name: update artifact versions in documentation samples
+        run: ./gradlew updateDocsVersions
+
+      # If updateDocsVersions generated changes, commit and push those changes.
+      - name: commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: update artifact versions in documentation samples
+          commit_options: '--no-verify --signoff'
+
+      # formats all Kotlin src files
+      - name: spotless format
+        run: ./gradlew spotlessApply
+
+      # If formatKotlin generated changes, commit and push those changes.
+      - name: commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply ktlint format
+          commit_options: '--no-verify --signoff'
+
       - name: detekt
         run: ./gradlew detekt
+
+      - name: all tests
+        run: ./gradlew testJvm
+
+      - name: Unit test results
+        uses: mikepenz/action-junit-report@v1
+        if: always()
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          report_paths: '**/build/**/TEST-*.xml'
+          check_name: Unit Test Results
