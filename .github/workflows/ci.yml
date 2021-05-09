@@ -22,9 +22,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/checkout@v2
-        with:
-          # use a personal access token to check out so that this action can trigger other actions
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
