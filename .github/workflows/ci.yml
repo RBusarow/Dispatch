@@ -20,6 +20,7 @@ jobs:
           workflows: "ci.yml"
         env:
           GITHUB_TOKEN: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
+
       - uses: actions/checkout@v2
         with:
           # use a personal access token to check out so that this action can trigger other actions
