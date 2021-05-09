@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,7 +21,7 @@ import kotlin.reflect.*
  * Indicates that a test **function** is expected to fail with the given exception type.
  */
 @Target(AnnotationTarget.FUNCTION)
-annotation class Fails(
+public annotation class Fails(
   /**
    * The KClass of the expected Throwable
    */

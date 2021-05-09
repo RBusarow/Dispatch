@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,29 +20,29 @@ import kotlinx.atomicfu.*
 import org.junit.jupiter.api.*
 
 @Suppress("UnnecessaryAbstractClass")
-abstract class BaseTest {
+public abstract class BaseTest {
 
   private val index = atomic(0)
   private val finished = atomic(false)
 
   @AfterEach
-  fun _afterEach() {
+  internal fun _afterEach() {
     resetIndex()
   }
 
-  fun expect(expectedIndex: Int) {
+  public fun expect(expectedIndex: Int) {
 
     val actualIndex = index.incrementAndGet()
 
     actualIndex shouldBe expectedIndex
   }
 
-  fun finish(expectedIndex: Int) {
+  public fun finish(expectedIndex: Int) {
     expect(expectedIndex)
     require(!finished.getAndSet(true)) { "Should call 'finish(...)' at most once" }
   }
 
-  fun resetIndex() {
+  public fun resetIndex() {
     try {
       require(index.value == 0 || finished.value) { "Expecting that 'finish(...)' was invoked, but it was not" }
     } finally {
@@ -51,5 +51,3 @@ abstract class BaseTest {
     }
   }
 }
-
-

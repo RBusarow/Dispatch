@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,7 @@ import kotlinx.coroutines.*
  *
  * @sample samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
  */
-object DefaultDispatcherProvider {
+public object DefaultDispatcherProvider {
 
   private val holder = atomic(default())
 
@@ -36,7 +36,7 @@ object DefaultDispatcherProvider {
    *
    * @see set
    */
-  fun get(): DispatcherProvider = holder.value
+  public fun get(): DispatcherProvider = holder.value
 
   /**
    * Atomically sets a default [DispatcherProvider] instance.
@@ -44,7 +44,7 @@ object DefaultDispatcherProvider {
    * @see get
    * @sample samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
    */
-  fun set(value: DispatcherProvider) {
+  public fun set(value: DispatcherProvider) {
     while (true) {
       val cur = holder.value
       if (holder.compareAndSet(cur, value)) return
@@ -68,11 +68,11 @@ object DefaultDispatcherProvider {
    */
   @Deprecated(
     message = "The DefaultDispatcherProvider class has been replaced with this singleton object.  " +
-        "To create a DispatcherProvider with the default implementation," +
-        " use the DispatcherProvider companion object factory.  " +
-        "This function will be removed before the 1.0 release.",
+      "To create a DispatcherProvider with the default implementation," +
+      " use the DispatcherProvider companion object factory.  " +
+      "This function will be removed before the 1.0 release.",
     replaceWith = ReplaceWith("DispatcherProvider()"),
     level = DeprecationLevel.HIDDEN
   )
-  operator fun invoke(): DispatcherProvider = DispatcherProvider()
+  public operator fun invoke(): DispatcherProvider = DispatcherProvider()
 }

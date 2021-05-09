@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,20 +31,18 @@ class ViewModelScopeSample {
       init {
 
         // auto-created MainImmediateCoroutineScope which is auto-cancelled in onClear()
-        viewModelScope //...
+        viewModelScope // ...
 
         // it works as a normal CoroutineScope (because it is)
         viewModelScope.launchMain { }
 
         // this is the same CoroutineScope instance each time
         viewModelScope.launchMain { }
-
       }
 
       override fun onClear() {
         viewModelScope.isActive shouldBe false
       }
     }
-
   }
 }

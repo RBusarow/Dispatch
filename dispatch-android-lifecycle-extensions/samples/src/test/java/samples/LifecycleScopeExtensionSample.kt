@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,7 +29,7 @@ class LifecycleScopeExtensionSample {
       init {
 
         // auto-created MainImmediateCoroutineScope which is lifecycle-aware
-        dispatchLifecycleScope //...
+        dispatchLifecycleScope // ...
 
         // active only when "resumed".  starts a fresh coroutine each time
         // this is a rough proxy for LiveData behavior
@@ -43,9 +43,7 @@ class LifecycleScopeExtensionSample {
 
         // it works as a normal CoroutineScope as well (because it is)
         dispatchLifecycleScope.launchMain { }
-
       }
     }
   }
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -102,7 +102,6 @@ internal class SuspendBuildersTest {
         coroutineContext shouldEqualFolded ctx + job
       }
     }
-
   }
 
   @Nested
@@ -156,5 +155,4 @@ internal class SuspendBuildersTest {
   fun runBlockingProvided(
     block: suspend CoroutineScope.() -> Unit
   ) = runBlocking(testProvider, block)
-
 }

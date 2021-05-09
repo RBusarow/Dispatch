@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,21 +17,12 @@ plugins {
   `kotlin-dsl`
 }
 
-repositories {
-  google()
-  jcenter()
-  maven("https://oss.sonatype.org/content/repositories/snapshots")
-}
-
-kotlinDslPluginOptions {
-  experimentalWarning.set(false)
-}
-
 dependencies {
 
   compileOnly(gradleApi())
 
-  implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.4.21") // update Dependencies.kt as well
-  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21") // update Dependencies.kt as well
-  implementation("com.android.tools.build:gradle:4.1.0") // update Dependencies.kt as well
+  implementation(libs.kotlin.compiler)
+  implementation(libs.kotlin.gradlePlugin)
+  implementation(libs.androidGradlePlugin)
+  implementation(libs.kotlinx.atomicfu)
 }

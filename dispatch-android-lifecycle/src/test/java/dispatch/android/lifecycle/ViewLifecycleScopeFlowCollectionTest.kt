@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -55,7 +55,6 @@ internal class ViewLifecycleScopeFlowCollectionTest {
 
     val flow = MutableStateFlow(0)
     val collected = mutableListOf<Int>()
-
 
     rule.withViewLifecycle(fragment) {
       flow.onEach { collected.add(it) }.launchOnCreate()
@@ -141,6 +140,5 @@ internal class ViewLifecycleScopeFlowCollectionTest {
     flow.value = 2
 
     collected shouldBe listOf(0, 1)
-
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,28 +14,28 @@
  */
 
 plugins {
-  id(Plugins.atomicFu)
+  id("kotlinx-atomicfu")
   javaLibrary
 }
 
 dependencies {
 
-  api(Libs.JUnit.jUnit4)
-  api(Libs.JUnit.jUnit5Api)
-  api(Libs.Kotlinx.Coroutines.core)
-  api(Libs.Kotlinx.Coroutines.coreJvm)
+  api(libs.junit.junit4)
+  api(libs.junit.api)
+  api(libs.kotlinx.coroutines.core)
+  api(libs.kotlinx.coroutines.jvm)
 
-  implementation(Libs.JUnit.jUnit5)
-  implementation(Libs.JUnit.jUnit5Vintage)
-  implementation(Libs.Kotest.assertions)
-  implementation(Libs.Kotest.assertionsShared)
-  implementation(Libs.Kotest.commonJvm)
-  implementation(Libs.Kotest.runner)
-  implementation(Libs.Kotlin.reflect)
-  implementation(Libs.Kotlin.test)
-  implementation(Libs.Kotlin.testCommon)
-  implementation(Libs.Kotlinx.Coroutines.test)
+  implementation(libs.junit.jupiter)
+  implementation(libs.junit.vintage)
+  implementation(libs.kotest.assertions)
+  implementation(libs.kotest.assertionsShared)
+  implementation(libs.kotest.common.jvm)
+  implementation(libs.kotest.runner)
+  implementation(libs.kotlin.reflect)
+  implementation(libs.kotlin.test)
+  implementation(libs.kotlin.testCommon)
+  implementation(libs.kotlinx.coroutines.test)
 
-  implementation(project(":dispatch-core"))
+  implementation(projects.dispatchCore)
 
 }

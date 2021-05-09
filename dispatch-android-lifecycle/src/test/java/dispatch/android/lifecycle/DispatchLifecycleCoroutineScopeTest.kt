@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,7 +30,9 @@ import kotlin.coroutines.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class DispatchLifecycleScopeTest : HermitJUnit5() {
+class DispatchLifecycleScopeTest :
+  HermitJUnit5(),
+  LiveDataTest {
 
   val testScope by resets { TestProvidedCoroutineScope(context = Job()) }
 
@@ -166,10 +168,10 @@ class DispatchLifecycleScopeTest : HermitJUnit5() {
       Lifecycle.Event.values()
         .filter {
           when (it) {
-            Lifecycle.Event.ON_CREATE  -> true
-            Lifecycle.Event.ON_STOP    -> true
+            Lifecycle.Event.ON_CREATE -> true
+            Lifecycle.Event.ON_STOP -> true
             Lifecycle.Event.ON_DESTROY -> true
-            else                       -> false
+            else -> false
           }
         }
         .forEach { event ->
@@ -245,12 +247,12 @@ class DispatchLifecycleScopeTest : HermitJUnit5() {
       Lifecycle.Event.values()
         .filter {
           when (it) {
-            Lifecycle.Event.ON_CREATE  -> true
-            Lifecycle.Event.ON_START   -> true
-            Lifecycle.Event.ON_PAUSE   -> true
-            Lifecycle.Event.ON_STOP    -> true
+            Lifecycle.Event.ON_CREATE -> true
+            Lifecycle.Event.ON_START -> true
+            Lifecycle.Event.ON_PAUSE -> true
+            Lifecycle.Event.ON_STOP -> true
             Lifecycle.Event.ON_DESTROY -> true
-            else                       -> false
+            else -> false
           }
         }
         .forEach { event ->

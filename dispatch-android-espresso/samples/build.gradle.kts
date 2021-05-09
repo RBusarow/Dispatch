@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Rick Busarow
+ * Copyright (C) 2021 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,25 +18,25 @@ plugins {
 }
 
 dependencies {
-  implementation(Libs.Kotlinx.Coroutines.coreJvm)
+  implementation(libs.kotlinx.coroutines.jvm)
 
-  implementation(project(":dispatch-core"))
+  implementation(projects.dispatchCore)
 
-  testImplementation(Libs.AndroidX.Test.Espresso.core)
-  testImplementation(Libs.AndroidX.Test.runner)
-  testImplementation(Libs.JUnit.jUnit4)
-  testImplementation(Libs.Kotest.assertions)
-  testImplementation(Libs.Kotest.properties)
-  testImplementation(Libs.Kotest.runner)
-  testImplementation(Libs.Kotlin.test)
-  testImplementation(Libs.Kotlin.testCommon)
-  testImplementation(Libs.Kotlinx.Coroutines.core)
-  testImplementation(Libs.Kotlinx.Coroutines.test)
-  testImplementation(Libs.Robolectric.core)
+  testImplementation(libs.androidx.test.espresso.core)
+  testImplementation(libs.androidx.test.runner)
+  testImplementation(libs.junit.junit4)
+  testImplementation(libs.kotest.assertions)
+  testImplementation(libs.kotest.properties)
+  testImplementation(libs.kotest.runner)
+  testImplementation(libs.kotlin.test)
+  testImplementation(libs.kotlin.testCommon)
+  testImplementation(libs.kotlinx.coroutines.core)
+  testImplementation(libs.kotlinx.coroutines.test)
+  testImplementation(libs.robolectric)
 
-  testImplementation(project(":dispatch-android-espresso"))
-  testImplementation(project(":dispatch-android-lifecycle-extensions"))
-  testImplementation(project(":dispatch-android-viewmodel"))
-  testImplementation(project(":dispatch-internal-test"))
+  testImplementation(projects.dispatchAndroidEspresso)
+  testImplementation(projects.dispatchAndroidLifecycleExtensions)
+  testImplementation(projects.dispatchAndroidViewmodel)
+  testImplementation(projects.dispatchInternalTest)
 
 }
