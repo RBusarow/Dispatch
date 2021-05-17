@@ -41,7 +41,7 @@ plugins {
   kotlin("jvm")
   id("org.jetbrains.dokka") version "1.4.10"
   id("com.dorongold.task-tree") version "1.5"
-  id("com.diffplug.spotless") version "5.12.4"
+  id("com.diffplug.spotless") version "5.12.5"
   base
   // can be removed for Kotlin Gradle Plugin 1.5.10
   // workaround for https://youtrack.jetbrains.com/issue/KT-46368#focus=Comments-27-4868598.0-0
