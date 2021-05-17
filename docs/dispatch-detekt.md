@@ -34,8 +34,7 @@ allprojects {
   dependencies {
     detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.16.0")
     
-    implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-RC01"))
-    detektPlugins("com.rickbusarow.dispatch:dispatch-detekt")
+    detektPlugins("com.rickbusarow.dispatch:dispatch-detekt:1.0.0-beta09")
   }
 }
 ```
