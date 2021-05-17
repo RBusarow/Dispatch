@@ -1,10 +1,5 @@
 # Change log for Dispatch
 
-## Version 1.0.0-RC01
-
-* Update coroutines to [1.5.0](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.5.0)
-* Add a BOM for unified dependency versions ([#219](https://github.com/RBusarow/Dispatch/issues/219))
-
 ## Version 1.0.0-beta09
 
 * [CoroutineTestExtension] now creates a new [scope][CoroutineTestExtension.scope] instance for each test.

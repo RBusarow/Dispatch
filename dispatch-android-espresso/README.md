@@ -90,10 +90,9 @@ dependencies {
   // core
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
-  implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-RC01"))
-  implementation("com.rickbusarow.dispatch:dispatch-core")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta09")
 
-  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso")
+  androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta09")
 
   // android
   androidTestImplementation("androidx.test:runner:1.3.0")

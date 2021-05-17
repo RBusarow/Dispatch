@@ -27,7 +27,6 @@ object Modules {
     ":dispatch-android-lifecycle:samples",
     ":dispatch-android-viewmodel",
     ":dispatch-android-viewmodel:samples",
-    ":dispatch-bom",
     ":dispatch-core",
     ":dispatch-core:samples",
     ":dispatch-detekt",
