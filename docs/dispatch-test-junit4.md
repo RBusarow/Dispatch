@@ -71,13 +71,13 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta09")
 
   // the junit4 artifact also provides the dispatch-test artifact
   testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta09")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 }
 ```
 
@@ -95,14 +95,14 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta09")
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
   testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta09")
   testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta09")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 }
 ```
 

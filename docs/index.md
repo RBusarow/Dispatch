@@ -361,8 +361,8 @@ dependencies {
   */
 
   // core coroutines
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
 
   // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta09")
@@ -379,7 +379,7 @@ dependencies {
   */
 
   // core coroutines-test
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
   // you only need this if you don't have the -junit4 or -junit5 artifacts
   testImplementation("com.rickbusarow.dispatch:dispatch-test:1.0.0-beta09")
   // CoroutineTestRule and :dispatch-test
