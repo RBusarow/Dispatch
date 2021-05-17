@@ -37,7 +37,7 @@ plugins {
   id("com.github.ben-manes.versions") version "0.38.0"
   id("com.autonomousapps.dependency-analysis") version "0.73.0"
   id("com.osacky.doctor") version "0.7.0"
-  id("io.gitlab.arturbosch.detekt") version "1.16.0"
+  id("io.gitlab.arturbosch.detekt") version "1.17.0"
   kotlin("jvm")
   id("org.jetbrains.dokka") version "1.4.10"
   id("com.dorongold.task-tree") version "1.5"
