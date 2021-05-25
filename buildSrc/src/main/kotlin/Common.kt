@@ -48,7 +48,7 @@ fun Project.common() {
       )
       eachDependency {
         when {
-          requested.group == "org.jetbrains.kotlin" -> useVersion("1.5.0")
+          requested.group == "org.jetbrains.kotlin" -> useVersion("1.5.10")
         }
       }
     }
