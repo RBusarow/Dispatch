@@ -152,10 +152,10 @@ fun File.updateLibraryVersions(): File {
         "androidx.lifecycle:lifecycle-viewmodel:2.3.1".toDependencyMatcher(),
         "androidx.test:runner:1.3.0".toDependencyMatcher(),
         "androidx.test.espresso:espresso-core:3.3.0".toDependencyMatcher(),
-        "io.gitlab.arturbosch.detekt:detekt-api:1.16.0".toDependencyMatcher(),
-        "io.gitlab.arturbosch.detekt:detekt-cli:1.16.0".toDependencyMatcher(),
-        "io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0".toDependencyMatcher(),
-        "io.gitlab.arturbosch.detekt:detekt-test:1.16.0".toDependencyMatcher(),
+        "io.gitlab.arturbosch.detekt:detekt-api:1.17.1".toDependencyMatcher(),
+        "io.gitlab.arturbosch.detekt:detekt-cli:1.17.1".toDependencyMatcher(),
+        "io.gitlab.arturbosch.detekt:detekt-formatting:1.17.1".toDependencyMatcher(),
+        "io.gitlab.arturbosch.detekt:detekt-test:1.17.1".toDependencyMatcher(),
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0".toDependencyMatcher(),
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0".toDependencyMatcher(),
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0".toDependencyMatcher(),
@@ -174,9 +174,9 @@ fun File.updateLibraryVersions(): File {
         "com.rickbusarow.hermit:hermit-junit5:0.9.2".toDependencyMatcher(),
         "com.rickbusarow.hermit:hermit-mockk:0.9.2".toDependencyMatcher(),
         "com.rickbusarow.hermit:hermit-coroutines:0.9.2".toDependencyMatcher(),
-        "io.kotest:kotest-assertions-core-jvm:4.4.3".toDependencyMatcher(),
-        "io.kotest:kotest-property-jvm:4.4.3".toDependencyMatcher(),
-        "io.kotest:kotest-runner-junit5-jvm:4.4.3".toDependencyMatcher()
+        "io.kotest:kotest-assertions-core-jvm:4.6.0".toDependencyMatcher(),
+        "io.kotest:kotest-property-jvm:4.6.0".toDependencyMatcher(),
+        "io.kotest:kotest-runner-junit5-jvm:4.6.0".toDependencyMatcher()
       )
 
       forEachLine { originalLine ->
