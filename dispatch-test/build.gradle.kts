@@ -28,10 +28,7 @@ dependencies {
 
   api(projects.dispatchCore)
 
-  implementation(libs.junit.jupiter)
-  implementation(libs.junit.api)
-  implementation(libs.junit.vintage)
-
+  testImplementation(libs.junit.api)
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
@@ -40,4 +37,6 @@ dependencies {
   testImplementation(libs.mockk)
 
   testImplementation(projects.dispatchInternalTest)
+
+  testRuntimeOnly(libs.junit.jupiter)
 }
