@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import com.android.build.gradle.*
 import org.jetbrains.kotlin.gradle.dsl.*
 
 /*
@@ -35,6 +36,12 @@ apply(plugin = "org.jetbrains.kotlin.android")
 
 commonAndroid()
 common()
+
+configure<LibraryExtension> {
+  buildFeatures {
+    buildConfig = false
+  }
+}
 
 val testJvm by tasks.registering {
   dependsOn("testDebugUnitTest")
