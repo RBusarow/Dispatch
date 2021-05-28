@@ -34,20 +34,6 @@ public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
 
 /**
  * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
- * then uses its [DispatcherProvider.io] property to call `flowOn(theDispatcher)`,
- * and returns the result.
- *
- * @sample samples.FlowOnSample.flowOnIOSample
- * @see flowOn
- */
-@ExperimentalCoroutinesApi
-public fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
-  flowOn(currentCoroutineContext().dispatcherProvider.io)
-    .collect { emit(it) }
-}
-
-/**
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
  * then uses its [DispatcherProvider.main] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *

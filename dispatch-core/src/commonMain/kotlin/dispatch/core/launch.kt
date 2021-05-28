@@ -40,24 +40,6 @@ public fun CoroutineScope.launchDefault(
  * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
  * The coroutine is cancelled when the resulting job is [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **io** [CoroutineDispatcher]
- * property (`coroutineContext.dispatcherProvider.io`) to call `launch(...)`.
- *
- * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
- *
- * @sample samples.LaunchSample.launchIOSample
- * @see launch
- */
-public fun CoroutineScope.launchIO(
-  context: CoroutineContext = EmptyCoroutineContext,
-  start: CoroutineStart = CoroutineStart.DEFAULT,
-  block: suspend CoroutineScope.() -> Unit
-): Job = launch(context + coroutineContext.dispatcherProvider.io, start, block)
-
-/**
- * Launches a new coroutine without blocking the current thread and returns a reference to the coroutine as a [Job].
- * The coroutine is cancelled when the resulting job is [cancelled][Job.cancel].
- *
  * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **main** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.main`) to call `launch(...)`.
  *

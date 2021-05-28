@@ -44,27 +44,6 @@ public suspend fun <T> withDefault(
  * the result.
  *
  * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine,
- * then uses its **io** [CoroutineDispatcher] property to call `withContext(theDispatcher)`,
- * and returns the result.
- *
- * The `io` property always corresponds to the `DispatcherProvider` of the current coroutine.
- *
- * @sample samples.WithContextSample.withIOSample
- * @see withContext
- */
-public suspend fun <T> withIO(
-  context: CoroutineContext = EmptyCoroutineContext,
-  block: suspend CoroutineScope.() -> T
-): T {
-  val newContext = context + coroutineContext.dispatcherProvider.io
-  return withContext(newContext, block)
-}
-
-/**
- * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
- * the result.
- *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine,
  * then uses its **main** [CoroutineDispatcher] property to call `withContext(theDispatcher)`,
  * and returns the result.
  *

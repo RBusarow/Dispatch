@@ -14,7 +14,7 @@
  */
 
 plugins {
-  javaLibrary
+  multiPlatformLibrary
   id("com.vanniktech.maven.publish")
   id("org.jetbrains.dokka")
   id("kotlinx-atomicfu")

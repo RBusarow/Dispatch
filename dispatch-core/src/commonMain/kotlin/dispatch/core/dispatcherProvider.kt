@@ -27,12 +27,7 @@ import kotlin.coroutines.*
  * meaning that a `CoroutineContext` can be composed with a set of pre-set dispatchers,
  * thereby eliminating the need for singleton references or dependency injecting this interface.
  */
-public interface DispatcherProvider : CoroutineContext.Element {
-
-  /**
-   * This unique [Key] property is what allows the `DispatcherProvider` to be stored in the [CoroutineContext].
-   */
-  override val key: CoroutineContext.Key<*> get() = Key
+public expect interface DispatcherProvider : CoroutineContext.Element {
 
   /**
    * [CoroutineDispatcher] generally intended for cpu-bound tasks.
@@ -41,16 +36,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Default
    */
-  public val default: CoroutineDispatcher get() = Dispatchers.Default
-
-  /**
-   * [CoroutineDispatcher] generally intended for blocking I/O tasks.
-   *
-   * Corresponds to the [Dispatchers.IO] property in a default implementation.
-   *
-   * @see Dispatchers.IO
-   */
-  public val io: CoroutineDispatcher get() = Dispatchers.IO
+  public val default: CoroutineDispatcher
 
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread.
@@ -59,7 +45,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Main
    */
-  public val main: CoroutineDispatcher get() = Dispatchers.Main
+  public val main: CoroutineDispatcher
 
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
@@ -68,7 +54,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see MainCoroutineDispatcher.immediate
    */
-  public val mainImmediate: CoroutineDispatcher get() = Dispatchers.Main.immediate
+  public val mainImmediate: CoroutineDispatcher
 
   /**
    * [CoroutineDispatcher] which is unconfined.
@@ -77,7 +63,7 @@ public interface DispatcherProvider : CoroutineContext.Element {
    *
    * @see Dispatchers.Unconfined
    */
-  public val unconfined: CoroutineDispatcher get() = Dispatchers.Unconfined
+  public val unconfined: CoroutineDispatcher
 
   /**
    * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the [CoroutineContext].

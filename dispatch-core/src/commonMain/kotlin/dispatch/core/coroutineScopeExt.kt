@@ -30,17 +30,6 @@ import kotlin.coroutines.*
 public val CoroutineScope.defaultDispatcher: CoroutineDispatcher
   get() = dispatcherProvider.default
 
-/**
- * Extracts the **io** [CoroutineDispatcher] out of the [CoroutineScope],
- * using [DefaultDispatcherProvider.get] to provide one if necessary.
- *
- * Note that `CoroutineContext` is immutable, so if a new `DefaultDispatcherProvider` is needed,
- * a new instance will be created each time.
- *
- * @see CoroutineScope.dispatcherProvider
- */
-public val CoroutineScope.ioDispatcher: CoroutineDispatcher
-  get() = dispatcherProvider.io
 
 /**
  * Extracts the **main** [CoroutineDispatcher] out of the [CoroutineScope],

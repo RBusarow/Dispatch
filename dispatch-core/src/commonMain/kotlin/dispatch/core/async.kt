@@ -40,23 +40,6 @@ public fun <T> CoroutineScope.asyncDefault(
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **io** [CoroutineDispatcher]
- * property (`coroutineContext.dispatcherProvider.io`) to call `async(...)`.
- *
- * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
- *
- * @sample samples.AsyncSample.asyncIOSample
- * @see async
- */
-public fun <T> CoroutineScope.asyncIO(
-  context: CoroutineContext = EmptyCoroutineContext,
-  start: CoroutineStart = CoroutineStart.DEFAULT,
-  block: suspend CoroutineScope.() -> T
-): Deferred<T> = async(context + coroutineContext.dispatcherProvider.io, start, block)
-
-/**
- * Creates a coroutine and returns its future result as an implementation of [Deferred].
- *
  * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **main** [CoroutineDispatcher]
  * property (`coroutineContext.dispatcherProvider.main`) to call `async(...)`.
  *
