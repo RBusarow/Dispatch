@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+@file:JvmName("CoroutineScopeJvm")
 package dispatch.core
 
 import kotlinx.coroutines.*

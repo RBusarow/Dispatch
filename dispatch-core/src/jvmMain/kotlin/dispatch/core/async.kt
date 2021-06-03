@@ -14,6 +14,7 @@
  */
 
 @file:Suppress("DeferredIsResult")
+@file:JvmName("Async")
 
 package dispatch.core
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("TooManyFunctions")
+@file:JvmName("CoroutineScopes")
 
 package dispatch.core
 

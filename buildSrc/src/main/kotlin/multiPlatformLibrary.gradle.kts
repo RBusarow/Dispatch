@@ -26,7 +26,6 @@ kotlin {
     explicitApi()
   }
 
-
   targets {
     jvm {
       compilations.all {
@@ -62,7 +61,6 @@ kotlin {
     val commonMain by getting {
       dependencies {
         compileOnly(kotlin("stdlib"))
-        implementation(kotlin("reflect"))
         api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
       }
     }
@@ -74,22 +72,18 @@ kotlin {
       }
     }
 
-    val desktopMain by creating {
-      dependsOn(commonMain)
-    }
-    val jsMain by creating { dependsOn(commonMain) }
-    val nativeMain by creating { dependsOn(commonMain) }
-    val macosX64Main by getting { dependsOn(nativeMain) }
-    val mingwX64Main by getting { dependsOn(nativeMain) }
-    val linuxX64Main by getting { dependsOn(nativeMain) }
-    val iosX64Main by getting { dependsOn(nativeMain) }
-    val iosArm64Main by getting { dependsOn(nativeMain) }
-    val iosArm32Main by getting { dependsOn(nativeMain) }
-    val watchosX86Main by getting { dependsOn(nativeMain) }
-    val watchosArm32Main by getting { dependsOn(nativeMain) }
-    val watchosArm64Main by getting { dependsOn(nativeMain) }
-    val watchosX64Main by getting { dependsOn(nativeMain) }
-    val tvosMain by getting { dependsOn(nativeMain) }
+    val desktopMain by creating { dependsOn(commonMain) }
+    val macosX64Main by getting { dependsOn(desktopMain) }
+    val mingwX64Main by getting { dependsOn(desktopMain) }
+    val linuxX64Main by getting { dependsOn(desktopMain) }
+    val iosX64Main by getting { dependsOn(desktopMain) }
+    val iosArm64Main by getting { dependsOn(desktopMain) }
+    val iosArm32Main by getting { dependsOn(desktopMain) }
+    val watchosX86Main by getting { dependsOn(desktopMain) }
+    val watchosArm32Main by getting { dependsOn(desktopMain) }
+    val watchosArm64Main by getting { dependsOn(desktopMain) }
+    val watchosX64Main by getting { dependsOn(desktopMain) }
+    val tvosMain by getting { dependsOn(desktopMain) }
     val jvmTest by getting {
 //      dependencies {
 //        implementation(project(Projects.Engine))
@@ -101,7 +95,6 @@ kotlin {
       languageSettings.useExperimentalAnnotation("kotlin.time.ExperimentalTime")
       languageSettings.useExperimentalAnnotation("kotlin.experimental.ExperimentalTypeInference")
       languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
-      languageSettings.useExperimentalAnnotation("kotlin.reflect.jvm.ExperimentalReflectionOnLambdas")
     }
   }
 }

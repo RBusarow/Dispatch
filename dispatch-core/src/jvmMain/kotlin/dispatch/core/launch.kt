@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+@file:JvmName("Launch")
+
 package dispatch.core
 
 import kotlinx.coroutines.*

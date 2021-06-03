@@ -17,6 +17,7 @@ package dispatch.core
 
 import kotlinx.atomicfu.*
 import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 /**
  * Holder singleton for a [DispatcherProvider] instance.
@@ -51,7 +52,18 @@ public object DefaultDispatcherProvider {
     }
   }
 
-  private fun default(): DispatcherProvider = object : DispatcherProvider {}
+  private fun default(): DispatcherProvider = object : DispatcherProvider {
+    override val default: CoroutineDispatcher
+      get() = TODO("Not yet implemented")
+    override val main: CoroutineDispatcher
+      get() = TODO("Not yet implemented")
+    override val mainImmediate: CoroutineDispatcher
+      get() = TODO("Not yet implemented")
+    override val unconfined: CoroutineDispatcher
+      get() = TODO("Not yet implemented")
+    override val key: CoroutineContext.Key<*>
+      get() = TODO("Not yet implemented")
+  }
 
   /**
    * Default implementation of [DispatcherProvider] which simply delegates to the corresponding
