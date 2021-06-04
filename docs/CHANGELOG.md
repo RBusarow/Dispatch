@@ -1,5 +1,11 @@
 # Change log for Dispatch
 
+## Version 1.0.0-beta10
+
+* Update coroutines to [1.5.0](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.5.0)
+* Add a BOM for unified dependency versions ([#219](https://github.com/RBusarow/Dispatch/issues/219))
+* Fix permanent cancellation when using [withViewLifecycleScope] ([#236](https://github.com/RBusarow/Dispatch/issues/236))
+
 ## Version 1.0.0-beta09
 
 * [CoroutineTestExtension] now creates a new [scope][CoroutineTestExtension.scope] instance for each test.
@@ -145,6 +151,7 @@
 <!--- MODULE dispatch-android-lifecycle-extensions-->
 <!--- INDEX  -->
 
+[withViewLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/with-view-lifecycle-scope.html
 [lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 
 <!--- MODULE dispatch-android-viewmodel-->

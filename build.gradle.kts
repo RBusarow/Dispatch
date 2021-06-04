@@ -24,10 +24,10 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 buildscript {
   dependencies {
-    classpath("com.android.tools.build:gradle:4.2.0")
+    classpath("com.android.tools.build:gradle:4.2.1")
     classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1")
     classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.5.0")
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
     classpath("com.vanniktech:gradle-maven-publish-plugin:0.15.1")
     classpath("org.jetbrains.kotlinx:kotlinx-knit:0.2.3")
   }
@@ -43,9 +43,6 @@ plugins {
   id("com.dorongold.task-tree") version "1.5"
   id("com.diffplug.spotless") version "5.12.5"
   base
-  // can be removed for Kotlin Gradle Plugin 1.5.10
-  // workaround for https://youtrack.jetbrains.com/issue/KT-46368#focus=Comments-27-4868598.0-0
-  id("dev.zacsweers.kgp-150-leak-patcher") version "1.1.0"
 }
 
 tasks.dokkaHtmlMultiModule.configure {

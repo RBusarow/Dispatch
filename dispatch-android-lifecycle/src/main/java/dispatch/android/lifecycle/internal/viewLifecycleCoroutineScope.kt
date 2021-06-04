@@ -21,7 +21,6 @@ import dispatch.android.lifecycle.*
 import dispatch.core.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlin.coroutines.*
 
 @ExperimentalCoroutinesApi
 internal fun bindViewLifecycleCoroutineScope(
@@ -34,20 +33,23 @@ internal fun bindViewLifecycleCoroutineScope(
     .onEachLatest { owner: LifecycleOwner? ->
 
       if (owner != null) {
+        coroutineScope {
+          launch {
+            /*
+            Create a new ViewLifecycleCoroutineScope for each update to the LiveData.
 
-        /*
-        Create a new ViewLifecycleCoroutineScope for each update to the LiveData.
+            This new scope has the same CoroutineContext as the "receiverScope" parent,
+            except that its Job is automatically cancelled for each new LiveData event
+            without affecting the Job contained in the receiver scope.
+             */
+            val viewScope = ViewLifecycleCoroutineScope(
+              lifecycle = owner.lifecycle,
+              coroutineContext = coroutineContext
+            )
 
-        This new scope has the same CoroutineContext as the "receiverScope" parent,
-        except that its Job is automatically cancelled for each new LiveData event
-        without affecting the Job contained in the receiver scope.
-         */
-        val viewScope = ViewLifecycleCoroutineScope(
-          lifecycle = owner.lifecycle,
-          coroutineContext = coroutineContext
-        )
-
-        viewScope.block()
+            viewScope.block()
+          }
+        }
       }
     }.flowOnMainImmediate()
     .launchIn(receiverScope)

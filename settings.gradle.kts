@@ -22,7 +22,7 @@ pluginManagement {
   resolutionStrategy {
     eachPlugin {
       when {
-        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.0")
+        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.10")
       }
     }
   }
@@ -71,6 +71,7 @@ include(":dispatch-android-lifecycle-extensions:samples")
 include(":dispatch-android-lifecycle:samples")
 include(":dispatch-android-viewmodel")
 include(":dispatch-android-viewmodel:samples")
+include(":dispatch-bom")
 include(":dispatch-core")
 include(":dispatch-test")
 include(":dispatch-test-junit4")
