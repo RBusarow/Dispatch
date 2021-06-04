@@ -26,6 +26,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewModel)
   implementation(libs.junit.junit4)
   implementation(libs.junit.api)
+  implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
 
   implementation(projects.dispatchAndroidLifecycle)

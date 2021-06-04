@@ -23,6 +23,7 @@ import dispatch.test.*
 import io.kotest.matchers.*
 import io.kotest.matchers.types.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
 import org.junit.*
 import org.junit.runner.*
 import org.robolectric.*
@@ -213,6 +214,82 @@ internal class WithViewLifecycleTest {
       internalScope!!.coroutineContext[Job]!!.isActive shouldBe false
 
       receiverScope.coroutineContext[Job]!!.isActive shouldBe true
+    }
+
+  @Test
+  fun `subsequent viewLifecycles should restart the lamba after the initial is destroyed`() =
+    runBlocking {
+
+      val fragment = FakeFragment(fragmentLifecycleOwner)
+
+      val receiverJob = Job()
+
+      val receiverScope =
+        MainImmediateCoroutineScope(receiverJob + rule.coroutineContext)
+
+      val control = Channel<Int>()
+      val deadlock = CompletableDeferred<Unit>()
+
+      var count = 0
+
+      receiverScope.withViewLifecycle(fragment) {
+
+        launch {
+          control.send(++count)
+
+          deadlock.await()
+        }
+      }
+
+      fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
+
+      control.receive() shouldBe 1
+
+      viewLifecycleOwner.destroy()
+
+      val secondView = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+
+      fragment.setFakeViewLifecycleOwner(secondView)
+
+      control.receive() shouldBe 2
+    }
+
+  @Test
+  fun `subsequent viewLifecycles should restart the lamba after the initial is set to null`() =
+    runBlocking {
+
+      val fragment = FakeFragment(fragmentLifecycleOwner)
+
+      val receiverJob = Job()
+
+      val receiverScope =
+        MainImmediateCoroutineScope(receiverJob + rule.coroutineContext)
+
+      val control = Channel<Int>()
+      val deadlock = CompletableDeferred<Unit>()
+
+      var count = 0
+
+      receiverScope.withViewLifecycle(fragment) {
+
+        launch {
+          control.send(++count)
+
+          deadlock.await()
+        }
+      }
+
+      fragment.setFakeViewLifecycleOwner(viewLifecycleOwner)
+
+      control.receive() shouldBe 1
+
+      fragment.setFakeViewLifecycleOwner(null)
+
+      val secondView = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+
+      fragment.setFakeViewLifecycleOwner(secondView)
+
+      control.receive() shouldBe 2
     }
 
   @Test
