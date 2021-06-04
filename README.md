@@ -365,7 +365,7 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
   
   // a BOM ensures that all artifacts used from the library are of the same version
-  implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-RC01"))
+  implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-beta10"))
 
   // everything provides :core via "api", so you only need this if you have no other "implementation" dispatch artifacts
   implementation("com.rickbusarow.dispatch:dispatch-core")
