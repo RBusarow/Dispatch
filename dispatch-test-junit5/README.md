@@ -101,13 +101,14 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta09")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+  implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-RC01"))
+  implementation("com.rickbusarow.dispatch:dispatch-core")
 
   // the junit5 artifact also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta09")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
   testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 }
 ```
@@ -126,16 +127,16 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
-  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta09")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+  implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-RC01")
 
   // the junit4 and junit5 artifacts also provides the dispatch-test artifact
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-beta09")
-  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-beta09")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4:1.0.0-RC01")
+  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5:1.0.0-RC01")
   testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
   testImplementation("org.junit.vintage:junit-vintage-engine:5.7.1")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 }
 ```
 

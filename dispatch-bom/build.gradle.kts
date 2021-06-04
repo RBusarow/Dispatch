@@ -14,29 +14,37 @@
  */
 
 plugins {
-  id("kotlinx-atomicfu")
-  javaLibrary
+  `java-platform`
   id("com.vanniktech.maven.publish")
-  id("org.jetbrains.dokka")
 }
+
+version = libs.versions.versionName.get()
+
+val bomProject = project
+
+rootProject
+  .subprojects
+  .filter { it.includeInBom() }
+  .forEach { bomProject.evaluationDependsOn(it.path) }
 
 dependencies {
-
-  api(libs.kotlinx.coroutines.core)
-  api(libs.kotlinx.coroutines.jvm)
-  api(libs.kotlinx.coroutines.test)
-
-  api(projects.dispatchCore)
-
-  testImplementation(libs.junit.api)
-  testImplementation(libs.kotest.assertions)
-  testImplementation(libs.kotest.properties)
-  testImplementation(libs.kotest.runner)
-  testImplementation(libs.kotlin.test)
-  testImplementation(libs.kotlin.testCommon)
-  testImplementation(libs.mockk)
-
-  testImplementation(projects.dispatchInternalTest)
-
-  testRuntimeOnly(libs.junit.jupiter)
+  constraints {
+    rootProject
+      .subprojects
+      .filter { it.includeInBom() }
+      .forEach { api(project(it.path)) }
+  }
 }
+
+publishing {
+  publications {
+    create<MavenPublication>("DispatchBom") {
+      from(components["javaPlatform"])
+    }
+  }
+}
+
+
+fun Project.includeInBom() = !path.contains("sample") &&
+    !path.contains("internal") &&
+    this != bomProject
