@@ -28,7 +28,7 @@ fun Project.commonAndroid() {
     defaultConfig {
       minSdkVersion(21)
       targetSdkVersion(30)
-      versionName = "1.0.0-beta09"
+      versionName = "1.0.0-beta10"
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
