@@ -41,7 +41,7 @@ plugins {
   kotlin("jvm")
   id("org.jetbrains.dokka") version "1.4.10"
   id("com.dorongold.task-tree") version "1.5"
-  id("com.diffplug.spotless") version "5.12.5"
+  id("com.diffplug.spotless") version "5.13.0"
   base
 }
 
