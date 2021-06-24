@@ -28,7 +28,7 @@ buildscript {
     classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.1")
     classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.6.0")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
-    classpath("com.vanniktech:gradle-maven-publish-plugin:0.15.1")
+    classpath("com.vanniktech:gradle-maven-publish-plugin:0.16.0")
     classpath("org.jetbrains.kotlinx:kotlinx-knit:0.2.3")
   }
 }
