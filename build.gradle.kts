@@ -40,7 +40,7 @@ plugins {
   id("io.gitlab.arturbosch.detekt") version "1.17.1"
   kotlin("jvm")
   id("org.jetbrains.dokka") version "1.4.10"
-  id("com.dorongold.task-tree") version "1.5"
+  id("com.dorongold.task-tree") version "2.0.1"
   id("com.diffplug.spotless") version "5.14.0"
   base
 }
