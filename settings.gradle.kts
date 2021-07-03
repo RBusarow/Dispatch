@@ -22,7 +22,7 @@ pluginManagement {
   resolutionStrategy {
     eachPlugin {
       when {
-        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.10")
+        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.20")
       }
     }
   }
@@ -63,6 +63,7 @@ rootProject.name = "Dispatch"
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+include(":dependency-sync")
 include(":dispatch-android-espresso")
 include(":dispatch-android-espresso:samples")
 include(":dispatch-android-lifecycle")

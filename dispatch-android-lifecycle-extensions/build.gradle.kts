@@ -32,8 +32,8 @@ dependencies {
 
   implementation(projects.dispatchCore)
 
-  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.arch.test.core)
+  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.test.espresso.core)
   testImplementation(libs.androidx.test.runner)
   testImplementation(libs.junit.jupiter)
@@ -41,7 +41,7 @@ dependencies {
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
   testImplementation(libs.kotlinx.coroutines.test)
-  testImplementation(libs.hermit.jUnit5)
+  testImplementation(libs.rickbusarow.hermit.jUnit5)
   testImplementation(libs.robolectric)
 
   testImplementation(projects.dispatchInternalTest)

@@ -20,8 +20,8 @@ plugins {
 
 dependencies {
 
-  api(libs.junit.junit4)
   api(libs.junit.api)
+  api(libs.junit.junit4)
   api(libs.kotlinx.coroutines.core)
   api(libs.kotlinx.coroutines.jvm)
 
@@ -32,8 +32,8 @@ dependencies {
   implementation(libs.kotest.common.jvm)
   implementation(libs.kotest.runner)
   implementation(libs.kotlin.reflect)
-  implementation(libs.kotlin.test)
-  implementation(libs.kotlin.testCommon)
+  implementation(libs.kotlin.test.common)
+  implementation(libs.kotlin.test.core)
   implementation(libs.kotlinx.coroutines.test)
 
   implementation(projects.dispatchCore)

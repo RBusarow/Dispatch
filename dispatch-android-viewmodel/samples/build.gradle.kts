@@ -30,7 +30,7 @@ dependencies {
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
-  testImplementation(libs.kotlin.test)
-  testImplementation(libs.kotlin.testCommon)
+  testImplementation(libs.kotlin.test.common)
+  testImplementation(libs.kotlin.test.core)
 
 }
