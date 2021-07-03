@@ -28,6 +28,7 @@ method = "rebase"
 # Instead of "dependabot[bot]" use "dependabot".
 
 # auto_approve_usernames = ["dependabot"]
+auto_approve_usernames = ["RBusarow"]
 
 [merge.message]
 # use title of PR for merge commit.
