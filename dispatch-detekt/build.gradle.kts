@@ -21,11 +21,11 @@ plugins {
 
 dependencies {
 
-  api(libs.detekt.api)
+  api(libs.arturbosch.detekt.api)
   api(libs.kotlin.compiler)
 
-  testImplementation(libs.detekt.api)
-  testImplementation(libs.detekt.test)
+  testImplementation(libs.arturbosch.detekt.api)
+  testImplementation(libs.arturbosch.detekt.test)
   testImplementation(libs.junit.api)
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)

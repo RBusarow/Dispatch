@@ -20,13 +20,13 @@ plugins {
 }
 
 dependencies {
-  api(libs.androidx.lifecycle.viewModel)
+  api(libs.androidx.lifecycle.viewModel.core)
   api(libs.kotlinx.coroutines.core)
   api(libs.kotlinx.coroutines.jvm)
 
   api(projects.dispatchCore)
 
-  implementation(libs.androidx.lifecycle.viewModelKtx)
+  implementation(libs.androidx.lifecycle.viewModel.ktx)
   implementation(libs.kotlinx.coroutines.android)
 
   testImplementation(libs.androidx.test.espresso.core)

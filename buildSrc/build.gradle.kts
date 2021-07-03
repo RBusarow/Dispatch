@@ -22,7 +22,7 @@ dependencies {
   compileOnly(gradleApi())
 
   implementation(libs.kotlin.compiler)
-  implementation(libs.kotlin.gradlePlugin)
+  implementation(libs.kotlin.gradle.plugin)
   implementation(libs.androidGradlePlugin)
   implementation(libs.kotlinx.atomicfu)
 }

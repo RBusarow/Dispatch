@@ -30,6 +30,7 @@ buildscript {
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
     classpath("com.vanniktech:gradle-maven-publish-plugin:0.16.0")
     classpath("org.jetbrains.kotlinx:kotlinx-knit:0.2.3")
+    classpath("com.rickbusarow.gradle-dependency-sync:gradle-dependency-sync-plugin:0.10.0")
   }
 }
 
@@ -161,7 +162,7 @@ detekt {
 
 dependencies {
 
-  detekt(libs.detekt.cli)
+  detekt(libs.arturbosch.detekt.cli)
   detektPlugins(projects.dispatchDetekt)
 }
 

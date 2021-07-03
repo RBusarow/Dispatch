@@ -33,8 +33,8 @@ dependencies {
   implementation(libs.androidx.lifecycle.runtime)
   implementation(libs.kotlinx.coroutines.android)
 
-  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.arch.test.core)
+  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.test.espresso.core)
   testImplementation(libs.androidx.test.runner)
   testImplementation(libs.junit.jupiter)
@@ -42,8 +42,8 @@ dependencies {
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
   testImplementation(libs.kotlinx.coroutines.test)
-  testImplementation(libs.hermit.coroutines)
-  testImplementation(libs.hermit.jUnit5)
+  testImplementation(libs.rickbusarow.hermit.coroutines)
+  testImplementation(libs.rickbusarow.hermit.jUnit5)
   testImplementation(libs.robolectric)
 
   testImplementation(projects.dispatchInternalTest)

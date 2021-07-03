@@ -53,13 +53,13 @@ dependencies {
 
   androidTestImplementation(projects.dispatchAndroidEspresso)
 
-  implementation(libs.androidx.activity)
+  implementation(libs.androidx.activity.ktx)
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.constraintLayout)
   implementation(libs.androidx.coreKtx)
   implementation(libs.androidx.fragment.ktx)
   implementation(libs.androidx.lifecycle.common)
-  implementation(libs.timber)
+  implementation(libs.jakewharton.timber4)
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
 
