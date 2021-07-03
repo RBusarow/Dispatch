@@ -16,12 +16,13 @@
 package dispatch.android.lifecycle
 
 import androidx.compose.runtime.*
+import dispatch.core.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
 @Composable
 fun foo() {
-  val scope = rememberCoroutineScope()
+  val scope = rememberDispatchCoroutineScope()
 }
 
 /**
@@ -51,11 +52,14 @@ fun foo() {
 inline fun rememberDispatchCoroutineScope(
   getContext: @DisallowComposableCalls () -> CoroutineContext = { EmptyCoroutineContext }
 ): CoroutineScope {
-  val composer = currentComposer
-  val wrapper = remember {
-    CompositionScopedCoroutineScopeCanceller(
-      createCompositionCoroutineScope(getContext(), composer)
-    )
+
+  return rememberCoroutineScope {
+    val context = getContext()
+
+    if (context[DispatcherProvider] != null) {
+      context
+    } else {
+      context + DefaultDispatcherProvider.get()
+    }
   }
-  return wrapper.coroutineScope
 }
