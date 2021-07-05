@@ -38,6 +38,16 @@ jobs:
           commit_message: update artifact versions in documentation samples
           commit_options: '--no-verify --signoff'
 
+      - name: Copy Dependabot dependencies to toml
+        run: ./gradlew dependencysync
+
+      # If the copy generated changes, commit and push those changes.
+      - name: commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update dependencies from dependabot
+          commit_options: '--no-verify --signoff'
+
       # formats all Kotlin src files
       - name: spotless format
         run: ./gradlew spotlessApply
