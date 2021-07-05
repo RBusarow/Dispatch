@@ -146,7 +146,7 @@ dependencies {
   dependencySync("com.jakewharton.timber:timber:4.7.1")
   dependencySync("com.malinskiy.marathon:marathon-gradle-plugin:0.6.2")
   dependencySync("com.mcxiaoke.photoview:library:1.2.3")
-  dependencySync("com.microsoft.appcenter:appcenter-analytics:4.1.1")
+  dependencySync("com.microsoft.appcenter:appcenter-analytics:4.2.0")
   dependencySync("com.microsoft.appcenter:appcenter-crashes:4.1.1")
   dependencySync("com.microsoft.appcenter:appcenter-distribute:4.1.1")
   dependencySync("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta10")
