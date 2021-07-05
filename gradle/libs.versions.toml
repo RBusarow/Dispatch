@@ -36,7 +36,7 @@ kotlinx-coroutines-version = "1.5.0"
 kotlinx-knit-version = "0.2.3"
 
 rickbusarow-dispatch = "1.0.0-beta10"
-rickbusarow-hermit = "0.9.4"
+rickbusarow-hermit = "0.9.5"
 
 square-kotlinPoet-version = "1.9.0"
 
