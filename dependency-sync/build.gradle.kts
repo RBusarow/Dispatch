@@ -93,7 +93,7 @@ dependencies {
   dependencySync("app.cash.turbine:turbine:0.5.2")
 
   dependencySync("com.airbnb.android:epoxy-databinding:3.8.0")
-  dependencySync("com.airbnb.android:epoxy-paging:3.8.0")
+  dependencySync("com.airbnb.android:epoxy-paging:4.6.2")
   dependencySync("com.airbnb.android:epoxy-processor:3.8.0")
   dependencySync("com.airbnb.android:epoxy:3.8.0")
   dependencySync("com.android.tools.build:gradle:4.2.1")
