@@ -163,7 +163,7 @@ dependencies {
   dependencySync("com.rickbusarow.hermit:hermit-coroutines:0.9.4")
   dependencySync("com.rickbusarow.hermit:hermit-junit4:0.9.4")
   dependencySync("com.rickbusarow.hermit:hermit-junit5:0.9.4")
-  dependencySync("com.rickbusarow.hermit:hermit-mockk:0.9.4")
+  dependencySync("com.rickbusarow.hermit:hermit-mockk:0.9.5")
   dependencySync("com.sergivonavi:materialbanner:1.2.0")
   dependencySync("com.squareup.anvil:annotations:2.3.3")
   dependencySync("com.squareup.anvil:compiler-api:2.3.3")
