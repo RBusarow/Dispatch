@@ -100,7 +100,7 @@ dependencies {
   dependencySync("com.auth0.android:auth0:2.2.0")
   dependencySync("com.auth0.android:jwtdecode:2.0.0")
   dependencySync("com.dipien:bye-bye-jetifier:1.1.2")
-  dependencySync("com.github.bumptech.glide:compiler:4.11.0")
+  dependencySync("com.github.bumptech.glide:compiler:4.12.0")
   dependencySync("com.github.bumptech.glide:glide:4.12.0")
   dependencySync("com.github.florent37:expansionpanel:1.2.4")
   dependencySync("com.github.javaparser:javaparser-symbol-solver-core:3.22.1")
