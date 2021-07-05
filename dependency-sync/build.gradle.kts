@@ -99,7 +99,7 @@ dependencies {
   dependencySync("com.android.tools.build:gradle:4.2.1")
   dependencySync("com.auth0.android:auth0:2.2.0")
   dependencySync("com.auth0.android:jwtdecode:2.0.0")
-  dependencySync("com.dipien:bye-bye-jetifier:1.1.2")
+  dependencySync("com.dipien:bye-bye-jetifier:1.1.3")
   dependencySync("com.github.bumptech.glide:compiler:4.11.0")
   dependencySync("com.github.bumptech.glide:glide:4.12.0")
   dependencySync("com.github.florent37:expansionpanel:1.2.4")
