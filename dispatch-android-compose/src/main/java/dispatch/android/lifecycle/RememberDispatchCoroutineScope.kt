@@ -23,6 +23,10 @@ import kotlin.coroutines.*
 @Composable
 fun foo() {
   val scope = rememberDispatchCoroutineScope()
+
+  LaunchedEffect(scope) {
+
+  }
 }
 
 /**
