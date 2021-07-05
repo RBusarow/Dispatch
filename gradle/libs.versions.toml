@@ -264,7 +264,7 @@ malinskiy-marathon-gradle-plugin = "com.malinskiy.marathon:marathon-gradle-plugi
 
 mcxiaoke-photoview-library = "com.mcxiaoke.photoview:library:1.2.3"
 
-microsoft-appcenter-analytics = "com.microsoft.appcenter:appcenter-analytics:4.1.1"
+microsoft-appcenter-analytics = "com.microsoft.appcenter:appcenter-analytics:4.2.0"
 microsoft-appcenter-crashes = "com.microsoft.appcenter:appcenter-crashes:4.1.1"
 microsoft-appcenter-distribute = "com.microsoft.appcenter:appcenter-distribute:4.1.1"
 
