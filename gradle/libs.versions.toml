@@ -149,7 +149,7 @@ dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.1.2"
 
 dokka-gradle-plugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.5.0"
 
-google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.13.0"
+google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.14.0"
 
 google-android-material = "com.google.android.material:material:1.4.0"
 
@@ -219,7 +219,7 @@ kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", versio
 
 mockk = "io.mockk:mockk:1.11.0"
 
-objenesis = "org.objenesis:objenesis:3.1"
+objenesis = "org.objenesis:objenesis:3.2"
 
 rickbusarow-dispatch-android-espresso = { module = "com.rickbusarow.dispatch:dispatch-android-espresso", version.ref = "rickbusarow-dispatch" }
 rickbusarow-dispatch-android-lifecycle-core = { module = "com.rickbusarow.dispatch:dispatch-android-lifecycle", version.ref = "rickbusarow-dispatch" }

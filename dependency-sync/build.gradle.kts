@@ -95,7 +95,7 @@ dependencies {
   dependencySync("com.android.tools.build:gradle:4.2.1")
   dependencySync("com.dipien:bye-bye-jetifier:1.1.2")
   dependencySync("com.github.javaparser:javaparser-symbol-solver-core:3.22.1")
-  dependencySync("com.google.accompanist:accompanist-coil:0.13.0")
+  dependencySync("com.google.accompanist:accompanist-coil:0.14.0")
   dependencySync("com.google.android.material:material:1.4.0")
   dependencySync("com.google.auto.service:auto-service-annotations:1.0")
   dependencySync("com.google.auto.service:auto-service:1.0")
@@ -146,7 +146,7 @@ dependencies {
   dependencySync("com.squareup:kotlinpoet:1.9.0")
   dependencySync("com.vanniktech:gradle-maven-publish-plugin:0.16.0")
 
-  dependencySync("commons-io:commons-io:2.8.0")
+  dependencySync("commons-io:commons-io:2.11.0")
 
   dependencySync("dev.zacsweers.moshix:moshi-ksp:0.11.2")
   dependencySync("dev.zacsweers.moshix:moshi-sealed-codegen:0.11.2")
@@ -198,7 +198,7 @@ dependencies {
   dependencySync("org.junit.jupiter:junit-jupiter-params:5.7.2")
   dependencySync("org.junit.jupiter:junit-jupiter:5.7.2")
   dependencySync("org.junit.vintage:junit-vintage-engine:5.7.2")
-  dependencySync("org.objenesis:objenesis:3.1")
+  dependencySync("org.objenesis:objenesis:3.2")
   dependencySync("org.robolectric:robolectric:4.5.1")
 
 }
