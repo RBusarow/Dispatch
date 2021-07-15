@@ -146,14 +146,6 @@ arturbosch-detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", ver
 arturbosch-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 arturbosch-detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
 
-auth0-android-auth0 = "com.auth0.android:auth0:2.2.0"
-auth0-android-jwtdecode = "com.auth0.android:jwtdecode:2.0.0"
-
-bouncycastle-bcprov-jdk15to18 = "org.bouncycastle:bcprov-jdk15to18:1.69"
-
-bumptech-glide-compiler = "com.github.bumptech.glide:compiler:4.11.0"
-bumptech-glide-core = "com.github.bumptech.glide:glide:4.12.0"
-
 codehaus-groovy-core = "org.codehaus.groovy:groovy:3.0.8"
 codehaus-groovy-xml = "org.codehaus.groovy:groovy-xml:3.0.8"
 
@@ -163,17 +155,7 @@ dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.1.2"
 
 dokka-gradle-plugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.4.32"
 
-fabric8-mockwebserver = "io.fabric8:mockwebserver:0.1.8"
-
-florent37-expansionpanel = "com.github.florent37:expansionpanel:1.2.4"
-
 google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.13.0"
-
-google-android-gms-play-services-location = "com.google.android.gms:play-services-location:18.0.0"
-google-android-gms-play-services-maps = "com.google.android.gms:play-services-maps:17.0.1"
-google-android-gms-play-services-nearby = "com.google.android.gms:play-services-nearby:18.0.0"
-
-google-android-libraries-places = "com.google.android.libraries.places:places:2.4.0"
 
 google-android-material = "com.google.android.material:material:1.4.0"
 
@@ -188,22 +170,6 @@ google-dagger-compiler = "com.google.dagger:dagger-compiler:2.37"
 google-devtools-ksp-symbol-processing-gradle-plugin = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.20-1.0.0-beta04"
 
 google-findbugs-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
-
-google-firebase-analytics = "com.google.firebase:firebase-analytics-ktx:19.0.0"
-google-firebase-appdistribution-gradle = "com.google.firebase:firebase-appdistribution-gradle:2.1.3"
-google-firebase-bom = "com.google.firebase:firebase-bom:28.2.0"
-google-firebase-config = "com.google.firebase:firebase-config-ktx:21.0.0"
-google-firebase-crashlytics-gradle = "com.google.firebase:firebase-crashlytics-gradle:2.7.1"
-google-firebase-crashlytics-ktx = "com.google.firebase:firebase-crashlytics-ktx:18.1.0"
-google-firebase-installations = "com.google.firebase:firebase-installations:17.0.0"
-google-firebase-messaging = "com.google.firebase:firebase-messaging-ktx:22.0.0"
-google-firebase-performance = "com.google.firebase:firebase-perf-ktx:20.0.1"
-
-google-gms-google-services = "com.google.gms:google-services:4.3.8"
-
-google-maps-android-maps-utils = "com.google.maps.android:android-maps-utils:2.2.4"
-
-google-mlkit-barcode-scanning = "com.google.mlkit:barcode-scanning:16.2.0"
 
 google-truth = "com.google.truth:truth:1.1.3"
 
@@ -257,41 +223,9 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-knit-core = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit-version" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit-version" }
 
-ltgt-gradle-incap-annotations = "net.ltgt.gradle.incap:incap:0.3"
-ltgt-gradle-incap-processor = "net.ltgt.gradle.incap:incap-processor:0.3"
-
-malinskiy-marathon-gradle-plugin = "com.malinskiy.marathon:marathon-gradle-plugin:0.6.2"
-
-mcxiaoke-photoview-library = "com.mcxiaoke.photoview:library:1.2.3"
-
-microsoft-appcenter-analytics = "com.microsoft.appcenter:appcenter-analytics:4.1.1"
-microsoft-appcenter-crashes = "com.microsoft.appcenter:appcenter-crashes:4.1.1"
-microsoft-appcenter-distribute = "com.microsoft.appcenter:appcenter-distribute:4.1.1"
-
 mockk = "io.mockk:mockk:1.11.0"
 
-noties-markwon-core = "io.noties.markwon:core:4.6.2"
-noties-markwon-ext-tables = "io.noties.markwon:ext-tables:4.6.2"
-noties-markwon-syntax-highlight = "io.noties.markwon:syntax-highlight:4.6.2"
-
-noties-prism4j = "io.noties:prism4j:2.0.0"
-
 objenesis = "org.objenesis:objenesis:3.1"
-
-pandulapeter-beagle-log-core = "com.github.pandulapeter.beagle:log:2.6.0"
-pandulapeter-beagle-log-crash = "com.github.pandulapeter.beagle:log-crash:2.6.0"
-pandulapeter-beagle-log-okhttp = "com.github.pandulapeter.beagle:log-okhttp:2.6.0"
-pandulapeter-beagle-ui-activity = "com.github.pandulapeter.beagle:ui-activity:2.6.0"
-pandulapeter-beagle-ui-bottom-sheet = "com.github.pandulapeter.beagle:ui-bottom-sheet:2.6.1"
-pandulapeter-beagle-ui-dialog = "com.github.pandulapeter.beagle:ui-dialog:2.6.0"
-pandulapeter-beagle-ui-drawer = "com.github.pandulapeter.beagle:ui-drawer:2.6.0"
-
-philjay-mpandroidchart = "com.github.PhilJay:MPAndroidChart:3.1.0"
-
-rbusarow-roomigrant-roomigrantcompiler = "com.github.RBusarow.Roomigrant:RoomigrantCompiler:0.2.6"
-rbusarow-roomigrant-roomigrantlib = "com.github.RBusarow.Roomigrant:RoomigrantLib:0.2.6"
-
-relex-circleindicator = "me.relex:circleindicator:2.1.6"
 
 rickbusarow-dispatch-android-espresso = { module = "com.rickbusarow.dispatch:dispatch-android-espresso", version.ref = "rickbusarow-dispatch" }
 rickbusarow-dispatch-android-lifecycle-core = { module = "com.rickbusarow.dispatch:dispatch-android-lifecycle", version.ref = "rickbusarow-dispatch" }
@@ -311,10 +245,6 @@ rickbusarow-hermit-jUnit5 = { module = "com.rickbusarow.hermit:hermit-junit5", v
 rickbusarow-hermit-mockk = { module = "com.rickbusarow.hermit:hermit-mockk", version.ref = "rickbusarow-hermit" }
 
 robolectric = "org.robolectric:robolectric:4.5.1"
-
-sephiroth-bottom-navigation = "it.sephiroth.android.library.bottomnavigation:bottom-navigation:3.0.0"
-
-sergivonavi-materialbanner = "com.sergivonavi:materialbanner:1.2.0"
 
 square-anvil-annotations = { module = "com.squareup.anvil:annotations", version.ref = "anvil" }
 square-anvil-compiler-api = { module = "com.squareup.anvil:compiler-api", version.ref = "anvil" }
@@ -349,8 +279,6 @@ square-turbine = "app.cash.turbine:turbine:0.5.2"
 swiftzer-semver = "net.swiftzer.semver:semver:1.1.1"
 
 vanniktech-gradle-maven-publish-plugin = "com.vanniktech:gradle-maven-publish-plugin:0.16.0"
-
-yalantis-ucrop = "com.github.yalantis:ucrop:2.2.7"
 
 zacsweers-moshix-moshi-ksp = "dev.zacsweers.moshix:moshi-ksp:0.11.2"
 zacsweers-moshix-moshi-sealed-codegen = "dev.zacsweers.moshix:moshi-sealed-codegen:0.11.2"
