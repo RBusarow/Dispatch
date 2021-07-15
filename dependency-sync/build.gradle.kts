@@ -15,7 +15,7 @@
 
 
 plugins {
-  id("com.rickbusarow.gradle-dependency-sync")
+  id("com.rickbusarow.gradle-dependency-sync") version "0.11.1"
 }
 
 dependencySync {
