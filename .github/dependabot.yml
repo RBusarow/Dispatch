@@ -15,3 +15,6 @@ updates:
       - "dependencies"
       # Add default Kodiak `merge.automerge_label`
       - "automerge"
+    ignore:
+      - dependency-name: "*kotlinx-coroutines-*"
+        versions: [ "1.5.1-native-mt" ]
