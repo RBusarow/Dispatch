@@ -146,7 +146,7 @@ dependencies {
   dependencySync("com.squareup:kotlinpoet:1.9.0")
   dependencySync("com.vanniktech:gradle-maven-publish-plugin:0.16.0")
 
-  dependencySync("commons-io:commons-io:2.8.0")
+  dependencySync("commons-io:commons-io:2.11.0")
 
   dependencySync("dev.zacsweers.moshix:moshi-ksp:0.11.2")
   dependencySync("dev.zacsweers.moshix:moshi-sealed-codegen:0.11.2")
