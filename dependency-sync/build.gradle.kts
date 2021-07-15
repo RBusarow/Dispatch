@@ -160,7 +160,7 @@ dependencies {
   dependencySync("io.kotest:kotest-assertions-core-jvm:4.6.0")
   dependencySync("io.kotest:kotest-assertions-shared-jvm:4.6.0")
   dependencySync("io.kotest:kotest-common-jvm:4.6.0")
-  dependencySync("io.kotest:kotest-property-jvm:4.6.0")
+  dependencySync("io.kotest:kotest-property-jvm:4.6.1")
   dependencySync("io.kotest:kotest-runner-junit5-jvm:4.6.0")
   dependencySync("io.mockk:mockk:1.11.0")
 
