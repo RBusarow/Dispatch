@@ -144,7 +144,7 @@ dependencies {
   dependencySync("com.squareup:kotlinpoet-metadata-specs:1.9.0")
   dependencySync("com.squareup:kotlinpoet-metadata:1.9.0")
   dependencySync("com.squareup:kotlinpoet:1.9.0")
-  dependencySync("com.vanniktech:gradle-maven-publish-plugin:0.16.0")
+  dependencySync("com.vanniktech:gradle-maven-publish-plugin:0.17.0")
 
   dependencySync("commons-io:commons-io:2.11.0")
 
