@@ -219,7 +219,7 @@ kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", versio
 
 mockk = "io.mockk:mockk:1.11.0"
 
-objenesis = "org.objenesis:objenesis:3.1"
+objenesis = "org.objenesis:objenesis:3.2"
 
 rickbusarow-dispatch-android-espresso = { module = "com.rickbusarow.dispatch:dispatch-android-espresso", version.ref = "rickbusarow-dispatch" }
 rickbusarow-dispatch-android-lifecycle-core = { module = "com.rickbusarow.dispatch:dispatch-android-lifecycle", version.ref = "rickbusarow-dispatch" }
