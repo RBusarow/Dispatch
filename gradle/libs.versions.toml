@@ -39,6 +39,8 @@ rickbusarow-hermit = "0.9.5"
 
 square-kotlinPoet-version = "1.9.0"
 
+zacSweers-moshix-version = "0.11.2"
+
 [libraries]
 airbnb-epoxy-core = { module = "com.airbnb.android:epoxy", version.ref = "airbnb-epoxy" }
 airbnb-epoxy-databinding = { module = "com.airbnb.android:epoxy-databinding", version.ref = "airbnb-epoxy" }
@@ -274,10 +276,10 @@ swiftzer-semver = "net.swiftzer.semver:semver:1.1.1"
 
 vanniktech-gradle-maven-publish-plugin = "com.vanniktech:gradle-maven-publish-plugin:0.16.0"
 
-zacsweers-moshix-moshi-ksp = "dev.zacsweers.moshix:moshi-ksp:0.11.2"
-zacsweers-moshix-moshi-sealed-codegen = "dev.zacsweers.moshix:moshi-sealed-codegen:0.11.2"
-zacsweers-moshix-moshi-sealed-ksp = "dev.zacsweers.moshix:moshi-sealed-ksp:0.11.2"
-zacsweers-moshix-moshi-sealed-runtime = "dev.zacsweers.moshix:moshi-sealed-runtime:0.11.2"
+zacSweers-moshix-ksp = { module = "dev.zacsweers.moshix:moshi-ksp", version.ref = "zacSweers-moshix-version" }
+zacSweers-moshix-sealed-codegen = { module = "dev.zacsweers.moshix:moshi-sealed-codegen", version.ref = "zacSweers-moshix-version" }
+zacSweers-moshix-sealed-ksp = { module = "dev.zacsweers.moshix:moshi-sealed-ksp", version.ref = "zacSweers-moshix-version" }
+zacSweers-moshix-sealed-runtime = { module = "dev.zacsweers.moshix:moshi-sealed-runtime", version.ref = "zacSweers-moshix-version" }
 
 [bundles]
 jUnit = ["junit-api", "junit-params", "junit-engine"]
