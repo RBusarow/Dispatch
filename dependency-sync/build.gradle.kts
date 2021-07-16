@@ -150,7 +150,7 @@ dependencies {
 
   dependencySync("dev.zacsweers.moshix:moshi-ksp:0.11.2")
   dependencySync("dev.zacsweers.moshix:moshi-sealed-codegen:0.11.2")
-  dependencySync("dev.zacsweers.moshix:moshi-sealed-ksp:0.11.2")
+  dependencySync("dev.zacsweers.moshix:moshi-sealed-ksp:0.12.0")
   dependencySync("dev.zacsweers.moshix:moshi-sealed-runtime:0.11.2")
 
   dependencySync("io.gitlab.arturbosch.detekt:detekt-api:1.17.1")
