@@ -277,7 +277,7 @@ vanniktech-gradle-maven-publish-plugin = "com.vanniktech:gradle-maven-publish-pl
 zacsweers-moshix-moshi-ksp = "dev.zacsweers.moshix:moshi-ksp:0.11.2"
 zacsweers-moshix-moshi-sealed-codegen = "dev.zacsweers.moshix:moshi-sealed-codegen:0.11.2"
 zacsweers-moshix-moshi-sealed-ksp = "dev.zacsweers.moshix:moshi-sealed-ksp:0.11.2"
-zacsweers-moshix-moshi-sealed-runtime = "dev.zacsweers.moshix:moshi-sealed-runtime:0.11.2"
+zacsweers-moshix-moshi-sealed-runtime = "dev.zacsweers.moshix:moshi-sealed-runtime:0.12.0"
 
 [bundles]
 jUnit = ["junit-api", "junit-params", "junit-engine"]
