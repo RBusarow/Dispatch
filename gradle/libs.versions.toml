@@ -151,7 +151,7 @@ dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.1.2"
 
 dokka-gradle-plugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.5.0"
 
-google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.14.0"
+google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.15.0"
 
 google-android-material = "com.google.android.material:material:1.4.0"
 
