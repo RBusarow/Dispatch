@@ -171,7 +171,7 @@ google-truth = "com.google.truth:truth:1.1.3"
 
 jakewharton-timber-android = "com.jakewharton.timber:timber-android:5.0.0-SNAPSHOT"
 jakewharton-timber-jdk = "com.jakewharton.timber:timber-jdk:5.0.0-SNAPSHOT"
-jakewharton-timber4 = "com.jakewharton.timber:timber:4.7.1"
+jakewharton-timber4 = "com.jakewharton.timber:timber:5.0.0"
 
 javaParser = "com.github.javaparser:javaparser-symbol-solver-core:3.22.1"
 
