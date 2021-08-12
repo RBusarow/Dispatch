@@ -86,7 +86,7 @@ dependencies {
   dependencySync("androidx.work:work-runtime:2.5.0")
   dependencySync("androidx.work:work-testing:2.5.0")
 
-  dependencySync("app.cash.turbine:turbine:0.5.2")
+  dependencySync("app.cash.turbine:turbine:0.6.0")
 
   dependencySync("com.airbnb.android:epoxy-databinding:3.8.0")
   dependencySync("com.airbnb.android:epoxy-paging:3.8.0")
