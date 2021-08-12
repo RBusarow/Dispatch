@@ -5,7 +5,7 @@ benManes = "0.36.0"
 changeTracker = "0.7.3"
 compileSdk = "30"
 dependencyAnalysis = "0.63.0"
-detekt = "1.17.1"
+detekt = "1.18.0"
 dokka = "1.4.10"
 gradleDoctor = "0.7.0"
 jUnit = "5.7.2"
@@ -145,7 +145,7 @@ arturbosch-detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", v
 codehaus-groovy-core = "org.codehaus.groovy:groovy:3.0.8"
 codehaus-groovy-xml = "org.codehaus.groovy:groovy-xml:3.0.8"
 
-commons-io = "commons-io:commons-io:2.8.0"
+commons-io = "commons-io:commons-io:2.11.0"
 
 dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.1.2"
 
@@ -264,7 +264,7 @@ square-okhttp3-okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
 
 square-okio = "com.squareup.okio:okio:2.10.0"
 
-square-picasso = "com.squareup.picasso:picasso:2.8"
+square-picasso = "com.squareup.picasso:picasso:2.71828"
 
 square-retrofit2-converter-moshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
 square-retrofit2-retrofit-core = "com.squareup.retrofit2:retrofit:2.9.0"
