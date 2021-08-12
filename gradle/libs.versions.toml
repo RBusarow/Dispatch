@@ -274,7 +274,7 @@ square-turbine = "app.cash.turbine:turbine:0.5.2"
 
 swiftzer-semver = "net.swiftzer.semver:semver:1.1.1"
 
-vanniktech-gradle-maven-publish-plugin = "com.vanniktech:gradle-maven-publish-plugin:0.16.0"
+vanniktech-gradle-maven-publish-plugin = "com.vanniktech:gradle-maven-publish-plugin:0.17.0"
 
 zacSweers-moshix-ksp = { module = "dev.zacsweers.moshix:moshi-ksp", version.ref = "zacSweers-moshix-version" }
 zacSweers-moshix-sealed-codegen = { module = "dev.zacsweers.moshix:moshi-sealed-codegen", version.ref = "zacSweers-moshix-version" }
