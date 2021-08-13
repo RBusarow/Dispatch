@@ -15,7 +15,7 @@
 
 
 plugins {
-  id("com.rickbusarow.gradle-dependency-sync") version "0.11.1"
+  id("com.rickbusarow.gradle-dependency-sync") version "0.11.2"
 }
 
 dependencySync {
@@ -86,7 +86,7 @@ dependencies {
   dependencySync("androidx.work:work-runtime:2.5.0")
   dependencySync("androidx.work:work-testing:2.5.0")
 
-  dependencySync("app.cash.turbine:turbine:0.5.2")
+  dependencySync("app.cash.turbine:turbine:0.6.0")
 
   dependencySync("com.airbnb.android:epoxy-databinding:3.8.0")
   dependencySync("com.airbnb.android:epoxy-paging:3.8.0")
@@ -162,7 +162,7 @@ dependencies {
   dependencySync("io.kotest:kotest-common-jvm:4.6.1")
   dependencySync("io.kotest:kotest-property-jvm:4.6.1")
   dependencySync("io.kotest:kotest-runner-junit5-jvm:4.6.1")
-  dependencySync("io.mockk:mockk:1.11.0")
+  dependencySync("io.mockk:mockk:1.12.0")
 
   dependencySync("javax.annotation:jsr250-api:1.0")
   dependencySync("javax.inject:javax.inject:1")

@@ -145,7 +145,7 @@ arturbosch-detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", v
 codehaus-groovy-core = "org.codehaus.groovy:groovy:3.0.8"
 codehaus-groovy-xml = "org.codehaus.groovy:groovy-xml:3.0.8"
 
-commons-io = "commons-io:commons-io:2.8.0"
+commons-io = "commons-io:commons-io:2.11.0"
 
 dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.1.2"
 
@@ -219,7 +219,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-knit-core = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit-version" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit-version" }
 
-mockk = "io.mockk:mockk:1.11.0"
+mockk = "io.mockk:mockk:1.12.0"
 
 objenesis = "org.objenesis:objenesis:3.2"
 
@@ -264,13 +264,13 @@ square-okhttp3-okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
 
 square-okio = "com.squareup.okio:okio:2.10.0"
 
-square-picasso = "com.squareup.picasso:picasso:2.8"
+square-picasso = "com.squareup.picasso:picasso:2.71828"
 
 square-retrofit2-converter-moshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
 square-retrofit2-retrofit-core = "com.squareup.retrofit2:retrofit:2.9.0"
 square-retrofit2-retrofit-mock = "com.squareup.retrofit2:retrofit-mock:2.9.0"
 
-square-turbine = "app.cash.turbine:turbine:0.5.2"
+square-turbine = "app.cash.turbine:turbine:0.6.0"
 
 swiftzer-semver = "net.swiftzer.semver:semver:1.1.1"
 
