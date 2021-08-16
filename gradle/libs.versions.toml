@@ -181,7 +181,7 @@ javax-inject-javax-inject = "javax.inject:javax.inject:1"
 
 json = "org.json:json:20210307"
 
-jsoup = "org.jsoup:jsoup:1.14.1"
+jsoup = "org.jsoup:jsoup:1.14.2"
 
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jUnit" }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jUnit" }
