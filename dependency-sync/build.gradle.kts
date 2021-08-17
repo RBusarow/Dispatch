@@ -90,7 +90,7 @@ dependencies {
 
   dependencySync("com.airbnb.android:epoxy-databinding:3.8.0")
   dependencySync("com.airbnb.android:epoxy-paging:3.8.0")
-  dependencySync("com.airbnb.android:epoxy-processor:3.8.0")
+  dependencySync("com.airbnb.android:epoxy-processor:4.6.3-vinay-compose")
   dependencySync("com.airbnb.android:epoxy:3.8.0")
   dependencySync("com.android.tools.build:gradle:4.2.1")
   dependencySync("com.dipien:bye-bye-jetifier:1.1.2")
