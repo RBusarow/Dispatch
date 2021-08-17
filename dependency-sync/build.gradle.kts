@@ -15,7 +15,7 @@
 
 
 plugins {
-  id("com.rickbusarow.gradle-dependency-sync") version "0.11.1"
+  id("com.rickbusarow.gradle-dependency-sync") version "0.11.2"
 }
 
 dependencySync {
@@ -86,7 +86,7 @@ dependencies {
   dependencySync("androidx.work:work-runtime:2.5.0")
   dependencySync("androidx.work:work-testing:2.5.0")
 
-  dependencySync("app.cash.turbine:turbine:0.5.2")
+  dependencySync("app.cash.turbine:turbine:0.6.0")
 
   dependencySync("com.airbnb.android:epoxy-databinding:3.8.0")
   dependencySync("com.airbnb.android:epoxy-paging:3.8.0")
@@ -99,11 +99,11 @@ dependencies {
   dependencySync("com.google.android.material:material:1.4.0")
   dependencySync("com.google.auto.service:auto-service-annotations:1.0")
   dependencySync("com.google.auto.service:auto-service:1.0")
-  dependencySync("com.google.auto:auto-common:1.0.1")
+  dependencySync("com.google.auto:auto-common:1.1.2")
   dependencySync("com.google.code.findbugs:jsr305:3.0.2")
   dependencySync("com.google.dagger:dagger-compiler:2.37")
   dependencySync("com.google.dagger:dagger:2.37")
-  dependencySync("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta05")
+  dependencySync("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta07")
   dependencySync("com.google.truth:truth:1.1.3")
   dependencySync("com.jakewharton.timber:timber-android:5.0.0-SNAPSHOT")
   dependencySync("com.jakewharton.timber:timber-jdk:5.0.0-SNAPSHOT")
@@ -162,7 +162,7 @@ dependencies {
   dependencySync("io.kotest:kotest-common-jvm:4.6.1")
   dependencySync("io.kotest:kotest-property-jvm:4.6.1")
   dependencySync("io.kotest:kotest-runner-junit5-jvm:4.6.1")
-  dependencySync("io.mockk:mockk:1.11.0")
+  dependencySync("io.mockk:mockk:1.12.0")
 
   dependencySync("javax.annotation:jsr250-api:1.0")
   dependencySync("javax.inject:javax.inject:1")
