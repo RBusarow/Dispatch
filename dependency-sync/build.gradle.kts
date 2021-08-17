@@ -89,9 +89,9 @@ dependencies {
   dependencySync("app.cash.turbine:turbine:0.6.0")
 
   dependencySync("com.airbnb.android:epoxy-databinding:4.6.3-vinay-compose")
-  dependencySync("com.airbnb.android:epoxy-paging:3.8.0")
-  dependencySync("com.airbnb.android:epoxy-processor:3.8.0")
-  dependencySync("com.airbnb.android:epoxy:3.8.0")
+  dependencySync("com.airbnb.android:epoxy-paging:4.6.3-vinay-compose")
+  dependencySync("com.airbnb.android:epoxy-processor:4.6.3-vinay-compose")
+  dependencySync("com.airbnb.android:epoxy:4.6.3-vinay-compose")
   dependencySync("com.android.tools.build:gradle:4.2.1")
   dependencySync("com.dipien:bye-bye-jetifier:1.1.2")
   dependencySync("com.github.javaparser:javaparser-symbol-solver-core:3.22.1")
