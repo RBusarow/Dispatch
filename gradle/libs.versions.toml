@@ -155,7 +155,7 @@ google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.14.0"
 
 google-android-material = "com.google.android.material:material:1.4.0"
 
-google-auto-common = "com.google.auto:auto-common:1.0.1"
+google-auto-common = "com.google.auto:auto-common:1.1.2"
 
 google-auto-service-annotations = "com.google.auto.service:auto-service-annotations:1.0"
 google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
