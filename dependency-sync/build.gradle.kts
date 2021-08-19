@@ -105,7 +105,7 @@ dependencies {
   dependencySync("com.google.dagger:dagger:2.37")
   dependencySync("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta07")
   dependencySync("com.google.truth:truth:1.1.3")
-  dependencySync("com.jakewharton.timber:timber:5.0.0")
+  dependencySync("com.jakewharton.timber:timber:5.0.1")
   dependencySync("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta10")
   dependencySync("com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions:1.0.0-beta10")
   dependencySync("com.rickbusarow.dispatch:dispatch-android-lifecycle:1.0.0-beta10")
