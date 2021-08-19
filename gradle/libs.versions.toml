@@ -31,6 +31,8 @@ androidx-test-core = "1.4.0"
 androidx-test-espresso = "3.4.0"
 androidx-work = "2.5.0"
 
+google-dagger = "2.38.1"
+
 kotlinx-coroutines-version = "1.5.1"
 kotlinx-knit-version = "0.3.0"
 
@@ -160,8 +162,8 @@ google-auto-common = "com.google.auto:auto-common:1.1.2"
 google-auto-service-annotations = "com.google.auto.service:auto-service-annotations:1.0"
 google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
 
-google-dagger-api = "com.google.dagger:dagger:2.37"
-google-dagger-compiler = "com.google.dagger:dagger-compiler:2.38.1"
+google-dagger-api = { module = "com.google.dagger:dagger", version.ref = "google-dagger" }
+google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "google-dagger" }
 
 google-devtools-ksp-symbol-processing-gradle-plugin = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta07"
 

@@ -102,7 +102,7 @@ dependencies {
   dependencySync("com.google.auto:auto-common:1.1.2")
   dependencySync("com.google.code.findbugs:jsr305:3.0.2")
   dependencySync("com.google.dagger:dagger-compiler:2.38.1")
-  dependencySync("com.google.dagger:dagger:2.37")
+  dependencySync("com.google.dagger:dagger:2.38.1")
   dependencySync("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta07")
   dependencySync("com.google.truth:truth:1.1.3")
   dependencySync("com.jakewharton.timber:timber:5.0.0")
