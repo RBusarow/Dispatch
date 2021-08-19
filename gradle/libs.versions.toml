@@ -5,7 +5,7 @@ benManes = "0.36.0"
 changeTracker = "0.7.3"
 compileSdk = "30"
 dependencyAnalysis = "0.63.0"
-detekt = "1.17.1"
+detekt = "1.18.0"
 dokka = "1.4.10"
 gradleDoctor = "0.7.0"
 jUnit = "5.7.2"
@@ -30,6 +30,8 @@ androidx-room = "2.3.0"
 androidx-test-core = "1.4.0"
 androidx-test-espresso = "3.4.0"
 androidx-work = "2.5.0"
+
+google-dagger = "2.38.1"
 
 kotlinx-coroutines-version = "1.5.1"
 kotlinx-knit-version = "0.3.0"
@@ -155,23 +157,21 @@ google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.14.0"
 
 google-android-material = "com.google.android.material:material:1.4.0"
 
-google-auto-common = "com.google.auto:auto-common:1.0.1"
+google-auto-common = "com.google.auto:auto-common:1.1.2"
 
 google-auto-service-annotations = "com.google.auto.service:auto-service-annotations:1.0"
 google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
 
-google-dagger-api = "com.google.dagger:dagger:2.37"
-google-dagger-compiler = "com.google.dagger:dagger-compiler:2.37"
+google-dagger-api = { module = "com.google.dagger:dagger", version.ref = "google-dagger" }
+google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "google-dagger" }
 
-google-devtools-ksp-symbol-processing-gradle-plugin = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta05"
+google-devtools-ksp-symbol-processing-gradle-plugin = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta07"
 
 google-findbugs-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 
 google-truth = "com.google.truth:truth:1.1.3"
 
-jakewharton-timber-android = "com.jakewharton.timber:timber-android:5.0.0-SNAPSHOT"
-jakewharton-timber-jdk = "com.jakewharton.timber:timber-jdk:5.0.0-SNAPSHOT"
-jakewharton-timber4 = "com.jakewharton.timber:timber:4.7.1"
+jakewharton-timber = "com.jakewharton.timber:timber:5.0.1"
 
 javaParser = "com.github.javaparser:javaparser-symbol-solver-core:3.22.1"
 
@@ -219,7 +219,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-knit-core = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit-version" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit-version" }
 
-mockk = "io.mockk:mockk:1.11.0"
+mockk = "io.mockk:mockk:1.12.0"
 
 objenesis = "org.objenesis:objenesis:3.2"
 
@@ -274,7 +274,7 @@ square-turbine = "app.cash.turbine:turbine:0.6.0"
 
 swiftzer-semver = "net.swiftzer.semver:semver:1.1.1"
 
-vanniktech-gradle-maven-publish-plugin = "com.vanniktech:gradle-maven-publish-plugin:0.16.0"
+vanniktech-gradle-maven-publish-plugin = "com.vanniktech:gradle-maven-publish-plugin:0.17.0"
 
 zacSweers-moshix-ksp = { module = "dev.zacsweers.moshix:moshi-ksp", version.ref = "zacSweers-moshix-version" }
 zacSweers-moshix-sealed-codegen = { module = "dev.zacsweers.moshix:moshi-sealed-codegen", version.ref = "zacSweers-moshix-version" }

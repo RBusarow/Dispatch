@@ -59,7 +59,7 @@ dependencies {
   implementation(libs.androidx.coreKtx)
   implementation(libs.androidx.fragment.ktx)
   implementation(libs.androidx.lifecycle.common)
-  implementation(libs.jakewharton.timber4)
+  implementation(libs.jakewharton.timber)
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
 
