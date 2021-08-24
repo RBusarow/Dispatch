@@ -155,7 +155,7 @@ dependencies {
   dependencySync("io.gitlab.arturbosch.detekt:detekt-cli:1.18.0")
   dependencySync("io.gitlab.arturbosch.detekt:detekt-formatting:1.18.0")
   dependencySync("io.gitlab.arturbosch.detekt:detekt-test:1.18.0")
-  dependencySync("io.kotest:kotest-assertions-core-jvm:4.6.1")
+  dependencySync("io.kotest:kotest-assertions-core-jvm:4.6.2")
   dependencySync("io.kotest:kotest-assertions-shared-jvm:4.6.1")
   dependencySync("io.kotest:kotest-common-jvm:4.6.1")
   dependencySync("io.kotest:kotest-property-jvm:4.6.1")
