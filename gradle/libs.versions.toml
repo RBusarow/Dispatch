@@ -208,7 +208,7 @@ kotlin-test-core = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = 
 
 kotlinter = "org.jmailen.gradle:kotlinter-gradle:3.4.5"
 
-kotlinx-atomicfu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.2"
+kotlinx-atomicfu = "org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.3"
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines-version" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-version" }
 kotlinx-coroutines-coreCommon = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common", version.ref = "kotlinx-coroutines-version" }
