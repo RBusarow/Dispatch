@@ -165,7 +165,7 @@ google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
 google-dagger-api = { module = "com.google.dagger:dagger", version.ref = "google-dagger" }
 google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "google-dagger" }
 
-google-devtools-ksp-symbol-processing-gradle-plugin = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.21-1.0.0-beta07"
+google-devtools-ksp-symbol-processing-gradle-plugin = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.30-1.0.0-beta08"
 
 google-findbugs-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 
