@@ -151,7 +151,7 @@ dependencies {
   dependencySync("dev.zacsweers.moshix:moshi-sealed-ksp:0.12.2")
   dependencySync("dev.zacsweers.moshix:moshi-sealed-runtime:0.12.2")
 
-  dependencySync("io.gitlab.arturbosch.detekt:detekt-api:1.18.0")
+  dependencySync("io.gitlab.arturbosch.detekt:detekt-api:1.18.1")
   dependencySync("io.gitlab.arturbosch.detekt:detekt-cli:1.18.0")
   dependencySync("io.gitlab.arturbosch.detekt:detekt-formatting:1.18.0")
   dependencySync("io.gitlab.arturbosch.detekt:detekt-test:1.18.0")
