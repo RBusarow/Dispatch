@@ -93,7 +93,7 @@ dependencies {
   dependencySync("com.airbnb.android:epoxy-processor:3.8.0")
   dependencySync("com.airbnb.android:epoxy:3.8.0")
   dependencySync("com.android.tools.build:gradle:4.2.1")
-  dependencySync("com.dipien:bye-bye-jetifier:1.1.2")
+  dependencySync("com.dipien:bye-bye-jetifier:1.2.0")
   dependencySync("com.github.javaparser:javaparser-symbol-solver-core:3.23.0")
   dependencySync("com.google.accompanist:accompanist-coil:0.14.0")
   dependencySync("com.google.android.material:material:1.4.0")
