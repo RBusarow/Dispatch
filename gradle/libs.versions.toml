@@ -33,7 +33,7 @@ androidx-work = "2.5.0"
 
 google-dagger = "2.38.1"
 
-kotlinx-coroutines-version = "1.5.1"
+kotlinx-coroutines-version = "1.5.2"
 kotlinx-knit-version = "0.3.0"
 
 rickbusarow-dispatch = "1.0.0-beta10"
