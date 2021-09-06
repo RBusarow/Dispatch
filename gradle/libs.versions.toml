@@ -145,7 +145,7 @@ arturbosch-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-fo
 arturbosch-detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
 
 codehaus-groovy-core = "org.codehaus.groovy:groovy:3.0.8"
-codehaus-groovy-xml = "org.codehaus.groovy:groovy-xml:3.0.8"
+codehaus-groovy-xml = "org.codehaus.groovy:groovy-xml:3.0.9"
 
 commons-io = "commons-io:commons-io:2.11.0"
 
