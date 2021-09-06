@@ -167,7 +167,7 @@ dependencies {
   dependencySync("junit:junit:4.13.2")
   dependencySync("net.swiftzer.semver:semver:1.1.1")
 
-  dependencySync("org.codehaus.groovy:groovy-xml:3.0.8")
+  dependencySync("org.codehaus.groovy:groovy-xml:3.0.9")
   dependencySync("org.codehaus.groovy:groovy:3.0.8")
   dependencySync("org.jetbrains.dokka:dokka-gradle-plugin:1.5.0")
   dependencySync("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.5.21")
