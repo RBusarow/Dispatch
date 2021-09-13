@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 buildscript {
   dependencies {
-    classpath("com.android.tools.build:gradle:4.2.1")
+    classpath("com.android.tools.build:gradle:7.0.2")
     classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.3")
     classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.7.1")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
@@ -48,9 +48,6 @@ plugins {
 tasks.dokkaHtmlMultiModule.configure {
 
   outputDirectory.set(buildDir.resolve("dokka"))
-
-  // missing from 1.4.10  https://github.com/Kotlin/dokka/issues/1530
-  // documentationFileName.set("README.md")
 }
 
 subprojects {
