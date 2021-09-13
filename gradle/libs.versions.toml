@@ -268,7 +268,7 @@ square-retrofit2-converter-moshi = "com.squareup.retrofit2:converter-moshi:2.9.0
 square-retrofit2-retrofit-core = "com.squareup.retrofit2:retrofit:2.9.0"
 square-retrofit2-retrofit-mock = "com.squareup.retrofit2:retrofit-mock:2.9.0"
 
-square-turbine = "app.cash.turbine:turbine:0.6.0"
+square-turbine = "app.cash.turbine:turbine:0.6.1"
 
 swiftzer-semver = "net.swiftzer.semver:semver:1.1.1"
 
