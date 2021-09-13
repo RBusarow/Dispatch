@@ -191,7 +191,7 @@ dependencies {
   dependencySync("org.json:json:20210307")
   dependencySync("org.jsoup:jsoup:1.14.1")
   dependencySync("org.junit.jupiter:junit-jupiter-api:5.7.2")
-  dependencySync("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+  dependencySync("org.junit.jupiter:junit-jupiter-engine:5.8.0")
   dependencySync("org.junit.jupiter:junit-jupiter-params:5.7.2")
   dependencySync("org.junit.jupiter:junit-jupiter:5.7.2")
   dependencySync("org.junit.vintage:junit-vintage-engine:5.7.2")
