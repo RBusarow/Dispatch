@@ -41,7 +41,7 @@ rickbusarow-hermit = "0.9.5"
 
 square-kotlinPoet-version = "1.9.0"
 
-zacSweers-moshix-version = "0.13.0"
+zacSweers-moshix-version = "0.14.0"
 
 [libraries]
 airbnb-epoxy-core = { module = "com.airbnb.android:epoxy", version.ref = "airbnb-epoxy" }
