@@ -33,7 +33,7 @@ androidx-work = "2.5.0"
 
 google-dagger = "2.38.1"
 
-kotlinx-coroutines-version = "1.5.1"
+kotlinx-coroutines-version = "1.5.2"
 kotlinx-knit-version = "0.3.0"
 
 rickbusarow-dispatch = "1.0.0-beta10"
@@ -41,7 +41,7 @@ rickbusarow-hermit = "0.9.5"
 
 square-kotlinPoet-version = "1.9.0"
 
-zacSweers-moshix-version = "0.13.0"
+zacSweers-moshix-version = "0.14.0"
 
 [libraries]
 airbnb-epoxy-core = { module = "com.airbnb.android:epoxy", version.ref = "airbnb-epoxy" }
