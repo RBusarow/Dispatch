@@ -8,7 +8,7 @@ dependencyAnalysis = "0.63.0"
 detekt = "1.18.1"
 dokka = "1.4.10"
 gradleDoctor = "0.7.0"
-jUnit = "5.7.2"
+jUnit = "5.8.0"
 kotest = "4.6.2"
 kotlin = "1.5.30"
 kotlinter = "3.4.0"
@@ -33,7 +33,7 @@ androidx-work = "2.5.0"
 
 google-dagger = "2.38.1"
 
-kotlinx-coroutines-version = "1.5.1"
+kotlinx-coroutines-version = "1.5.2"
 kotlinx-knit-version = "0.3.0"
 
 rickbusarow-dispatch = "1.0.0-beta10"
@@ -41,7 +41,7 @@ rickbusarow-hermit = "0.9.5"
 
 square-kotlinPoet-version = "1.9.0"
 
-zacSweers-moshix-version = "0.13.0"
+zacSweers-moshix-version = "0.14.0"
 
 [libraries]
 airbnb-epoxy-core = { module = "com.airbnb.android:epoxy", version.ref = "airbnb-epoxy" }
@@ -171,7 +171,7 @@ google-truth = "com.google.truth:truth:1.1.3"
 
 jakewharton-timber = "com.jakewharton.timber:timber:5.0.1"
 
-javaParser = "com.github.javaparser:javaparser-symbol-solver-core:3.22.1"
+javaParser = "com.github.javaparser:javaparser-symbol-solver-core:3.23.0"
 
 javax-annotation-jsr250-api = "javax.annotation:jsr250-api:1.0"
 
@@ -268,7 +268,7 @@ square-retrofit2-converter-moshi = "com.squareup.retrofit2:converter-moshi:2.9.0
 square-retrofit2-retrofit-core = "com.squareup.retrofit2:retrofit:2.9.0"
 square-retrofit2-retrofit-mock = "com.squareup.retrofit2:retrofit-mock:2.9.0"
 
-square-turbine = "app.cash.turbine:turbine:0.6.0"
+square-turbine = "app.cash.turbine:turbine:0.6.1"
 
 swiftzer-semver = "net.swiftzer.semver:semver:1.1.1"
 
