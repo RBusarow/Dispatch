@@ -19,6 +19,14 @@ plugins {
   id("org.jetbrains.dokka")
 }
 
+android {
+  buildFeatures.compose = true
+
+  composeOptions {
+    kotlinCompilerExtensionVersion = libs.versions.androidx.compose.get()
+  }
+}
+
 dependencies {
 
   api(libs.androidx.lifecycle.common)
@@ -27,14 +35,17 @@ dependencies {
 
   api(projects.dispatchCore)
 
+  implementation(libs.androidx.compose.foundation)
+  implementation(libs.androidx.compose.ui.core)
+  implementation(libs.androidx.compose.ui.tooling)
   implementation(libs.androidx.fragment.core)
   implementation(libs.androidx.lifecycle.liveData)
   implementation(libs.androidx.lifecycle.liveDataKtx)
   implementation(libs.androidx.lifecycle.runtime)
   implementation(libs.kotlinx.coroutines.android)
 
-  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.arch.test.core)
+  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.test.espresso.core)
   testImplementation(libs.androidx.test.runner)
   testImplementation(libs.junit.jupiter)

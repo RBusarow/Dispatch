@@ -23,11 +23,11 @@ import java.io.*
 fun Project.commonAndroid() {
 
   configure<TestedExtension> {
-    compileSdkVersion(30)
+    compileSdkVersion(31)
 
     defaultConfig {
-      minSdkVersion(21)
-      targetSdkVersion(30)
+      minSdk = 21
+      targetSdk = 31
       versionName = "1.0.0-beta10"
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

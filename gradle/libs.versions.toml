@@ -10,7 +10,7 @@ dokka = "1.4.10"
 gradleDoctor = "0.7.0"
 jUnit = "5.8.0"
 kotest = "4.6.2"
-kotlin = "1.5.30"
+kotlin = "1.5.21"
 kotlinter = "3.4.0"
 mavenPublish = "0.13.0"
 minSdk = "23"
@@ -86,14 +86,14 @@ androidx-lifecycle-liveDataKtx = { module = "androidx.lifecycle:lifecycle-liveda
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-viewModel-compose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+androidx-lifecycle-viewModel-compose = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-beta01"
 androidx-lifecycle-viewModel-core = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewModel-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 
 androidx-multidex = "androidx.multidex:multidex:2.0.1"
 
-androidx-navigation-compose = "androidx.navigation:navigation-compose:2.4.0-alpha08"
+androidx-navigation-compose = "androidx.navigation:navigation-compose:2.4.0-alpha09"
 androidx-navigation-runtime-ktx = "androidx.navigation:navigation-runtime-ktx:2.3.5"
 
 androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx-paging" }

@@ -22,6 +22,7 @@ import org.junit.*
 import org.junit.rules.*
 import org.junit.runner.*
 import org.robolectric.*
+import org.robolectric.annotation.*
 
 @RunWith(RobolectricTestRunner::class)
 class IdlingDispatcherProviderRuleTest {

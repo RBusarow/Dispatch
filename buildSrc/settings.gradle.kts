@@ -22,7 +22,7 @@ pluginManagement {
   resolutionStrategy {
     eachPlugin {
       when {
-        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.30")
+        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.21")
       }
     }
   }

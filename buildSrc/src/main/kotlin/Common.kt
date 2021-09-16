@@ -46,11 +46,6 @@ fun Project.common() {
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2",
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
       )
-      eachDependency {
-        when {
-          requested.group == "org.jetbrains.kotlin" -> useVersion("1.5.30")
-        }
-      }
     }
   }
 }

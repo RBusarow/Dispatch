@@ -17,35 +17,40 @@ plugins {
   androidLibrary
 }
 
+android {
+  buildFeatures.compose = true
+
+  composeOptions {
+    kotlinCompilerExtensionVersion = libs.versions.androidx.compose.get()
+  }
+}
+
 dependencies {
-
-  implementation(libs.androidx.fragment.core)
-  implementation(libs.androidx.fragment.ktx)
-  implementation(libs.androidx.lifecycle.common)
-  implementation(libs.androidx.lifecycle.liveData)
-  implementation(libs.androidx.lifecycle.viewModel)
-  implementation(libs.junit.junit4)
-  implementation(libs.junit.api)
-  implementation(libs.kotlinx.coroutines.android)
-  implementation(libs.kotlinx.coroutines.core)
-
 
   implementation(libs.androidx.compose.foundation)
   implementation(libs.androidx.compose.ui.core)
   implementation(libs.androidx.compose.ui.tooling)
+  implementation(libs.androidx.fragment.core)
+  implementation(libs.androidx.fragment.ktx)
+  implementation(libs.androidx.lifecycle.common)
+  implementation(libs.androidx.lifecycle.liveData)
+  implementation(libs.androidx.lifecycle.viewModel.compose)
+  implementation(libs.kotlinx.coroutines.android)
+  implementation(libs.kotlinx.coroutines.core)
+
   implementation(projects.dispatchAndroidLifecycle)
   implementation(projects.dispatchCore)
 
-  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.arch.test.core)
+  testImplementation(libs.androidx.lifecycle.runtime)
   testImplementation(libs.androidx.test.espresso.core)
   testImplementation(libs.androidx.test.runner)
   testImplementation(libs.junit.jupiter)
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
-  testImplementation(libs.kotlin.test.core)
   testImplementation(libs.kotlin.test.common)
+  testImplementation(libs.kotlin.test.core)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.kotlinx.knit.test)
   testImplementation(libs.rickbusarow.hermit.coroutines)
