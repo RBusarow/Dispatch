@@ -121,41 +121,41 @@
 * Lower JDK version to 1.6
 
 <!--- MODULE dispatch-core-->
-<!--- INDEX -->
+<!--- INDEX dispatch.core-->
 
 [DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
 
 <!--- MODULE dispatch-test-->
-<!--- INDEX  -->
+<!--- INDEX dispatch.test-->
 
 [testProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/test-provided.html
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
 
 <!--- MODULE dispatch-test-junit4-->
-<!--- INDEX  -->
+<!--- INDEX dispatch.test.junit4-->
 <!--- MODULE dispatch-test-junit5-->
-<!--- INDEX  -->
+<!--- INDEX dispatch.test.junit5-->
 
 [CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html
 [CoroutineTestExtension.scope]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html#dispatch.test/CoroutineTestExtension/scope/#/PointingToDeclaration/
 
 <!--- MODULE dispatch-android-espresso-->
-<!--- INDEX  -->
+<!--- INDEX dispatch.android.espresso-->
 <!--- MODULE dispatch-android-lifecycle-->
-<!--- INDEX  -->
+<!--- INDEX dispatch.android.lifecycle-->
 
 [ViewLifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/index.html
 [DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
 [LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleCoroutineScope//PointingToDeclaration/
 
 <!--- MODULE dispatch-android-lifecycle-extensions-->
-<!--- INDEX  -->
+<!--- INDEX dispatch.android.lifecycle.extensions-->
 
 [withViewLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/with-view-lifecycle-scope.html
 [lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 
 <!--- MODULE dispatch-android-viewmodel-->
-<!--- INDEX  -->
+<!--- INDEX dispatch.android.viewmodel-->
 
 [CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
 [DispatchViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html

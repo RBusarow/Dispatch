@@ -18,32 +18,11 @@ plugins {
   kotlin("android")
   id("kotlin-parcelize")
 }
-@Suppress("MagicNumber")
+
+commonAndroid()
+
 android {
-  compileSdkVersion(30)
-
-  defaultConfig {
-    minSdkVersion(21)
-    targetSdkVersion(30)
-    versionCode = 1
-    versionName = "1.0.0-beta10"
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
   buildFeatures.viewBinding = true
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-  }
-
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-    }
-  }
 }
 
 dependencies {
@@ -59,7 +38,7 @@ dependencies {
   implementation(libs.androidx.coreKtx)
   implementation(libs.androidx.fragment.ktx)
   implementation(libs.androidx.lifecycle.common)
-  implementation(libs.jakewharton.timber4)
+  implementation(libs.jakewharton.timber)
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
 

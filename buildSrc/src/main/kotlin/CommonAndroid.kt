@@ -54,7 +54,6 @@ fun Project.commonAndroid() {
       enable("InvalidPackage")
       enable("Interoperability")
       isAbortOnError = true
-      baselineFile = File("$projectDir/lint-baseline.xml")
     }
 
     testOptions {

@@ -22,7 +22,7 @@ pluginManagement {
   resolutionStrategy {
     eachPlugin {
       when {
-        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.20")
+        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.30")
       }
     }
   }
@@ -33,17 +33,6 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-    jcenter {
-      content {
-        // dokka
-        includeGroup("org.jetbrains.dokka")
-        includeModule("org.jetbrains", "markdown")
-        // Detekt && dokka
-        includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
-        // https://youtrack.jetbrains.com/issue/IDEA-261387
-        includeModule("org.jetbrains.trove4j", "trove4j")
-      }
-    }
   }
 }
 
