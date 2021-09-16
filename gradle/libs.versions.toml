@@ -146,7 +146,7 @@ commons-io = "commons-io:commons-io:2.11.0"
 
 dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.2.0"
 
-dokka-gradle-plugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.5.0"
+dokka-gradle-plugin = "org.jetbrains.dokka:dokka-gradle-plugin:1.5.30"
 
 google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.15.0"
 
