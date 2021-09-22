@@ -39,7 +39,7 @@ plugins {
   id("com.osacky.doctor") version "0.7.1"
   id("io.gitlab.arturbosch.detekt") version "1.18.1"
   kotlin("jvm")
-  id("org.jetbrains.dokka") version "1.5.30"
+  id("org.jetbrains.dokka")
   id("com.dorongold.task-tree") version "2.1.0"
   id("com.diffplug.spotless") version "5.15.0"
   base
