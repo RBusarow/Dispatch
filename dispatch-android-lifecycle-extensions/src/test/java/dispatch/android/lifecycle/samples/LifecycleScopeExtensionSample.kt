@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-
 package dispatch.android.lifecycle.samples
 
 import dispatch.android.lifecycle.dispatchLifecycleScope

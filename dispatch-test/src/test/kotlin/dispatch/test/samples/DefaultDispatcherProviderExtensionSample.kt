@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-
 package dispatch.test.samples
 
 import dispatch.core.DefaultDispatcherProvider

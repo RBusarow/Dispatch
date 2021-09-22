@@ -26,13 +26,13 @@ import org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask
 
 buildscript {
   dependencies {
-     classpath(libs.android.gradle)
-     classpath(libs.square.anvil.gradle)
-     classpath(libs.google.ksp)
-     classpath(libs.vanniktech.maven.publish)
-     classpath(libs.kotlin.gradle.plug)
-     classpath(libs.kotlinx.atomicfu)
-     classpath(libs.ktlint.gradle)
+    classpath(libs.android.gradle)
+    classpath(libs.square.anvil.gradle)
+    classpath(libs.google.ksp)
+    classpath(libs.vanniktech.maven.publish)
+    classpath(libs.kotlin.gradle.plug)
+    classpath(libs.kotlinx.atomicfu)
+    classpath(libs.ktlint.gradle)
     classpath(libs.ktlint.gradle)
   }
 }
@@ -63,7 +63,6 @@ allprojects {
     }
   }
 }
-
 
 subprojects {
   @Suppress("UNUSED_VARIABLE")

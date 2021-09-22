@@ -39,7 +39,7 @@ dependencies {
 
   testImplementation(projects.dispatchAndroidEspresso)
   testImplementation(projects.dispatchAndroidViewmodel)
-  testImplementation(projects.dispatchTest)
   testImplementation(projects.dispatchInternalTest)
+  testImplementation(projects.dispatchTest)
   testImplementation(projects.dispatchTestJunit5)
 }
