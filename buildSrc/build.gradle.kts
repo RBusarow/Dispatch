@@ -17,12 +17,44 @@ plugins {
   `kotlin-dsl`
 }
 
+repositories {
+  mavenCentral()
+  google()
+  maven("https://plugins.gradle.org/m2/")
+}
+
+val kotlinVersion = libs.versions.kotlin.get()
+
 dependencies {
 
   compileOnly(gradleApi())
-
+  implementation(libs.kotlin.reflect)
+  implementation(libs.kotlin.stdlib.jdk8)
+  implementation(libs.kotlin.annotation.processing)
   implementation(libs.kotlin.compiler)
-  implementation(libs.kotlin.gradle.plugin)
-  implementation(libs.androidGradlePlugin)
+  implementation(libs.kotlin.gradle.pluginApi)
+
+  implementation(kotlin("gradle-plugin", version = kotlinVersion))
+  implementation(kotlin("stdlib", version = kotlinVersion))
+  implementation(kotlin("stdlib-common", version = kotlinVersion))
+  implementation(kotlin("stdlib-jdk7", version = kotlinVersion))
+  implementation(kotlin("stdlib-jdk8", version = kotlinVersion))
+  implementation(kotlin("reflect", version = kotlinVersion))
+
+  implementation(libs.android.gradle)
+  implementation(libs.dokka.gradle)
+
   implementation(libs.kotlinx.atomicfu)
+  implementation(libs.kotlinx.knit.gradle)
+}
+
+configurations.all {
+  resolutionStrategy {
+
+    eachDependency {
+      when {
+        requested.group == "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
+      }
+    }
+  }
 }

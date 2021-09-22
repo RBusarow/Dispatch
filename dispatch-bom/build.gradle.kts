@@ -18,7 +18,7 @@ plugins {
   id("com.vanniktech.maven.publish")
 }
 
-version = libs.versions.versionName.get()
+version = project.extra.properties["VERSION_NAME"] as String
 
 val bomProject = project
 
