@@ -38,5 +38,4 @@ dependencies {
  api(libs.kotlinx.coroutines.test)
 
  api(projects.dispatchCore)
-
 }

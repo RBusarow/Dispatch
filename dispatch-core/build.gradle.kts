@@ -36,5 +36,4 @@ dependencies {
   testImplementation(libs.hermit.jUnit5)
 
   testImplementation(projects.dispatchInternalTest)
-
 }

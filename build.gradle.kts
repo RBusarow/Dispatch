@@ -33,6 +33,7 @@ buildscript {
      classpath(libs.kotlin.gradle.plug)
      classpath(libs.kotlinx.atomicfu)
      classpath(libs.ktlint.gradle)
+    classpath(libs.ktlint.gradle)
   }
 }
 
