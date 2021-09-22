@@ -32,5 +32,4 @@ dependencies {
   testImplementation(libs.kotest.runner)
   testImplementation(libs.kotlin.test.common)
   testImplementation(libs.kotlin.test.core)
-
 }

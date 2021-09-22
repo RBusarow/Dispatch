@@ -43,5 +43,4 @@ dependencies {
   testImplementation(libs.robolectric)
 
   testImplementation(projects.dispatchInternalTestAndroid)
-
 }

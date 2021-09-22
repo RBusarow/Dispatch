@@ -35,9 +35,7 @@ class BuildersSample {
 
       subject.dataDeferred()
         .await() shouldBe myData
-
     }
-
   }
 
   @Sample
@@ -52,9 +50,7 @@ class BuildersSample {
 
       subject.dataDeferred()
         .await() shouldBe myData
-
     }
-
   }
 
   @Sample
@@ -71,9 +67,6 @@ class BuildersSample {
 
       subject.dataDeferred()
         .await() shouldBe myData
-
     }
-
   }
-
 }

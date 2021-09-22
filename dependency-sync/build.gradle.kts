@@ -13,14 +13,13 @@
  * limitations under the License.
  */
 
-
 plugins {
   id("com.rickbusarow.gradle-dependency-sync") version "0.11.2"
 }
 
 dependencySync {
   gradleBuildFile.set(buildFile.path)
-  typeSafeFile.set("${rootDir}/gradle/libs.versions.toml")
+  typeSafeFile.set("$rootDir/gradle/libs.versions.toml")
 }
 
 dependencies {

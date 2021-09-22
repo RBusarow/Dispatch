@@ -35,5 +35,4 @@ dependencies {
   testImplementation(libs.kotlinx.coroutines.test)
 
   testImplementation(projects.dispatchTest)
-
 }

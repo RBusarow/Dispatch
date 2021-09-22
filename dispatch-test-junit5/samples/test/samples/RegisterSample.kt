@@ -49,4 +49,3 @@ class RegisterSample {
       resultDeferred.await() shouldBe someValue
     }
 }
-

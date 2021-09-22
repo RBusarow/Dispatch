@@ -34,5 +34,4 @@ dependencies {
 
   testImplementation(projects.dispatchTest)
   testImplementation(projects.dispatchTestJunit5)
-
 }

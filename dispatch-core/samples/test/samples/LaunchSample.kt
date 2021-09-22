@@ -29,9 +29,7 @@ class LaunchSample {
     launchDefault {
 
       dispatcherName() shouldBe "default"
-
     }.join()
-
   }
 
   @Sample
@@ -42,9 +40,7 @@ class LaunchSample {
     launchIO {
 
       dispatcherName() shouldBe "io"
-
     }.join()
-
   }
 
   @Sample
@@ -55,9 +51,7 @@ class LaunchSample {
     launchMain {
 
       dispatcherName() shouldBe "main"
-
     }.join()
-
   }
 
   @Sample
@@ -68,9 +62,7 @@ class LaunchSample {
     launchMainImmediate {
 
       dispatcherName() shouldBe "main immediate"
-
     }.join()
-
   }
 
   @Sample
@@ -81,9 +73,6 @@ class LaunchSample {
     launchUnconfined {
 
       dispatcherName() shouldBe "unconfined"
-
     }.join()
-
   }
 }
-

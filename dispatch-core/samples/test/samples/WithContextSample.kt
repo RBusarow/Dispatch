@@ -29,7 +29,6 @@ class WithContextSample {
     withDefault {
 
       dispatcherName() shouldBe "default"
-
     }
   }
 
@@ -41,7 +40,6 @@ class WithContextSample {
     withIO {
 
       dispatcherName() shouldBe "io"
-
     }
   }
 
@@ -53,7 +51,6 @@ class WithContextSample {
     withMain {
 
       dispatcherName() shouldBe "main"
-
     }
   }
 
@@ -65,7 +62,6 @@ class WithContextSample {
     withMainImmediate {
 
       dispatcherName() shouldBe "main immediate"
-
     }
   }
 
@@ -77,7 +73,6 @@ class WithContextSample {
     withUnconfined {
 
       dispatcherName() shouldBe "unconfined"
-
     }
   }
 }
