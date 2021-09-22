@@ -37,7 +37,9 @@ dependencies {
   testImplementation(libs.kotest.runner)
   testImplementation(libs.kotlinx.coroutines.test)
 
-  testImplementation(projects.dispatchCore)
+  testImplementation(projects.dispatchAndroidEspresso)
+  testImplementation(projects.dispatchAndroidViewmodel)
+  testImplementation(projects.dispatchTest)
   testImplementation(projects.dispatchInternalTest)
   testImplementation(projects.dispatchTestJunit5)
 }

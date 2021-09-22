@@ -35,7 +35,7 @@ import kotlin.coroutines.*
  *
  * @see runBlocking
  * @see testProvided
- * @sample samples.BuildersSample.runBlockingProvidedSample
+ * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  */
 @ExperimentalCoroutinesApi
 public fun runBlockingProvided(
@@ -67,7 +67,7 @@ public fun runBlockingProvided(
  *
  * @see runBlockingTest
  * @see runBlockingProvided
- * @sample samples.BuildersSample.testProvidedSample
+ * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  */
 @ExperimentalCoroutinesApi
 public fun testProvided(
@@ -104,8 +104,8 @@ public fun testProvided(
  *
  * @see runBlockingTest
  * @see runBlockingProvided
- * @sample samples.BuildersSample.testProvidedSample
- * @sample samples.BuildersSample.testProvidedExtensionSample
+ * @sample dispatch.test.samples.BuildersSample.testProvidedSample
+ * @sample dispatch.test.samples.BuildersSample.testProvidedExtensionSample
  */
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope.testProvided(

@@ -6,9 +6,9 @@
 
 * [Rules](#rules)
 * [Setup](#setup)
-    * [Adding new dependencies](#adding-new-dependencies)
-    * [Configuration](#configuration)
-    * [Gradle Daemon bug](#gradle-daemon-bug)
+  * [Adding new dependencies](#adding-new-dependencies)
+  * [Configuration](#configuration)
+  * [Gradle Daemon bug](#gradle-daemon-bug)
 
 <!--- END -->
 
@@ -74,11 +74,9 @@ cause issues the first time running Detekt. The workaround is to execute `./grad
 command line. You should only ever need to do this one time, if at all. The fix for this has already
 been merged into Detekt.
 
-
 [AndroidXLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-detekt/dispatch.detekt.rules/-android-x-lifecycle-scope/index.html
 
 [HardCodedDispatcher]: https://rbusarow.github.io/Dispatch/api/dispatch-detekt/dispatch.detekt.rules/-hard-coded-dispatcher/index.html
-
 
 [Android Lifecycle]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.html
 

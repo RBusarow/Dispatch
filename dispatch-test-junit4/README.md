@@ -8,8 +8,8 @@
 * [Setting Dispatchers.Main](#setting-dispatchersmain)
 * [This module replaces dispatch-test](#this-module-replaces-dispatch-test)
 * [JUnit dependencies](#junit-dependencies)
-    * [Minimum Gradle Config](#minimum-gradle-config)
-    * [JUnit 5 interoperability](#junit-5-interoperability)
+  * [Minimum Gradle Config](#minimum-gradle-config)
+  * [JUnit 5 interoperability](#junit-5-interoperability)
 
 <!--- END -->
 
@@ -65,9 +65,9 @@ bundled as part of Dispatch, so you’ll need to add it to your `dependencies` b
 official options would be:
 
 - classic JUnit 4
-    - `org.junit.jupiter:junit-jupiter:4.13`
+  - `org.junit.jupiter:junit-jupiter:4.13`
 - JUnit 5 "vintage"
-    - `org.junit.vintage:junit-vintage-engine:5.5.1`
+  - `org.junit.vintage:junit-vintage-engine:5.5.1`
 
 Add to your module's `build.gradle.kts`:
 
@@ -121,7 +121,6 @@ dependencies {
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
 
 [cleanupTestCoroutines]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html#kotlinx.coroutines.test/TestCoroutineScope/cleanupTestCoroutines/#/PointingToDeclaration/
-
 
 [TestCoroutineRule]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/-test-coroutine-rule/index.html
 

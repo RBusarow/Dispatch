@@ -49,9 +49,9 @@ import kotlin.coroutines.*
  * @see CoroutineTest
  * @param scopeFactory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
  * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
- * @sample samples.RegisterSample
- * @sample samples.RegisterWithFactorySample
- * @sample samples.CoroutineTestExtensionExtendWithSample
+ * @sample dispatch.test.samples.RegisterSample
+ * @sample dispatch.test.samples.RegisterWithFactorySample
+ * @sample dispatch.test.samples.CoroutineTestExtensionExtendWithSample
  */
 @ExperimentalCoroutinesApi
 @Suppress("newApi") // this arbitrary build target is 21, but JUnit5 requires Java 8
@@ -148,7 +148,7 @@ public class CoroutineTestExtension(
    * 1. Create a custom factory which has a default constructor and extends this `ScopeFactory`
    * 2. Annotate your test class with [CoroutineTest] and pass your custom factory's `KClass` in as its parameter.
    *
-   * @sample samples.CoroutineTestNamedFactorySample
+   * @sample dispatch.test.samples.CoroutineTestNamedFactorySample
    */
   @ExperimentalCoroutinesApi
   public open class ScopeFactory {
@@ -168,8 +168,8 @@ public class CoroutineTestExtension(
  * @see CoroutineTest
  * @param scopeFactory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
  * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
- * @sample samples.RegisterSample
- * @sample samples.RegisterWithFactorySample
+ * @sample dispatch.test.samples.RegisterSample
+ * @sample dispatch.test.samples.RegisterWithFactorySample
  */
 @ExperimentalCoroutinesApi
 public inline fun coroutineTestExtension(

@@ -38,9 +38,9 @@ dependencies {
   implementation(libs.androidx.coreKtx)
   implementation(libs.androidx.fragment.ktx)
   implementation(libs.androidx.lifecycle.common)
+  implementation(libs.timber)
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.core)
-  implementation(libs.timber)
 
   implementation(projects.dispatchAndroidLifecycle)
   implementation(projects.dispatchAndroidLifecycleExtensions)

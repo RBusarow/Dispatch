@@ -58,15 +58,15 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 <!--- TOC -->
 
 * [Types](#types)
-    * [Marker interfaces and factories](#marker-interfaces-and-factories)
+  * [Marker interfaces and factories](#marker-interfaces-and-factories)
 * [Extensions](#extensions)
-    * [Launch](#launch)
-    * [Async](#async)
-    * [WithContext](#withcontext)
-    * [Flow](#flow)
+  * [Launch](#launch)
+  * [Async](#async)
+  * [WithContext](#withcontext)
+  * [Flow](#flow)
 * [DefaultDispatcherProvider](#defaultdispatcherprovider)
-    * [Out-of-box default functionality](#out-of-box-default-functionality)
-    * [Easy global dispatcher overrides](#easy-global-dispatcher-overrides)
+  * [Out-of-box default functionality](#out-of-box-default-functionality)
+  * [Easy global dispatcher overrides](#easy-global-dispatcher-overrides)
 * [Minimum Gradle Config](#minimum-gradle-config)
 
 <!--- END -->
@@ -90,16 +90,18 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 
 ## Extensions
 
-|              | **Default**     | **IO**     | **Main**     | **Main.immediate**    | **
-Unconfined**     |
-| ------------ | --------------- | ---------- | ------------ | --------------------- | ------------------ |
-| [Job]        | [launchDefault] | [launchIO] | [launchMain] | [launchMainImmediate] | [launchUnconfined]
-| [Deferred]   | [asyncDefault]  | [asyncIO]  | [asyncMain]  | [asyncMainImmediate]  | [asyncUnconfined]
-| `suspend T`  | [withDefault]   | [withIO]   | [withMain]   | [withMainImmediate]   | [withUnconfined]
-| `Flow<T>`    | [flowOnDefault] | [flowOnIO] | [flowOnMain] | [flowOnMainImmediate] | [flowOnUnconfined]
+| | **Default**     | **IO**     | **Main**     | **Main.immediate**    | **
+Unconfined**     | | ------------ | --------------- | ---------- | ------------ |
+--------------------- | ------------------ | | [Job]        | [launchDefault] | [launchIO]
+| [launchMain] | [launchMainImmediate] | [launchUnconfined]
+| [Deferred]   | [asyncDefault]  | [asyncIO]  | [asyncMain]  | [asyncMainImmediate]
+| [asyncUnconfined]
+| `suspend T`  | [withDefault]   | [withIO]   | [withMain]   | [withMainImmediate]
+| [withUnconfined]
+| `Flow<T>`    | [flowOnDefault] | [flowOnIO] | [flowOnMain] | [flowOnMainImmediate]
+| [flowOnUnconfined]
 
 ### Launch
-
 ``` kotlin
 fun foo(scope: CoroutineScope) {
   scope.launchDefault {  }
@@ -111,7 +113,6 @@ fun foo(scope: CoroutineScope) {
 ```
 
 ### Async
-
 ``` kotlin
 fun foo(scope: CoroutineScope) {
   scope.asyncDefault {  }
@@ -202,7 +203,6 @@ fun `my test`() = runBlocking {
   DefaultDispatcherProvider.reset() // from dispatch-test
 }
 ```
-
 > See [dispatch-test] and [TestDispatcherProvider]
 
 ## Minimum Gradle Config
@@ -291,6 +291,7 @@ dependencies {
 
 
 [TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-dispatcher-provider/index.html
+
 
 [context_preservation]: https://medium.com/@elizarov/execution-context-of-kotlin-flows-b8c151c9309b
 

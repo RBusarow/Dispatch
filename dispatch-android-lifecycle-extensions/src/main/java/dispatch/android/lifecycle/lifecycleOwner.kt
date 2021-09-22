@@ -31,7 +31,7 @@ import kotlinx.coroutines.*
  * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s
  * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
  *
- * @sample samples.LifecycleScopeExtensionSample.lifecycleScopeExtensionSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeExtensionSample.lifecycleScopeExtensionSample
  */
 @Deprecated(
   "Use dispatchLifecycleScope to avoid collisions with the Androidx library",
@@ -52,7 +52,7 @@ val LifecycleOwner.lifecycleScope: DispatchLifecycleScope
  * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s
  * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
  *
- * @sample samples.LifecycleScopeExtensionSample.lifecycleScopeExtensionSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeExtensionSample.lifecycleScopeExtensionSample
  */
 val LifecycleOwner.dispatchLifecycleScope: DispatchLifecycleScope
   get() = DispatchLifecycleScopeStore.get(this.lifecycle)

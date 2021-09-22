@@ -18,56 +18,56 @@ The artifact I hope you don't need, but if you're not doing dependency injection
 
 ## Examples
 
-```Kotlin
+``` kotlin
 import dispatch.android.*
 
 // DispatchViewModel is just a ViewModel with a lazy viewModelScope
 class SomeViewModel : DispatchViewModel() {
-    // ...
+  // ...
 
-    init {
+  init {
 
-        // auto-creates a MainImmediateCoroutineScope which is closed in onCleared()
-        viewModelScope. //...
+    // auto-creates a MainImmediateCoroutineScope which is closed in onCleared()
+    viewModelScope. //...
 
-            // multiple invocations use the same instance
-        viewModelScope.launch { }
+    // multiple invocations use the same instance
+    viewModelScope.launch {  }
 
-        // it works as a normal CoroutineScope (because it is)
-        viewModelScope.launchMain { }
+    // it works as a normal CoroutineScope (because it is)
+    viewModelScope.launchMain {  }
 
-    }
+  }
 }
 
 class SomeApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        // A custom factory can be set to add elements to the CoroutineContext
-        ViewModelScopeFactory.set { MainImmediateCoroutineScope() + SomeCustomElement() }
-    }
+  override fun onCreate() {
+    super.onCreate()
+    // A custom factory can be set to add elements to the CoroutineContext
+    ViewModelScopeFactory.set { MainImmediateCoroutineScope() + SomeCustomElement() }
+  }
 }
 
 class SomeViewModelTest {
 
-    val viewModel = SomeViewModel()
+  val viewModel = SomeViewModel()
 
-    @Before
-    fun setUp() {
-        // This custom factory can be used to use custom scopes for testing
-        ViewModelScopeFactory.set { TestProvidedCoroutineScope() }
-    }
+  @Before
+  fun setUp() {
+    // This custom factory can be used to use custom scopes for testing
+    ViewModelScopeFactory.set { TestProvidedCoroutineScope() }
+  }
 
-    @After
-    fun tearDown() {
-        // The factory can also be reset to default
-        ViewModelScopeFactory.reset()
-    }
+  @After
+  fun tearDown() {
+    // The factory can also be reset to default
+    ViewModelScopeFactory.reset()
+  }
 
-    @Test
-    fun someTest() = runBlocking {
-        // the AndroidX version is public, so it's public here as well.
-        viewModel.viewModelScope.launch { }
-    }
+  @Test
+  fun someTest() = runBlocking {
+    // the AndroidX version is public, so it's public here as well.
+    viewModel.viewModelScope.launch {  }
+  }
 }
 ```
 
@@ -199,9 +199,7 @@ dependencies {
 
 [DispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html
 
-
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher/index.html
-
 
 [androidx-lifecycle-viewmodel-ktx]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42
 

@@ -51,8 +51,8 @@ import kotlin.coroutines.*
  * @see TestRule
  * @see TestCoroutineScope
  * @see TestProvidedCoroutineScope
- * @sample samples.TestCoroutineRuleSample
- * @sample samples.TestCoroutineRuleWithFactorySample
+ * @sample dispatch.core.test.samples.TestCoroutineRuleSample
+ * @sample dispatch.core.test.samples.TestCoroutineRuleWithFactorySample
  */
 @ExperimentalCoroutinesApi
 public class TestCoroutineRule(
