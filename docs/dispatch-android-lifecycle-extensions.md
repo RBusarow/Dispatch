@@ -1,10 +1,11 @@
 # Module dispatch-android-lifecycle-extensions
 
 ## Contents
+
 <!--- TOC -->
 
 * [Api](#api)
-  * [One-time suspend functions](#one-time-suspend-functions)
+    * [One-time suspend functions](#one-time-suspend-functions)
 * [Difference from AndroidX](#difference-from-androidx)
 * [Custom CoroutineScope factories](#custom-coroutinescope-factories)
 * [Automatic lifecycle jobs](#automatic-lifecycle-jobs)
@@ -75,13 +76,18 @@ class SomeEspressoTest {
 
 ## Difference from AndroidX
 
-This module is really just a slightly different version of [androidx-lifecycle-runtime-ktx][androidx-lifecycle-runtime-ktx] — the library which gives us the [lifecycleScope][androidx-lifecycleScope] property.
+This module is really just a slightly different version
+of [androidx-lifecycle-runtime-ktx][androidx-lifecycle-runtime-ktx] — the library which gives us
+the [lifecycleScope][androidx-lifecycleScope] property.
 
-Why not just use AndroidX?  Because we need two things it doesn't offer.
+Why not just use AndroidX? Because we need two things it doesn't offer.
 
 ## Custom CoroutineScope factories
 
-The way `androidx-lifecycle-runtime` constructs its [CoroutineScope] is [hard-coded][androidx-lifecycleScope], which eliminates the possibility of using a custom [CoroutineContext] such as a `DispatcherProvider` or [IdlingDispatcher]. With `dispatch.android.lifecycle`, we can set a custom factory.
+The way `androidx-lifecycle-runtime` constructs its [CoroutineScope]
+is [hard-coded][androidx-lifecycleScope], which eliminates the possibility of using a
+custom [CoroutineContext] such as a `DispatcherProvider` or [IdlingDispatcher].
+With `dispatch.android.lifecycle`, we can set a custom factory.
 
 ``` kotlin
 class SomeFragmentEspressoTest {
@@ -103,11 +109,17 @@ class SomeFragmentEspressoTest {
 
 ## Automatic lifecycle jobs
 
-Structured concurrency relies upon cancellation, but [androidx-lifecycle-runtime.ktx][androidx-lifecycle-runtime-ktx] doesn't cancel.  It uses a special [PausingDispatcher][androidx-pausingDispatcher]. This pausing behavior then **leaks** upstream, creating backpressure and potentially deadlocks.
+Structured concurrency relies upon cancellation,
+but [androidx-lifecycle-runtime.ktx][androidx-lifecycle-runtime-ktx] doesn't cancel. It uses a
+special [PausingDispatcher][androidx-pausingDispatcher]. This pausing behavior then **leaks**
+upstream, creating backpressure and potentially deadlocks.
 
 There's a [bug filed in their issue tracker][b/146370660], but 2.2.0 got released anyway.
 
-This library's API surface is the same as that within the AndroidX version, but has a different strategy for handling lifecycle events.  When a lifecycle state enters the desired range, such as at `ON_RESUME`, a new coroutine is created.  When the state exists the range, that coroutine is *cancelled*. If the lifecycle state enters the desired range again, a **new** coroutine is created.
+This library's API surface is the same as that within the AndroidX version, but has a different
+strategy for handling lifecycle events. When a lifecycle state enters the desired range, such as
+at `ON_RESUME`, a new coroutine is created. When the state exists the range, that coroutine is *
+cancelled*. If the lifecycle state enters the desired range again, a **new** coroutine is created.
 
 ``` kotlin
 import dispatch.android.*
@@ -126,7 +138,8 @@ class SomeFragment : Fragment() {
 }
 ```
 
-This has the desired effect of not leaking backpressure upstream (which in this example is the `viewModel`).
+This has the desired effect of not leaking backpressure upstream (which in this example is
+the `viewModel`).
 
 ## Minimum Gradle Config
 
@@ -148,34 +161,17 @@ dependencies {
 }
 ```
 
-
-<!--- MODULE dispatch-core-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-test-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-test-junit4-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-test-junit5-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-android-espresso-->
-<!--- INDEX  -->
-
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher/index.html
 
-<!--- MODULE dispatch-android-lifecycle-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-android-viewmodel-->
-<!--- INDEX  -->
-<!--- MODULE dispatch-android-viewmodel-->
-<!--- INDEX  -->
-<!--- END -->
 
 [androidx-lifecycle-runtime-ktx]: https://developer.android.com/jetpack/androidx/releases/lifecycle
+
 [b/146370660]: https://issuetracker.google.com/issues/146370660
+
 [CoroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
+
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
 
 [androidx-lifecycleScope]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44
 
 [androidx-pausingDispatcher]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/PausingDispatcher.kt
-
