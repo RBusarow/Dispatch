@@ -1,7 +1,12 @@
 name: CI
 
 on:
-  pull_request_target
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # every day at 10pm CST (4 UTC)
+    - cron: '0 4 * * *'
 
 jobs:
 
@@ -67,7 +72,7 @@ jobs:
 
       - name: Unit test results
         uses: mikepenz/action-junit-report@v1
-        if: always()
+        if: failure()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           report_paths: '**/build/**/TEST-*.xml'
