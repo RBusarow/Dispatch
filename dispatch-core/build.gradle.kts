@@ -25,6 +25,7 @@ dependencies {
   api(libs.kotlinx.coroutines.core)
   api(libs.kotlinx.coroutines.jvm)
 
+  testImplementation(libs.hermit.jUnit5)
   testImplementation(libs.junit.jupiter)
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)
@@ -33,7 +34,6 @@ dependencies {
   testImplementation(libs.kotlin.test.core)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.mockk)
-  testImplementation(libs.rickbusarow.hermit.jUnit5)
 
   testImplementation(projects.dispatchInternalTest)
 
