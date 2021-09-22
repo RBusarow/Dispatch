@@ -9,12 +9,12 @@ for the rest.)
 <!--- TOC -->
 
 * [TestDispatcherProvider](#testdispatcherprovider)
-    * [Constructor with default arguments](#constructor-with-default-arguments)
-    * [Single-arg factory](#single-arg-factory)
-    * [Basic TestDispatcherProvider](#basic-testdispatcherprovider)
+  * [Constructor with default arguments](#constructor-with-default-arguments)
+  * [Single-arg factory](#single-arg-factory)
+  * [Basic TestDispatcherProvider](#basic-testdispatcherprovider)
 * [TestProvidedCoroutineScope](#testprovidedcoroutinescope)
 * [Builders](#builders)
-    * [Minimum Gradle Config](#minimum-gradle-config)
+  * [Minimum Gradle Config](#minimum-gradle-config)
 
 <!--- END -->
 
@@ -40,7 +40,6 @@ val customTestDispatcherProvider = TestDispatcherProvider(
 
 val defaultTetsDispatcherProvider = TestDispatcherProvider()
 ```
-
 ### Single-arg factory
 
 [(link)][TestDispatcherProvider]
@@ -140,7 +139,6 @@ dependencies {
 [DispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html
 
 [DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
-
 
 [TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-dispatcher-provider/index.html
 

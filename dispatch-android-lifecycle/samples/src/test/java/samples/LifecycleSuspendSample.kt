@@ -16,6 +16,7 @@
 package samples
 
 import dispatch.android.lifecycle.*
+import dispatch.android.lifecycle.samples.Fragment
 import dispatch.core.*
 import dispatch.internal.test.android.*
 import dispatch.test.*

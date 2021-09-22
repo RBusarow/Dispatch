@@ -28,7 +28,7 @@ import kotlin.coroutines.*
  *
  * The *default* property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * @sample samples.WithContextSample.withDefaultSample
+ * @sample dispatch.core.samples.WithContextSample.withDefaultSample
  * @see withContext
  */
 public suspend fun <T> withDefault(
@@ -49,7 +49,7 @@ public suspend fun <T> withDefault(
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * @sample samples.WithContextSample.withIOSample
+ * @sample dispatch.core.samples.WithContextSample.withIOSample
  * @see withContext
  */
 public suspend fun <T> withIO(
@@ -70,7 +70,7 @@ public suspend fun <T> withIO(
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * @sample samples.WithContextSample.withMainSample
+ * @sample dispatch.core.samples.WithContextSample.withMainSample
  * @see withContext
  */
 public suspend fun <T> withMain(
@@ -91,7 +91,7 @@ public suspend fun <T> withMain(
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * @sample samples.WithContextSample.withMainImmediateSample
+ * @sample dispatch.core.samples.WithContextSample.withMainImmediateSample
  * @see withContext
  */
 public suspend fun <T> withMainImmediate(
@@ -112,7 +112,7 @@ public suspend fun <T> withMainImmediate(
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
- * @sample samples.WithContextSample.withUnconfinedSample
+ * @sample dispatch.core.samples.WithContextSample.withUnconfinedSample
  * @see withContext
  */
 public suspend fun <T> withUnconfined(

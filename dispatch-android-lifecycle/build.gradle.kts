@@ -34,7 +34,9 @@ dependencies {
   implementation(libs.kotlinx.coroutines.android)
 
   testImplementation(libs.androidx.arch.test.core)
+  testImplementation(libs.androidx.fragment.ktx)
   testImplementation(libs.androidx.lifecycle.runtime)
+  testImplementation(libs.androidx.lifecycle.viewModel.ktx)
   testImplementation(libs.androidx.test.espresso.core)
   testImplementation(libs.androidx.test.runner)
   testImplementation(libs.hermit.coroutines)
@@ -46,6 +48,7 @@ dependencies {
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.robolectric)
 
+  testImplementation(projects.dispatchAndroidLifecycleExtensions)
   testImplementation(projects.dispatchInternalTest)
   testImplementation(projects.dispatchInternalTestAndroid)
   testImplementation(projects.dispatchTest)

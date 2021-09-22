@@ -54,8 +54,8 @@ typealias LifecycleCoroutineScope = DispatchLifecycleScope
  * This `CoroutineScope`'s [Job] will be cancelled automatically
  * as soon as the `lifecycle` reaches [DESTROYED][Lifecycle.State.DESTROYED].
  *
- * @sample samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeDefaultSample
- * @sample samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeFromContextSample
+ * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeDefaultSample
+ * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeFromContextSample
  * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
  * @param coroutineContext the source CoroutineContext which will be converted to a [MainImmediateCoroutineScope].
  * Its [Elements][CoroutineContext.Element] will be re-used, except:
@@ -88,8 +88,8 @@ open class DispatchLifecycleScope(
    * there is no returning from below a [CREATED][Lifecycle.State.CREATED] state,
    * so the [minimumStatePolicy][MinimumStatePolicy] is largely irrelevant.
    *
-   * @sample samples.DispatchLifecycleScopeSample.launchOnCreateOnceSample
-   * @sample samples.DispatchLifecycleScopeSample.launchOnCreateRestartingSample
+   * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.launchOnCreateOnceSample
+   * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.launchOnCreateRestartingSample
    */
   fun launchOnCreate(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -110,8 +110,8 @@ open class DispatchLifecycleScope(
    * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
    * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
-   * @sample samples.DispatchLifecycleScopeSample.launchOnStartOnceSample
-   * @sample samples.DispatchLifecycleScopeSample.launchOnStartRestartingSample
+   * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.launchOnStartOnceSample
+   * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.launchOnStartRestartingSample
    */
   fun launchOnStart(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -132,8 +132,8 @@ open class DispatchLifecycleScope(
    * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the minimum
    * state or re-entering.  Uses [MinimumStatePolicy.RESTART_EVERY] by default.
-   * @sample samples.DispatchLifecycleScopeSample.launchOnResumeOnceSample
-   * @sample samples.DispatchLifecycleScopeSample.launchOnResumeRestartingSample
+   * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.launchOnResumeOnceSample
+   * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.launchOnResumeRestartingSample
    */
   fun launchOnResume(
     context: CoroutineContext = EmptyCoroutineContext,
@@ -185,7 +185,7 @@ open class DispatchLifecycleScope(
      * If this `CoroutineScope` has a [Job], it will be cancelled automatically
      * as soon as the `lifecycle` reaches [DESTROYED][Lifecycle.State.DESTROYED].
      *
-     * @sample samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeFromScopeSample
+     * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeSample.lifecycleCoroutineScopeFromScopeSample
      * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
      * @param coroutineScope the source CoroutineScope which will be converted to a [MainImmediateCoroutineScope].
      * Its [CoroutineContext][kotlin.coroutines.CoroutineContext] will be re-used, except:

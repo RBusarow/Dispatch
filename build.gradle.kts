@@ -26,12 +26,13 @@ import org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask
 
 buildscript {
   dependencies {
-    classpath("com.android.tools.build:gradle:7.0.2")
-    classpath("org.jetbrains.kotlinx:atomicfu-gradle-plugin:0.16.3")
-    classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.7.1")
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
-    classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
-    classpath("org.jetbrains.kotlinx:kotlinx-knit:0.3.0")
+    classpath(libs.android.gradle)
+    classpath(libs.square.anvil.gradle)
+    classpath(libs.google.ksp)
+    classpath(libs.vanniktech.maven.publish)
+    classpath(libs.kotlin.gradle.plug)
+    classpath(libs.kotlinx.atomicfu)
+    classpath(libs.ktlint.gradle)
     classpath(libs.ktlint.gradle)
   }
 }
@@ -42,52 +43,27 @@ plugins {
   id("com.osacky.doctor") version "0.7.1"
   id("io.gitlab.arturbosch.detekt") version "1.18.1"
   kotlin("jvm")
-  id("org.jetbrains.dokka")
   id("com.dorongold.task-tree") version "2.1.0"
+  id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.7.1"
   base
+  dokka
+  knit
 }
 
-tasks.dokkaHtmlMultiModule.configure {
+allprojects {
+  configurations.all {
+    resolutionStrategy {
 
-  outputDirectory.set(buildDir.resolve("dokka"))
-}
-
-subprojects {
-
-  tasks.withType<DokkaTask>().configureEach {
-
-    dependsOn(allprojects.mapNotNull { it.tasks.findByName("assemble") })
-
-    outputDirectory.set(buildDir.resolve("dokka"))
-
-    dokkaSourceSets.configureEach {
-
-      jdkVersion.set(8)
-      reportUndocumented.set(true)
-      skipEmptyPackages.set(true)
-      noAndroidSdkLink.set(false)
-
-      samples.from(files("samples"))
-
-      if (File("$projectDir/README.md").exists()) {
-        includes.from(files("README.md"))
-      }
-
-      sourceLink {
-
-        val modulePath = this@subprojects.path.replace(":", "/").replaceFirst("/", "")
-
-        // Unix based directory relative path to the root of the project (where you execute gradle respectively).
-        localDirectory.set(file("src/main"))
-
-        // URL showing where the source code can be accessed through the web browser
-        remoteUrl.set(uri("https://github.com/RBusarow/Dispatch/blob/main/$modulePath/src/main").toURL())
-        // Suffix which is used to append the line number to the URL. Use #L for GitHub
-        remoteLineSuffix.set("#L")
+      eachDependency {
+        when {
+          requested.group == "org.jetbrains.kotlin" -> useVersion(libs.versions.kotlin.get())
+          requested.name.startsWith("kotlinx-coroutines") -> useVersion(libs.versions.kotlinx.coroutines.get())
+        }
       }
     }
   }
 }
+
 subprojects {
   @Suppress("UNUSED_VARIABLE")
   val buildDocs by tasks.registering {
@@ -202,29 +178,8 @@ extensions.configure<ApiValidationExtension> {
   ignoredProjects = mutableSetOf(
     "dispatch-internal-test",
     "dispatch-internal-test-android",
-    "dispatch-sample",
-    "samples"
+    "dispatch-sample"
   )
-}
-
-apply(plugin = "kotlinx-knit")
-
-extensions.configure<KnitPluginExtension> {
-
-  rootDir = rootProject.rootDir
-  moduleRoots = listOf(".")
-
-  moduleDocs = "build/dokka"
-  moduleMarkers = listOf("build.gradle", "build.gradle.kts")
-  siteRoot = "https://rbusarow.github.io/Dispatch/api"
-}
-
-// Build API docs for all modules with dokka before running Knit
-tasks.withType<KnitTask> {
-  dependsOn(allprojects.mapNotNull { it.tasks.findByName("dokkaHtml") })
-  doLast {
-    fixDocsReferencePaths()
-  }
 }
 
 val sortDependencies by tasks.registering {

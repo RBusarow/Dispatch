@@ -98,8 +98,8 @@ interface UnconfinedIdlingCoroutineScope :
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample samples.IdlingCoroutineScopeSample.createNoArgIdlingCoroutineScope
- * @sample samples.IdlingCoroutineScopeSample.createCustomIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeSample.createNoArgIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeSample.createCustomIdlingCoroutineScope
  */
 fun IdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -118,8 +118,8 @@ fun IdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample samples.DefaultIdlingCoroutineScopeSample.createNoArgDefaultIdlingCoroutineScope
- * @sample samples.DefaultIdlingCoroutineScopeSample.createCustomDefaultIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.DefaultIdlingCoroutineScopeSample.createNoArgDefaultIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.DefaultIdlingCoroutineScopeSample.createCustomDefaultIdlingCoroutineScope
  */
 fun DefaultIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -138,8 +138,8 @@ fun DefaultIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample samples.IOIdlingCoroutineScopeSample.createNoArgIOIdlingCoroutineScope
- * @sample samples.IOIdlingCoroutineScopeSample.createCustomIOIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.IOIdlingCoroutineScopeSample.createNoArgIOIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.IOIdlingCoroutineScopeSample.createCustomIOIdlingCoroutineScope
  */
 fun IOIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -158,8 +158,8 @@ fun IOIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample samples.MainIdlingCoroutineScopeSample.createNoArgMainIdlingCoroutineScope
- * @sample samples.MainIdlingCoroutineScopeSample.createCustomMainIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.MainIdlingCoroutineScopeSample.createNoArgMainIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.MainIdlingCoroutineScopeSample.createCustomMainIdlingCoroutineScope
  */
 fun MainIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -178,8 +178,8 @@ fun MainIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample samples.MainImmediateIdlingCoroutineScopeSample.createNoArgMainImmediateIdlingCoroutineScope
- * @sample samples.MainImmediateIdlingCoroutineScopeSample.createCustomMainImmediateIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.MainImmediateIdlingCoroutineScopeSample.createNoArgMainImmediateIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.MainImmediateIdlingCoroutineScopeSample.createCustomMainImmediateIdlingCoroutineScope
  */
 fun MainImmediateIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -199,8 +199,8 @@ fun MainImmediateIdlingCoroutineScope(
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample samples.UnconfinedIdlingCoroutineScopeSample.createNoArgUnconfinedIdlingCoroutineScope
- * @sample samples.UnconfinedIdlingCoroutineScopeSample.createCustomUnconfinedIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.UnconfinedIdlingCoroutineScopeSample.createNoArgUnconfinedIdlingCoroutineScope
+ * @sample dispatch.android.espresso.samples.UnconfinedIdlingCoroutineScopeSample.createCustomUnconfinedIdlingCoroutineScope
  */
 fun UnconfinedIdlingCoroutineScope(
   job: Job = SupervisorJob(),

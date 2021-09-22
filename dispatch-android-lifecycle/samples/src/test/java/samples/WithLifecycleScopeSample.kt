@@ -21,6 +21,7 @@ import androidx.fragment.app.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import dispatch.android.lifecycle.*
+import dispatch.android.lifecycle.samples.Inject
 import dispatch.core.*
 import dispatch.internal.test.android.*
 import kotlinx.coroutines.flow.*

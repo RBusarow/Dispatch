@@ -44,6 +44,7 @@ dependencies {
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.robolectric)
 
+  testImplementation(projects.dispatchAndroidEspresso)
   testImplementation(projects.dispatchInternalTest)
   testImplementation(projects.dispatchInternalTestAndroid)
   testImplementation(projects.dispatchTestJunit4)

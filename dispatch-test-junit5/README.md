@@ -5,13 +5,13 @@
 <!--- TOC -->
 
 * [Features](#features)
-    * [CoroutineTest example](#coroutinetest-example)
-    * [CoroutineTestExtension example](#coroutinetestextension-example)
+  * [CoroutineTest example](#coroutinetest-example)
+  * [CoroutineTestExtension example](#coroutinetestextension-example)
 * [Setting Dispatchers.Main](#setting-dispatchersmain)
 * [This module replaces dispatch-test](#this-module-replaces-dispatch-test)
 * [JUnit dependencies](#junit-dependencies)
-    * [Minimum Gradle Config](#minimum-gradle-config)
-    * [JUnit 4 interoperability](#junit-4-interoperability)
+  * [Minimum Gradle Config](#minimum-gradle-config)
+  * [JUnit 4 interoperability](#junit-4-interoperability)
 
 <!--- END -->
 
@@ -159,7 +159,6 @@ dependencies {
 [CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html
 
 [CoroutineTest]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test/index.html
-
 
 [dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
 

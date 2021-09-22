@@ -37,8 +37,8 @@ import kotlin.coroutines.*
  * @see MainImmediateContext
  * @see DispatchLifecycleScope
  * @see DispatchLifecycleScopeFactory
- * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
- * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
  */
 object LifecycleScopeFactory {
 
@@ -53,7 +53,7 @@ object LifecycleScopeFactory {
   /**
    * Immediately resets the factory function to its default.
    *
-   * @sample samples.LifecycleScopeFactorySample.LifecycleScopeFactoryResetSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.LifecycleScopeFactoryResetSample
    */
   @Suppress("UNUSED")
   public fun reset() {
@@ -71,8 +71,8 @@ object LifecycleScopeFactory {
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
    * the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
    *
-   * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
-   * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
    */
   @Suppress("UNUSED")
   public fun set(factory: DispatchLifecycleScopeFactory) {
@@ -90,8 +90,8 @@ object LifecycleScopeFactory {
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
    * the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
    *
-   * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
-   * @sample samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
    */
   @Suppress("UNUSED")
   public fun set(factory: () -> CoroutineContext) {

@@ -25,7 +25,7 @@ import kotlinx.coroutines.*
  * in a [CoroutineContext][kotlin.coroutines.CoroutineContext] which does not have one,
  * it will use a default defined by this object.
  *
- * @sample samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
+ * @sample dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
  */
 public object DefaultDispatcherProvider {
 
@@ -42,7 +42,7 @@ public object DefaultDispatcherProvider {
    * Atomically sets a default [DispatcherProvider] instance.
    *
    * @see get
-   * @sample samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
+   * @sample dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
    */
   public fun set(value: DispatcherProvider) {
     while (true) {

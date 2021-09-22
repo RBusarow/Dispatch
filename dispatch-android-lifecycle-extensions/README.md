@@ -5,7 +5,7 @@
 <!--- TOC -->
 
 * [Api](#api)
-    * [One-time suspend functions](#one-time-suspend-functions)
+  * [One-time suspend functions](#one-time-suspend-functions)
 * [Difference from AndroidX](#difference-from-androidx)
 * [Custom CoroutineScope factories](#custom-coroutinescope-factories)
 * [Automatic lifecycle jobs](#automatic-lifecycle-jobs)
@@ -162,7 +162,6 @@ dependencies {
 ```
 
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher/index.html
-
 
 [androidx-lifecycle-runtime-ktx]: https://developer.android.com/jetpack/androidx/releases/lifecycle
 

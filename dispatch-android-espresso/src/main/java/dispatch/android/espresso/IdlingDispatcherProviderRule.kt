@@ -51,8 +51,8 @@ import org.junit.runner.*
  * @param factory factory for a custom [IdlingDispatcherProvider].
  * This must be the same [DispatcherProvider] which is used to create [CoroutineScope]s in the code being tested.
  *
- * @sample samples.IdlingCoroutineScopeRuleSample
- * @sample samples.IdlingCoroutineScopeRuleWithLifecycleSample
+ * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeRuleSample
+ * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeRuleWithLifecycleSample
  * @see TestRule
  * @see IdlingRegistry
  */
