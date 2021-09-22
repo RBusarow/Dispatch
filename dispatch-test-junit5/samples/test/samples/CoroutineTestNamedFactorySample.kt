@@ -39,6 +39,5 @@ class CoroutineTestNamedFactorySample {
 
       testScope.coroutineContext[Job] shouldNotBe null
     }
-
   }
 }

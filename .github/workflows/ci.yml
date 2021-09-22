@@ -49,8 +49,8 @@ jobs:
           commit_options: '--no-verify --signoff'
 
       # formats all Kotlin src files
-      - name: spotless format
-        run: ./gradlew spotlessApply
+      - name: KTLint format
+        run: ./gradlew ktlintformat
 
       # If formatKotlin generated changes, commit and push those changes.
       - name: commit changes

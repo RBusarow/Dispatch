@@ -29,9 +29,7 @@ class AsyncSample {
     asyncDefault {
 
       dispatcherName() shouldBe "default"
-
     }.join()
-
   }
 
   @Sample
@@ -42,9 +40,7 @@ class AsyncSample {
     asyncIO {
 
       dispatcherName() shouldBe "io"
-
     }.join()
-
   }
 
   @Sample
@@ -55,9 +51,7 @@ class AsyncSample {
     asyncMain {
 
       dispatcherName() shouldBe "main"
-
     }.join()
-
   }
 
   @Sample
@@ -68,9 +62,7 @@ class AsyncSample {
     asyncMainImmediate {
 
       dispatcherName() shouldBe "main immediate"
-
     }.join()
-
   }
 
   @Sample
@@ -81,9 +73,6 @@ class AsyncSample {
     asyncUnconfined {
 
       dispatcherName() shouldBe "unconfined"
-
     }.join()
-
   }
 }
-

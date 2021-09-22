@@ -38,5 +38,4 @@ class CoroutineTestDefaultFactorySample(
 
     resultDeferred.await() shouldBe someValue
   }
-
 }

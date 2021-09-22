@@ -23,4 +23,3 @@ class SomeClass(val coroutineScope: CoroutineScope) {
 
   fun someFunction() = coroutineScope.async { true }
 }
-

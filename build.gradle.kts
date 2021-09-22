@@ -21,6 +21,8 @@ import kotlinx.knit.*
 import kotlinx.validation.*
 import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.tasks.*
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
+import org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask
 
 buildscript {
   dependencies {
@@ -30,6 +32,7 @@ buildscript {
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
     classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
     classpath("org.jetbrains.kotlinx:kotlinx-knit:0.3.0")
+    classpath(libs.ktlint.gradle)
   }
 }
 
@@ -41,7 +44,6 @@ plugins {
   kotlin("jvm")
   id("org.jetbrains.dokka")
   id("com.dorongold.task-tree") version "2.1.0"
-  id("com.diffplug.spotless") version "5.15.0"
   base
 }
 
@@ -256,34 +258,23 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
   }
 }
 
-configure<com.diffplug.gradle.spotless.SpotlessExtension> {
-  kotlin {
-    target("**/src/**/*.kt")
-    ktlint("0.40.0")
-      .userData(
-        mapOf(
-          "indent_size" to "2",
-          "continuation_indent_size" to "2",
-          "max_line_length" to "off",
-          "disabled_rules" to "no-wildcard-imports",
-          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
-        )
+allprojects {
+  apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+  configure<KtlintExtension> {
+    debug.set(false)
+
+    disabledRules.set(
+      setOf(
+        "no-wildcard-imports",
+        "max-line-length", // manually formatting still does this, and KTLint will still wrap long chains when possible
+        "filename", // same as Detekt's MatchingDeclarationName, but Detekt's version can be suppressed and this can't
+        "experimental:argument-list-wrapping" // doesn't work half the time
       )
-    trimTrailingWhitespace()
-    endWithNewline()
+    )
   }
-  kotlinGradle {
-    target("*.gradle.kts")
-    ktlint("0.40.0")
-      .userData(
-        mapOf(
-          "indent_size" to "2",
-          "continuation_indent_size" to "2",
-          "max_line_length" to "off",
-          "disabled_rules" to "no-wildcard-imports",
-          "ij_kotlin_imports_layout" to "*,java.**,javax.**,kotlin.**,^"
-        )
-      )
+  tasks.withType<BaseKtLintCheckTask> {
+    workerMaxHeapSize.set("512m")
   }
 }
 

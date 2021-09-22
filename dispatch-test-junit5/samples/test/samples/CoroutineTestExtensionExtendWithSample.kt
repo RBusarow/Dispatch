@@ -32,5 +32,4 @@ class CoroutineTestExtensionExtendWithSample(
 
     testScope shouldNotBe null
   }
-
 }

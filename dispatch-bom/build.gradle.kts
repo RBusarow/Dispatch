@@ -44,7 +44,6 @@ publishing {
   }
 }
 
-
 fun Project.includeInBom() = !path.contains("sample") &&
-    !path.contains("internal") &&
-    this != bomProject
+  !path.contains("internal") &&
+  this != bomProject

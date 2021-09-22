@@ -36,5 +36,4 @@ dependencies {
   testImplementation(libs.mockk)
 
   testImplementation(projects.dispatchInternalTest)
-
 }

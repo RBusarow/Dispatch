@@ -34,5 +34,4 @@ dependencies {
   testImplementation(libs.kotlin.test.common)
   testImplementation(libs.kotlin.test.core)
   testImplementation(libs.kotlinx.coroutines.test)
-
 }
