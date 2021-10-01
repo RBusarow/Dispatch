@@ -13,7 +13,7 @@ groovy = "3.0.9"
 hermit = "0.9.5"
 jUnit = "5.8.0"
 kotest = "4.6.3"
-kotlin = "1.5.21"
+kotlin = "1.5.31"
 
 sonarPlugin = "2.6.1"
 spotless = "5.10.1"
@@ -42,7 +42,7 @@ square-moshi = "1.12.0"
 square-okhttp = "4.9.1"
 square-retrofit = "2.9.0"
 
-zacSweers-moshix = "0.14.0"
+zacSweers-moshix = "0.14.1"
 
 [plugins]
 
