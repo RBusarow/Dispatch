@@ -157,10 +157,10 @@ dependencies {
   dependencySync("commons-io:commons-io:2.11.0")
 
   dependencySync("dev.zacsweers.autoservice:auto-service-ksp:1.0.0")
-  dependencySync("dev.zacsweers.moshix:moshi-ksp:0.14.0")
-  dependencySync("dev.zacsweers.moshix:moshi-sealed-codegen:0.14.0")
-  dependencySync("dev.zacsweers.moshix:moshi-sealed-ksp:0.14.0")
-  dependencySync("dev.zacsweers.moshix:moshi-sealed-runtime:0.14.0")
+  dependencySync("dev.zacsweers.moshix:moshi-ksp:0.14.1")
+  dependencySync("dev.zacsweers.moshix:moshi-sealed-codegen:0.14.1")
+  dependencySync("dev.zacsweers.moshix:moshi-sealed-ksp:0.14.1")
+  dependencySync("dev.zacsweers.moshix:moshi-sealed-runtime:0.14.1")
 
   dependencySync("gradle.plugin.dev.arunkumar:scabbard-gradle-plugin:0.5.0")
 
@@ -190,7 +190,7 @@ dependencies {
   dependencySync("org.jetbrains.dokka:dokka-gradle-plugin:1.5.30")
   dependencySync("org.jetbrains.kotlin:kotlin-annotation-processing-embeddable:1.5.21")
   dependencySync("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.5.21")
-  dependencySync("org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.5.21")
+  dependencySync("org.jetbrains.kotlin:kotlin-gradle-plugin-api:1.5.31")
   dependencySync("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
   dependencySync("org.jetbrains.kotlin:kotlin-reflect:1.5.21")
   dependencySync("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21")
