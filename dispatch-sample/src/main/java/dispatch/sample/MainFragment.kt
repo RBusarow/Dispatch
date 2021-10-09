@@ -95,9 +95,9 @@ class MainFragment : Fragment() {
 @Suppress("UNCHECKED_CAST")
 inline fun <reified VM : ViewModel> viewModelFactory(crossinline f: () -> VM):
   ViewModelProvider.Factory =
-    object : ViewModelProvider.Factory {
-      override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
-    }
+  object : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
+  }
 
 inline fun <reified VM : ViewModel> Fragment.viewModels(
   noinline ownerProducer: () -> ViewModelStoreOwner = { this },

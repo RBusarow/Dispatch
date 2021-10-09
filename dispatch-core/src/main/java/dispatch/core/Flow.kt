@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.*
  * then uses its [DispatcherProvider.default] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * @sample samples.FlowOnSample.flowOnDefaultSample
+ * @sample dispatch.core.samples.FlowOnSample.flowOnDefaultSample
  * @see flowOn
  */
 @ExperimentalCoroutinesApi
@@ -37,7 +37,7 @@ public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
  * then uses its [DispatcherProvider.io] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * @sample samples.FlowOnSample.flowOnIOSample
+ * @sample dispatch.core.samples.FlowOnSample.flowOnIOSample
  * @see flowOn
  */
 @ExperimentalCoroutinesApi
@@ -51,7 +51,7 @@ public fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
  * then uses its [DispatcherProvider.main] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * @sample samples.FlowOnSample.flowOnMainSample
+ * @sample dispatch.core.samples.FlowOnSample.flowOnMainSample
  * @see flowOn
  */
 @ExperimentalCoroutinesApi
@@ -65,7 +65,7 @@ public fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
  * then uses its [DispatcherProvider.mainImmediate] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * @sample samples.FlowOnSample.flowOnMainImmediateSample
+ * @sample dispatch.core.samples.FlowOnSample.flowOnMainImmediateSample
  * @see flowOn
  */
 @ExperimentalCoroutinesApi
@@ -79,7 +79,7 @@ public fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
  * then uses its [DispatcherProvider.unconfined] property to call `flowOn(theDispatcher)`,
  * and returns the result.
  *
- * @sample samples.FlowOnSample.flowOnUnconfinedSample
+ * @sample dispatch.core.samples.FlowOnSample.flowOnUnconfinedSample
  * @see flowOn
  */
 @ExperimentalCoroutinesApi

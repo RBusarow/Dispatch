@@ -42,7 +42,7 @@ typealias CoroutineViewModel = DispatchViewModel
  *
  * `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
  *
- * @sample samples.ViewModelScopeSample.viewModelScopeSample
+ * @sample dispatch.android.viewmodel.samples.ViewModelScopeSample.viewModelScopeSample
  */
 abstract class DispatchViewModel : ViewModel() {
 
@@ -59,7 +59,7 @@ abstract class DispatchViewModel : ViewModel() {
    *
    * `viewModelScope` is automatically cancelled when `onCleared()` is invoked.
    *
-   * @sample samples.ViewModelScopeSample.viewModelScopeSample
+   * @sample dispatch.android.viewmodel.samples.ViewModelScopeSample.viewModelScopeSample
    */
   val viewModelScope: CoroutineScope
     get() {

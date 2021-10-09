@@ -22,20 +22,19 @@ dependencies {
 
   api(libs.junit.api)
   api(libs.junit.junit4)
+  api(libs.junit.jupiter)
+  api(libs.junit.vintage)
+  api(libs.kotest.assertions)
+  api(libs.kotest.assertionsShared)
+  api(libs.kotest.common.jvm)
+  api(libs.kotest.runner)
+  api(libs.kotlin.reflect)
+  api(libs.kotlin.test.common)
+  api(libs.kotlin.test.core)
   api(libs.kotlinx.coroutines.core)
   api(libs.kotlinx.coroutines.jvm)
+  api(libs.kotlinx.coroutines.test)
+  api(libs.kotlinx.knit.test)
 
-  implementation(libs.junit.jupiter)
-  implementation(libs.junit.vintage)
-  implementation(libs.kotest.assertions)
-  implementation(libs.kotest.assertionsShared)
-  implementation(libs.kotest.common.jvm)
-  implementation(libs.kotest.runner)
-  implementation(libs.kotlin.reflect)
-  implementation(libs.kotlin.test.common)
-  implementation(libs.kotlin.test.core)
-  implementation(libs.kotlinx.coroutines.test)
-
-  implementation(projects.dispatchCore)
-
+  api(projects.dispatchCore)
 }

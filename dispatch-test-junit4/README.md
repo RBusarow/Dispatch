@@ -1,6 +1,7 @@
 # Module dispatch-test-junit4
 
 ## Contents
+
 <!--- TOC -->
 
 * [Features](#features)
@@ -14,9 +15,11 @@
 
 ## Features
 
-In addition to all the functionality in [dispatch-test], this module exposes a [TestCoroutineRule] to handle set-up and tear-down of a [TestProvidedCoroutineScope].
+In addition to all the functionality in [dispatch-test], this module exposes a [TestCoroutineRule]
+to handle set-up and tear-down of a [TestProvidedCoroutineScope].
 
-Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Rule also invokes [cleanupTestCoroutines][cleanupTestCoroutines] after the test.
+Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Rule also
+invokes [cleanupTestCoroutines][cleanupTestCoroutines] after the test.
 
 ``` kotlin
 class SomeClassTest {
@@ -44,7 +47,10 @@ class SomeClass(val coroutineScope: CoroutineScope) {
 
 ## Setting Dispatchers.Main
 
-Even though `dispatch-core` eliminates the need to use `Dispatchers.Main` in internal code, it’s still possible that code which has yet to be migrated, or a third-party library is making use of the hard-coded dispatcher.  Because of this, the rule still calls `Dispatchers.setMain(...)` in its setup and `Dispatchers.resetMain()` afterwards.
+Even though `dispatch-core` eliminates the need to use `Dispatchers.Main` in internal code, it’s
+still possible that code which has yet to be migrated, or a third-party library is making use of the
+hard-coded dispatcher. Because of this, the rule still calls `Dispatchers.setMain(...)` in its setup
+and `Dispatchers.resetMain()` afterwards.
 
 ## This module replaces dispatch-test
 
@@ -54,7 +60,9 @@ If using this module, there is no need to include the `dispatch-test` artifact i
 
 ### Minimum Gradle Config
 
-Because this is a JUnit 4 Rule, it requires a variant of that artifact.  No external libraries are bundled as part of Dispatch, so you’ll need to add it to your `dependencies` block yourself.  The two official options would be:
+Because this is a JUnit 4 Rule, it requires a variant of that artifact. No external libraries are
+bundled as part of Dispatch, so you’ll need to add it to your `dependencies` block yourself. The two
+official options would be:
 
 - classic JUnit 4
   - `org.junit.jupiter:junit-jupiter:4.13`
@@ -84,7 +92,9 @@ dependencies {
 
 ### JUnit 5 interoperability
 
-Junit 5 provides a “vintage” (JUnit 4) artifact for legacy support (such as Robolectric or Android instrumented tests).  Dispatch also supports running both in the same project by just adding both artifacts.
+Junit 5 provides a “vintage” (JUnit 4) artifact for legacy support (such as Robolectric or Android
+instrumented tests). Dispatch also supports running both in the same project by just adding both
+artifacts.
 
 Add to your module's `build.gradle.kts`:
 
@@ -108,19 +118,12 @@ dependencies {
 }
 ```
 
-<!--- MODULE dispatch-test-->
-<!--- INDEX  -->
-
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
-[cleanupTestCoroutines]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html#kotlinx.coroutines.test/TestCoroutineScope/cleanupTestCoroutines/#/PointingToDeclaration/
 
-<!--- MODULE dispatch-test-junit4-->
-<!--- INDEX  -->
+[cleanupTestCoroutines]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html#kotlinx.coroutines.test/TestCoroutineScope/cleanupTestCoroutines/#/PointingToDeclaration/
 
 [TestCoroutineRule]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/-test-coroutine-rule/index.html
 
-<!--- END -->
-
 [dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
-[TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html
 
+[TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html

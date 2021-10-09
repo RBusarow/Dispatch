@@ -37,15 +37,4 @@ fun Project.common() {
         jvmTarget = "1.8"
       }
     }
-
-  // force update all transitive dependencies (prevents some library leaking an old version)
-  configurations.all {
-    resolutionStrategy {
-      force(
-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2",
-        "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2",
-        "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
-      )
-    }
-  }
 }

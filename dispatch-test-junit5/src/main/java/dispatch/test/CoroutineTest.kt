@@ -27,9 +27,11 @@ import kotlin.reflect.*
  * @param scopeFactory *optional* KClass which extends [CoroutineTestExtension.ScopeFactory].
  * **This class must have a default constructor**
  * An instance will be automatically initialized inside the [CoroutineTestExtension] and used to create custom [TestProvidedCoroutineScope] instances.
- * @sample samples.CoroutineTestDefaultFactorySample
- * @sample samples.CoroutineTestNamedFactorySample
+ * @sample dispatch.test.samples.CoroutineTestDefaultFactorySample
+ * @sample dispatch.test.samples.CoroutineTestNamedFactorySample
  */
 @ExperimentalCoroutinesApi
 @ExtendWith(CoroutineTestExtension::class)
-public annotation class CoroutineTest(val scopeFactory: KClass<*> = CoroutineTestExtension.ScopeFactory::class)
+public annotation class CoroutineTest(
+  val scopeFactory: KClass<*> = CoroutineTestExtension.ScopeFactory::class
+)

@@ -44,13 +44,12 @@ dependencies {
   testImplementation(libs.kotlin.test.core)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.kotlinx.knit.test)
-  testImplementation(libs.rickbusarow.hermit.coroutines)
-  testImplementation(libs.rickbusarow.hermit.jUnit5)
+  testImplementation(libs.hermit.coroutines)
+  testImplementation(libs.hermit.jUnit5)
   testImplementation(libs.robolectric)
 
   testImplementation(projects.dispatchAndroidLifecycleExtensions)
   testImplementation(projects.dispatchInternalTestAndroid)
   testImplementation(projects.dispatchTest)
   testImplementation(projects.dispatchTestJunit5)
-
 }

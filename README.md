@@ -41,12 +41,13 @@ class MyTest {
 ```
 
 ## Contents
+
 <!--- TOC -->
 
 * [Injecting dispatchers](#injecting-dispatchers)
 * [Types and Factories](#types-and-factories)
 * [Referencing dispatchers](#referencing-dispatchers)
-  * [Builder Extensions](#builder-extensions)
+    * [Builder Extensions](#builder-extensions)
 * [Android Lifecycle](#android-lifecycle)
 * [Android Espresso](#android-espresso)
 * [Android ViewModel](#android-viewmodel)
@@ -56,7 +57,6 @@ class MyTest {
 * [License](#license)
 
 <!--- END -->
-
 
 ## Injecting dispatchers
 
@@ -88,15 +88,16 @@ val someCoroutineScope = CoroutineScope(
 )
 ```
 
-The default implementation of this interface simply delegates to that [Dispatchers] singleton,
-as that is what we typically want for production usage.
+The default implementation of this interface simply delegates to that [Dispatchers] singleton, as
+that is what we typically want for production usage.
 
 ## Types and Factories
 
-A [CoroutineScope] may have any type of [CoroutineDispatcher].  What if we have a View class which
+A [CoroutineScope] may have any type of [CoroutineDispatcher]. What if we have a View class which
 will always use the [Main][Dispatchers.Main] thread, or one which will always do I/O?
 
-There are marker interfaces and factories to ensure that the correct type of [CoroutineScope] is always used.
+There are marker interfaces and factories to ensure that the correct type of [CoroutineScope] is
+always used.
 
 | **Type**                         | **Dispatcher**       |
 | -------------------------------- | -------------------- |
@@ -129,7 +130,8 @@ functions:
 
 ### Builder Extensions
 
-|              | **Default**     | **IO**     | **Main**     | **Main.immediate**    | **Unconfined**     |
+|              | **Default**     | **IO**     | **Main**     | **Main.immediate**    | **
+Unconfined**     |
 | ------------ | --------------- | ---------- | ------------ | --------------------- | ------------------ |
 | [Job]        | [launchDefault] | [launchIO] | [launchMain] | [launchMainImmediate] | [launchUnconfined]
 | [Deferred]   | [asyncDefault]  | [asyncIO]  | [asyncMain]  | [asyncMainImmediate]  | [asyncUnconfined]
@@ -151,12 +153,14 @@ class MyClass(val coroutineScope: IOCoroutineScope) {
 The [AndroidX.lifecycle][androidx-lifecycle-runtime-ktx] library offers a
 [lifecycleScope][androidx-lifecycleScope] extension function to provide a lifecycle-aware
 [CoroutineScope], but there are two shortcomings:
+
 1. It delegates to a hard-coded `Dispatchers.Main` [CoroutineDispatcher], which complicates unit and
    [Espresso] testing by requiring the use of [Dispatchers.setMain].
-2. It *pauses* the dispatcher when the lifecycle state passes below its threshold, which [leaks
-   backpressure to the producing coroutine and can create deadlocks][b/146370660].
+2. It *pauses* the dispatcher when the lifecycle state passes below its threshold,
+   which [leaks backpressure to the producing coroutine and can create deadlocks][b/146370660].
 
-[Dispatch-android-lifecycle] and [dispatch-android-lifecycle-extensions] completely replace the AndroidX version.
+[Dispatch-android-lifecycle] and [dispatch-android-lifecycle-extensions] completely replace the
+AndroidX version.
 
 ``` kotlin
 import dispatch.android.lifecycle.*
@@ -175,7 +179,8 @@ class MyActivity : Activity() {
 }
 ```
 
-The [DispatchLifecycleScope][DispatchLifecycleScope-class] may be configured with any dispatcher, since
+The [DispatchLifecycleScope][DispatchLifecycleScope-class] may be configured with any dispatcher,
+since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -271,7 +276,8 @@ class MyViewModel : CoroutineViewModel() {
 }
 ```
 
-The [DispatchLifecycleScope][DispatchLifecycleScope-class] may be configured with any dispatcher, since
+The [DispatchLifecycleScope][DispatchLifecycleScope-class] may be configured with any dispatcher,
+since
 [MainImmediateCoroutineScope] is just a marker interface. Its lifecycle-aware functions *cancel*
 when dropping below a threshold, then automatically restart when entering into the desired lifecycle
 state again. This is key to preventing the backpressure leak of the AndroidX version, and it's also
@@ -299,7 +305,8 @@ class TestDispatcherProvider(
 ) : DispatcherProvider
 ```
 
-As well as a polymorphic [TestProvidedCoroutineScope] which may be used in place of any type-specific [CoroutineScope]:
+As well as a polymorphic [TestProvidedCoroutineScope] which may be used in place of any
+type-specific [CoroutineScope]:
 
 ``` kotlin
 val testScope = TestProvidedCoroutineScope()
@@ -363,7 +370,7 @@ dependencies {
   // core coroutines
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
-  
+
   // a BOM ensures that all artifacts used from the library are of the same version
   implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-beta10"))
 
@@ -420,124 +427,180 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-<!--- MODULE dispatch-core-->
-<!--- INDEX  -->
-
 [DispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-dispatcher-provider/index.html
+
 [DefaultCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-coroutine-scope/index.html
+
 [IOCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-i-o-coroutine-scope/index.html
+
 [MainCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-main-coroutine-scope/index.html
+
 [MainImmediateCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.html
+
 [UnconfinedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-unconfined-coroutine-scope/index.html
+
 [launchDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-default.html
+
 [launchIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-i-o.html
+
 [launchMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-main.html
+
 [launchMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-main-immediate.html
+
 [launchUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/launch-unconfined.html
+
 [asyncDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-default.html
+
 [asyncIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-i-o.html
+
 [asyncMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-main.html
+
 [asyncMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-main-immediate.html
+
 [asyncUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/async-unconfined.html
+
 [withDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-default.html
+
 [withIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-i-o.html
+
 [withMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-main.html
+
 [withMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-main-immediate.html
+
 [withUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/with-unconfined.html
+
 [flowOnDefault]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-default.html
+
 [flowOnIO]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-i-o.html
+
 [flowOnMain]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-main.html
+
 [flowOnMainImmediate]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-main-immediate.html
+
 [flowOnUnconfined]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/flow-on-unconfined.html
 
-<!--- MODULE dispatch-test-->
-<!--- INDEX  -->
 
 [TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
+
 [TestDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-dispatcher-provider/index.html
+
 [testProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/test-provided.html
+
 [runBlockingProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/run-blocking-provided.html
 
-<!--- MODULE dispatch-test-junit4-->
-<!--- INDEX  -->
 
 [TestCoroutineRule]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/-test-coroutine-rule/index.html
 
-<!--- MODULE dispatch-test-junit5-->
-<!--- INDEX  -->
 
 [CoroutineTest]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test/index.html
+
 [CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html
 
-<!--- MODULE dispatch-android-espresso-->
-<!--- INDEX  -->
 
 [IdlingCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-coroutine-scope/index.html
+
 [IdlingDispatcher]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher/index.html
+
 [IdlingDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/-idling-dispatcher-provider/index.html
 
-<!--- MODULE dispatch-android-lifecycle-->
-<!--- INDEX  -->
 
 [launchOnCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-create.html
+
 [launchOnStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-start.html
+
 [launchOnResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-resume.html
+
 [onNextCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-create.html
+
 [onNextStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-start.html
+
 [onNextResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-resume.html
 
-<!--- MODULE dispatch-android-lifecycle-extensions-->
-<!--- INDEX  -->
 
 [LifecycleScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/-lifecycle-scope-factory/index.html
 
-<!--- MODULE dispatch-android-viewmodel-->
-<!--- INDEX  -->
 
 [CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
+
 [viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html#dispatch.android.viewmodel/DispatchViewModel/viewModelScope/#/PointingToDeclaration/
+
 [ViewModelScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-view-model-scope-factory/index.html
 
-<!--- END -->
-
 [androidx-lifecycle-runtime-ktx]: https://developer.android.com/jetpack/androidx/releases/lifecycle
+
 [androidx-lifecycle-viewmodel-ktx]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-viewmodel-ktx/src/main/java/androidx/lifecycle/ViewModel.kt;l=42
+
 [androidx-lifecycleScope]: https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:lifecycle/lifecycle-runtime-ktx/src/main/java/androidx/lifecycle/Lifecycle.kt;l=44
+
 [androidx-viewModelScope]: https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope
+
 [b/146370660]: https://issuetracker.google.com/issues/146370660
+
 [CoroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/
+
 [CoroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html
+
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
+
 [Deferred]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html
+
 [Detekt]: https://github.com/detekt/detekt
+
 [dispatch-android-espresso]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/index.html
+
 [dispatch-android-lifecycle-extensions]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html
+
 [dispatch-android-lifecycle]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html
+
 [dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html
+
 [dispatch-core]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/index.html
+
 [dispatch-detekt]: https://rbusarow.github.io/Dispatch/api/dispatch-detekt/dispatch.detekt/index.html
+
 [dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/index.html
+
 [dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/index.html
+
 [dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
+
 [Dispatchers.Default]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-default.html
+
 [Dispatchers.IO]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-io.html
+
 [Dispatchers.Main.immediate]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html
+
 [Dispatchers.Main]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html
+
 [Dispatchers.setMain]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/kotlinx.coroutines.-dispatchers/set-main.html
+
 [Dispatchers.Unconfined]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-unconfined.html
+
 [Dispatchers]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/index.html
+
 [Espresso]: https://developer.android.com/training/testing/espresso
+
 [IdlingResource]: https://developer.android.com/training/testing/espresso/idling-resource
+
 [Job]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html
+
 [kotlin.coroutineContext]: https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/coroutine-context.html
+
 [kotlinx.coroutines]: https://kotlin.github.io/kotlinx.coroutines/
+
 [kotlinx.runBlockingTest]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/run-blocking-test.html
+
 [LiveData]: https://developer.android.com/reference/androidx/lifecycle/LiveData
+
 [TestCoroutineDispatcher]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-dispatcher/index.html
+
 [TestCoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html
+
 [ViewModel.onCleared]: https://developer.android.com/reference/androidx/lifecycle/ViewModel#onCleared()
+
 [ViewModel]: https://developer.android.com/reference/androidx/lifecycle/ViewModel
 
 
 [DispatchLifecycleScope-class]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
+
 [dispatchLifecycleScope-extension]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/dispatchLifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/

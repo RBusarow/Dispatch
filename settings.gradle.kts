@@ -19,13 +19,6 @@ pluginManagement {
     mavenCentral()
     google()
   }
-  resolutionStrategy {
-    eachPlugin {
-      when {
-        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.21")
-      }
-    }
-  }
 }
 
 dependencyResolutionManagement {
@@ -58,18 +51,15 @@ include(":dispatch-android-compose-test")
 include(":dispatch-android-compose-test:samples")
 include(":dispatch-android-compose:samples")
 include(":dispatch-android-espresso")
-include(":dispatch-android-espresso:samples")
 include(":dispatch-android-lifecycle")
 include(":dispatch-android-lifecycle-extensions")
-include(":dispatch-android-lifecycle-extensions:samples")
-include(":dispatch-android-lifecycle:samples")
 include(":dispatch-android-viewmodel")
-include(":dispatch-android-viewmodel:samples")
 include(":dispatch-bom")
 include(":dispatch-core")
-include(":dispatch-core:samples")
+include(":dispatch-test")
+include(":dispatch-test-junit4")
+include(":dispatch-test-junit5")
 include(":dispatch-detekt")
-include(":dispatch-detekt:samples")
 include(":dispatch-internal-test")
 include(":dispatch-internal-test-android")
 include(":dispatch-sample")

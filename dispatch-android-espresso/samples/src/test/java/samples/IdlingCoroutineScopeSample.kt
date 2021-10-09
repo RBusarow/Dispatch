@@ -16,6 +16,7 @@
 package samples
 
 import dispatch.android.espresso.*
+import dispatch.android.espresso.samples.TestAppComponent
 import kotlinx.coroutines.*
 import org.junit.runner.*
 import org.robolectric.*

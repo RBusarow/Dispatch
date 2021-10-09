@@ -35,5 +35,7 @@ dependencies {
   testImplementation(libs.mockk)
   testImplementation(libs.robolectric)
 
+  testImplementation(projects.dispatchAndroidLifecycleExtensions)
+  testImplementation(projects.dispatchAndroidViewmodel)
   testImplementation(projects.dispatchInternalTest)
 }

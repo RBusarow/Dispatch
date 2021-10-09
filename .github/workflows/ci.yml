@@ -1,7 +1,12 @@
 name: CI
 
 on:
-  pull_request_target
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # every day at 10pm CST (4 UTC)
+    - cron: '0 4 * * *'
 
 jobs:
 
@@ -49,8 +54,8 @@ jobs:
           commit_options: '--no-verify --signoff'
 
       # formats all Kotlin src files
-      - name: spotless format
-        run: ./gradlew spotlessApply
+      - name: KTLint format
+        run: ./gradlew ktlintformat
 
       # If formatKotlin generated changes, commit and push those changes.
       - name: commit changes
@@ -67,7 +72,7 @@ jobs:
 
       - name: Unit test results
         uses: mikepenz/action-junit-report@v1
-        if: always()
+        if: failure()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           report_paths: '**/build/**/TEST-*.xml'

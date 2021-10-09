@@ -27,7 +27,7 @@ import kotlin.coroutines.*
  *
  * The `default` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * @sample samples.LaunchSample.launchDefaultSample
+ * @sample dispatch.core.samples.LaunchSample.launchDefaultSample
  * @see launch
  */
 public fun CoroutineScope.launchDefault(
@@ -45,7 +45,7 @@ public fun CoroutineScope.launchDefault(
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * @sample samples.LaunchSample.launchIOSample
+ * @sample dispatch.core.samples.LaunchSample.launchIOSample
  * @see launch
  */
 public fun CoroutineScope.launchIO(
@@ -63,7 +63,7 @@ public fun CoroutineScope.launchIO(
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * @sample samples.LaunchSample.launchMainSample
+ * @sample dispatch.core.samples.LaunchSample.launchMainSample
  * @see launch
  */
 public fun CoroutineScope.launchMain(
@@ -81,7 +81,7 @@ public fun CoroutineScope.launchMain(
  *
  * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * @sample samples.LaunchSample.launchMainImmediateSample
+ * @sample dispatch.core.samples.LaunchSample.launchMainImmediateSample
  * @see launch
  */
 public fun CoroutineScope.launchMainImmediate(
@@ -99,7 +99,7 @@ public fun CoroutineScope.launchMainImmediate(
  *
  * The `unconfined` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
  *
- * @sample samples.LaunchSample.launchUnconfinedSample
+ * @sample dispatch.core.samples.LaunchSample.launchUnconfinedSample
  * @see launch
  */
 public fun CoroutineScope.launchUnconfined(

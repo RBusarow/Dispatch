@@ -3,6 +3,7 @@
 [CoroutineScope] functionality linked with an [Android Lifecycle].
 
 ## Contents
+
 <!--- TOC -->
 
 * [Types](#types)
@@ -45,7 +46,6 @@
 | [onNextStart]   | Executes code one time upon reaching a state of [Lifecycle.State.STARTED]
 | [onNextResume]  | Executes code one time upon reaching a state of [Lifecycle.State.RESUMED]
 
-
 ## Minimum Gradle Config
 
 Add to your module's `build.gradle.kts`:
@@ -65,30 +65,39 @@ dependencies {
 }
 ```
 
-<!--- MODULE dispatch-core-->
-<!--- INDEX  -->
-
 [MainCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-main-coroutine-scope/index.html
 
-<!--- MODULE dispatch-android-lifecycle-->
-<!--- INDEX  -->
 
 [DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
+
 [MinimumStatePolicy]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/-minimum-state-policy/index.html
+
 [launchOnCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-create.html
+
 [launchOnStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-start.html
+
 [launchOnResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/launch-on-resume.html
+
 [onNextCreate]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-create.html
+
 [onNextStart]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-start.html
+
 [onNextResume]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/on-next-resume.html
 
-<!--- END -->
 [Android Lifecycle]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.html
+
 [CoroutineScope]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/coroutine-scope.html
+
 [Job]: https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html
+
 [Lifecycle.State.CREATED]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.State.html#CREATED
+
 [Lifecycle.State.RESUMED]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.State.html#RESUMED
+
 [Lifecycle.State.STARTED]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.State.html#STARTED
+
 [Lifecycle.State]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.State.html
+
 [Lifecycle]: https://developer.android.com/reference/androidx/lifecycle/Lifecycle.html
+
 [LifecycleOwner]: https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner.html

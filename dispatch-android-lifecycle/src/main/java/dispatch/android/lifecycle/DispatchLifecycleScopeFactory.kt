@@ -22,7 +22,7 @@ import kotlin.coroutines.*
  * Factory for [DispatchLifecycleScope]s.  This may be injected into a lifecycle-aware class
  * to provide custom [CoroutineContexts][CoroutineContext].
  *
- * @sample samples.DispatchLifecycleScopeFactorySample.factorySample
+ * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeFactorySample.factorySample
  * @param coroutineContextFactory the lambda defining the creating of a [CoroutineContext]
  */
 public class DispatchLifecycleScopeFactory(

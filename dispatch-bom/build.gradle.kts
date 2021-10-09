@@ -18,7 +18,7 @@ plugins {
   id("com.vanniktech.maven.publish")
 }
 
-version = libs.versions.versionName.get()
+version = project.extra.properties["VERSION_NAME"] as String
 
 val bomProject = project
 
@@ -44,7 +44,6 @@ publishing {
   }
 }
 
-
 fun Project.includeInBom() = !path.contains("sample") &&
-    !path.contains("internal") &&
-    this != bomProject
+  !path.contains("internal") &&
+  this != bomProject

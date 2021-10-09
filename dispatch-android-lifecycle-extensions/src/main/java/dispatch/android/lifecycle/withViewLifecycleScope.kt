@@ -24,7 +24,7 @@ import kotlinx.coroutines.*
  * This function observes a `Fragment`'s [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData],
  * and invokes [block].
  *
- * @sample samples.WithViewLifecycleScopeExtensionSample.withViewLifecycleScopeSample
+ * @sample dispatch.android.lifecycle.samples.WithViewLifecycleScopeExtensionSample.withViewLifecycleScopeSample
  */
 @ExperimentalCoroutinesApi
 fun Fragment.withViewLifecycleScope(

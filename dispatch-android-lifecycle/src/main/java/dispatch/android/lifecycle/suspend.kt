@@ -27,7 +27,7 @@ import kotlin.coroutines.*
  *
  * @see [DispatchLifecycleScope.launchOnCreate] for repeating behavior.
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
  */
 suspend fun <T> LifecycleOwner.onNextCreate(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -41,7 +41,7 @@ suspend fun <T> LifecycleOwner.onNextCreate(
  *
  * @see [DispatchLifecycleScope.launchOnCreate] for repeating behavior.
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample samples.LifecycleSuspendSample.lifecycleOnNextCreateSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextCreateSample
  */
 suspend fun <T> Lifecycle.onNextCreate(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -55,7 +55,7 @@ suspend fun <T> Lifecycle.onNextCreate(
  *
  * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
  */
 suspend fun <T> LifecycleOwner.onNextStart(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -69,7 +69,7 @@ suspend fun <T> LifecycleOwner.onNextStart(
  *
  * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample samples.LifecycleSuspendSample.lifecycleOnNextStartSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextStartSample
  */
 suspend fun <T> Lifecycle.onNextStart(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -83,7 +83,7 @@ suspend fun <T> Lifecycle.onNextStart(
  *
  * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
  */
 suspend fun <T> LifecycleOwner.onNextResume(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -97,7 +97,7 @@ suspend fun <T> LifecycleOwner.onNextResume(
  *
  * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample samples.LifecycleSuspendSample.lifecycleOnNextResumeSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextResumeSample
  */
 suspend fun <T> Lifecycle.onNextResume(
   context: CoroutineContext = EmptyCoroutineContext,
