@@ -19,13 +19,6 @@ pluginManagement {
     mavenCentral()
     google()
   }
-  resolutionStrategy {
-    eachPlugin {
-      when {
-        requested.id.id.startsWith("org.jetbrains.kotlin") -> useVersion("1.5.21")
-      }
-    }
-  }
 }
 
 dependencyResolutionManagement {

@@ -13,4 +13,4 @@
   ~ limitations under the License.
   -->
 
-<manifest package="dispatch.android.lifecycle" />
+<manifest package="dispatch.android.compose.test" />
