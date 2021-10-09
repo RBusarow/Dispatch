@@ -53,8 +53,8 @@ dependencies {
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
   testImplementation(libs.kotlinx.coroutines.test)
-  testImplementation(libs.rickbusarow.hermit.coroutines)
-  testImplementation(libs.rickbusarow.hermit.jUnit5)
+  testImplementation(libs.hermit.coroutines)
+  testImplementation(libs.hermit.jUnit5)
   testImplementation(libs.robolectric)
 
   testImplementation(projects.dispatchInternalTest)
