@@ -39,12 +39,15 @@ google-dagger = "2.39.1"
 google-material = "1.4.0"
 
 square-moshi = "1.12.0"
-square-okhttp = "4.9.1"
+square-okhttp = "4.9.2"
 square-retrofit = "2.9.0"
 
 zacSweers-moshix = "0.14.1"
 
+[plugins]
 
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlinx-knit = { id = "kotlinx-knit", version.ref = "kotlinx-knit" }
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidTools" }
@@ -76,7 +79,7 @@ androidx-compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifes
 androidx-compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose" }
 
-androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.0"
+androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
 
 androidx-coreKtx = "androidx.core:core-ktx:1.6.0"
 
@@ -205,17 +208,6 @@ javax-annotation-jsr250-api = "javax.annotation:jsr250-api:1.0"
 
 javax-inject = "javax.inject:javax.inject:1"
 
-kotlinx-coroutines-coreCommon = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines" }
-kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin", version.ref = "kotlinx-atomicfu" }
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-jdk8 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-kotlinx-knit-gradle = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }
-kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit" }
-
 jmailen-gradle-kotlinter-gradle = "org.jmailen.gradle:kotlinter-gradle:3.6.0"
 
 json = "org.json:json:20210307"
@@ -248,21 +240,22 @@ kotlin-test-core = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = 
 
 kotlin-compile-testing = "com.github.tschuchortdev:kotlin-compile-testing:1.4.5"
 
+kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin", version.ref = "kotlinx-atomicfu" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-coreCommon = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-jdk8 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-jvm = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+kotlinx-knit-gradle = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }
+kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit" }
+
 ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.2.0"
 
 mockk = "io.mockk:mockk:1.12.0"
 
 objenesis = "org.objenesis:objenesis:3.2"
-
-rickBusarow-dispatch-core = { module = "com.rickbusarow.dispatch:dispatch-core", version.ref = "dispatch" }
-rickBusarow-dispatch-detekt = { module = "com.rickbusarow.dispatch:dispatch-detekt", version.ref = "dispatch" }
-rickBusarow-dispatch-espresso = { module = "com.rickbusarow.dispatch:dispatch-android-espresso", version.ref = "dispatch" }
-rickBusarow-dispatch-lifecycle = { module = "com.rickbusarow.dispatch:dispatch-android-lifecycle", version.ref = "dispatch" }
-rickBusarow-dispatch-lifecycleExtensions = { module = "com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions", version.ref = "dispatch" }
-rickBusarow-dispatch-test-core = { module = "com.rickbusarow.dispatch:dispatch-test", version.ref = "dispatch" }
-rickBusarow-dispatch-test-jUnit4 = { module = "com.rickbusarow.dispatch:dispatch-test-junit4", version.ref = "dispatch" }
-rickBusarow-dispatch-test-jUnit5 = { module = "com.rickbusarow.dispatch:dispatch-test-junit5", version.ref = "dispatch" }
-rickBusarow-dispatch-viewModel = { module = "com.rickbusarow.dispatch:dispatch-android-viewmodel", version.ref = "dispatch" }
 
 robolectric = "org.robolectric:robolectric:4.6.1"
 
@@ -274,8 +267,6 @@ square-anvil-compiler-core = { module = "com.squareup.anvil:compiler", version.r
 square-anvil-compiler-utils = { module = "com.squareup.anvil:compiler-utils", version.ref = "anvil" }
 square-anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
 
-
-
 square-moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "square-moshi" }
 square-moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "square-moshi" }
 square-moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "square-moshi" }
@@ -283,7 +274,7 @@ square-moshi-kotlinCodegen = { module = "com.squareup.moshi:moshi-kotlin-codegen
 
 square-okhttp-core = { module = "com.squareup.okhttp3:okhttp", version.ref = "square-okhttp" }
 square-okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "square-okhttp" }
-square-okhttp3-mockwebserver = "com.squareup.okhttp3:mockwebserver:4.9.1"
+square-okhttp3-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "square-okhttp" }
 
 square-retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "square-retrofit" }
 square-retrofit-mock = { module = "com.squareup.retrofit2:retrofit-mock", version.ref = "square-retrofit" }
