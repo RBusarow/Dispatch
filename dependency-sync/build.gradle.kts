@@ -14,7 +14,7 @@
  */
 
 plugins {
-  id("com.rickbusarow.gradle-dependency-sync") version "0.11.2"
+  id("com.rickbusarow.gradle-dependency-sync") version "0.11.3"
 }
 
 dependencySync {
@@ -109,7 +109,7 @@ dependencies {
   dependencySync("com.google.android.material:material:1.4.0")
   dependencySync("com.google.auto.service:auto-service-annotations:1.0")
   dependencySync("com.google.auto.service:auto-service:1.0")
-  dependencySync("com.google.auto:auto-common:1.1.2")
+  dependencySync("com.google.auto:auto-common:1.2")
   dependencySync("com.google.code.findbugs:jsr305:3.0.2")
   dependencySync("com.google.dagger:dagger-compiler:2.39.1")
   dependencySync("com.google.dagger:dagger:2.39.1")
