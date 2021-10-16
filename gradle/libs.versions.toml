@@ -180,7 +180,7 @@ dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref
 
 google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.15.0"
 
-google-auto-common = "com.google.auto:auto-common:1.1.2"
+google-auto-common = "com.google.auto:auto-common:1.2"
 
 google-auto-service-annotations = "com.google.auto.service:auto-service-annotations:1.0"
 google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
