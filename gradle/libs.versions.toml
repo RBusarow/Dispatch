@@ -1,6 +1,6 @@
 [versions]
 androidTools = "7.0.2"
-anvil = "2.3.6"
+anvil = "2.3.7"
 benManes = "0.36.0"
 changeTracker = "0.7.3"
 coil = "1.4.0"
@@ -180,7 +180,7 @@ dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref
 
 google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.15.0"
 
-google-auto-common = "com.google.auto:auto-common:1.1.2"
+google-auto-common = "com.google.auto:auto-common:1.2"
 
 google-auto-service-annotations = "com.google.auto.service:auto-service-annotations:1.0"
 google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
