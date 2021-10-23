@@ -5,7 +5,7 @@ Never reference [Dispatchers] again, and never inject a `dispatchers` interface 
 All the standard [CoroutineDispatcher] types are embedded in a [CoroutineContext] and can be
 accessed explicitly or via convenient [extension functions](#extensions).
 
-``` kotlin
+```kotlin
 fun foo(scope: CoroutineScope) {
   scope.launchDefault {  }
   scope.launchIO {  }
@@ -18,7 +18,7 @@ fun foo(scope: CoroutineScope) {
 You can define custom mappings via a [factory](#marker-interfaces-and-factories), making testing
 much easier, or use the default, which simply maps to [Dispatchers].
 
-``` kotlin
+```kotlin
 // a standard DispatcherProvider is easy to create
 val myDefaultDispatchProvider = DispatcherProvider()
 
@@ -39,7 +39,7 @@ or function with a [CoroutineScope] dependency.
 There are also factory functions for conveniently creating any implementation, with a
 built-in [DispatcherProvider].
 
-``` kotlin
+```kotlin
 val mainScope = MainCoroutineScope()
 
 val someUIClass = SomeUIClass(mainScope)
@@ -102,7 +102,7 @@ Unconfined**     | | ------------ | --------------- | ---------- | ------------ 
 | [flowOnUnconfined]
 
 ### Launch
-``` kotlin
+```kotlin
 fun foo(scope: CoroutineScope) {
   scope.launchDefault {  }
   scope.launchIO {  }
@@ -113,7 +113,7 @@ fun foo(scope: CoroutineScope) {
 ```
 
 ### Async
-``` kotlin
+```kotlin
 fun foo(scope: CoroutineScope) {
   scope.asyncDefault {  }
   scope.asyncIO {  }
@@ -130,7 +130,7 @@ the [coroutineContext][kotlin.coroutineContext] top-level suspend property in [k
 It returns the current context, so the `default`, `io`, etc. used here are the ones defined in
 the [CoroutineScope] of the caller. There is no need to inject any other dependencies.
 
-``` kotlin
+```kotlin
 suspend fun foo() {
   // note that we have no CoroutineContext
   withDefault {  }
@@ -149,7 +149,7 @@ called [context preservation][context_preservation]. These new operators maintai
 preservation (*they’re forced to, actually*), and extract
 the [coroutineContext][kotlin.coroutineContext] from the collector.
 
-``` kotlin
+```kotlin
 val someFlow = flow {  }
   .flowOnDefault()
   .flowOnIO()
@@ -164,7 +164,7 @@ The simplest way to get up and running with Dispatch. All library access to a
 [CoroutineContext's][CoroutineContext] [DispatcherProvider] filters through a single extension
 property:
 
-``` kotlin
+```kotlin
 public val CoroutineContext.dispatcherProvider: DispatcherProvider
   get() = get(DispatcherProvider) ?: DefaultDispatcherProvider.get()
 ```
@@ -189,7 +189,7 @@ doesn't need to be confined to testing.
 You can use [DefaultDispatcherProvider.set] to globally set a custom implementation at the beginning
 of an application's lifecycle, but the most likely use-case is certainly in testing.
 
-``` kotlin
+```kotlin
 @Test
 fun `my test`() = runBlocking {
 
@@ -209,7 +209,7 @@ fun `my test`() = runBlocking {
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }

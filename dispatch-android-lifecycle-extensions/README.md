@@ -19,7 +19,7 @@
 
 Examples
 
-``` kotlin
+```kotlin
 import dispatch.android.*
 
 // This could be any LifecycleOwner -- Fragments, Activities, Services...
@@ -47,7 +47,7 @@ class SomeScreen : Fragment() {
 }
 ```
 
-``` kotlin
+```kotlin
 class SomeApplication : Application() {
   override fun onCreate() {
     super.onCreate()
@@ -57,7 +57,7 @@ class SomeApplication : Application() {
 }
 ```
 
-``` kotlin
+```kotlin
 class SomeEspressoTest {
   @Before
   fun setUp() {
@@ -89,7 +89,7 @@ is [hard-coded][androidx-lifecycleScope], which eliminates the possibility of us
 custom [CoroutineContext] such as a `DispatcherProvider` or [IdlingDispatcher].
 With `dispatch.android.lifecycle`, we can set a custom factory.
 
-``` kotlin
+```kotlin
 class SomeFragmentEspressoTest {
 
   // Not part of this artifact.  see dispatch-android-espresso
@@ -121,7 +121,7 @@ strategy for handling lifecycle events. When a lifecycle state enters the desire
 at `ON_RESUME`, a new coroutine is created. When the state exists the range, that coroutine is *
 cancelled*. If the lifecycle state enters the desired range again, a **new** coroutine is created.
 
-``` kotlin
+```kotlin
 import dispatch.android.*
 
 class SomeFragment : Fragment() {
@@ -145,7 +145,7 @@ the `viewModel`).
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }
