@@ -8,7 +8,7 @@ all associated coroutines to leave the *active* state before performing any asse
 Coroutines which are in a *suspended* state (such as a [Job] "observing" a [Flow] for updates)
 do not prevent Espresso from performing assertions.
 
-``` kotlin
+```kotlin
 class IdlingCoroutineScopeRuleWithLifecycleSample {
 
   // Retrieve the DispatcherProvider from a dependency graph,
@@ -80,7 +80,7 @@ class IdlingCoroutineScopeRuleWithLifecycleSample {
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }

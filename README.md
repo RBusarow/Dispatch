@@ -8,7 +8,7 @@ Utilities for [kotlinx.coroutines] which make them type-safe, easier to test, an
 Use the predefined [types and factories](#types-and-factories) or define your own, and never inject
 a `Dispatchers` object again.
 
-``` kotlin
+```kotlin
 val presenter = MyPresenter(MainCoroutineScope())
 
 class MyPresenter @Inject constructor(
@@ -24,7 +24,7 @@ class MyPresenter @Inject constructor(
 }
 ```
 
-``` kotlin
+```kotlin
 class MyTest {
 
   @Test
@@ -47,7 +47,7 @@ class MyTest {
 * [Injecting dispatchers](#injecting-dispatchers)
 * [Types and Factories](#types-and-factories)
 * [Referencing dispatchers](#referencing-dispatchers)
-    * [Builder Extensions](#builder-extensions)
+  * [Builder Extensions](#builder-extensions)
 * [Android Lifecycle](#android-lifecycle)
 * [Android Espresso](#android-espresso)
 * [Android ViewModel](#android-viewmodel)
@@ -69,7 +69,7 @@ The core of this library is [DispatcherProvider] - an interface with properties 
 It lives inside the [CoroutineContext], and gets passed from parent to child coroutines
 transparently without any additional code.
 
-``` kotlin
+```kotlin
 interface DispatcherProvider : CoroutineContext.Element {
 
   override val key: CoroutineContext.Key<*> get() = Key
@@ -107,7 +107,7 @@ always used.
 | [MainImmediateCoroutineScope]    | [Dispatchers.Main.immediate]
 | [UnconfinedCoroutineScope]       | [Dispatchers.Unconfined]
 
-``` kotlin
+```kotlin
 val mainScope = MainCoroutineScope()
 
 val someUIClass = SomeUIClass(mainScope)
@@ -130,15 +130,18 @@ functions:
 
 ### Builder Extensions
 
-|              | **Default**     | **IO**     | **Main**     | **Main.immediate**    | **
-Unconfined**     |
-| ------------ | --------------- | ---------- | ------------ | --------------------- | ------------------ |
-| [Job]        | [launchDefault] | [launchIO] | [launchMain] | [launchMainImmediate] | [launchUnconfined]
-| [Deferred]   | [asyncDefault]  | [asyncIO]  | [asyncMain]  | [asyncMainImmediate]  | [asyncUnconfined]
-| `suspend T`  | [withDefault]   | [withIO]   | [withMain]   | [withMainImmediate]   | [withUnconfined]
-| `Flow<T>`    | [flowOnDefault] | [flowOnIO] | [flowOnMain] | [flowOnMainImmediate] | [flowOnUnconfined]
+| | **Default**     | **IO**     | **Main**     | **Main.immediate**    | **
+Unconfined**     | | ------------ | --------------- | ---------- | ------------ |
+--------------------- | ------------------ | | [Job]        | [launchDefault] | [launchIO]
+| [launchMain] | [launchMainImmediate] | [launchUnconfined]
+| [Deferred]   | [asyncDefault]  | [asyncIO]  | [asyncMain]  | [asyncMainImmediate]
+| [asyncUnconfined]
+| `suspend T`  | [withDefault]   | [withIO]   | [withMain]   | [withMainImmediate]
+| [withUnconfined]
+| `Flow<T>`    | [flowOnDefault] | [flowOnIO] | [flowOnMain] | [flowOnMainImmediate]
+| [flowOnUnconfined]
 
-``` kotlin
+```kotlin
 class MyClass(val coroutineScope: IOCoroutineScope) {
 
   fun accessMainThread() = coroutineScope.launchMain {
@@ -153,7 +156,6 @@ class MyClass(val coroutineScope: IOCoroutineScope) {
 The [AndroidX.lifecycle][androidx-lifecycle-runtime-ktx] library offers a
 [lifecycleScope][androidx-lifecycleScope] extension function to provide a lifecycle-aware
 [CoroutineScope], but there are two shortcomings:
-
 1. It delegates to a hard-coded `Dispatchers.Main` [CoroutineDispatcher], which complicates unit and
    [Espresso] testing by requiring the use of [Dispatchers.setMain].
 2. It *pauses* the dispatcher when the lifecycle state passes below its threshold,
@@ -162,7 +164,7 @@ The [AndroidX.lifecycle][androidx-lifecycle-runtime-ktx] library offers a
 [Dispatch-android-lifecycle] and [dispatch-android-lifecycle-extensions] completely replace the
 AndroidX version.
 
-``` kotlin
+```kotlin
 import dispatch.android.lifecycle.*
 import dispatch.core.*
 import kotlinx.coroutines.flow.*
@@ -201,7 +203,7 @@ being "idle" when it is suspended. Using statically defined factories, service l
 dependency injection, it is possible to utilize idling-aware dispatchers throughout a codebase
 during Espresso testing.
 
-``` kotlin
+```kotlin
 class IdlingCoroutineScopeRuleWithLifecycleSample {
 
 
@@ -261,7 +263,7 @@ scope you'd like.
 If you're using the AAC `ViewModel` but not dependency injection, this artifact should be very
 helpful with testing.
 
-``` kotlin
+```kotlin
 import dispatch.android.viewmodel.*
 import kotlinx.coroutines.flow.*
 import timber.log.*
@@ -295,7 +297,7 @@ powerful when they can be used, but any reference to a statically defined dispat
 
 To that end, there's a configurable [TestDispatcherProvider]:
 
-``` kotlin
+```kotlin
 class TestDispatcherProvider(
   override val default: CoroutineDispatcher = TestCoroutineDispatcher(),
   override val io: CoroutineDispatcher = TestCoroutineDispatcher(),
@@ -308,7 +310,7 @@ class TestDispatcherProvider(
 As well as a polymorphic [TestProvidedCoroutineScope] which may be used in place of any
 type-specific [CoroutineScope]:
 
-``` kotlin
+```kotlin
 val testScope = TestProvidedCoroutineScope()
 
 val someUIClass = SomeUIClass(testScope)
@@ -325,7 +327,7 @@ class SomeUIClass(val coroutineScope: MainCoroutineScope) {
 There's also [testProvided], which delegates to [runBlockingTest][kotlinx.runBlockingTest] but which
 includes a [TestDispatcherProvider] inside the [TestCoroutineScope].
 
-``` kotlin
+```kotlin
 class Subject {
   // this would normally be a hard-coded reference to Dispatchers.Main
   suspend fun sayHello() = withMain {  }
@@ -344,19 +346,19 @@ fun `sayHello should say hello`() = runBlockingProvided {
 
 | **artifact**                            | **features**                                   |
 | --------------------------------------  | ---------------------------------------------- |
-| [dispatch-android-espresso]             | [IdlingDispatcher] <p> [IdlingDispatcherProvider]
+| [dispatch-android-espresso]             | [IdlingDispatcher] <p/> [IdlingDispatcherProvider]
 | [dispatch-android-lifecycle-extensions] | [dispatchLifecycleScope][dispatchLifecycleScope-extension]
-| [dispatch-android-lifecycle]            | [DispatchLifecycleScope][DispatchLifecycleScope-class] <p> [launchOnCreate] <p> [launchOnStart] <p> [launchOnResume] <p> [onNextCreate] <p> [onNextStart] <p> [onNextResume]
-| [dispatch-android-viewmodel]            | [CoroutineViewModel] <p> [viewModelScope]
-| [dispatch-core]                         | Dispatcher-specific types and factories <p> Dispatcher-specific coroutine builders
+| [dispatch-android-lifecycle]            | [DispatchLifecycleScope][DispatchLifecycleScope-class] <p/> [launchOnCreate] <p/> [launchOnStart] <p/> [launchOnResume] <p/> [onNextCreate] <p/> [onNextStart] <p/> [onNextResume]
+| [dispatch-android-viewmodel]            | [CoroutineViewModel] <p/> [viewModelScope]
+| [dispatch-core]                         | Dispatcher-specific types and factories <p/> Dispatcher-specific coroutine builders
 | [dispatch-detekt]                       | [Detekt] rules for common auto-imported-the-wrong-thing problems
 | [dispatch-test-junit4]                  | [TestCoroutineRule]
-| [dispatch-test-junit5]                  | [CoroutineTest] <p> [CoroutineTestExtension]
-| [dispatch-test]                         | [TestProvidedCoroutineScope] <p> [TestDispatcherProvider] <p> [runBlockingProvided] and [testProvided]
+| [dispatch-test-junit5]                  | [CoroutineTest] <p/> [CoroutineTestExtension]
+| [dispatch-test]                         | [TestProvidedCoroutineScope] <p/> [TestDispatcherProvider] <p/> [runBlockingProvided] and [testProvided]
 
 ## Full Gradle Config
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }
@@ -525,6 +527,7 @@ limitations under the License.
 [viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html#dispatch.android.viewmodel/DispatchViewModel/viewModelScope/#/PointingToDeclaration/
 
 [ViewModelScopeFactory]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-view-model-scope-factory/index.html
+
 
 [androidx-lifecycle-runtime-ktx]: https://developer.android.com/jetpack/androidx/releases/lifecycle
 

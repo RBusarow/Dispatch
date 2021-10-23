@@ -21,7 +21,7 @@ to handle set-up and tear-down of a [TestProvidedCoroutineScope].
 Since [TestProvidedCoroutineScope] is a [TestCoroutineScope], this Rule also
 invokes [cleanupTestCoroutines][cleanupTestCoroutines] after the test.
 
-``` kotlin
+```kotlin
 class SomeClassTest {
 
   @JvmField
@@ -71,7 +71,7 @@ official options would be:
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }
@@ -98,7 +98,7 @@ artifacts.
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }
