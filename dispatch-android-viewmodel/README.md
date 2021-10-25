@@ -18,7 +18,7 @@ The artifact I hope you don't need, but if you're not doing dependency injection
 
 ## Examples
 
-``` kotlin
+```kotlin
 import dispatch.android.*
 
 // DispatchViewModel is just a ViewModel with a lazy viewModelScope
@@ -87,7 +87,7 @@ custom [CoroutineContext]
 such as a [DispatcherProvider] or [IdlingDispatcher]. With [dispatch-android-lifecycle], we can set
 a custom factory.
 
-``` kotlin
+```kotlin
 class SomeViewModelTest {
 
   @Before
@@ -121,7 +121,7 @@ a `viewModelScope` is active while the `LifecycleOwner` is in the backstack.
 
 Consider this example:
 
-``` kotlin
+```kotlin
 // Don't do this
 class SomeViewModel : DispatchViewModel() {
 
@@ -140,7 +140,7 @@ A `CoroutineScope` in a `ViewModel` is better utilized for single-shot requests 
 restarted in the event of a configuration change.  "Observer" behavior should be scoped to the
 associated view.
 
-``` kotlin
+```kotlin
 // Maybe do this
 class SomeFragment : Fragment() {
 
@@ -183,7 +183,7 @@ galling since `ViewModel` could absolutely have just been an interface to begin 
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }

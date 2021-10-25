@@ -29,7 +29,7 @@ Testing version of the [DispatcherProvider] with three main styles of creation:
 Each property becomes its own [TestCoroutineDispatcher] by default, but may be replaced by
 any [CoroutineDispatcher].
 
-``` kotlin
+```kotlin
 val customTestDispatcherProvider = TestDispatcherProvider(
   default = newSingleThreadContext("default"),
   io = newSingleThreadContext("io"),
@@ -46,7 +46,7 @@ val defaultTetsDispatcherProvider = TestDispatcherProvider()
 
 Another option is to pass a single [CoroutineDispatcher], which is then used to populate all fields.
 
-``` kotlin
+```kotlin
 val dispatcher = newSingleThreadContext("custom")
 
 val dispatcherProvider = TestDispatcherProvider(dispatcher)
@@ -68,7 +68,7 @@ the awkward mechanics of [Dispatchers.setMain].
 This is essentially [DefaultDispatcherProvider] except with
 a [single-threaded executor][newSingleThreadContext] handling the "main" thread.
 
-``` kotlin
+```kotlin
 fun TestBasicDispatcherProvider(): TestDispatcherProvider {
 
   val mainThread = newSingleThreadContext("main thread proxy")
@@ -97,7 +97,7 @@ This type may be injected anywhere, regardless of the requirement.
 Sometimes, instead of explicitly creating a [CoroutineScope] object, we prefer to just use a
 coroutineScope builder function within a function.
 
-``` kotlin
+```kotlin
 @Test
 fun some_test() = runBlockingProvided {
   someSuspendFunction()
@@ -118,7 +118,7 @@ fun some_test() = testProvided {
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }

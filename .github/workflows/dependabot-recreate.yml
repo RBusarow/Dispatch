@@ -1,8 +1,10 @@
 name: "check for Dependabot merge conflicts"
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request_target:
+    types: [synchronize, edited, unlabeled, labeled]
 
 jobs:
   main:

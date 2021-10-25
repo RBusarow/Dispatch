@@ -1,0 +1,64 @@
+{
+  "version-1.0.0-beta10/Basics": [
+    {
+      "type": "doc",
+      "id": "version-1.0.0-beta10/intro"
+    },
+    {
+      "type": "doc",
+      "id": "version-1.0.0-beta10/quickstart"
+    },
+    {
+      "type": "doc",
+      "id": "version-1.0.0-beta10/modules/dispatch-core"
+    },
+    {
+      "type": "doc",
+      "id": "version-1.0.0-beta10/modules/dispatch-detekt"
+    },
+    {
+      "type": "category",
+      "label": "Android",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.0.0-beta10/modules/dispatch-android-espresso"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0-beta10/modules/dispatch-android-lifecycle"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0-beta10/modules/dispatch-android-lifecycle-extensions"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0-beta10/modules/dispatch-android-viewmodel"
+        }
+      ],
+      "collapsible": true
+    },
+    {
+      "type": "category",
+      "label": "Testing",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.0.0-beta10/modules/dispatch-test"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0-beta10/modules/dispatch-test-junit4"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.0-beta10/modules/dispatch-test-junit5"
+        }
+      ],
+      "collapsible": true
+    }
+  ]
+}

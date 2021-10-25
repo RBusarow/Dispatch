@@ -48,6 +48,7 @@ plugins {
   base
   dokka
   knit
+  website
 }
 
 allprojects {
@@ -61,63 +62,6 @@ allprojects {
         }
       }
     }
-  }
-}
-
-subprojects {
-  @Suppress("UNUSED_VARIABLE")
-  val buildDocs by tasks.registering {
-
-    description = "recreates all documentation for the /docs directory"
-    group = "documentation"
-
-    doFirst {
-      updateReadMeArtifactVersions()
-    }
-
-    dependsOn(
-      rootProject.tasks.findByName("cleanDocs"),
-      rootProject.tasks.findByName("copyRootFiles"),
-      rootProject.tasks.findByName("knit")
-    )
-
-    doLast {
-      copyKdoc()
-      copyReadMe()
-    }
-  }
-}
-
-val updateDocsVersions by tasks.registering {
-
-  description = "updates all artifact versions used in documentation"
-  group = "documentation"
-
-  doLast {
-    allprojects { updateReadMeArtifactVersions() }
-  }
-}
-
-val cleanDocs by tasks.registering {
-
-  description = "cleans /docs"
-  group = "documentation"
-
-  doLast {
-    cleanDocs()
-  }
-}
-
-val copyRootFiles by tasks.registering {
-
-  description = "copies documentation files from the project root into /docs"
-  group = "documentation"
-
-  dependsOn("cleanDocs")
-
-  doLast {
-    copySite()
-    copyRootFiles()
   }
 }
 

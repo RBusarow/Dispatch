@@ -32,7 +32,7 @@ project**-level gradle file.
 
 In root project-level `build.gradle` or `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 allprojects {
   dependencies {
     detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.17.1")

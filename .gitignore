@@ -16,3 +16,7 @@
 /projectFilesBackup/.idea/
 !/.idea/scopes/*
 /docs/api/
+
+
+# copy of API docs for website
+/website/static/api/*

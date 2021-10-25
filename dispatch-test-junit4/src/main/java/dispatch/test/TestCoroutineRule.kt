@@ -37,7 +37,7 @@ import kotlin.coroutines.*
  *
  * ### Requires JUnit 4.
  *
- * ``` Kotlin
+ * ```kotlin
  * dependencies {
  *   testImplementation("junit:junit:4.12")
  *   -- or --

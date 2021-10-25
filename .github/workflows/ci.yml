@@ -10,70 +10,193 @@ on:
 
 jobs:
 
-  tests:
+  cancel-other-jobs:
 
     runs-on: ubuntu-latest
 
     steps:
       # cancel previous jobs
-      - uses: khan/pull-request-workflow-cancel@1.0.0
-        with:
-          workflows: "ci.yml"
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          access_token: '${{ github.token }}'
 
+  detekt:
+
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses : actions/setup-java@v2
+        with :
+          distribution : 'temurin'
+          java-version : '11'
+          cache: 'gradle'
+
+      - uses: burrunan/gradle-cache-action@v1
+        name: detekt
+        with:
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            detekt --no-daemon
+          concurrent: true
+          gradle-build-scan-report: false
+          gradle-distribution-sha-256-sum-warning: false
+
+  ktlint:
+
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+
+    steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
+
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses : actions/setup-java@v2
+        with :
+          distribution : 'temurin'
+          java-version : '11'
+          cache: 'gradle'
+
+      # formats all src files
+      - uses: burrunan/gradle-cache-action@v1
+        name: KtLint format
         with:
-          java-version: 14
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            ktlintFormat
+          concurrent: true
+          gradle-build-scan-report: false
+          gradle-distribution-sha-256-sum-warning: false
 
-      # update artifact versions in documentation samples
-      - name: update artifact versions in documentation samples
-        run: ./gradlew updateDocsVersions
-
-      # If updateDocsVersions generated changes, commit and push those changes.
+      # If KtLint generated changes, commit and push those changes.
       - name: commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: update artifact versions in documentation samples
+          commit_message: Apply KtLint format
           commit_options: '--no-verify --signoff'
 
-      - name: Copy Dependabot dependencies to toml
-        run: ./gradlew dependencysync
+#  versioning:
+#
+#    runs-on: ubuntu-latest
+#    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          ref: ${{ github.event.pull_request.head.ref }}
+#          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+#          fetch-depth: 0
+#
+#      - name: Set up JDK
+#        uses : actions/setup-java@v2
+#        with :
+#          distribution : 'adopt'
+#          java-version : '14'
+#          cache: 'gradle'
+#
+#      - uses: burrunan/gradle-cache-action@v1
+#        name: Sync versions in website docs
+#        with:
+#          gradle-dependencies-cache-key: |
+#            gradle/libs.versions.toml
+#          arguments: |
+#            updateWebsiteNextDocsVersionRefs
+#          concurrent: true
+#          gradle-build-scan-report: false
+#          gradle-distribution-sha-256-sum-warning: false
+#
+#      - name: commit changes
+#        uses: stefanzweifel/git-auto-commit-action@v4
+#        with:
+#          commit_message: update docs versions
+#          commit_options: '--no-verify --signoff'
+#
+#      - uses: burrunan/gradle-cache-action@v1
+#        name: Update version in website package.json
+#        with:
+#          gradle-dependencies-cache-key: |
+#            gradle/libs.versions.toml
+#          arguments: |
+#            updateWebsitePackageJsonVersion
+#          concurrent: true
+#          gradle-build-scan-report: false
+#          gradle-distribution-sha-256-sum-warning: false
+#
+#      - name: commit changes
+#        uses: stefanzweifel/git-auto-commit-action@v4
+#        with:
+#          commit_message: update website versions
+#          commit_options: '--no-verify --signoff'
 
-      # If the copy generated changes, commit and push those changes.
-      - name: commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+  api-check:
+
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+
+    steps:
+      - uses: actions/checkout@v2
         with:
-          commit_message: Update dependencies from dependabot
-          commit_options: '--no-verify --signoff'
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-      # formats all Kotlin src files
-      - name: KTLint format
-        run: ./gradlew ktlintformat
+      - name: Set up JDK
+        uses : actions/setup-java@v2
+        with :
+          distribution : 'temurin'
+          java-version : '11'
+          cache: 'gradle'
 
-      # If formatKotlin generated changes, commit and push those changes.
-      - name: commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: burrunan/gradle-cache-action@v1
+        name: api check
         with:
-          commit_message: Apply ktlint format
-          commit_options: '--no-verify --signoff'
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            apicheck
+          concurrent: true
+          gradle-build-scan-report: false
+          gradle-distribution-sha-256-sum-warning: false
 
-      - name: detekt
-        run: ./gradlew detekt
+  tests:
 
-      - name: all tests
-        run: ./gradlew testJvm
+    runs-on: ubuntu-latest
 
-      - name: Unit test results
-        uses: mikepenz/action-junit-report@v1
-        if: failure()
+    steps:
+      - uses: actions/checkout@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/build/**/TEST-*.xml'
-          check_name: Unit Test Results
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses : actions/setup-java@v2
+        with :
+          distribution : 'temurin'
+          java-version : '11'
+          cache: 'gradle'
+
+      - uses: burrunan/gradle-cache-action@v1
+        name: all tests
+        with:
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            testJvm
+          concurrent: true
+          gradle-build-scan-report: false
+          gradle-distribution-sha-256-sum-warning: false

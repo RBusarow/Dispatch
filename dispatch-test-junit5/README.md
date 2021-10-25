@@ -26,7 +26,7 @@ invokes [cleanupTestCoroutines] after the test.
 
 ### CoroutineTest example
 
-``` kotlin
+```kotlin
 @CoroutineTest(CustomScopeFactory::class)
 class SomeClassTest(
   val testScope: TestProvidedCoroutineScope
@@ -55,7 +55,7 @@ class CustomScopeFactory : CoroutineTestExtension.ScopeFactory() {
 
 ### CoroutineTestExtension example
 
-``` kotlin
+```kotlin
 class SomeClassTest {
 
   @JvmField
@@ -101,7 +101,7 @@ bundled as part of Dispatch, so you’ll need to add it to your `dependencies` b
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }
@@ -129,7 +129,7 @@ artifacts.
 
 Add to your module's `build.gradle.kts`:
 
-``` kotlin
+```kotlin
 repositories {
   mavenCentral()
 }
