@@ -99,7 +99,7 @@ dependencies {
   dependencySync("androidx.work:work-runtime:2.7.0")
   dependencySync("androidx.work:work-testing:2.7.0")
 
-  dependencySync("app.cash.turbine:turbine:0.6.1")
+  dependencySync("app.cash.turbine:turbine:0.7.0")
 
   dependencySync("com.android.tools.build:gradle:7.0.2")
   dependencySync("com.dipien:bye-bye-jetifier:1.2.0")
