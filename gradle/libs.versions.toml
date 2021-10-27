@@ -163,7 +163,7 @@ arturbosch-detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", ver
 arturbosch-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 arturbosch-detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
 
-cash-turbine = "app.cash.turbine:turbine:0.6.1"
+cash-turbine = "app.cash.turbine:turbine:0.7.0"
 
 codehaus-groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
 codehaus-groovy-xml = { module = "org.codehaus.groovy:groovy-xml", version.ref = "groovy" }

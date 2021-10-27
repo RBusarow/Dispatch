@@ -99,9 +99,9 @@ dependencies {
   dependencySync("androidx.work:work-runtime:2.7.0")
   dependencySync("androidx.work:work-testing:2.7.0")
 
-  dependencySync("app.cash.turbine:turbine:0.6.1")
+  dependencySync("app.cash.turbine:turbine:0.7.0")
 
-  dependencySync("com.android.tools.build:gradle:7.0.2")
+  dependencySync("com.android.tools.build:gradle:7.0.3")
   dependencySync("com.dipien:bye-bye-jetifier:1.2.0")
   dependencySync("com.github.javaparser:javaparser-symbol-solver-core:3.23.1")
   dependencySync("com.github.tschuchortdev:kotlin-compile-testing:1.4.5")
