@@ -281,7 +281,7 @@ square-retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref
 square-retrofit-mock = { module = "com.squareup.retrofit2:retrofit-mock", version.ref = "square-retrofit" }
 square-retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "square-retrofit" }
 
-squareup-okio = "com.squareup.okio:okio"
+squareup-okio ={ module = "com.squareup.okio:okio", version.ref = "square-okio" }
 squareup-okio-bom = { module = "com.squareup.okio:okio-bom", version.ref = "square-okio" }
 
 squareup-picasso = "com.squareup.picasso:picasso:2.71828"
