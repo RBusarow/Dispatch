@@ -122,10 +122,10 @@ dependencies {
   dependencySync("com.rickbusarow.hermit:hermit-junit5:0.9.5")
   dependencySync("com.rickbusarow.hermit:hermit-mockk:0.9.5")
   dependencySync("com.squareup.anvil:annotations:2.3.8")
-  dependencySync("com.squareup.anvil:compiler-api:2.3.7")
-  dependencySync("com.squareup.anvil:compiler-utils:2.3.7")
-  dependencySync("com.squareup.anvil:compiler:2.3.7")
-  dependencySync("com.squareup.anvil:gradle-plugin:2.3.7")
+  dependencySync("com.squareup.anvil:compiler-api:2.3.8")
+  dependencySync("com.squareup.anvil:compiler-utils:2.3.8")
+  dependencySync("com.squareup.anvil:compiler:2.3.8")
+  dependencySync("com.squareup.anvil:gradle-plugin:2.3.8")
   dependencySync("com.squareup.moshi:moshi-adapters:1.12.0")
   dependencySync("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
   dependencySync("com.squareup.moshi:moshi-kotlin:1.12.0")
@@ -142,6 +142,7 @@ dependencies {
 
   dependencySync("commons-io:commons-io:2.11.0")
 
+  dependencySync("com.squareup.okio:okio-bom:3.0.0")
   dependencySync("dev.zacsweers.autoservice:auto-service-ksp:1.0.0")
   dependencySync("dev.zacsweers.moshix:moshi-ksp:0.14.1")
   dependencySync("dev.zacsweers.moshix:moshi-sealed-codegen:0.14.1")
