@@ -107,7 +107,7 @@ dependencies {
   dependencySync("com.github.tschuchortdev:kotlin-compile-testing:1.4.5")
   dependencySync("com.google.accompanist:accompanist-coil:0.15.0")
   dependencySync("com.google.android.material:material:1.4.0")
-  dependencySync("com.google.auto.service:auto-service-annotations:1.0.1.1")
+  dependencySync("com.google.auto.service:auto-service-annotations:1.0.1")
   dependencySync("com.google.auto.service:auto-service:1.0")
   dependencySync("com.google.auto:auto-common:1.2")
   dependencySync("com.google.code.findbugs:jsr305:3.0.2")
