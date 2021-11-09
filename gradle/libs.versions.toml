@@ -1,6 +1,6 @@
 [versions]
 androidTools = "7.0.3"
-anvil = "2.3.8"
+anvil = "2.3.9"
 benManes = "0.36.0"
 changeTracker = "0.7.3"
 coil = "1.4.0"
@@ -281,7 +281,7 @@ square-retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref
 square-retrofit-mock = { module = "com.squareup.retrofit2:retrofit-mock", version.ref = "square-retrofit" }
 square-retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "square-retrofit" }
 
-squareup-okio ={ module = "com.squareup.okio:okio", version.ref = "square-okio" }
+squareup-okio = { module = "com.squareup.okio:okio", version.ref = "square-okio" }
 squareup-okio-bom = { module = "com.squareup.okio:okio-bom", version.ref = "square-okio" }
 
 squareup-picasso = "com.squareup.picasso:picasso:2.71828"
