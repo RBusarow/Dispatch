@@ -32,6 +32,12 @@ jobs:
 
       - uses: gradle/wrapper-validation-action@v1
 
+      # Install and build Docusaurus website
+      - name: Install yarn dependencies
+        run: |
+          cd website
+          yarn install
+
       - uses: burrunan/gradle-cache-action@v1
         name: Build Docusaurus website
         with:

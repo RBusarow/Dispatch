@@ -179,7 +179,6 @@ val buildSite by tasks.registering(Exec::class) {
   )
 
   workingDir("./website")
-  commandLine("yarn", "install")
   commandLine("yarn", "run", "build")
 }
 
