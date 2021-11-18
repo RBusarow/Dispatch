@@ -18,38 +18,40 @@ jobs:
         env:
           access_token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
 
-  build:
+  dependency-sync:
 
     runs-on: ubuntu-latest
 
     steps:
 
       - uses: actions/checkout@v2
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - uses: gradle/wrapper-validation-action@v1
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
 
       - name: Set up JDK
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         uses : actions/setup-java@v2
         with :
           distribution : 'temurin'
           java-version : '11'
           cache: 'gradle'
 
-      - name: Copy Dependabot dependencies to toml
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-        run: ./gradlew dependencySync
+      - uses: burrunan/gradle-cache-action@v1
+        name: run dependencySync
+        with:
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            dependencySync
+          concurrent: true
+          gradle-build-scan-report: false
 
       # If the copy generated changes, commit and push those changes.
       - name: commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         with:
-          commit_message: Update dependencies from dependabot
+          commit_message: sync dependency definitions
           commit_options: '--no-verify --signoff'
