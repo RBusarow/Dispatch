@@ -33,7 +33,7 @@ public class TestDispatcherProvider(
    *
    * @see Dispatchers.Default
    */
-  override val default: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val default: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * [CoroutineDispatcher] generally intended for blocking I/O tasks.
    *
@@ -41,7 +41,7 @@ public class TestDispatcherProvider(
    *
    * @see Dispatchers.IO
    */
-  override val io: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val io: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread.
    *
@@ -49,7 +49,7 @@ public class TestDispatcherProvider(
    *
    * @see Dispatchers.Main
    */
-  override val main: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val main: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
    *
@@ -57,13 +57,13 @@ public class TestDispatcherProvider(
    *
    * @see [MainCoroutineDispatcher.immediate]
    */
-  override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val mainImmediate: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * Corresponds to the [Dispatchers.Unconfined] property in a default implementation.
    *
    * @see [Dispatchers.Unconfined]
    */
-  override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+  override val unconfined: CoroutineDispatcher = StandardTestDispatcher()
 ) : DispatcherProvider {
   /**
    * @suppress

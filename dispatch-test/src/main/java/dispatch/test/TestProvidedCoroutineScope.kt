@@ -36,7 +36,6 @@ import kotlin.coroutines.*
  */
 @ExperimentalCoroutinesApi
 public interface TestProvidedCoroutineScope :
-  TestCoroutineScope,
   DefaultCoroutineScope,
   IOCoroutineScope,
   MainCoroutineScope,
@@ -51,6 +50,7 @@ public interface TestProvidedCoroutineScope :
 /**
  * @suppress internal use only
  */
+@Suppress("DEPRECATION")
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeImpl(
   override val dispatcherProvider: DispatcherProvider,
@@ -68,7 +68,7 @@ internal class TestProvidedCoroutineScopeImpl(
  */
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope(
-  dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),
+  dispatcher: TestDispatcher = StandardTestDispatcher(),
   dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
   context: CoroutineContext = EmptyCoroutineContext
 ): TestProvidedCoroutineScope = TestProvidedCoroutineScopeImpl(

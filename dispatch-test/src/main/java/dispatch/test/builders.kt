@@ -83,15 +83,15 @@ public fun testProvided(
   testBody: suspend TestProvidedCoroutineScope.() -> Unit
 ) {
 
-  val dispatcher = (context[ContinuationInterceptor] as? TestCoroutineDispatcher)
-    ?: TestCoroutineDispatcher()
+  val dispatcher = (context[ContinuationInterceptor] as? TestDispatcher)
+    ?: StandardTestDispatcher()
 
   val dispatcherProvider = context[DispatcherProvider]
     ?: TestDispatcherProvider(dispatcher)
 
   val combinedContext = context + dispatcher + dispatcherProvider
 
-  return runBlockingTest(context = combinedContext) {
+  return runTest(context = combinedContext) {
 
     val providedScope = TestProvidedCoroutineScopeImpl(
       dispatcherProvider = dispatcherProvider,
