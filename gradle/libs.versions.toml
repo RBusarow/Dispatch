@@ -14,6 +14,7 @@ hermit = "0.9.5"
 jUnit = "5.8.1"
 kotest = "4.6.3"
 kotlin = "1.5.31"
+ktlint-gradle = "10.2.1"
 
 sonarPlugin = "2.6.1"
 spotless = "5.10.1"
@@ -32,12 +33,17 @@ androidx-test-version = "1.4.0"
 androidx-work-version = "2.7.0"
 
 kotlinx-atomicfu = "0.16.3"
+kotlinx-binaryCompatibility = "0.8.0"
 kotlinx-coroutines = "1.5.2"
 kotlinx-knit = "0.3.0"
 
 google-dagger = "2.40"
 google-material = "1.4.0"
 
+rickBusarow-dependencySync = "0.11.4"
+rickBusarow-moduleCheck = "0.11.3"
+
+square-anvil = "2.3.11-1-6-10"
 square-moshi = "1.12.0"
 square-okhttp = "4.9.2"
 square-okio = "3.0.0"
@@ -47,7 +53,20 @@ zacSweers-moshix = "0.14.1"
 
 [plugins]
 
+anvil = { id = "com.squareup.anvil", version.ref = "square-anvil" }
+benManes = { id = "com.github.ben-manes.versions", version.ref = "benManes" }
+dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+gradleDoctor = { id = "com.osacky.doctor", version.ref = "gradleDoctor" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
+taskTree = { id = "com.dorongold.task-tree", version.ref = "taskTree" }
+
+dependencySync = { id = "com.rickbusarow.gradle-dependency-sync", version.ref = "rickBusarow-dependencySync" }
+moduleCheck = { id = "com.rickbusarow.module-check", version.ref = "rickBusarow-moduleCheck" }
+
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlinx-binaryCompatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinx-binaryCompatibility" }
 kotlinx-knit = { id = "kotlinx-knit", version.ref = "kotlinx-knit" }
 
 [libraries]

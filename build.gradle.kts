@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -37,14 +37,16 @@ buildscript {
   }
 }
 
+@Suppress("UnstableApiUsage")
 plugins {
-  id("com.github.ben-manes.versions") version "0.39.0"
-  id("com.autonomousapps.dependency-analysis") version "0.78.0"
-  id("com.osacky.doctor") version "0.7.3"
-  id("io.gitlab.arturbosch.detekt") version "1.18.1"
   kotlin("jvm")
-  id("com.dorongold.task-tree") version "2.1.0"
-  id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.8.0"
+  alias(libs.plugins.kotlinx.binaryCompatibility)
+  alias(libs.plugins.dependencyAnalysis)
+  alias(libs.plugins.benManes)
+  alias(libs.plugins.gradleDoctor)
+  alias(libs.plugins.detekt)
+  alias(libs.plugins.taskTree)
+  alias(libs.plugins.moduleCheck)
   base
   dokka
   knit
