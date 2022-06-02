@@ -49,6 +49,15 @@ template: |
 
   $CHANGES
 
+exclude-contributors:
+  - 'dependabot'
+  - 'dependabot[bot]'
+  - 'renovate'
+  - 'renovate[bot]'
+  - 'renovate-bot'
+  - 'kodiakhq'
+  - 'kodiakhq[bot]'
+
 autolabeler:
   - label: 'documentation'
     files:
@@ -56,6 +65,7 @@ autolabeler:
   - label: 'dependencies'
     branch:
       - '/dependabot\/.+/'
+      - '/renovate\/.+/'
 
 include-labels:
   - 'api-breaking change'
