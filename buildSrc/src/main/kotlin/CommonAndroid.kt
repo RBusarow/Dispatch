@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,53 +13,58 @@
  * limitations under the License.
  */
 
+import com.android.build.api.dsl.ApplicationBaseFlavor
+import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.LibraryBaseFlavor
 import com.android.build.gradle.*
 import org.gradle.api.*
 import org.gradle.api.JavaVersion.*
 import org.gradle.kotlin.dsl.*
 import java.io.*
 
-@Suppress("MagicNumber", "LongMethod")
-fun Project.commonAndroid() {
+@Suppress("MagicNumber", "LongMethod", "UnstableApiUsage")
+fun CommonExtension<*, *, *, *>.commonAndroid() {
 
-  configure<TestedExtension> {
-    compileSdkVersion(30)
+  compileSdk = 31
 
-    defaultConfig {
-      minSdkVersion(21)
-      targetSdkVersion(30)
-      versionName = "1.0.0-beta10"
+  defaultConfig {
 
-      testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    minSdk = 21
+    // `targetSdk` doesn't have a single base interface, as of AGP 7.1.0
+    when (this@defaultConfig) {
+      is LibraryBaseFlavor -> targetSdk = 31
+      is ApplicationBaseFlavor -> targetSdk = 31
     }
 
-    buildTypes {
-      getByName("release") {
-        isMinifyEnabled = false
-        proguardFiles(
-          getDefaultProguardFile("proguard-android-optimize.txt"),
-          "proguard-rules.pro"
-        )
-      }
-    }
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+  }
 
-    compileOptions {
-      sourceCompatibility = VERSION_1_8
-      targetCompatibility = VERSION_1_8
+  buildTypes {
+    getByName("release") {
+      isMinifyEnabled = false
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro"
+      )
     }
+  }
 
-    lintOptions {
-      disable("ObsoleteLintCustomCheck")
-      disable("MissingTranslation")
-      enable("InvalidPackage")
-      enable("Interoperability")
-      isAbortOnError = true
-    }
+  compileOptions {
+    sourceCompatibility = VERSION_11
+    targetCompatibility = VERSION_11
+  }
 
-    testOptions {
-      unitTests.isIncludeAndroidResources = true
-      unitTests.isReturnDefaultValues = true
-      animationsDisabled = true
-    }
+  lint {
+    disable.addAll(setOf("ObsoleteLintCustomCheck", "MissingTranslation"))
+    enable.addAll(setOf("InvalidPackage", "Interoperability"))
+    abortOnError = true
+    checkDependencies = true
+    checkAllWarnings = true
+  }
+
+  testOptions {
+    unitTests.isIncludeAndroidResources = true
+    unitTests.isReturnDefaultValues = true
+    animationsDisabled = true
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ public class TestDispatcherProvider(
    *
    * @see Dispatchers.Default
    */
-  override val default: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val default: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * [CoroutineDispatcher] generally intended for blocking I/O tasks.
    *
@@ -41,7 +41,7 @@ public class TestDispatcherProvider(
    *
    * @see Dispatchers.IO
    */
-  override val io: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val io: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread.
    *
@@ -49,21 +49,23 @@ public class TestDispatcherProvider(
    *
    * @see Dispatchers.Main
    */
-  override val main: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val main: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
    *
-   * Corresponds to the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in a default implementation.
+   * Corresponds to the
+   * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in
+   * a default implementation.
    *
    * @see [MainCoroutineDispatcher.immediate]
    */
-  override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher(),
+  override val mainImmediate: CoroutineDispatcher = StandardTestDispatcher(),
   /**
    * Corresponds to the [Dispatchers.Unconfined] property in a default implementation.
    *
    * @see [Dispatchers.Unconfined]
    */
-  override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+  override val unconfined: CoroutineDispatcher = StandardTestDispatcher()
 ) : DispatcherProvider {
   /**
    * @suppress
@@ -107,7 +109,7 @@ public fun TestDispatcherProvider(
 @Suppress("HardCodedDispatcher")
 public fun TestBasicDispatcherProvider(): TestDispatcherProvider {
 
-  @Suppress("EXPERIMENTAL_API_USAGE")
+  @Suppress("OPT_IN_USAGE")
   val mainThread = newSingleThreadContext("main thread proxy")
 
   return TestDispatcherProvider(

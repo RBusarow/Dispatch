@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,13 +19,13 @@ import io.gitlab.arturbosch.detekt.api.*
 import org.jetbrains.kotlin.com.intellij.psi.*
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.*
-import org.jetbrains.kotlin.resolve.calls.callUtil.*
+import org.jetbrains.kotlin.resolve.calls.util.*
 
 /**
  * Detects use of a hard-coded reference to the `kotlinx.coroutines.Dispatchers` singleton.
  *
- * The `CoroutineDispatcher`'s in this singleton do not contain a `DispatcherProvider`,
- * so they're unaffected by this library.
+ * The `CoroutineDispatcher`'s in this singleton do not contain a `DispatcherProvider`, so they're
+ * unaffected by this library.
  *
  * ## Config
  * - allowDefaultDispatcher

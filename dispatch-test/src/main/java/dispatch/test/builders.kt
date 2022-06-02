@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -75,15 +75,15 @@ public fun testProvided(
   testBody: suspend TestProvidedCoroutineScope.() -> Unit
 ) {
 
-  val dispatcher = (context[ContinuationInterceptor] as? TestCoroutineDispatcher)
-    ?: TestCoroutineDispatcher()
+  val dispatcher = (context[ContinuationInterceptor] as? TestDispatcher)
+    ?: StandardTestDispatcher()
 
   val dispatcherProvider = context[DispatcherProvider]
     ?: TestDispatcherProvider(dispatcher)
 
   val combinedContext = context + dispatcher + dispatcherProvider
 
-  return runBlockingTest(context = combinedContext) {
+  return runTest(context = combinedContext) {
 
     val providedScope = TestProvidedCoroutineScopeImpl(
       dispatcherProvider = dispatcherProvider,
