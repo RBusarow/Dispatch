@@ -1,0 +1,13 @@
+io.gitlab.arturbosch.detekt:detekt-api:1.18.1
+io.gitlab.arturbosch.detekt:detekt-bom:1.18.1
+io.gitlab.arturbosch.detekt:detekt-psi-utils:1.18.1
+org.jetbrains.intellij.deps:trove4j:1.0.20181211
+org.jetbrains.kotlin:kotlin-compiler-embeddable:1.5.31
+org.jetbrains.kotlin:kotlin-daemon-embeddable:1.5.31
+org.jetbrains.kotlin:kotlin-reflect:1.5.31
+org.jetbrains.kotlin:kotlin-script-runtime:1.5.31
+org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31
+org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31
+org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31
+org.jetbrains.kotlin:kotlin-stdlib:1.5.31
+org.jetbrains:annotations:13.0

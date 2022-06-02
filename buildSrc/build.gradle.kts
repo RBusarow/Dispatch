@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,11 +28,12 @@ val kotlinVersion = libs.versions.kotlin.get()
 dependencies {
 
   compileOnly(gradleApi())
-  implementation(libs.kotlin.reflect)
-  implementation(libs.kotlin.stdlib.jdk8)
+  implementation(libs.dropbox.dependencyGuard)
   implementation(libs.kotlin.annotation.processing)
   implementation(libs.kotlin.compiler)
   implementation(libs.kotlin.gradle.pluginApi)
+  implementation(libs.kotlin.reflect)
+  implementation(libs.kotlin.stdlib.jdk8)
 
   implementation(kotlin("gradle-plugin", version = kotlinVersion))
   implementation(kotlin("stdlib", version = kotlinVersion))
