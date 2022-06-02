@@ -181,4 +181,10 @@ allprojects {
 
 configure<com.osacky.doctor.DoctorExtension> {
   negativeAvoidanceThreshold.set(500)
+  javaHome {
+    // this is throwing a false positive
+    // JAVA_HOME is /Users/rbusarow/Library/Java/JavaVirtualMachines/azul-11-ARM64
+    // Gradle is using /Users/rbusarow/Library/Java/JavaVirtualMachines/azul-11-ARM64/zulu-11.jdk/Contents/Home
+    ensureJavaHomeMatches.set(false)
+  }
 }
