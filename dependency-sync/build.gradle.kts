@@ -143,6 +143,7 @@ dependencies {
   dependencySync("commons-io:commons-io:2.11.0")
 
   dependencySync("com.squareup.okio:okio-bom:3.0.0")
+  dependencySync("com.dropbox.dependency-guard:dependency-guard:0.3.0")
   dependencySync("dev.zacsweers.autoservice:auto-service-ksp:1.0.0")
   dependencySync("dev.zacsweers.moshix:moshi-ksp:0.14.1")
   dependencySync("dev.zacsweers.moshix:moshi-sealed-codegen:0.14.1")
