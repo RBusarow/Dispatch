@@ -31,7 +31,7 @@ androidx-room = "2.4.0-beta01"
 androidx-startup = "1.1.0"
 androidx-test-espresso = "3.4.0"
 androidx-test-version = "1.4.0"
-androidx-work-version = "2.7.0"
+androidx-work-version = "2.7.1"
 
 kotlinx-atomicfu = "0.16.3"
 kotlinx-binaryCompatibility = "0.8.0"
