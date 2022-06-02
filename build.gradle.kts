@@ -39,7 +39,7 @@ buildscript {
 
 @Suppress("UnstableApiUsage")
 plugins {
-  kotlin("jvm")
+  kotlin("jvm") apply false
   alias(libs.plugins.kotlinx.binaryCompatibility)
   alias(libs.plugins.dependencyAnalysis)
   alias(libs.plugins.benManes)
