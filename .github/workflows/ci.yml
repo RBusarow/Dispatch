@@ -24,7 +24,7 @@ jobs:
   detekt:
 
     runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+    if: github.actor != 'renovate[bot]'
 
     steps:
       - uses: actions/checkout@v2
@@ -46,7 +46,7 @@ jobs:
   ktlint:
 
     runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+    if: github.actor != 'renovate[bot]'
 
     steps:
       - name: check out with token (used by forks)
@@ -87,7 +87,7 @@ jobs:
 #  versioning:
 #
 #    runs-on: ubuntu-latest
-#    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+  #    if: github.actor != 'renovate[bot]'
 #
 #    steps:
 #      - uses: actions/checkout@v2
@@ -140,7 +140,7 @@ jobs:
   api-check:
 
     runs-on: ubuntu-latest
-    if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+    if: github.actor != 'renovate[bot]'
 
     steps:
       - uses: actions/checkout@v2
