@@ -45,7 +45,6 @@ rootProject.name = "Dispatch"
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":dependency-sync")
 include(":dispatch-android-espresso")
 include(":dispatch-android-lifecycle")
 include(":dispatch-android-lifecycle-extensions")
