@@ -228,7 +228,7 @@ hermit-mockk = { module = "com.rickbusarow.hermit:hermit-mockk", version.ref = "
 
 javaParser = "com.github.javaparser:javaparser-symbol-solver-core:3.23.1"
 
-javax-annotation-jsr250-api = "javax.annotation:jsr250-api:1.0"
+javax-annotation-jsr250-api = "javax.annotation:jsr250-api:1.0-20050927.133100"
 
 javax-inject = "javax.inject:javax.inject:1"
 
