@@ -207,7 +207,7 @@ google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.15.0"
 google-auto-common = "com.google.auto:auto-common:1.2"
 
 google-auto-service-annotations = "com.google.auto.service:auto-service-annotations:1.0.1"
-google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
+google-auto-service-processor = "com.google.auto.service:auto-service:1.0.1"
 
 google-code-findbugs-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 
