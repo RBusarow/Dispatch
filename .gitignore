@@ -15,6 +15,7 @@
 /.idea/
 /projectFilesBackup/.idea/
 !/.idea/scopes/*
+!/.idea/runConfigurations/all_tests.xml
 /docs/api/
 
 
