@@ -19,14 +19,12 @@ import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.*
 
 fun Project.common() {
-
   // check for runtime classpath changes in any published modul/artifact
   pluginManager.withPlugin("com.vanniktech.maven.publish") {
     apply(plugin = "dependency-guard")
   }
 
   tasks.withType<Test> {
-
     useJUnitPlatform {
       includeEngines("junit-vintage", "junit-jupiter")
     }
@@ -34,12 +32,19 @@ fun Project.common() {
 
   tasks.withType<KotlinCompile>()
     .configureEach {
-
       kotlinOptions {
-
         allWarningsAsErrors = true
 
-        jvmTarget = "1.8"
+        val kotlinMajor = "1.5"
+
+        languageVersion = kotlinMajor
+        apiVersion = kotlinMajor
+
+        val javaMajor = "11"
+
+        jvmTarget = javaMajor
+        sourceCompatibility = javaMajor
+        targetCompatibility = javaMajor
       }
     }
 }

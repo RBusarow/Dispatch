@@ -33,7 +33,6 @@ dependencies {
   implementation(libs.kotlin.compiler)
   implementation(libs.kotlin.gradle.pluginApi)
   implementation(libs.kotlin.reflect)
-  implementation(libs.kotlin.stdlib.jdk8)
 
   implementation(kotlin("gradle-plugin", version = kotlinVersion))
   implementation(kotlin("stdlib", version = kotlinVersion))
@@ -57,5 +56,15 @@ configurations.all {
         requested.group == "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
       }
     }
+  }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+  kotlinOptions {
+
+    languageVersion = "1.5"
+    apiVersion = "1.5"
+
+    jvmTarget = "1.8"
   }
 }

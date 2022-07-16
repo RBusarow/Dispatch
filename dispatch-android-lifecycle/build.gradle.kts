@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -36,7 +36,7 @@ dependencies {
   testImplementation(libs.androidx.arch.test.core)
   testImplementation(libs.androidx.fragment.ktx)
   testImplementation(libs.androidx.lifecycle.runtime)
-  testImplementation(libs.androidx.lifecycle.viewModel.ktx)
+  testImplementation(libs.androidx.lifecycle.viewmodel.ktx)
   testImplementation(libs.androidx.test.espresso.core)
   testImplementation(libs.androidx.test.runner)
   testImplementation(libs.hermit.coroutines)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,13 +20,13 @@ plugins {
 }
 
 dependencies {
-  api(libs.androidx.lifecycle.viewModel.core)
+  api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.kotlinx.coroutines.core)
   api(libs.kotlinx.coroutines.jvm)
 
   api(projects.dispatchCore)
 
-  implementation(libs.androidx.lifecycle.viewModel.ktx)
+  implementation(libs.androidx.lifecycle.viewmodel.ktx)
   implementation(libs.kotlinx.coroutines.android)
 
   testImplementation(libs.androidx.test.espresso.core)
