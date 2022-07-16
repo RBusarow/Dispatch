@@ -196,7 +196,7 @@ coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 
 commons-io = "commons-io:commons-io:2.11.0"
 
-dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.2.0"
+dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.2.2"
 
 dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
