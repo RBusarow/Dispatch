@@ -196,7 +196,7 @@ coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 
 commons-io = "commons-io:commons-io:2.11.0"
 
-dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.2.0"
+dipien-bye-jetifier = "com.dipien:bye-bye-jetifier:1.2.2"
 
 dokka-gradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
@@ -207,7 +207,7 @@ google-accompanist-coil = "com.google.accompanist:accompanist-coil:0.15.0"
 google-auto-common = "com.google.auto:auto-common:1.2.1"
 
 google-auto-service-annotations = "com.google.auto.service:auto-service-annotations:1.0.1"
-google-auto-service-processor = "com.google.auto.service:auto-service:1.0"
+google-auto-service-processor = "com.google.auto.service:auto-service:1.0.1"
 
 google-code-findbugs-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 
@@ -277,7 +277,7 @@ kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", versio
 
 ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.2.0"
 
-mockk = "io.mockk:mockk:1.12.0"
+mockk = "io.mockk:mockk:1.12.4"
 
 objenesis = "org.objenesis:objenesis:3.2"
 
