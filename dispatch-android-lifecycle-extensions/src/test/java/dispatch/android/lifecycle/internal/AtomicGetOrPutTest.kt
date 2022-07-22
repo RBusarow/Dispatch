@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,17 +15,33 @@
 
 package dispatch.android.lifecycle.internal
 
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import dispatch.internal.test.android.*
-import dispatch.test.*
-import hermit.test.junit.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
-import org.junit.jupiter.api.extension.*
-import java.util.concurrent.*
+import androidx.lifecycle.Lifecycle
+import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.core.MainImmediateCoroutineScope
+import dispatch.internal.test.android.FakeLifecycleOwner
+import dispatch.internal.test.android.InstantTaskExecutorExtension
+import dispatch.test.TestDispatcherProvider
+import hermit.test.junit.HermitJUnit5
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.yield
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 @ExtendWith(InstantTaskExecutorExtension::class)
 @ObsoleteCoroutinesApi
@@ -40,7 +56,7 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
       @Test
       fun `all threads should get the same instance`() = runBlocking {
 
-        val main = newSingleThreadContext("main")
+        val main = StandardTestDispatcher(name = "main")
 
         val storeMap = ConcurrentHashMap<Lifecycle, DispatchLifecycleScope>()
 

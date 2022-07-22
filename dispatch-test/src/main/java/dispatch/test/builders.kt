@@ -16,6 +16,7 @@
 package dispatch.test
 
 import dispatch.core.DispatcherProvider
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,6 +24,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.ContinuationInterceptor
@@ -40,8 +42,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * created using the [kotlinx.coroutines.BlockingEventLoop] interceptor.
  *
  * @param context The base `CoroutineContext` which will be modified to use a
- *   [TestBasicDispatcherProvider] and [TestDispatcherProvider].
- *   [EmptyCoroutineContext] is used if one is not provided.
+ *   [TestDispatcherProvider]. [EmptyCoroutineContext] is used if one is not provided.
  * @param block the action to be performed
  * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  * @see runBlocking
@@ -57,7 +58,7 @@ public fun runBlockingProvided(
   val existingDispatcherProvider = context[DispatcherProvider]
 
   val newContext = if (existingDispatcherProvider == null) {
-    coroutineContext + TestBasicDispatcherProvider()
+    coroutineContext + TestDispatcherProvider()
   } else coroutineContext
 
   CoroutineScope(newContext).block()
@@ -67,8 +68,8 @@ public fun runBlockingProvided(
  * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
  * [TestCoroutineScope].
  *
- * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher], then a new
- * [TestCoroutineDispatcher] will be created.
+ * If the `context`'s [ContinuationInterceptor] is not a [TestDispatcher], then a new
+ * [TestDispatcher] will be created.
  *
  * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
  * created using the `TestCoroutineDispatcher`.
@@ -84,24 +85,24 @@ public fun runBlockingProvided(
 @ExperimentalCoroutinesApi
 public fun testProvided(
   context: CoroutineContext = EmptyCoroutineContext,
-  testBody: suspend TestProvidedCoroutineScope.() -> Unit
+  testBody: suspend TestScope.() -> Unit
 ) {
 
-  val dispatcher = (context[ContinuationInterceptor] as? TestDispatcher)
+  val dispatcher = context[ContinuationInterceptor] as? TestDispatcher
     ?: StandardTestDispatcher()
 
-  val dispatcherProvider = context[DispatcherProvider]
+  val dispatcherProvider = context[DispatcherProvider] as? TestDispatcherProvider
     ?: TestDispatcherProvider(dispatcher)
 
   val combinedContext = context + dispatcher + dispatcherProvider
 
-  return runTest(context = combinedContext) {
+  println("1 -- ${dispatcher[CoroutineExceptionHandler]}")
+  println("2 -- ${dispatcherProvider[CoroutineExceptionHandler]}")
+  println("3 -- ${context[CoroutineExceptionHandler]}")
+  println("4 -- ${combinedContext[CoroutineExceptionHandler]}")
 
-    val providedScope = TestProvidedCoroutineScopeImpl(
-      dispatcherProvider = dispatcherProvider,
-      context = combinedContext + coroutineContext
-    )
-    testBody.invoke(providedScope)
+  return TestScope(context = combinedContext).runTest {
+    testBody.invoke(this)
   }
 }
 
@@ -109,8 +110,8 @@ public fun testProvided(
  * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
  * [TestCoroutineScope].
  *
- * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher], then a new
- * [TestCoroutineDispatcher] will be created.
+ * If the `context`'s [ContinuationInterceptor] is not a [TestDispatcher], then a new
+ * [TestDispatcher] will be created.
  *
  * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
  * created using the `TestCoroutineDispatcher`.
@@ -122,5 +123,5 @@ public fun testProvided(
  */
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope.testProvided(
-  testBody: suspend TestProvidedCoroutineScope.() -> Unit
+  testBody: suspend TestScope.() -> Unit
 ): Unit = testProvided(coroutineContext, testBody)

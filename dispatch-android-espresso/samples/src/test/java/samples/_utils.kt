@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,12 +31,12 @@ infix fun Any?.shouldPrint(
 fun dispatcherName() = " @coroutine.*".toRegex()
   .replace(Thread.currentThread().name, "")
 
-val blocking = newSingleThreadContext("runBlocking thread")
+val blocking = StandardTestDispatcher(name = "runBlocking thread")
 
 val someDispatcherProvider = object : DispatcherProvider {
-  override val default = newSingleThreadContext("default")
-  override val io = newSingleThreadContext("io")
-  override val main = newSingleThreadContext("main")
-  override val mainImmediate = newSingleThreadContext("main immediate")
-  override val unconfined = newSingleThreadContext("unconfined")
+  override val default = StandardTestDispatcher(name = "default")
+  override val io = StandardTestDispatcher(name = "io")
+  override val main = StandardTestDispatcher(name = "main")
+  override val mainImmediate = StandardTestDispatcher(name = "main immediate")
+  override val unconfined = StandardTestDispatcher(name = "unconfined")
 } + blocking

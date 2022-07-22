@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,11 +25,11 @@ import kotlin.coroutines.*
 internal class SuspendBuildersTest {
 
   val testProvider = object : DispatcherProvider {
-    override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+    override val default: CoroutineDispatcher = StandardTestDispatcher()
+    override val io: CoroutineDispatcher = StandardTestDispatcher()
+    override val main: CoroutineDispatcher = StandardTestDispatcher()
+    override val mainImmediate: CoroutineDispatcher = StandardTestDispatcher()
+    override val unconfined: CoroutineDispatcher = StandardTestDispatcher()
   }
 
   @Nested

@@ -13,15 +13,17 @@
  * limitations under the License.
  */
 
-@file:OptIn(ObsoleteCoroutinesApi::class)
+@file:OptIn(ExperimentalCoroutinesApi::class)
 
 package dispatch.android.viewmodel.samples
 
-import dispatch.core.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import org.junit.jupiter.api.Test
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 typealias Sample = Test
 
@@ -32,14 +34,14 @@ infix fun Any?.shouldPrint(
 fun dispatcherName() = " @coroutine.*".toRegex()
   .replace(Thread.currentThread().name, "")
 
-val blocking = newSingleThreadContext("runBlocking thread")
+val blocking = StandardTestDispatcher(name = "runBlocking thread")
 
 val someDispatcherProvider = object : DispatcherProvider {
-  override val default = newSingleThreadContext("default")
-  override val io = newSingleThreadContext("io")
-  override val main = newSingleThreadContext("main")
-  override val mainImmediate = newSingleThreadContext("main immediate")
-  override val unconfined = newSingleThreadContext("unconfined")
+  override val default = StandardTestDispatcher(name = "default")
+  override val io = StandardTestDispatcher(name = "io")
+  override val main = StandardTestDispatcher(name = "main")
+  override val mainImmediate = StandardTestDispatcher(name = "main immediate")
+  override val unconfined = StandardTestDispatcher(name = "unconfined")
 } + blocking
 
 fun MyCustomElement(): CoroutineContext {

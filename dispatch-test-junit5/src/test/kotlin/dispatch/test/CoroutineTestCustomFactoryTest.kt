@@ -17,9 +17,11 @@ package dispatch.test
 
 import dispatch.internal.test.shouldEqualFolded
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
@@ -45,10 +47,20 @@ class CoroutineTestCustomFactoryTest(
   }
 
   @Test
-  fun `testProvided with default context should use testScope`() = testScope.testProvided {
+  fun `testProvided with default context should use testScope`() {
 
-    // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
-    coroutineContext shouldEqualFolded testScope.coroutineContext + coroutineContext[Job]!!
+    println("new scope -- ${TestProvidedCoroutineScope().coroutineContext[CoroutineExceptionHandler]}")
+    println("new dispatcherProvider -- ${TestDispatcherProvider()[CoroutineExceptionHandler]}")
+
+    println("standard -- ${StandardTestDispatcher()[CoroutineExceptionHandler]}")
+
+    println("scope -- ${testScope.coroutineContext[CoroutineExceptionHandler]}")
+
+    testScope.testProvided {
+
+      // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties
+      coroutineContext shouldEqualFolded testScope.coroutineContext + coroutineContext[Job]!!
+    }
   }
 
   @Test
@@ -56,8 +68,8 @@ class CoroutineTestCustomFactoryTest(
 
     val job = Job()
 
-    val dispatcher = testScope.coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
-    val dispatcherProvider = testScope.dispatcherProvider as TestDispatcherProvider
+    val dispatcher = testScope.coroutineContext[ContinuationInterceptor] as TestDispatcher
+    val dispatcherProvider = testScope.dispatcherProvider
 
     TestProvidedCoroutineScope(
       dispatcher,
@@ -92,8 +104,8 @@ class CoroutineTestCustomFactoryTest(
       val job = Job()
 
       val dispatcher =
-        testScope.coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
-      val dispatcherProvider = testScope.dispatcherProvider as TestDispatcherProvider
+        testScope.coroutineContext[ContinuationInterceptor] as TestDispatcher
+      val dispatcherProvider = testScope.dispatcherProvider
 
       TestProvidedCoroutineScope(
         dispatcher,

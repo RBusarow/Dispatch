@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +15,16 @@
 
 package dispatch.test.samples
 
-import dispatch.internal.test.*
-import dispatch.test.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
+import dispatch.internal.test.Sample
+import dispatch.test.TestProvidedCoroutineScope
+import dispatch.test.runBlockingProvided
+import dispatch.test.testProvided
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.jupiter.api.Test
 
+@OptIn(DelicateCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 class BuildersSample {
 

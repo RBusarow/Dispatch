@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.*
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeTest {
 
-  val dispatcher = TestCoroutineDispatcher()
+  val dispatcher = StandardTestDispatcher()
   val provider = TestDispatcherProvider(dispatcher)
 
   @Nested

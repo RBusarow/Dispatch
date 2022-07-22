@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +15,14 @@
 
 package dispatch.test
 
-import dispatch.internal.test.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.internal.test.shouldEqualFolded
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.test.TestDispatcher
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import kotlin.coroutines.ContinuationInterceptor
 
 @CoroutineTest
 @ExperimentalCoroutinesApi
@@ -56,8 +58,8 @@ class CoroutineTestDefaultFactoryTest(
 
     val job = Job()
 
-    val dispatcher = testScope.coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
-    val dispatcherProvider = testScope.dispatcherProvider as TestDispatcherProvider
+    val dispatcher = testScope.coroutineContext[ContinuationInterceptor] as TestDispatcher
+    val dispatcherProvider = testScope.dispatcherProvider
 
     TestProvidedCoroutineScope(
       dispatcher,
@@ -102,8 +104,8 @@ class CoroutineTestDefaultFactoryTest(
       val job = Job()
 
       val dispatcher =
-        testScope.coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
-      val dispatcherProvider = testScope.dispatcherProvider as TestDispatcherProvider
+        testScope.coroutineContext[ContinuationInterceptor] as TestDispatcher
+      val dispatcherProvider = testScope.dispatcherProvider
 
       TestProvidedCoroutineScope(
         dispatcher,

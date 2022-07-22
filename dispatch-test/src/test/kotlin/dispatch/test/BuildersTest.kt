@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,24 +15,37 @@
 
 package dispatch.test
 
-import dispatch.core.*
-import io.kotest.matchers.*
-import io.kotest.matchers.types.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import dispatch.core.dispatcherProvider
+import dispatch.core.launchMain
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
+import io.kotest.matchers.types.shouldBeTypeOf
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceTimeBy
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
 
 @Suppress("HardCodedDispatcher")
+@OptIn(DelicateCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 internal class BuildersTest {
 
   val testProvider = object : DispatcherProvider {
-    override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+    override val default: CoroutineDispatcher = StandardTestDispatcher()
+    override val io: CoroutineDispatcher = StandardTestDispatcher()
+    override val main: CoroutineDispatcher = StandardTestDispatcher()
+    override val mainImmediate: CoroutineDispatcher = StandardTestDispatcher()
+    override val unconfined: CoroutineDispatcher = StandardTestDispatcher()
   }
 
   @Nested
@@ -88,13 +101,12 @@ internal class BuildersTest {
   inner class `run blocking test provided` {
 
     @Test
-    fun `default params should create scope with TestDispatcherProvider`() =
-      testProvided {
+    fun `default params should create scope with TestDispatcherProvider`() = testProvided {
 
-        val dispatcherProvider = coroutineContext.dispatcherProvider
+      val dispatcherProvider = coroutineContext.dispatcherProvider
 
-        dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
-      }
+      dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
+    }
 
     @Test
     fun `specified provider param should be used in CoroutineContext`() =
@@ -125,7 +137,7 @@ internal class BuildersTest {
     @Test
     fun `CoroutineScope receiver should be TestCoroutineScope`() = testProvided {
 
-      this.shouldBeInstanceOf<TestCoroutineScope>()
+      this.shouldBeInstanceOf<TestScope>()
     }
 
     @Test
@@ -134,6 +146,7 @@ internal class BuildersTest {
         launchMain {
           delay(1000)
         }
+
         advanceTimeBy(1000)
       }
 

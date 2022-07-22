@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,7 +21,11 @@ import dispatch.internal.test.Sample
 import dispatch.test.reset
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
@@ -32,7 +36,7 @@ import org.junit.jupiter.api.BeforeEach
 @ExperimentalCoroutinesApi
 class DefaultDispatcherProviderExtensionSample {
 
-  val main = newSingleThreadContext("main")
+  val main = StandardTestDispatcher(name = "main")
 
   @BeforeEach
   fun beforeEach() {

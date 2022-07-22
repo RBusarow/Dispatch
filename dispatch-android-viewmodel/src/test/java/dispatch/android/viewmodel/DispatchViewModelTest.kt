@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,29 +15,51 @@
 
 package dispatch.android.viewmodel
 
-import androidx.lifecycle.*
-import dispatch.core.*
-import dispatch.internal.test.*
-import io.kotest.matchers.*
-import io.kotest.matchers.types.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import dispatch.core.DefaultDispatcherProvider
+import dispatch.core.DispatcherProvider
+import dispatch.core.MainCoroutineScope
+import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.mainDispatcher
+import dispatch.internal.test.shouldBeSupervisorJob
+import dispatch.internal.test.shouldEqualFolded
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.types.shouldBeInstanceOf
+import io.kotest.matchers.types.shouldBeSameInstanceAs
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import kotlin.coroutines.ContinuationInterceptor
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 internal class DispatchViewModelTest {
 
   val job = Job()
-  val dispatcher = newSingleThreadContext("single thread dispatcher")
+  val dispatcher = StandardTestDispatcher(name = "single thread dispatcher")
   val dispatcherProvider = DispatcherProvider()
   val exceptionHandler = CoroutineExceptionHandler { _, _ -> }
   val coroutineName = CoroutineName("name")
 
   val originContext = job + dispatcher + dispatcherProvider + exceptionHandler + coroutineName
 
-  val mainDispatcher = newSingleThreadContext("main dispatcher")
+  val mainDispatcher = StandardTestDispatcher(name = "main dispatcher")
 
   @BeforeAll
   fun beforeAll() {
@@ -77,7 +99,7 @@ internal class DispatchViewModelTest {
   }
 
   @Test
-  fun `default factory should be a default MainImmediateCoroutineScope`() = runBlockingTest {
+  fun `default factory should be a default MainImmediateCoroutineScope`() = runTest {
 
     val scope = TestViewModel().viewModelScope
 
@@ -91,7 +113,7 @@ internal class DispatchViewModelTest {
   }
 
   @Test
-  fun `a custom factory should be used after being set`() = runBlockingTest {
+  fun `a custom factory should be used after being set`() = runTest {
 
     ViewModelScopeFactory.set { MainImmediateCoroutineScope(originContext) }
 
@@ -101,13 +123,13 @@ internal class DispatchViewModelTest {
   }
 
   @Test
-  fun `an initialized scope should be cancelled during onCleared`() = runBlockingTest {
+  fun `an initialized scope should be cancelled during onCleared`() = runTest {
 
     val store = ViewModelStore()
 
     val owner = ViewModelStoreOwner { store }
 
-    val viewModel = ViewModelProvider(owner).get(TestViewModel::class.java)
+    val viewModel = ViewModelProvider(owner)[TestViewModel::class.java]
 
     val scope = viewModel.viewModelScope
 

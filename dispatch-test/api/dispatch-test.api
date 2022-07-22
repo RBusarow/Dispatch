@@ -12,32 +12,33 @@ public final class dispatch/test/DefaultDispatcherProviderKt {
 
 public final class dispatch/test/TestDispatcherProvider : dispatch/core/DispatcherProvider {
 	public fun <init> ()V
-	public fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)V
-	public synthetic fun <init> (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;)V
+	public synthetic fun <init> (Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;Lkotlinx/coroutines/test/TestDispatcher;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun fold (Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
 	public fun get (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
-	public fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public synthetic fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getDefault ()Lkotlinx/coroutines/test/TestDispatcher;
+	public synthetic fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getIo ()Lkotlinx/coroutines/test/TestDispatcher;
 	public fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
-	public fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun getMainImmediate ()Lkotlinx/coroutines/CoroutineDispatcher;
-	public fun getUnconfined ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public synthetic fun getMain ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getMain ()Lkotlinx/coroutines/test/TestDispatcher;
+	public synthetic fun getMainImmediate ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getMainImmediate ()Lkotlinx/coroutines/test/TestDispatcher;
+	public synthetic fun getUnconfined ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public fun getUnconfined ()Lkotlinx/coroutines/test/TestDispatcher;
 	public fun minusKey (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext;
 	public fun plus (Lkotlin/coroutines/CoroutineContext;)Lkotlin/coroutines/CoroutineContext;
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class dispatch/test/TestDispatcherProviderKt {
-	public static final fun TestBasicDispatcherProvider (Lkotlinx/coroutines/test/TestCoroutineScheduler;Ljava/lang/String;)Ldispatch/test/TestDispatcherProvider;
-	public static final fun TestBasicDispatcherProvider (Lkotlinx/coroutines/test/TestDispatcher;)Ldispatch/test/TestDispatcherProvider;
-	public static synthetic fun TestBasicDispatcherProvider$default (Lkotlinx/coroutines/test/TestCoroutineScheduler;Ljava/lang/String;ILjava/lang/Object;)Ldispatch/test/TestDispatcherProvider;
-	public static synthetic fun TestBasicDispatcherProvider$default (Lkotlinx/coroutines/test/TestDispatcher;ILjava/lang/Object;)Ldispatch/test/TestDispatcherProvider;
-	public static final fun TestDispatcherProvider (Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/test/TestDispatcherProvider;
-	public static synthetic fun TestDispatcherProvider$default (Lkotlinx/coroutines/CoroutineDispatcher;ILjava/lang/Object;)Ldispatch/test/TestDispatcherProvider;
+	public static final fun TestDispatcherProvider (Lkotlinx/coroutines/test/TestDispatcher;)Ldispatch/test/TestDispatcherProvider;
+	public static synthetic fun TestDispatcherProvider$default (Lkotlinx/coroutines/test/TestDispatcher;ILjava/lang/Object;)Ldispatch/test/TestDispatcherProvider;
 }
 
 public abstract interface class dispatch/test/TestProvidedCoroutineScope : dispatch/core/DefaultCoroutineScope, dispatch/core/IOCoroutineScope, dispatch/core/MainCoroutineScope, dispatch/core/MainImmediateCoroutineScope, dispatch/core/UnconfinedCoroutineScope {
-	public abstract fun getDispatcherProvider ()Ldispatch/core/DispatcherProvider;
+	public abstract fun getDispatcherProvider ()Ldispatch/test/TestDispatcherProvider;
 }
 
 public final class dispatch/test/TestProvidedCoroutineScopeKt {

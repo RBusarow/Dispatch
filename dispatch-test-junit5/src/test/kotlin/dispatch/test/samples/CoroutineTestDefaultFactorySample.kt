@@ -24,6 +24,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @CoroutineTest
 class CoroutineTestDefaultFactorySample(
   val testScope: TestProvidedCoroutineScope

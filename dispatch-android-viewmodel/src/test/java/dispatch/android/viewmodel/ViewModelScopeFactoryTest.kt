@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,28 +15,43 @@
 
 package dispatch.android.viewmodel
 
-import dispatch.core.*
-import dispatch.internal.test.*
-import io.kotest.matchers.*
-import io.kotest.matchers.types.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.core.DefaultDispatcherProvider
+import dispatch.core.DispatcherProvider
+import dispatch.core.MainCoroutineScope
+import dispatch.core.mainDispatcher
+import dispatch.internal.test.shouldBeSupervisorJob
+import dispatch.internal.test.shouldEqualFolded
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import kotlin.coroutines.ContinuationInterceptor
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 internal class ViewModelScopeFactoryTest {
 
   val job = Job()
-  val dispatcher = newSingleThreadContext("single thread dispatcher")
+  val dispatcher = StandardTestDispatcher(name = "single thread dispatcher")
   val dispatcherProvider = DispatcherProvider()
   val exceptionHandler = CoroutineExceptionHandler { _, _ -> }
   val coroutineName = CoroutineName("name")
 
   val originContext = job + dispatcher + dispatcherProvider + exceptionHandler + coroutineName
 
-  val mainDispatcher = newSingleThreadContext("main dispatcher")
+  val mainDispatcher = StandardTestDispatcher(name = "main dispatcher")
 
   @BeforeAll
   fun beforeAll() {
@@ -54,7 +69,7 @@ internal class ViewModelScopeFactoryTest {
   }
 
   @Test
-  fun `default factory should be a default MainCoroutineScope`() = runBlockingTest {
+  fun `default factory should be a default MainCoroutineScope`() = runTest {
 
     val scope = ViewModelScopeFactory.create()
 
@@ -68,7 +83,7 @@ internal class ViewModelScopeFactoryTest {
   }
 
   @Test
-  fun `a custom factory should be used after being set`() = runBlockingTest {
+  fun `a custom factory should be used after being set`() = runTest {
 
     ViewModelScopeFactory.set { MainCoroutineScope(originContext) }
 
@@ -78,7 +93,7 @@ internal class ViewModelScopeFactoryTest {
   }
 
   @Test
-  fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
+  fun `reset after setting a custom factory should return to the default`() = runTest {
 
     ViewModelScopeFactory.set { MainCoroutineScope(originContext) }
 

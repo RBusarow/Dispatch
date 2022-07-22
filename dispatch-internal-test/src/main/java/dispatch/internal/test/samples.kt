@@ -13,17 +13,17 @@
  * limitations under the License.
  */
 
-@file:Suppress("EXPERIMENTAL_API_USAGE")
-
 package dispatch.internal.test
 
-import dispatch.core.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import kotlinx.knit.test.*
-import org.junit.*
-import java.io.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestDispatcher
+import org.junit.Test
+import java.io.PrintStream
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.knit.test.captureOutput as knitCaptureOutput
 
 public typealias Sample = Test
@@ -39,16 +39,16 @@ public fun Any?.shouldPrint(vararg expected: String) {
 public fun dispatcherName(): String = " @coroutine.*".toRegex()
   .replace(Thread.currentThread().name, "")
 
-@OptIn(ObsoleteCoroutinesApi::class)
-public val blocking: ExecutorCoroutineDispatcher = newSingleThreadContext("runBlocking thread")
+@OptIn(ExperimentalCoroutinesApi::class)
+public val blocking: TestDispatcher = StandardTestDispatcher(name = "runBlocking thread")
 
-@OptIn(ObsoleteCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 public val someDispatcherProvider: CoroutineContext = object : DispatcherProvider {
-  override val default = newSingleThreadContext("default")
-  override val io = newSingleThreadContext("io")
-  override val main = newSingleThreadContext("main")
-  override val mainImmediate = newSingleThreadContext("main immediate")
-  override val unconfined = newSingleThreadContext("unconfined")
+  override val default = StandardTestDispatcher(name = "default")
+  override val io = StandardTestDispatcher(name = "io")
+  override val main = StandardTestDispatcher(name = "main")
+  override val mainImmediate = StandardTestDispatcher(name = "main immediate")
+  override val unconfined = StandardTestDispatcher(name = "unconfined")
 } + blocking
 
 public fun MyCustomElement(): CoroutineContext {

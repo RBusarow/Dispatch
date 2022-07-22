@@ -18,11 +18,11 @@ package dispatch.internal.test.android
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
 
-@Suppress("EXPERIMENTAL_API_USAGE")
+@OptIn(ExperimentalCoroutinesApi::class)
 open class FakeLifecycleOwner(
   initialState: Lifecycle.State = Lifecycle.State.INITIALIZED,
   private val mainDispatcher: CoroutineDispatcher = fakeMainDispatcher()
@@ -97,5 +97,5 @@ open class FakeLifecycleOwner(
   fun getObserverCount(): Int = runBlocking(mainDispatcher) { fakeLifecycle.observerCount }
 }
 
-@OptIn(ObsoleteCoroutinesApi::class)
-private fun fakeMainDispatcher() = newSingleThreadContext("FakeLifecycleOwner main")
+@OptIn(ExperimentalCoroutinesApi::class)
+private fun fakeMainDispatcher() = StandardTestDispatcher()

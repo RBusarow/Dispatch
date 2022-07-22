@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,14 +34,14 @@ internal class LifecycleScopeFactoryTest :
   LiveDataTest {
 
   val job = Job()
-  val dispatcher = newSingleThreadContext("single thread dispatcher")
+  val dispatcher = StandardTestDispatcher(name = "single thread dispatcher")
   val dispatcherProvider = DispatcherProvider()
   val exceptionHandler = CoroutineExceptionHandler { _, _ -> }
   val coroutineName = CoroutineName("name")
 
   val originContext = job + dispatcher + dispatcherProvider + exceptionHandler + coroutineName
 
-  val mainDispatcher = newSingleThreadContext("main dispatcher")
+  val mainDispatcher = StandardTestDispatcher(name = "main dispatcher")
 
   val lifecycleOwner by resets { FakeLifecycleOwner() }
 
@@ -62,7 +62,7 @@ internal class LifecycleScopeFactoryTest :
   }
 
   @Test
-  fun `default factory should be a default MainImmediateContext`() = runBlockingTest {
+  fun `default factory should be a default MainImmediateContext`() = runTest {
 
     val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
@@ -74,7 +74,7 @@ internal class LifecycleScopeFactoryTest :
   }
 
   @Test
-  fun `a custom factory should be used after being set`() = runBlockingTest {
+  fun `a custom factory should be used after being set`() = runTest {
 
     LifecycleScopeFactory.set { originContext }
 
@@ -84,7 +84,7 @@ internal class LifecycleScopeFactoryTest :
   }
 
   @Test
-  fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
+  fun `reset after setting a custom factory should return to the default`() = runTest {
 
     LifecycleScopeFactory.set { originContext }
 
