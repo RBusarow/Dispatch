@@ -82,6 +82,11 @@ open class FakeLifecycleOwner(
   }
 
   fun destroy() = runBlocking(mainDispatcher) {
+    // We're no longer able to transition from INITIALIZED to DESTROYED. So if we need to do that
+    // for a test, just 'create' first and then go down.
+    if (lifecycle.currentState == Lifecycle.State.INITIALIZED) {
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    }
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
   }
 
