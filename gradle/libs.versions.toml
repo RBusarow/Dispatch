@@ -1,7 +1,7 @@
 [versions]
 androidTools = "7.2.1"
 anvil = "2.4.0"
-benManes = "0.36.0"
+benManes = "0.42.0"
 changeTracker = "0.7.3"
 coil = "1.4.0"
 dependencyAnalysis = "0.80.0"
@@ -151,7 +151,7 @@ androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "an
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "androidx-room" }
 
-androidx-savedstate = "androidx.savedstate:savedstate:1.1.0"
+androidx-savedstate = "androidx.savedstate:savedstate:1.2.0"
 
 androidx-security-crypto = "androidx.security:security-crypto:1.0.0"
 
