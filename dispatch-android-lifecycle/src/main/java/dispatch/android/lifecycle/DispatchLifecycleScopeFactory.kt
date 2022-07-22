@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,15 @@
 
 package dispatch.android.lifecycle
 
-import androidx.lifecycle.*
-import kotlin.coroutines.*
+import androidx.lifecycle.Lifecycle
+import kotlin.coroutines.CoroutineContext
 
 /**
- * Factory for [DispatchLifecycleScope]s.  This may be injected into a lifecycle-aware class
- * to provide custom [CoroutineContexts][CoroutineContext].
+ * Factory for [DispatchLifecycleScope]s. This may be injected into a lifecycle-aware class to
+ * provide custom [CoroutineContexts][CoroutineContext].
  *
+ * @property coroutineContextFactory the lambda defining the creating of a [CoroutineContext]
  * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScopeFactorySample.factorySample
- * @param coroutineContextFactory the lambda defining the creating of a [CoroutineContext]
  */
 public class DispatchLifecycleScopeFactory(
   private val coroutineContextFactory: () -> CoroutineContext

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,54 +13,72 @@
  * limitations under the License.
  */
 
+import com.android.build.gradle.tasks.CompileLibraryResourcesTask
+import kotlinx.atomicfu.plugin.gradle.AtomicFUTransformTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.tasks.KtLintCheckTask
+import org.jlleitschuh.gradle.ktlint.tasks.KtLintFormatTask
+
 apply(plugin = "org.jetbrains.dokka")
 
 subprojects {
 
-  val proj = this
+  afterEvaluate {
 
-  val includeSubproject = when {
-    path.endsWith("tests") -> false
-    path.endsWith("compiler") -> false
-    proj.parent?.path == ":sample" -> false
-    else -> File("${proj.projectDir}/src").exists()
-  }
+    val proj = this
 
-  if (includeSubproject) {
-    apply(plugin = "org.jetbrains.dokka")
+    val includeSubproject = when {
+      path.endsWith("tests") -> false
+      path.endsWith("compiler") -> false
+      proj.parent?.path == ":sample" -> false
+      else -> File("${proj.projectDir}/src").exists()
+    }
 
-    proj.tasks
-      .withType<org.jetbrains.dokka.gradle.AbstractDokkaLeafTask>()
-      .configureEach {
+    if (includeSubproject) {
+      apply(plugin = "org.jetbrains.dokka")
 
-        dependsOn(allprojects.mapNotNull { it.tasks.findByName("compileKotlin") })
+      proj.tasks
+        .withType<org.jetbrains.dokka.gradle.AbstractDokkaLeafTask>()
+        .configureEach {
 
-        dokkaSourceSets {
+          // Dokka uses their outputs but doesn't explicitly depend upon them.
+          mustRunAfter(tasks.withType(KotlinCompile::class.java))
+          mustRunAfter(tasks.withType(KtLintCheckTask::class.java))
+          mustRunAfter(tasks.withType(KtLintFormatTask::class.java))
+          mustRunAfter(tasks.withType(CompileLibraryResourcesTask::class.java))
+          mustRunAfter(tasks.withType(AtomicFUTransformTask::class.java))
 
-          getByName("main") {
+          dependsOn(allprojects.mapNotNull { it.tasks.findByName("compileKotlin") })
 
-            samples.setFrom(
-              fileTree(proj.projectDir) {
-                include("**/samples/**")
+          dokkaSourceSets {
+
+            getByName("main") {
+
+              samples.setFrom(
+                fileTree(proj.projectDir) {
+                  include("**/samples/**")
+                }
+              )
+
+              if (File("${proj.projectDir}/README.md").exists()) {
+                includes.from(files("${proj.projectDir}/README.md"))
               }
-            )
 
-            if (File("${proj.projectDir}/README.md").exists()) {
-              includes.from(files("${proj.projectDir}/README.md"))
-            }
+              sourceLink {
+                localDirectory.set(file("src/main"))
 
-            sourceLink {
-              localDirectory.set(file("src/main"))
+                val modulePath = proj.path.replace(":", "/").replaceFirst("/", "")
 
-              val modulePath = proj.path.replace(":", "/").replaceFirst("/", "")
-
-              // URL showing where the source code can be accessed through the web browser
-              remoteUrl.set(uri("https://github.com/RBusarow/Dispatch/blob/main/$modulePath/src/main").toURL())
-              // Suffix which is used to append the line number to the URL. Use #L for GitHub
-              remoteLineSuffix.set("#L")
+                // URL showing where the source code can be accessed through the web browser
+                remoteUrl.set(
+                  uri("https://github.com/RBusarow/Dispatch/blob/main/$modulePath/src/main").toURL()
+                )
+                // Suffix which is used to append the line number to the URL. Use #L for GitHub
+                remoteLineSuffix.set("#L")
+              }
             }
           }
         }
-      }
+    }
   }
 }

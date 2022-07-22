@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,11 +15,15 @@
 
 package dispatch.android.lifecycle.internal
 
-import androidx.lifecycle.*
-import dispatch.core.*
-import kotlinx.coroutines.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import dispatch.core.launchMainImmediate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import java.util.concurrent.CancellationException
-import kotlin.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 internal class DispatchLifecycleScopeBinding(
   private val lifecycle: Lifecycle,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +15,19 @@
 
 package dispatch.android.lifecycle.internal
 
-import androidx.fragment.app.*
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.asFlow
+import dispatch.android.lifecycle.ViewLifecycleCoroutineScope
+import dispatch.core.flowOnMainImmediate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 internal fun bindViewLifecycleCoroutineScope(

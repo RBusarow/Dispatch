@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,41 +17,44 @@
 
 package dispatch.core
 
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `default`.
  */
 public interface DefaultCoroutineScope : CoroutineScope
 
-/**
- * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `io`.
- */
+/** Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `io`. */
 public interface IOCoroutineScope : CoroutineScope
 
-/**
- * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `main`.
- */
+/** Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `main`. */
 public interface MainCoroutineScope : CoroutineScope
 
 /**
- * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `mainImmediate`.
+ * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of
+ * `mainImmediate`.
  */
 public interface MainImmediateCoroutineScope : CoroutineScope
 
 /**
- * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of `unconfined`.
+ * Marker interface which designates a [CoroutineScope] with a [CoroutineDispatcher] of
+ * `unconfined`.
  */
 public interface UnconfinedCoroutineScope : CoroutineScope
 
 /**
- * Factory function for a [DefaultCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `default` property of the `DispatcherProvider`.
+ * Factory function for a [DefaultCoroutineScope] with a [DispatcherProvider]. Dispatch defaults to
+ * the `default` property of the `DispatcherProvider`.
  *
- * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
- *
+ * @param job [Job] to be used for the resulting `CoroutineScope`. Uses a [SupervisorJob] if one is
+ *   not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.
+ *   Uses [DefaultDispatcherProvider.get] if one is not provided.
  * @see CoroutineScope
  */
 public fun DefaultCoroutineScope(
@@ -62,13 +65,12 @@ public fun DefaultCoroutineScope(
 }
 
 /**
- * Factory function for a [DefaultCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `default` property of the `DispatcherProvider`.
+ * Factory function for a [DefaultCoroutineScope] with a [DispatcherProvider]. Dispatch defaults to
+ * the `default` property of the `DispatcherProvider`.
  *
- * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
- * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
- *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`. Any
+ *   existing [ContinuationInterceptor] will be overwritten. If the `CoroutineContext` does not
+ *   already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  * @see CoroutineScope
  */
 public fun DefaultCoroutineScope(
@@ -78,12 +80,13 @@ public fun DefaultCoroutineScope(
 }
 
 /**
- * Factory function for an [IOCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `io` property of the `DispatcherProvider`.
+ * Factory function for an [IOCoroutineScope] with a [DispatcherProvider]. Dispatch defaults to the
+ * `io` property of the `DispatcherProvider`.
  *
- * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
- *
+ * @param job [Job] to be used for the resulting `CoroutineScope`. Uses a [SupervisorJob] if one is
+ *   not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.
+ *   Uses [DefaultDispatcherProvider.get] if one is not provided.
  * @see CoroutineScope
  */
 public fun IOCoroutineScope(
@@ -94,13 +97,12 @@ public fun IOCoroutineScope(
 }
 
 /**
- * Factory function for a [IOCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `io` property of the `DispatcherProvider`.
+ * Factory function for a [IOCoroutineScope] with a [DispatcherProvider]. Dispatch defaults to the
+ * `io` property of the `DispatcherProvider`.
  *
- * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
- * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
- *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`. Any
+ *   existing [ContinuationInterceptor] will be overwritten. If the `CoroutineContext` does not
+ *   already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  * @see CoroutineScope
  */
 public fun IOCoroutineScope(
@@ -110,12 +112,13 @@ public fun IOCoroutineScope(
 }
 
 /**
- * Factory function for a [MainCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `main` property of the `DispatcherProvider`.
+ * Factory function for a [MainCoroutineScope] with a [DispatcherProvider]. Dispatch defaults to the
+ * `main` property of the `DispatcherProvider`.
  *
- * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
- *
+ * @param job [Job] to be used for the resulting `CoroutineScope`. Uses a [SupervisorJob] if one is
+ *   not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.
+ *   Uses [DefaultDispatcherProvider.get] if one is not provided.
  * @see CoroutineScope
  */
 public fun MainCoroutineScope(
@@ -126,13 +129,12 @@ public fun MainCoroutineScope(
 }
 
 /**
- * Factory function for a [MainCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `main` property of the `DispatcherProvider`.
+ * Factory function for a [MainCoroutineScope] with a [DispatcherProvider]. Dispatch defaults to the
+ * `main` property of the `DispatcherProvider`.
  *
- * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
- * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
- *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`. Any
+ *   existing [ContinuationInterceptor] will be overwritten. If the `CoroutineContext` does not
+ *   already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  * @see CoroutineScope
  */
 public fun MainCoroutineScope(
@@ -142,12 +144,13 @@ public fun MainCoroutineScope(
 }
 
 /**
- * Factory function for a [MainImmediateCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `mainImmediate` property of the `DispatcherProvider`.
+ * Factory function for a [MainImmediateCoroutineScope] with a [DispatcherProvider]. Dispatch
+ * defaults to the `mainImmediate` property of the `DispatcherProvider`.
  *
- * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
- *
+ * @param job [Job] to be used for the resulting `CoroutineScope`. Uses a [SupervisorJob] if one is
+ *   not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.
+ *   Uses [DefaultDispatcherProvider.get] if one is not provided.
  * @see CoroutineScope
  */
 public fun MainImmediateCoroutineScope(
@@ -159,13 +162,12 @@ public fun MainImmediateCoroutineScope(
 }
 
 /**
- * Factory function for a [MainImmediateCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `mainImmediate` property of the `DispatcherProvider`.
+ * Factory function for a [MainImmediateCoroutineScope] with a [DispatcherProvider]. Dispatch
+ * defaults to the `mainImmediate` property of the `DispatcherProvider`.
  *
- * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
- * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
- *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`. Any
+ *   existing [ContinuationInterceptor] will be overwritten. If the `CoroutineContext` does not
+ *   already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  * @see CoroutineScope
  */
 public fun MainImmediateCoroutineScope(
@@ -175,12 +177,13 @@ public fun MainImmediateCoroutineScope(
 }
 
 /**
- * Factory function for a [UnconfinedCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.
+ * Factory function for a [UnconfinedCoroutineScope] with a [DispatcherProvider]. Dispatch defaults
+ * to the `unconfined` property of the `DispatcherProvider`.
  *
- * @param job [Job] to be used for the resulting `CoroutineScope`.  Uses a [SupervisorJob] if one is not provided.
- * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.  Uses [DefaultDispatcherProvider.get] if one is not provided.
- *
+ * @param job [Job] to be used for the resulting `CoroutineScope`. Uses a [SupervisorJob] if one is
+ *   not provided.
+ * @param dispatcherProvider [DispatcherProvider] to be used for the resulting `CoroutineScope`.
+ *   Uses [DefaultDispatcherProvider.get] if one is not provided.
  * @see CoroutineScope
  */
 public fun UnconfinedCoroutineScope(
@@ -191,13 +194,12 @@ public fun UnconfinedCoroutineScope(
 }
 
 /**
- * Factory function for a [UnconfinedCoroutineScope] with a [DispatcherProvider].
- * Dispatch defaults to the `unconfined` property of the `DispatcherProvider`.
+ * Factory function for a [UnconfinedCoroutineScope] with a [DispatcherProvider]. Dispatch defaults
+ * to the `unconfined` property of the `DispatcherProvider`.
  *
- * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`.
- * Any existing [ContinuationInterceptor] will be overwritten.
- * If the `CoroutineContext` does not already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
- *
+ * @param coroutineContext [CoroutineContext] to be used for the resulting `CoroutineScope`. Any
+ *   existing [ContinuationInterceptor] will be overwritten. If the `CoroutineContext` does not
+ *   already contain a `DispatcherProvider`, [DefaultDispatcherProvider.get] will be added.
  * @see CoroutineScope
  */
 public fun UnconfinedCoroutineScope(

@@ -1,22 +1,78 @@
-*.iml
-.gradle
-/local.properties
+#built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
 .DS_Store
-/build/
-/*/build/
-/*/*/build/
-/out/
-/*/out/
-/captures
-.externalNativeBuild
-.cxx
-/.idea/gradle.xml
-/buildSrc/build/
-/.idea/
-/projectFilesBackup/.idea/
-!/.idea/scopes/*
-/docs/api/
 
+# Eclipse project files
+.classpath
+.project
 
-# copy of API docs for website
-/website/static/api/*
+## IDEA/Android Studio ignores
+*.iml
+*.ipr
+*.iws
+/.idea/*
+/.gradle/*
+
+# IDEA/Android Studio Ignore exceptions
+!/.idea/vcs.xml
+!/.idea/fileTemplates/
+!/.idea/inspectionProfiles/
+!/.idea/scopes/
+!/.idea/codeStyleSettings.xml
+!/.idea/encodings.xml
+!/.idea/copyright/
+!/.idea/compiler.xml
+# required plugins
+!/.idea/externalDependencies.xml
+# ktlint plugin settings
+!/.idea/ktlint.xml
+# detekt plugin settings
+!/.idea/detekt.xml
+!/.idea/icon.png
+!/.idea/runConfigurations/all_tests.xml
+
+/.idea/vcs.xml
+**/.idea/workspace.xml
+
+#NDK
+obj/
+**/.gradle/
+
+captures/
+/.idea/copyright/profiles_settings.xml
+/.idea/compiler.xml
+!/.idea/codeStyles/
+!/gradle/wrapper/gradle-wrapper.properties
+true/
+
+# all build dirs at any level
+**/build
+/gradle/profiler/gradle-user-home/
+!/gradle/profiler/bin/
+
+checksum.txt
+
+# copy of API docs for website.  Save the /styles dir before the CSS is slightly customized
+/website/static/api
+!/website/static/api/styles
+
+local.settings.gradle.kts

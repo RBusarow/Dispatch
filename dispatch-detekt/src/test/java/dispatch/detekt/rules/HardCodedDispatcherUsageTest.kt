@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,14 +15,17 @@
 
 package dispatch.detekt.rules
 
-import io.gitlab.arturbosch.detekt.test.*
-import io.kotest.core.spec.style.*
-import io.kotest.data.*
-import io.kotest.matchers.*
-import io.kotest.property.*
-import io.kotest.property.exhaustive.*
+import io.gitlab.arturbosch.detekt.test.TestConfig
+import io.gitlab.arturbosch.detekt.test.lint
+import io.kotest.core.spec.style.FreeSpec
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.matchers.shouldBe
+import io.kotest.property.Exhaustive
+import io.kotest.property.checkAll
+import io.kotest.property.exhaustive.boolean
 
-internal class HardCodedDispatcherTest : FreeSpec(
+internal class HardCodedDispatcherUsageTest : FreeSpec(
   {
 
     fun findingMessage(expression: String) =
@@ -69,7 +72,7 @@ internal class HardCodedDispatcherTest : FreeSpec(
             |
             |}
             |
-          """.trimMargin()
+        """.trimMargin()
 
         val rule = HardCodedDispatcher()
 
@@ -115,7 +118,7 @@ internal class HardCodedDispatcherTest : FreeSpec(
             |
             |}
             |
-          """.trimMargin()
+        """.trimMargin()
 
         val rule = HardCodedDispatcher()
 
@@ -175,7 +178,7 @@ internal class HardCodedDispatcherTest : FreeSpec(
         |
         |}
         |
-          """.trimMargin()
+        """.trimMargin()
 
         val rule = HardCodedDispatcher()
 
@@ -220,7 +223,7 @@ internal class HardCodedDispatcherTest : FreeSpec(
         |
         |}
         |
-          """.trimMargin()
+        """.trimMargin()
 
         val rule = HardCodedDispatcher(config)
 

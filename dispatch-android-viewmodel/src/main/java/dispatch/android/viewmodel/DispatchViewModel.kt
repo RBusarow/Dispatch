@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,9 +15,11 @@
 
 package dispatch.android.viewmodel
 
-import androidx.lifecycle.*
-import kotlinx.coroutines.*
-import java.util.concurrent.atomic.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
+import java.util.concurrent.atomic.AtomicReference
 
 /**
  * **Deprecated** in favor of [DispatchViewModel].
@@ -33,8 +35,8 @@ typealias CoroutineViewModel = DispatchViewModel
 /**
  * Base class for [ViewModel]s which will be using a [viewModelScope].
  *
- * The `viewModelScope` instance is created automatically upon first access
- * from the factory set in [ViewModelScopeFactory].
+ * The `viewModelScope` instance is created automatically upon first access from the factory set in
+ * [ViewModelScopeFactory].
  *
  * The type of [CoroutineScope] created is configurable via [ViewModelScopeFactory.set].
  *
@@ -49,11 +51,11 @@ abstract class DispatchViewModel : ViewModel() {
   private val _coroutineScope = AtomicReference<CoroutineScope?>(null)
 
   /**
-   * [CoroutineScope] instance for the [DispatchViewModel].
-   * By default, it uses the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher
+   * [CoroutineScope] instance for the [DispatchViewModel]. By default, it uses the
+   * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher
    *
-   * The `viewModelScope` instance is created automatically upon first access
-   * from the factory set in [ViewModelScopeFactory].
+   * The `viewModelScope` instance is created automatically upon first access from the factory set
+   * in [ViewModelScopeFactory].
    *
    * The type of [CoroutineScope] created is configurable via [ViewModelScopeFactory.set].
    *
@@ -77,7 +79,8 @@ abstract class DispatchViewModel : ViewModel() {
     }
 
   /**
-   * It is necessary to do a final override of [ViewModel.onCleared] to ensure that [viewModelScope] is cancelled.
+   * It is necessary to do a final override of [ViewModel.onCleared] to ensure that [viewModelScope]
+   * is cancelled.
    *
    * Use [onClear] to perform logic after this event.
    */
@@ -89,6 +92,7 @@ abstract class DispatchViewModel : ViewModel() {
 
   /**
    * This method will be called when this ViewModel is no longer used and will be destroyed.
+   *
    * <p>
    * It is useful when ViewModel observes some data and you need to clear this subscription to
    * prevent a leak of this ViewModel.
