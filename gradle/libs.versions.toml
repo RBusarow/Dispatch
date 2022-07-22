@@ -1,7 +1,7 @@
 [versions]
 androidTools = "7.2.1"
 anvil = "2.4.0"
-benManes = "0.36.0"
+benManes = "0.42.0"
 changeTracker = "0.7.3"
 coil = "1.4.0"
 dependencyAnalysis = "0.80.0"
