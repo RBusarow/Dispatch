@@ -102,7 +102,7 @@ androidx-compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifes
 androidx-compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose" }
 
-androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
+androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
 androidx-coreKtx = "androidx.core:core-ktx:1.6.0"
 
