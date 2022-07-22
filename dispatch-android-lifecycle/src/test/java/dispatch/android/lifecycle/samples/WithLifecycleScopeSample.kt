@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 
-@file:Suppress("EXPERIMENTAL_API_USAGE", "UNUSED_ANONYMOUS_PARAMETER")
+@file:OptIn(ExperimentalCoroutinesApi::class)
+@file:Suppress("UNUSED_ANONYMOUS_PARAMETER")
 
 package dispatch.android.lifecycle.samples
 
@@ -23,6 +24,7 @@ import androidx.lifecycle.ViewModel
 import dispatch.android.lifecycle.withViewLifecycle
 import dispatch.core.MainImmediateCoroutineScope
 import dispatch.internal.test.android.LiveDataTest
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
 import org.junit.Test

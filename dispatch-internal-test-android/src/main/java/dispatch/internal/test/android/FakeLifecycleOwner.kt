@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -43,6 +43,7 @@ open class FakeLifecycleOwner(
     Lifecycle.State.INITIALIZED -> throw IllegalArgumentException(
       "cannot transition straight from initialized to destroyed"
     )
+
     Lifecycle.State.CREATED -> destroy()
     Lifecycle.State.STARTED -> stop()
     Lifecycle.State.RESUMED -> pause()
@@ -87,5 +88,5 @@ open class FakeLifecycleOwner(
   fun getObserverCount(): Int = runBlocking(mainDispatcher) { fakeLifecycle.observerCount }
 }
 
-@Suppress("EXPERIMENTAL_API_USAGE")
+@OptIn(ObsoleteCoroutinesApi::class)
 private fun fakeMainDispatcher() = newSingleThreadContext("FakeLifecycleOwner main")

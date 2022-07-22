@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,12 +19,12 @@ package dispatch.internal.test
 
 import dispatch.core.*
 import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import kotlinx.knit.test.*
-import org.junit.*
 import java.io.*
 import kotlin.coroutines.*
+import kotlinx.coroutines.*
+import kotlinx.knit.test.*
 import kotlinx.knit.test.captureOutput as knitCaptureOutput
+import org.junit.*
 
 public typealias Sample = Test
 
@@ -39,8 +39,10 @@ public fun Any?.shouldPrint(vararg expected: String) {
 public fun dispatcherName(): String = " @coroutine.*".toRegex()
   .replace(Thread.currentThread().name, "")
 
+@OptIn(ObsoleteCoroutinesApi::class)
 public val blocking: ExecutorCoroutineDispatcher = newSingleThreadContext("runBlocking thread")
 
+@OptIn(ObsoleteCoroutinesApi::class)
 public val someDispatcherProvider: CoroutineContext = object : DispatcherProvider {
   override val default = newSingleThreadContext("default")
   override val io = newSingleThreadContext("io")

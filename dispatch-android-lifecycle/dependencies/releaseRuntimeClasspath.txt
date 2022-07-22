@@ -20,10 +20,10 @@ androidx.savedstate:savedstate:1.1.0
 androidx.tracing:tracing:1.0.0
 androidx.versionedparcelable:versionedparcelable:1.1.0
 androidx.viewpager:viewpager:1.0.0
-org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31
-org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31
-org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31
-org.jetbrains.kotlin:kotlin-stdlib:1.5.31
+org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10
+org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10
+org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10
+org.jetbrains.kotlin:kotlin-stdlib:1.7.10
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2
 org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2
