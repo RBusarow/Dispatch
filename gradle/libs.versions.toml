@@ -9,13 +9,13 @@ dispatch = "1.0.0-beta10"
 detekt = "1.21.0"
 dokka = "1.7.10"
 dropbox-dependencyGuard = "0.3.1"
-gradleDoctor = "0.7.0"
+gradleDoctor = "0.8.1"
 groovy = "3.0.11"
 hermit = "0.9.5"
 jUnit = "5.8.1"
 kotest = "4.6.4"
 kotlin = "1.7.10"
-ktlint-gradle = "10.2.1"
+ktlint-gradle = "10.3.0"
 
 sonarPlugin = "2.6.1"
 spotless = "5.10.1"
@@ -216,7 +216,7 @@ google-code-findbugs-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 google-dagger-api = { module = "com.google.dagger:dagger", version.ref = "google-dagger" }
 google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "google-dagger" }
 
-google-ksp = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.31-1.0.0"
+google-ksp = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.7.10-1.0.6"
 
 google-material-android = { module = "com.google.android.material:material", version.ref = "google-material" }
 
@@ -266,7 +266,7 @@ kotlinx-metadata-jvm = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", 
 kotlinx-knit-gradle = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit" }
 
-ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.2.0"
+ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.3.0"
 
 mockk = "io.mockk:mockk:1.12.4"
 
