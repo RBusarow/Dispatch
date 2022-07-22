@@ -40,7 +40,7 @@ kotlinx-knit = "0.4.0"
 kotlinx-metadata = "0.5.0"
 
 google-dagger = "2.43"
-google-material = "1.4.0"
+google-material = "1.6.1"
 
 rickBusarow-dependencySync = "0.11.4"
 rickBusarow-moduleCheck = "0.12.3"
