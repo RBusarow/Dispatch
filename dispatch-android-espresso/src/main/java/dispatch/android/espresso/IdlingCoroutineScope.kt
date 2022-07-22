@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,13 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("MaxLineLength")
 
 package dispatch.android.espresso
 
-import androidx.test.espresso.*
-import dispatch.core.*
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.IdlingResource
+import dispatch.core.DefaultCoroutineScope
+import dispatch.core.DispatcherProvider
+import dispatch.core.IOCoroutineScope
+import dispatch.core.MainCoroutineScope
+import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.UnconfinedCoroutineScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Special [CoroutineScope] with a [DispatcherProvider] which is an [IdlingDispatcherProvider].
@@ -29,13 +39,15 @@ import kotlin.coroutines.*
 interface IdlingCoroutineScope : CoroutineScope {
 
   /**
-   * Any [IdlingCoroutineScope] has an [idlingDispatcherProvider] property which can be registered in the [IdlingRegistry].
+   * Any [IdlingCoroutineScope] has an [idlingDispatcherProvider] property which can be registered
+   * in the [IdlingRegistry].
    */
   val idlingDispatcherProvider: IdlingDispatcherProvider
 }
 
 /**
- * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.default]
+ * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is
+ * [DispatcherProvider.default]
  *
  * @see IdlingDispatcherProvider
  * @see IdlingResource
@@ -46,7 +58,8 @@ interface DefaultIdlingCoroutineScope :
   DefaultCoroutineScope
 
 /**
- * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.io]
+ * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is
+ * [DispatcherProvider.io]
  *
  * @see IdlingDispatcherProvider
  * @see IdlingResource
@@ -57,7 +70,8 @@ interface IOIdlingCoroutineScope :
   IOCoroutineScope
 
 /**
- * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.main]
+ * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is
+ * [DispatcherProvider.main]
  *
  * @see IdlingDispatcherProvider
  * @see IdlingResource
@@ -68,7 +82,8 @@ interface MainIdlingCoroutineScope :
   MainCoroutineScope
 
 /**
- * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.mainImmediate]
+ * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is
+ * [DispatcherProvider.mainImmediate]
  *
  * @see IdlingDispatcherProvider
  * @see IdlingResource
@@ -79,7 +94,8 @@ interface MainImmediateIdlingCoroutineScope :
   MainImmediateCoroutineScope
 
 /**
- * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is [DispatcherProvider.unconfined]
+ * Marker interface for an [IdlingCoroutineScope] which indicates that its [CoroutineDispatcher] is
+ * [DispatcherProvider.unconfined]
  *
  * @see IdlingDispatcherProvider
  * @see IdlingResource
@@ -92,14 +108,17 @@ interface UnconfinedIdlingCoroutineScope :
 /**
  * Factory function for an [IdlingCoroutineScope].
  *
- * @param job *optional* The [Job] used in creation of the [CoroutineContext].  Uses [SupervisorJob] by default.
- * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the [CoroutineContext].
- * Uses the default [IdlingDispatcherProvider] factory by default.
+ * @param job *optional* The [Job] used in creation of the [CoroutineContext]. Uses [SupervisorJob]
+ *   by default.
+ * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the
+ *   [CoroutineContext]. Uses the default [IdlingDispatcherProvider] factory by default.
+ * @sample
+ *   dispatch.android.espresso.samples.IdlingCoroutineScopeSample.createNoArgIdlingCoroutineScope
+ * @sample
+ *   dispatch.android.espresso.samples.IdlingCoroutineScopeSample.createCustomIdlingCoroutineScope
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeSample.createNoArgIdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeSample.createCustomIdlingCoroutineScope
  */
 fun IdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -112,14 +131,17 @@ fun IdlingCoroutineScope(
 /**
  * Factory function for a [DefaultIdlingCoroutineScope].
  *
- * @param job *optional* The [Job] used in creation of the [CoroutineContext].  Uses [SupervisorJob] by default.
- * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the [CoroutineContext].
- * Uses the default [IdlingDispatcherProvider] factory by default.
+ * @param job *optional* The [Job] used in creation of the [CoroutineContext]. Uses [SupervisorJob]
+ *   by default.
+ * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the
+ *   [CoroutineContext]. Uses the default [IdlingDispatcherProvider] factory by default.
+ * @sample
+ *   dispatch.android.espresso.samples.DefaultIdlingCoroutineScopeSample.createNoArgDefaultIdlingCoroutineScope
+ * @sample
+ *   dispatch.android.espresso.samples.DefaultIdlingCoroutineScopeSample.createCustomDefaultIdlingCoroutineScope
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.DefaultIdlingCoroutineScopeSample.createNoArgDefaultIdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.DefaultIdlingCoroutineScopeSample.createCustomDefaultIdlingCoroutineScope
  */
 fun DefaultIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -132,14 +154,17 @@ fun DefaultIdlingCoroutineScope(
 /**
  * Factory function for an [IOIdlingCoroutineScope].
  *
- * @param job *optional* The [Job] used in creation of the [CoroutineContext].  Uses [SupervisorJob] by default.
- * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the [CoroutineContext].
- * Uses the default [IdlingDispatcherProvider] factory by default.
+ * @param job *optional* The [Job] used in creation of the [CoroutineContext]. Uses [SupervisorJob]
+ *   by default.
+ * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the
+ *   [CoroutineContext]. Uses the default [IdlingDispatcherProvider] factory by default.
+ * @sample
+ *   dispatch.android.espresso.samples.IOIdlingCoroutineScopeSample.createNoArgIOIdlingCoroutineScope
+ * @sample
+ *   dispatch.android.espresso.samples.IOIdlingCoroutineScopeSample.createCustomIOIdlingCoroutineScope
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.IOIdlingCoroutineScopeSample.createNoArgIOIdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.IOIdlingCoroutineScopeSample.createCustomIOIdlingCoroutineScope
  */
 fun IOIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -152,14 +177,17 @@ fun IOIdlingCoroutineScope(
 /**
  * Factory function for a [MainIdlingCoroutineScope].
  *
- * @param job *optional* The [Job] used in creation of the [CoroutineContext].  Uses [SupervisorJob] by default.
- * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the [CoroutineContext].
- * Uses the default [IdlingDispatcherProvider] factory by default.
+ * @param job *optional* The [Job] used in creation of the [CoroutineContext]. Uses [SupervisorJob]
+ *   by default.
+ * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the
+ *   [CoroutineContext]. Uses the default [IdlingDispatcherProvider] factory by default.
+ * @sample
+ *   dispatch.android.espresso.samples.MainIdlingCoroutineScopeSample.createNoArgMainIdlingCoroutineScope
+ * @sample
+ *   dispatch.android.espresso.samples.MainIdlingCoroutineScopeSample.createCustomMainIdlingCoroutineScope
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.MainIdlingCoroutineScopeSample.createNoArgMainIdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.MainIdlingCoroutineScopeSample.createCustomMainIdlingCoroutineScope
  */
 fun MainIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -172,14 +200,17 @@ fun MainIdlingCoroutineScope(
 /**
  * Factory function for a [MainImmediateIdlingCoroutineScope].
  *
- * @param job *optional* The [Job] used in creation of the [CoroutineContext].  Uses [SupervisorJob] by default.
- * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the [CoroutineContext].
- * Uses the default [IdlingDispatcherProvider] factory by default.
+ * @param job *optional* The [Job] used in creation of the [CoroutineContext]. Uses [SupervisorJob]
+ *   by default.
+ * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the
+ *   [CoroutineContext]. Uses the default [IdlingDispatcherProvider] factory by default.
+ * @sample
+ *   dispatch.android.espresso.samples.MainImmediateIdlingCoroutineScopeSample.createNoArgMainImmediateIdlingCoroutineScope
+ * @sample
+ *   dispatch.android.espresso.samples.MainImmediateIdlingCoroutineScopeSample.createCustomMainImmediateIdlingCoroutineScope
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.MainImmediateIdlingCoroutineScopeSample.createNoArgMainImmediateIdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.MainImmediateIdlingCoroutineScopeSample.createCustomMainImmediateIdlingCoroutineScope
  */
 fun MainImmediateIdlingCoroutineScope(
   job: Job = SupervisorJob(),
@@ -193,14 +224,17 @@ fun MainImmediateIdlingCoroutineScope(
 /**
  * Factory function for an [UnconfinedIdlingCoroutineScope].
  *
- * @param job *optional* The [Job] used in creation of the [CoroutineContext].  Uses [SupervisorJob] by default.
- * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the [CoroutineContext].
- * Uses the default [IdlingDispatcherProvider] factory by default.
+ * @param job *optional* The [Job] used in creation of the [CoroutineContext]. Uses [SupervisorJob]
+ *   by default.
+ * @param dispatcherProvider The [IdlingDispatcherProvider] used in creation of the
+ *   [CoroutineContext]. Uses the default [IdlingDispatcherProvider] factory by default.
+ * @sample
+ *   dispatch.android.espresso.samples.UnconfinedIdlingCoroutineScopeSample.createNoArgUnconfinedIdlingCoroutineScope
+ * @sample
+ *   dispatch.android.espresso.samples.UnconfinedIdlingCoroutineScopeSample.createCustomUnconfinedIdlingCoroutineScope
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  * @see IdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.UnconfinedIdlingCoroutineScopeSample.createNoArgUnconfinedIdlingCoroutineScope
- * @sample dispatch.android.espresso.samples.UnconfinedIdlingCoroutineScopeSample.createCustomUnconfinedIdlingCoroutineScope
  */
 fun UnconfinedIdlingCoroutineScope(
   job: Job = SupervisorJob(),

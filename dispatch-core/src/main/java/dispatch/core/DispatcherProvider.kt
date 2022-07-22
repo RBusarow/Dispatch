@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,21 +16,24 @@
 
 package dispatch.core
 
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainCoroutineDispatcher
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Interface corresponding to the different [CoroutineDispatcher]'s offered by [Dispatchers].
  *
- * Implements the [CoroutineContext.Element] interface
- * so that it can be embedded into the [CoroutineContext] map,
- * meaning that a `CoroutineContext` can be composed with a set of pre-set dispatchers,
- * thereby eliminating the need for singleton references or dependency injecting this interface.
+ * Implements the [CoroutineContext.Element] interface so that it can be embedded into the
+ * [CoroutineContext] map, meaning that a `CoroutineContext` can be composed with a set of pre-set
+ * dispatchers, thereby eliminating the need for singleton references or dependency injecting this
+ * interface.
  */
 public interface DispatcherProvider : CoroutineContext.Element {
 
   /**
-   * This unique [Key] property is what allows the `DispatcherProvider` to be stored in the [CoroutineContext].
+   * This unique [Key] property is what allows the `DispatcherProvider` to be stored in the
+   * [CoroutineContext].
    */
   override val key: CoroutineContext.Key<*> get() = Key
 
@@ -64,7 +67,9 @@ public interface DispatcherProvider : CoroutineContext.Element {
   /**
    * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
    *
-   * Corresponds to the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in a default implementation.
+   * Corresponds to the
+   * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in
+   * a default implementation.
    *
    * @see MainCoroutineDispatcher.immediate
    */
@@ -80,7 +85,8 @@ public interface DispatcherProvider : CoroutineContext.Element {
   public val unconfined: CoroutineDispatcher get() = Dispatchers.Unconfined
 
   /**
-   * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the [CoroutineContext].
+   * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the
+   * [CoroutineContext].
    */
   public companion object Key : CoroutineContext.Key<DispatcherProvider>
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,13 +15,17 @@
 
 package dispatch.android.espresso
 
-import androidx.test.espresso.*
-import dispatch.core.*
-import kotlinx.coroutines.*
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.IdlingResource
+import dispatch.core.DefaultDispatcherProvider
+import dispatch.core.DispatcherProvider
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainCoroutineDispatcher
 
 /**
- * [IdlingResource] helper for coroutines.  This [DispatcherProvider] implementation
- * utilizes an [IdlingDispatcher] for each [CoroutineDispatcher].
+ * [IdlingResource] helper for coroutines. This [DispatcherProvider] implementation utilizes an
+ * [IdlingDispatcher] for each [CoroutineDispatcher].
  *
  * @see IdlingResource
  * @see DispatcherProvider
@@ -30,39 +34,40 @@ import kotlinx.coroutines.*
  */
 class IdlingDispatcherProvider(
   /**
-   * [IdlingDispatcher] implementation of [DispatcherProvider.default],
-   * which typically corresponds to the [Dispatchers.Default] [CoroutineDispatcher].
+   * [IdlingDispatcher] implementation of [DispatcherProvider.default], which typically corresponds
+   * to the [Dispatchers.Default] [CoroutineDispatcher].
    */
   override val default: IdlingDispatcher,
   /**
-   * [IdlingDispatcher] implementation of [DispatcherProvider.io],
-   * which typically corresponds to the [Dispatchers.IO] [CoroutineDispatcher].
+   * [IdlingDispatcher] implementation of [DispatcherProvider.io], which typically corresponds to
+   * the [Dispatchers.IO] [CoroutineDispatcher].
    */
   override val io: IdlingDispatcher,
   /**
-   * [IdlingDispatcher] implementation of [DispatcherProvider.main],
-   * which typically corresponds to the [Dispatchers.Main] [CoroutineDispatcher].
+   * [IdlingDispatcher] implementation of [DispatcherProvider.main], which typically corresponds to
+   * the [Dispatchers.Main] [CoroutineDispatcher].
    */
   override val main: IdlingDispatcher,
   /**
-   * [IdlingDispatcher] implementation of [DispatcherProvider.mainImmediate],
-   * which typically corresponds to the [Dispatchers.Main.immediate][MainCoroutineDispatcher.immediate] [CoroutineDispatcher].
+   * [IdlingDispatcher] implementation of [DispatcherProvider.mainImmediate], which typically
+   * corresponds to the [Dispatchers.Main.immediate][MainCoroutineDispatcher.immediate]
+   * [CoroutineDispatcher].
    */
   override val mainImmediate: IdlingDispatcher,
   /**
-   * [IdlingDispatcher] implementation of [DispatcherProvider.unconfined],
-   * which typically corresponds to the [Dispatchers.Unconfined] [CoroutineDispatcher].
+   * [IdlingDispatcher] implementation of [DispatcherProvider.unconfined], which typically
+   * corresponds to the [Dispatchers.Unconfined] [CoroutineDispatcher].
    */
   override val unconfined: IdlingDispatcher
 ) : DispatcherProvider
 
 /**
- * [IdlingDispatcherProvider] factory function, which creates an instance using an existing [DispatcherProvider].
+ * [IdlingDispatcherProvider] factory function, which creates an instance using an existing
+ * [DispatcherProvider].
  *
  * @param delegate *optional* Use this [DispatcherProvider] to create a single [IdlingDispatcher]
- * which is used as all properties for the [IdlingDispatcherProvider].
- * Uses [DefaultDispatcherProvider.get] if no instance provided.
- *
+ *   which is used as all properties for the [IdlingDispatcherProvider].
+ *   Uses [DefaultDispatcherProvider.get] if no instance provided.
  * @see IdlingResource
  * @see DispatcherProvider
  * @see IdlingDispatcher
@@ -79,11 +84,13 @@ fun IdlingDispatcherProvider(
 )
 
 /**
- * Register all [IdlingDispatcher] properties of the receiver [IdlingDispatcherProvider] with Espresso's [IdlingRegistry].
+ * Register all [IdlingDispatcher] properties of the receiver [IdlingDispatcherProvider] with
+ * Espresso's [IdlingRegistry].
  *
  * This should be done before executing a test.
  *
- * After test execution, be sure to call the companion [IdlingDispatcherProvider.unregisterAllIdlingResources].
+ * After test execution, be sure to call the companion
+ * [IdlingDispatcherProvider.unregisterAllIdlingResources].
  *
  * @see IdlingDispatcherProvider.unregisterAllIdlingResources
  */
@@ -102,12 +109,13 @@ fun IdlingDispatcherProvider.registerAllIdlingResources() {
 }
 
 /**
- * Unregister all [IdlingDispatcher] properties of the receiver [IdlingDispatcherProvider] with Espresso's [IdlingRegistry].
+ * Unregister all [IdlingDispatcher] properties of the receiver [IdlingDispatcherProvider] with
+ * Espresso's [IdlingRegistry].
  *
  * This should be done after executing a test.
  *
- * Before test execution, be sure to call the companion [IdlingDispatcherProvider.registerAllIdlingResources]
- * or this function will have no effect.
+ * Before test execution, be sure to call the companion
+ * [IdlingDispatcherProvider.registerAllIdlingResources] or this function will have no effect.
  *
  * @see IdlingDispatcherProvider.registerAllIdlingResources
  */

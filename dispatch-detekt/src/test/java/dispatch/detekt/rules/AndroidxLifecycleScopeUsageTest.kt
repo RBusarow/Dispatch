@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,11 +15,11 @@
 
 package dispatch.detekt.rules
 
-import io.gitlab.arturbosch.detekt.test.*
-import io.kotest.core.spec.style.*
-import io.kotest.matchers.*
+import io.gitlab.arturbosch.detekt.test.lint
+import io.kotest.core.spec.style.FreeSpec
+import io.kotest.matchers.shouldBe
 
-internal class AndroidXLifecycleScopeTest : FreeSpec(
+internal class AndroidxLifecycleScopeUsageTest : FreeSpec(
   {
 
     "importing androidx lifecycleScope and using it should report Finding" {
@@ -37,7 +37,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |
       |}
       |
-    """.trimMargin()
+      """.trimMargin()
 
       val rule = AndroidXLifecycleScope()
 
@@ -59,7 +59,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |
       |}
       |
-    """.trimMargin()
+      """.trimMargin()
 
       val rule = AndroidXLifecycleScope()
 
@@ -91,7 +91,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |  }
       |
       |}
-    """.trimMargin()
+      """.trimMargin()
 
       val rule = AndroidXLifecycleScope()
 
@@ -115,7 +115,7 @@ internal class AndroidXLifecycleScopeTest : FreeSpec(
       |
       |}
       |
-    """.trimMargin()
+      """.trimMargin()
 
       val rule = AndroidXLifecycleScope()
 

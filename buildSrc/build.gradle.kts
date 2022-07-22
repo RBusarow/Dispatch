@@ -32,6 +32,7 @@ dependencies {
   implementation(kotlin("gradle-plugin", version = kotlinVersion))
   implementation(kotlin("reflect", version = kotlinVersion))
   implementation(libs.android.gradle)
+  implementation(libs.detekt.gradle)
   implementation(libs.dokka.gradle)
   implementation(libs.dropbox.dependencyGuard)
   implementation(libs.kotlin.annotation.processing)

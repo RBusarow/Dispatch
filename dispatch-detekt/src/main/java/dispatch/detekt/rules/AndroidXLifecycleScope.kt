@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,22 +15,27 @@
 
 package dispatch.detekt.rules
 
-import io.gitlab.arturbosch.detekt.api.*
-import org.jetbrains.kotlin.psi.*
-import org.jetbrains.kotlin.psi.psiUtil.*
+import io.gitlab.arturbosch.detekt.api.CodeSmell
+import io.gitlab.arturbosch.detekt.api.Config
+import io.gitlab.arturbosch.detekt.api.Debt
+import io.gitlab.arturbosch.detekt.api.Entity
+import io.gitlab.arturbosch.detekt.api.Issue
+import io.gitlab.arturbosch.detekt.api.Rule
+import io.gitlab.arturbosch.detekt.api.Severity
+import org.jetbrains.kotlin.psi.KtImportDirective
+import org.jetbrains.kotlin.psi.KtReferenceExpression
+import org.jetbrains.kotlin.psi.psiUtil.isInImportDirective
 
 /**
- * Detects use of `androidx.lifecycle.lifecycleScope`,
- * which shares a namespace with `dispatch.android.lifecycle.lifecycleScope`.
+ * Detects use of `androidx.lifecycle.lifecycleScope`, which shares a namespace with
+ * `dispatch.android.lifecycle.lifecycleScope`.
  *
- * The AndroidX library uses a hard-coded `Dispatchers.Main` and does not contain a `DispatcherProvider`,
- * and also leaks its pausing behavior.
+ * The AndroidX library uses a hard-coded `Dispatchers.Main` and does not contain a
+ * `DispatcherProvider`, and also leaks its pausing behavior.
  */
 public class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config) {
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override val issue: Issue = Issue(
     id = "AndroidXLifecycleScope",
     severity = Severity.Defect,
@@ -38,9 +43,7 @@ public class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config
     debt = Debt.FIVE_MINS
   )
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   private companion object {
     private val starImportRegex = "androidx\\.lifecycle\\.\\*".toRegex()
     private val explicitImportRegex = "androidx\\.lifecycle\\.lifecycleScope".toRegex()
@@ -50,9 +53,7 @@ public class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config
   private val calls = mutableListOf<KtReferenceExpression>()
   private var importPresent = false
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun visitReferenceExpression(expression: KtReferenceExpression) {
     super.visitReferenceExpression(expression)
 
@@ -73,9 +74,7 @@ public class AndroidXLifecycleScope(config: Config = Config.empty) : Rule(config
     }
   }
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun visitImportDirective(importDirective: KtImportDirective) {
 
     val importString = importDirective.importPath?.pathStr
