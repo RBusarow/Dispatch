@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.*
-import org.gradle.api.*
-import org.gradle.api.JavaVersion.*
-import org.gradle.kotlin.dsl.*
-import java.io.*
+import com.android.build.gradle.TestedExtension
+import org.gradle.api.JavaVersion.VERSION_1_8
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.configure
 
 @Suppress("MagicNumber", "LongMethod")
 fun Project.commonAndroid() {

@@ -10,10 +10,10 @@ androidx.core:core:1.8.0
 androidx.customview:customview:1.0.0
 androidx.fragment:fragment:1.5.0
 androidx.lifecycle:lifecycle-common:2.5.0
-androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.1
+androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.0
 androidx.lifecycle:lifecycle-livedata-core:2.5.0
-androidx.lifecycle:lifecycle-livedata-ktx:2.3.1
-androidx.lifecycle:lifecycle-livedata:2.3.1
+androidx.lifecycle:lifecycle-livedata-ktx:2.5.0
+androidx.lifecycle:lifecycle-livedata:2.5.0
 androidx.lifecycle:lifecycle-runtime:2.5.0
 androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0
 androidx.lifecycle:lifecycle-viewmodel:2.5.0

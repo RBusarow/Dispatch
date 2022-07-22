@@ -15,8 +15,12 @@
 
 package dispatch.internal.test.android
 
-import androidx.lifecycle.*
-import kotlinx.coroutines.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.runBlocking
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 open class FakeLifecycleOwner(

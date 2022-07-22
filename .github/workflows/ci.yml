@@ -36,12 +36,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'zulu'
           java-version: '11'
-          cache: 'gradle'
 
       - name: detekt
-        run: ./gradlew detekt --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: detekt
+          cache-read-only: false
 
   ktlint:
 
@@ -64,13 +66,15 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'zulu'
           java-version: '11'
-          cache: 'gradle'
 
       - name: KtLint format (used by main repo)
         if: github.event.pull_request.head.repo.full_name == github.repository
-        run: ./gradlew ktlintformat -q --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: ktlintformat
+          cache-read-only: false
 
       # If KtLint generated changes, commit and push those changes.
       - name: commit changes (used by main repo)
@@ -82,9 +86,12 @@ jobs:
 
       - name: KtLint check (used by forks)
         if: github.event.pull_request.head.repo.full_name != github.repository
-        run: ./gradlew ktlintCheck -q --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: ktlintcheck
+          cache-read-only: false
 
-#  versioning:
+  #  versioning:
 #
 #    runs-on: ubuntu-latest
   #    if: github.actor != 'renovate[bot]'
@@ -152,12 +159,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'zulu'
           java-version: '11'
-          cache: 'gradle'
 
       - name: api check
-        run: ./gradlew apicheck --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: apicheck
+          cache-read-only: false
 
   dependency-guard:
 
@@ -174,12 +183,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'zulu'
           java-version: '11'
-          cache: 'gradle'
 
       - name: dependency-guard
-        run: ./gradlew dependencyGuard --no-daemon --refresh-dependencies
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: dependencyGuard
+          cache-read-only: false
 
   tests:
 
@@ -195,12 +206,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'zulu'
           java-version: '11'
-          cache: 'gradle'
 
       - name: all tests
-        run: ./gradlew testJvm --no-daemon
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: testJvm
+          cache-read-only: false
 
       - name: Archive test results
         uses: actions/upload-artifact@v3
