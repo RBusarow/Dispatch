@@ -21,8 +21,22 @@ import dispatch.android.lifecycle.DispatchLifecycleScope
 import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANCEL
 import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.RESTART_EVERY
 import dispatch.core.flowOnMainImmediate
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.takeWhile
+import kotlinx.coroutines.flow.transformLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
 
@@ -142,7 +156,6 @@ internal fun Lifecycle.eventFlow(
 }
 
 /** Terminal operator which collects the given [Flow] until the [predicate] returns true. */
-@ExperimentalCoroutinesApi
 private suspend fun <T> Flow<T>.collectUntil(
   predicate: suspend (T) -> Boolean
 ) = takeWhile { !predicate(it) }.collect()
@@ -153,7 +166,7 @@ private suspend fun <T> Flow<T>.collectUntil(
  * The crucial difference from [onEach] is that when the original flow emits a new value, the
  * [action] block for previous value is cancelled.
  */
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalCoroutinesApi::class)
 internal fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLatest { value ->
   action(value)
   return@transformLatest emit(value)

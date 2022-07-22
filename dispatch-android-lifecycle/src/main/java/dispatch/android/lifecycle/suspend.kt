@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,19 +15,26 @@
 
 package dispatch.android.lifecycle
 
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.internal.*
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import dispatch.android.lifecycle.internal.onNext
+import kotlinx.coroutines.CoroutineScope
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 /**
- * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least
+ * [Lifecycle.State.CREATED].
  *
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
+ * @param T the type to be returned by [block]
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
+ *   coroutine.
+ * @param block the action to be performed
+ * @sample
+ *   dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
  * @see [DispatchLifecycleScope.launchOnCreate] for repeating behavior.
- * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
  */
 suspend fun <T> LifecycleOwner.onNextCreate(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -35,13 +42,17 @@ suspend fun <T> LifecycleOwner.onNextCreate(
 ): T? = lifecycle.onNext(context, Lifecycle.State.CREATED, block)
 
 /**
- * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.CREATED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least
+ * [Lifecycle.State.CREATED].
  *
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
- * @see [DispatchLifecycleScope.launchOnCreate] for repeating behavior.
- * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
+ * @param T the type to be returned by [block]
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
+ *   coroutine.
+ * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextCreateSample
+ * @see [DispatchLifecycleScope.launchOnCreate]
  */
 suspend fun <T> Lifecycle.onNextCreate(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -49,13 +60,18 @@ suspend fun <T> Lifecycle.onNextCreate(
 ): T? = onNext(context, Lifecycle.State.CREATED, block)
 
 /**
- * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least
+ * [Lifecycle.State.STARTED].
  *
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
+ * @param T the type to be returned by [block]
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
+ *   coroutine.
+ * @param block the action to be performed
+ * @sample
+ *   dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
  * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
- * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
  */
 suspend fun <T> LifecycleOwner.onNextStart(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -63,13 +79,17 @@ suspend fun <T> LifecycleOwner.onNextStart(
 ): T? = lifecycle.onNext(context, Lifecycle.State.STARTED, block)
 
 /**
- * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.STARTED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least
+ * [Lifecycle.State.STARTED].
  *
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
- * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
- * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
+ * @param T the type to be returned by [block]
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
+ *   coroutine.
+ * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextStartSample
+ * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
  */
 suspend fun <T> Lifecycle.onNextStart(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -77,13 +97,18 @@ suspend fun <T> Lifecycle.onNextStart(
 ): T? = onNext(context, Lifecycle.State.STARTED, block)
 
 /**
- * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least
+ * [Lifecycle.State.RESUMED].
  *
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
+ * @param T the type to be returned by [block]
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
+ *   coroutine.
+ * @param block the action to be performed
+ * @sample
+ *   dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
  * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
- * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
- * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
  */
 suspend fun <T> LifecycleOwner.onNextResume(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -91,13 +116,17 @@ suspend fun <T> LifecycleOwner.onNextResume(
 ): T? = lifecycle.onNext(context, Lifecycle.State.RESUMED, block)
 
 /**
- * Executes `block` one time, the next time the [Lifecycle]'s state is at least [Lifecycle.State.RESUMED].
+ * Executes `block` one time, the next time the [Lifecycle]'s state is at least
+ * [Lifecycle.State.RESUMED].
  *
  * If the lifecycle is already in this state, `block` will be executed immediately.
  *
- * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
- * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the coroutine.
+ * @param T the type to be returned by [block]
+ * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
+ *   coroutine.
+ * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextResumeSample
+ * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
  */
 suspend fun <T> Lifecycle.onNextResume(
   context: CoroutineContext = EmptyCoroutineContext,

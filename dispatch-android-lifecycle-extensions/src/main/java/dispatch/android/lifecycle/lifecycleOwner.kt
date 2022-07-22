@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,23 +15,26 @@
 
 package dispatch.android.lifecycle
 
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.internal.*
-import kotlinx.coroutines.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import dispatch.android.lifecycle.internal.DispatchLifecycleScopeStore
+import kotlinx.coroutines.CoroutineScope
 
 /**
- * [CoroutineScope] instance for the [LifecycleOwner].
- * By default, it uses the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher.
+ * [CoroutineScope] instance for the [LifecycleOwner]. By default, it uses the
+ * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher.
  *
- * The `lifecycleScope` instance is created automatically upon first access,
- * from the factory set in [LifecycleScopeFactory].
+ * The `lifecycleScope` instance is created automatically upon first access, from the factory set in
+ * [LifecycleScopeFactory].
  *
  * The type of [CoroutineScope] created is configurable via [LifecycleScopeFactory.set].
  *
  * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s
- * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
+ * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to
+ * [Lifecycle.State.DESTROYED].
  *
- * @sample dispatch.android.lifecycle.samples.LifecycleScopeExtensionSample.lifecycleScopeExtensionSample
+ * @sample
+ *   dispatch.android.lifecycle.samples.LifecycleScopeExtensionSamples.lifecycleScopeExtensionSample
  */
 @Deprecated(
   "Use dispatchLifecycleScope to avoid collisions with the Androidx library",
@@ -41,18 +44,20 @@ val LifecycleOwner.lifecycleScope: DispatchLifecycleScope
   get() = dispatchLifecycleScope
 
 /**
- * [CoroutineScope] instance for the [LifecycleOwner].
- * By default, it uses the [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher.
+ * [CoroutineScope] instance for the [LifecycleOwner]. By default, it uses the
+ * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] dispatcher.
  *
- * The `lifecycleScope` instance is created automatically upon first access,
- * from the factory set in [LifecycleScopeFactory].
+ * The `lifecycleScope` instance is created automatically upon first access, from the factory set in
+ * [LifecycleScopeFactory].
  *
  * The type of [CoroutineScope] created is configurable via [LifecycleScopeFactory.set].
  *
  * The `viewModelScope` is automatically cancelled when the [LifecycleOwner]'s
- * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to [Lifecycle.State.DESTROYED].
+ * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to
+ * [Lifecycle.State.DESTROYED].
  *
- * @sample dispatch.android.lifecycle.samples.LifecycleScopeExtensionSample.lifecycleScopeExtensionSample
+ * @sample
+ *   dispatch.android.lifecycle.samples.LifecycleScopeExtensionSamples.lifecycleScopeExtensionSample
  */
 val LifecycleOwner.dispatchLifecycleScope: DispatchLifecycleScope
   get() = DispatchLifecycleScopeStore.get(this.lifecycle)

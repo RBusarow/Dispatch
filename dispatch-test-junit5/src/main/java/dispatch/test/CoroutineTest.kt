@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,20 +15,21 @@
 
 package dispatch.test
 
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.extension.*
-import kotlin.reflect.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.jupiter.api.extension.ExtendWith
+import kotlin.reflect.KClass
 
 /**
- * Annotation for specifying a custom [CoroutineTestExtension.ScopeFactory] while
- * extending a test class or function with [CoroutineTestExtension].
+ * Annotation for specifying a custom [CoroutineTestExtension.ScopeFactory] while extending a test
+ * class or function with [CoroutineTestExtension].
  *
- * @see CoroutineTestExtension
- * @param scopeFactory *optional* KClass which extends [CoroutineTestExtension.ScopeFactory].
- * **This class must have a default constructor**
- * An instance will be automatically initialized inside the [CoroutineTestExtension] and used to create custom [TestProvidedCoroutineScope] instances.
+ * @property scopeFactory *optional* KClass which extends [CoroutineTestExtension.ScopeFactory].
+ *   **This class must have a default constructor** An instance will
+ *   be automatically initialized inside the [CoroutineTestExtension]
+ *   and used to create custom [TestProvidedCoroutineScope] instances.
  * @sample dispatch.test.samples.CoroutineTestDefaultFactorySample
  * @sample dispatch.test.samples.CoroutineTestNamedFactorySample
+ * @see CoroutineTestExtension
  */
 @ExperimentalCoroutinesApi
 @ExtendWith(CoroutineTestExtension::class)
