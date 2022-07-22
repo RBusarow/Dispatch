@@ -32,6 +32,7 @@ buildscript {
     classpath(libs.vanniktech.maven.publish)
     classpath(libs.kotlin.gradle.plug)
     classpath(libs.kotlinx.atomicfu)
+    classpath(libs.kotlinx.metadata.jvm)
     classpath(libs.ktlint.gradle)
     classpath(libs.ktlint.gradle)
   }

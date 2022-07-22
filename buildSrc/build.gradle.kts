@@ -41,5 +41,6 @@ dependencies {
   implementation(libs.kotlin.stdlib.jdk8)
   implementation(libs.kotlinx.atomicfu)
   implementation(libs.kotlinx.knit.gradle)
+  implementation(libs.kotlinx.metadata.jvm)
   implementation(libs.ktlint.gradle)
 }
