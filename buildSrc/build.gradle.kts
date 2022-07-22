@@ -28,35 +28,19 @@ val kotlinVersion = libs.versions.kotlin.get()
 dependencies {
 
   compileOnly(gradleApi())
+
+  implementation(kotlin("gradle-plugin", version = kotlinVersion))
+  implementation(kotlin("reflect", version = kotlinVersion))
+  implementation(libs.android.gradle)
+  implementation(libs.dokka.gradle)
   implementation(libs.dropbox.dependencyGuard)
   implementation(libs.kotlin.annotation.processing)
   implementation(libs.kotlin.compiler)
   implementation(libs.kotlin.gradle.pluginApi)
   implementation(libs.kotlin.reflect)
   implementation(libs.kotlin.stdlib.jdk8)
-  implementation(libs.ktlint.gradle)
-
-  implementation(kotlin("gradle-plugin", version = kotlinVersion))
-  implementation(kotlin("stdlib", version = kotlinVersion))
-  implementation(kotlin("stdlib-common", version = kotlinVersion))
-  implementation(kotlin("stdlib-jdk7", version = kotlinVersion))
-  implementation(kotlin("stdlib-jdk8", version = kotlinVersion))
-  implementation(kotlin("reflect", version = kotlinVersion))
-
-  implementation(libs.android.gradle)
-  implementation(libs.dokka.gradle)
-
   implementation(libs.kotlinx.atomicfu)
   implementation(libs.kotlinx.knit.gradle)
-}
-
-configurations.all {
-  resolutionStrategy {
-
-    eachDependency {
-      when {
-        requested.group == "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
-      }
-    }
-  }
+  implementation(libs.kotlinx.metadata.jvm)
+  implementation(libs.ktlint.gradle)
 }
