@@ -13,7 +13,7 @@ gradleDoctor = "0.7.0"
 groovy = "3.0.9"
 hermit = "0.9.5"
 jUnit = "5.8.1"
-kotest = "4.6.3"
+kotest = "4.6.4"
 kotlin = "1.5.31"
 ktlint-gradle = "10.2.1"
 
