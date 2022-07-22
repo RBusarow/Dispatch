@@ -34,6 +34,7 @@ dependencies {
   implementation(libs.kotlin.gradle.pluginApi)
   implementation(libs.kotlin.reflect)
   implementation(libs.kotlin.stdlib.jdk8)
+  implementation(libs.ktlint.gradle)
 
   implementation(kotlin("gradle-plugin", version = kotlinVersion))
   implementation(kotlin("stdlib", version = kotlinVersion))
