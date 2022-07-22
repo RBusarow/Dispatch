@@ -14,7 +14,7 @@ groovy = "3.0.9"
 hermit = "0.9.5"
 jUnit = "5.8.1"
 kotest = "4.6.4"
-kotlin = "1.5.31"
+kotlin = "1.7.10"
 ktlint-gradle = "10.2.1"
 
 sonarPlugin = "2.6.1"
