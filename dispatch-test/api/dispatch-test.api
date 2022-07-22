@@ -28,16 +28,20 @@ public final class dispatch/test/TestDispatcherProvider : dispatch/core/Dispatch
 }
 
 public final class dispatch/test/TestDispatcherProviderKt {
-	public static final fun TestBasicDispatcherProvider ()Ldispatch/test/TestDispatcherProvider;
+	public static final fun TestBasicDispatcherProvider (Lkotlinx/coroutines/test/TestCoroutineScheduler;Ljava/lang/String;)Ldispatch/test/TestDispatcherProvider;
+	public static final fun TestBasicDispatcherProvider (Lkotlinx/coroutines/test/TestDispatcher;)Ldispatch/test/TestDispatcherProvider;
+	public static synthetic fun TestBasicDispatcherProvider$default (Lkotlinx/coroutines/test/TestCoroutineScheduler;Ljava/lang/String;ILjava/lang/Object;)Ldispatch/test/TestDispatcherProvider;
+	public static synthetic fun TestBasicDispatcherProvider$default (Lkotlinx/coroutines/test/TestDispatcher;ILjava/lang/Object;)Ldispatch/test/TestDispatcherProvider;
 	public static final fun TestDispatcherProvider (Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/test/TestDispatcherProvider;
+	public static synthetic fun TestDispatcherProvider$default (Lkotlinx/coroutines/CoroutineDispatcher;ILjava/lang/Object;)Ldispatch/test/TestDispatcherProvider;
 }
 
-public abstract interface class dispatch/test/TestProvidedCoroutineScope : dispatch/core/DefaultCoroutineScope, dispatch/core/IOCoroutineScope, dispatch/core/MainCoroutineScope, dispatch/core/MainImmediateCoroutineScope, dispatch/core/UnconfinedCoroutineScope, kotlinx/coroutines/test/TestCoroutineScope {
+public abstract interface class dispatch/test/TestProvidedCoroutineScope : dispatch/core/DefaultCoroutineScope, dispatch/core/IOCoroutineScope, dispatch/core/MainCoroutineScope, dispatch/core/MainImmediateCoroutineScope, dispatch/core/UnconfinedCoroutineScope {
 	public abstract fun getDispatcherProvider ()Ldispatch/core/DispatcherProvider;
 }
 
 public final class dispatch/test/TestProvidedCoroutineScopeKt {
-	public static final fun TestProvidedCoroutineScope (Lkotlinx/coroutines/test/TestCoroutineDispatcher;Ldispatch/test/TestDispatcherProvider;Lkotlin/coroutines/CoroutineContext;)Ldispatch/test/TestProvidedCoroutineScope;
-	public static synthetic fun TestProvidedCoroutineScope$default (Lkotlinx/coroutines/test/TestCoroutineDispatcher;Ldispatch/test/TestDispatcherProvider;Lkotlin/coroutines/CoroutineContext;ILjava/lang/Object;)Ldispatch/test/TestProvidedCoroutineScope;
+	public static final fun TestProvidedCoroutineScope (Lkotlinx/coroutines/test/TestDispatcher;Ldispatch/test/TestDispatcherProvider;Lkotlin/coroutines/CoroutineContext;)Ldispatch/test/TestProvidedCoroutineScope;
+	public static synthetic fun TestProvidedCoroutineScope$default (Lkotlinx/coroutines/test/TestDispatcher;Ldispatch/test/TestDispatcherProvider;Lkotlin/coroutines/CoroutineContext;ILjava/lang/Object;)Ldispatch/test/TestProvidedCoroutineScope;
 }
 

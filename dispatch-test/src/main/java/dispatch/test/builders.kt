@@ -17,11 +17,14 @@ package dispatch.test
 
 import dispatch.core.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -37,13 +40,14 @@ import kotlin.coroutines.EmptyCoroutineContext
  * created using the [kotlinx.coroutines.BlockingEventLoop] interceptor.
  *
  * @param context The base `CoroutineContext` which will be modified to use a
- *   [TestCoroutineDispatcher] and [TestDispatcherProvider].
+ *   [TestBasicDispatcherProvider] and [TestDispatcherProvider].
  *   [EmptyCoroutineContext] is used if one is not provided.
  * @param block the action to be performed
  * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  * @see runBlocking
  * @see testProvided
  */
+@DelicateCoroutinesApi
 @ExperimentalCoroutinesApi
 public fun runBlockingProvided(
   context: CoroutineContext = EmptyCoroutineContext,
