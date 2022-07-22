@@ -216,7 +216,7 @@ google-code-findbugs-jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 google-dagger-api = { module = "com.google.dagger:dagger", version.ref = "google-dagger" }
 google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "google-dagger" }
 
-google-ksp = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.5.31-1.0.0"
+google-ksp = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.7.10-1.0.6"
 
 google-material-android = { module = "com.google.android.material:material", version.ref = "google-material" }
 
