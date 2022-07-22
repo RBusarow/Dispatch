@@ -118,4 +118,8 @@ internal inline fun <reified VM : ViewModel> viewModelFactory(
 internal inline fun <reified VM : ViewModel> Fragment.viewModels(
   noinline ownerProducer: () -> ViewModelStoreOwner = { this },
   noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
-) = createViewModelLazy(VM::class, { ownerProducer().viewModelStore }, factoryProducer)
+) = createViewModelLazy(
+  VM::class,
+  { ownerProducer().viewModelStore },
+  factoryProducer = factoryProducer
+)
