@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -62,6 +62,7 @@ class OnNextCreateTest :
     @Test
     fun `block should not immediately execute if lifecycle is not created`() = testProvided {
 
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
       var executed = false
@@ -180,6 +181,7 @@ class OnNextCreateTest :
     @Test
     fun `block should not immediately execute if lifecycle is not created`() = testProvided {
 
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
       var executed = false
