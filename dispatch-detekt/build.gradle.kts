@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,11 +21,10 @@ plugins {
 
 dependencies {
 
-  api(libs.arturbosch.detekt.api)
+  api(libs.detekt.api)
   api(libs.kotlin.compiler)
 
-  testImplementation(libs.arturbosch.detekt.api)
-  testImplementation(libs.arturbosch.detekt.test)
+  testImplementation(libs.detekt.test)
   testImplementation(libs.junit.api)
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)

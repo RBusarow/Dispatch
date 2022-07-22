@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,16 +15,21 @@
 
 package dispatch.android.lifecycle
 
-import androidx.fragment.app.*
-import kotlinx.coroutines.*
+import androidx.fragment.app.Fragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 
 /**
- * [CoroutineScope] helper for a [Fragment]'s [ViewLifecycleOwner][FragmentViewLifecycleOwner].
+ * [CoroutineScope] helper for a [Fragment]'s
+ * [ViewLifecycleOwner][androidx.fragment.app.FragmentViewLifecycleOwner].
  *
- * This function observes a `Fragment`'s [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData],
- * and invokes [block].
+ * This function observes a `Fragment`'s
+ * [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData], and
+ * invokes [block].
  *
- * @sample dispatch.android.lifecycle.samples.WithViewLifecycleScopeExtensionSample.withViewLifecycleScopeSample
+ * @sample
+ *   dispatch.android.lifecycle.samples.WithViewLifecycleScopeExtensionSamples.withViewLifecycleScopeSample
  */
 @ExperimentalCoroutinesApi
 fun Fragment.withViewLifecycleScope(

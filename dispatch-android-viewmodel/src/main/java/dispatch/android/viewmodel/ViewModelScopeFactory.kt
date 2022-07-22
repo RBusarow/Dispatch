@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,34 +16,47 @@
 package dispatch.android.viewmodel
 
 import dispatch.android.viewmodel.ViewModelScopeFactory.reset
-import dispatch.core.*
-import kotlinx.coroutines.*
+import dispatch.core.MainCoroutineScope
+import dispatch.core.MainImmediateCoroutineScope
+import kotlinx.coroutines.CoroutineScope
 
 /**
- * Factory holder for [viewModelScope][dispatch.android.viewmodel.DispatchViewModel.viewModelScope]'s.
+ * Factory holder for
+ * [viewModelScope][dispatch.android.viewmodel.DispatchViewModel.viewModelScope]'s.
  *
- * By default, `create` returns a [MainImmediateCoroutineScope], but may return any [CoroutineScope].
+ * By default, `create` returns a [MainImmediateCoroutineScope], but may return any
+ * [CoroutineScope].
  *
- * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
- * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate].
+ * This factory can be overridden for testing or to include a custom
+ * [CoroutineContext][kotlin.coroutines.CoroutineContext] in production code. This may be done in
+ * [Application.onCreate][android.app.Application.onCreate].
  *
  * [reset] may be used to reset the factory to default at any time.
- * @sample dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryProductionSample
- * @sample dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryEspressoSample
- * @sample dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryJvmSample
+ *
+ * @sample
+ *   dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryProductionSample
+ * @sample
+ *   dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryEspressoSample
+ * @sample
+ *   dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryJvmSample
  */
 public object ViewModelScopeFactory {
 
   private var _factory: () -> CoroutineScope = { MainImmediateCoroutineScope() }
 
   /**
-   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
-   * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]
+   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom
+   * [CoroutineContext][kotlin.coroutines.CoroutineContext] in production code. This may be done in
+   * [Application.onCreate][android.app.Application.onCreate]
    *
-   * @param factory sets a custom [CoroutineScope] factory to be used for all new instance creations until reset.
-   * @sample dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryProductionSample
-   * @sample dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryEspressoSample
-   * @sample dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryJvmSample
+   * @param factory sets a custom [CoroutineScope] factory to be used for all new instance creations
+   *   until reset.
+   * @sample
+   *   dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryProductionSample
+   * @sample
+   *   dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryEspressoSample
+   * @sample
+   *   dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.setViewModelScopeFactoryJvmSample
    */
   public fun set(factory: () -> CoroutineScope) {
     _factory = factory
@@ -54,7 +67,8 @@ public object ViewModelScopeFactory {
   /**
    * Immediately resets the factory function to its default.
    *
-   * @sample dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.viewModelScopeFactoryResetSample
+   * @sample
+   *   dispatch.android.viewmodel.samples.ViewModelScopeFactorySample.viewModelScopeFactoryResetSample
    */
   public fun reset() {
     _factory = { MainCoroutineScope() }
