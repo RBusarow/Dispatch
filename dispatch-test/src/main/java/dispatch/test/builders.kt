@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,27 +15,34 @@
 
 package dispatch.test
 
-import dispatch.core.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.runBlockingTest
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 /**
  * Delegates to [runBlocking], but injects a [DispatcherProvider] into the created [CoroutineScope].
  *
- * The resultant [CoroutineContext] will use a [BlockingEventLoop][kotlinx.coroutines.BlockingEventLoop]
- * as its default [ContinuationInterceptor].
+ * The resultant [CoroutineContext] will use a
+ * [BlockingEventLoop][kotlinx.coroutines.BlockingEventLoop] as its default
+ * [ContinuationInterceptor].
  *
- * If the `context` does not contain a `DispatcherProvider`,
- * a [TestDispatcherProvider] will be created using the [BlockingEventLoop] interceptor.
+ * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
+ * created using the [kotlinx.coroutines.BlockingEventLoop] interceptor.
  *
- * @param context The base `CoroutineContext` which will be modified
- * to use a [TestCoroutineDispatcher] and [TestDispatcherProvider].
- * [EmptyCoroutineContext] is used if one is not provided.
- *
+ * @param context The base `CoroutineContext` which will be modified to use a
+ *   [TestCoroutineDispatcher] and [TestDispatcherProvider].
+ *   [EmptyCoroutineContext] is used if one is not provided.
+ * @param block the action to be performed
+ * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  * @see runBlocking
  * @see testProvided
- * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  */
 @ExperimentalCoroutinesApi
 public fun runBlockingProvided(
@@ -53,21 +60,22 @@ public fun runBlockingProvided(
 }
 
 /**
- * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created [TestCoroutineScope].
+ * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
+ * [TestCoroutineScope].
  *
- * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher],
- * then a new [TestCoroutineDispatcher] will be created.
+ * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher], then a new
+ * [TestCoroutineDispatcher] will be created.
  *
- * If the `context` does not contain a `DispatcherProvider`,
- * a [TestDispatcherProvider] will be created using the `TestCoroutineDispatcher`.
+ * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
+ * created using the `TestCoroutineDispatcher`.
  *
- * @param context The base `CoroutineContext` which will be modified
- * to use a `TestCoroutineDispatcher` and `TestDispatcherProvider`.
- * [EmptyCoroutineContext] is used if one is not provided.
- *
+ * @param context The base `CoroutineContext` which will be modified to use a
+ *   `TestCoroutineDispatcher` and `TestDispatcherProvider`.
+ *   [EmptyCoroutineContext] is used if one is not provided.
+ * @param testBody the action to be performed
+ * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @see runBlockingTest
  * @see runBlockingProvided
- * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  */
 @ExperimentalCoroutinesApi
 public fun testProvided(
@@ -94,18 +102,19 @@ public fun testProvided(
 }
 
 /**
- * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created [TestCoroutineScope].
+ * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
+ * [TestCoroutineScope].
  *
- * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher],
- * then a new [TestCoroutineDispatcher] will be created.
+ * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher], then a new
+ * [TestCoroutineDispatcher] will be created.
  *
- * If the `context` does not contain a `DispatcherProvider`,
- * a [TestDispatcherProvider] will be created using the `TestCoroutineDispatcher`.
+ * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
+ * created using the `TestCoroutineDispatcher`.
  *
- * @see runBlockingTest
- * @see runBlockingProvided
  * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @sample dispatch.test.samples.BuildersSample.testProvidedExtensionSample
+ * @see runBlockingTest
+ * @see runBlockingProvided
  */
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope.testProvided(

@@ -14,13 +14,11 @@
  */
 @file:Suppress("MagicNumber")
 
-import com.github.benmanes.gradle.versions.updates.*
-import formatting.*
-import io.gitlab.arturbosch.detekt.*
-import kotlinx.knit.*
-import kotlinx.validation.*
-import org.jetbrains.dokka.gradle.*
-import org.jetbrains.kotlin.gradle.tasks.*
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import formatting.sortDependencies
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import kotlinx.validation.ApiValidationExtension
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 import org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask
 
@@ -32,22 +30,27 @@ buildscript {
     classpath(libs.vanniktech.maven.publish)
     classpath(libs.kotlin.gradle.plug)
     classpath(libs.kotlinx.atomicfu)
+    classpath(libs.kotlinx.metadata.jvm)
     classpath(libs.ktlint.gradle)
     classpath(libs.ktlint.gradle)
   }
 }
 
-@Suppress("UnstableApiUsage")
+// `alias(libs.______)` inside the plugins block throws a false positive warning
+// https://youtrack.jetbrains.com/issue/KTIJ-19369
+// There's also an IntelliJ plugin to disable this warning globally:
+// https://plugins.jetbrains.com/plugin/18949-gradle-libs-error-suppressor
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   kotlin("jvm") apply false
   alias(libs.plugins.kotlinx.binaryCompatibility)
   alias(libs.plugins.dependencyAnalysis)
   alias(libs.plugins.benManes)
   alias(libs.plugins.gradleDoctor)
-  alias(libs.plugins.detekt)
   alias(libs.plugins.taskTree)
   alias(libs.plugins.moduleCheck)
   base
+  detekt
   dokka
   knit
   website
@@ -82,7 +85,7 @@ detekt {
 
 dependencies {
 
-  detekt(libs.arturbosch.detekt.cli)
+  detekt(libs.detekt.cli)
   detektPlugins(projects.dispatchDetekt)
 }
 
@@ -112,15 +115,10 @@ apply(plugin = "binary-compatibility-validator")
 
 extensions.configure<ApiValidationExtension> {
 
-  /**
-   * Packages that are excluded from public API dumps even if they
-   * contain public API.
-   */
+  /** Packages that are excluded from public API dumps even if they contain public API. */
   ignoredPackages = mutableSetOf("sample", "samples")
 
-  /**
-   * Sub-projects that are excluded from API validation
-   */
+  /** Sub-projects that are excluded from API validation */
   ignoredProjects = mutableSetOf(
     "dispatch-internal-test",
     "dispatch-internal-test-android",
@@ -146,6 +144,7 @@ dependencyAnalysis {
   }
 }
 
+@Suppress("UndocumentedPublicFunction")
 fun isNonStable(version: String): Boolean {
   val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
   val regex = "^[0-9,.v-]+(-r)?$".toRegex()

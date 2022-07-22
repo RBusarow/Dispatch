@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,19 @@
 
 package dispatch.android.lifecycle
 
-import androidx.fragment.app.*
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.internal.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import kotlin.coroutines.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import dispatch.android.lifecycle.internal.bindViewLifecycleCoroutineScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlin.coroutines.CoroutineContext
 
 /**
- * [DispatchLifecycleScope] instance which is tied to a [Fragment's][Fragment] View [lifecycle][Lifecycle].
+ * [DispatchLifecycleScope] instance which is tied to a [Fragment's][Fragment] View
+ * [lifecycle][Lifecycle].
  */
 class ViewLifecycleCoroutineScope internal constructor(
   lifecycle: Lifecycle,
@@ -31,7 +35,9 @@ class ViewLifecycleCoroutineScope internal constructor(
 ) : DispatchLifecycleScope(lifecycle, coroutineContext) {
 
   /**
-   * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches [CREATED][androidx.lifecycle.Lifecycle.State.CREATED], create a new coroutine and collect this [Flow].
+   * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches
+   * [CREATED][androidx.lifecycle.Lifecycle.State.CREATED], create a new coroutine and collect this
+   * [Flow].
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
@@ -40,7 +46,9 @@ class ViewLifecycleCoroutineScope internal constructor(
   ) { collect() }
 
   /**
-   * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches [STARTED][androidx.lifecycle.Lifecycle.State.STARTED], create a new coroutine and collect this [Flow].
+   * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches
+   * [STARTED][androidx.lifecycle.Lifecycle.State.STARTED], create a new coroutine and collect this
+   * [Flow].
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
@@ -49,7 +57,9 @@ class ViewLifecycleCoroutineScope internal constructor(
   ) { collect() }
 
   /**
-   * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches [RESUMED][androidx.lifecycle.Lifecycle.State.RESUMED], create a new coroutine and collect this [Flow].
+   * Every time the View [Lifecycle State][androidx.lifecycle.Lifecycle.State] reaches
+   * [RESUMED][androidx.lifecycle.Lifecycle.State.RESUMED], create a new coroutine and collect this
+   * [Flow].
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
@@ -61,10 +71,12 @@ class ViewLifecycleCoroutineScope internal constructor(
 /**
  * [CoroutineScope] helper for a [Fragment]'s [ViewLifecycleOwner][FragmentViewLifecycleOwner].
  *
- * This function observes a `Fragment`'s [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData],
- * and invokes [block].
+ * This function observes a `Fragment`'s
+ * [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData], and
+ * invokes [block].
  *
- * @sample dispatch.android.lifecycle.samples.WithViewLifecycleScopeSample.withViewLifecycleScopeSample
+ * @sample
+ *   dispatch.android.lifecycle.samples.WithViewLifecycleScopeSample.withViewLifecycleScopeSample
  */
 @ExperimentalCoroutinesApi
 fun CoroutineScope.withViewLifecycle(

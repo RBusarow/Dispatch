@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,25 +13,35 @@
  * limitations under the License.
  */
 
-package dispatch.test
+package dispatch.core.test
 
-import dispatch.core.*
-import dispatch.internal.test.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import dispatch.internal.test.ExpectedFailureRule
+import dispatch.internal.test.Fails
+import dispatch.test.TestCoroutineRule
+import dispatch.test.TestProvidedCoroutineScope
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UncompletedCoroutinesError
+import org.junit.Rule
+import org.junit.Test
+import kotlin.coroutines.ContinuationInterceptor
 
 @ExperimentalCoroutinesApi
 class TestCoroutineRuleTest {
 
   val customScope = TestProvidedCoroutineScope()
-  @JvmField @Rule val customFactoryRule = TestCoroutineRule { customScope }
 
-  @JvmField @Rule val defaultRule = TestCoroutineRule()
+  @JvmField @Rule
+  val customFactoryRule = TestCoroutineRule { customScope }
 
-  @JvmField @Rule val failureRule = ExpectedFailureRule()
+  @JvmField @Rule
+  val defaultRule = TestCoroutineRule()
+
+  @JvmField @Rule
+  val failureRule = ExpectedFailureRule()
 
   @Test
   fun `a no-arg rule should use a default TestProvidedCoroutineScope`() {
@@ -52,23 +62,21 @@ class TestCoroutineRuleTest {
 
   @Test
   fun `a custom factory rule should use use the custom factory`() {
-
     val context = customFactoryRule.coroutineContext
 
     context shouldBe customScope.coroutineContext
   }
 
   /**
-   * We can't just use a normal `@Test(expected = UncompletedCoroutinesError::class)` because
-   * that expects the `Throwable` to be thrown during the test itself.
+   * We can't just use a normal `@Test(expected = UncompletedCoroutinesError::class)` because that
+   * expects the `Throwable` to be thrown during the test itself.
    *
-   * In this case, it's thrown during tear-down (after the function),
-   * so we need to wrap the process with a larger try/catch.
+   * In this case, it's thrown during tear-down (after the function), so we need to wrap the process
+   * with a larger try/catch.
    */
   @Test
   @Fails(expected = UncompletedCoroutinesError::class)
   fun `leaking coroutine should fail with UncompletedCoroutineError`() {
-
     // Job should run well past completion -- making the coroutine leak
     defaultRule.launch { delay(100000) }
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,30 +15,36 @@
 
 package dispatch.android.lifecycle
 
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
 import dispatch.android.lifecycle.LifecycleScopeFactory.reset
-import dispatch.core.*
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import dispatch.core.DefaultDispatcherProvider
+import dispatch.core.DispatcherProvider
+import dispatch.core.MainImmediateCoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Factory holder for [DispatchLifecycleScope]'s.
  *
  * By default, `create` returns a [MainImmediateContext].
  *
- * This factory can be overridden for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
- * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate],
- * or else as early as possible in the Application's existence.
+ * This factory can be overridden for testing or to include a custom
+ * [CoroutineContext][kotlin.coroutines.CoroutineContext] in production code. This may be done in
+ * [Application.onCreate][android.app.Application.onCreate], or else as early as possible in the
+ * Application's existence.
  *
  * A custom factory will persist for the application's full lifecycle unless overwritten or [reset].
  *
  * [reset] may be used to reset the factory to default at any time.
  *
+ * @sample
+ *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+ * @sample
+ *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
  * @see MainImmediateContext
  * @see DispatchLifecycleScope
  * @see DispatchLifecycleScopeFactory
- * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
- * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
  */
 object LifecycleScopeFactory {
 
@@ -53,7 +59,8 @@ object LifecycleScopeFactory {
   /**
    * Immediately resets the factory function to its default.
    *
-   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.LifecycleScopeFactoryResetSample
+   * @sample
+   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.LifecycleScopeFactoryResetSample
    */
   @Suppress("UNUSED")
   public fun reset() {
@@ -61,18 +68,22 @@ object LifecycleScopeFactory {
   }
 
   /**
-   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
-   * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]
-   *
-   * @param factory sets a custom [CoroutineContext] factory to be used for all new instance creations until reset.
-   * Its [Elements][CoroutineContext.Element] will be re-used, except:
-   * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be added.
+   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom
+   * [CoroutineContext][kotlin.coroutines.CoroutineContext] in production code. This may be done in
+   * [Application.onCreate][android.app.Application.onCreate]
+   * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be
+   *    added.
    * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
-   * the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
+   *    the one referenced by the [possibly new]
+   *    [DispatcherProvider.mainImmediate] property, it will be updated to match.
    *
-   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
-   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+   * @param factory sets a custom [CoroutineContext] factory to be used for all new instance
+   *   creations until reset. Its [Elements][CoroutineContext.Element] will be re-used, except:
+   * @sample
+   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+   * @sample
+   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
    */
   @Suppress("UNUSED")
   public fun set(factory: DispatchLifecycleScopeFactory) {
@@ -80,18 +91,22 @@ object LifecycleScopeFactory {
   }
 
   /**
-   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom [CoroutineContext][kotlin.coroutines.CoroutineContext]
-   * in production code.  This may be done in [Application.onCreate][android.app.Application.onCreate]
-   *
-   * @param factory sets a custom [CoroutineContext] factory to be used for all new instance creations until reset.
-   * Its [Elements][CoroutineContext.Element] will be re-used, except:
-   * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be added.
+   * Override the default [MainImmediateCoroutineScope] factory, for testing or to include a custom
+   * [CoroutineContext][kotlin.coroutines.CoroutineContext] in production code. This may be done in
+   * [Application.onCreate][android.app.Application.onCreate]
+   * 1. If a [DispatcherProvider] element isn't present, [DefaultDispatcherProvider.get] will be
+   *    added.
    * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
-   * the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be updated to match.
+   *    the one referenced by the [possibly new]
+   *    [DispatcherProvider.mainImmediate] property, it will be updated to match.
    *
-   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
-   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+   * @param factory sets a custom [CoroutineContext] factory to be used for all new instance
+   *   creations until reset. Its [Elements][CoroutineContext.Element] will be re-used, except:
+   * @sample
+   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
+   * @sample
+   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
    */
   @Suppress("UNUSED")
   public fun set(factory: () -> CoroutineContext) {

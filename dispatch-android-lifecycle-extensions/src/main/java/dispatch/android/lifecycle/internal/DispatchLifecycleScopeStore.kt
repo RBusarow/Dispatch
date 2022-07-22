@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,11 +15,15 @@
 
 package dispatch.android.lifecycle.internal
 
-import android.os.*
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import java.util.concurrent.*
+import android.os.Build
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.android.lifecycle.LifecycleScopeFactory
+import dispatch.core.launchMainImmediate
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
 
 @Suppress("MagicNumber")
 internal object DispatchLifecycleScopeStore : LifecycleEventObserver {
@@ -48,6 +52,7 @@ internal object DispatchLifecycleScopeStore : LifecycleEventObserver {
       Build.VERSION.SDK_INT >= 24 -> {
         map.computeIfAbsent(lifecycle) { bindLifecycle(lifecycle) }
       }
+
       Build.VERSION.SDK_INT == 23 -> {
         /*
         `getOrPut` by itself isn't atomic.  It is guaranteed to only ever return one instance
@@ -55,6 +60,7 @@ internal object DispatchLifecycleScopeStore : LifecycleEventObserver {
          */
         (map as ConcurrentMap).atomicGetOrPut(lifecycle) { bindLifecycle(lifecycle) }
       }
+
       else -> {
         synchronized(map) {
           map.getOrPut(lifecycle) { bindLifecycle(lifecycle) }
