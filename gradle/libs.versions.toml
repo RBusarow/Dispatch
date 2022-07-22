@@ -181,7 +181,7 @@ androidx-work-core = { module = "androidx.work:work-runtime", version.ref = "and
 androidx-work-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work-version" }
 androidx-work-test = { module = "androidx.work:work-testing", version.ref = "androidx-work-version" }
 
-cash-turbine = "app.cash.turbine:turbine:0.7.0"
+cash-turbine = "app.cash.turbine:turbine:0.8.0"
 
 codehaus-groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
 codehaus-groovy-xml = { module = "org.codehaus.groovy:groovy-xml", version.ref = "groovy" }
