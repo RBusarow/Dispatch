@@ -17,12 +17,12 @@ package dispatch.test
 
 import dispatch.internal.test.shouldEqualFolded
 import io.kotest.matchers.shouldBe
-import kotlin.coroutines.ContinuationInterceptor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import kotlin.coroutines.ContinuationInterceptor
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal val customScope = TestProvidedCoroutineScope()

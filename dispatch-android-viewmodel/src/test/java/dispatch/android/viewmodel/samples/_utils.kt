@@ -19,9 +19,9 @@ package dispatch.android.viewmodel.samples
 
 import dispatch.core.*
 import io.kotest.matchers.*
-import kotlin.coroutines.*
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.*
+import kotlin.coroutines.*
 
 typealias Sample = Test
 

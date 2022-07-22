@@ -19,12 +19,12 @@ package dispatch.internal.test
 
 import dispatch.core.*
 import io.kotest.matchers.*
-import java.io.*
-import kotlin.coroutines.*
 import kotlinx.coroutines.*
 import kotlinx.knit.test.*
-import kotlinx.knit.test.captureOutput as knitCaptureOutput
 import org.junit.*
+import java.io.*
+import kotlin.coroutines.*
+import kotlinx.knit.test.captureOutput as knitCaptureOutput
 
 public typealias Sample = Test
 

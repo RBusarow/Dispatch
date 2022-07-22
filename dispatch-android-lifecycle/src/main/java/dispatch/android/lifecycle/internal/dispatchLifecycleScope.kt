@@ -21,10 +21,10 @@ import dispatch.android.lifecycle.DispatchLifecycleScope
 import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANCEL
 import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.RESTART_EVERY
 import dispatch.core.flowOnMainImmediate
-import java.util.concurrent.atomic.AtomicBoolean
-import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.coroutines.CoroutineContext
 
 internal fun DispatchLifecycleScope.launchOn(
   context: CoroutineContext,
