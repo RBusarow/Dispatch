@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,21 +15,21 @@
 
 package dispatch.android.lifecycle.internal
 
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import kotlinx.coroutines.*
-import java.util.concurrent.*
+import androidx.lifecycle.Lifecycle
+import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.core.launchMainImmediate
+import kotlinx.coroutines.Job
+import java.util.concurrent.ConcurrentMap
 
 /**
- * Normal [getOrPut] is guaranteed to only return a single instance for a given key,
- * but the [defaultValue] lambda may be invoked unnecessarily.  This would create a new instance
- * of [DispatchLifecycleScope] without actually returning it.
+ * Normal [getOrPut] is guaranteed to only return a single instance for a given key, but the
+ * [defaultValue] lambda may be invoked unnecessarily. This would create a new instance of
+ * [DispatchLifecycleScope] without actually returning it.
  *
  * This extra [DispatchLifecycleScope] would still be active and observing the [lifecycle][key].
  *
- * This function compares the result of the lambda to the result of [getOrPut],
- * and cancels the lambda's result if it's different.
+ * This function compares the result of the lambda to the result of [getOrPut], and cancels the
+ * lambda's result if it's different.
  *
  * @see getOrPut
  */

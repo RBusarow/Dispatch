@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,16 +15,20 @@
 
 package dispatch.core
 
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.coroutines.coroutineContext
 
 /**
- * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
- * the result.
- *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine,
- * then uses its **default** [CoroutineDispatcher] property to call `withContext(theDispatcher)`,
+ * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
+ *
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
+ * its **default** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and returns
+ * the result.
  *
  * The *default* property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
@@ -40,12 +44,12 @@ public suspend fun <T> withDefault(
 }
 
 /**
- * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
- * the result.
- *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine,
- * then uses its **io** [CoroutineDispatcher] property to call `withContext(theDispatcher)`,
+ * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
+ *
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
+ * its **io** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and returns the
+ * result.
  *
  * The `io` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
@@ -61,12 +65,12 @@ public suspend fun <T> withIO(
 }
 
 /**
- * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
- * the result.
- *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine,
- * then uses its **main** [CoroutineDispatcher] property to call `withContext(theDispatcher)`,
+ * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
+ *
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
+ * its **main** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and returns the
+ * result.
  *
  * The `main` property always corresponds to the `DispatcherProvider` of the current coroutine.
  *
@@ -82,14 +86,15 @@ public suspend fun <T> withMain(
 }
 
 /**
- * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
- * the result.
- *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine,
- * then uses its **mainImmediate** [CoroutineDispatcher] property to call `withContext(theDispatcher)`,
+ * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
  *
- * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current coroutine.
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
+ * its **mainImmediate** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and
+ * returns the result.
+ *
+ * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current
+ * coroutine.
  *
  * @sample dispatch.core.samples.WithContextSample.withMainImmediateSample
  * @see withContext
@@ -103,14 +108,15 @@ public suspend fun <T> withMainImmediate(
 }
 
 /**
- * Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns
- * the result.
- *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine,
- * then uses its **unconfined** [CoroutineDispatcher] property to call `withContext(theDispatcher)`,
+ * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
  *
- * The `unconfined` property always corresponds to the `DispatcherProvider` of the current coroutine.
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then
+ * uses its **unconfined** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and
+ * returns the result.
+ *
+ * The `unconfined` property always corresponds to the `DispatcherProvider` of the current
+ * coroutine.
  *
  * @sample dispatch.core.samples.WithContextSample.withUnconfinedSample
  * @see withContext

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,17 +15,19 @@
 
 package dispatch.core
 
-import kotlinx.atomicfu.*
-import kotlinx.coroutines.*
+import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.Dispatchers
 
 /**
  * Holder singleton for a [DispatcherProvider] instance.
  *
- * If [CoroutineScope.dispatcherProvider][dispatch.core.dispatcherProvider] or [CoroutineContext.dispatcherProvider][dispatch.core.dispatcherProvider] is referenced
- * in a [CoroutineContext][kotlin.coroutines.CoroutineContext] which does not have one,
- * it will use a default defined by this object.
+ * If [CoroutineScope.dispatcherProvider][dispatch.core.dispatcherProvider] or
+ * [CoroutineContext.dispatcherProvider][dispatch.core.dispatcherProvider] is referenced in a
+ * [CoroutineContext][kotlin.coroutines.CoroutineContext] which does not have one, it will use a
+ * default defined by this object.
  *
- * @sample dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
+ * @sample
+ *   dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
  */
 public object DefaultDispatcherProvider {
 
@@ -41,8 +43,9 @@ public object DefaultDispatcherProvider {
   /**
    * Atomically sets a default [DispatcherProvider] instance.
    *
+   * @sample
+   *   dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
    * @see get
-   * @sample dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
    */
   public fun set(value: DispatcherProvider) {
     while (true) {
@@ -59,10 +62,10 @@ public object DefaultDispatcherProvider {
    *
    * This should be suitable for most production code.
    *
-   * **Deprecated**
-   * The DefaultDispatcherProvider class has been replaced with this singleton object.
-   * To create a DispatcherProvider with the default implementation, use the DispatcherProvider companion object factory.
-   * This function will be removed before the 1.0 release.
+   * **Deprecated** The DefaultDispatcherProvider class has been replaced with this singleton
+   * object. To create a DispatcherProvider with the default implementation, use the
+   * DispatcherProvider companion object factory. This function will be removed before the 1.0
+   * release.
    *
    * @see DispatcherProvider
    */

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,11 +17,14 @@
 
 package dispatch.android.lifecycle.samples
 
-import dispatch.android.espresso.*
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import dispatch.internal.test.*
-import kotlinx.coroutines.*
+import dispatch.android.espresso.IdlingDispatcherProvider
+import dispatch.android.lifecycle.LifecycleScopeFactory
+import dispatch.android.lifecycle.MainImmediateContext
+import dispatch.core.DispatcherProvider
+import dispatch.internal.test.Application
+import dispatch.internal.test.MyCustomElement
+import dispatch.internal.test.Sample
+import kotlinx.coroutines.SupervisorJob
 
 class LifecycleScopeFactorySample {
 
