@@ -3,7 +3,7 @@ androidTools = "7.2.1"
 anvil = "2.4.0"
 benManes = "0.42.0"
 changeTracker = "0.7.3"
-coil = "1.4.0"
+coil = "2.1.0"
 dependencyAnalysis = "1.10.0"
 dispatch = "1.0.0-beta10"
 detekt = "1.21.0"
@@ -51,7 +51,7 @@ square-okhttp = "4.9.2"
 square-okio = "3.0.0"
 square-retrofit = "2.9.0"
 
-zacSweers-moshix = "0.14.1"
+zacSweers-moshix = "0.18.3"
 
 [plugins]
 
