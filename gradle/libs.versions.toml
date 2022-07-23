@@ -46,7 +46,7 @@ rickBusarow-dependencySync = "0.11.4"
 rickBusarow-moduleCheck = "0.12.3"
 
 square-anvil = "2.3.11-1-6-10"
-square-moshi = "1.12.0"
+square-moshi = "1.13.0"
 square-okhttp = "4.9.2"
 square-okio = "3.0.0"
 square-retrofit = "2.9.0"
