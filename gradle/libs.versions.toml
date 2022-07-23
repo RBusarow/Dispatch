@@ -51,7 +51,7 @@ square-okhttp = "4.9.2"
 square-okio = "3.0.0"
 square-retrofit = "2.9.0"
 
-zacSweers-moshix = "0.14.1"
+zacSweers-moshix = "0.18.3"
 
 [plugins]
 
