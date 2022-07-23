@@ -300,7 +300,7 @@ squareup-okio-bom = { module = "com.squareup.okio:okio-bom", version.ref = "squa
 
 squareup-picasso = "com.squareup.picasso:picasso:2.71828"
 
-swiftzer-semver = "net.swiftzer.semver:semver:1.1.2"
+swiftzer-semver = "net.swiftzer.semver:semver:1.2.0"
 
 timber = "com.jakewharton.timber:timber:5.0.1"
 
