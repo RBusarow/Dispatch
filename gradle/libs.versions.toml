@@ -304,7 +304,7 @@ swiftzer-semver = "net.swiftzer.semver:semver:1.2.0"
 
 timber = "com.jakewharton.timber:timber:5.0.1"
 
-vanniktech-maven-publish = "com.vanniktech:gradle-maven-publish-plugin:0.18.0"
+vanniktech-maven-publish = "com.vanniktech:gradle-maven-publish-plugin:0.21.0"
 
 zacSweers-auto-service-ksp = "dev.zacsweers.autoservice:auto-service-ksp:1.0.0"
 
