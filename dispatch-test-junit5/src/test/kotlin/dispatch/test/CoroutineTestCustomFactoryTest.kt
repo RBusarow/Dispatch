@@ -49,13 +49,6 @@ class CoroutineTestCustomFactoryTest(
   @Test
   fun `testProvided with default context should use testScope`() {
 
-    println("new scope -- ${TestProvidedCoroutineScope().coroutineContext[CoroutineExceptionHandler]}")
-    println("new dispatcherProvider -- ${TestDispatcherProvider()[CoroutineExceptionHandler]}")
-
-    println("standard -- ${StandardTestDispatcher()[CoroutineExceptionHandler]}")
-
-    println("scope -- ${testScope.coroutineContext[CoroutineExceptionHandler]}")
-
     testScope.testProvided {
 
       // RBT adds a SupervisorJob when there is no Job, so we really only need to check the other properties

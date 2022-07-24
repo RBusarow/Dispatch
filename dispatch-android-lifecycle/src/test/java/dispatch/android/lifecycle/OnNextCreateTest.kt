@@ -15,18 +15,26 @@
 
 package dispatch.android.lifecycle
 
-import androidx.lifecycle.*
-import dispatch.core.*
-import dispatch.internal.test.*
-import dispatch.internal.test.android.*
-import dispatch.test.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.sync.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.core.ioDispatcher
+import dispatch.internal.test.BaseTest
+import dispatch.internal.test.android.FakeLifecycleOwner
+import dispatch.internal.test.android.LiveDataTest
+import dispatch.test.testProvided
+import dispatch.test.testProvidedUnconfined
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.CoroutineStart.LAZY
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.async
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.launch
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
+import kotlin.coroutines.ContinuationInterceptor
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -34,15 +42,8 @@ class OnNextCreateTest :
   BaseTest(),
   LiveDataTest {
 
-  lateinit var lifecycleOwner: LifecycleOwner
-  lateinit var lifecycle: LifecycleRegistry
-
-  @BeforeEach
-  fun beforeEach() {
-
-    lifecycleOwner = LifecycleOwner { lifecycle }
-    lifecycle = LifecycleRegistry(lifecycleOwner)
-  }
+  val lifecycleOwner by resets { FakeLifecycleOwner() }
+  val lifecycle by resets { lifecycleOwner.lifecycle }
 
   @Nested
   inner class `Lifecycle version` {
@@ -50,11 +51,11 @@ class OnNextCreateTest :
     @Test
     fun `block should immediately execute if already created`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       var executed = false
 
-      launch { lifecycle.onNextCreate { executed = true } }
+      lifecycle.onNextCreate { executed = true }
 
       executed shouldBe true
     }
@@ -62,8 +63,8 @@ class OnNextCreateTest :
     @Test
     fun `block should not immediately execute if lifecycle is not created`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.create()
+      lifecycleOwner.destroy()
 
       var executed = false
 
@@ -81,9 +82,9 @@ class OnNextCreateTest :
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
-      launch {
+      val observer = launch {
         lifecycle.onNextCreate {
           input.consumeAsFlow()
             .onCompletion { completed = true }
@@ -95,24 +96,27 @@ class OnNextCreateTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.destroy()
 
       output shouldBe listOf(1, 2, 3)
+
+      observer.join()
+
       completed shouldBe true
     }
 
     @Test
     fun `block should not execute twice when lifecycle is created twice`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       lifecycle.onNextCreate { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.destroy()
 
       expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       finish(3)
     }
@@ -120,7 +124,7 @@ class OnNextCreateTest :
     @Test
     fun `block should return value if allowed to complete`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       val result = lifecycle.onNextCreate { true }
 
@@ -128,22 +132,17 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete before destroy`() = testProvided {
 
-      val lock = Mutex(locked = true)
+      lifecycleOwner.create()
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-
-      val resultDeferred = async {
-        lifecycle.onNextCreate {
-          lock.withLock {
-            // unreachable
-            true
-          }
+      val resultDeferred = async(start = LAZY) {
+        lifecycle.onNextCreate<Boolean> {
+          fail { "should be unreachable" }
         }
       }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.destroy()
 
       resultDeferred.await() shouldBe null
     }
@@ -151,7 +150,7 @@ class OnNextCreateTest :
     @Test
     fun `block context should respect context parameter`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       var dispatcher: ContinuationInterceptor? = null
 
@@ -169,11 +168,11 @@ class OnNextCreateTest :
     @Test
     fun `block should immediately execute if already created`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       var executed = false
 
-      launch { lifecycleOwner.onNextCreate { executed = true } }
+      lifecycleOwner.onNextCreate { executed = true }
 
       executed shouldBe true
     }
@@ -181,8 +180,8 @@ class OnNextCreateTest :
     @Test
     fun `block should not immediately execute if lifecycle is not created`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.create()
+      lifecycleOwner.destroy()
 
       var executed = false
 
@@ -194,15 +193,17 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = testProvided {
+    fun `block should stop when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
+      lifecycleOwner.start()
+      lifecycleOwner.resume()
 
-      launch {
+      val observer = launch {
         lifecycleOwner.onNextCreate {
           input.consumeAsFlow()
             .onCompletion { completed = true }
@@ -214,24 +215,29 @@ class OnNextCreateTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.pause()
+      lifecycleOwner.stop()
+      lifecycleOwner.destroy()
 
       output shouldBe listOf(1, 2, 3)
+
+      observer.join()
+
       completed shouldBe true
     }
 
     @Test
     fun `block should not execute twice when lifecycle is created twice`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       lifecycleOwner.onNextCreate { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.destroy()
 
       expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       finish(3)
     }
@@ -239,7 +245,7 @@ class OnNextCreateTest :
     @Test
     fun `block should return value if allowed to complete`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       val result = lifecycleOwner.onNextCreate { true }
 
@@ -247,22 +253,17 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete before destroy`() = testProvided {
 
-      val lock = Mutex(locked = true)
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       val resultDeferred = async {
-        lifecycleOwner.onNextCreate {
-          lock.withLock {
-            // unreachable
-            true
-          }
+        lifecycleOwner.onNextCreate<Boolean> {
+          fail { "should be unreachable" }
         }
       }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.destroy()
 
       resultDeferred.await() shouldBe null
     }
@@ -270,7 +271,7 @@ class OnNextCreateTest :
     @Test
     fun `block context should respect context parameter`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       var dispatcher: ContinuationInterceptor? = null
 

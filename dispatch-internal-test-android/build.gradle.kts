@@ -18,6 +18,8 @@ plugins {
 }
 dependencies {
 
+  implementation(projects.dispatchCore)
+
   api(libs.androidx.fragment.core)
   api(libs.androidx.lifecycle.common)
   api(libs.androidx.lifecycle.liveData)

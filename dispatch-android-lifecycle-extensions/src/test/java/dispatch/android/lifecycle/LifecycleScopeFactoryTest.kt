@@ -18,7 +18,6 @@ package dispatch.android.lifecycle
 import dispatch.core.*
 import dispatch.internal.test.*
 import dispatch.internal.test.android.*
-import hermit.test.*
 import hermit.test.junit.*
 import io.kotest.matchers.*
 import io.kotest.matchers.types.*

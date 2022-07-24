@@ -126,7 +126,8 @@ internal class TestProvidedCoroutineScopeImpl(
    */
   @ExperimentalCoroutinesApi
   @ExperimentalTime
-  public override val testTimeSource: TimeSource get() = testScheduler.timeSource
+  public override val testTimeSource: TimeSource
+  get() = testScheduler.timeSource
 
   /**
    * The current virtual time on [testScheduler][TestScope.testScheduler].

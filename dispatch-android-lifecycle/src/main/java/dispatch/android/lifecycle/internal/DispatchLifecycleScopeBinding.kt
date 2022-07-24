@@ -18,6 +18,7 @@ package dispatch.android.lifecycle.internal
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import dispatch.core.launchMainImmediate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -45,12 +46,12 @@ internal class DispatchLifecycleScopeBinding(
       }
     }
     coroutineContext[Job]?.invokeOnCompletion {
-      lifecycle.removeObserver(this)
+      lifecycle.removeObserver(this@DispatchLifecycleScopeBinding)
     }
   }
 
   private fun cancelDestroyed() {
-    lifecycle.removeObserver(this)
+    lifecycle.removeObserver(this@DispatchLifecycleScopeBinding)
     coroutineContext.cancel(
       LifecycleCancellationException(
         lifecycle = lifecycle,

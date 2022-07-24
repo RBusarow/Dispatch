@@ -17,42 +17,45 @@ package dispatch.android.lifecycle
 
 import androidx.lifecycle.Lifecycle
 import dispatch.core.ioDispatcher
+import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.TestProvidedCoroutineScope
-import hermit.test.junit.HermitJUnit5
+import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.yield
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class DispatchLifecycleScopeTest :
-  HermitJUnit5(),
+class DispatchLifecycleScopeTest : BaseTest(),
   LiveDataTest {
 
-  val testScope by resets { TestProvidedCoroutineScope(context = Job()) }
+  val testScope by resets { TestProvidedCoroutineScope(context = Job() + mainDispatcher) }
 
   val lifecycleOwner by resets { FakeLifecycleOwner() }
   val lifecycle by resets { lifecycleOwner.lifecycle }
-  val scope by resets { DispatchLifecycleScope(lifecycle, testScope) }
+  val lifecycleScope by resets { DispatchLifecycleScope(lifecycle, testScope) }
 
   @Nested
   inner class cancellation {
 
     @Test
-    fun `scope with Job should cancel on init if lifecycle is destroyed`() = runBlocking {
+    fun `scope with Job should cancel on init if lifecycle is destroyed`() = runTest {
 
       lifecycleOwner.destroy()
 
@@ -62,7 +65,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `scope should cancel when lifecycle is destroyed`() = runBlocking {
+    fun `scope should cancel when lifecycle is destroyed`() = runTest {
 
       lifecycleOwner.create()
 
@@ -76,15 +79,20 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `lifecycle observer should be removed when scope is cancelled`() = runBlocking {
+    fun `lifecycle observer should be removed when scope is cancelled`() = runTest {
 
+      val lifecycleOwner = FakeLifecycleOwner()
+      val lifecycle = lifecycleOwner.lifecycle
       lifecycleOwner.create()
 
-      val scope = DispatchLifecycleScope(lifecycle, testScope)
+      val scope = DispatchLifecycleScope(lifecycle, this + Job() + mainDispatcher)
+
+       advanceUntilIdle()
 
       lifecycle.observerCount shouldBe 1
 
       scope.cancel()
+      advanceUntilIdle()
 
       lifecycle.observerCount shouldBe 0
     }
@@ -94,51 +102,57 @@ class DispatchLifecycleScopeTest :
   inner class `launch on create` {
 
     @Test
-    fun `block should immediately execute if already created`() = runBlocking {
+    fun `block should immediately execute if already created`() = runTest {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
       var executed = false
 
-      scope.launchOnCreate { executed = true }
+      lifecycleScope.launchOnCreate { executed = true }
+
+      advanceUntilIdle()
 
       executed shouldBe true
     }
 
     @Test
-    fun `block should not immediately execute if screen is not created`() = runBlocking {
+    fun `block should not immediately execute if screen is not created`() = runTest {
 
       var executed = false
 
-      scope.launchOnCreate { executed = true }
+      lifecycleScope.launchOnCreate { executed = true }
+
+      advanceUntilIdle()
 
       executed shouldBe false
     }
 
     @Test
-    fun `block context should respect context parameter`() = runBlocking {
+    fun `block context should respect context parameter`() = runTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       var dispatcher: ContinuationInterceptor? = null
 
-      scope.launchOnCreate(testScope.ioDispatcher) {
+      lifecycleScope.launchOnCreate(testScope.ioDispatcher) {
         dispatcher = coroutineContext[ContinuationInterceptor]
       }
+
+      advanceUntilIdle()
 
       dispatcher shouldBe testScope.ioDispatcher
     }
 
     @Test
-    fun `block should stop when screen is destroyed`() = runBlocking {
+    fun `block should stop when screen is destroyed`() = runTest {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
-      scope.launchOnCreate {
+      lifecycleScope.launchOnCreate {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -148,7 +162,9 @@ class DispatchLifecycleScopeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.destroy()
+
+      advanceUntilIdle()
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true
@@ -159,19 +175,21 @@ class DispatchLifecycleScopeTest :
   inner class `launch on start` {
 
     @Test
-    fun `block should immediately execute if already started`() = runBlocking {
+    fun `block should immediately execute if already started`() = runTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycleOwner.start()
 
       var executed = false
 
-      scope.launchOnStart { executed = true }
+      lifecycleScope.launchOnStart { executed = true }
+
+      advanceUntilIdle()
 
       executed shouldBe true
     }
 
     @Test
-    fun `block should not immediately execute if screen is not started`() = runBlocking {
+    fun `block should not immediately execute if screen is not started`() = runTest {
 
       Lifecycle.Event.values()
         .filter {
@@ -188,36 +206,38 @@ class DispatchLifecycleScopeTest :
 
           var executed = false
 
-          scope.launchOnStart { executed = true }
+          lifecycleScope.launchOnStart { executed = true }
 
           executed shouldBe false
         }
     }
 
     @Test
-    fun `block context should respect context parameter`() = runBlocking {
+    fun `block context should respect context parameter`() = runTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycleOwner.start()
 
       var dispatcher: ContinuationInterceptor? = null
 
-      scope.launchOnStart(testScope.ioDispatcher) {
+      lifecycleScope.launchOnStart(testScope.ioDispatcher) {
         dispatcher = coroutineContext[ContinuationInterceptor]
       }
+
+      advanceUntilIdle()
 
       dispatcher shouldBe testScope.ioDispatcher
     }
 
     @Test
-    fun `block should stop when screen is stopped`() = runBlocking {
+    fun `block should stop when screen is stopped`() = runTest {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycleOwner.start()
 
-      scope.launchOnStart {
+      lifecycleScope.launchOnStart {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -227,7 +247,9 @@ class DispatchLifecycleScopeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycleOwner.stop()
+
+      advanceUntilIdle()
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true
@@ -238,19 +260,23 @@ class DispatchLifecycleScopeTest :
   inner class `launch on resume` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = runBlocking {
+    fun `block should immediately execute if already resumed`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var executed = false
 
-      scope.launchOnResume { executed = true }
+      lifecycleScope.launchOnResume {
+        executed = true
+      }
+
+      advanceUntilIdle()
 
       executed shouldBe true
     }
 
     @Test
-    fun `block should not immediately execute if screen is not resumed`() = runBlocking {
+    fun `block should not immediately execute if screen is not resumed`() = testProvided {
 
       Lifecycle.Event.values()
         .filter {
@@ -269,36 +295,40 @@ class DispatchLifecycleScopeTest :
 
           var executed = false
 
-          scope.launchOnResume { executed = true }
+          lifecycleScope.launchOnResume { executed = true }
+
+          advanceUntilIdle()
 
           executed shouldBe false
         }
     }
 
     @Test
-    fun `block context should respect context parameter`() = runBlocking {
+    fun `block context should respect context parameter`() = runTest {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var dispatcher: ContinuationInterceptor? = null
 
-      scope.launchOnResume(testScope.ioDispatcher) {
+      lifecycleScope.launchOnResume(testScope.ioDispatcher) {
         dispatcher = coroutineContext[ContinuationInterceptor]
       }
+
+      advanceUntilIdle()
 
       dispatcher shouldBe testScope.ioDispatcher
     }
 
     @Test
-    fun `block should stop when screen is paused`() = runBlocking {
+    fun `block should stop when screen is paused`() = runTest {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
-      scope.launchOnResume {
+      lifecycleScope.launchOnResume {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -308,7 +338,9 @@ class DispatchLifecycleScopeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.pause()
+
+      advanceUntilIdle()
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true

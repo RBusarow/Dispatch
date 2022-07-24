@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -39,11 +39,11 @@ internal class ViewLifecycleScopeFlowCollectionTest {
   @Rule
   val instantTaskRule = InstantTaskExecutorRule()
 
-  val fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
-  val viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+  val fragmentLifecycleOwner = FakeLifecycleOwner()
+  val viewLifecycleOwner = FakeLifecycleOwner()
 
   @Before
-  fun setUp() {
+  fun setUp() = runBlocking{
     fragmentLifecycleOwner.start()
     viewLifecycleOwner.create()
   }

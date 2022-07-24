@@ -16,33 +16,45 @@
 package dispatch.internal.test.android
 
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Lifecycle.Event.ON_CREATE
+import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
+import androidx.lifecycle.Lifecycle.Event.ON_RESUME
+import androidx.lifecycle.Lifecycle.Event.ON_START
+import androidx.lifecycle.Lifecycle.State.INITIALIZED
 import androidx.lifecycle.LifecycleOwner
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.StandardTestDispatcher
+import androidx.lifecycle.LifecycleRegistry
+import dispatch.core.withMain
 
-@OptIn(ExperimentalCoroutinesApi::class)
 open class FakeLifecycleOwner(
-  initialState: Lifecycle.State = Lifecycle.State.INITIALIZED,
-  private val mainDispatcher: CoroutineDispatcher = fakeMainDispatcher()
+  initialState: Lifecycle.State = Lifecycle.State.INITIALIZED
 ) : LifecycleOwner {
 
-  val fakeLifecycle: FakeLifecycle by lazy { FakeLifecycle(this) }
+  val fakeLifecycle by lazy {
 
-  init {
-    when (initialState) {
-      Lifecycle.State.DESTROYED -> destroy()
-      Lifecycle.State.CREATED -> create()
-      Lifecycle.State.STARTED -> start()
-      Lifecycle.State.RESUMED -> resume()
-      else -> Unit
-    }
+    @Suppress("VisibleForTests")
+    LifecycleRegistry.createUnsafe(this)
+      .also { registry ->
+        when (initialState) {
+          Lifecycle.State.DESTROYED -> {
+            // We're no longer able to transition from INITIALIZED to DESTROYED. So if we need to do that
+            // for a test, just 'create' first and then go down.
+            if (registry.currentState == INITIALIZED) {
+              registry.handleLifecycleEvent(ON_CREATE)
+            }
+            registry.handleLifecycleEvent(ON_DESTROY)
+          }
+
+          Lifecycle.State.CREATED -> registry.handleLifecycleEvent(ON_CREATE)
+          Lifecycle.State.STARTED -> registry.handleLifecycleEvent(ON_START)
+          Lifecycle.State.RESUMED -> registry.handleLifecycleEvent(ON_RESUME)
+          else -> Unit
+        }
+      }
   }
 
-  override fun getLifecycle(): FakeLifecycle = fakeLifecycle
+  override fun getLifecycle(): LifecycleRegistry = synchronized(this) { fakeLifecycle }
 
-  fun stepDown() = when (lifecycle.currentState) {
+  suspend fun stepDown() = when (lifecycle.currentState) {
     Lifecycle.State.DESTROYED -> throw IllegalArgumentException("already destroyed")
     Lifecycle.State.INITIALIZED -> throw IllegalArgumentException(
       "cannot transition straight from initialized to destroyed"
@@ -53,7 +65,7 @@ open class FakeLifecycleOwner(
     Lifecycle.State.RESUMED -> pause()
   }
 
-  fun stepUp() = when (lifecycle.currentState) {
+  suspend fun stepUp() = when (lifecycle.currentState) {
     Lifecycle.State.DESTROYED -> throw IllegalArgumentException("already destroyed")
     Lifecycle.State.INITIALIZED -> create()
     Lifecycle.State.CREATED -> start()
@@ -61,31 +73,33 @@ open class FakeLifecycleOwner(
     Lifecycle.State.RESUMED -> throw IllegalArgumentException("already resumed")
   }
 
-  fun create() = runBlocking(mainDispatcher) {
+  suspend fun create() = withMain {
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
   }
 
-  fun start() = runBlocking(mainDispatcher) {
+  suspend fun start() = withMain {
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
   }
 
-  fun resume() = runBlocking(mainDispatcher) {
+  suspend fun resume() = withMain {
+
+    println(" resuming --   ${Thread.currentThread().id}")
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
   }
 
-  fun pause() = runBlocking(mainDispatcher) {
+  suspend fun pause() = withMain {
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
   }
 
-  fun stop() = runBlocking(mainDispatcher) {
+  suspend fun stop() = withMain {
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
   }
 
-  fun initialize() = runBlocking(mainDispatcher) {
+  suspend fun initialize() = withMain {
     lifecycle.currentState = Lifecycle.State.INITIALIZED
   }
 
-  fun destroy() = runBlocking(mainDispatcher) {
+  suspend fun destroy() = withMain {
     // We're no longer able to transition from INITIALIZED to DESTROYED. So if we need to do that
     // for a test, just 'create' first and then go down.
     if (lifecycle.currentState == Lifecycle.State.INITIALIZED) {
@@ -94,8 +108,7 @@ open class FakeLifecycleOwner(
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
   }
 
-  fun getObserverCount(): Int = runBlocking(mainDispatcher) { fakeLifecycle.observerCount }
+  fun getObserverCount(): Int {
+    return fakeLifecycle.observerCount
+  }
 }
-
-@OptIn(ExperimentalCoroutinesApi::class)
-private fun fakeMainDispatcher() = StandardTestDispatcher()

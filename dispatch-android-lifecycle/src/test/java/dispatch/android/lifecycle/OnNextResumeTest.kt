@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,34 +15,33 @@
 
 package dispatch.android.lifecycle
 
-import androidx.lifecycle.*
-import dispatch.core.*
-import dispatch.internal.test.*
-import dispatch.internal.test.android.*
-import dispatch.test.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.sync.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.core.ioDispatcher
+import dispatch.internal.test.BaseTest
+import dispatch.internal.test.android.FakeLifecycleOwner
+import dispatch.internal.test.android.LiveDataTest
+import dispatch.test.testProvided
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.CoroutineStart.LAZY
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.async
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.launch
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
+import kotlin.coroutines.ContinuationInterceptor
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class OnNextResumeTest :
-  BaseTest(),
+class OnNextResumeTest : BaseTest(),
   LiveDataTest {
 
-  lateinit var lifecycleOwner: LifecycleOwner
-  lateinit var lifecycle: LifecycleRegistry
-
-  @BeforeEach
-  fun beforeEach() {
-
-    lifecycleOwner = LifecycleOwner { lifecycle }
-    lifecycle = LifecycleRegistry(lifecycleOwner)
-  }
+  val lifecycleOwner by resets { FakeLifecycleOwner() }
+  val lifecycle by resets { lifecycleOwner.lifecycle }
 
   @Nested
   inner class `Lifecycle version` {
@@ -50,11 +49,11 @@ class OnNextResumeTest :
     @Test
     fun `block should immediately execute if already resumed`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var executed = false
 
-      launch { lifecycle.onNextResume { executed = true } }
+      lifecycle.onNextResume { executed = true }
 
       executed shouldBe true
     }
@@ -62,7 +61,7 @@ class OnNextResumeTest :
     @Test
     fun `block should not immediately execute if lifecycle is not resumed`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.pause()
 
       var executed = false
 
@@ -80,9 +79,9 @@ class OnNextResumeTest :
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
-      launch {
+      val observer = launch {
         lifecycle.onNextResume {
           input.consumeAsFlow()
             .onCompletion { completed = true }
@@ -94,24 +93,28 @@ class OnNextResumeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
+      lifecycleOwner.pause()
+      lifecycleOwner.destroy()
       output shouldBe listOf(1, 2, 3)
+
+      observer.join()
+
       completed shouldBe true
     }
 
     @Test
     fun `block should not execute twice when lifecycle is resumed twice`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       lifecycle.onNextResume { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.pause()
 
       expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       finish(3)
     }
@@ -119,7 +122,7 @@ class OnNextResumeTest :
     @Test
     fun `block should return value if allowed to complete`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       val result = lifecycle.onNextResume { true }
 
@@ -127,22 +130,17 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete before destroy`() = testProvided {
 
-      val lock = Mutex(locked = true)
+      lifecycleOwner.resume()
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
-
-      val resultDeferred = async {
-        lifecycle.onNextResume {
-          lock.withLock {
-            // unreachable
-            true
-          }
+      val resultDeferred = async(start = LAZY) {
+        lifecycle.onNextResume<Boolean> {
+          fail { "should be unreachable" }
         }
       }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.destroy()
 
       resultDeferred.await() shouldBe null
     }
@@ -150,7 +148,7 @@ class OnNextResumeTest :
     @Test
     fun `block context should respect context parameter`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var dispatcher: ContinuationInterceptor? = null
 
@@ -168,11 +166,11 @@ class OnNextResumeTest :
     @Test
     fun `block should immediately execute if already resumed`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var executed = false
 
-      launch { lifecycleOwner.onNextResume { executed = true } }
+      lifecycleOwner.onNextResume { executed = true }
 
       executed shouldBe true
     }
@@ -180,7 +178,7 @@ class OnNextResumeTest :
     @Test
     fun `block should not immediately execute if lifecycle is not resumed`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.pause()
 
       var executed = false
 
@@ -198,9 +196,9 @@ class OnNextResumeTest :
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
-      launch {
+      val observer = launch {
         lifecycleOwner.onNextResume {
           input.consumeAsFlow()
             .onCompletion { completed = true }
@@ -212,24 +210,28 @@ class OnNextResumeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.pause()
+      lifecycleOwner.destroy()
 
       output shouldBe listOf(1, 2, 3)
+
+      observer.join()
+
       completed shouldBe true
     }
 
     @Test
     fun `block should not execute twice when lifecycle is resumed twice`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       lifecycleOwner.onNextResume { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.pause()
 
       expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       finish(3)
     }
@@ -237,7 +239,7 @@ class OnNextResumeTest :
     @Test
     fun `block should return value if allowed to complete`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       val result = lifecycleOwner.onNextResume { true }
 
@@ -245,22 +247,17 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete before destroy`() = testProvided {
 
-      val lock = Mutex(locked = true)
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       val resultDeferred = async {
-        lifecycleOwner.onNextResume {
-          lock.withLock {
-            // unreachable
-            true
-          }
+        lifecycleOwner.onNextResume<Boolean> {
+          fail { "should be unreachable" }
         }
       }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.destroy()
 
       resultDeferred.await() shouldBe null
     }
@@ -268,7 +265,7 @@ class OnNextResumeTest :
     @Test
     fun `block context should respect context parameter`() = testProvided {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var dispatcher: ContinuationInterceptor? = null
 

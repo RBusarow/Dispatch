@@ -22,9 +22,11 @@ import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANC
 import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.RESTART_EVERY
 import dispatch.core.flowOnMainImmediate
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
@@ -37,7 +39,6 @@ import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
 
 internal fun DispatchLifecycleScope.launchOn(
@@ -50,7 +51,6 @@ internal fun DispatchLifecycleScope.launchOn(
   RESTART_EVERY -> launchEvery(context, minimumState, block)
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 internal suspend fun <T> Lifecycle.onNext(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -58,31 +58,35 @@ internal suspend fun <T> Lifecycle.onNext(
 ): T? {
 
   var result: T? = null
-  val stateReached = AtomicBoolean(false)
+  var stateReached = false
   var completed = false
 
   // suspend until the lifecycle's flow has reached the minimum state, then move on
   eventFlow(minimumState)
     .onEachLatest { stateIsHighEnough ->
+
+      println("                                          on each --  $stateIsHighEnough")
+
       if (stateIsHighEnough) {
-        stateReached.compareAndSet(false, true)
+        stateReached = true
         coroutineScope {
-          withContext(context + coroutineContext[Job]!!) {
+          withContext(context + currentCoroutineContext()[Job]!!) {
             result = block()
           }
         }
         completed = true
       }
     }
-    .takeWhile { !completed }
     .collectUntil { stateIsHighEnough ->
-      !stateIsHighEnough && stateReached.get()
+
+      println("                                          high enough -- ${!stateIsHighEnough} -- reached $stateReached")
+
+      stateReached && (completed || !stateIsHighEnough)
     }
 
   return result
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 internal fun DispatchLifecycleScope.launchEvery(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -125,16 +129,21 @@ internal fun Lifecycle.eventFlow(
   // immediately send the current state.  Otherwise there's no events until the lifecycle changes.
   flow.tryEmit(currentState)
 
-  val observer = LifecycleEventObserver { _, _ ->
+  val observer = LifecycleEventObserver { owner, _ ->
+
+    println("emit state -- ${owner.lifecycle.currentState}")
 
     // send true if the state is high enough, false if not
-    flow.tryEmit(currentState)
+    flow.tryEmit(owner.lifecycle.currentState)
   }
 
   addObserver(observer)
 
   return flow
     .takeWhile {
+
+      println("new state -- $it   ${Thread.currentThread().id}")
+
       // stop collecting when the lifecycle is destroyed.  This triggers `onCompletion` below
       it != Lifecycle.State.DESTROYED
     }

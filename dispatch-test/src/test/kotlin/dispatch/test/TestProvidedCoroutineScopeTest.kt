@@ -15,12 +15,19 @@
 
 package dispatch.test
 
-import dispatch.core.*
-import io.kotest.matchers.*
-import io.kotest.matchers.types.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.jupiter.api.*
+import dispatch.core.DefaultCoroutineScope
+import dispatch.core.IOCoroutineScope
+import dispatch.core.MainCoroutineScope
+import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.UnconfinedCoroutineScope
+import dispatch.core.dispatcherProvider
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeTest {
@@ -70,7 +77,7 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `scope implementation should contain DispatcherProvider property`() {
 
-      val scope = TestProvidedCoroutineScopeImpl(provider)
+      val scope = TestProvidedCoroutineScopeImpl(provider, TestScope(provider))
 
       scope.coroutineContext.dispatcherProvider shouldBe provider
     }
@@ -80,7 +87,7 @@ internal class TestProvidedCoroutineScopeTest {
 
       val scope = TestProvidedCoroutineScopeImpl(
         dispatcherProvider = provider,
-        context = TestDispatcherProvider()
+        delegateScope = TestScope(provider)
       )
 
       scope.coroutineContext.dispatcherProvider shouldBe provider

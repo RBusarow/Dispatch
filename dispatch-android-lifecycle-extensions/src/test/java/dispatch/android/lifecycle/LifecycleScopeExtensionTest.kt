@@ -17,11 +17,11 @@ package dispatch.android.lifecycle
 
 import androidx.lifecycle.Lifecycle
 import dispatch.android.lifecycle.internal.DispatchLifecycleScopeStore
+import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.internal.test.getPrivateObjectFieldByName
 import dispatch.test.TestDispatcherProvider
-import hermit.test.junit.HermitJUnit5
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.CompletableDeferred
@@ -34,6 +34,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.yield
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -46,7 +47,7 @@ import java.util.concurrent.TimeUnit
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 internal class LifecycleScopeExtensionTest :
-  HermitJUnit5(),
+  BaseTest(),
   LiveDataTest {
 
   val storeMap: MutableMap<Lifecycle, DispatchLifecycleScope> =
@@ -102,7 +103,9 @@ internal class LifecycleScopeExtensionTest :
   @Nested
   inner class `initial lifecycle of Lifecycle State INITIALIZED` {
 
-    val lifecycleOwner by resets { FakeLifecycleOwner(initialState = Lifecycle.State.INITIALIZED) }
+    val lifecycleOwner by resets {
+      FakeLifecycleOwner(initialState = Lifecycle.State.INITIALIZED)
+    }
 
     @Nested
     inner class `scope is created` {
@@ -132,22 +135,21 @@ internal class LifecycleScopeExtensionTest :
       @Nested
       inner class `lifecycle passes to destroyed` {
 
-        @BeforeEach
-        fun beforeEach() {
+        @Test
+        fun `scope should be cancelled`() = runTest {
           // special case for Initialized state
           lifecycleOwner.create()
-
           lifecycleOwner.destroy()
-        }
-
-        @Test
-        fun `scope should be cancelled`() {
 
           scope.isActive shouldBe false
         }
 
         @Test
-        fun `scope should be removed from the cache`() {
+        fun `scope should be removed from the cache`() = runTest {
+
+          // special case for Initialized state
+          lifecycleOwner.create()
+          lifecycleOwner.destroy()
 
           storeMap[lifecycleOwner.lifecycle] shouldBe null
         }
@@ -217,7 +219,7 @@ internal class LifecycleScopeExtensionTest :
       inner class `lifecycle passes to destroyed` {
 
         @BeforeEach
-        fun beforeEach() {
+        fun beforeEach() = runBlocking {
           lifecycleOwner.destroy()
         }
 
@@ -298,7 +300,7 @@ internal class LifecycleScopeExtensionTest :
       inner class `lifecycle passes to destroyed` {
 
         @BeforeEach
-        fun beforeEach() {
+        fun beforeEach() = runBlocking {
           lifecycleOwner.destroy()
         }
 
@@ -379,7 +381,7 @@ internal class LifecycleScopeExtensionTest :
       inner class `lifecycle passes to destroyed` {
 
         @BeforeEach
-        fun beforeEach() {
+        fun beforeEach() = runBlocking {
 
           lifecycleOwner.destroy()
         }

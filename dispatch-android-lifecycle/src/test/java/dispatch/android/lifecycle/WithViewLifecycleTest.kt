@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,19 +15,28 @@
 
 package dispatch.android.lifecycle
 
-import androidx.arch.core.executor.testing.*
-import dispatch.core.*
-import dispatch.internal.test.*
-import dispatch.internal.test.android.*
-import dispatch.test.*
-import io.kotest.matchers.*
-import io.kotest.matchers.types.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
-import org.junit.*
-import org.junit.runner.*
-import org.robolectric.*
-import org.robolectric.annotation.*
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import dispatch.core.MainImmediateCoroutineScope
+import dispatch.internal.test.android.FakeFragment
+import dispatch.internal.test.android.FakeLifecycleOwner
+import dispatch.internal.test.shouldEqualFolded
+import dispatch.internal.test.shouldNotEqualFolded
+import dispatch.test.TestCoroutineRule
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeSameInstanceAs
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
@@ -42,11 +51,11 @@ internal class WithViewLifecycleTest {
   @Rule
   val instantTaskRule = InstantTaskExecutorRule()
 
-  val fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
-  val viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+  val fragmentLifecycleOwner = FakeLifecycleOwner()
+  val viewLifecycleOwner = FakeLifecycleOwner()
 
   @Before
-  fun setUp() {
+  fun setUp() = runBlocking {
     fragmentLifecycleOwner.start()
     viewLifecycleOwner.create()
   }
@@ -118,7 +127,7 @@ internal class WithViewLifecycleTest {
   }
 
   @Test
-  fun `when the view lifecycle is destroyed, lambda should be cancelled`() {
+  fun `when the view lifecycle is destroyed, lambda should be cancelled`() = runBlocking {
 
     lateinit var job: Job
 
@@ -140,7 +149,7 @@ internal class WithViewLifecycleTest {
   }
 
   @Test
-  fun `when the fragment lifecycle is destroyed, lambda be cancelled`() {
+  fun `when the fragment lifecycle is destroyed, lambda be cancelled`() = runBlocking {
 
     lateinit var job: Job
 
@@ -247,7 +256,7 @@ internal class WithViewLifecycleTest {
 
       viewLifecycleOwner.destroy()
 
-      val secondView = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+      val secondView = FakeLifecycleOwner()
 
       fragment.setFakeViewLifecycleOwner(secondView)
 
@@ -285,7 +294,7 @@ internal class WithViewLifecycleTest {
 
       fragment.setFakeViewLifecycleOwner(null)
 
-      val secondView = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+      val secondView = FakeLifecycleOwner()
 
       fragment.setFakeViewLifecycleOwner(secondView)
 
