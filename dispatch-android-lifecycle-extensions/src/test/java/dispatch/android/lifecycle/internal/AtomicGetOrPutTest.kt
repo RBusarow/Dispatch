@@ -18,10 +18,13 @@ package dispatch.android.lifecycle.internal
 import androidx.lifecycle.Lifecycle
 import dispatch.android.lifecycle.DispatchLifecycleScope
 import dispatch.core.MainImmediateCoroutineScope
+import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.android.InstantTaskExecutorExtension
 import dispatch.test.TestDispatcherProvider
+import dispatch.test.testProvided
 import hermit.test.junit.HermitJUnit5
+import io.kotest.core.script.test
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,7 +49,7 @@ import java.util.concurrent.TimeUnit
 @ExtendWith(InstantTaskExecutorExtension::class)
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class AtomicGetOrPutTest : HermitJUnit5() {
+internal class AtomicGetOrPutTest : BaseTest() {
 
   @Nested
   inner class `API level 23` {
@@ -54,9 +57,9 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
     @Nested
     inner class `multiple threads access lifecycleScope at once` {
       @Test
-      fun `all threads should get the same instance`() = runBlocking {
+      fun `all threads should get the same instance`() = testProvided {
 
-        val main = StandardTestDispatcher(name = "main")
+        val main = mainDispatcher
 
         val storeMap = ConcurrentHashMap<Lifecycle, DispatchLifecycleScope>()
 
