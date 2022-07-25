@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,7 +17,7 @@ package dispatch.android.espresso.samples
 
 import dispatch.android.espresso.UnconfinedIdlingCoroutineScope
 import dispatch.android.espresso.registerAllIdlingResources
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample4
 import kotlinx.coroutines.Job
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -25,7 +25,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class UnconfinedIdlingCoroutineScopeSample {
 
-  @Sample
+  @Sample4
   fun createNoArgUnconfinedIdlingCoroutineScope() {
 
     val scope = UnconfinedIdlingCoroutineScope()
@@ -33,7 +33,7 @@ class UnconfinedIdlingCoroutineScopeSample {
     scope.idlingDispatcherProvider.registerAllIdlingResources()
   }
 
-  @Sample
+  @Sample4
   fun createCustomUnconfinedIdlingCoroutineScope() {
 
     val scope = UnconfinedIdlingCoroutineScope(

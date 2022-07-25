@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,23 +15,42 @@
 
 package dispatch.internal.test
 
-import io.kotest.matchers.*
-import kotlinx.atomicfu.*
-import org.junit.jupiter.api.*
+import hermit.test.junit.HermitJUnit5
+import io.kotest.matchers.shouldBe
+import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 
-@Suppress("UnnecessaryAbstractClass")
-public abstract class BaseTest {
+@OptIn(ObsoleteCoroutinesApi::class, ExperimentalCoroutinesApi::class)
+public abstract class BaseTest : HermitJUnit5() {
 
   private val index = atomic(0)
   private val finished = atomic(false)
 
+  public val mainDispatcher: ExecutorCoroutineDispatcher by resets {
+    newSingleThreadContext("main")
+      .also { Dispatchers.setMain(it) }
+  }
+
+  @BeforeEach
+  internal fun _beforeEach() {
+    mainDispatcher
+  }
+
   @AfterEach
   internal fun _afterEach() {
+    Dispatchers.resetMain()
     resetIndex()
   }
 
   public fun expect(expectedIndex: Int) {
-
     val actualIndex = index.incrementAndGet()
 
     actualIndex shouldBe expectedIndex
@@ -42,9 +61,11 @@ public abstract class BaseTest {
     require(!finished.getAndSet(true)) { "Should call 'finish(...)' at most once" }
   }
 
-  public fun resetIndex() {
+  private fun resetIndex() {
     try {
-      require(index.value == 0 || finished.value) { "Expecting that 'finish(...)' was invoked, but it was not" }
+      require(index.value == 0 || finished.value) {
+        "Expecting that 'finish(...)' was invoked, but it was not"
+      }
     } finally {
       index.value = 0
       finished.value = false

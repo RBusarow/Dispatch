@@ -17,21 +17,22 @@ package dispatch.android.lifecycle
 
 import androidx.lifecycle.Lifecycle
 import dispatch.core.ioDispatcher
+import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.TestProvidedCoroutineScope
-import hermit.test.junit.HermitJUnit5
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.yield
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
@@ -39,14 +40,14 @@ import kotlin.coroutines.ContinuationInterceptor
 @FlowPreview
 @ExperimentalCoroutinesApi
 class DispatchLifecycleScopeTest :
-  HermitJUnit5(),
+  BaseTest(),
   LiveDataTest {
 
-  val testScope by resets { TestProvidedCoroutineScope(context = Job()) }
+  val testScope by resets { TestProvidedCoroutineScope(context = Job() + mainDispatcher) }
 
   val lifecycleOwner by resets { FakeLifecycleOwner() }
   val lifecycle by resets { lifecycleOwner.lifecycle }
-  val scope by resets { DispatchLifecycleScope(lifecycle, testScope) }
+  val lifecycleScope by resets { DispatchLifecycleScope(lifecycle, testScope) }
 
   @Nested
   inner class cancellation {
@@ -78,13 +79,20 @@ class DispatchLifecycleScopeTest :
     @Test
     fun `lifecycle observer should be removed when scope is cancelled`() = runBlocking {
 
+      val lifecycleOwner = FakeLifecycleOwner()
+      val lifecycle = lifecycleOwner.lifecycle
+      val job = Job()
       lifecycleOwner.create()
 
-      val scope = DispatchLifecycleScope(lifecycle, testScope)
+      DispatchLifecycleScope(lifecycle, this + job + mainDispatcher)
+      Thread.yield()
+      yield()
 
       lifecycle.observerCount shouldBe 1
 
-      scope.cancel()
+      job.cancel()
+      Thread.yield()
+      yield()
 
       lifecycle.observerCount shouldBe 0
     }
@@ -100,7 +108,7 @@ class DispatchLifecycleScopeTest :
 
       var executed = false
 
-      scope.launchOnCreate { executed = true }
+      lifecycleScope.launchOnCreate { executed = true }
 
       executed shouldBe true
     }
@@ -110,7 +118,7 @@ class DispatchLifecycleScopeTest :
 
       var executed = false
 
-      scope.launchOnCreate { executed = true }
+      lifecycleScope.launchOnCreate { executed = true }
 
       executed shouldBe false
     }
@@ -118,11 +126,11 @@ class DispatchLifecycleScopeTest :
     @Test
     fun `block context should respect context parameter`() = runBlocking {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
       var dispatcher: ContinuationInterceptor? = null
 
-      scope.launchOnCreate(testScope.ioDispatcher) {
+      lifecycleScope.launchOnCreate(testScope.ioDispatcher) {
         dispatcher = coroutineContext[ContinuationInterceptor]
       }
 
@@ -136,9 +144,9 @@ class DispatchLifecycleScopeTest :
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+      lifecycleOwner.create()
 
-      scope.launchOnCreate {
+      lifecycleScope.launchOnCreate {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -148,7 +156,7 @@ class DispatchLifecycleScopeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+      lifecycleOwner.destroy()
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true
@@ -161,11 +169,11 @@ class DispatchLifecycleScopeTest :
     @Test
     fun `block should immediately execute if already started`() = runBlocking {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycleOwner.start()
 
       var executed = false
 
-      scope.launchOnStart { executed = true }
+      lifecycleScope.launchOnStart { executed = true }
 
       executed shouldBe true
     }
@@ -188,7 +196,7 @@ class DispatchLifecycleScopeTest :
 
           var executed = false
 
-          scope.launchOnStart { executed = true }
+          lifecycleScope.launchOnStart { executed = true }
 
           executed shouldBe false
         }
@@ -197,11 +205,11 @@ class DispatchLifecycleScopeTest :
     @Test
     fun `block context should respect context parameter`() = runBlocking {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycleOwner.start()
 
       var dispatcher: ContinuationInterceptor? = null
 
-      scope.launchOnStart(testScope.ioDispatcher) {
+      lifecycleScope.launchOnStart(testScope.ioDispatcher) {
         dispatcher = coroutineContext[ContinuationInterceptor]
       }
 
@@ -215,9 +223,9 @@ class DispatchLifecycleScopeTest :
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+      lifecycleOwner.start()
 
-      scope.launchOnStart {
+      lifecycleScope.launchOnStart {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -227,7 +235,7 @@ class DispatchLifecycleScopeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+      lifecycleOwner.stop()
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true
@@ -240,11 +248,11 @@ class DispatchLifecycleScopeTest :
     @Test
     fun `block should immediately execute if already resumed`() = runBlocking {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var executed = false
 
-      scope.launchOnResume { executed = true }
+      lifecycleScope.launchOnResume { executed = true }
 
       executed shouldBe true
     }
@@ -269,7 +277,7 @@ class DispatchLifecycleScopeTest :
 
           var executed = false
 
-          scope.launchOnResume { executed = true }
+          lifecycleScope.launchOnResume { executed = true }
 
           executed shouldBe false
         }
@@ -278,11 +286,11 @@ class DispatchLifecycleScopeTest :
     @Test
     fun `block context should respect context parameter`() = runBlocking {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
       var dispatcher: ContinuationInterceptor? = null
 
-      scope.launchOnResume(testScope.ioDispatcher) {
+      lifecycleScope.launchOnResume(testScope.ioDispatcher) {
         dispatcher = coroutineContext[ContinuationInterceptor]
       }
 
@@ -296,9 +304,9 @@ class DispatchLifecycleScopeTest :
       val output = mutableListOf<Int>()
       var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+      lifecycleOwner.resume()
 
-      scope.launchOnResume {
+      lifecycleScope.launchOnResume {
         input.consumeAsFlow()
           .onCompletion { completed = true }
           .collect { output.add(it) }
@@ -308,7 +316,7 @@ class DispatchLifecycleScopeTest :
       input.send(2)
       input.send(3)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+      lifecycleOwner.pause()
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true

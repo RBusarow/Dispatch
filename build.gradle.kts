@@ -163,13 +163,16 @@ allprojects {
 
   configure<KtlintExtension> {
     debug.set(false)
-
+    version.set("0.46.1")
+    outputToConsole.set(true)
+    enableExperimentalRules.set(true)
     disabledRules.set(
       setOf(
-        "no-wildcard-imports",
         "max-line-length", // manually formatting still does this, and KTLint will still wrap long chains when possible
         "filename", // same as Detekt's MatchingDeclarationName, but Detekt's version can be suppressed and this can't
-        "experimental:argument-list-wrapping" // doesn't work half the time
+        "argument-list-wrapping", // doesn't work half the time
+        "no-empty-first-line-in-method-block", // code golf...
+        "experimental:function-signature"
       )
     )
   }

@@ -17,16 +17,19 @@
 
 package dispatch.internal.test
 
-import dispatch.core.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import kotlinx.knit.test.*
-import org.junit.*
-import java.io.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
+import org.junit.jupiter.api.Test
+import java.io.PrintStream
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.knit.test.captureOutput as knitCaptureOutput
 
 public typealias Sample = Test
+public typealias Sample4 = org.junit.Test
 
 public infix fun Any?.shouldPrint(expected: String) {
   toString() shouldBe expected

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,6 +18,8 @@ plugins {
 }
 dependencies {
 
+  implementation(projects.dispatchCore)
+
   api(libs.androidx.fragment.core)
   api(libs.androidx.lifecycle.common)
   api(libs.androidx.lifecycle.liveData)
@@ -25,6 +27,7 @@ dependencies {
   api(libs.junit.api)
   api(libs.kotlinx.coroutines.core)
   api(libs.kotlinx.coroutines.jvm)
+  api(libs.kotlinx.coroutines.test)
 
   implementation(libs.androidx.lifecycle.runtimeKtx)
   implementation(libs.kotlin.reflect)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,21 +20,24 @@ import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANC
 import dispatch.android.lifecycle.dispatchLifecycleScope
 import dispatch.core.DispatcherProvider
 import dispatch.core.launchMain
+import dispatch.internal.test.BaseTest
 import dispatch.internal.test.Sample
 import dispatch.internal.test.android.LiveDataTest
-import dispatch.test.CoroutineTest
+import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.yield
 
-@CoroutineTest
 @ExperimentalCoroutinesApi
-class DispatchLifecycleScopeSample : LiveDataTest {
+class DispatchLifecycleScopeSample : BaseTest(), LiveDataTest {
 
   @Sample
   fun lifecycleCoroutineScopeFromScopeSample() = runBlocking {
@@ -397,6 +400,8 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   @Sample
   fun launchOnResumeRestartingSample() = runBlocking {
 
+    Dispatchers.Main shouldBe this@DispatchLifecycleScopeSample.mainDispatcher
+
     val channel = Channel<String>()
     val history = mutableListOf<String>()
 
@@ -415,6 +420,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
       init {
         dispatchLifecycleScope.launchOnResume {
           viewModel.someFlow.collect {
+            println("collected $it")
             channel.send("$it")
           }
         }
