@@ -32,7 +32,6 @@ buildscript {
     classpath(libs.kotlinx.atomicfu)
     classpath(libs.kotlinx.metadata.jvm)
     classpath(libs.ktlint.gradle)
-    classpath(libs.ktlint.gradle)
   }
 }
 
