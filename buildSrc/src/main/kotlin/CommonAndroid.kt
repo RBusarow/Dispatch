@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,21 +13,20 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.*
-import org.gradle.api.*
-import org.gradle.api.JavaVersion.*
-import org.gradle.kotlin.dsl.*
-import java.io.*
+import com.android.build.gradle.TestedExtension
+import org.gradle.api.JavaVersion.VERSION_1_8
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.configure
 
 @Suppress("MagicNumber", "LongMethod")
 fun Project.commonAndroid() {
 
   configure<TestedExtension> {
-    compileSdkVersion(31)
+    compileSdkVersion(32)
 
     defaultConfig {
       minSdk = 21
-      targetSdk = 31
+      targetSdk = 32
       versionName = "1.0.0-beta10"
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

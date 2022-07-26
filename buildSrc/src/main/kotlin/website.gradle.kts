@@ -165,6 +165,23 @@ val startSite by tasks.registering(Exec::class) {
   commandLine("yarn", "run", "start")
 }
 
+val buildSite by tasks.registering(Exec::class) {
+
+  description = "launches the local development website"
+  group = "website"
+
+  dependsOn(
+    versionDocs,
+    updateWebsiteApiDocs,
+    updateWebsiteChangelog,
+    updateWebsiteNextDocsVersionRefs,
+    updateWebsitePackageJsonVersion
+  )
+
+  workingDir("./website")
+  commandLine("yarn", "run", "build")
+}
+
 val versionDocs by tasks.registering(Exec::class) {
 
   description =

@@ -12,23 +12,46 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
       # Node is required for npm
       - name: Set up Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "12"
+          node-version: 16.x
+          cache: yarn
+
+      - name: Set up JDK
+        uses : actions/setup-java@v2
+        with :
+          distribution : 'temurin'
+          java-version : '11'
+          cache: 'gradle'
+
+      - uses: gradle/wrapper-validation-action@v1
+
       # Install and build Docusaurus website
-      - name: Build Docusaurus website
+      - name: Install yarn dependencies
         run: |
           cd website
-          npm install
-          npm run build
+          yarn install
+
+      - uses: burrunan/gradle-cache-action@v1
+        name: Build Docusaurus website
+        with:
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+          arguments: |
+            buildSite
+          concurrent: true
+          gradle-build-scan-report: false
+
       - name: Deploy to GitHub Pages
         if: success()
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
           build_dir: website/build

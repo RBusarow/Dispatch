@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,18 +15,20 @@
 
 package dispatch.core
 
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 /**
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
- * then uses its [DispatcherProvider.default] property to call `flowOn(theDispatcher)`,
- * and returns the result.
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine, then
+ * uses its [DispatcherProvider.default] property to call `flowOn(theDispatcher)`, and returns the
+ * result.
  *
  * @sample dispatch.core.samples.FlowOnSample.flowOnDefaultSample
  * @see flowOn
  */
-@ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
   flowOn(currentCoroutineContext().dispatcherProvider.default)
     .collect { emit(it) }
@@ -34,55 +36,51 @@ public fun <T> Flow<T>.flowOnDefault(): Flow<T> = flow {
 
 /**
  * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
- * then uses its [DispatcherProvider.io] property to call `flowOn(theDispatcher)`,
- * and returns the result.
+ * then uses its [DispatcherProvider.io] property to call `flowOn(theDispatcher)`, and returns the
+ * result.
  *
  * @sample dispatch.core.samples.FlowOnSample.flowOnIOSample
  * @see flowOn
  */
-@ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnIO(): Flow<T> = flow {
   flowOn(currentCoroutineContext().dispatcherProvider.io)
     .collect { emit(it) }
 }
 
 /**
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
- * then uses its [DispatcherProvider.main] property to call `flowOn(theDispatcher)`,
- * and returns the result.
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine, then
+ * uses its [DispatcherProvider.main] property to call `flowOn(theDispatcher)`, and returns the
+ * result.
  *
  * @sample dispatch.core.samples.FlowOnSample.flowOnMainSample
  * @see flowOn
  */
-@ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnMain(): Flow<T> = flow {
   flowOn(currentCoroutineContext().dispatcherProvider.main)
     .collect { emit(it) }
 }
 
 /**
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
- * then uses its [DispatcherProvider.mainImmediate] property to call `flowOn(theDispatcher)`,
- * and returns the result.
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine, then
+ * uses its [DispatcherProvider.mainImmediate] property to call `flowOn(theDispatcher)`, and returns
+ * the result.
  *
  * @sample dispatch.core.samples.FlowOnSample.flowOnMainImmediateSample
  * @see flowOn
  */
-@ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnMainImmediate(): Flow<T> = flow {
   flowOn(currentCoroutineContext().dispatcherProvider.mainImmediate)
     .collect { emit(it) }
 }
 
 /**
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine,
- * then uses its [DispatcherProvider.unconfined] property to call `flowOn(theDispatcher)`,
- * and returns the result.
+ * Extracts the [DispatcherProvider] from the `coroutineContext` of the *collector* coroutine, then
+ * uses its [DispatcherProvider.unconfined] property to call `flowOn(theDispatcher)`, and returns
+ * the result.
  *
  * @sample dispatch.core.samples.FlowOnSample.flowOnUnconfinedSample
  * @see flowOn
  */
-@ExperimentalCoroutinesApi
 public fun <T> Flow<T>.flowOnUnconfined(): Flow<T> = flow {
   flowOn(currentCoroutineContext().dispatcherProvider.unconfined)
     .collect { emit(it) }

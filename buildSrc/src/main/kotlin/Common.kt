@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,11 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 fun Project.common() {
 
+  // check for runtime classpath changes in any published modul/artifact
+  pluginManager.withPlugin("com.vanniktech.maven.publish") {
+    apply(plugin = "dependency-guard")
+  }
+
   tasks.withType<Test> {
 
     useJUnitPlatform {
@@ -35,6 +40,10 @@ fun Project.common() {
         allWarningsAsErrors = true
 
         jvmTarget = "1.8"
+
+        freeCompilerArgs = freeCompilerArgs + listOf(
+          "-opt-in=kotlin.RequiresOptIn"
+        )
       }
     }
 }

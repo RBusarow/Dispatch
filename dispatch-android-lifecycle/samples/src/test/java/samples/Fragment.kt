@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,6 +18,7 @@ package samples
 import androidx.lifecycle.*
 import dispatch.internal.test.android.*
 
+@Suppress("UnnecessaryAbstractClass")
 abstract class Fragment(
   initialState: Lifecycle.State = Lifecycle.State.INITIALIZED
 ) : FakeLifecycleOwner(initialState = initialState)

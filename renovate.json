@@ -1,0 +1,8 @@
+{
+  "labels": ["dependencies", "automerge"],
+  "extends": [
+    "config:base"
+  ],
+  "rebaseWhen": "never",
+  "rebaseLabel": "rebase"
+}

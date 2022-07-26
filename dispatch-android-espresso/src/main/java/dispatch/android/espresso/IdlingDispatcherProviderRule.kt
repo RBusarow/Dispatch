@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,32 +15,38 @@
 
 package dispatch.android.espresso
 
-import androidx.test.espresso.*
-import dispatch.core.*
-import kotlinx.coroutines.*
-import org.junit.rules.*
-import org.junit.runner.*
+import androidx.test.espresso.IdlingRegistry
+import dispatch.core.DispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 
 /**
- * A JUnit 4 [TestRule] which creates a new [IdlingDispatcherProvider] for each test,
- * registering all [IdlingDispatcher]s with [IdlingRegistry] before `@Before` and unregistering them after `@After`.
+ * A JUnit 4 [TestRule] which creates a new [IdlingDispatcherProvider] for each test, registering
+ * all [IdlingDispatcher]s with [IdlingRegistry] before `@Before` and unregistering them after
+ * `@After`.
  *
- * The rule takes an optional [IdlingDispatcherProvider] factory, in which case it only handles registration.
+ * The rule takes an optional [IdlingDispatcherProvider] factory, in which case it only handles
+ * registration.
  *
- * When doing Espresso testing, it's important that the same [IdlingDispatcher]s are used throughout a codebase.
- * For this reason, it's a good idea to use a dependency injection framework just as Dagger or Koin
- * to provide [CoroutineScope]s.
+ * When doing Espresso testing, it's important that the same [IdlingDispatcher]s are used throughout
+ * a codebase. For this reason, it's a good idea to use a dependency injection framework just as
+ * Dagger or Koin to provide [CoroutineScope]s.
  *
- * If using the `lifecycleScope` and `viewModelScope` properties,
- * be sure to use the versions from the `dispatch-android-lifecycle` artifacts to make use of their settable factories.
+ * If using the `lifecycleScope` and `viewModelScope` properties, be sure to use the versions from
+ * the `dispatch-android-lifecycle` artifacts to make use of their settable factories.
  *
  * ### Before the test:
- * * [IdlingDispatcherProvider.registerAllIdlingResources] is called to register all dispatchers with [IdlingRegistry].
+ * * [IdlingDispatcherProvider.registerAllIdlingResources] is called to register all dispatchers
+ *   with [IdlingRegistry].
  *
  * ### After the test:
- * * [IdlingDispatcherProvider.unregisterAllIdlingResources] is called to unregister all dispatchers with [IdlingRegistry].
+ * * [IdlingDispatcherProvider.unregisterAllIdlingResources] is called to unregister all dispatchers
+ *   with [IdlingRegistry].
  *
  * ### Requires JUnit 4.
+ *
  * ```
  * dependencies {
  *   testImplementation "junit:junit:4.12"
@@ -48,9 +54,9 @@ import org.junit.runner.*
  *   testImplementation "org.junit.vintage:junit-vintage-engine:5.5.1"
  * }
  * ```
- * @param factory factory for a custom [IdlingDispatcherProvider].
- * This must be the same [DispatcherProvider] which is used to create [CoroutineScope]s in the code being tested.
  *
+ * @property factory factory for a custom [IdlingDispatcherProvider]. This must be the same
+ *   [DispatcherProvider] which is used to create [CoroutineScope]s in the code being tested.
  * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeRuleSample
  * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeRuleWithLifecycleSample
  * @see TestRule
@@ -63,23 +69,20 @@ class IdlingDispatcherProviderRule(
   /**
    * The [IdlingDispatcherProvider] which is automatically registered with [IdlingRegistry].
    *
-   * This `dispatcherProvider` should be used in all other [CoroutineScope]s for the duration of the test.
+   * This `dispatcherProvider` should be used in all other [CoroutineScope]s for the duration of the
+   * test.
    */
   lateinit var dispatcherProvider: IdlingDispatcherProvider
 
-  /**
-   * @suppress
-   */
-  override fun starting(description: Description?) {
+  /** @suppress */
+  override fun starting(description: Description) {
     dispatcherProvider = factory.invoke()
 
     dispatcherProvider.registerAllIdlingResources()
   }
 
-  /**
-   * @suppress
-   */
-  override fun finished(description: Description?) {
+  /** @suppress */
+  override fun finished(description: Description) {
     dispatcherProvider.unregisterAllIdlingResources()
   }
 }

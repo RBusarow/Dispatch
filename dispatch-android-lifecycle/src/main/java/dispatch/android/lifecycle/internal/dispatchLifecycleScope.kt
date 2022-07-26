@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,17 +15,31 @@
 
 package dispatch.android.lifecycle.internal
 
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
-import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.*
-import dispatch.core.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.flow.*
-import java.util.concurrent.atomic.*
-import kotlin.coroutines.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANCEL
+import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.RESTART_EVERY
+import dispatch.core.flowOnMainImmediate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.takeWhile
+import kotlinx.coroutines.flow.transformLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.coroutines.CoroutineContext
 
-@Suppress("EXPERIMENTAL_API_USAGE")
 internal fun DispatchLifecycleScope.launchOn(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -36,7 +50,7 @@ internal fun DispatchLifecycleScope.launchOn(
   RESTART_EVERY -> launchEvery(context, minimumState, block)
 }
 
-@Suppress("EXPERIMENTAL_API_USAGE")
+@OptIn(ExperimentalCoroutinesApi::class)
 internal suspend fun <T> Lifecycle.onNext(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -68,7 +82,7 @@ internal suspend fun <T> Lifecycle.onNext(
   return result
 }
 
-@Suppress("EXPERIMENTAL_API_USAGE")
+@OptIn(ExperimentalCoroutinesApi::class)
 internal fun DispatchLifecycleScope.launchEvery(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -93,11 +107,12 @@ internal fun DispatchLifecycleScope.launchEvery(
   .launchIn(this)
 
 /**
- * Distinct Flow representing `true` if the state is at or above [minimumState], and `false` when below.
+ * Distinct Flow representing `true` if the state is at or above [minimumState], and `false` when
+ * below.
  *
  * The flow ends when the lifecycle is [destroyed][Lifecycle.State.DESTROYED]
  */
-@Suppress("EXPERIMENTAL_API_USAGE")
+@OptIn(ExperimentalCoroutinesApi::class)
 internal fun Lifecycle.eventFlow(
   minimumState: Lifecycle.State
 ): Flow<Boolean> {
@@ -140,10 +155,7 @@ internal fun Lifecycle.eventFlow(
     .distinctUntilChanged()
 }
 
-/**
- * Terminal operator which collects the given [Flow] until the [predicate] returns true.
- */
-@ExperimentalCoroutinesApi
+/** Terminal operator which collects the given [Flow] until the [predicate] returns true. */
 private suspend fun <T> Flow<T>.collectUntil(
   predicate: suspend (T) -> Boolean
 ) = takeWhile { !predicate(it) }.collect()
@@ -151,10 +163,10 @@ private suspend fun <T> Flow<T>.collectUntil(
 /**
  * Returns a flow which performs the given [action] on each value of the original flow.
  *
- * The crucial difference from [onEach] is that when the original flow emits a new value, the [action] block for previous
- * value is cancelled.
+ * The crucial difference from [onEach] is that when the original flow emits a new value, the
+ * [action] block for previous value is cancelled.
  */
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalCoroutinesApi::class)
 internal fun <T> Flow<T>.onEachLatest(action: suspend (T) -> Unit) = transformLatest { value ->
   action(value)
   return@transformLatest emit(value)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,18 +15,33 @@
 
 package dispatch.sample
 
-import android.annotation.*
-import android.content.*
-import android.os.*
-import android.view.*
-import androidx.fragment.app.*
-import androidx.lifecycle.*
-import dispatch.android.lifecycle.*
-import dispatch.core.*
-import dispatch.sample.databinding.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import timber.log.*
+import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.createViewModelLazy
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
+import dispatch.android.lifecycle.withViewLifecycle
+import dispatch.core.DefaultCoroutineScope
+import dispatch.core.IOCoroutineScope
+import dispatch.core.MainCoroutineScope
+import dispatch.core.defaultDispatcher
+import dispatch.core.flowOnMain
+import dispatch.sample.databinding.FragmentMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.plus
+import timber.log.Timber
 
 @ExperimentalCoroutinesApi
 class MainFragment : Fragment() {
@@ -93,13 +108,18 @@ class MainFragment : Fragment() {
 }
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified VM : ViewModel> viewModelFactory(crossinline f: () -> VM):
-  ViewModelProvider.Factory =
+internal inline fun <reified VM : ViewModel> viewModelFactory(
+  crossinline f: () -> VM
+): ViewModelProvider.Factory =
   object : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = f() as T
   }
 
-inline fun <reified VM : ViewModel> Fragment.viewModels(
+internal inline fun <reified VM : ViewModel> Fragment.viewModels(
   noinline ownerProducer: () -> ViewModelStoreOwner = { this },
   noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
-) = createViewModelLazy(VM::class, { ownerProducer().viewModelStore }, factoryProducer)
+) = createViewModelLazy(
+  VM::class,
+  { ownerProducer().viewModelStore },
+  factoryProducer = factoryProducer
+)

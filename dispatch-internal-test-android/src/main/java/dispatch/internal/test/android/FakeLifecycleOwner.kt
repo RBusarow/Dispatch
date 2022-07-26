@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,8 +15,12 @@
 
 package dispatch.internal.test.android
 
-import androidx.lifecycle.*
-import kotlinx.coroutines.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.runBlocking
 
 @Suppress("EXPERIMENTAL_API_USAGE")
 open class FakeLifecycleOwner(
@@ -43,6 +47,7 @@ open class FakeLifecycleOwner(
     Lifecycle.State.INITIALIZED -> throw IllegalArgumentException(
       "cannot transition straight from initialized to destroyed"
     )
+
     Lifecycle.State.CREATED -> destroy()
     Lifecycle.State.STARTED -> stop()
     Lifecycle.State.RESUMED -> pause()
@@ -81,11 +86,16 @@ open class FakeLifecycleOwner(
   }
 
   fun destroy() = runBlocking(mainDispatcher) {
+    // We're no longer able to transition from INITIALIZED to DESTROYED. So if we need to do that
+    // for a test, just 'create' first and then go down.
+    if (lifecycle.currentState == Lifecycle.State.INITIALIZED) {
+      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    }
     lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
   }
 
   fun getObserverCount(): Int = runBlocking(mainDispatcher) { fakeLifecycle.observerCount }
 }
 
-@Suppress("EXPERIMENTAL_API_USAGE")
+@OptIn(ObsoleteCoroutinesApi::class)
 private fun fakeMainDispatcher() = newSingleThreadContext("FakeLifecycleOwner main")

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,40 +15,42 @@
 
 package dispatch.android.espresso
 
-import androidx.test.espresso.*
-import androidx.test.espresso.idling.*
-import kotlinx.coroutines.*
-import kotlin.coroutines.*
+import androidx.test.espresso.IdlingResource
+import androidx.test.espresso.idling.CountingIdlingResource
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Runnable
+import kotlin.coroutines.CoroutineContext
 
 /**
- * [IdlingResource] helper for coroutines.  This class simply wraps a delegate [CoroutineDispatcher]
- * and keeps a running count of all coroutines it creates, decrementing the count when they complete.
+ * [IdlingResource] helper for coroutines. This class simply wraps a delegate [CoroutineDispatcher]
+ * and keeps a running count of all coroutines it creates, decrementing the count when they
+ * complete.
  *
- * @param delegate The [CoroutineDispatcher] which will be used for actual dispatch.
+ * @property delegate The [CoroutineDispatcher] which will be used for actual dispatch.
  * @see IdlingResource
- * @see Espresso
  * @see CoroutineDispatcher
  */
 class IdlingDispatcher(
   private val delegate: CoroutineDispatcher
 ) : CoroutineDispatcher() {
 
-  /**
-   * The [CountingIdlingResource] which is responsible for [Espresso] functionality.
-   */
+  /** The [CountingIdlingResource] which is responsible for Espresso functionality. */
   val counter: CountingIdlingResource = CountingIdlingResource("IdlingResource for $this")
 
   /**
-   * @return
    * * true if the [counter]'s count is zero
    * * false if the [counter]'s count is non-zero
+   *
+   * @return
    */
+  @Suppress("UNUSED")
   fun isIdle(): Boolean = counter.isIdleNow
 
   /**
    * Counting implementation of the [dispatch][CoroutineDispatcher.dispatch] function.
    *
-   * The count is incremented for every dispatch, and decremented for every completion, including suspension.
+   * The count is incremented for every dispatch, and decremented for every completion, including
+   * suspension.
    */
   override fun dispatch(context: CoroutineContext, block: Runnable) {
 
@@ -63,8 +65,6 @@ class IdlingDispatcher(
     delegate.dispatch(context, runnable)
   }
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun toString(): String = "CountingDispatcher delegating to $delegate"
 }

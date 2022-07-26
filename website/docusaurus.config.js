@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,21 +23,15 @@ module.exports = {
   organizationName: "rbusarow", // Usually your GitHub org/user name.
   projectName: "Dispatch", // Usually your repo name.
   themeConfig: {
-    hideableSidebar: true,
+    docs: {
+      sidebar: {
+        hideable: true,
+      }
+    },
     colorMode: {
       defaultMode: "light",
       disableSwitch: false,
       respectPrefersColorScheme: true,
-      switchConfig: {
-        darkIcon: '🌙',
-        lightIcon: '☀️',
-        darkIconStyle: {
-          marginLeft: '2px',
-        },
-        lightIconStyle: {
-          marginLeft: '2px',
-        },
-      },
     },
 //    announcementBar: {
 //      id: "supportus",

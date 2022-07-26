@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  id("com.gradle.enterprise").version("3.5.2")
+  id("com.gradle.enterprise").version("3.10")
 }
 
 gradleEnterprise {
@@ -45,25 +45,20 @@ rootProject.name = "Dispatch"
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":dependency-sync")
-include(":dispatch-android-compose")
-include(":dispatch-android-compose-test")
-include(":dispatch-android-espresso")
-include(":dispatch-android-lifecycle")
-include(":dispatch-android-lifecycle-extensions")
-include(":dispatch-android-viewmodel")
-include(":dispatch-bom")
-include(":dispatch-core")
-include(":dispatch-test")
-include(":dispatch-test-junit4")
-include(":dispatch-test-junit5")
-include(":dispatch-detekt")
-include(":dispatch-internal-test")
-include(":dispatch-internal-test-android")
-include(":dispatch-sample")
-include(":dispatch-test")
-include(":dispatch-test-junit4")
-include(":dispatch-test-junit4:samples")
-include(":dispatch-test-junit5")
-include(":dispatch-test-junit5:samples")
-include(":dispatch-test:samples")
+include(
+  ":dispatch-android-compose",
+  ":dispatch-android-compose-test",
+  ":dispatch-android-espresso",
+  ":dispatch-android-lifecycle",
+  ":dispatch-android-lifecycle-extensions",
+  ":dispatch-android-viewmodel",
+  ":dispatch-bom",
+  ":dispatch-core",
+  ":dispatch-detekt",
+  ":dispatch-internal-test",
+  ":dispatch-internal-test-android",
+  ":dispatch-sample",
+  ":dispatch-test",
+  ":dispatch-test-junit4",
+  ":dispatch-test-junit5"
+)
