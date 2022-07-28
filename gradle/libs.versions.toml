@@ -4,7 +4,7 @@ anvil = "2.4.0"
 benManes = "0.42.0"
 changeTracker = "0.7.3"
 coil = "2.1.0"
-dependencyAnalysis = "1.10.0"
+dependencyAnalysis = "1.11.1"
 dispatch = "1.0.0-beta10"
 detekt = "1.21.0"
 dokka = "1.7.10"
@@ -13,7 +13,7 @@ gradleDoctor = "0.8.1"
 groovy = "3.0.12"
 hermit = "0.9.6"
 jUnit = "5.8.1"
-kotest = "5.4.0"
+kotest = "5.4.1"
 kotlin = "1.7.10"
 ktlint-gradle = "10.3.0"
 
@@ -25,9 +25,9 @@ taskTree = "2.1.0"
 androidx-compose = "1.2.0"
 androidx-fragment-version = "1.5.0"
 androidx-lifecycle = "2.5.0"
-androidx-navigation-version = "2.5.0"
+androidx-navigation-version = "2.5.1"
 androidx-paging = "3.1.1"
-androidx-room = "2.4.2"
+androidx-room = "2.4.3"
 androidx-startup = "1.1.1"
 androidx-test-espresso = "3.4.0"
 androidx-test-version = "1.4.0"
@@ -75,9 +75,9 @@ kotlinx-knit = { id = "kotlinx-knit", version.ref = "kotlinx-knit" }
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidTools" }
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.5.0"
-androidx-activity-core = "androidx.activity:activity:1.5.0"
-androidx-activity-ktx = "androidx.activity:activity-ktx:1.5.0"
+androidx-activity-compose = "androidx.activity:activity-compose:1.5.1"
+androidx-activity-core = "androidx.activity:activity:1.5.1"
+androidx-activity-ktx = "androidx.activity:activity-ktx:1.5.1"
 
 androidx-annotations = "androidx.annotation:annotation:1.4.0"
 
@@ -268,7 +268,7 @@ kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", versio
 
 ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.3.0"
 
-mockk = "io.mockk:mockk:1.12.4"
+mockk = "io.mockk:mockk:1.12.5"
 
 objenesis = "org.objenesis:objenesis:3.2"
 
