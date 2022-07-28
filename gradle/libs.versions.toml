@@ -27,7 +27,7 @@ androidx-fragment-version = "1.5.0"
 androidx-lifecycle = "2.5.0"
 androidx-navigation-version = "2.5.1"
 androidx-paging = "3.1.1"
-androidx-room = "2.4.2"
+androidx-room = "2.4.3"
 androidx-startup = "1.1.1"
 androidx-test-espresso = "3.4.0"
 androidx-test-version = "1.4.0"
@@ -75,9 +75,9 @@ kotlinx-knit = { id = "kotlinx-knit", version.ref = "kotlinx-knit" }
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidTools" }
 
-androidx-activity-compose = "androidx.activity:activity-compose:1.5.0"
-androidx-activity-core = "androidx.activity:activity:1.5.0"
-androidx-activity-ktx = "androidx.activity:activity-ktx:1.5.0"
+androidx-activity-compose = "androidx.activity:activity-compose:1.5.1"
+androidx-activity-core = "androidx.activity:activity:1.5.1"
+androidx-activity-ktx = "androidx.activity:activity-ktx:1.5.1"
 
 androidx-annotations = "androidx.annotation:annotation:1.4.0"
 
