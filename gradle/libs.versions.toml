@@ -268,7 +268,7 @@ kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", versio
 
 ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.3.0"
 
-mockk = "io.mockk:mockk:1.12.4"
+mockk = "io.mockk:mockk:1.12.5"
 
 objenesis = "org.objenesis:objenesis:3.2"
 
