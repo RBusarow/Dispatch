@@ -25,9 +25,9 @@ taskTree = "2.1.0"
 androidx-compose = "1.2.0"
 androidx-fragment-version = "1.5.0"
 androidx-lifecycle = "2.5.0"
-androidx-navigation-version = "2.5.0"
+androidx-navigation-version = "2.5.1"
 androidx-paging = "3.1.1"
-androidx-room = "2.4.2"
+androidx-room = "2.4.3"
 androidx-startup = "1.1.1"
 androidx-test-espresso = "3.4.0"
 androidx-test-version = "1.4.0"
@@ -268,7 +268,7 @@ kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", versio
 
 ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.3.0"
 
-mockk = "io.mockk:mockk:1.12.4"
+mockk = "io.mockk:mockk:1.12.5"
 
 objenesis = "org.objenesis:objenesis:3.2"
 
