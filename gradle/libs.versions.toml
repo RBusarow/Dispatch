@@ -39,7 +39,7 @@ kotlinx-coroutines = "1.5.2"
 kotlinx-knit = "0.4.0"
 kotlinx-metadata = "0.5.0"
 
-google-dagger = "2.43"
+google-dagger = "2.43.1"
 google-material = "1.6.1"
 
 rickBusarow-dependencySync = "0.11.4"
