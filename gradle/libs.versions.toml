@@ -1,5 +1,5 @@
 [versions]
-androidTools = "7.2.1"
+androidTools = "7.2.2"
 anvil = "2.4.0"
 benManes = "0.42.0"
 changeTracker = "0.7.3"
