@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,7 +30,7 @@ dependencies {
   androidTestImplementation(libs.androidx.test.espresso.core)
   androidTestImplementation(libs.androidx.test.runner)
 
-  androidTestImplementation(projects.dispatchAndroidEspresso)
+  api(projects.dispatchCore)
 
   implementation(libs.androidx.activity.ktx)
   implementation(libs.androidx.appcompat)
@@ -43,9 +43,6 @@ dependencies {
   implementation(libs.timber)
 
   implementation(projects.dispatchAndroidLifecycle)
-  implementation(projects.dispatchAndroidLifecycleExtensions)
-  implementation(projects.dispatchAndroidViewmodel)
-  implementation(projects.dispatchCore)
 
   testImplementation(libs.junit.junit4)
   testImplementation(libs.junit.jupiter)
@@ -53,7 +50,4 @@ dependencies {
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
   testImplementation(libs.kotlinx.coroutines.test)
-
-  testImplementation(projects.dispatchTestJunit4)
-  testImplementation(projects.dispatchTestJunit5)
 }

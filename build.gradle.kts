@@ -86,7 +86,13 @@ detekt {
 dependencies {
 
   detekt(libs.detekt.cli)
+
   detektPlugins(projects.dispatchDetekt)
+}
+
+moduleCheck {
+  deleteUnused = true
+  checks.sortDependencies = true
 }
 
 tasks.withType<DetektCreateBaselineTask> {
@@ -118,7 +124,7 @@ extensions.configure<ApiValidationExtension> {
   /** Packages that are excluded from public API dumps even if they contain public API. */
   ignoredPackages = mutableSetOf("sample", "samples")
 
-  /** Sub-projects that are excluded from API validation */
+  /** Sub-projects that are excluded from API validation. */
   ignoredProjects = mutableSetOf(
     "dispatch-internal-test",
     "dispatch-internal-test-android",
