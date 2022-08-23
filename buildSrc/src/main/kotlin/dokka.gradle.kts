@@ -23,7 +23,15 @@ plugins {
   id("org.jetbrains.dokka")
 }
 
-tasks
+pluginManager.withPlugin("com.android.library") {
+  configureDokka()
+}
+
+pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+  configureDokka()
+}
+
+fun configureDokka() = tasks
   .withType<org.jetbrains.dokka.gradle.AbstractDokkaLeafTask>()
   .configureEach {
 

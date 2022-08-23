@@ -27,7 +27,6 @@ buildscript {
     classpath(libs.android.gradle)
     classpath(libs.square.anvil.gradle)
     classpath(libs.google.ksp)
-    classpath(libs.vanniktech.maven.publish)
     classpath(libs.kotlin.gradle.plug)
     classpath(libs.kotlinx.atomicfu)
     classpath(libs.kotlinx.metadata.jvm)
@@ -42,7 +41,7 @@ buildscript {
 // https://plugins.jetbrains.com/plugin/18949-gradle-libs-error-suppressor
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-  kotlin("jvm")
+  kotlin("jvm") apply false
   alias(libs.plugins.kotlinx.binaryCompatibility)
   alias(libs.plugins.dependencyAnalysis)
   alias(libs.plugins.benManes)

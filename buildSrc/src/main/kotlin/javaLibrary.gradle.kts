@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.gradle.dsl.*
 plugins {
   kotlin("jvm")
   id("detekt")
+  id("dokka")
 }
 
 common()

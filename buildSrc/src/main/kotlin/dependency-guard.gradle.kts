@@ -13,16 +13,10 @@
  * limitations under the License.
  */
 
-plugins {
-  id("com.dropbox.dependency-guard")
-}
+pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
 
-if (project == rootProject) {
-  // record the root project's *build* classpath
-  configureClasspath("classpath")
-}
+  apply(plugin = "com.dropbox.dependency-guard")
 
-pluginManager.withPlugin("java") {
   // If we got here, we're either in an empty "parent" module without a build plugin
   // (and no configurations), or we're in a vanilla Kotlin module.  In this case, we can just look
   // at configuration names.
@@ -35,10 +29,13 @@ pluginManager.withPlugin("java") {
 }
 
 pluginManager.withPlugin("com.android.library") {
+
+  apply(plugin = "com.dropbox.dependency-guard")
+
   // For Android modules, just hard-code `releaseRuntimeClasspath` for the release variant.
   // This is actually pretty robust, since if this configuration ever changes, dependency-guard
   // will fail when trying to look it up.
-  extensions.configure< com.android.build.gradle.LibraryExtension> {
+  extensions.configure<com.android.build.gradle.LibraryExtension> {
     configureClasspath("releaseRuntimeClasspath")
   }
 }
