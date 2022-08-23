@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -47,6 +47,6 @@ dependencies {
   testImplementation(projects.dispatchAndroidEspresso)
   testImplementation(projects.dispatchInternalTest)
   testImplementation(projects.dispatchInternalTestAndroid)
+  testImplementation(projects.dispatchTest)
   testImplementation(projects.dispatchTestJunit4)
-  testImplementation(projects.dispatchTestJunit5)
 }
