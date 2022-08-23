@@ -12,8 +12,8 @@
     "clear": "docusaurus clear"
   },
   "dependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/helper-compilation-targets": "^7.8.7",
+    "@babel/core": "7.18.13",
+    "@babel/helper-compilation-targets": "7.18.9",
     "@docusaurus/core": "2.0.1",
     "@docusaurus/plugin-content-docs": "2.0.1",
     "@docusaurus/plugin-content-pages": "2.0.1",
