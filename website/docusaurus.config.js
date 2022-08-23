@@ -73,13 +73,13 @@ module.exports = {
           position: "left",
         },
         {
+          label: "Twitter",
           href: "https://twitter.com/rbusarow",
-          className: 'header-twitter-link',
           position: "right",
         },
         {
+          label: "GitHub",
           href: "https://github.com/rbusarow/Dispatch",
-          className: 'header-github-link',
           position: "right",
         },
       ],
@@ -98,13 +98,12 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
+          remarkPlugins: [require('mdx-mermaid')],
           sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
           editUrl: "https://github.com/rbusarow/Dispatch/edit/main/website/",
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl: "https://github.com/rbusarow/Dispatch/edit/main/website/",
         },
         theme: {
