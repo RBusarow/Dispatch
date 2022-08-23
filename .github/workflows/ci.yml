@@ -160,59 +160,6 @@ jobs:
           commit_message: update website versions
           commit_options: '--no-verify --signoff'
 
-  #  versioning:
-#
-#    runs-on: ubuntu-latest
-  #    if: github.actor != 'renovate[bot]'
-#
-#    steps:
-#      - uses: actions/checkout@v2
-#        with:
-#          ref: ${{ github.event.pull_request.head.ref }}
-#          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-#          fetch-depth: 0
-#
-#      - name: Set up JDK
-#        uses : actions/setup-java@v2
-#        with :
-#          distribution : 'adopt'
-#          java-version : '14'
-#          cache: 'gradle'
-#
-#      - uses: burrunan/gradle-cache-action@v1
-#        name: Sync versions in website docs
-#        with:
-#          gradle-dependencies-cache-key: |
-#            gradle/libs.versions.toml
-#          arguments: |
-#            updateWebsiteNextDocsVersionRefs
-#          concurrent: true
-#          gradle-build-scan-report: false
-#          gradle-distribution-sha-256-sum-warning: false
-#
-#      - name: commit changes
-#        uses: stefanzweifel/git-auto-commit-action@v4
-#        with:
-#          commit_message: update docs versions
-#          commit_options: '--no-verify --signoff'
-#
-#      - uses: burrunan/gradle-cache-action@v1
-#        name: Update version in website package.json
-#        with:
-#          gradle-dependencies-cache-key: |
-#            gradle/libs.versions.toml
-#          arguments: |
-#            updateWebsitePackageJsonVersion
-#          concurrent: true
-#          gradle-build-scan-report: false
-#          gradle-distribution-sha-256-sum-warning: false
-#
-#      - name: commit changes
-#        uses: stefanzweifel/git-auto-commit-action@v4
-#        with:
-#          commit_message: update website versions
-#          commit_options: '--no-verify --signoff'
-
   api-check:
 
     runs-on: ubuntu-latest

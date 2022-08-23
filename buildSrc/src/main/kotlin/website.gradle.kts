@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,9 +13,34 @@
  * limitations under the License.
  */
 
+val VERSION_NAME: String by project
+val GROUP: String by project
+
 /**
- * Looks for all references to Dispatch artifacts in the md/mdx files
- * in the un-versioned /website/docs. Updates all versions to the pre-release version.
+ * Looks for all references to Dispatch artifacts in the md/mdx files in the un-versioned
+ * /website/docs. Updates all versions to the pre-release version.
+ */
+val checkWebsiteNextDocsVersionRefs by tasks.registering {
+
+  description = "Checks the \"next\" version docs for version changes"
+  group = "website"
+
+  doLast {
+
+    val version = VERSION_NAME
+
+    fileTree("$rootDir/website/docs") {
+      include("**/*.md*")
+    }
+      .forEach { file ->
+        file.updateDispatchVersionRef(version, failOnChanges = true)
+      }
+  }
+}
+
+/**
+ * Looks for all references to Dispatch artifacts in the md/mdx files in the un-versioned
+ * /website/docs. Updates all versions to the pre-release version.
  */
 val updateWebsiteNextDocsVersionRefs by tasks.registering {
 
@@ -24,21 +49,19 @@ val updateWebsiteNextDocsVersionRefs by tasks.registering {
 
   doLast {
 
-    val version = project.extra.properties["VERSION_NAME"] as String
+    val version = VERSION_NAME
 
     fileTree("$rootDir/website/docs") {
       include("**/*.md*")
     }
       .forEach { file ->
-        file.updateDispatchVersionRef(version)
-        file.updateCoroutinesVersionRef("1.5.2")
+        file.updateDispatchVersionRef(version, failOnChanges = false)
+        file.updateCoroutinesVersionRef()
       }
   }
 }
 
-/**
- * Updates the "dispatch" version in package.json
- */
+/** Updates the "dispatch" version in package.json. */
 val updateWebsitePackageJsonVersion by tasks.registering {
 
   description = "Updates the \"Dispatch\" version in package.json"
@@ -46,7 +69,7 @@ val updateWebsitePackageJsonVersion by tasks.registering {
 
   doLast {
 
-    val version = project.extra.properties["VERSION_NAME"] as String
+    val version = VERSION_NAME
 
     // this isn't very robust, but it's fine for this use-case
     val versionReg = """(\s*"version"\s*:\s*")[^"]*("\s*,)""".toRegex()
@@ -76,9 +99,74 @@ val updateWebsitePackageJsonVersion by tasks.registering {
   }
 }
 
+/** Updates the "dispatch" version in package.json. */
+val checkWebsitePackageJsonVersion by tasks.registering {
+
+  description = "Checks the \"Dispatch\" version in package.json"
+  group = "website"
+
+  doLast {
+    val version = VERSION_NAME
+
+    // this isn't very robust, but it's fine for this use-case
+    val versionReg = """(\s*"version"\s*:\s*")[^"]*("\s*,)""".toRegex()
+
+    // just in case some child object gets a "version" field, ignore it.
+    // This only works if the correct field comes first (which it does).
+    var foundOnce = false
+
+    with(File("$rootDir/website/package.json")) {
+      val oldText = readText()
+      val newText = oldText
+        .lines()
+        .joinToString("\n") { line ->
+
+          line.replace(versionReg) { matchResult ->
+
+            if (!foundOnce) {
+              foundOnce = true
+              val (prefix, suffix) = matchResult.destructured
+              "$prefix$version$suffix"
+            } else {
+              line
+            }
+          }
+        }
+      require(oldText == newText) {
+        "The website package.json version is out of date.  " +
+          "Run `./gradlew updateWebsitePackageJsonVersion` to update."
+      }
+    }
+  }
+}
+
 /**
- * Looks for all references to Dispatch artifacts in the project README.md
- * to the current released version.
+ * Looks for all references to Dispatch artifacts in the project README.md to the current released
+ * version.
+ */
+val checkProjectReadmeVersionRefs by tasks.registering {
+
+  description =
+    "Updates the project-level README to use the latest published version in maven coordinates"
+  group = "documentation"
+
+  doLast {
+
+    val version = VERSION_NAME
+
+    File("$rootDir/README.md")
+      .updateDispatchVersionRef(
+        version,
+        failOnChanges = true,
+        "updateProjectReadmeVersionRefs"
+      )
+      .updateCoroutinesVersionRef()
+  }
+}
+
+/**
+ * Looks for all references to Dispatch artifacts in the project README.md to the current released
+ * version.
  */
 val updateProjectReadmeVersionRefs by tasks.registering {
 
@@ -88,46 +176,47 @@ val updateProjectReadmeVersionRefs by tasks.registering {
 
   doLast {
 
-    val version = project.extra.properties["VERSION_NAME"] as String
+    val version = VERSION_NAME
 
     File("$rootDir/README.md")
-      .updateDispatchVersionRef(version)
-
-    File("$rootDir/README.md")
-      .updateCoroutinesVersionRef("1.5.2")
+      .updateDispatchVersionRef(version, failOnChanges = false)
+      .updateCoroutinesVersionRef()
   }
 }
 
-fun File.updateDispatchVersionRef(version: String) {
+fun File.updateDispatchVersionRef(
+  version: String,
+  failOnChanges: Boolean,
+  updateTaskName: String = ""
+) = apply {
 
-  val group = project.extra.properties["GROUP"] as String
+  val group = GROUP
 
-  val pluginRegex =
-    """^([^'"\n]*['"])$group[^'"]*(['"].*) version (['"])[^'"]*(['"])${'$'}""".toRegex()
   val moduleRegex = """^([^'"\n]*['"])$group:([^:]*):[^'"]*(['"].*)${'$'}""".toRegex()
 
-  val newText = readText()
-    .lines()
+  val oldText = readText()
+
+  val newText = oldText.lines()
     .joinToString("\n") { line ->
-      line
-        .replace(pluginRegex) { matchResult ->
+      line.replace(moduleRegex) { matchResult ->
 
-          val (preId, postId, preVersion, postVersion) = matchResult.destructured
+        val (config, module, suffix) = matchResult.destructured
 
-          "$preId$group$postId version $preVersion$version$postVersion"
-        }
-        .replace(moduleRegex) { matchResult ->
-
-          val (config, module, suffix) = matchResult.destructured
-
-          "$config$group:$module:$version$suffix"
-        }
+        "$config$group:$module:$version$suffix"
+      }
     }
+
+  require(!failOnChanges || oldText == newText) {
+    "Dispatch version references in $path are out of date.  " +
+      "Run `./gradlew $updateTaskName` to update."
+  }
 
   writeText(newText)
 }
 
-fun File.updateCoroutinesVersionRef(version: String) {
+fun File.updateCoroutinesVersionRef() = apply {
+
+  val version = libsCatalog.version("kotlinx-coroutines").requiredVersion
 
   val group = "org.jetbrains.kotlinx"
 
@@ -148,58 +237,13 @@ fun File.updateCoroutinesVersionRef(version: String) {
   writeText(newText)
 }
 
-val startSite by tasks.registering(Exec::class) {
+val yarnInstall by tasks.registering(Exec::class) {
 
-  description = "launches the local development website"
+  description = "runs `yarn install` for the website"
   group = "website"
 
-  dependsOn(
-    versionDocs,
-    updateWebsiteApiDocs,
-    updateWebsiteChangelog,
-    updateWebsiteNextDocsVersionRefs,
-    updateWebsitePackageJsonVersion
-  )
-
   workingDir("./website")
-  commandLine("yarn", "run", "start")
-}
-
-val buildSite by tasks.registering(Exec::class) {
-
-  description = "launches the local development website"
-  group = "website"
-
-  dependsOn(
-    versionDocs,
-    updateWebsiteApiDocs,
-    updateWebsiteChangelog,
-    updateWebsiteNextDocsVersionRefs,
-    updateWebsitePackageJsonVersion
-  )
-
-  workingDir("./website")
-  commandLine("yarn", "run", "build")
-}
-
-val versionDocs by tasks.registering(Exec::class) {
-
-  description =
-    "creates a new version snapshot of website docs, using the current version defined in gradle.properties"
-  group = "website"
-
-  val existingVersions = with(File("./website/versions.json")) {
-    "\"([^\"]*)\"".toRegex()
-      .findAll(readText())
-      .flatMap { it.destructured.toList() }
-  }
-
-  val version = project.extra.properties["VERSION_NAME"] as String
-
-  enabled = version !in existingVersions
-
-  workingDir("./website")
-  commandLine("yarn", "run", "docusaurus", "docs:version", version)
+  commandLine("yarn", "install")
 }
 
 val updateWebsiteApiDocs by tasks.registering(Copy::class) {
@@ -209,17 +253,21 @@ val updateWebsiteApiDocs by tasks.registering(Copy::class) {
 
   doFirst {
     delete(
-      fileTree("./website/static/api")
+      fileTree("$rootDir/website/static/api") {
+        exclude("**/styles/*")
+      }
     )
   }
 
   dependsOn(tasks.findByName("knit"))
 
   from(
-    fileTree("$buildDir/dokka/htmlMultiModule")
+    fileTree("$buildDir/dokka/htmlMultiModule") {
+      exclude("**/styles/*")
+    }
   )
 
-  into("./website/static/api")
+  into("$rootDir/website/static/api")
 }
 
 val updateWebsiteChangelog by tasks.registering(Copy::class) {
@@ -228,12 +276,12 @@ val updateWebsiteChangelog by tasks.registering(Copy::class) {
   group = "website"
 
   from("CHANGELOG.md")
-  into("./website/src/pages")
+  into("$rootDir/website/src/pages")
 
   doLast {
 
     // add one hashmark to each header, because GitHub and Docusaurus render them differently
-    val changelog = File("./website/src/pages/CHANGELOG.md")
+    val changelog = File("$rootDir/website/src/pages/CHANGELOG.md")
 
     val newText = changelog.readText()
       .lines()
@@ -243,7 +291,75 @@ val updateWebsiteChangelog by tasks.registering(Copy::class) {
 
           "$hashes# $text"
         }
+          // relativize all links?
+          .replace("https://rbusarow.github.io/Dispatch", "")
       }
+
+    require(!newText.contains("http://localhost:3000")) {
+      "Don't forget to remove the hard-coded local development site root " +
+        "(`http://localhost:3000`) from the ChangeLog."
+    }
+
     changelog.writeText(newText)
   }
+}
+
+val versionDocs by tasks.registering(Exec::class) {
+
+  description = "creates a new version snapshot of website docs, " +
+    "using the current version defined in gradle.properties"
+  group = "website"
+
+  val existingVersions = with(File("$rootDir/website/versions.json")) {
+    "\"([^\"]*)\"".toRegex()
+      .findAll(readText())
+      .flatMap { it.destructured.toList() }
+  }
+
+  val devVersions = ".*(?:-SNAPSHOT|-LOCAL)".toRegex()
+
+  val version = VERSION_NAME
+
+  enabled = version !in existingVersions && !version.matches(devVersions)
+
+  workingDir("$rootDir/website")
+  commandLine("yarn", "run", "docusaurus", "docs:version", version)
+
+  dependsOn(yarnInstall)
+}
+
+val startSite by tasks.registering(Exec::class) {
+
+  description = "launches the local development website"
+  group = "website"
+
+  dependsOn(
+    yarnInstall,
+    versionDocs,
+    updateWebsiteApiDocs,
+    updateWebsiteChangelog,
+    updateWebsiteNextDocsVersionRefs,
+    updateWebsitePackageJsonVersion
+  )
+
+  workingDir("$rootDir/website")
+  commandLine("yarn", "run", "start")
+}
+
+val buildSite by tasks.registering(Exec::class) {
+
+  description = "builds the website"
+  group = "website"
+
+  dependsOn(
+    yarnInstall,
+    versionDocs,
+    updateWebsiteApiDocs,
+    updateWebsiteChangelog,
+    updateWebsiteNextDocsVersionRefs,
+    updateWebsitePackageJsonVersion
+  )
+
+  workingDir("$rootDir/website")
+  commandLine("yarn", "run", "build")
 }
