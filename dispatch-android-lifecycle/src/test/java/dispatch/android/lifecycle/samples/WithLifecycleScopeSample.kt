@@ -39,7 +39,7 @@ import org.robolectric.annotation.Config
 class WithViewLifecycleScopeSample : LiveDataTest {
 
   @Test
-  fun withViewLifecycleScopeSample() {
+  fun sample() {
 
     class MyFragment @Inject constructor(
       scope: MainImmediateCoroutineScope

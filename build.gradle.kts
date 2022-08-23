@@ -42,7 +42,7 @@ buildscript {
 // https://plugins.jetbrains.com/plugin/18949-gradle-libs-error-suppressor
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-  kotlin("jvm") apply false
+  kotlin("jvm")
   alias(libs.plugins.kotlinx.binaryCompatibility)
   alias(libs.plugins.dependencyAnalysis)
   alias(libs.plugins.benManes)
@@ -70,17 +70,10 @@ allprojects {
   }
 }
 
-@Suppress("DEPRECATION")
 detekt {
 
   parallel = true
   config = files("$rootDir/detekt/detekt-config.yml")
-
-  reports {
-    xml.enabled = false
-    html.enabled = true
-    txt.enabled = false
-  }
 }
 
 dependencies {
@@ -107,6 +100,12 @@ tasks.withType<DetektCreateBaselineTask> {
 }
 
 tasks.withType<Detekt> {
+
+  reports {
+    xml.required.set(true)
+    html.required.set(true)
+    txt.required.set(false)
+  }
 
   setSource(files(rootDir))
 

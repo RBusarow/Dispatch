@@ -26,8 +26,7 @@ import kotlinx.coroutines.Dispatchers
  * [CoroutineContext][kotlin.coroutines.CoroutineContext] which does not have one, it will use a
  * default defined by this object.
  *
- * @sample
- *   dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
+ * @sample dispatch.core.samples.DefaultDispatcherProviderSample.setSample
  */
 public object DefaultDispatcherProvider {
 
@@ -43,8 +42,7 @@ public object DefaultDispatcherProvider {
   /**
    * Atomically sets a default [DispatcherProvider] instance.
    *
-   * @sample
-   *   dispatch.core.samples.DefaultDispatcherProviderSample.defaultDispatcherProviderSetSample
+   * @sample dispatch.core.samples.DefaultDispatcherProviderSample.setSample
    * @see get
    */
   public fun set(value: DispatcherProvider) {
@@ -70,9 +68,9 @@ public object DefaultDispatcherProvider {
    * @see DispatcherProvider
    */
   @Deprecated(
-    message = "The DefaultDispatcherProvider class has been replaced with this singleton object.  " +
-      "To create a DispatcherProvider with the default implementation," +
-      " use the DispatcherProvider companion object factory.  " +
+    message = "The DefaultDispatcherProvider class has been replaced with this singleton " +
+      "object.  To create a DispatcherProvider with the default implementation, use the " +
+      "DispatcherProvider companion object factory.  " +
       "This function will be removed before the 1.0 release.",
     replaceWith = ReplaceWith("DispatcherProvider()"),
     level = DeprecationLevel.HIDDEN

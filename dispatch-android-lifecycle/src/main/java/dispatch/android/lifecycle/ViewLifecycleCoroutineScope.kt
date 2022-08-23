@@ -69,14 +69,14 @@ class ViewLifecycleCoroutineScope internal constructor(
 }
 
 /**
- * [CoroutineScope] helper for a [Fragment]'s [ViewLifecycleOwner][FragmentViewLifecycleOwner].
+ * [CoroutineScope] helper for a [Fragment]'s
+ * [ViewLifecycleOwner][androidx.fragment.app.FragmentViewLifecycleOwner].
  *
  * This function observes a `Fragment`'s
- * [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData], and
- * invokes [block].
+ * [viewLifecycleOwnerLiveData][androidx.fragment.app.Fragment.getViewLifecycleOwnerLiveData],
+ * and invokes [block].
  *
- * @sample
- *   dispatch.android.lifecycle.samples.WithViewLifecycleScopeSample.withViewLifecycleScopeSample
+ * @sample dispatch.android.lifecycle.samples.WithViewLifecycleScopeSample.sample
  */
 @ExperimentalCoroutinesApi
 fun CoroutineScope.withViewLifecycle(

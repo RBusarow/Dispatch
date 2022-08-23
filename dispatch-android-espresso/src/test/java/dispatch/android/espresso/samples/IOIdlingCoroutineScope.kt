@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,7 +14,7 @@
  */
 package dispatch.android.espresso.samples
 
-import dispatch.android.espresso.MainIdlingCoroutineScope
+import dispatch.android.espresso.IOIdlingCoroutineScope
 import dispatch.android.espresso.registerAllIdlingResources
 import dispatch.internal.test.Sample
 import kotlinx.coroutines.Job
@@ -22,20 +22,20 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class MainIdlingCoroutineScopeSample {
+class IOIdlingCoroutineScope {
 
   @Sample
-  fun createNoArgMainIdlingCoroutineScope() {
+  fun createNoArgIO() {
 
-    val scope = MainIdlingCoroutineScope()
+    val scope = IOIdlingCoroutineScope()
 
     scope.idlingDispatcherProvider.registerAllIdlingResources()
   }
 
   @Sample
-  fun createCustomMainIdlingCoroutineScope() {
+  fun createCustomIO() {
 
-    val scope = MainIdlingCoroutineScope(
+    val scope = IOIdlingCoroutineScope(
       job = Job(),
       dispatcherProvider = SomeCustomIdlingDispatcherProvider()
     )

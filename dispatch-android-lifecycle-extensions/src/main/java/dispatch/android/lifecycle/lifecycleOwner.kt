@@ -33,8 +33,7 @@ import kotlinx.coroutines.CoroutineScope
  * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to
  * [Lifecycle.State.DESTROYED].
  *
- * @sample
- *   dispatch.android.lifecycle.samples.LifecycleScopeExtensionSamples.lifecycleScopeExtensionSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeExtensionSamples.sample
  */
 @Deprecated(
   "Use dispatchLifecycleScope to avoid collisions with the Androidx library",
@@ -56,8 +55,7 @@ val LifecycleOwner.lifecycleScope: DispatchLifecycleScope
  * [lifecycle][LifecycleOwner.getLifecycle]'s [Lifecycle.State] drops to
  * [Lifecycle.State.DESTROYED].
  *
- * @sample
- *   dispatch.android.lifecycle.samples.LifecycleScopeExtensionSamples.lifecycleScopeExtensionSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeExtensionSamples.sample
  */
 val LifecycleOwner.dispatchLifecycleScope: DispatchLifecycleScope
   get() = DispatchLifecycleScopeStore.get(this.lifecycle)

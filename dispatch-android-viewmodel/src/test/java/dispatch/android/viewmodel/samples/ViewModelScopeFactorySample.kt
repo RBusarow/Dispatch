@@ -25,7 +25,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class ViewModelScopeFactorySample {
 
   @Sample
-  fun setViewModelScopeFactoryProductionSample() {
+  fun productionSample() {
 
     class MyApplication : Application {
 
@@ -36,7 +36,7 @@ class ViewModelScopeFactorySample {
   }
 
   @Sample
-  fun setViewModelScopeFactoryEspressoSample() {
+  fun espressoSample() {
 
     class MyEspressoTest {
 
@@ -48,7 +48,7 @@ class ViewModelScopeFactorySample {
   }
 
   @Sample
-  fun viewModelScopeFactoryResetSample() {
+  fun resetSample() {
 
     class MyEspressoTest {
 
@@ -65,7 +65,7 @@ class ViewModelScopeFactorySample {
   }
 
   @Sample
-  fun setViewModelScopeFactoryJvmSample() {
+  fun jvmSample() {
 
     class MyJvmTest {
 

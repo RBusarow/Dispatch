@@ -33,7 +33,7 @@ import org.robolectric.annotation.Config
 class WithViewLifecycleScopeExtensionSample {
 
   @Test
-  fun withViewLifecycleScopeSample() {
+  fun sample() {
 
     class MyViewModel {
 

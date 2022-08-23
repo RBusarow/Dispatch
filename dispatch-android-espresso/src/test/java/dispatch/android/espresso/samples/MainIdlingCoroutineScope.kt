@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,11 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package dispatch.android.espresso.samples
 
-import dispatch.android.espresso.IdlingCoroutineScope
-import dispatch.android.espresso.IdlingDispatcherProvider
+import dispatch.android.espresso.MainIdlingCoroutineScope
 import dispatch.android.espresso.registerAllIdlingResources
 import dispatch.internal.test.Sample
 import kotlinx.coroutines.Job
@@ -24,20 +22,20 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class IdlingCoroutineScopeSample {
+class MainIdlingCoroutineScope {
 
   @Sample
-  fun createNoArgIdlingCoroutineScope() {
+  fun createNoArgMain() {
 
-    val scope = IdlingCoroutineScope()
+    val scope = MainIdlingCoroutineScope()
 
     scope.idlingDispatcherProvider.registerAllIdlingResources()
   }
 
   @Sample
-  fun createCustomIdlingCoroutineScope() {
+  fun createCustomMain() {
 
-    val scope = IdlingCoroutineScope(
+    val scope = MainIdlingCoroutineScope(
       job = Job(),
       dispatcherProvider = SomeCustomIdlingDispatcherProvider()
     )
@@ -45,11 +43,3 @@ class IdlingCoroutineScopeSample {
     scope.idlingDispatcherProvider.registerAllIdlingResources()
   }
 }
-
-fun SomeCustomIdlingDispatcherProvider() = IdlingDispatcherProvider()
-
-class TestAppComponent {
-  val customDispatcherProvider = IdlingDispatcherProvider()
-}
-
-val testAppComponent get() = TestAppComponent()

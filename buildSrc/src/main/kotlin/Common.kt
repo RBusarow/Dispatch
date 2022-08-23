@@ -13,12 +13,15 @@
  * limitations under the License.
  */
 
-import org.gradle.api.*
-import org.gradle.api.tasks.testing.*
-import org.gradle.kotlin.dsl.*
-import org.jetbrains.kotlin.gradle.tasks.*
+import org.gradle.api.Project
+import org.gradle.api.tasks.testing.Test
+import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun Project.common() {
+
+  apply(plugin = "dokka")
 
   // check for runtime classpath changes in any published modul/artifact
   pluginManager.withPlugin("com.vanniktech.maven.publish") {
