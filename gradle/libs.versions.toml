@@ -272,7 +272,7 @@ mockk = "io.mockk:mockk:1.12.5"
 
 objenesis = "org.objenesis:objenesis:3.3"
 
-robolectric = "org.robolectric:robolectric:4.8.1"
+robolectric = "org.robolectric:robolectric:4.8.2"
 
 scabbard = "gradle.plugin.dev.arunkumar:scabbard-gradle-plugin:0.5.0"
 
