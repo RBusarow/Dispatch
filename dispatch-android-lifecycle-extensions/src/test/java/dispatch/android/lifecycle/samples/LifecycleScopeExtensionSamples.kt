@@ -22,7 +22,7 @@ import dispatch.internal.test.Sample
 class LifecycleScopeExtensionSamples {
 
   @Sample
-  fun lifecycleScopeExtensionSample() {
+  fun sample() {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {

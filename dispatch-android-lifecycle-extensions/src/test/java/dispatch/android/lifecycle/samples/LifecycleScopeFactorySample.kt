@@ -29,7 +29,7 @@ import kotlinx.coroutines.SupervisorJob
 class LifecycleScopeFactorySample {
 
   @Sample
-  fun setLifecycleScopeFactoryProductionSample() {
+  fun productionSample() {
 
     class MyApplication : Application {
 
@@ -41,7 +41,7 @@ class LifecycleScopeFactorySample {
   }
 
   @Sample
-  fun setLifecycleScopeFactoryEspressoSample() {
+  fun espressoSample() {
 
     class MyEspressoTest {
 
@@ -50,13 +50,15 @@ class LifecycleScopeFactorySample {
 
         val dispatcherProvider = IdlingDispatcherProvider()
 
-        LifecycleScopeFactory.set { SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate }
+        LifecycleScopeFactory.set {
+          SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
+        }
       }
     }
   }
 
   @Sample
-  fun LifecycleScopeFactoryResetSample() {
+  fun resetSample() {
 
     class MyEspressoTest {
 
@@ -65,7 +67,9 @@ class LifecycleScopeFactorySample {
 
         val dispatcherProvider = DispatcherProvider()
 
-        LifecycleScopeFactory.set { SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate }
+        LifecycleScopeFactory.set {
+          SupervisorJob() + dispatcherProvider + dispatcherProvider.mainImmediate
+        }
       }
 
       @After

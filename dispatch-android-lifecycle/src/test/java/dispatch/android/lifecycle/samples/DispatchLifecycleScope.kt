@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,10 +34,10 @@ import kotlinx.coroutines.runBlocking
 
 @CoroutineTest
 @ExperimentalCoroutinesApi
-class DispatchLifecycleScopeSample : LiveDataTest {
+class DispatchLifecycleScope : LiveDataTest {
 
   @Sample
-  fun lifecycleCoroutineScopeFromScopeSample() = runBlocking {
+  fun scopeFromScope() = runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment @Inject constructor(
@@ -68,7 +68,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun lifecycleCoroutineScopeFromContextSample() = runBlocking {
+  fun scopeFromContext() = runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {
@@ -99,7 +99,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun lifecycleCoroutineScopeDefaultSample() = runBlocking {
+  fun defaultSample() = runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {
@@ -128,7 +128,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun launchOnCreateOnceSample() = runBlocking {
+  fun launchOnCreateOnce() = runBlocking {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -178,7 +178,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun launchOnCreateRestartingSample() = runBlocking {
+  fun onCreateRestarting() = runBlocking {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -228,7 +228,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun launchOnStartOnceSample() = runBlocking {
+  fun launchOnStartOnce() = runBlocking {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -279,7 +279,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun launchOnStartRestartingSample() = runBlocking {
+  fun launchOnStartRestarting() = runBlocking {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -344,7 +344,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun launchOnResumeOnceSample() = runBlocking {
+  fun launchOnResumeOnce() = runBlocking {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -395,7 +395,7 @@ class DispatchLifecycleScopeSample : LiveDataTest {
   }
 
   @Sample
-  fun launchOnResumeRestartingSample() = runBlocking {
+  fun launchOnResumeRestarting() = runBlocking {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()

@@ -38,10 +38,8 @@ import kotlin.coroutines.CoroutineContext
  *
  * [reset] may be used to reset the factory to default at any time.
  *
- * @sample
- *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
- * @sample
- *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.productionSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.espressoSample
  * @see MainImmediateContext
  * @see DispatchLifecycleScope
  * @see DispatchLifecycleScopeFactory
@@ -59,8 +57,7 @@ object LifecycleScopeFactory {
   /**
    * Immediately resets the factory function to its default.
    *
-   * @sample
-   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.LifecycleScopeFactoryResetSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.resetSample
    */
   @Suppress("UNUSED")
   public fun reset() {
@@ -75,15 +72,13 @@ object LifecycleScopeFactory {
    *    added.
    * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
-   *    the one referenced by the [possibly new]
-   *    [DispatcherProvider.mainImmediate] property, it will be updated to match.
+   *    the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it
+   *    will be updated to match.
    *
    * @param factory sets a custom [CoroutineContext] factory to be used for all new instance
-   *   creations until reset. Its [Elements][CoroutineContext.Element] will be re-used, except:
-   * @sample
-   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
-   * @sample
-   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+   *     creations until reset. Its [Elements][CoroutineContext.Element] will be re-used, except:
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.productionSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.espressoSample
    */
   @Suppress("UNUSED")
   public fun set(factory: DispatchLifecycleScopeFactory) {
@@ -98,15 +93,13 @@ object LifecycleScopeFactory {
    *    added.
    * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
    * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
-   *    the one referenced by the [possibly new]
-   *    [DispatcherProvider.mainImmediate] property, it will be updated to match.
+   *    the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it
+   *    will be updated to match.
    *
    * @param factory sets a custom [CoroutineContext] factory to be used for all new instance
-   *   creations until reset. Its [Elements][CoroutineContext.Element] will be re-used, except:
-   * @sample
-   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryProductionSample
-   * @sample
-   *   dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.setLifecycleScopeFactoryEspressoSample
+   *     creations until reset. Its [Elements][CoroutineContext.Element] will be re-used, except:
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.productionSample
+   * @sample dispatch.android.lifecycle.samples.LifecycleScopeFactorySample.espressoSample
    */
   @Suppress("UNUSED")
   public fun set(factory: () -> CoroutineContext) {

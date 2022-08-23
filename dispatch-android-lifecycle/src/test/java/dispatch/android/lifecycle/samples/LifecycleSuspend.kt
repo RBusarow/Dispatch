@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,11 @@
 
 package dispatch.android.lifecycle.samples
 
-import dispatch.android.lifecycle.*
+import dispatch.android.lifecycle.LifecycleScopeFactory
+import dispatch.android.lifecycle.dispatchLifecycleScope
+import dispatch.android.lifecycle.onNextCreate
+import dispatch.android.lifecycle.onNextResume
+import dispatch.android.lifecycle.onNextStart
 import dispatch.core.launchMainImmediate
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.CoroutineTest
@@ -28,7 +32,7 @@ import org.junit.jupiter.api.Test
 
 @CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleSuspendSample(
+class LifecycleSuspend(
   val testScope: TestProvidedCoroutineScope
 ) : LiveDataTest {
 
@@ -38,7 +42,7 @@ class LifecycleSuspendSample(
   }
 
   @Test
-  fun lifecycleOwnerOnNextCreateSample() = runBlocking {
+  fun lifecycleOwnerOnNextCreate() = runBlocking {
 
     class SomeFragment : Fragment() {
 

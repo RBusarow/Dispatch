@@ -37,12 +37,12 @@ gradleEnterprise {
   buildScan {
     termsOfServiceUrl = "https://gradle.com/terms-of-service"
     termsOfServiceAgree = "yes"
-    publishAlwaysIf(System.getenv("GITHUB_ACTIONS")?.toBoolean() == true)
+    publishAlways()
   }
 }
 
 rootProject.name = "Dispatch"
-enableFeaturePreview("VERSION_CATALOGS")
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":dispatch-android-espresso")

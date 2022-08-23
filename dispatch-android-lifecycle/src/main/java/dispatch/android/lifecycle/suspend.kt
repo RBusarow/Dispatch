@@ -32,8 +32,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
  *   coroutine.
  * @param block the action to be performed
- * @sample
- *   dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextCreateSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOwnerOnNextCreate
  * @see [DispatchLifecycleScope.launchOnCreate] for repeating behavior.
  */
 suspend fun <T> LifecycleOwner.onNextCreate(
@@ -51,7 +50,7 @@ suspend fun <T> LifecycleOwner.onNextCreate(
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
  *   coroutine.
  * @param block the action to be performed
- * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextCreateSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOnNextCreateSample
  * @see [DispatchLifecycleScope.launchOnCreate]
  */
 suspend fun <T> Lifecycle.onNextCreate(
@@ -69,8 +68,7 @@ suspend fun <T> Lifecycle.onNextCreate(
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
  *   coroutine.
  * @param block the action to be performed
- * @sample
- *   dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextStartSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOwnerOnNextStartSample
  * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
  */
 suspend fun <T> LifecycleOwner.onNextStart(
@@ -88,7 +86,7 @@ suspend fun <T> LifecycleOwner.onNextStart(
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
  *   coroutine.
  * @param block the action to be performed
- * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextStartSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOnNextStartSample
  * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
  */
 suspend fun <T> Lifecycle.onNextStart(
@@ -106,8 +104,7 @@ suspend fun <T> Lifecycle.onNextStart(
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
  *   coroutine.
  * @param block the action to be performed
- * @sample
- *   dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOwnerOnNextResumeSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOwnerOnNextResumeSample
  * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
  */
 suspend fun <T> LifecycleOwner.onNextResume(
@@ -125,7 +122,7 @@ suspend fun <T> LifecycleOwner.onNextResume(
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
  *   coroutine.
  * @param block the action to be performed
- * @sample dispatch.android.lifecycle.samples.LifecycleSuspendSample.lifecycleOnNextResumeSample
+ * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOnNextResumeSample
  * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
  */
 suspend fun <T> Lifecycle.onNextResume(
