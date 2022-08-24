@@ -7,6 +7,10 @@ on:
     # * is a special character in YAML so you have to quote this string
     # every day at 10pm CST (4 UTC)
     - cron: '0 4 * * *'
+env:
+  macosGradleArgs: '-Dorg.gradle.jvmargs=-Xmx10g -Dfile.encoding=UTF-8 -XX:+UseParallelGC'
+  ubuntuGradleArgs: '-Dorg.gradle.jvmargs=-Xmx5g -Dfile.encoding=UTF-8 -XX:+UseParallelGC'
+  windowsGradleArgs: '-Dorg.gradle.jvmargs=-Xmx3500m -Dfile.encoding=UTF-8 -XX:+UseParallelGC'
 
 jobs:
 
@@ -232,7 +236,6 @@ jobs:
   dependency-guard:
 
     runs-on: ubuntu-latest
-    if: github.actor != 'renovate[bot]'
 
     steps:
       - uses: actions/checkout@v3
@@ -253,9 +256,10 @@ jobs:
           arguments: dependencyGuard
           cache-read-only: false
 
+
   website:
     name: build website
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
 
       - name: Check out repo
@@ -271,8 +275,7 @@ jobs:
 
       - name: Install Yarn
         working-directory: website
-        run: |
-          yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - uses: gradle/wrapper-validation-action@v1
 
@@ -282,10 +285,22 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
 
-      - name: build website
+      - name: compileKotlin
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: buildSite
+          arguments: compileKotlin "${{ env.macosGradleArgs }}"
+          cache-read-only: false
+
+      - name: dokkaHtmlMultiModule
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: dokkaHtmlMultiModule "${{ env.macosGradleArgs }}"
+          cache-read-only: false
+
+      - name: buildSite
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: buildSite "${{ env.macosGradleArgs }}"
           cache-read-only: false
 
       - name: knit check
@@ -295,8 +310,7 @@ jobs:
           cache-read-only: false
 
   tests:
-
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -314,7 +328,7 @@ jobs:
       - name: all tests
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: testJvm
+          arguments: testJvm "${{ env.macosGradleArgs }}"
           cache-read-only: false
 
       - name: Archive test results
