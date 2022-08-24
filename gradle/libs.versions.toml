@@ -36,7 +36,7 @@ androidx-work-version = "2.7.1"
 
 kotlinx-atomicfu = "0.18.3"
 kotlinx-binaryCompatibility = "0.11.0"
-kotlinx-coroutines = "1.5.2"
+kotlinx-coroutines = "1.6.4"
 kotlinx-knit = "0.4.0"
 kotlinx-metadata = "0.5.0"
 

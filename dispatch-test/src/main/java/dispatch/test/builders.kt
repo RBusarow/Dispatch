@@ -17,6 +17,7 @@ package dispatch.test
 
 import dispatch.core.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -37,13 +38,14 @@ import kotlin.coroutines.EmptyCoroutineContext
  * created using the [kotlinx.coroutines.BlockingEventLoop] interceptor.
  *
  * @param context The base `CoroutineContext` which will be modified to use a
- *     [TestCoroutineDispatcher] and [TestDispatcherProvider]. [EmptyCoroutineContext] is used if
+ *     [TestDispatcherProvider]. [EmptyCoroutineContext] is used if
  *     one is not provided.
  * @param block the action to be performed
  * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  * @see runBlocking
  * @see testProvided
  */
+@DelicateCoroutinesApi
 @ExperimentalCoroutinesApi
 public fun runBlockingProvided(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -53,7 +55,7 @@ public fun runBlockingProvided(
   val existingDispatcherProvider = context[DispatcherProvider]
 
   val newContext = if (existingDispatcherProvider == null) {
-    coroutineContext + TestBasicDispatcherProvider()
+    coroutineContext + TestDispatcherProvider()
   } else coroutineContext
 
   CoroutineScope(newContext).block()
@@ -77,6 +79,7 @@ public fun runBlockingProvided(
  * @see runBlockingTest
  * @see runBlockingProvided
  */
+@Deprecated("Deprecated since TestCoroutineDispatcher and runBlockingTest are deprecated.")
 @ExperimentalCoroutinesApi
 public fun testProvided(
   context: CoroutineContext = EmptyCoroutineContext,
@@ -116,6 +119,7 @@ public fun testProvided(
  * @see runBlockingTest
  * @see runBlockingProvided
  */
+@Deprecated("Deprecated since TestCoroutineDispatcher and runBlockingTest are deprecated.")
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope.testProvided(
   testBody: suspend TestProvidedCoroutineScope.() -> Unit

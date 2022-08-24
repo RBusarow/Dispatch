@@ -19,8 +19,8 @@ package dispatch.internal.test
 
 import dispatch.core.DispatcherProvider
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExecutorCoroutineDispatcher
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
 import org.junit.Test
 import java.io.PrintStream
@@ -41,10 +41,10 @@ public fun Any?.shouldPrint(vararg expected: String) {
 public fun dispatcherName(): String = " @coroutine.*".toRegex()
   .replace(Thread.currentThread().name, "")
 
-@OptIn(ObsoleteCoroutinesApi::class)
+@OptIn(DelicateCoroutinesApi::class)
 public val blocking: ExecutorCoroutineDispatcher = newSingleThreadContext("runBlocking thread")
 
-@OptIn(ObsoleteCoroutinesApi::class)
+@OptIn(DelicateCoroutinesApi::class)
 public val someDispatcherProvider: CoroutineContext = object : DispatcherProvider {
   override val default = newSingleThreadContext("default")
   override val io = newSingleThreadContext("io")
