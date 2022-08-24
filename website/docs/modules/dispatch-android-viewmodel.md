@@ -187,7 +187,7 @@ dependencies {
 
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
-  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta10")
+  implementation("com.rickbusarow.dispatch:dispatch-android-viewmodel:1.0.0-beta10-SNAPSHOT")
 }
 ```
 
