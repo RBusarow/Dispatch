@@ -44,4 +44,5 @@ dependencies {
   implementation(libs.kotlinx.knit.gradle)
   implementation(libs.kotlinx.metadata.jvm)
   implementation(libs.ktlint.gradle)
+  implementation(libs.vanniktech.publish)
 }

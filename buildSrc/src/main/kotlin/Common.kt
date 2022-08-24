@@ -21,13 +21,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun Project.common() {
 
-  apply(plugin = "dokka")
-
-  // check for runtime classpath changes in any published modul/artifact
-  pluginManager.withPlugin("com.vanniktech.maven.publish") {
-    apply(plugin = "dependency-guard")
-  }
-
   tasks.withType<Test> {
 
     useJUnitPlatform {
