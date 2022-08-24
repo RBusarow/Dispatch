@@ -1,6 +1,6 @@
 {
   "name": "dispatch",
-  "version": "1.0.0-beta10",
+  "version": "1.0.0-beta10-SNAPSHOT",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",

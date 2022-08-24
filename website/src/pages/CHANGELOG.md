@@ -146,31 +146,31 @@
 * Maven artifacts.
 * Lower JDK version to 1.6
 
-[DefaultDispatcherProvider]: https://rbusarow.github.io/Dispatch/api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
+[DefaultDispatcherProvider]: /api/dispatch-core/dispatch.core/-default-dispatcher-provider/index.html
 
-[testProvided]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/test-provided.html
+[testProvided]: /api/dispatch-test/dispatch.test/test-provided.html
 
-[TestProvidedCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
+[TestProvidedCoroutineScope]: /api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html
 
-[CoroutineTestExtension]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html
+[CoroutineTestExtension]: /api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html
 
-[CoroutineTestExtension.scope]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html#dispatch.test/CoroutineTestExtension/scope/#/PointingToDeclaration/
+[CoroutineTestExtension.scope]: /api/dispatch-test-junit5/dispatch.test/-coroutine-test-extension/index.html#dispatch.test/CoroutineTestExtension/scope/#/PointingToDeclaration/
 
-[ViewLifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/index.html
+[ViewLifecycleCoroutineScope]: /api/dispatch-android-lifecycle/dispatch.android.lifecycle/-view-lifecycle-coroutine-scope/index.html
 
-[DispatchLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
+[DispatchLifecycleScope]: /api/dispatch-android-lifecycle/dispatch.android.lifecycle/-dispatch-lifecycle-scope/index.html
 
-[LifecycleCoroutineScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleCoroutineScope//PointingToDeclaration/
+[LifecycleCoroutineScope]: /api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/LifecycleCoroutineScope//PointingToDeclaration/
 
-[withViewLifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/with-view-lifecycle-scope.html
+[withViewLifecycleScope]: /api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/with-view-lifecycle-scope.html
 
-[lifecycleScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
+[lifecycleScope]: /api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html#dispatch.android.lifecycle/lifecycleScope/androidx.lifecycle.LifecycleOwner#/PointingToDeclaration/
 
-[CoroutineViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
+[CoroutineViewModel]: /api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html#dispatch.android.viewmodel/CoroutineViewModel//PointingToDeclaration/
 
-[DispatchViewModel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html
+[DispatchViewModel]: /api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html
 
-[viewModelScope]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html#dispatch.android.viewmodel/DispatchViewModel/viewModelScope/#/PointingToDeclaration/
+[viewModelScope]: /api/dispatch-android-viewmodel/dispatch.android.viewmodel/-dispatch-view-model/index.html#dispatch.android.viewmodel/DispatchViewModel/viewModelScope/#/PointingToDeclaration/
 
 [Fragment]: https://developer.android.com/reference/androidx/fragment/app/Fragment
 
@@ -180,21 +180,21 @@
 
 [Detekt]: https://github.com/detekt/detekt
 
-[dispatch-android-espresso]: https://rbusarow.github.io/Dispatch/api/dispatch-android-espresso/dispatch.android.espresso/index.html
+[dispatch-android-espresso]: /api/dispatch-android-espresso/dispatch.android.espresso/index.html
 
-[dispatch-android-lifecycle-extensions]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html
+[dispatch-android-lifecycle-extensions]: /api/dispatch-android-lifecycle-extensions/dispatch.android.lifecycle/index.html
 
-[dispatch-android-lifecycle]: https://rbusarow.github.io/Dispatch/api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html
+[dispatch-android-lifecycle]: /api/dispatch-android-lifecycle/dispatch.android.lifecycle/index.html
 
-[dispatch-android-viewmodel]: https://rbusarow.github.io/Dispatch/api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html
+[dispatch-android-viewmodel]: /api/dispatch-android-viewmodel/dispatch.android.viewmodel/index.html
 
-[dispatch-detekt]: https://rbusarow.github.io/Dispatch/api/dispatch-detekt/dispatch.detekt/index.html
+[dispatch-detekt]: /api/dispatch-detekt/dispatch.detekt.rules/index.html
 
-[dispatch-test]: https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html
+[dispatch-test]: /api/dispatch-test/dispatch.test/index.html
 
-[dispatch-test-junit4]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/index.html
+[dispatch-test-junit4]: /api/dispatch-test-junit4/dispatch.test/index.html
 
-[dispatch-test-junit5]: https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/index.html
+[dispatch-test-junit5]: /api/dispatch-test-junit4/dispatch.test/index.html
 
 [IdlingResource]: https://developer.android.com/training/testing/espresso/idling-resource
 
