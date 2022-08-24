@@ -24,6 +24,7 @@ import dispatch.core.dispatcherProvider
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -31,7 +32,7 @@ import org.junit.jupiter.api.Test
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeTest {
 
-  val dispatcher = TestCoroutineDispatcher()
+  val dispatcher = StandardTestDispatcher()
   val provider = TestDispatcherProvider(dispatcher)
 
   @Nested
@@ -106,6 +107,8 @@ internal class TestProvidedCoroutineScopeTest {
 
     @Test
     fun `dispatcher arg should be used to create default DispatcherProvider`() {
+
+      val dispatcher = TestCoroutineDispatcher()
 
       val scope = TestProvidedCoroutineScope(dispatcher = dispatcher)
 

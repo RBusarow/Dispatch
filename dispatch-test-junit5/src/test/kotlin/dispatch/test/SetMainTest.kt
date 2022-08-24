@@ -15,9 +15,11 @@
 
 package dispatch.test
 
+import dispatch.core.dispatcherProvider
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -42,7 +44,7 @@ class SetMainTest {
 
   @Test
   fun `function injected scope's dispatcher should be set as Main by default`(
-    scope: TestProvidedCoroutineScope
+    scope: TestScope
   ) {
 
     val beforeSet = Dispatchers.Main
@@ -54,7 +56,7 @@ class SetMainTest {
 
   @Nested
   inner class `constructor injection`(
-    val scope: TestProvidedCoroutineScope
+    val scope: TestScope
   ) {
 
     @Test

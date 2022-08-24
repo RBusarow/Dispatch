@@ -16,11 +16,10 @@
 package dispatch.core
 
 import dispatch.internal.test.shouldEqualFolded
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.CoroutineContext
@@ -28,13 +27,13 @@ import kotlin.coroutines.CoroutineContext
 @ExperimentalCoroutinesApi
 internal class AsyncBuildersTest {
 
-  val testProvider = object : DispatcherProvider {
-    override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
-  }
+  val testProvider = DispatcherProvider(
+    default = UnconfinedTestDispatcher(),
+    io = UnconfinedTestDispatcher(),
+    main = UnconfinedTestDispatcher(),
+    mainImmediate = UnconfinedTestDispatcher(),
+    unconfined = UnconfinedTestDispatcher()
+  )
 
   @Nested
   inner class `async default` {

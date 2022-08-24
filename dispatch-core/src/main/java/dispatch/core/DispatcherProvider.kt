@@ -68,8 +68,8 @@ public interface DispatcherProvider : CoroutineContext.Element {
    * [CoroutineDispatcher] which is confined to the "main" thread with immediate dispatch.
    *
    * Corresponds to the
-   * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate] property in
-   * a default implementation.
+   * [Dispatchers.Main.immediate][kotlinx.coroutines.MainCoroutineDispatcher.immediate]
+   * property in a default implementation.
    *
    * @see MainCoroutineDispatcher.immediate
    */
@@ -83,6 +83,20 @@ public interface DispatcherProvider : CoroutineContext.Element {
    * @see Dispatchers.Unconfined
    */
   public val unconfined: CoroutineDispatcher get() = Dispatchers.Unconfined
+
+  public fun copy(
+    default: CoroutineDispatcher = this.default,
+    io: CoroutineDispatcher = this.io,
+    main: CoroutineDispatcher = this.main,
+    mainImmediate: CoroutineDispatcher = this.mainImmediate,
+    unconfined: CoroutineDispatcher = this.unconfined
+  ): DispatcherProvider = DispatcherProvider(
+    default = default,
+    io = io,
+    main = main,
+    mainImmediate = mainImmediate,
+    unconfined = unconfined
+  )
 
   /**
    * Unique [Key] definition which allows the `DispatcherProvider` to be stored in the
@@ -100,3 +114,25 @@ public interface DispatcherProvider : CoroutineContext.Element {
  * @see DefaultDispatcherProvider
  */
 public fun DispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider.get()
+
+/**
+ * Default implementation of [DispatcherProvider] which simply delegates to the corresponding
+ * properties in the [Dispatchers] singleton.
+ *
+ * This should be suitable for most production code.
+ *
+ * @see DefaultDispatcherProvider
+ */
+public fun DispatcherProvider(
+  default: CoroutineDispatcher,
+  io: CoroutineDispatcher,
+  main: CoroutineDispatcher,
+  mainImmediate: CoroutineDispatcher,
+  unconfined: CoroutineDispatcher
+): DispatcherProvider = object : DispatcherProvider {
+  override val default: CoroutineDispatcher = default
+  override val io: CoroutineDispatcher = io
+  override val main: CoroutineDispatcher = main
+  override val mainImmediate: CoroutineDispatcher = mainImmediate
+  override val unconfined: CoroutineDispatcher = unconfined
+}

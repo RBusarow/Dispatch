@@ -34,5 +34,6 @@ dependencies {
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.mockk)
 
+  testImplementation(projects.dispatchTest)
   testImplementation(projects.dispatchInternalTest)
 }

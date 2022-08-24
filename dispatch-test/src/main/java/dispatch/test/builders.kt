@@ -16,13 +16,18 @@
 package dispatch.test
 
 import dispatch.core.DispatcherProvider
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -55,7 +60,7 @@ public fun runBlockingProvided(
   val existingDispatcherProvider = context[DispatcherProvider]
 
   val newContext = if (existingDispatcherProvider == null) {
-    coroutineContext + TestDispatcherProvider()
+    coroutineContext + DispatcherProvider()
   } else coroutineContext
 
   CoroutineScope(newContext).block()
@@ -83,25 +88,27 @@ public fun runBlockingProvided(
 @ExperimentalCoroutinesApi
 public fun testProvided(
   context: CoroutineContext = EmptyCoroutineContext,
-  testBody: suspend TestProvidedCoroutineScope.() -> Unit
+  testBody: suspend TestScope.() -> Unit
 ) {
 
-  val dispatcher = (context[ContinuationInterceptor] as? TestCoroutineDispatcher)
-    ?: TestCoroutineDispatcher()
+  val existingDispatcher = context[ContinuationInterceptor]
+
+  val dispatcher = existingDispatcher as? CoroutineDispatcher
+    ?: StandardTestDispatcher()
 
   val dispatcherProvider = context[DispatcherProvider]
-    ?: TestDispatcherProvider(dispatcher)
+    ?: TestDispatcherProvider(
+      dispatcher as? TestDispatcher ?: StandardTestDispatcher()
+      // default = dispatcher,
+      // io = dispatcher,
+      // main = dispatcher,
+      // mainImmediate = dispatcher,
+      // unconfined = dispatcher
+    )
 
   val combinedContext = context + dispatcher + dispatcherProvider
 
-  return runBlockingTest(context = combinedContext) {
-
-    val providedScope = TestProvidedCoroutineScopeImpl(
-      dispatcherProvider = dispatcherProvider,
-      context = combinedContext + coroutineContext
-    )
-    testBody.invoke(providedScope)
-  }
+  return runTest(context = combinedContext, testBody = testBody)
 }
 
 /**
@@ -122,5 +129,5 @@ public fun testProvided(
 @Deprecated("Deprecated since TestCoroutineDispatcher and runBlockingTest are deprecated.")
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope.testProvided(
-  testBody: suspend TestProvidedCoroutineScope.() -> Unit
+  testBody: suspend TestScope.() -> Unit
 ): Unit = testProvided(coroutineContext, testBody)

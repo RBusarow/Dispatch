@@ -24,8 +24,10 @@ import dispatch.core.UnconfinedCoroutineScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestDispatcher
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -70,7 +72,26 @@ internal class TestProvidedCoroutineScopeImpl(
  */
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope(
-  dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher(),
+  dispatcher: TestCoroutineDispatcher,
+  dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
+  context: CoroutineContext = EmptyCoroutineContext
+): TestProvidedCoroutineScope = TestProvidedCoroutineScopeImpl(
+  dispatcherProvider = dispatcherProvider,
+  context = context + dispatcher
+)
+
+/**
+ * Creates a [TestProvidedCoroutineScope] implementation with optional parameters of
+ * [TestCoroutineDispatcher], [TestDispatcherProvider], and a generic [CoroutineContext].
+ *
+ * The resultant `TestProvidedCoroutineScope` will utilize a single `TestCoroutineDispatcher`
+ * for all the [CoroutineDispatcher] properties of its [DispatcherProvider], and the
+ * [ContinuationInterceptor] Key of the `CoroutineContext` will also return that
+ * `TestCoroutineDispatcher`.
+ */
+@ExperimentalCoroutinesApi
+public fun TestProvidedCoroutineScope(
+  dispatcher: TestDispatcher = StandardTestDispatcher(),
   dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
   context: CoroutineContext = EmptyCoroutineContext
 ): TestProvidedCoroutineScope = TestProvidedCoroutineScopeImpl(

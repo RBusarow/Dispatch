@@ -46,7 +46,7 @@ class RegisterSample {
 
       val resultDeferred = subject.someFunction()
 
-      scope.advanceUntilIdle()
+      scope.testScheduler.advanceUntilIdle()
 
       resultDeferred.await() shouldBe someValue
     }

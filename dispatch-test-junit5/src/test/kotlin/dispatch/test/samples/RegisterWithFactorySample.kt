@@ -17,12 +17,12 @@
 
 package dispatch.test.samples
 
-import dispatch.test.TestProvidedCoroutineScope
 import dispatch.test.coroutineTestExtension
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
@@ -31,7 +31,7 @@ class RegisterWithFactorySample {
   @JvmField
   @RegisterExtension
   val extension = coroutineTestExtension {
-    TestProvidedCoroutineScope(context = CoroutineName("custom name"))
+    TestScope(context = CoroutineName("custom name"))
   }
 
   @Test

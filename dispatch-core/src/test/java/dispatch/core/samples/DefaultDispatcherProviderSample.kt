@@ -19,9 +19,10 @@ import dispatch.core.DefaultDispatcherProvider
 import dispatch.core.DispatcherProvider
 import dispatch.core.MainImmediateCoroutineScope
 import dispatch.core.mainImmediateDispatcher
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -31,6 +32,7 @@ import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 
+@OptIn(DelicateCoroutinesApi::class)
 @Suppress("HardCodedDispatcher")
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
@@ -48,7 +50,7 @@ class DefaultDispatcherProviderSample {
     Dispatchers.resetMain()
   }
 
-  @Sample
+  @Sample5
   fun setSample() {
 
     val custom = CustomDispatcherProvider()

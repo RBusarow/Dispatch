@@ -19,43 +19,38 @@ import dispatch.core.DispatcherProvider
 import dispatch.core.dispatcherProvider
 import dispatch.core.launchMain
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.kotest.matchers.types.shouldBeTypeOf
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 
 @Suppress("HardCodedDispatcher")
+@OptIn(DelicateCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 internal class BuildersTest {
 
   val testProvider = object : DispatcherProvider {
-    override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+    override val default: CoroutineDispatcher = StandardTestDispatcher()
+    override val io: CoroutineDispatcher = StandardTestDispatcher()
+    override val main: CoroutineDispatcher = StandardTestDispatcher()
+    override val mainImmediate: CoroutineDispatcher = StandardTestDispatcher()
+    override val unconfined: CoroutineDispatcher = StandardTestDispatcher()
   }
 
   @Nested
   inner class `run blocking provided` {
-
-    @Test
-    fun `default CoroutineContext param should create scope with TestDispatcherProvider`() =
-      runBlockingProvided {
-
-        val dispatcherProvider = coroutineContext.dispatcherProvider
-
-        dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
-      }
 
     @Test
     fun `existing DispatcherProvider in CoroutineContext param should be used in new CoroutineContext`() =
@@ -79,8 +74,9 @@ internal class BuildersTest {
 
     @Test
     fun `CoroutineContext param without DispatcherProvider should create provider which delegates to Dispatchers`() =
-
       runBlockingProvided {
+
+        Dispatchers.setMain(testProvider.main)
 
         val provider = dispatcherProvider
 
@@ -88,9 +84,10 @@ internal class BuildersTest {
         provider.io shouldBe Dispatchers.IO
         provider.unconfined shouldBe Dispatchers.Unconfined
 
+        provider.main shouldBe Dispatchers.Main
         provider.main shouldBe provider.mainImmediate
 
-        provider.main shouldNotBe Dispatchers.Main
+        Dispatchers.resetMain()
       }
   }
 
@@ -98,13 +95,12 @@ internal class BuildersTest {
   inner class `run blocking test provided` {
 
     @Test
-    fun `default params should create scope with TestDispatcherProvider`() =
-      testProvided {
+    fun `default params should create scope with TestDispatcherProvider`() = testProvided {
 
-        val dispatcherProvider = coroutineContext.dispatcherProvider
+      val dispatcherProvider = coroutineContext.dispatcherProvider
 
-        dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
-      }
+      dispatcherProvider.shouldBeTypeOf<TestDispatcherProvider>()
+    }
 
     @Test
     fun `specified provider param should be used in CoroutineContext`() =
@@ -127,15 +123,9 @@ internal class BuildersTest {
     }
 
     @Test
-    fun `CoroutineScope receiver should be TestProvidedCoroutineScope`() = testProvided {
+    fun `CoroutineScope receiver should be TestScope`() = testProvided {
 
-      this.shouldBeInstanceOf<TestProvidedCoroutineScope>()
-    }
-
-    @Test
-    fun `CoroutineScope receiver should be TestCoroutineScope`() = testProvided {
-
-      this.shouldBeInstanceOf<TestCoroutineScope>()
+      this.shouldBeInstanceOf<TestScope>()
     }
 
     @Test

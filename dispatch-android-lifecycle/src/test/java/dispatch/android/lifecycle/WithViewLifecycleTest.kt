@@ -22,6 +22,7 @@ import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.shouldEqualFolded
 import dispatch.internal.test.shouldNotEqualFolded
 import dispatch.test.TestCoroutineRule
+import dispatch.test.TestProvidedCoroutineScope
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import kotlinx.coroutines.CompletableDeferred
@@ -31,6 +32,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -45,7 +48,9 @@ internal class WithViewLifecycleTest {
 
   @JvmField
   @Rule
-  val rule = TestCoroutineRule()
+  val rule = TestCoroutineRule {
+    TestProvidedCoroutineScope(dispatcher = UnconfinedTestDispatcher())
+  }
 
   @JvmField
   @Rule
@@ -58,6 +63,12 @@ internal class WithViewLifecycleTest {
   fun setUp() {
     fragmentLifecycleOwner.start()
     viewLifecycleOwner.create()
+  }
+
+  @After
+  fun tearDown() {
+    fragmentLifecycleOwner.destroy()
+    viewLifecycleOwner.destroy()
   }
 
   @Test

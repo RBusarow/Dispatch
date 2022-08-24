@@ -24,11 +24,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
@@ -40,22 +40,23 @@ import kotlin.coroutines.EmptyCoroutineContext
 internal class CoroutineScopesTest {
 
   val job = Job()
-  val dispatcher = newSingleThreadContext("single thread dispatcher")
+  val dispatcher = StandardTestDispatcher(name = "single thread dispatcher")
+  val mainDispatcher = StandardTestDispatcher(name = "main dispatcher")
+
+  // val dispatcherProvider = TestDispatcherProvider(main = mainDispatcher)
   val dispatcherProvider = DispatcherProvider()
   val exceptionHandler = CoroutineExceptionHandler { _, _ -> }
   val coroutineName = CoroutineName("name")
 
   val originContext = job + dispatcher + dispatcherProvider + exceptionHandler + coroutineName
 
-  val mainDispatcher = newSingleThreadContext("main dispatcher")
-
-  @BeforeAll
-  fun beforeAll() {
+  @BeforeEach
+  fun beforeEach() {
     Dispatchers.setMain(mainDispatcher)
   }
 
-  @AfterAll
-  fun afterAll() {
+  @AfterEach
+  fun afterEach() {
     Dispatchers.resetMain()
   }
 

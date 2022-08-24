@@ -20,7 +20,7 @@ import dispatch.core.asyncIO
 import dispatch.core.asyncMain
 import dispatch.core.asyncMainImmediate
 import dispatch.core.asyncUnconfined
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.internal.test.dispatcherName
 import dispatch.internal.test.someDispatcherProvider
 import io.kotest.matchers.shouldBe
@@ -28,7 +28,7 @@ import kotlinx.coroutines.runBlocking
 
 class AsyncSample {
 
-  @Sample
+  @Sample5
   fun asyncDefaultSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -39,7 +39,7 @@ class AsyncSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun asyncIOSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -50,7 +50,7 @@ class AsyncSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun asyncMainSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -61,7 +61,7 @@ class AsyncSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun asyncMainImmediateSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -72,7 +72,7 @@ class AsyncSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun asyncUnconfinedSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"

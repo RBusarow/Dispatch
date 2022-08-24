@@ -16,6 +16,7 @@
 package dispatch.core
 
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -27,6 +28,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
+@OptIn(DelicateCoroutinesApi::class)
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 internal class DispatcherProviderTest {

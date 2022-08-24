@@ -24,14 +24,15 @@ import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Test
 
 class CoroutineTestNamedFactorySample {
 
   class TestCoroutineScopeWithJobFactory : CoroutineTestExtension.ScopeFactory() {
 
-    override fun create(): TestProvidedCoroutineScope {
-      return TestProvidedCoroutineScope(context = Job())
+    override fun create(): TestScope {
+      return TestScope(context = Job())
     }
   }
 

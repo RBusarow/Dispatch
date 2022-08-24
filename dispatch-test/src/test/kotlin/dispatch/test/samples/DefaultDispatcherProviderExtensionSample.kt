@@ -17,11 +17,12 @@ package dispatch.test.samples
 
 import dispatch.core.DefaultDispatcherProvider
 import dispatch.core.DispatcherProvider
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.test.reset
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -32,6 +33,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 
 @Suppress("HardCodedDispatcher")
+@OptIn(DelicateCoroutinesApi::class)
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 class DefaultDispatcherProviderExtensionSample {
@@ -48,7 +50,7 @@ class DefaultDispatcherProviderExtensionSample {
     Dispatchers.resetMain()
   }
 
-  @Sample
+  @Sample5
   fun defaultDispatcherProviderResetSample() {
 
     val custom = CustomDispatcherProvider()

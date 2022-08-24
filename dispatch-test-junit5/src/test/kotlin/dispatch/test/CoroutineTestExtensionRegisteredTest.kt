@@ -18,6 +18,7 @@ package dispatch.test
 import dispatch.core.DispatcherProvider
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -26,7 +27,7 @@ import kotlin.coroutines.ContinuationInterceptor
 @ExperimentalCoroutinesApi
 class CoroutineTestExtensionRegisteredTest {
 
-  val customScope = TestProvidedCoroutineScope()
+  val customScope = TestScope(TestDispatcherProvider())
 
   @JvmField @RegisterExtension
   val customFactoryExtension = coroutineTestExtension { customScope }

@@ -15,18 +15,21 @@
 
 package dispatch.test.samples
 
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.test.TestProvidedCoroutineScope
 import dispatch.test.runBlockingProvided
 import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.jupiter.api.Test
 
+@Suppress("DEPRECATION")
+@OptIn(DelicateCoroutinesApi::class)
 @ExperimentalCoroutinesApi
 class BuildersSample {
 
-  @Sample
+  @Sample5
   fun runBlockingProvidedSample() {
 
     @Test
@@ -41,7 +44,7 @@ class BuildersSample {
     }
   }
 
-  @Sample
+  @Sample5
   fun testProvidedSample() {
 
     @Test
@@ -56,7 +59,7 @@ class BuildersSample {
     }
   }
 
-  @Sample
+  @Sample5
   fun testProvidedExtensionSample() {
 
     val scope = TestProvidedCoroutineScope()

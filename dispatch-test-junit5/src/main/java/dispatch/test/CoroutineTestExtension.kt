@@ -15,6 +15,7 @@
 
 package dispatch.test
 
+import dispatch.core.dispatcherProvider
 import dispatch.test.CoroutineTestExtension.ScopeFactory
 import dispatch.test.internal.ResetManager
 import dispatch.test.internal.getAnnotationRecursive
@@ -25,7 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.UncompletedCoroutinesError
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.extension.AfterEachCallback
@@ -52,7 +53,8 @@ import kotlin.coroutines.CoroutineContext
  *
  * ### After Each:
  * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are
- *   no leaking coroutines. Any unfinished coroutine will throw an [UncompletedCoroutinesError].
+ *   no leaking coroutines. Any unfinished coroutine will throw an
+ *   [UncompletedCoroutinesError][kotlinx.coroutines.test.UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 5.
@@ -76,7 +78,7 @@ import kotlin.coroutines.CoroutineContext
 @Suppress("newApi") // this arbitrary build target is 21, but JUnit5 requires Java 8
 public class CoroutineTestExtension(
   scopeFactory: ScopeFactory = ScopeFactory()
-) : TypeBasedParameterResolver<TestProvidedCoroutineScope>(),
+) : TypeBasedParameterResolver<TestScope>(),
   BeforeEachCallback,
   AfterEachCallback {
 
@@ -105,7 +107,7 @@ public class CoroutineTestExtension(
    * - [Dispatchers.Main] is reset via [Dispatchers.resetMain].
    * - The existing scope instance is destroyed.
    */
-  public val scope: TestProvidedCoroutineScope
+  public val scope: TestScope
     get() = lazyScope.value
 
   private val contextScopeMap = mutableMapOf<ExtensionContext, TestProvidedCoroutineScope>()
@@ -114,7 +116,7 @@ public class CoroutineTestExtension(
   override fun resolveParameter(
     parameterContext: ParameterContext,
     extensionContext: ExtensionContext
-  ): TestProvidedCoroutineScope {
+  ): TestScope {
 
     val annotation = extensionContext.getAnnotationRecursive<CoroutineTest>()
 
@@ -148,7 +150,7 @@ public class CoroutineTestExtension(
   override fun afterEach(context: ExtensionContext) {
 
     if (lazyScope.isInitialized()) {
-      scope.cleanupTestCoroutines()
+      // scope.cleanupTestCoroutines()
       Dispatchers.resetMain()
     }
 
@@ -169,8 +171,7 @@ public class CoroutineTestExtension(
   public open class ScopeFactory {
 
     /** Creates an instance of [TestProvidedCoroutineScope]. Uses the no-arg factory by default. */
-    public open fun create(): TestProvidedCoroutineScope =
-      TestProvidedCoroutineScope()
+    public open fun create(): TestScope = TestScope(TestDispatcherProvider())
   }
 }
 
@@ -193,8 +194,8 @@ public inline fun coroutineTestExtension(
    *
    * By default, it creates a standard [TestProvidedCoroutineScope].
    */
-  crossinline scopeFactory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
+  crossinline scopeFactory: () -> TestScope = { TestScope() }
 ): CoroutineTestExtension =
   CoroutineTestExtension(object : ScopeFactory() {
-    override fun create(): TestProvidedCoroutineScope = scopeFactory.invoke()
+    override fun create(): TestScope = scopeFactory.invoke()
   })

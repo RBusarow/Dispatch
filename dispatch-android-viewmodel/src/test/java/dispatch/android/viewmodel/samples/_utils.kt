@@ -13,19 +13,14 @@
  * limitations under the License.
  */
 
-@file:OptIn(ObsoleteCoroutinesApi::class)
-
 package dispatch.android.viewmodel.samples
 
 import dispatch.core.DispatcherProvider
 import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
-import org.junit.jupiter.api.Test
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-
-typealias Sample = Test
 
 infix fun Any?.shouldPrint(
   expected: String
@@ -34,8 +29,10 @@ infix fun Any?.shouldPrint(
 fun dispatcherName() = " @coroutine.*".toRegex()
   .replace(Thread.currentThread().name, "")
 
+@OptIn(DelicateCoroutinesApi::class)
 val blocking = newSingleThreadContext("runBlocking thread")
 
+@OptIn(DelicateCoroutinesApi::class)
 val someDispatcherProvider = object : DispatcherProvider {
   override val default = newSingleThreadContext("default")
   override val io = newSingleThreadContext("io")

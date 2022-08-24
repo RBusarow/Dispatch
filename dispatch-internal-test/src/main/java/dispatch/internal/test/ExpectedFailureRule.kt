@@ -36,7 +36,7 @@ public class ExpectedFailureRule : TestRule {
         val failsAnnotation = description.getAnnotation(Fails::class.java)
 
         if (failsAnnotation != null) {
-          failsAnnotation.expected shouldBe e::class
+          failsAnnotation.expectedExceptionFqName shouldBe e::class.qualifiedName
         } else {
           throw e
         }

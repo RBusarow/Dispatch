@@ -31,8 +31,8 @@ import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
 import org.junit.jupiter.api.Nested
@@ -56,7 +56,7 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
       @Test
       fun `all threads should get the same instance`() = runBlocking {
 
-        val main = newSingleThreadContext("main")
+        val main = StandardTestDispatcher(name = "main")
 
         val storeMap = ConcurrentHashMap<Lifecycle, DispatchLifecycleScope>()
 

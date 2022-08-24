@@ -21,19 +21,22 @@ import androidx.lifecycle.LifecycleRegistry
 import dispatch.core.ioDispatcher
 import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.LiveDataTest
+import dispatch.test.TestDispatcherProvider
 import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -51,6 +54,8 @@ class OnNextCreateTest :
   @BeforeEach
   fun beforeEach() {
 
+    Dispatchers.setMain(UnconfinedTestDispatcher())
+
     lifecycleOwner = LifecycleOwner { lifecycle }
     lifecycle = LifecycleRegistry(lifecycleOwner)
   }
@@ -59,7 +64,9 @@ class OnNextCreateTest :
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already created`() = testProvided {
+    fun `block should immediately execute if already created`() = testProvided(
+      TestDispatcherProvider(UnconfinedTestDispatcher()) + UnconfinedTestDispatcher()
+    ) {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 

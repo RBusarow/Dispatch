@@ -20,7 +20,7 @@ import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANC
 import dispatch.android.lifecycle.dispatchLifecycleScope
 import dispatch.core.DispatcherProvider
 import dispatch.core.launchMain
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.CoroutineTest
 import io.kotest.matchers.shouldBe
@@ -28,7 +28,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 
@@ -36,7 +35,7 @@ import kotlinx.coroutines.runBlocking
 @ExperimentalCoroutinesApi
 class DispatchLifecycleScope : LiveDataTest {
 
-  @Sample
+  @Sample5
   fun scopeFromScope() = runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
@@ -67,7 +66,7 @@ class DispatchLifecycleScope : LiveDataTest {
     }
   }
 
-  @Sample
+  @Sample5
   fun scopeFromContext() = runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
@@ -98,7 +97,7 @@ class DispatchLifecycleScope : LiveDataTest {
     }
   }
 
-  @Sample
+  @Sample5
   fun defaultSample() = runBlocking {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
@@ -127,7 +126,7 @@ class DispatchLifecycleScope : LiveDataTest {
     }
   }
 
-  @Sample
+  @Sample5
   fun launchOnCreateOnce() = runBlocking {
 
     val channel = Channel<String>()
@@ -177,7 +176,7 @@ class DispatchLifecycleScope : LiveDataTest {
     )
   }
 
-  @Sample
+  @Sample5
   fun onCreateRestarting() = runBlocking {
 
     val channel = Channel<String>()
@@ -227,7 +226,7 @@ class DispatchLifecycleScope : LiveDataTest {
     )
   }
 
-  @Sample
+  @Sample5
   fun launchOnStartOnce() = runBlocking {
 
     val channel = Channel<String>()
@@ -278,7 +277,7 @@ class DispatchLifecycleScope : LiveDataTest {
     )
   }
 
-  @Sample
+  @Sample5
   fun launchOnStartRestarting() = runBlocking {
 
     val channel = Channel<String>()
@@ -343,7 +342,7 @@ class DispatchLifecycleScope : LiveDataTest {
     )
   }
 
-  @Sample
+  @Sample5
   fun launchOnResumeOnce() = runBlocking {
 
     val channel = Channel<String>()
@@ -394,7 +393,7 @@ class DispatchLifecycleScope : LiveDataTest {
     )
   }
 
-  @Sample
+  @Sample5
   fun launchOnResumeRestarting() = runBlocking {
 
     val channel = Channel<String>()

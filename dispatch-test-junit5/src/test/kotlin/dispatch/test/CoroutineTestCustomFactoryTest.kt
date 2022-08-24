@@ -20,16 +20,17 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
 
 @OptIn(ExperimentalCoroutinesApi::class)
-internal val customScope = TestProvidedCoroutineScope()
+internal val customScope = TestScope()
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CustomFactory : CoroutineTestExtension.ScopeFactory() {
-  override fun create(): TestProvidedCoroutineScope = customScope
+  override fun create(): TestScope = customScope
 }
 
 @CoroutineTest(CustomFactory::class)

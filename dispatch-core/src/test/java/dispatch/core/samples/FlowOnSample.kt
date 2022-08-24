@@ -20,7 +20,7 @@ import dispatch.core.flowOnIO
 import dispatch.core.flowOnMain
 import dispatch.core.flowOnMainImmediate
 import dispatch.core.flowOnUnconfined
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.internal.test.dispatcherName
 import dispatch.internal.test.someDispatcherProvider
 import io.kotest.matchers.shouldBe
@@ -32,7 +32,7 @@ import kotlinx.coroutines.runBlocking
 @ExperimentalCoroutinesApi
 class FlowOnSample {
 
-  @Sample
+  @Sample5
   fun flowOnDefaultSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -46,7 +46,7 @@ class FlowOnSample {
       .collect() // collect the flow from the "main" dispatcher
   }
 
-  @Sample
+  @Sample5
   fun flowOnIOSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -60,7 +60,7 @@ class FlowOnSample {
       .collect() // collect the flow from the "main" dispatcher
   }
 
-  @Sample
+  @Sample5
   fun flowOnMainSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -74,7 +74,7 @@ class FlowOnSample {
       .collect() // collect the flow from the "default" dispatcher
   }
 
-  @Sample
+  @Sample5
   fun flowOnMainImmediateSample() =
     runBlocking(someDispatcherProvider) {
 
@@ -89,7 +89,7 @@ class FlowOnSample {
         .collect() // collect the flow from the "main" dispatcher
     }
 
-  @Sample
+  @Sample5
   fun flowOnUnconfinedSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"

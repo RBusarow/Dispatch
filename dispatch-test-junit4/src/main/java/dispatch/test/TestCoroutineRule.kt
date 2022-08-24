@@ -15,13 +15,13 @@
 
 package dispatch.test
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.DelayController
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.UncaughtExceptionCaptor
-import kotlinx.coroutines.test.UncompletedCoroutinesError
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestRule
@@ -41,7 +41,8 @@ import kotlin.coroutines.CoroutineContext
  *
  * ### After the test:
  * * [cleanupTestCoroutines] is called to ensure there are no leaking coroutines. Any unfinished
- *   coroutine will throw an [UncompletedCoroutinesError].
+ *   coroutine will throw an
+ *   [UncompletedCoroutinesError][kotlinx.coroutines.test.UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 4.
@@ -75,16 +76,16 @@ public class TestCoroutineRule(
    * @see UncaughtExceptionCaptor
    * @see DelayController
    */
-  public val dispatcher: TestCoroutineDispatcher =
-    coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
+  public val dispatcher: CoroutineDispatcher =
+    coroutineContext[ContinuationInterceptor] as CoroutineDispatcher
 
   /** @suppress */
-  override fun starting(description: Description?) {
+  override fun starting(description: Description) {
     Dispatchers.setMain(dispatcher)
   }
 
   /** @suppress */
-  override fun finished(description: Description?) {
+  override fun finished(description: Description) {
     cleanupTestCoroutines()
     Dispatchers.resetMain()
   }
