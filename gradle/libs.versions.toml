@@ -1,6 +1,5 @@
 [versions]
 androidTools = "7.2.2"
-anvil = "2.4.0"
 benManes = "0.42.0"
 changeTracker = "0.7.3"
 coil = "2.2.0"
@@ -45,7 +44,7 @@ google-material = "1.6.1"
 rickBusarow-dependencySync = "0.11.4"
 rickBusarow-moduleCheck = "0.12.3"
 
-square-anvil = "2.3.11-1-6-10"
+square-anvil = "2.4.2"
 square-moshi = "1.13.0"
 square-okhttp = "4.10.0"
 square-okio = "3.2.0"
@@ -278,11 +277,11 @@ robolectric = "org.robolectric:robolectric:4.8.2"
 
 scabbard = "gradle.plugin.dev.arunkumar:scabbard-gradle-plugin:0.5.0"
 
-square-anvil-annotations = { module = "com.squareup.anvil:annotations", version.ref = "anvil" }
-square-anvil-compiler-api = { module = "com.squareup.anvil:compiler-api", version.ref = "anvil" }
-square-anvil-compiler-core = { module = "com.squareup.anvil:compiler", version.ref = "anvil" }
-square-anvil-compiler-utils = { module = "com.squareup.anvil:compiler-utils", version.ref = "anvil" }
-square-anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "anvil" }
+square-anvil-annotations = { module = "com.squareup.anvil:annotations", version.ref = "square-anvil" }
+square-anvil-compiler-api = { module = "com.squareup.anvil:compiler-api", version.ref = "square-anvil" }
+square-anvil-compiler-core = { module = "com.squareup.anvil:compiler", version.ref = "square-anvil" }
+square-anvil-compiler-utils = { module = "com.squareup.anvil:compiler-utils", version.ref = "square-anvil" }
+square-anvil-gradle = { module = "com.squareup.anvil:gradle-plugin", version.ref = "square-anvil" }
 
 square-moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "square-moshi" }
 square-moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "square-moshi" }
