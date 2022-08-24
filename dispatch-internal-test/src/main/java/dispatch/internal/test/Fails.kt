@@ -15,11 +15,14 @@
 
 package dispatch.internal.test
 
-import kotlin.reflect.KClass
-
 /** Indicates that a test **function** is expected to fail with the given exception type. */
 @Target(AnnotationTarget.FUNCTION)
 public annotation class Fails(
-  /** The KClass of the expected Throwable. */
-  val expected: KClass<*>
+  /**
+   * The fully qualified name string of the expected Throwable.
+   *
+   * NB This can't just be a KClass<*> since `UncompletedCoroutinesError` is now internal in
+   * `kotlinx-coroutines-test`.
+   */
+  val expectedExceptionFqName: String
 )

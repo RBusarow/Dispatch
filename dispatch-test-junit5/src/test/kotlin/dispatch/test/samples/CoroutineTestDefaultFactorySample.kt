@@ -36,7 +36,7 @@ class CoroutineTestDefaultFactorySample(
 
     val resultDeferred = subject.someFunction()
 
-    testScope.advanceUntilIdle()
+    testScope.testScheduler.advanceUntilIdle()
 
     resultDeferred.await() shouldBe someValue
   }
