@@ -16,7 +16,6 @@
 package dispatch.android.lifecycle
 
 import androidx.lifecycle.*
-import dispatch.android.lifecycle.internal.*
 import dispatch.internal.test.*
 import dispatch.internal.test.android.*
 import dispatch.test.*

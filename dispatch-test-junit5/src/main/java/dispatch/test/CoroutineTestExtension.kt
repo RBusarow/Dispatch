@@ -15,8 +15,6 @@
 
 package dispatch.test
 
-import dispatch.test.CoroutineTestExtension.*
-import dispatch.test.internal.*
 import kotlinx.atomicfu.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*

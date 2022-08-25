@@ -14,7 +14,7 @@ hermit = "0.9.6"
 jUnit = "5.9.0"
 kotest = "5.4.2"
 kotlin = "1.7.10"
-ktlint-gradle = "10.3.0"
+ktlint-gradle = "11.0.0"
 
 sonarPlugin = "2.6.1"
 spotless = "5.10.1"
@@ -268,7 +268,7 @@ kotlinx-metadata-jvm = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", 
 kotlinx-knit-gradle = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }
 kotlinx-knit-test = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit" }
 
-ktlint-gradle = "org.jlleitschuh.gradle:ktlint-gradle:10.3.0"
+ktlint-gradle = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint-gradle" }
 
 mockk = "io.mockk:mockk:1.12.7"
 

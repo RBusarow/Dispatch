@@ -20,7 +20,6 @@ package dispatch.sample
 import android.annotation.*
 import android.os.*
 import androidx.appcompat.app.*
-import dispatch.sample.databinding.*
 import kotlinx.coroutines.*
 import timber.log.*
 
