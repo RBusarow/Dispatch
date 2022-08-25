@@ -21,11 +21,8 @@ import dispatch.core.DispatcherProvider
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
-import org.junit.jupiter.api.Test
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-
-typealias Sample = Test
 
 infix fun Any?.shouldPrint(
   expected: String

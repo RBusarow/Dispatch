@@ -15,36 +15,35 @@
 
 package dispatch.test
 
-import dispatch.test.HermitCoroutines.TestEnvironmentScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 
 @ExperimentalCoroutinesApi
-public abstract class HermitCoroutines<E : TestEnvironmentScope>(
+public abstract class HermitCoroutines<E : Any>(
   private val factory: (TestScope) -> E
 ) {
 
-  /**
-   * the base class for the environment... It can't implement `TestScope`, so instead it just
-   * decorates. If you need an actual `TestScope`-typed instance to pass into something, it's still
-   * available.
-   */
-  public abstract class TestEnvironmentScope
+  // /**
+  //  * the base class for the environment... It can't implement `TestScope`, so instead it just
+  //  * decorates. If you need an actual `TestScope`-typed instance to pass into something, it's still
+  //  * available.
+  //  */
+  // public interface TestEnvironmentScope
 
   /**
    * Uses `runTest { ... }` to create and manage a TestScope, creating a new instance of the
    * environment for each test.
    */
   public fun test(
-    action: suspend context(TestScope) E.() -> Unit
+    action: suspend context(E) TestScope.() -> Unit
   ) {
 
-    runTest {
+    runTest scope@{
 
-      val instance = factory(this@runTest)
+      val instance = factory(this@scope)
 
-      action.invoke(this@runTest, instance)
+      action.invoke(instance, this@scope)
     }
   }
 }
