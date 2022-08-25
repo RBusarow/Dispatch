@@ -15,6 +15,7 @@
 
 package dispatch.test
 
+import dispatch.core.DispatcherProvider
 import dispatch.core.dispatcherProvider
 import dispatch.test.CoroutineTestExtension.ScopeFactory
 import dispatch.test.internal.ResetManager
@@ -49,7 +50,8 @@ import kotlin.coroutines.CoroutineContext
  * is automatically managed.
  *
  * ### Before Each:
- * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
+ * [Dispatchers.Main] is set to the [TestDispatcher][kotlinx.coroutines.test.TestDispatcher] used by
+ * the [CoroutineContext].
  *
  * ### After Each:
  * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are
@@ -67,9 +69,9 @@ import kotlin.coroutines.CoroutineContext
  *
  * @see CoroutineTestExtension
  * @see CoroutineTest
- * @param scopeFactory *optional* factory for a custom [TestProvidedCoroutineScope]. If a factory is
- *     not provided, the resultant scope uses the same [TestCoroutineDispatcher] for each property
- *     in its [TestDispatcherProvider]
+ * @param scopeFactory *optional* factory for a custom [TestScope]. If a factory is not provided,
+ *     the resultant scope uses the same [TestCoroutineDispatcher] for each property in its
+ *     [TestDispatcherProvider]
  * @sample dispatch.test.samples.RegisterSample
  * @sample dispatch.test.samples.RegisterWithFactorySample
  * @sample dispatch.test.samples.CoroutineTestExtensionExtendWithSample
@@ -86,13 +88,17 @@ public class CoroutineTestExtension(
 
   private val resetManager = ResetManager()
 
-  private val lazyScope = resetManager.resets {
-    val newScope = atomicScopeFactory.value.create()
+  private val lazyScope = resetManager.resets { newScope() }
 
-    Dispatchers.setMain(newScope.dispatcherProvider.main)
-
-    newScope
-  }
+  private fun newScope() = atomicScopeFactory.value.create()
+    .also { newScope ->
+      val provider = newScope.coroutineContext[DispatcherProvider]
+      requireNotNull(provider) {
+        "Scopes created by ${CoroutineTestExtension::class.simpleName} " +
+          "must have a ${DispatcherProvider::class.simpleName}."
+      }
+      Dispatchers.setMain(provider.main)
+    }
 
   /**
    * A lazy `TestProvidedCoroutineScope` instance which is reset via
