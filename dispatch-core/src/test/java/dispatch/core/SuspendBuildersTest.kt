@@ -20,7 +20,7 @@ import hermit.test.junit.HermitJUnit5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.CoroutineContext
@@ -30,21 +30,21 @@ internal class SuspendBuildersTest : HermitJUnit5() {
 
   val baseProvider by resets {
     DispatcherProvider(
-      default = TestCoroutineDispatcher(),
-      io = TestCoroutineDispatcher(),
-      main = TestCoroutineDispatcher(),
-      mainImmediate = TestCoroutineDispatcher(),
-      unconfined = TestCoroutineDispatcher()
+      default = UnconfinedTestDispatcher(),
+      io = UnconfinedTestDispatcher(),
+      main = UnconfinedTestDispatcher(),
+      mainImmediate = UnconfinedTestDispatcher(),
+      unconfined = UnconfinedTestDispatcher()
     )
   }
 
   val secondProvider by resets {
     DispatcherProvider(
-      default = TestCoroutineDispatcher(),
-      io = TestCoroutineDispatcher(),
-      main = TestCoroutineDispatcher(),
-      mainImmediate = TestCoroutineDispatcher(),
-      unconfined = TestCoroutineDispatcher()
+      default = UnconfinedTestDispatcher(),
+      io = UnconfinedTestDispatcher(),
+      main = UnconfinedTestDispatcher(),
+      mainImmediate = UnconfinedTestDispatcher(),
+      unconfined = UnconfinedTestDispatcher()
     )
   }
 

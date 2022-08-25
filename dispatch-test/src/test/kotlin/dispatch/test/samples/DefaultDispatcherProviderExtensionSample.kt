@@ -25,7 +25,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
@@ -36,7 +36,7 @@ import org.junit.jupiter.api.BeforeEach
 @ExperimentalCoroutinesApi
 class DefaultDispatcherProviderExtensionSample {
 
-  val main = newSingleThreadContext("main")
+  val main = UnconfinedTestDispatcher(name = "main")
 
   @BeforeEach
   fun beforeEach() {

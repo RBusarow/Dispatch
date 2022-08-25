@@ -28,13 +28,14 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
@@ -42,6 +43,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
 
+@OptIn(DelicateCoroutinesApi::class)
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 internal class LifecycleScopeFactoryTest :
@@ -77,7 +79,7 @@ internal class LifecycleScopeFactoryTest :
   }
 
   @Test
-  fun `default factory should be a default MainImmediateContext`() = runBlockingTest {
+  fun `default factory should be a default MainImmediateContext`() = runTest {
 
     val scope = LifecycleScopeFactory.create(lifecycleOwner.lifecycle)
 
@@ -89,7 +91,7 @@ internal class LifecycleScopeFactoryTest :
   }
 
   @Test
-  fun `a custom factory should be used after being set`() = runBlockingTest {
+  fun `a custom factory should be used after being set`() = runTest {
 
     LifecycleScopeFactory.set { originContext }
 
@@ -99,7 +101,7 @@ internal class LifecycleScopeFactoryTest :
   }
 
   @Test
-  fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
+  fun `reset after setting a custom factory should return to the default`() = runTest {
 
     LifecycleScopeFactory.set { originContext }
 

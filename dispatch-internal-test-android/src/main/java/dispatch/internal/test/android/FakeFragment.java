@@ -36,7 +36,7 @@ public class FakeFragment extends Fragment {
 
     public void setFakeViewLifecycleOwner(@Nullable LifecycleOwner lifecycleOwner) {
         fakeViewLifecycleOwner = lifecycleOwner;
-        fakeViewLifecycleOwnerLiveData.postValue(lifecycleOwner);
+        fakeViewLifecycleOwnerLiveData.setValue(lifecycleOwner);
     }
 
     @NonNull

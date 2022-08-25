@@ -17,11 +17,18 @@ package dispatch.test
 
 import dispatch.core.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -37,8 +44,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * created using the [kotlinx.coroutines.BlockingEventLoop] interceptor.
  *
  * @param context The base `CoroutineContext` which will be modified to use a
- *     [TestCoroutineDispatcher] and [TestDispatcherProvider]. [EmptyCoroutineContext] is used if
- *     one is not provided.
+ *     [TestDispatcherProvider]. [EmptyCoroutineContext] is used if one is not provided.
  * @param block the action to be performed
  * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  * @see runBlocking
@@ -48,30 +54,31 @@ import kotlin.coroutines.EmptyCoroutineContext
 public fun runBlockingProvided(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> Unit
-): Unit = runBlocking(context) {
+) {
 
   val existingDispatcherProvider = context[DispatcherProvider]
 
   val newContext = if (existingDispatcherProvider == null) {
-    coroutineContext + TestBasicDispatcherProvider()
-  } else coroutineContext
+    context + DispatcherProvider()
+  } else context
 
-  CoroutineScope(newContext).block()
+  runBlocking(newContext, block)
 }
 
 /**
  * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
  * [TestCoroutineScope].
  *
- * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher], then a new
- * [TestCoroutineDispatcher] will be created.
+ * If the `context`'s [ContinuationInterceptor] is not a
+ * [TestDispatcher][kotlinx.coroutines.test.TestDispatcher], then a new
+ * [TestDispatcher][kotlinx.coroutines.test.TestDispatcher] will be created.
  *
  * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
- * created using the `TestCoroutineDispatcher`.
+ * created using the `TestDispatcher`.
  *
  * @param context The base `CoroutineContext` which will be modified to use a
- *     `TestCoroutineDispatcher` and `TestDispatcherProvider`. [EmptyCoroutineContext] is used if
- *     one is not provided.
+ *     [TestDispatcher][kotlinx.coroutines.test.TestDispatcher] and [TestDispatcherProvider].
+ *     [EmptyCoroutineContext] is used if one is not provided.
  * @param testBody the action to be performed
  * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @see runBlockingTest
@@ -80,36 +87,59 @@ public fun runBlockingProvided(
 @ExperimentalCoroutinesApi
 public fun testProvided(
   context: CoroutineContext = EmptyCoroutineContext,
-  testBody: suspend TestProvidedCoroutineScope.() -> Unit
+  testBody: suspend TestScope.() -> Unit
 ) {
 
-  val dispatcher = (context[ContinuationInterceptor] as? TestCoroutineDispatcher)
-    ?: TestCoroutineDispatcher()
+  val dispatcher = context[ContinuationInterceptor]
+    ?.let { existing ->
+      require(existing is TestDispatcher) {
+        "The dispatcher passed to `testProvided` must implement " +
+          "${TestDispatcher::class.qualifiedName}.  It was: $existing"
+      }
+      existing
+    }
+    ?: StandardTestDispatcher()
+
+  Dispatchers.setMain(dispatcher)
 
   val dispatcherProvider = context[DispatcherProvider]
     ?: TestDispatcherProvider(dispatcher)
 
   val combinedContext = context + dispatcher + dispatcherProvider
 
-  return runBlockingTest(context = combinedContext) {
+  runTest(context = combinedContext, testBody = testBody)
 
-    val providedScope = TestProvidedCoroutineScopeImpl(
-      dispatcherProvider = dispatcherProvider,
-      context = combinedContext + coroutineContext
-    )
-    testBody.invoke(providedScope)
-  }
+  Dispatchers.resetMain()
+}
+
+@ExperimentalCoroutinesApi
+public fun testProvidedUnconfined(
+  context: CoroutineContext = EmptyCoroutineContext,
+  testBody: suspend TestScope.() -> Unit
+) {
+
+  val dispatcher = context[ContinuationInterceptor]
+    ?.let { existing ->
+      require(existing is TestDispatcher) {
+        "The dispatcher passed to `testProvided` must implement " +
+          "${TestDispatcher::class.qualifiedName}.  It was: $existing"
+      }
+      existing.takeIf { it.isDispatchNeeded(EmptyCoroutineContext) }
+    }
+    ?: UnconfinedTestDispatcher()
+  return testProvided(dispatcher, testBody)
 }
 
 /**
  * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
  * [TestCoroutineScope].
  *
- * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher], then a new
- * [TestCoroutineDispatcher] will be created.
+ * If the `context`'s [ContinuationInterceptor] is not a
+ * [TestDispatcher][kotlinx.coroutines.test.TestDispatcher], then a new
+ * [TestDispatcher][kotlinx.coroutines.test.TestDispatcher] will be created.
  *
  * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
- * created using the `TestCoroutineDispatcher`.
+ * created using the `TestDispatcher`.
  *
  * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @sample dispatch.test.samples.BuildersSample.testProvidedExtensionSample
@@ -117,6 +147,30 @@ public fun testProvided(
  * @see runBlockingProvided
  */
 @ExperimentalCoroutinesApi
-public fun TestProvidedCoroutineScope.testProvided(
-  testBody: suspend TestProvidedCoroutineScope.() -> Unit
+public fun TestDispatchScope.testProvided(
+  testBody: suspend TestScope.() -> Unit
 ): Unit = testProvided(coroutineContext, testBody)
+
+/**
+ * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
+ * [TestCoroutineScope].
+ *
+ * If the `context`'s [ContinuationInterceptor] is not a
+ * [TestDispatcher][kotlinx.coroutines.test.TestDispatcher], then a new
+ * [TestDispatcher][kotlinx.coroutines.test.TestDispatcher] will be created.
+ *
+ * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
+ * created using the `TestDispatcher`.
+ *
+ * @sample dispatch.test.samples.BuildersSample.testProvidedSample
+ * @sample dispatch.test.samples.BuildersSample.testProvidedExtensionSample
+ * @see runBlockingTest
+ * @see runBlockingProvided
+ */
+@ExperimentalCoroutinesApi
+public fun TestScope.testProvided(
+  testBody: suspend TestScope.() -> Unit
+): Unit = testProvided(coroutineContext, testBody)
+
+@ExperimentalCoroutinesApi
+public fun TestScope.asTestDispatchScope(): TestDispatchScope = TestDispatchScope(coroutineContext)

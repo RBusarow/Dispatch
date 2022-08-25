@@ -18,10 +18,11 @@ package dispatch.android.lifecycle.internal
 import androidx.lifecycle.Lifecycle
 import dispatch.android.lifecycle.DispatchLifecycleScope
 import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.dispatcherProvider
+import dispatch.core.withMain
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.android.InstantTaskExecutorExtension
-import dispatch.test.TestDispatcherProvider
-import hermit.test.junit.HermitJUnit5
+import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,9 +32,6 @@ import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -46,7 +44,7 @@ import java.util.concurrent.TimeUnit
 @ExtendWith(InstantTaskExecutorExtension::class)
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-internal class AtomicGetOrPutTest : HermitJUnit5() {
+internal class AtomicGetOrPutTest {
 
   @Nested
   inner class `API level 23` {
@@ -54,9 +52,7 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
     @Nested
     inner class `multiple threads access lifecycleScope at once` {
       @Test
-      fun `all threads should get the same instance`() = runBlocking {
-
-        val main = newSingleThreadContext("main")
+      fun `all threads should get the same instance`() = testProvided {
 
         val storeMap = ConcurrentHashMap<Lifecycle, DispatchLifecycleScope>()
 
@@ -78,9 +74,12 @@ internal class AtomicGetOrPutTest : HermitJUnit5() {
             storeMap.atomicGetOrPut(androidLifecycle) {
               val scope = DispatchLifecycleScope(
                 lifecycle = androidLifecycle,
-                coroutineScope = MainImmediateCoroutineScope(Job(), TestDispatcherProvider(main))
+                coroutineScope = MainImmediateCoroutineScope(
+                  job = Job(),
+                  dispatcherProvider = dispatcherProvider
+                )
               )
-              withContext(main) {
+              withMain {
 
                 androidLifecycle.addObserver(DispatchLifecycleScopeStore)
               }

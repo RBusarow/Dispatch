@@ -21,7 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.CoroutineContext
@@ -30,11 +30,11 @@ import kotlin.coroutines.CoroutineContext
 internal class CoroutineScopeExtKtTest {
 
   val provider = DispatcherProvider(
-    default = TestCoroutineDispatcher(),
-    io = TestCoroutineDispatcher(),
-    main = TestCoroutineDispatcher(),
-    mainImmediate = TestCoroutineDispatcher(),
-    unconfined = TestCoroutineDispatcher()
+    default = UnconfinedTestDispatcher(),
+    io = UnconfinedTestDispatcher(),
+    main = UnconfinedTestDispatcher(),
+    mainImmediate = UnconfinedTestDispatcher(),
+    unconfined = UnconfinedTestDispatcher()
   )
 
   @Test

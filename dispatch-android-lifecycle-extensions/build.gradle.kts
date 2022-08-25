@@ -51,5 +51,4 @@ dependencies {
   testImplementation(projects.dispatchInternalTest)
   testImplementation(projects.dispatchInternalTestAndroid)
   testImplementation(projects.dispatchTest)
-  testImplementation(projects.dispatchTestJunit4)
 }

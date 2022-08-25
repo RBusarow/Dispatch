@@ -24,20 +24,20 @@ import dispatch.core.dispatcherProvider
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 internal class TestProvidedCoroutineScopeTest {
 
-  val dispatcher = TestCoroutineDispatcher()
+  val dispatcher = StandardTestDispatcher()
   val provider = TestDispatcherProvider(dispatcher)
 
   @Nested
   inner class `marker interfaces` {
 
-    val scope = TestProvidedCoroutineScope()
+    val scope = TestDispatchScope()
 
     @Test
     fun `TestProvidedCoroutineScope should implement DefaultCoroutineScope`() {
@@ -71,12 +71,12 @@ internal class TestProvidedCoroutineScopeTest {
   }
 
   @Nested
-  inner class `test provided CoroutineScope impl` {
+  inner class `impl` {
 
     @Test
     fun `scope implementation should contain DispatcherProvider property`() {
 
-      val scope = TestProvidedCoroutineScopeImpl(provider)
+      val scope = TestDispatchScopeImpl(provider)
 
       scope.coroutineContext.dispatcherProvider shouldBe provider
     }
@@ -84,7 +84,7 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `DispatcherProvider property should override context arg`() {
 
-      val scope = TestProvidedCoroutineScopeImpl(
+      val scope = TestDispatchScopeImpl(
         dispatcherProvider = provider,
         context = TestDispatcherProvider()
       )
@@ -99,6 +99,42 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `scope should contain DispatcherProvider property`() {
 
+      val scope = TestDispatchScope(dispatcherProvider = provider)
+
+      scope.coroutineContext.dispatcherProvider shouldBe provider
+    }
+
+    @Test
+    fun `dispatcher arg should be used to create default DispatcherProvider`() {
+
+      val scope = TestDispatchScope(context = dispatcher)
+
+      scope.dispatcherProvider.default shouldBe dispatcher
+      scope.dispatcherProvider.io shouldBe dispatcher
+      scope.dispatcherProvider.main shouldBe dispatcher
+      scope.dispatcherProvider.mainImmediate shouldBe dispatcher
+      scope.dispatcherProvider.unconfined shouldBe dispatcher
+    }
+
+    @Test
+    fun `DispatcherProvider arg should override context arg`() {
+
+      val scope = TestDispatchScope(
+        context = TestDispatcherProvider(),
+        dispatcherProvider = provider
+      )
+
+      scope.coroutineContext.dispatcherProvider shouldBe provider
+    }
+  }
+
+  @Suppress("DEPRECATION")
+  @Nested
+  inner class `legacy factory function` {
+
+    @Test
+    fun `scope should contain DispatcherProvider property`() {
+
       val scope = TestProvidedCoroutineScope(dispatcherProvider = provider)
 
       scope.coroutineContext.dispatcherProvider shouldBe provider
@@ -107,13 +143,15 @@ internal class TestProvidedCoroutineScopeTest {
     @Test
     fun `dispatcher arg should be used to create default DispatcherProvider`() {
 
-      val scope = TestProvidedCoroutineScope(dispatcher = dispatcher)
+      val legacyDispatcher = kotlinx.coroutines.test.TestCoroutineDispatcher()
 
-      scope.dispatcherProvider.default shouldBe dispatcher
-      scope.dispatcherProvider.io shouldBe dispatcher
-      scope.dispatcherProvider.main shouldBe dispatcher
-      scope.dispatcherProvider.mainImmediate shouldBe dispatcher
-      scope.dispatcherProvider.unconfined shouldBe dispatcher
+      val scope = TestProvidedCoroutineScope(dispatcher = legacyDispatcher)
+
+      scope.dispatcherProvider.default shouldBe legacyDispatcher
+      scope.dispatcherProvider.io shouldBe legacyDispatcher
+      scope.dispatcherProvider.main shouldBe legacyDispatcher
+      scope.dispatcherProvider.mainImmediate shouldBe legacyDispatcher
+      scope.dispatcherProvider.unconfined shouldBe legacyDispatcher
     }
 
     @Test

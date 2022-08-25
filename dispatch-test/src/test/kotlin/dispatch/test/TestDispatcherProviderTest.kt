@@ -17,16 +17,10 @@ package dispatch.test
 
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.yield
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import java.util.concurrent.atomic.AtomicInteger
 
 @Suppress("HardCodedDispatcher")
 @ExperimentalCoroutinesApi
@@ -35,7 +29,7 @@ internal class TestDispatcherProviderTest {
   @Nested
   inner class `TestCoroutineDispatcher factory` {
 
-    val dispatcher = TestCoroutineDispatcher()
+    val dispatcher = StandardTestDispatcher()
 
     @Test
     fun `provider arg should be assigned to all properties`() {
@@ -53,71 +47,6 @@ internal class TestDispatcherProviderTest {
     fun `factory should create TestDispatcherProvider`() {
 
       val provider = TestDispatcherProvider(dispatcher)
-
-      provider.shouldBeTypeOf<TestDispatcherProvider>()
-    }
-  }
-
-  @Nested
-  inner class `Basic CoroutineDispatcher factory` {
-
-    @Test
-    fun `default property should delegate to Dispatchers_Default`() {
-
-      val provider = TestBasicDispatcherProvider()
-
-      provider.default shouldBe Dispatchers.Default
-    }
-
-    @Test
-    fun `io property should delegate to Dispatchers_IO`() {
-
-      val provider = TestBasicDispatcherProvider()
-
-      provider.io shouldBe Dispatchers.IO
-    }
-
-    @Test
-    fun `main and mainImmediate properties should be a single dispatcher`() {
-
-      val provider = TestBasicDispatcherProvider()
-
-      provider.main shouldBe provider.mainImmediate
-
-      val count = AtomicInteger(1)
-
-      runBlocking(provider.main) {
-
-        provider.main.asExecutor()
-
-        count.getAndIncrement() shouldBe 1
-
-        launch(provider.main) {
-          count.getAndIncrement() shouldBe 2
-        }
-        launch(provider.mainImmediate) {
-          count.getAndIncrement() shouldBe 3
-        }
-
-        // yielding only works because the above launches are already queued for dispatch on the same dispatcher
-        yield()
-        yield()
-        count.getAndIncrement() shouldBe 4
-      }
-    }
-
-    @Test
-    fun `unconfined property should delegate to Dispatchers_Unconfined`() {
-
-      val provider = TestBasicDispatcherProvider()
-
-      provider.unconfined shouldBe Dispatchers.Unconfined
-    }
-
-    @Test
-    fun `factory should create TestDispatcherProvider`() {
-
-      val provider = TestDispatcherProvider()
 
       provider.shouldBeTypeOf<TestDispatcherProvider>()
     }

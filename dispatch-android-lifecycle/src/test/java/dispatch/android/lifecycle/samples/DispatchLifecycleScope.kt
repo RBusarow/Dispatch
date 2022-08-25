@@ -22,22 +22,25 @@ import dispatch.core.DispatcherProvider
 import dispatch.core.launchMain
 import dispatch.internal.test.Sample5
 import dispatch.internal.test.android.LiveDataTest
-import dispatch.test.CoroutineTest
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.parallel.ResourceLock
+import org.junit.jupiter.api.parallel.Resources.GLOBAL
 
-@CoroutineTest
 @ExperimentalCoroutinesApi
+@ResourceLock(GLOBAL)
 class DispatchLifecycleScope : LiveDataTest {
 
   @Sample5
-  fun scopeFromScope() = runBlocking {
+  fun scopeFromScope() = test {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment @Inject constructor(
@@ -68,7 +71,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun scopeFromContext() = runBlocking {
+  fun scopeFromContext() = test {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {
@@ -99,7 +102,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun defaultSample() = runBlocking {
+  fun defaultSample() = test {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
     class SomeFragment : Fragment() {
@@ -128,7 +131,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnCreateOnce() = runBlocking {
+  fun launchOnCreateOnce() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -178,7 +181,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun onCreateRestarting() = runBlocking {
+  fun onCreateRestarting() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -228,7 +231,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnStartOnce() = runBlocking {
+  fun launchOnStartOnce() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -279,7 +282,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnStartRestarting() = runBlocking {
+  fun launchOnStartRestarting() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -344,7 +347,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnResumeOnce() = runBlocking {
+  fun launchOnResumeOnce() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -395,7 +398,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnResumeRestarting() = runBlocking {
+  fun launchOnResumeRestarting() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -457,5 +460,13 @@ class DispatchLifecycleScope : LiveDataTest {
       "2",
       "pausing"
     )
+  }
+
+  fun test(action: suspend CoroutineScope.() -> Unit) {
+
+    val main = UnconfinedTestDispatcher(name = "main")
+    Dispatchers.setMain(main)
+
+    runBlocking { action() }
   }
 }

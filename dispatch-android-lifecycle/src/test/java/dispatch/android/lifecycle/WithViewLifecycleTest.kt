@@ -15,13 +15,13 @@
 
 package dispatch.android.lifecycle
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.dispatcherProvider
 import dispatch.internal.test.android.FakeFragment
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.shouldEqualFolded
 import dispatch.internal.test.shouldNotEqualFolded
-import dispatch.test.TestCoroutineRule
+import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import kotlinx.coroutines.CompletableDeferred
@@ -30,9 +30,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import org.junit.Before
-import org.junit.Rule
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -43,31 +42,34 @@ import org.robolectric.annotation.Config
 @ExperimentalCoroutinesApi
 internal class WithViewLifecycleTest {
 
-  @JvmField
-  @Rule
-  val rule = TestCoroutineRule()
+  lateinit var fragmentLifecycleOwner: FakeLifecycleOwner
+  lateinit var viewLifecycleOwner: FakeLifecycleOwner
 
-  @JvmField
-  @Rule
-  val instantTaskRule = InstantTaskExecutorRule()
+  fun test(testAction: suspend TestScope.() -> Unit) {
 
-  val fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
-  val viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+    testProvided(UnconfinedTestDispatcher()) {
 
-  @Before
-  fun setUp() {
-    fragmentLifecycleOwner.start()
-    viewLifecycleOwner.create()
+      fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = dispatcherProvider.main)
+      viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = dispatcherProvider.main)
+
+      fragmentLifecycleOwner.start()
+      viewLifecycleOwner.create()
+
+      testAction()
+
+      fragmentLifecycleOwner.destroy()
+      viewLifecycleOwner.destroy()
+    }
   }
 
   @Test
-  fun `when the livedata goes from null to non-null, lambda should be invoked`() {
+  fun `when the livedata goes from null to non-null, lambda should be invoked`() = test {
 
     var invocations = 0
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
-    rule.withViewLifecycle(fragment) { invocations++ }
+    withViewLifecycle(fragment) { invocations++ }
 
     invocations shouldBe 0
 
@@ -77,13 +79,13 @@ internal class WithViewLifecycleTest {
   }
 
   @Test
-  fun `when the livedata goes from null to non-null, lambda should be invoked every time`() {
+  fun `when the livedata goes from null to non-null, lambda should be invoked every time`() = test {
 
     var invocations = 0
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
-    rule.withViewLifecycle(fragment) { invocations++ }
+    withViewLifecycle(fragment) { invocations++ }
 
     invocations shouldBe 0
 
@@ -103,13 +105,13 @@ internal class WithViewLifecycleTest {
   }
 
   @Test
-  fun `when the livedata gets set to non-null, lambda should be invoked every time`() {
+  fun `when the livedata gets set to non-null, lambda should be invoked every time`() = test {
 
     var invocations = 0
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
-    rule.withViewLifecycle(fragment) { invocations++ }
+    withViewLifecycle(fragment) { invocations++ }
 
     invocations shouldBe 0
 
@@ -127,13 +129,13 @@ internal class WithViewLifecycleTest {
   }
 
   @Test
-  fun `when the view lifecycle is destroyed, lambda should be cancelled`() {
+  fun `when the view lifecycle is destroyed, lambda should be cancelled`() = test {
 
     lateinit var job: Job
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
-    rule.withViewLifecycle(fragment) {
+    withViewLifecycle(fragment) {
       job = launch {
         // never completes, so the Job should be active until the scope is destroyed
         CompletableDeferred<Int>().await()
@@ -149,13 +151,13 @@ internal class WithViewLifecycleTest {
   }
 
   @Test
-  fun `when the fragment lifecycle is destroyed, lambda be cancelled`() {
+  fun `when the fragment lifecycle is destroyed, lambda be cancelled`() = test {
 
     lateinit var job: Job
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
-    rule.withViewLifecycle(fragment) {
+    withViewLifecycle(fragment) {
       job = launch {
         // never completes, so the Job should be active until the scope is destroyed
         CompletableDeferred<Int>().await()
@@ -171,13 +173,13 @@ internal class WithViewLifecycleTest {
   }
 
   @Test
-  fun `the lambda's LifecycleScope should correspond to the view lifecycle`() = runBlocking {
+  fun `the lambda's LifecycleScope should correspond to the view lifecycle`() = test {
 
     lateinit var job: Job
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
-    rule.withViewLifecycle(fragment) {
+    withViewLifecycle(fragment) {
       job = launch {
 
         lifecycle shouldBeSameInstanceAs viewLifecycleOwner.lifecycle
@@ -191,7 +193,7 @@ internal class WithViewLifecycleTest {
 
   @Test
   fun `receiver CoroutineScope should not be cancelled when Fragment's lifecycle is destroyed`() =
-    runBlocking {
+    test {
 
       /*
       This extension creates a ViewLifecycleScope without knowing where the receiver CoroutineScope came from.
@@ -203,7 +205,7 @@ internal class WithViewLifecycleTest {
       val fragment = FakeFragment(fragmentLifecycleOwner)
 
       val receiverScope =
-        MainImmediateCoroutineScope(Job() + rule.coroutineContext)
+        MainImmediateCoroutineScope(Job() + coroutineContext)
 
       var internalScope: CoroutineScope? = null
 
@@ -227,14 +229,14 @@ internal class WithViewLifecycleTest {
 
   @Test
   fun `subsequent viewLifecycles should restart the lamba after the initial is destroyed`() =
-    runBlocking {
+    test {
 
       val fragment = FakeFragment(fragmentLifecycleOwner)
 
       val receiverJob = Job()
 
       val receiverScope =
-        MainImmediateCoroutineScope(receiverJob + rule.coroutineContext)
+        MainImmediateCoroutineScope(receiverJob + coroutineContext)
 
       val control = Channel<Int>()
       val deadlock = CompletableDeferred<Unit>()
@@ -256,7 +258,7 @@ internal class WithViewLifecycleTest {
 
       viewLifecycleOwner.destroy()
 
-      val secondView = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+      val secondView = FakeLifecycleOwner(mainDispatcher = dispatcherProvider.main)
 
       fragment.setFakeViewLifecycleOwner(secondView)
 
@@ -265,14 +267,14 @@ internal class WithViewLifecycleTest {
 
   @Test
   fun `subsequent viewLifecycles should restart the lamba after the initial is set to null`() =
-    runBlocking {
+    test {
 
       val fragment = FakeFragment(fragmentLifecycleOwner)
 
       val receiverJob = Job()
 
       val receiverScope =
-        MainImmediateCoroutineScope(receiverJob + rule.coroutineContext)
+        MainImmediateCoroutineScope(receiverJob + coroutineContext)
 
       val control = Channel<Int>()
       val deadlock = CompletableDeferred<Unit>()
@@ -294,7 +296,7 @@ internal class WithViewLifecycleTest {
 
       fragment.setFakeViewLifecycleOwner(null)
 
-      val secondView = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+      val secondView = FakeLifecycleOwner(mainDispatcher = dispatcherProvider.main)
 
       fragment.setFakeViewLifecycleOwner(secondView)
 
@@ -303,12 +305,12 @@ internal class WithViewLifecycleTest {
 
   @Test
   fun `receiver CoroutineScope and View scope contexts should be identical except for the Job`() =
-    runBlocking {
+    test {
 
       val fragment = FakeFragment(fragmentLifecycleOwner)
 
       val receiverScope =
-        MainImmediateCoroutineScope(Job() + rule.coroutineContext)
+        MainImmediateCoroutineScope(Job() + coroutineContext)
 
       var internalScope: CoroutineScope? = null
 

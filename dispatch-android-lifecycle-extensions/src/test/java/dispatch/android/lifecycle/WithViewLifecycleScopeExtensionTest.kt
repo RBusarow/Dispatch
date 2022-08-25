@@ -15,11 +15,9 @@
 
 package dispatch.android.lifecycle
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import dispatch.internal.test.android.FakeFragment
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.android.LiveDataTest
-import dispatch.test.TestCoroutineRule
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import kotlinx.coroutines.CompletableDeferred
@@ -27,8 +25,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -39,21 +38,21 @@ import org.robolectric.annotation.Config
 @ExperimentalCoroutinesApi
 internal class WithViewLifecycleScopeExtensionTest : LiveDataTest {
 
-  @JvmField
-  @Rule
-  val rule = TestCoroutineRule()
+  val main = UnconfinedTestDispatcher(name = "main")
 
-  @JvmField
-  @Rule
-  val instantTaskRule = InstantTaskExecutorRule()
-
-  val fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
-  val viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+  val fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = main)
+  val viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = main)
 
   @Before
   fun setUp() {
     fragmentLifecycleOwner.start()
     viewLifecycleOwner.create()
+  }
+
+  @After
+  fun tearDown() {
+    fragmentLifecycleOwner.destroy()
+    viewLifecycleOwner.destroy()
   }
 
   @Test

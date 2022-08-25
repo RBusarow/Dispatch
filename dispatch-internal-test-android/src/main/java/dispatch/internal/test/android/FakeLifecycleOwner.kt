@@ -18,7 +18,7 @@ package dispatch.internal.test.android
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 
@@ -97,5 +97,5 @@ open class FakeLifecycleOwner(
   fun getObserverCount(): Int = runBlocking(mainDispatcher) { fakeLifecycle.observerCount }
 }
 
-@OptIn(ObsoleteCoroutinesApi::class)
+@OptIn(DelicateCoroutinesApi::class)
 private fun fakeMainDispatcher() = newSingleThreadContext("FakeLifecycleOwner main")

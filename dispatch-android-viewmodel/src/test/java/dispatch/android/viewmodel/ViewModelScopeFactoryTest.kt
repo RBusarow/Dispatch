@@ -29,9 +29,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
@@ -44,14 +44,14 @@ import kotlin.coroutines.ContinuationInterceptor
 internal class ViewModelScopeFactoryTest {
 
   val job = Job()
-  val dispatcher = newSingleThreadContext("single thread dispatcher")
+  val dispatcher = UnconfinedTestDispatcher(name = "single thread dispatcher")
   val dispatcherProvider = DispatcherProvider()
   val exceptionHandler = CoroutineExceptionHandler { _, _ -> }
   val coroutineName = CoroutineName("name")
 
   val originContext = job + dispatcher + dispatcherProvider + exceptionHandler + coroutineName
 
-  val mainDispatcher = newSingleThreadContext("main dispatcher")
+  val mainDispatcher = UnconfinedTestDispatcher(name = "main dispatcher")
 
   @BeforeAll
   fun beforeAll() {
@@ -69,7 +69,7 @@ internal class ViewModelScopeFactoryTest {
   }
 
   @Test
-  fun `default factory should be a default MainCoroutineScope`() = runBlockingTest {
+  fun `default factory should be a default MainCoroutineScope`() = runTest {
 
     val scope = ViewModelScopeFactory.create()
 
@@ -83,7 +83,7 @@ internal class ViewModelScopeFactoryTest {
   }
 
   @Test
-  fun `a custom factory should be used after being set`() = runBlockingTest {
+  fun `a custom factory should be used after being set`() = runTest {
 
     ViewModelScopeFactory.set { MainCoroutineScope(originContext) }
 
@@ -93,7 +93,7 @@ internal class ViewModelScopeFactoryTest {
   }
 
   @Test
-  fun `reset after setting a custom factory should return to the default`() = runBlockingTest {
+  fun `reset after setting a custom factory should return to the default`() = runTest {
 
     ViewModelScopeFactory.set { MainCoroutineScope(originContext) }
 

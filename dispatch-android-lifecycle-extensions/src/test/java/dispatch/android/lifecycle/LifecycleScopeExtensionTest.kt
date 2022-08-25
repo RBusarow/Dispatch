@@ -33,7 +33,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.yield
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -55,7 +55,7 @@ internal class LifecycleScopeExtensionTest :
   @BeforeEach
   fun beforeEach() {
 
-    val dispatcher = TestCoroutineDispatcher()
+    val dispatcher = UnconfinedTestDispatcher()
 
     LifecycleScopeFactory.set { dispatcher + TestDispatcherProvider(dispatcher) + Job() }
   }

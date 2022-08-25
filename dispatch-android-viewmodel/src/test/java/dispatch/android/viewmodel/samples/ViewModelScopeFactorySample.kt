@@ -19,7 +19,7 @@ import dispatch.android.espresso.MainImmediateIdlingCoroutineScope
 import dispatch.android.viewmodel.ViewModelScopeFactory
 import dispatch.core.MainImmediateCoroutineScope
 import dispatch.internal.test.Sample5
-import dispatch.test.TestProvidedCoroutineScope
+import dispatch.test.TestDispatchScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -72,7 +72,7 @@ class ViewModelScopeFactorySample {
 
       @Before
       fun setUp() {
-        ViewModelScopeFactory.set { TestProvidedCoroutineScope() }
+        ViewModelScopeFactory.set { TestDispatchScope() }
       }
     }
   }

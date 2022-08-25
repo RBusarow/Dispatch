@@ -22,13 +22,13 @@ import dispatch.core.ioDispatcher
 import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.testProvided
+import dispatch.test.testProvidedUnconfined
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ class OnNextCreateTest :
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already created`() = testProvided {
+    fun `block should immediately execute if already created`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -86,7 +86,7 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = testProvided {
+    fun `block should stop when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -178,7 +178,7 @@ class OnNextCreateTest :
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already created`() = testProvided {
+    fun `block should immediately execute if already created`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -205,7 +205,7 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = testProvided {
+    fun `block should stop when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()

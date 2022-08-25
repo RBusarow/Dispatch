@@ -16,7 +16,7 @@
 package dispatch.test.samples
 
 import dispatch.internal.test.Sample5
-import dispatch.test.TestProvidedCoroutineScope
+import dispatch.test.TestDispatchScope
 import dispatch.test.runBlockingProvided
 import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
@@ -59,7 +59,7 @@ class BuildersSample {
   @Sample5
   fun testProvidedExtensionSample() {
 
-    val scope = TestProvidedCoroutineScope()
+    val scope = TestDispatchScope()
 
     @Test
     fun someTest() = scope.testProvided {

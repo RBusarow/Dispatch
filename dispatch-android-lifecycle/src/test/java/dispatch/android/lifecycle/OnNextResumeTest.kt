@@ -22,6 +22,7 @@ import dispatch.core.ioDispatcher
 import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.testProvided
+import dispatch.test.testProvidedUnconfined
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -59,7 +60,7 @@ class OnNextResumeTest :
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = testProvided {
+    fun `block should immediately execute if already resumed`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -85,7 +86,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should pause when lifecycle is destroyed`() = testProvided {
+    fun `block should pause when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -138,7 +139,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() = testProvidedUnconfined {
 
       val lock = Mutex(locked = true)
 
@@ -177,7 +178,7 @@ class OnNextResumeTest :
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = testProvided {
+    fun `block should immediately execute if already resumed`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -203,7 +204,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should pause when lifecycle is destroyed`() = testProvided {
+    fun `block should pause when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -256,7 +257,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() = testProvidedUnconfined {
 
       val lock = Mutex(locked = true)
 

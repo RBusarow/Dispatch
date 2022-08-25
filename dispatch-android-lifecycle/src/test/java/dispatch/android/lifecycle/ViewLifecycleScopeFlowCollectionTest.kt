@@ -15,17 +15,16 @@
 
 package dispatch.android.lifecycle
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import dispatch.core.dispatcherProvider
 import dispatch.internal.test.android.FakeFragment
 import dispatch.internal.test.android.FakeLifecycleOwner
-import dispatch.test.TestCoroutineRule
+import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.runBlocking
-import org.junit.Before
-import org.junit.Rule
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -36,32 +35,35 @@ import org.robolectric.annotation.Config
 @ExperimentalCoroutinesApi
 internal class ViewLifecycleScopeFlowCollectionTest {
 
-  @JvmField
-  @Rule
-  val rule = TestCoroutineRule()
+  lateinit var fragmentLifecycleOwner: FakeLifecycleOwner
+  lateinit var viewLifecycleOwner: FakeLifecycleOwner
 
-  @JvmField
-  @Rule
-  val instantTaskRule = InstantTaskExecutorRule()
+  fun test(testAction: suspend TestScope.() -> Unit) {
 
-  val fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
-  val viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = rule.dispatcherProvider.main)
+    testProvided(UnconfinedTestDispatcher()) {
 
-  @Before
-  fun setUp() {
-    fragmentLifecycleOwner.start()
-    viewLifecycleOwner.create()
+      fragmentLifecycleOwner = FakeLifecycleOwner(mainDispatcher = dispatcherProvider.main)
+      viewLifecycleOwner = FakeLifecycleOwner(mainDispatcher = dispatcherProvider.main)
+
+      fragmentLifecycleOwner.start()
+      viewLifecycleOwner.create()
+
+      testAction()
+
+      fragmentLifecycleOwner.destroy()
+      viewLifecycleOwner.destroy()
+    }
   }
 
   @Test
-  fun `launchOnCreate collection should only happen while at least CREATED`() = runBlocking {
+  fun `launchOnCreate collection should only happen while at least CREATED`() = test {
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
     val flow = MutableStateFlow(0)
     val collected = mutableListOf<Int>()
 
-    rule.withViewLifecycle(fragment) {
+    withViewLifecycle(fragment) {
       flow.onEach { collected.add(it) }.launchOnCreate()
     }
 
@@ -85,14 +87,14 @@ internal class ViewLifecycleScopeFlowCollectionTest {
   }
 
   @Test
-  fun `launchOnStart collection should only happen while at least STARTED`() = runBlocking {
+  fun `launchOnStart collection should only happen while at least STARTED`() = test {
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
     val flow = MutableStateFlow(0)
     val collected = mutableListOf<Int>()
 
-    rule.withViewLifecycle(fragment) {
+    withViewLifecycle(fragment) {
       flow.onEach { collected.add(it) }
         .launchOnStart()
     }
@@ -117,14 +119,14 @@ internal class ViewLifecycleScopeFlowCollectionTest {
   }
 
   @Test
-  fun `launchOnResume collection should only happen while RESUMED`() = runBlocking {
+  fun `launchOnResume collection should only happen while RESUMED`() = test {
 
     val fragment = FakeFragment(fragmentLifecycleOwner)
 
     val flow = MutableStateFlow(0)
     val collected = mutableListOf<Int>()
 
-    rule.withViewLifecycle(fragment) {
+    withViewLifecycle(fragment) {
       flow.onEach { collected.add(it) }.launchOnResume()
     }
 

@@ -31,15 +31,15 @@ import io.kotest.matchers.types.shouldBeInstanceOf
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
@@ -47,8 +47,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
 
-@ObsoleteCoroutinesApi
-@ExperimentalCoroutinesApi
+@OptIn(DelicateCoroutinesApi::class, ExperimentalCoroutinesApi::class)
 internal class DispatchViewModelTest {
 
   val job = Job()
@@ -99,7 +98,7 @@ internal class DispatchViewModelTest {
   }
 
   @Test
-  fun `default factory should be a default MainImmediateCoroutineScope`() = runBlockingTest {
+  fun `default factory should be a default MainImmediateCoroutineScope`() = runTest {
 
     val scope = TestViewModel().viewModelScope
 
@@ -113,7 +112,7 @@ internal class DispatchViewModelTest {
   }
 
   @Test
-  fun `a custom factory should be used after being set`() = runBlockingTest {
+  fun `a custom factory should be used after being set`() = runTest {
 
     ViewModelScopeFactory.set { MainImmediateCoroutineScope(originContext) }
 
@@ -123,13 +122,13 @@ internal class DispatchViewModelTest {
   }
 
   @Test
-  fun `an initialized scope should be cancelled during onCleared`() = runBlockingTest {
+  fun `an initialized scope should be cancelled during onCleared`() = runTest {
 
     val store = ViewModelStore()
 
     val owner = ViewModelStoreOwner { store }
 
-    val viewModel = ViewModelProvider(owner).get(TestViewModel::class.java)
+    val viewModel = ViewModelProvider(owner)[TestViewModel::class.java]
 
     val scope = viewModel.viewModelScope
 

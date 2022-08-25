@@ -24,7 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterAll
@@ -40,14 +40,14 @@ import kotlin.coroutines.EmptyCoroutineContext
 internal class CoroutineScopesTest {
 
   val job = Job()
-  val dispatcher = newSingleThreadContext("single thread dispatcher")
+  val dispatcher = UnconfinedTestDispatcher(name = "single thread dispatcher")
   val dispatcherProvider = DispatcherProvider()
   val exceptionHandler = CoroutineExceptionHandler { _, _ -> }
   val coroutineName = CoroutineName("name")
 
   val originContext = job + dispatcher + dispatcherProvider + exceptionHandler + coroutineName
 
-  val mainDispatcher = newSingleThreadContext("main dispatcher")
+  val mainDispatcher = UnconfinedTestDispatcher(name = "main dispatcher")
 
   @BeforeAll
   fun beforeAll() {

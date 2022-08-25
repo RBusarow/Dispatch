@@ -22,27 +22,27 @@ import dispatch.android.lifecycle.onNextResume
 import dispatch.android.lifecycle.onNextStart
 import dispatch.core.launchMainImmediate
 import dispatch.internal.test.android.LiveDataTest
-import dispatch.test.CoroutineTest
-import dispatch.test.TestProvidedCoroutineScope
+import dispatch.test.testProvided
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.BeforeEach
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.jupiter.api.Test
 
-@CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleSuspend(
-  val testScope: TestProvidedCoroutineScope
-) : LiveDataTest {
+class LifecycleSuspend : LiveDataTest {
 
-  @BeforeEach
-  fun beforeEach() {
-    LifecycleScopeFactory.set { testScope.coroutineContext }
+  fun test(testAction: suspend TestScope.() -> Unit) {
+    testProvided(UnconfinedTestDispatcher()) {
+
+      LifecycleScopeFactory.set { coroutineContext }
+
+      testAction()
+    }
   }
 
   @Test
-  fun lifecycleOwnerOnNextCreate() = runBlocking {
+  fun lifecycleOwnerOnNextCreate() = test {
 
     class SomeFragment : Fragment() {
 
@@ -66,7 +66,7 @@ class LifecycleSuspend(
   }
 
   @Test
-  fun lifecycleOnNextCreateSample() = runBlocking {
+  fun lifecycleOnNextCreateSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -90,7 +90,7 @@ class LifecycleSuspend(
   }
 
   @Test
-  fun lifecycleOwnerOnNextStartSample() = runBlocking {
+  fun lifecycleOwnerOnNextStartSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -119,7 +119,7 @@ class LifecycleSuspend(
   }
 
   @Test
-  fun lifecycleOnNextStartSample() = runBlocking {
+  fun lifecycleOnNextStartSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -148,7 +148,7 @@ class LifecycleSuspend(
   }
 
   @Test
-  fun lifecycleOwnerOnNextResumeSample() = runBlocking {
+  fun lifecycleOwnerOnNextResumeSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -177,7 +177,7 @@ class LifecycleSuspend(
   }
 
   @Test
-  fun lifecycleOnNextResumeSample() = runBlocking {
+  fun lifecycleOnNextResumeSample() = test {
 
     class SomeFragment : Fragment() {
 
