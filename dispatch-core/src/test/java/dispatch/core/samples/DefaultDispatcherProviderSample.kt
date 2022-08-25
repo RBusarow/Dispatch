@@ -21,7 +21,11 @@ import dispatch.core.MainImmediateCoroutineScope
 import dispatch.core.mainImmediateDispatcher
 import dispatch.internal.test.Sample
 import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach

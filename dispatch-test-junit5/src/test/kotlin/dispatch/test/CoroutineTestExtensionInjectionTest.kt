@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,19 @@
 
 package dispatch.test
 
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
-import org.junit.jupiter.api.extension.*
+import io.kotest.matchers.shouldNotBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 
 @ExperimentalCoroutinesApi
 class CoroutineTestExtensionInjectionTest {
 
-  @JvmField @RegisterExtension val extension = CoroutineTestExtension()
+  @JvmField @RegisterExtension
+  val extension = CoroutineTestExtension()
 
   @Nested
   inner class `nested classes` {

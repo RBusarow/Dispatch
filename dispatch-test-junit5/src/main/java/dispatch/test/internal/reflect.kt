@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,8 +15,9 @@
 
 package dispatch.test.internal
 
-import org.junit.jupiter.api.extension.*
-import java.lang.reflect.*
+import org.junit.jupiter.api.extension.ExtensionContext
+import java.lang.reflect.AnnotatedElement
+import java.lang.reflect.Parameter
 
 internal inline fun <reified T : Annotation> ExtensionContext.getAnnotationRecursive(): T? {
 

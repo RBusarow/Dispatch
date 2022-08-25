@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,11 @@
 
 package dispatch.core.samples
 
-import dispatch.core.*
+import dispatch.core.asyncDefault
+import dispatch.core.asyncIO
+import dispatch.core.asyncMain
+import dispatch.core.asyncMainImmediate
+import dispatch.core.asyncUnconfined
 import dispatch.internal.test.Sample
 import dispatch.internal.test.dispatcherName
 import dispatch.internal.test.someDispatcherProvider

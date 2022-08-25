@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,9 +15,11 @@
 
 package dispatch.internal.test.android
 
-import androidx.lifecycle.*
-import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.flow.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleRegistry
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 
 class FakeLifecycle(lifecycleOwner: FakeLifecycleOwner) : Lifecycle() {
 

@@ -20,7 +20,6 @@ import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import kotlinx.validation.ApiValidationExtension
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
-import org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask
 
 buildscript {
   dependencies {
@@ -165,19 +164,47 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
 allprojects {
   apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
-  configure<KtlintExtension> {
+  extensions.configure(KtlintExtension::class.java) {
+    val libVersion = "0.45.2"
+    version.set(libVersion)
     debug.set(false)
-
+    outputToConsole.set(true)
+    enableExperimentalRules.set(true)
+    filter {
+      exclude("**/generated/**")
+      exclude("**/build/**")
+    }
     disabledRules.set(
       setOf(
-        "no-wildcard-imports",
-        "max-line-length", // manually formatting still does this, and KTLint will still wrap long chains when possible
-        "filename", // same as Detekt's MatchingDeclarationName, but Detekt's version can be suppressed and this can't
-        "experimental:argument-list-wrapping" // doesn't work half the time
+        // manually formatting still does this, and KTLint will still wrap long chains when possible
+        "max-line-length",
+        // same as Detekt's MatchingDeclarationName,
+        // but Detekt's version can be suppressed and this can't
+        "filename",
+        "experimental:argument-list-wrapping", // doesn't work half the time
+        "experimental:no-empty-first-line-in-method-block", // code golf...
+        // This can be re-enabled once 0.46.0 is released
+        // https://github.com/pinterest/ktlint/issues/1435
+        "experimental:type-parameter-list-spacing",
+        // added in 0.46.0
+        "experimental:function-signature"
       )
     )
+
+    extensions.configure(KtlintExtension::class.java) {
+
+      require(libVersion < "0.46.0") {
+        """
+      when updating to 0.46.0:
+      - Re-enable `experimental:type-parameter-list-spacing`
+      - remove 'experimental' from 'argument-list-wrapping'
+      - remove 'experimental' from 'no-empty-first-line-in-method-block'
+        """.trimIndent()
+      }
+    }
   }
-  tasks.withType<BaseKtLintCheckTask> {
+
+  tasks.withType<org.jlleitschuh.gradle.ktlint.tasks.BaseKtLintCheckTask> {
     workerMaxHeapSize.set("512m")
   }
 }

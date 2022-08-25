@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,10 +15,17 @@
 
 package dispatch.sample
 
-import androidx.lifecycle.*
-import dispatch.core.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import androidx.lifecycle.ViewModel
+import dispatch.core.DefaultCoroutineScope
+import dispatch.core.defaultDispatcher
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class MainViewModel(
