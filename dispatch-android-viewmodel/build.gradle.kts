@@ -13,40 +13,31 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-  id("kotlinx-atomicfu")
-  javaLibrary
+  androidLibrary
   published
 }
 
 dependencies {
-
+  api(libs.androidx.lifecycle.viewModel.core)
   api(libs.kotlinx.coroutines.core)
   api(libs.kotlinx.coroutines.jvm)
-  api(libs.kotlinx.coroutines.test)
 
   api(projects.dispatchCore)
 
-  testImplementation(libs.junit.api)
+  implementation(libs.androidx.lifecycle.viewModel.ktx)
+  implementation(libs.kotlinx.coroutines.android)
+
+  testImplementation(libs.androidx.test.espresso.core)
+  testImplementation(libs.androidx.test.runner)
+  testImplementation(libs.junit.jupiter)
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)
   testImplementation(libs.kotest.runner)
-  testImplementation(libs.kotlin.test.common)
-  testImplementation(libs.kotlin.test.core)
-  testImplementation(libs.mockk)
+  testImplementation(libs.kotlinx.coroutines.test)
 
+  testImplementation(projects.dispatchAndroidEspresso)
+  testImplementation(projects.dispatchAndroidViewmodel)
   testImplementation(projects.dispatchInternalTest)
-
-  testRuntimeOnly(libs.junit.jupiter)
+  testImplementation(projects.dispatchTest)
 }
-
-tasks.withType<KotlinCompile>()
-  .configureEach {
-    kotlinOptions {
-      freeCompilerArgs = freeCompilerArgs + listOf(
-        "-Xcontext-receivers"
-      )
-    }
-  }

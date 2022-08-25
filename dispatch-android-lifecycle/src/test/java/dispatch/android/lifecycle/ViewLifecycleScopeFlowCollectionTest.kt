@@ -16,6 +16,7 @@
 package dispatch.android.lifecycle
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import dispatch.core.dispatcherProvider
 import dispatch.internal.test.android.FakeFragment
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.test.TestCoroutineRule

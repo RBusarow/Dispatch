@@ -17,12 +17,12 @@ package dispatch.android.lifecycle
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.dispatcherProvider
 import dispatch.internal.test.android.FakeFragment
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.shouldEqualFolded
 import dispatch.internal.test.shouldNotEqualFolded
 import dispatch.test.TestCoroutineRule
-import dispatch.test.TestProvidedCoroutineScope
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
 import kotlinx.coroutines.CompletableDeferred
@@ -32,6 +32,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.After
 import org.junit.Before
@@ -49,7 +50,7 @@ internal class WithViewLifecycleTest {
   @JvmField
   @Rule
   val rule = TestCoroutineRule {
-    TestProvidedCoroutineScope(dispatcher = UnconfinedTestDispatcher())
+    TestScope(context = UnconfinedTestDispatcher())
   }
 
   @JvmField

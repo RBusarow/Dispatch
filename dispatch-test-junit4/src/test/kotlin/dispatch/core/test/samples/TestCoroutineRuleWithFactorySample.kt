@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,13 +23,14 @@ import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
 import org.junit.Rule
 import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 class TestCoroutineRuleWithFactorySample {
 
-  val customScope = TestProvidedCoroutineScope(
+  val customScope = TestScope(
     context = CoroutineName("custom name")
   )
 

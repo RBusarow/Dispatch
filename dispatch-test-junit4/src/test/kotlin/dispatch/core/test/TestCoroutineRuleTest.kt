@@ -19,11 +19,11 @@ import dispatch.core.DispatcherProvider
 import dispatch.internal.test.ExpectedFailureRule
 import dispatch.internal.test.Fails
 import dispatch.test.TestCoroutineRule
-import dispatch.test.TestProvidedCoroutineScope
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestScope
 import org.junit.Rule
 import org.junit.Test
 import kotlin.coroutines.ContinuationInterceptor
@@ -31,7 +31,7 @@ import kotlin.coroutines.ContinuationInterceptor
 @ExperimentalCoroutinesApi
 class TestCoroutineRuleTest {
 
-  val customScope = TestProvidedCoroutineScope()
+  val customScope = TestScope()
 
   @JvmField @Rule
   val customFactoryRule = TestCoroutineRule { customScope }

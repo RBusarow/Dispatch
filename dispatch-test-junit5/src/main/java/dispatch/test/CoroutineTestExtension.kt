@@ -29,6 +29,7 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.extension.AfterEachCallback
 import org.junit.jupiter.api.extension.BeforeEachCallback
@@ -159,6 +160,8 @@ public class CoroutineTestExtension(
       // scope.cleanupTestCoroutines()
       Dispatchers.resetMain()
     }
+
+    runTest { }
 
     resetManager.resetAll()
   }

@@ -16,11 +16,13 @@
 package dispatch.test
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.DelayController
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UncaughtExceptionCaptor
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -66,9 +68,8 @@ import kotlin.coroutines.CoroutineContext
  */
 @ExperimentalCoroutinesApi
 public class TestCoroutineRule(
-  factory: () -> TestProvidedCoroutineScope = { TestProvidedCoroutineScope() }
-) : TestWatcher(),
-  TestProvidedCoroutineScope by factory() {
+  factory: () -> TestScope = { TestScope(TestDispatcherProvider()) }
+) : TestWatcher(), CoroutineScope by factory() {
 
   /**
    * The underlying [TestCoroutineDispatcher] which is responsible for virtual time control.
@@ -86,7 +87,6 @@ public class TestCoroutineRule(
 
   /** @suppress */
   override fun finished(description: Description) {
-    cleanupTestCoroutines()
     Dispatchers.resetMain()
   }
 }

@@ -17,7 +17,7 @@ package dispatch.android.viewmodel.samples
 
 import dispatch.android.viewmodel.DispatchViewModel
 import dispatch.core.launchMain
-import dispatch.internal.test.Sample5
+import dispatch.internal.test.Sample
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.isActive
@@ -26,7 +26,7 @@ import kotlinx.coroutines.isActive
 @ExperimentalCoroutinesApi
 class ViewModelScopeSample {
 
-  @Sample5
+  @Sample
   fun viewModelScopeSample() {
 
     class SomeViewModel : DispatchViewModel() {

@@ -17,14 +17,12 @@ package dispatch.android.lifecycle.samples
 
 import dispatch.android.lifecycle.DispatchLifecycleScope
 import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANCEL
-import dispatch.android.lifecycle.LifecycleScopeFactory
 import dispatch.android.lifecycle.dispatchLifecycleScope
 import dispatch.core.DispatcherProvider
 import dispatch.core.launchMain
 import dispatch.core.mainDispatcher
 import dispatch.internal.test.Sample5
 import dispatch.internal.test.android.LiveDataTest
-import dispatch.test.CoroutineTest
 import dispatch.test.testProvidedUnconfined
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineScope
@@ -36,6 +34,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.setMain
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class DispatchLifecycleScope : LiveDataTest {
