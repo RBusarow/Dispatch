@@ -220,7 +220,8 @@ fun File.updateCoroutinesVersionRef() = apply {
 
   val group = "org.jetbrains.kotlinx"
 
-  val moduleRegex = """^([^'"\n]*['"])$group:kotlinx-coroutines([^:]*):[^'"]*(['"].*)${'$'}""".toRegex()
+  val moduleRegex =
+    """^([^'"\n]*['"])$group:kotlinx-coroutines([^:]*):[^'"]*(['"].*)${'$'}""".toRegex()
 
   val newText = readText()
     .lines()
@@ -253,18 +254,14 @@ val updateWebsiteApiDocs by tasks.registering(Copy::class) {
 
   doFirst {
     delete(
-      fileTree("$rootDir/website/static/api") {
-        exclude("**/styles/*")
-      }
+      fileTree("$rootDir/website/static/api")
     )
   }
 
   dependsOn(tasks.findByName("knit"))
 
   from(
-    fileTree("$buildDir/dokka/htmlMultiModule") {
-      exclude("**/styles/*")
-    }
+    fileTree("$buildDir/dokka/htmlMultiModule")
   )
 
   into("$rootDir/website/static/api")
