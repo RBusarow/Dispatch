@@ -15,11 +15,13 @@
 
 package dispatch.test
 
+import dispatch.core.dispatcherProvider
 import dispatch.internal.test.shouldEqualFolded
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
@@ -27,7 +29,7 @@ import kotlin.coroutines.ContinuationInterceptor
 @CoroutineTest
 @ExperimentalCoroutinesApi
 class CoroutineTestDefaultFactoryTest(
-  val testScope: TestProvidedCoroutineScope
+  val testScope: TestScope
 ) {
 
   @Test

@@ -16,7 +16,6 @@
 package dispatch.test
 
 import dispatch.core.DispatcherProvider
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,6 +25,7 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import kotlin.coroutines.ContinuationInterceptor
@@ -93,18 +93,26 @@ public fun testProvided(
 
   val existingDispatcher = context[ContinuationInterceptor]
 
-  val dispatcher = existingDispatcher as? CoroutineDispatcher
-    ?: StandardTestDispatcher()
+  val dispatcher = existingDispatcher as? TestDispatcher ?: StandardTestDispatcher()
 
   val dispatcherProvider = context[DispatcherProvider]
-    ?: TestDispatcherProvider(
-      dispatcher as? TestDispatcher ?: StandardTestDispatcher()
-      // default = dispatcher,
-      // io = dispatcher,
-      // main = dispatcher,
-      // mainImmediate = dispatcher,
-      // unconfined = dispatcher
-    )
+    ?: TestDispatcherProvider(dispatcher)
+
+  val combinedContext = context + dispatcher + dispatcherProvider
+
+  return runTest(context = combinedContext, testBody = testBody)
+}
+
+@Deprecated("Deprecated since TestCoroutineDispatcher and runBlockingTest are deprecated.")
+@ExperimentalCoroutinesApi
+public fun testProvidedUnconfined(
+  context: CoroutineContext = EmptyCoroutineContext,
+  testBody: suspend TestScope.() -> Unit
+) {
+
+  val dispatcher = UnconfinedTestDispatcher()
+
+  val dispatcherProvider = TestDispatcherProvider(dispatcher)
 
   val combinedContext = context + dispatcher + dispatcherProvider
 
@@ -129,5 +137,26 @@ public fun testProvided(
 @Deprecated("Deprecated since TestCoroutineDispatcher and runBlockingTest are deprecated.")
 @ExperimentalCoroutinesApi
 public fun TestProvidedCoroutineScope.testProvided(
+  testBody: suspend TestScope.() -> Unit
+): Unit = testProvided(coroutineContext, testBody)
+
+/**
+ * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
+ * [TestCoroutineScope].
+ *
+ * If the `context`'s [ContinuationInterceptor] is not a [TestCoroutineDispatcher], then a new
+ * [TestCoroutineDispatcher] will be created.
+ *
+ * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
+ * created using the `TestCoroutineDispatcher`.
+ *
+ * @sample dispatch.test.samples.BuildersSample.testProvidedSample
+ * @sample dispatch.test.samples.BuildersSample.testProvidedExtensionSample
+ * @see runBlockingTest
+ * @see runBlockingProvided
+ */
+@Deprecated("Deprecated since TestCoroutineDispatcher and runBlockingTest are deprecated.")
+@ExperimentalCoroutinesApi
+public fun TestScope.testProvided(
   testBody: suspend TestScope.() -> Unit
 ): Unit = testProvided(coroutineContext, testBody)

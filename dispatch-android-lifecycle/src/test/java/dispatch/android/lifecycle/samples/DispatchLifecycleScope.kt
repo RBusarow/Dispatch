@@ -17,21 +17,26 @@ package dispatch.android.lifecycle.samples
 
 import dispatch.android.lifecycle.DispatchLifecycleScope
 import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANCEL
+import dispatch.android.lifecycle.LifecycleScopeFactory
 import dispatch.android.lifecycle.dispatchLifecycleScope
 import dispatch.core.DispatcherProvider
 import dispatch.core.launchMain
+import dispatch.core.mainDispatcher
 import dispatch.internal.test.Sample5
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.CoroutineTest
+import dispatch.test.testProvidedUnconfined
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.setMain
 
-@CoroutineTest
 @ExperimentalCoroutinesApi
 class DispatchLifecycleScope : LiveDataTest {
 
@@ -127,7 +132,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnCreateOnce() = runBlocking {
+  fun launchOnCreateOnce() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -177,7 +182,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun onCreateRestarting() = runBlocking {
+  fun onCreateRestarting() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -227,7 +232,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnStartOnce() = runBlocking {
+  fun launchOnStartOnce() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -278,7 +283,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnStartRestarting() = runBlocking {
+  fun launchOnStartRestarting() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -343,7 +348,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnResumeOnce() = runBlocking {
+  fun launchOnResumeOnce() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -394,7 +399,7 @@ class DispatchLifecycleScope : LiveDataTest {
   }
 
   @Sample5
-  fun launchOnResumeRestarting() = runBlocking {
+  fun launchOnResumeRestarting() = test {
 
     val channel = Channel<String>()
     val history = mutableListOf<String>()
@@ -456,5 +461,12 @@ class DispatchLifecycleScope : LiveDataTest {
       "2",
       "pausing"
     )
+  }
+
+  fun test(action: suspend TestScope.() -> Unit) {
+    testProvidedUnconfined {
+      Dispatchers.setMain(mainDispatcher)
+      action()
+    }
   }
 }

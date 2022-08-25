@@ -17,6 +17,7 @@
 
 package dispatch.test.samples
 
+import dispatch.test.TestDispatcherProvider
 import dispatch.test.coroutineTestExtension
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineName
@@ -31,7 +32,7 @@ class RegisterWithFactorySample {
   @JvmField
   @RegisterExtension
   val extension = coroutineTestExtension {
-    TestScope(context = CoroutineName("custom name"))
+    TestScope(context = CoroutineName("custom name") + TestDispatcherProvider())
   }
 
   @Test

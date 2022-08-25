@@ -13,30 +13,26 @@
  * limitations under the License.
  */
 
-package samples
+package dispatch.android.lifecycle.samples
 
-import dispatch.android.lifecycle.*
-import dispatch.android.lifecycle.samples.Fragment
-import dispatch.core.*
-import dispatch.internal.test.android.*
-import dispatch.test.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
+import dispatch.android.lifecycle.LifecycleScopeFactory
+import dispatch.android.lifecycle.dispatchLifecycleScope
+import dispatch.android.lifecycle.onNextCreate
+import dispatch.android.lifecycle.onNextResume
+import dispatch.android.lifecycle.onNextStart
+import dispatch.core.launchMainImmediate
+import dispatch.internal.test.android.LiveDataTest
+import dispatch.test.testProvidedUnconfined
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestScope
+import org.junit.jupiter.api.Test
 
-@CoroutineTest
 @ExperimentalCoroutinesApi
-class LifecycleSuspendSample(
-  val testScope: TestProvidedCoroutineScope
-) : LiveDataTest {
+class LifecycleSuspend : LiveDataTest {
 
-  @BeforeEach
-  fun beforeEach() {
-    LifecycleScopeFactory.set { testScope.coroutineContext }
-  }
-
-  @Sample5
-  fun lifecycleOwnerOnNextCreateSample() = runBlocking {
+  @Test
+  fun lifecycleOwnerOnNextCreate() = test {
 
     class SomeFragment : Fragment() {
 
@@ -59,8 +55,8 @@ class LifecycleSuspendSample(
     fragment.invocations shouldBe 1
   }
 
-  @Sample5
-  fun lifecycleOnNextCreateSample() = runBlocking {
+  @Test
+  fun lifecycleOnNextCreateSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -83,8 +79,8 @@ class LifecycleSuspendSample(
     fragment.invocations shouldBe 1
   }
 
-  @Sample5
-  fun lifecycleOwnerOnNextStartSample() = runBlocking {
+  @Test
+  fun lifecycleOwnerOnNextStartSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -112,8 +108,8 @@ class LifecycleSuspendSample(
     fragment.invocations shouldBe 1
   }
 
-  @Sample5
-  fun lifecycleOnNextStartSample() = runBlocking {
+  @Test
+  fun lifecycleOnNextStartSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -141,8 +137,8 @@ class LifecycleSuspendSample(
     fragment.invocations shouldBe 1
   }
 
-  @Sample5
-  fun lifecycleOwnerOnNextResumeSample() = runBlocking {
+  @Test
+  fun lifecycleOwnerOnNextResumeSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -170,8 +166,8 @@ class LifecycleSuspendSample(
     fragment.invocations shouldBe 1
   }
 
-  @Sample5
-  fun lifecycleOnNextResumeSample() = runBlocking {
+  @Test
+  fun lifecycleOnNextResumeSample() = test {
 
     class SomeFragment : Fragment() {
 
@@ -197,5 +193,12 @@ class LifecycleSuspendSample(
     fragment.pause()
     fragment.resume()
     fragment.invocations shouldBe 1
+  }
+
+  fun test(action: suspend TestScope.() -> Unit) {
+    testProvidedUnconfined {
+      LifecycleScopeFactory.set { coroutineContext }
+      action()
+    }
   }
 }

@@ -17,12 +17,12 @@
 
 package dispatch.test.samples
 
-import dispatch.test.TestProvidedCoroutineScope
 import dispatch.test.coroutineTestExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
@@ -35,11 +35,11 @@ class RegisterSample {
   @Test
   fun `extension should be a TestProvidedCoroutineScope`() = runBlocking<Unit> {
 
-    extension.scope.shouldBeInstanceOf<TestProvidedCoroutineScope>()
+    extension.scope.shouldBeInstanceOf<TestScope>()
   }
 
   @Test
-  fun `extension should automatically inject into functions`(scope: TestProvidedCoroutineScope) =
+  fun `extension should automatically inject into functions`(scope: TestScope) =
     runBlocking {
 
       val subject = SomeClass(scope)

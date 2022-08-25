@@ -20,11 +20,8 @@ import androidx.arch.core.executor.TaskExecutor
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.ExtensionContext
-import org.junit.jupiter.api.parallel.ResourceLock
-import org.junit.jupiter.api.parallel.Resources
 
 @ExtendWith(InstantTaskExecutorExtension::class)
-@ResourceLock(Resources.GLOBAL)
 interface LiveDataTest
 
 @Suppress("RestrictedApi")

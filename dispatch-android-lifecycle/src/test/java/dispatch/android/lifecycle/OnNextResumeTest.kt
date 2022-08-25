@@ -22,13 +22,13 @@ import dispatch.core.ioDispatcher
 import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.testProvided
+import dispatch.test.testProvidedUnconfined
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
@@ -59,19 +59,20 @@ class OnNextResumeTest :
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = testProvided {
+    fun `block should immediately execute if already resumed`() =
+      testProvidedUnconfined {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      var executed = false
+        var executed = false
 
-      launch { lifecycle.onNextResume { executed = true } }
+        launch { lifecycle.onNextResume { executed = true } }
 
-      executed shouldBe true
-    }
+        executed shouldBe true
+      }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not resumed`() = testProvided {
+    fun `block should not immediately execute if lifecycle is not resumed`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
@@ -85,34 +86,35 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should pause when lifecycle is destroyed`() = testProvided {
+    fun `block should pause when lifecycle is destroyed`() =
+      testProvidedUnconfined {
 
-      val input = Channel<Int>()
-      val output = mutableListOf<Int>()
-      var completed = false
+        val input = Channel<Int>()
+        val output = mutableListOf<Int>()
+        var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      launch {
-        lifecycle.onNextResume {
-          input.consumeAsFlow()
-            .onCompletion { completed = true }
-            .collect { output.add(it) }
+        launch {
+          lifecycle.onNextResume {
+            input.consumeAsFlow()
+              .onCompletion { completed = true }
+              .collect { output.add(it) }
+          }
         }
+
+        input.send(1)
+        input.send(2)
+        input.send(3)
+
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+
+        output shouldBe listOf(1, 2, 3)
+        completed shouldBe true
       }
 
-      input.send(1)
-      input.send(2)
-      input.send(3)
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-
-      output shouldBe listOf(1, 2, 3)
-      completed shouldBe true
-    }
-
     @Test
-    fun `block should not execute twice when lifecycle is resumed twice`() = testProvided {
+    fun `block should not execute twice when lifecycle is resumed twice`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -128,7 +130,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = testProvided {
+    fun `block should return value if allowed to complete`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -138,28 +140,29 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() =
+      testProvidedUnconfined {
 
-      val lock = Mutex(locked = true)
+        val lock = Mutex(locked = true)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      val resultDeferred = async {
-        lifecycle.onNextResume {
-          lock.withLock {
-            // unreachable
-            true
+        val resultDeferred = async {
+          lifecycle.onNextResume {
+            lock.withLock {
+              // unreachable
+              true
+            }
           }
         }
+
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+
+        resultDeferred.await() shouldBe null
       }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-
-      resultDeferred.await() shouldBe null
-    }
-
     @Test
-    fun `block context should respect context parameter`() = testProvided {
+    fun `block context should respect context parameter`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -177,19 +180,20 @@ class OnNextResumeTest :
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = testProvided {
+    fun `block should immediately execute if already resumed`() =
+      testProvidedUnconfined {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      var executed = false
+        var executed = false
 
-      launch { lifecycleOwner.onNextResume { executed = true } }
+        launch { lifecycleOwner.onNextResume { executed = true } }
 
-      executed shouldBe true
-    }
+        executed shouldBe true
+      }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not resumed`() = testProvided {
+    fun `block should not immediately execute if lifecycle is not resumed`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
 
@@ -203,34 +207,35 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should pause when lifecycle is destroyed`() = testProvided {
+    fun `block should pause when lifecycle is destroyed`() =
+      testProvidedUnconfined {
 
-      val input = Channel<Int>()
-      val output = mutableListOf<Int>()
-      var completed = false
+        val input = Channel<Int>()
+        val output = mutableListOf<Int>()
+        var completed = false
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
-      launch {
-        lifecycleOwner.onNextResume {
-          input.consumeAsFlow()
-            .onCompletion { completed = true }
-            .collect { output.add(it) }
+        launch {
+          lifecycleOwner.onNextResume {
+            input.consumeAsFlow()
+              .onCompletion { completed = true }
+              .collect { output.add(it) }
+          }
         }
+
+        input.send(1)
+        input.send(2)
+        input.send(3)
+
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+
+        output shouldBe listOf(1, 2, 3)
+        completed shouldBe true
       }
 
-      input.send(1)
-      input.send(2)
-      input.send(3)
-
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-
-      output shouldBe listOf(1, 2, 3)
-      completed shouldBe true
-    }
-
     @Test
-    fun `block should not execute twice when lifecycle is resumed twice`() = testProvided {
+    fun `block should not execute twice when lifecycle is resumed twice`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -246,7 +251,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = testProvided {
+    fun `block should return value if allowed to complete`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -256,7 +261,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() = testProvidedUnconfined {
 
       val lock = Mutex(locked = true)
 
@@ -277,7 +282,7 @@ class OnNextResumeTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = testProvided {
+    fun `block context should respect context parameter`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 

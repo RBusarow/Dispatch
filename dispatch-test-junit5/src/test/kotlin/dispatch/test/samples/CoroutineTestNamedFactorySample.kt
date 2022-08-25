@@ -19,7 +19,6 @@ package dispatch.test.samples
 
 import dispatch.test.CoroutineTest
 import dispatch.test.CoroutineTestExtension
-import dispatch.test.TestProvidedCoroutineScope
 import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -37,7 +36,7 @@ class CoroutineTestNamedFactorySample {
   }
 
   @CoroutineTest(TestCoroutineScopeWithJobFactory::class)
-  class CustomFactorySample(val testScope: TestProvidedCoroutineScope) {
+  class CustomFactorySample(val testScope: TestScope) {
 
     @Test
     fun `injected scope should have a Job context`() = runBlocking {

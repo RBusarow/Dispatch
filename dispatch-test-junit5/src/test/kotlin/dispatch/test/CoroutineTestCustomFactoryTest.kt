@@ -15,6 +15,7 @@
 
 package dispatch.test
 
+import dispatch.core.dispatcherProvider
 import dispatch.internal.test.shouldEqualFolded
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,7 +37,7 @@ class CustomFactory : CoroutineTestExtension.ScopeFactory() {
 @CoroutineTest(CustomFactory::class)
 @ExperimentalCoroutinesApi
 class CoroutineTestCustomFactoryTest(
-  val testScope: TestProvidedCoroutineScope
+  val testScope: TestScope
 ) {
 
   @Test

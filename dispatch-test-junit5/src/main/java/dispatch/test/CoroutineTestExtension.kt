@@ -194,7 +194,7 @@ public inline fun coroutineTestExtension(
    *
    * By default, it creates a standard [TestProvidedCoroutineScope].
    */
-  crossinline scopeFactory: () -> TestScope = { TestScope() }
+  crossinline scopeFactory: () -> TestScope = { TestScope(TestDispatcherProvider()) }
 ): CoroutineTestExtension =
   CoroutineTestExtension(object : ScopeFactory() {
     override fun create(): TestScope = scopeFactory.invoke()

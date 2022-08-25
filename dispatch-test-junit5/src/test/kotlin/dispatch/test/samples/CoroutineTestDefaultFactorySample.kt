@@ -18,15 +18,15 @@
 package dispatch.test.samples
 
 import dispatch.test.CoroutineTest
-import dispatch.test.TestProvidedCoroutineScope
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Test
 
 @CoroutineTest
 class CoroutineTestDefaultFactorySample(
-  val testScope: TestProvidedCoroutineScope
+  val testScope: TestScope
 ) {
 
   @Test

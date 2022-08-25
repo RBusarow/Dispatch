@@ -17,6 +17,7 @@ package dispatch.test
 
 import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
@@ -33,7 +34,7 @@ class CoroutineTestExtensionInjectionTest {
   inner class `nested classes` {
 
     @Test
-    fun `function arguments should be automatically injected`(scope: TestProvidedCoroutineScope) {
+    fun `function arguments should be automatically injected`(scope: TestScope) {
 
       scope shouldNotBe null
     }
@@ -42,16 +43,16 @@ class CoroutineTestExtensionInjectionTest {
   @Nested
   inner class `lifecycle callback functions` {
 
-    var beforeAllInjectedScope: TestProvidedCoroutineScope? = null
-    var beforeEachInjectedScope: TestProvidedCoroutineScope? = null
+    var beforeAllInjectedScope: TestScope? = null
+    var beforeEachInjectedScope: TestScope? = null
 
     @BeforeAll
-    fun beforeAll(scope: TestProvidedCoroutineScope) {
+    fun beforeAll(scope: TestScope) {
       beforeAllInjectedScope = scope
     }
 
     @BeforeEach
-    fun beforeEach(scope: TestProvidedCoroutineScope) {
+    fun beforeEach(scope: TestScope) {
       beforeEachInjectedScope = scope
     }
 

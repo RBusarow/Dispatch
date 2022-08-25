@@ -18,15 +18,15 @@
 package dispatch.test.samples
 
 import dispatch.test.CoroutineTestExtension
-import dispatch.test.TestProvidedCoroutineScope
 import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestScope
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(CoroutineTestExtension::class)
 class CoroutineTestExtensionExtendWithSample(
-  val testScope: TestProvidedCoroutineScope
+  val testScope: TestScope
 ) {
 
   @Test

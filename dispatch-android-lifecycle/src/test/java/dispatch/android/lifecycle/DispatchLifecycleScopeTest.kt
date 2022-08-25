@@ -17,21 +17,25 @@ package dispatch.android.lifecycle
 
 import androidx.lifecycle.Lifecycle
 import dispatch.core.ioDispatcher
+import dispatch.core.mainDispatcher
 import dispatch.internal.test.android.FakeLifecycleOwner
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.TestProvidedCoroutineScope
+import dispatch.test.testProvidedUnconfined
 import hermit.test.junit.HermitJUnit5
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.isActive
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.ContinuationInterceptor
@@ -42,7 +46,12 @@ class DispatchLifecycleScopeTest :
   HermitJUnit5(),
   LiveDataTest {
 
-  val testScope by resets { TestProvidedCoroutineScope(context = Job()) }
+  val testScope by resets {
+    TestProvidedCoroutineScope(
+      dispatcher = UnconfinedTestDispatcher(),
+      context = Job()
+    )
+  }
 
   val lifecycleOwner by resets { FakeLifecycleOwner() }
   val lifecycle by resets { lifecycleOwner.lifecycle }
@@ -52,7 +61,7 @@ class DispatchLifecycleScopeTest :
   inner class cancellation {
 
     @Test
-    fun `scope with Job should cancel on init if lifecycle is destroyed`() = runBlocking {
+    fun `scope with Job should cancel on init if lifecycle is destroyed`() = test {
 
       lifecycleOwner.destroy()
 
@@ -62,7 +71,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `scope should cancel when lifecycle is destroyed`() = runBlocking {
+    fun `scope should cancel when lifecycle is destroyed`() = test {
 
       lifecycleOwner.create()
 
@@ -76,7 +85,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `lifecycle observer should be removed when scope is cancelled`() = runBlocking {
+    fun `lifecycle observer should be removed when scope is cancelled`() = test {
 
       lifecycleOwner.create()
 
@@ -94,7 +103,7 @@ class DispatchLifecycleScopeTest :
   inner class `launch on create` {
 
     @Test
-    fun `block should immediately execute if already created`() = runBlocking {
+    fun `block should immediately execute if already created`() = test {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -106,7 +115,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block should not immediately execute if screen is not created`() = runBlocking {
+    fun `block should not immediately execute if screen is not created`() = test {
 
       var executed = false
 
@@ -116,7 +125,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = runBlocking {
+    fun `block context should respect context parameter`() = test {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -130,7 +139,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block should stop when screen is destroyed`() = runBlocking {
+    fun `block should stop when screen is destroyed`() = test {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -159,7 +168,7 @@ class DispatchLifecycleScopeTest :
   inner class `launch on start` {
 
     @Test
-    fun `block should immediately execute if already started`() = runBlocking {
+    fun `block should immediately execute if already started`() = test {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -171,7 +180,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block should not immediately execute if screen is not started`() = runBlocking {
+    fun `block should not immediately execute if screen is not started`() = test {
 
       Lifecycle.Event.values()
         .filter {
@@ -195,7 +204,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = runBlocking {
+    fun `block context should respect context parameter`() = test {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -209,7 +218,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block should stop when screen is stopped`() = runBlocking {
+    fun `block should stop when screen is stopped`() = test {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -238,7 +247,7 @@ class DispatchLifecycleScopeTest :
   inner class `launch on resume` {
 
     @Test
-    fun `block should immediately execute if already resumed`() = runBlocking {
+    fun `block should immediately execute if already resumed`() = test {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -250,7 +259,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block should not immediately execute if screen is not resumed`() = runBlocking {
+    fun `block should not immediately execute if screen is not resumed`() = test {
 
       Lifecycle.Event.values()
         .filter {
@@ -276,7 +285,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = runBlocking {
+    fun `block context should respect context parameter`() = test {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
@@ -290,7 +299,7 @@ class DispatchLifecycleScopeTest :
     }
 
     @Test
-    fun `block should stop when screen is paused`() = runBlocking {
+    fun `block should stop when screen is paused`() = test {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -312,6 +321,14 @@ class DispatchLifecycleScopeTest :
 
       output shouldBe listOf(1, 2, 3)
       completed shouldBe true
+    }
+  }
+
+  fun test(action: suspend TestScope.() -> Unit) {
+    testProvidedUnconfined {
+      LifecycleScopeFactory.set { coroutineContext }
+      Dispatchers.setMain(mainDispatcher)
+      action()
     }
   }
 }

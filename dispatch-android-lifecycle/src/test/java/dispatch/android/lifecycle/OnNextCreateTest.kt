@@ -21,8 +21,7 @@ import androidx.lifecycle.LifecycleRegistry
 import dispatch.core.ioDispatcher
 import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.LiveDataTest
-import dispatch.test.TestDispatcherProvider
-import dispatch.test.testProvided
+import dispatch.test.testProvidedUnconfined
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -64,9 +63,7 @@ class OnNextCreateTest :
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already created`() = testProvided(
-      TestDispatcherProvider(UnconfinedTestDispatcher()) + UnconfinedTestDispatcher()
-    ) {
+    fun `block should immediately execute if already created`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -78,22 +75,23 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not created`() = testProvided {
+    fun `block should not immediately execute if lifecycle is not created`() =
+      testProvidedUnconfined {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
-      var executed = false
+        var executed = false
 
-      val job = launch { lifecycle.onNextCreate { executed = true } }
+        val job = launch { lifecycle.onNextCreate { executed = true } }
 
-      executed shouldBe false
+        executed shouldBe false
 
-      job.cancelAndJoin()
-    }
+        job.cancelAndJoin()
+      }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = testProvided {
+    fun `block should stop when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -120,23 +118,24 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is created twice`() = testProvided {
+    fun `block should not execute twice when lifecycle is created twice`() =
+      testProvidedUnconfined {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      lifecycle.onNextCreate { expect(1) }
+        lifecycle.onNextCreate { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
-      expect(2)
+        expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      finish(3)
-    }
+        finish(3)
+      }
 
     @Test
-    fun `block should return value if allowed to complete`() = testProvided {
+    fun `block should return value if allowed to complete`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -146,7 +145,7 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() = testProvidedUnconfined {
 
       val lock = Mutex(locked = true)
 
@@ -167,7 +166,7 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = testProvided {
+    fun `block context should respect context parameter`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -185,7 +184,7 @@ class OnNextCreateTest :
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already created`() = testProvided {
+    fun `block should immediately execute if already created`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -197,22 +196,23 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not created`() = testProvided {
+    fun `block should not immediately execute if lifecycle is not created`() =
+      testProvidedUnconfined {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
-      var executed = false
+        var executed = false
 
-      val job = launch { lifecycleOwner.onNextCreate { executed = true } }
+        val job = launch { lifecycleOwner.onNextCreate { executed = true } }
 
-      executed shouldBe false
+        executed shouldBe false
 
-      job.cancelAndJoin()
-    }
+        job.cancelAndJoin()
+      }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = testProvided {
+    fun `block should stop when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -239,23 +239,24 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is created twice`() = testProvided {
+    fun `block should not execute twice when lifecycle is created twice`() =
+      testProvidedUnconfined {
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      lifecycleOwner.onNextCreate { expect(1) }
+        lifecycleOwner.onNextCreate { expect(1) }
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
 
-      expect(2)
+        expect(2)
 
-      lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
-      finish(3)
-    }
+        finish(3)
+      }
 
     @Test
-    fun `block should return value if allowed to complete`() = testProvided {
+    fun `block should return value if allowed to complete`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -265,7 +266,7 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() = testProvidedUnconfined {
 
       val lock = Mutex(locked = true)
 
@@ -286,7 +287,7 @@ class OnNextCreateTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = testProvided {
+    fun `block context should respect context parameter`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 

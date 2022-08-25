@@ -22,13 +22,13 @@ import dispatch.core.ioDispatcher
 import dispatch.internal.test.BaseTest
 import dispatch.internal.test.android.LiveDataTest
 import dispatch.test.testProvided
+import dispatch.test.testProvidedUnconfined
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ class OnNextStartTest :
   inner class `Lifecycle version` {
 
     @Test
-    fun `block should immediately execute if already started`() = testProvided {
+    fun `block should immediately execute if already started`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -71,7 +71,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not started`() = testProvided {
+    fun `block should not immediately execute if lifecycle is not started`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
 
@@ -85,7 +85,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = testProvided {
+    fun `block should stop when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -112,7 +112,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is started twice`() = testProvided {
+    fun `block should not execute twice when lifecycle is started twice`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -128,7 +128,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = testProvided {
+    fun `block should return value if allowed to complete`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -138,7 +138,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() = testProvidedUnconfined {
 
       val lock = Mutex(locked = true)
 
@@ -159,7 +159,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = testProvided {
+    fun `block context should respect context parameter`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -177,7 +177,7 @@ class OnNextStartTest :
   inner class `LifecycleOwner version` {
 
     @Test
-    fun `block should immediately execute if already started`() = testProvided {
+    fun `block should immediately execute if already started`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -189,7 +189,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should not immediately execute if lifecycle is not started`() = testProvided {
+    fun `block should not immediately execute if lifecycle is not started`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
 
@@ -203,7 +203,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should stop when lifecycle is destroyed`() = testProvided {
+    fun `block should stop when lifecycle is destroyed`() = testProvidedUnconfined {
 
       val input = Channel<Int>()
       val output = mutableListOf<Int>()
@@ -230,7 +230,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should not execute twice when lifecycle is started twice`() = testProvided {
+    fun `block should not execute twice when lifecycle is started twice`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -246,7 +246,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should return value if allowed to complete`() = testProvided {
+    fun `block should return value if allowed to complete`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
@@ -256,7 +256,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block should return null if not allowed to complete`() = testProvided {
+    fun `block should return null if not allowed to complete`() = testProvidedUnconfined {
 
       val lock = Mutex(locked = true)
 
@@ -277,7 +277,7 @@ class OnNextStartTest :
     }
 
     @Test
-    fun `block context should respect context parameter`() = testProvided {
+    fun `block context should respect context parameter`() = testProvidedUnconfined {
 
       lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 

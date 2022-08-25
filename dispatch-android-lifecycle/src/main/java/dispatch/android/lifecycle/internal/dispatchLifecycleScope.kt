@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
@@ -50,7 +51,6 @@ internal fun DispatchLifecycleScope.launchOn(
   RESTART_EVERY -> launchEvery(context, minimumState, block)
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 internal suspend fun <T> Lifecycle.onNext(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -58,31 +58,29 @@ internal suspend fun <T> Lifecycle.onNext(
 ): T? {
 
   var result: T? = null
-  val stateReached = AtomicBoolean(false)
+  var stateReached = false
   var completed = false
 
   // suspend until the lifecycle's flow has reached the minimum state, then move on
   eventFlow(minimumState)
     .onEachLatest { stateIsHighEnough ->
       if (stateIsHighEnough) {
-        stateReached.compareAndSet(false, true)
+        stateReached = true
         coroutineScope {
-          withContext(context + coroutineContext[Job]!!) {
+          withContext(context + currentCoroutineContext()[Job]!!) {
             result = block()
           }
         }
         completed = true
       }
     }
-    .takeWhile { !completed }
     .collectUntil { stateIsHighEnough ->
-      !stateIsHighEnough && stateReached.get()
+      stateReached && (completed || !stateIsHighEnough)
     }
 
   return result
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 internal fun DispatchLifecycleScope.launchEvery(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -125,10 +123,10 @@ internal fun Lifecycle.eventFlow(
   // immediately send the current state.  Otherwise there's no events until the lifecycle changes.
   flow.tryEmit(currentState)
 
-  val observer = LifecycleEventObserver { _, _ ->
+  val observer = LifecycleEventObserver { owner, _ ->
 
     // send true if the state is high enough, false if not
-    flow.tryEmit(currentState)
+    flow.tryEmit(owner.lifecycle.currentState)
   }
 
   addObserver(observer)
