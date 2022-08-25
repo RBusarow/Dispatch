@@ -33,6 +33,8 @@ public final class dispatch/android/espresso/IdlingDispatcher : kotlinx/coroutin
 
 public final class dispatch/android/espresso/IdlingDispatcherProvider : dispatch/core/DispatcherProvider {
 	public fun <init> (Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;Ldispatch/android/espresso/IdlingDispatcher;)V
+	public fun copy (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/android/espresso/IdlingDispatcherProvider;
+	public synthetic fun copy (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/core/DispatcherProvider;
 	public fun fold (Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
 	public fun get (Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
 	public fun getDefault ()Ldispatch/android/espresso/IdlingDispatcher;

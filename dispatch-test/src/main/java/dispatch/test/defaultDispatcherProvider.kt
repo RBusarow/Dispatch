@@ -23,7 +23,7 @@ import dispatch.core.DispatcherProvider
  * delegates to the [Dispatchers][kotlinx.coroutines.Dispatchers] singleton object properties.
  *
  * @see DefaultDispatcherProvider
- * @sample dispatch.test.samples.DefaultDispatcherProviderExtensionSample.defaultDispatcherProviderResetSample
+ * @sample dispatch.test.samples.DefaultDispatcherProviderExtensionSample.resetSample
  */
 @Suppress("unused")
 public fun DefaultDispatcherProvider.reset() {

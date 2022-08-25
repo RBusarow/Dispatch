@@ -55,14 +55,13 @@ internal class FlowTest {
 
     originalDispatcher = RecordingDispatcher("origin")
 
-    testProvider = object : DispatcherProvider {
-
-      override val default: CoroutineDispatcher = RecordingDispatcher("default")
-      override val io: CoroutineDispatcher = RecordingDispatcher("io")
-      override val main: CoroutineDispatcher = RecordingDispatcher("main")
-      override val mainImmediate: CoroutineDispatcher = RecordingDispatcher("mainImmediate")
-      override val unconfined: CoroutineDispatcher = RecordingDispatcher("unconfined")
-    }
+    testProvider = DispatcherProvider(
+      default = RecordingDispatcher("default"),
+      io = RecordingDispatcher("io"),
+      main = RecordingDispatcher("main"),
+      mainImmediate = RecordingDispatcher("mainImmediate"),
+      unconfined = RecordingDispatcher("unconfined")
+    )
 
     originalScope = CoroutineScope(originalDispatcher + testProvider)
   }
