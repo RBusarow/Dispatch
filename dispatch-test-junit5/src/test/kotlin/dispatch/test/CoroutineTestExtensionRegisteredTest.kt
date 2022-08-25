@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,19 +15,24 @@
 
 package dispatch.test
 
-import dispatch.core.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
-import org.junit.jupiter.api.extension.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
+import kotlin.coroutines.ContinuationInterceptor
 
 @ExperimentalCoroutinesApi
 class CoroutineTestExtensionRegisteredTest {
 
   val customScope = TestProvidedCoroutineScope()
-  @JvmField @RegisterExtension val customFactoryExtension = coroutineTestExtension { customScope }
-  @JvmField @RegisterExtension val defaultExtension = CoroutineTestExtension()
+
+  @JvmField @RegisterExtension
+  val customFactoryExtension = coroutineTestExtension { customScope }
+
+  @JvmField @RegisterExtension
+  val defaultExtension = CoroutineTestExtension()
 
   @Test
   fun `a no-arg extension should use a default TestProvidedCoroutineScope`() {

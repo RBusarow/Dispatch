@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,24 @@
 
 package dispatch.test
 
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.rules.*
-import org.junit.runner.*
-import kotlin.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.DelayController
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.UncaughtExceptionCaptor
+import kotlinx.coroutines.test.UncompletedCoroutinesError
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.CoroutineContext
 
 /**
- * A basic JUnit 4 [TestRule] which creates a new [TestProvidedCoroutineScope] for each test,
- * sets [Dispatchers.Main], and calls [cleanupTestCoroutines] afterwards.
+ * A basic JUnit 4 [TestRule] which creates a new [TestProvidedCoroutineScope] for each test, sets
+ * [Dispatchers.Main], and calls [cleanupTestCoroutines] afterwards.
  *
  * The rule itself implements [TestProvidedCoroutineScope], so it can be used as follows:
  *
@@ -31,8 +40,8 @@ import kotlin.coroutines.*
  * * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
  *
  * ### After the test:
- * * [cleanupTestCoroutines] is called to ensure there are no leaking coroutines.  Any unfinished coroutine
- * will throw an [UncompletedCoroutinesError].
+ * * [cleanupTestCoroutines] is called to ensure there are no leaking coroutines. Any unfinished
+ *   coroutine will throw an [UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 4.
@@ -45,9 +54,9 @@ import kotlin.coroutines.*
  * }
  * ```
  *
- * @param factory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
- * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
- *
+ * @param factory *optional* factory for a custom [TestProvidedCoroutineScope]. If a factory is not
+ *     provided, the resultant scope uses the same [TestCoroutineDispatcher] for each property in
+ *     its [TestDispatcherProvider]
  * @see TestRule
  * @see TestCoroutineScope
  * @see TestProvidedCoroutineScope
@@ -69,16 +78,12 @@ public class TestCoroutineRule(
   public val dispatcher: TestCoroutineDispatcher =
     coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun starting(description: Description?) {
     Dispatchers.setMain(dispatcher)
   }
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun finished(description: Description?) {
     cleanupTestCoroutines()
     Dispatchers.resetMain()

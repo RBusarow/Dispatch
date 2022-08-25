@@ -30,15 +30,15 @@ import kotlin.coroutines.EmptyCoroutineContext
  * Delegates to [runBlocking], but injects a [DispatcherProvider] into the created [CoroutineScope].
  *
  * The resultant [CoroutineContext] will use a
- * [BlockingEventLoop][kotlinx.coroutines.BlockingEventLoop] as its default
- * [ContinuationInterceptor].
+ * [BlockingEventLoop][kotlinx.coroutines.BlockingEventLoop]
+ * as its default [ContinuationInterceptor].
  *
  * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
  * created using the [kotlinx.coroutines.BlockingEventLoop] interceptor.
  *
  * @param context The base `CoroutineContext` which will be modified to use a
- *   [TestCoroutineDispatcher] and [TestDispatcherProvider].
- *   [EmptyCoroutineContext] is used if one is not provided.
+ *     [TestCoroutineDispatcher] and [TestDispatcherProvider]. [EmptyCoroutineContext] is used if
+ *     one is not provided.
  * @param block the action to be performed
  * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
  * @see runBlocking
@@ -70,8 +70,8 @@ public fun runBlockingProvided(
  * created using the `TestCoroutineDispatcher`.
  *
  * @param context The base `CoroutineContext` which will be modified to use a
- *   `TestCoroutineDispatcher` and `TestDispatcherProvider`.
- *   [EmptyCoroutineContext] is used if one is not provided.
+ *     `TestCoroutineDispatcher` and `TestDispatcherProvider`. [EmptyCoroutineContext] is used if
+ *     one is not provided.
  * @param testBody the action to be performed
  * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @see runBlockingTest

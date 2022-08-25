@@ -17,11 +17,13 @@
 
 package dispatch.android.viewmodel.samples
 
-import dispatch.core.*
-import io.kotest.matchers.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.core.DispatcherProvider
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
+import org.junit.jupiter.api.Test
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 typealias Sample = Test
 

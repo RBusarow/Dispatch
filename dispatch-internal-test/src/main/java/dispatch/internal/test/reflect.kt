@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,10 +15,12 @@
 
 package dispatch.internal.test
 
-import kotlin.reflect.full.*
-import kotlin.reflect.jvm.*
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
 
-public inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(name: String): R {
+public inline fun <reified T : Any, reified R : Any> T.getPrivateObjectFieldByName(
+  name: String
+): R {
 
   val kClass = T::class
 

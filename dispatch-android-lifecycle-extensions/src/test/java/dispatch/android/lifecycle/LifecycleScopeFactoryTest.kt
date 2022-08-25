@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,17 +15,32 @@
 
 package dispatch.android.lifecycle
 
-import dispatch.core.*
-import dispatch.internal.test.*
-import dispatch.internal.test.android.*
-import hermit.test.*
-import hermit.test.junit.*
-import io.kotest.matchers.*
-import io.kotest.matchers.types.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.jupiter.api.*
-import kotlin.coroutines.*
+import dispatch.core.DefaultDispatcherProvider
+import dispatch.core.DispatcherProvider
+import dispatch.core.MainImmediateCoroutineScope
+import dispatch.core.mainDispatcher
+import dispatch.internal.test.android.FakeLifecycleOwner
+import dispatch.internal.test.android.LiveDataTest
+import dispatch.internal.test.shouldBeSupervisorJob
+import dispatch.internal.test.shouldEqualFolded
+import hermit.test.junit.HermitJUnit5
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeInstanceOf
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import kotlin.coroutines.ContinuationInterceptor
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi

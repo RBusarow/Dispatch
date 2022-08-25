@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,28 +15,48 @@
 
 package dispatch.test
 
-import kotlinx.atomicfu.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.*
-import org.junit.jupiter.api.extension.*
-import org.junit.jupiter.api.extension.support.*
-import kotlin.coroutines.*
+import dispatch.test.CoroutineTestExtension.ScopeFactory
+import dispatch.test.internal.ResetManager
+import dispatch.test.internal.getAnnotationRecursive
+import dispatch.test.internal.resets
+import dispatch.test.internal.resolutionException
+import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.UncompletedCoroutinesError
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.extension.AfterEachCallback
+import org.junit.jupiter.api.extension.BeforeEachCallback
+import org.junit.jupiter.api.extension.Extension
+import org.junit.jupiter.api.extension.ExtensionContext
+import org.junit.jupiter.api.extension.ParameterContext
+import org.junit.jupiter.api.extension.ParameterResolver
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.junit.jupiter.api.extension.support.TypeBasedParameterResolver
+import kotlin.coroutines.CoroutineContext
 
 /**
- * JUnit 5 [ParameterResolver] [extension][Extension] for injecting and managing a [TestProvidedCoroutineScope] in a test instance.
- * This creates a new instance of [TestProvidedCoroutineScope] each time the scope is injected, optionally using a custom [ScopeFactory].
+ * JUnit 5 [ParameterResolver] [extension][Extension] for injecting and managing a
+ * [TestProvidedCoroutineScope] in a test instance. This creates a new instance of
+ * [TestProvidedCoroutineScope] each time the scope is injected, optionally using a custom
+ * [ScopeFactory].
  *
- * If this extension is initialized via [RegisterExtension], there is also a [scope] property which is automatically managed.
+ * If this extension is initialized via [RegisterExtension], there is also a [scope] property which
+ * is automatically managed.
  *
  * ### Before Each:
  * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
  *
  * ### After Each:
- * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are no leaking coroutines.  Any unfinished coroutine
- * will throw an [UncompletedCoroutinesError].
+ * * [cleanupTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called to ensure there are
+ *   no leaking coroutines. Any unfinished coroutine will throw an [UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 5.
+ *
  * ```kotlin
  * dependencies {
  *   testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
@@ -45,8 +65,9 @@ import kotlin.coroutines.*
  *
  * @see CoroutineTestExtension
  * @see CoroutineTest
- * @param scopeFactory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
- * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
+ * @param scopeFactory *optional* factory for a custom [TestProvidedCoroutineScope]. If a factory is
+ *     not provided, the resultant scope uses the same [TestCoroutineDispatcher] for each property
+ *     in its [TestDispatcherProvider]
  * @sample dispatch.test.samples.RegisterSample
  * @sample dispatch.test.samples.RegisterWithFactorySample
  * @sample dispatch.test.samples.CoroutineTestExtensionExtendWithSample
@@ -72,10 +93,12 @@ public class CoroutineTestExtension(
   }
 
   /**
-   * A lazy `TestProvidedCoroutineScope` instance which is reset via [cleanUpTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] after each test.
+   * A lazy `TestProvidedCoroutineScope` instance which is reset via
+   * [cleanUpTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] after each test.
    *
    * ### Before Each:
-   * - If accessed, [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
+   * - If accessed, [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the
+   *   [CoroutineContext].
    *
    * ### After Each:
    * - [cleanUpTestCoroutines][TestCoroutineScope.cleanupTestCoroutines] is called.
@@ -87,9 +110,7 @@ public class CoroutineTestExtension(
 
   private val contextScopeMap = mutableMapOf<ExtensionContext, TestProvidedCoroutineScope>()
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun resolveParameter(
     parameterContext: ParameterContext,
     extensionContext: ExtensionContext
@@ -100,7 +121,6 @@ public class CoroutineTestExtension(
     // if the extension is registered via @RegisterExtension,
     // then its factory would be passed at instance creation and is already set
     if (annotation != null) {
-      @Suppress("UNCHECKED_CAST")
       val factoryClass = annotation.scopeFactory
 
       val factory = factoryClass.java.getConstructor().newInstance() as? ScopeFactory
@@ -112,9 +132,7 @@ public class CoroutineTestExtension(
     return scope
   }
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun beforeEach(context: ExtensionContext) {
 
     /*
@@ -126,9 +144,7 @@ public class CoroutineTestExtension(
     Dispatchers.setMain(scope.dispatcherProvider.main)
   }
 
-  /**
-   * @suppress
-   */
+  /** @suppress */
   override fun afterEach(context: ExtensionContext) {
 
     if (lazyScope.isInitialized()) {
@@ -144,16 +160,15 @@ public class CoroutineTestExtension(
    *
    * In order to provide a custom implementation of [TestProvidedCoroutineScope]:
    * 1. Create a custom factory which has a default constructor and extends this `ScopeFactory`
-   * 2. Annotate your test class with [CoroutineTest] and pass your custom factory's `KClass` in as its parameter.
+   * 2. Annotate your test class with [CoroutineTest] and pass your custom factory's `KClass` in as
+   *    its parameter.
    *
    * @sample dispatch.test.samples.CoroutineTestNamedFactorySample
    */
   @ExperimentalCoroutinesApi
   public open class ScopeFactory {
 
-    /**
-     * Creates an instance of [TestProvidedCoroutineScope].  Uses the no-arg factory by default.
-     */
+    /** Creates an instance of [TestProvidedCoroutineScope]. Uses the no-arg factory by default. */
     public open fun create(): TestProvidedCoroutineScope =
       TestProvidedCoroutineScope()
   }
@@ -164,15 +179,17 @@ public class CoroutineTestExtension(
  *
  * @see CoroutineTestExtension
  * @see CoroutineTest
- * @param scopeFactory *optional* factory for a custom [TestProvidedCoroutineScope].  If a factory is not provided,
- * the resultant scope uses the same [TestCoroutineDispatcher] for each property in its [TestDispatcherProvider]
+ * @param scopeFactory *optional* factory for a custom [TestProvidedCoroutineScope]. If a factory is
+ *     not provided, the resultant scope uses the same [TestCoroutineDispatcher] for each property
+ *     in its [TestDispatcherProvider]
  * @sample dispatch.test.samples.RegisterSample
  * @sample dispatch.test.samples.RegisterWithFactorySample
  */
 @ExperimentalCoroutinesApi
 public inline fun coroutineTestExtension(
   /**
-   * This factory lambda creates the [TestProvidedCoroutineScope] which is managed by the [CoroutineTestExtension].
+   * This factory lambda creates the [TestProvidedCoroutineScope] which is managed by the
+   * [CoroutineTestExtension].
    *
    * By default, it creates a standard [TestProvidedCoroutineScope].
    */

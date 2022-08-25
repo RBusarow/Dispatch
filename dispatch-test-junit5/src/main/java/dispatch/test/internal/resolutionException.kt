@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,19 +15,21 @@
 
 package dispatch.test.internal
 
-import dispatch.test.*
-import kotlinx.coroutines.*
-import org.junit.jupiter.api.extension.*
-import kotlin.reflect.*
+import dispatch.test.CoroutineTest
+import dispatch.test.CoroutineTestExtension
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.jupiter.api.extension.ParameterResolutionException
+import kotlin.reflect.KClass
 
 @ExperimentalCoroutinesApi
 internal fun resolutionException(factoryClass: KClass<*>): ParameterResolutionException {
   return ParameterResolutionException(
     """A ${CoroutineTest::class.simpleName} annotation was found with an incompatible factory type.
-              |
-              |The specified factory must be <${CoroutineTestExtension.ScopeFactory::class.qualifiedName}> or a subtype.
-              |
-              |The provided factory type was:  <${factoryClass.qualifiedName}>
-              |""".trimMargin()
+    |
+    |The specified factory must be <${CoroutineTestExtension.ScopeFactory::class.qualifiedName}> or a subtype.
+    |
+    |The provided factory type was:  <${factoryClass.qualifiedName}>
+    |
+    """.trimMargin()
   )
 }

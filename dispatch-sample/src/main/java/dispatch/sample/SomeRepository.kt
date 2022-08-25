@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +15,14 @@
 
 package dispatch.sample
 
-import dispatch.core.*
-import kotlinx.coroutines.*
+import dispatch.core.IOCoroutineScope
+import dispatch.core.asyncIO
+import dispatch.core.withIO
+import kotlinx.coroutines.delay
 
 /**
- * This would normally be a singleton,
- * but we don't have a DI framework here, so we'll just _suspend_ disbelief.
+ * This would normally be a singleton, but we don't have a DI framework here, so we'll just
+ * _suspend_ disbelief.
  */
 class SomeRepository(private val coroutineScope: IOCoroutineScope) {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Rick Busarow
+ * Copyright (C) 2022 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,22 +15,30 @@
 
 package dispatch.android.espresso
 
-import androidx.test.espresso.*
-import io.kotest.matchers.*
-import io.mockk.*
-import org.junit.*
-import org.junit.rules.*
-import org.junit.runner.*
-import org.robolectric.*
+import androidx.test.espresso.IdlingRegistry
+import io.kotest.matchers.shouldBe
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.mockkStatic
+import io.mockk.unmockkStatic
+import io.mockk.verify
+import org.junit.Rule
+import org.junit.Test
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class IdlingDispatcherProviderRuleTest {
 
   val idlingDispatcherProvider = IdlingDispatcherProvider()
 
-  @JvmField @Rule val mockkRule = EspressoMockingWrapper()
+  @JvmField @Rule
+  val mockkRule = EspressoMockingWrapper()
 
-  @JvmField @Rule val idlingRule = IdlingDispatcherProviderRule { idlingDispatcherProvider }
+  @JvmField @Rule
+  val idlingRule = IdlingDispatcherProviderRule { idlingDispatcherProvider }
 
   @Test
   fun `rule's DispatcherProvider should be what is returned by the factory`() {
