@@ -15,7 +15,6 @@
 @file:Suppress("MagicNumber")
 
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import formatting.sortDependencies
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import kotlinx.validation.ApiValidationExtension
@@ -114,8 +113,6 @@ tasks.withType<Detekt> {
   this.jvmTarget = "1.8"
 }
 
-apply(plugin = "binary-compatibility-validator")
-
 extensions.configure<ApiValidationExtension> {
 
   /** Packages that are excluded from public API dumps even if they contain public API. */
@@ -127,16 +124,6 @@ extensions.configure<ApiValidationExtension> {
     "dispatch-internal-test-android",
     "dispatch-sample"
   )
-}
-
-val sortDependencies by tasks.registering {
-
-  description = "sort all dependencies in a gradle kts file"
-  group = "refactor"
-
-  doLast {
-    sortDependencies()
-  }
 }
 
 dependencyAnalysis {
