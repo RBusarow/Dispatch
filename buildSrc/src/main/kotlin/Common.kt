@@ -15,7 +15,6 @@
 
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
-import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.systemProperties
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -29,7 +28,6 @@ fun Project.common() {
     }
 
     systemProperties(
-
       // auto-discover and apply any Junit5 extensions in the classpath
       // "junit.jupiter.extensions.autodetection.enabled" to true,
 
@@ -40,16 +38,17 @@ fun Project.common() {
       "junit.jupiter.testinstance.lifecycle.default" to "per_class",
 
       // https://junit.org/junit5/docs/snapshot/user-guide/#writing-tests-parallel-execution-config-properties
-      // Allow unit tests to run in parallel
-      "junit.jupiter.execution.parallel.enabled" to false,
-      "junit.jupiter.execution.parallel.mode.default" to "same_thread",
-      "junit.jupiter.execution.parallel.mode.classes.default" to "same_thread",
+      // run all tests concurrently
+      // this might wind up creating flakes thanks to Dispatchers.setMain
+      "junit.jupiter.execution.parallel.enabled" to true,
+      "junit.jupiter.execution.parallel.mode.default" to "concurrent",
+      "junit.jupiter.execution.parallel.mode.classes.default" to "concurrent",
 
       "junit.jupiter.execution.parallel.config.strategy" to "dynamic",
       "junit.jupiter.execution.parallel.config.dynamic.factor" to 1.0
     )
 
-    // Allow unit tests to run in parallel
+    // Allow Junit 4 tests to run in parallel
     maxParallelForks = Runtime.getRuntime().availableProcessors()
   }
 
