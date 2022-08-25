@@ -14,7 +14,7 @@ hermit = "0.9.6"
 jUnit = "5.9.0"
 kotest = "5.4.2"
 kotlin = "1.7.10"
-ktlint-gradle = "10.3.0"
+ktlint-gradle = "11.0.0"
 
 sonarPlugin = "2.6.1"
 spotless = "5.10.1"
