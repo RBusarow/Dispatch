@@ -28,12 +28,16 @@ import kotlin.coroutines.EmptyCoroutineContext
  * to the coroutine as a [Job]. The coroutine is cancelled when the resulting job is
  * [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default**
- * [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.default`) to call
- * `launch(...)`.
+ * Uses the [default][DispatcherProvider.default] [dispatcher][CoroutineDispatcher].
  *
- * The `default` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.LaunchSample.launchDefaultSample
  * @see launch
@@ -42,17 +46,23 @@ public fun CoroutineScope.launchDefault(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launch(context + coroutineContext.dispatcherProvider.default, start, block)
+): Job = launch(context + getProvider(context).default, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference
  * to the coroutine as a [Job]. The coroutine is cancelled when the resulting job is
  * [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **io**
- * [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.io`) to call `launch(...)`.
+ * Uses the [io][DispatcherProvider.io] [dispatcher][CoroutineDispatcher].
  *
- * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.LaunchSample.launchIOSample
  * @see launch
@@ -61,19 +71,23 @@ public fun CoroutineScope.launchIO(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launch(context + coroutineContext.dispatcherProvider.io, start, block)
+): Job = launch(context + getProvider(context).io, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference
  * to the coroutine as a [Job]. The coroutine is cancelled when the resulting job is
  * [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **main**
- * [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.main`) to call
- * `launch(...)`.
+ * Uses the [main][DispatcherProvider.main] [dispatcher][CoroutineDispatcher].
  *
- * The `main` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.LaunchSample.launchMainSample
  * @see launch
@@ -82,19 +96,23 @@ public fun CoroutineScope.launchMain(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launch(context + coroutineContext.dispatcherProvider.main, start, block)
+): Job = launch(context + getProvider(context).main, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference
  * to the coroutine as a [Job]. The coroutine is cancelled when the resulting job is
  * [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver,
- * then uses its **mainImmediate** [CoroutineDispatcher] property
- * (`coroutineContext.dispatcherProvider.mainImmediate`) to call `launch(...)`.
+ * Uses the [mainImmediate][DispatcherProvider.mainImmediate] [dispatcher][CoroutineDispatcher].
  *
- * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.LaunchSample.launchMainImmediateSample
  * @see launch
@@ -103,19 +121,23 @@ public fun CoroutineScope.launchMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launch(context + coroutineContext.dispatcherProvider.mainImmediate, start, block)
+): Job = launch(context + getProvider(context).mainImmediate, start, block)
 
 /**
  * Launches a new coroutine without blocking the current thread and returns a reference
  * to the coroutine as a [Job]. The coroutine is cancelled when the resulting job is
  * [cancelled][Job.cancel].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its
- * **unconfined** [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.unconfined`)
- * to call `launch(...)`.
+ * Uses the [unconfined][DispatcherProvider.unconfined] [dispatcher][CoroutineDispatcher].
  *
- * The `unconfined` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.LaunchSample.launchUnconfinedSample
  * @see launch
@@ -124,4 +146,8 @@ public fun CoroutineScope.launchUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> Unit
-): Job = launch(context + coroutineContext.dispatcherProvider.unconfined, start, block)
+): Job = launch(context + getProvider(context).unconfined, start, block)
+
+internal fun CoroutineScope.getProvider(
+  context: CoroutineContext
+): DispatcherProvider = context[DispatcherProvider] ?: coroutineContext.dispatcherProvider

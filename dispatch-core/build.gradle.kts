@@ -28,7 +28,6 @@ dependencies {
   testImplementation(libs.junit.jupiter)
   testImplementation(libs.kotest.assertions)
   testImplementation(libs.kotest.properties)
-  testImplementation(libs.kotest.runner)
   testImplementation(libs.kotlin.test.common)
   testImplementation(libs.kotlin.test.core)
   testImplementation(libs.kotlinx.coroutines.test)
