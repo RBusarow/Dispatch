@@ -17,20 +17,25 @@ package dispatch.core
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-import kotlin.coroutines.coroutineContext
 
 /**
  * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
  *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
- * its **default** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and returns
- * the result.
+ * Uses the [default][DispatcherProvider.default] [dispatcher][CoroutineDispatcher].
  *
- * The *default* property always corresponds to the `DispatcherProvider` of the current coroutine.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.WithContextSample.withDefaultSample
  * @see withContext
@@ -39,7 +44,7 @@ public suspend fun <T> withDefault(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T {
-  val newContext = context + coroutineContext.dispatcherProvider.default
+  val newContext = context + getProvider(context).default
   return withContext(newContext, block)
 }
 
@@ -47,11 +52,16 @@ public suspend fun <T> withDefault(
  * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
  *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
- * its **io** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and returns the
- * result.
+ * Uses the [io][DispatcherProvider.io] [dispatcher][CoroutineDispatcher].
  *
- * The `io` property always corresponds to the `DispatcherProvider` of the current coroutine.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.WithContextSample.withIOSample
  * @see withContext
@@ -60,7 +70,7 @@ public suspend fun <T> withIO(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T {
-  val newContext = context + coroutineContext.dispatcherProvider.io
+  val newContext = context + getProvider(context).io
   return withContext(newContext, block)
 }
 
@@ -68,11 +78,16 @@ public suspend fun <T> withIO(
  * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
  *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
- * its **main** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and returns the
- * result.
+ * Uses the [main][DispatcherProvider.main] [dispatcher][CoroutineDispatcher].
  *
- * The `main` property always corresponds to the `DispatcherProvider` of the current coroutine.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.WithContextSample.withMainSample
  * @see withContext
@@ -81,7 +96,7 @@ public suspend fun <T> withMain(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T {
-  val newContext = context + coroutineContext.dispatcherProvider.main
+  val newContext = context + getProvider(context).main
   return withContext(newContext, block)
 }
 
@@ -89,12 +104,16 @@ public suspend fun <T> withMain(
  * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
  *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then uses
- * its **mainImmediate** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and
- * returns the result.
+ * Uses the [mainImmediate][DispatcherProvider.mainImmediate] [dispatcher][CoroutineDispatcher].
  *
- * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current
- * coroutine.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.WithContextSample.withMainImmediateSample
  * @see withContext
@@ -103,7 +122,7 @@ public suspend fun <T> withMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T {
-  val newContext = context + coroutineContext.dispatcherProvider.mainImmediate
+  val newContext = context + getProvider(context).mainImmediate
   return withContext(newContext, block)
 }
 
@@ -111,12 +130,16 @@ public suspend fun <T> withMainImmediate(
  * Calls the specified suspending block with a given coroutine context, suspends until it completes,
  * and returns the result.
  *
- * Extracts the [DispatcherProvider] from the `coroutineContext` of the current coroutine, then
- * uses its **unconfined** [CoroutineDispatcher] property to call `withContext(theDispatcher)`, and
- * returns the result.
+ * Uses the [unconfined][DispatcherProvider.unconfined] [dispatcher][CoroutineDispatcher].
  *
- * The `unconfined` property always corresponds to the `DispatcherProvider` of the current
- * coroutine.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.WithContextSample.withUnconfinedSample
  * @see withContext
@@ -125,6 +148,11 @@ public suspend fun <T> withUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T {
-  val newContext = context + coroutineContext.dispatcherProvider.unconfined
+  val newContext = context + getProvider(context).unconfined
   return withContext(newContext, block)
 }
+
+internal suspend fun getProvider(
+  newContext: CoroutineContext
+): DispatcherProvider = newContext[DispatcherProvider]
+  ?: currentCoroutineContext().dispatcherProvider

@@ -28,12 +28,16 @@ import kotlin.coroutines.EmptyCoroutineContext
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **default**
- * [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.default`) to call
- * `async(...)`.
+ * Uses the [default][DispatcherProvider.default] [dispatcher][CoroutineDispatcher].
  *
- * The `default` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.AsyncSample.asyncDefaultSample
  * @see async
@@ -42,15 +46,21 @@ public fun <T> CoroutineScope.asyncDefault(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = async(context + coroutineContext.dispatcherProvider.default, start, block)
+): Deferred<T> = async(context + getProvider(context).default, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **io**
- * [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.io`) to call `async(...)`.
+ * Uses the [io][DispatcherProvider.io] [dispatcher][CoroutineDispatcher].
  *
- * The `io` property always corresponds to the `DispatcherProvider` of the current `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.AsyncSample.asyncIOSample
  * @see async
@@ -59,16 +69,21 @@ public fun <T> CoroutineScope.asyncIO(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = async(context + coroutineContext.dispatcherProvider.io, start, block)
+): Deferred<T> = async(context + getProvider(context).io, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its **main**
- * [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.main`) to call `async(...)`.
+ * Uses the [main][DispatcherProvider.main] [dispatcher][CoroutineDispatcher].
  *
- * The `main` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.AsyncSample.asyncMainSample
  * @see async
@@ -77,17 +92,21 @@ public fun <T> CoroutineScope.asyncMain(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = async(context + coroutineContext.dispatcherProvider.main, start, block)
+): Deferred<T> = async(context + getProvider(context).main, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver,
- * then uses its **mainImmediate** [CoroutineDispatcher] property
- * (`coroutineContext.dispatcherProvider.mainImmediate`) to call `async(...)`.
+ * Uses the [mainImmediate][DispatcherProvider.mainImmediate] [dispatcher][CoroutineDispatcher].
  *
- * The `mainImmediate` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.AsyncSample.asyncMainImmediateSample
  * @see async
@@ -96,17 +115,21 @@ public fun <T> CoroutineScope.asyncMainImmediate(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = async(context + coroutineContext.dispatcherProvider.mainImmediate, start, block)
+): Deferred<T> = async(context + getProvider(context).mainImmediate, start, block)
 
 /**
  * Creates a coroutine and returns its future result as an implementation of [Deferred].
  *
- * Extracts the [DispatcherProvider] from the [CoroutineScope] receiver, then uses its
- * **unconfined** [CoroutineDispatcher] property (`coroutineContext.dispatcherProvider.unconfined`)
- * to call `async(...)`.
+ * Uses the [unconfined][DispatcherProvider.unconfined] [dispatcher][CoroutineDispatcher].
  *
- * The `unconfined` property always corresponds to the `DispatcherProvider` of the current
- * `CoroutineScope`.
+ * The specific `dispatcherProvider` instance to be used is determined *after* the [context]
+ * parameter has been [folded][CoroutineContext.fold] into the receiver's context.
+ *
+ * The selected [DispatcherProvider] is essentially the first non-null result from:
+ * - the [context] parameter
+ * - the receiver [CoroutineScope]'s [coroutineContext][CoroutineScope.coroutineContext]
+ * - [DefaultDispatcherProvider.get] Extracts the [DispatcherProvider] from the [CoroutineScope]
+ *   receiver
  *
  * @sample dispatch.core.samples.AsyncSample.asyncUnconfinedSample
  * @see async
@@ -115,4 +138,4 @@ public fun <T> CoroutineScope.asyncUnconfined(
   context: CoroutineContext = EmptyCoroutineContext,
   start: CoroutineStart = CoroutineStart.DEFAULT,
   block: suspend CoroutineScope.() -> T
-): Deferred<T> = async(context + coroutineContext.dispatcherProvider.unconfined, start, block)
+): Deferred<T> = async(context + getProvider(context).unconfined, start, block)
