@@ -52,7 +52,7 @@ public fun MainImmediateContext(): CoroutineContext {
   replaceWith = ReplaceWith("DispatchLifecycleScope")
 )
 @Suppress("UNUSED")
-typealias LifecycleCoroutineScope = DispatchLifecycleScope
+public typealias LifecycleCoroutineScope = DispatchLifecycleScope
 
 /**
  * [MainImmediateCoroutineScope] which is tied to a [Lifecycle].
@@ -67,17 +67,17 @@ typealias LifecycleCoroutineScope = DispatchLifecycleScope
  *    added.
  * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
  * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match the
- *    one referenced by the [possibly new] [DispatcherProvider.mainImmediate]
- *    property, it will be updated to match.
+ *    one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it will be
+ *    updated to match.
  *
  * @property lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
  * @param coroutineContext *optional* the source CoroutineContext which will be converted to a
- *   [MainImmediateCoroutineScope]. Its [Elements][CoroutineContext.Element] will be re-used.
+ *     [MainImmediateCoroutineScope]. Its [Elements][CoroutineContext.Element] will be re-used.
  * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.defaultSample
  * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.scopeFromContext
  */
-open class DispatchLifecycleScope(
-  val lifecycle: Lifecycle,
+public open class DispatchLifecycleScope(
+  public val lifecycle: Lifecycle,
   coroutineContext: CoroutineContext = MainImmediateContext()
 ) : MainImmediateCoroutineScope by MainImmediateCoroutineScope(coroutineContext) {
 
@@ -96,16 +96,17 @@ open class DispatchLifecycleScope(
    * [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.CREATED].
    *
    * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
-   *   coroutine.
+   *     coroutine.
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the
-   *   minimum state or re-entering. Uses [MinimumStatePolicy.RESTART_EVERY] by default. Note that
-   *   for a normal Lifecycle, there is no returning from below a [CREATED][Lifecycle.State.CREATED]
-   *   state, so the [minimumStatePolicy][MinimumStatePolicy] is largely irrelevant.
+   *     minimum state or re-entering. Uses [MinimumStatePolicy.RESTART_EVERY] by default. Note that
+   *     for a normal Lifecycle, there is no returning from below a
+   *     [CREATED][Lifecycle.State.CREATED] state, so the [minimumStatePolicy][MinimumStatePolicy]
+   *     is largely irrelevant.
    * @param block the action to be performed
    * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.launchOnCreateOnce
    * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.onCreateRestarting
    */
-  fun launchOnCreate(
+  public fun launchOnCreate(
     context: CoroutineContext = EmptyCoroutineContext,
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
     block: suspend CoroutineScope.() -> Unit
@@ -122,14 +123,14 @@ open class DispatchLifecycleScope(
    * [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.STARTED].
    *
    * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
-   *   coroutine.
+   *     coroutine.
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the
-   *   minimum state or re-entering. Uses [MinimumStatePolicy.RESTART_EVERY] by default.
+   *     minimum state or re-entering. Uses [MinimumStatePolicy.RESTART_EVERY] by default.
    * @param block the action to be performed
    * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.launchOnStartOnce
    * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.launchOnStartRestarting
    */
-  fun launchOnStart(
+  public fun launchOnStart(
     context: CoroutineContext = EmptyCoroutineContext,
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
     block: suspend CoroutineScope.() -> Unit
@@ -146,14 +147,14 @@ open class DispatchLifecycleScope(
    * [lifecycle]'s [Lifecycle.State] drops below [Lifecycle.State.RESUMED].
    *
    * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
-   *   coroutine.
+   *     coroutine.
    * @param minimumStatePolicy *optional* - the way this [Job] will behave when passing below the
-   *   minimum state or re-entering. Uses [MinimumStatePolicy.RESTART_EVERY] by default.
+   *     minimum state or re-entering. Uses [MinimumStatePolicy.RESTART_EVERY] by default.
    * @param block the action to be performed
    * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.launchOnResumeOnce
    * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.launchOnResumeRestarting
    */
-  fun launchOnResume(
+  public fun launchOnResume(
     context: CoroutineContext = EmptyCoroutineContext,
     minimumStatePolicy: MinimumStatePolicy = MinimumStatePolicy.RESTART_EVERY,
     block: suspend CoroutineScope.() -> Unit
@@ -163,7 +164,7 @@ open class DispatchLifecycleScope(
    * Describes the way a particular [Job] will behave if the [lifecycle] passes below the minimum
    * state before said [Job] has completed.
    */
-  enum class MinimumStatePolicy {
+  public enum class MinimumStatePolicy {
     /**
      * When using `CANCEL`, a coroutine will be created the first time the [lifecycle] meets the
      * minimum state, and cancelled upon dropping below it. Subsequently meeting the minimum state
@@ -190,7 +191,7 @@ open class DispatchLifecycleScope(
   }
 
   /** @suppress */
-  companion object {
+  public companion object {
 
     /**
      * [MainImmediateCoroutineScope] which is tied to a [Lifecycle].
@@ -205,16 +206,16 @@ open class DispatchLifecycleScope(
      *    added.
      * 2. If a [Job] element isn't present, a [SupervisorJob] will be added.
      * 3. If the [ContinuationInterceptor][kotlin.coroutines.ContinuationInterceptor] does not match
-     *    the one referenced by the [possibly new]
-     *    [DispatcherProvider.mainImmediate] property, it will be updated to match.
+     *    the one referenced by the [possibly new] [DispatcherProvider.mainImmediate] property, it
+     *    will be updated to match.
      *
      * @param lifecycle the lifecycle to which this [MainImmediateCoroutineScope] is linked.
      * @param coroutineScope the source CoroutineScope which will be converted to a
-     *   [MainImmediateCoroutineScope]. Its
-     *   [CoroutineContext][kotlin.coroutines.CoroutineContext] will be re-used, except:
+     *     [MainImmediateCoroutineScope]. Its [CoroutineContext][kotlin.coroutines.CoroutineContext]
+     *     will be re-used, except:
      * @sample dispatch.android.lifecycle.samples.DispatchLifecycleScope.scopeFromScope
      */
-    operator fun invoke(
+    public operator fun invoke(
       lifecycle: Lifecycle,
       coroutineScope: CoroutineScope
     ): DispatchLifecycleScope = DispatchLifecycleScope(

@@ -18,6 +18,10 @@ plugins {
   published
 }
 
+android {
+  namespace = "dispatch.android.espresso"
+}
+
 dependencies {
 
   api(libs.androidx.test.espresso.idlingResource)

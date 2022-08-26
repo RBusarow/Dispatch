@@ -13,9 +13,6 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.*
-import org.jetbrains.kotlin.gradle.dsl.*
-
 plugins {
   id("com.android.library")
   kotlin("android")
@@ -23,23 +20,12 @@ plugins {
   id("dokka")
 }
 
-commonAndroid()
-common()
+android {
 
-configure<LibraryExtension> {
-  buildFeatures {
-    buildConfig = false
-  }
-}
+  commonAndroid(project)
+  common()
 
-val testJvm by tasks.registering {
-  dependsOn("testDebugUnitTest")
-}
-
-val buildTests by tasks.registering {
-  dependsOn("assembleDebugUnitTest")
-}
-
-extensions.configure<KotlinAndroidProjectExtension> {
-  explicitApi = ExplicitApiMode.Strict
+  // don't generate BuildConfig
+  @Suppress("UnstableApiUsage")
+  buildFeatures.buildConfig = false
 }

@@ -16,7 +16,6 @@
 package dispatch.android.espresso
 
 import androidx.test.espresso.IdlingRegistry
-import dispatch.core.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import org.junit.rules.TestRule
 import org.junit.rules.TestWatcher
@@ -56,13 +55,13 @@ import org.junit.runner.Description
  * ```
  *
  * @property factory factory for a custom [IdlingDispatcherProvider]. This must be the same
- *   [DispatcherProvider] which is used to create [CoroutineScope]s in the code being tested.
+ *     [DispatcherProvider] which is used to create [CoroutineScope]s in the code being tested.
  * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeRuleSample
  * @sample dispatch.android.espresso.samples.IdlingCoroutineScopeRuleWithLifecycleSample
  * @see TestRule
  * @see IdlingRegistry
  */
-class IdlingDispatcherProviderRule(
+public class IdlingDispatcherProviderRule(
   private val factory: () -> IdlingDispatcherProvider
 ) : TestWatcher() {
 
@@ -72,7 +71,7 @@ class IdlingDispatcherProviderRule(
    * This `dispatcherProvider` should be used in all other [CoroutineScope]s for the duration of the
    * test.
    */
-  lateinit var dispatcherProvider: IdlingDispatcherProvider
+  public lateinit var dispatcherProvider: IdlingDispatcherProvider
 
   /** @suppress */
   override fun starting(description: Description) {

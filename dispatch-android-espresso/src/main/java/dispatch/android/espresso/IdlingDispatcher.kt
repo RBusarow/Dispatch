@@ -30,12 +30,12 @@ import kotlin.coroutines.CoroutineContext
  * @see IdlingResource
  * @see CoroutineDispatcher
  */
-class IdlingDispatcher(
+public class IdlingDispatcher(
   private val delegate: CoroutineDispatcher
 ) : CoroutineDispatcher() {
 
   /** The [CountingIdlingResource] which is responsible for Espresso functionality. */
-  val counter: CountingIdlingResource = CountingIdlingResource("IdlingResource for $this")
+  public val counter: CountingIdlingResource = CountingIdlingResource("IdlingResource for $this")
 
   /**
    * * true if the [counter]'s count is zero
@@ -44,7 +44,7 @@ class IdlingDispatcher(
    * @return
    */
   @Suppress("UNUSED")
-  fun isIdle(): Boolean = counter.isIdleNow
+  public fun isIdle(): Boolean = counter.isIdleNow
 
   /**
    * Counting implementation of the [dispatch][CoroutineDispatcher.dispatch] function.

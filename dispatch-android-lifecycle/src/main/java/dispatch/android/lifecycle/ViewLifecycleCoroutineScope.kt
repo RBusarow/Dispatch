@@ -29,7 +29,7 @@ import kotlin.coroutines.CoroutineContext
  * [DispatchLifecycleScope] instance which is tied to a [Fragment's][Fragment] View
  * [lifecycle][Lifecycle].
  */
-class ViewLifecycleCoroutineScope internal constructor(
+public class ViewLifecycleCoroutineScope internal constructor(
   lifecycle: Lifecycle,
   coroutineContext: CoroutineContext
 ) : DispatchLifecycleScope(lifecycle, coroutineContext) {
@@ -41,7 +41,7 @@ class ViewLifecycleCoroutineScope internal constructor(
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
-  fun <T> Flow<T>.launchOnCreate() = launchOnCreate(
+  public fun <T> Flow<T>.launchOnCreate(): Job = launchOnCreate(
     minimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
   ) { collect() }
 
@@ -52,7 +52,7 @@ class ViewLifecycleCoroutineScope internal constructor(
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
-  fun <T> Flow<T>.launchOnStart() = launchOnStart(
+  public fun <T> Flow<T>.launchOnStart(): Job = launchOnStart(
     minimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
   ) { collect() }
 
@@ -63,7 +63,7 @@ class ViewLifecycleCoroutineScope internal constructor(
    *
    * @see kotlinx.coroutines.flow.launchIn
    */
-  fun <T> Flow<T>.launchOnResume() = launchOnResume(
+  public fun <T> Flow<T>.launchOnResume(): Job = launchOnResume(
     minimumStatePolicy = MinimumStatePolicy.RESTART_EVERY
   ) { collect() }
 }
@@ -79,7 +79,7 @@ class ViewLifecycleCoroutineScope internal constructor(
  * @sample dispatch.android.lifecycle.samples.WithViewLifecycleScopeSample.sample
  */
 @ExperimentalCoroutinesApi
-fun CoroutineScope.withViewLifecycle(
+public fun CoroutineScope.withViewLifecycle(
   fragment: Fragment,
   block: ViewLifecycleCoroutineScope.() -> Unit
 ): Job {

@@ -31,6 +31,6 @@ import kotlinx.coroutines.Job
  * @sample dispatch.android.lifecycle.samples.WithViewLifecycleScopeExtensionSample.sample
  */
 @ExperimentalCoroutinesApi
-fun Fragment.withViewLifecycleScope(
+public fun Fragment.withViewLifecycleScope(
   block: ViewLifecycleCoroutineScope.() -> Unit
 ): Job = dispatchLifecycleScope.withViewLifecycle(this, block)

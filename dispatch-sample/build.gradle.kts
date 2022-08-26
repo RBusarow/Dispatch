@@ -19,9 +19,10 @@ plugins {
   id("kotlin-parcelize")
 }
 
-commonAndroid()
-
 android {
+  commonAndroid(project)
+
+  @Suppress("UnstableApiUsage")
   buildFeatures.viewBinding = true
 }
 

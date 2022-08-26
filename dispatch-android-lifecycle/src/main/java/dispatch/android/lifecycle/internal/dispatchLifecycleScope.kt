@@ -50,7 +50,6 @@ internal fun DispatchLifecycleScope.launchOn(
   RESTART_EVERY -> launchEvery(context, minimumState, block)
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 internal suspend fun <T> Lifecycle.onNext(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -82,7 +81,6 @@ internal suspend fun <T> Lifecycle.onNext(
   return result
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 internal fun DispatchLifecycleScope.launchEvery(
   context: CoroutineContext,
   minimumState: Lifecycle.State,
@@ -110,7 +108,7 @@ internal fun DispatchLifecycleScope.launchEvery(
  * Distinct Flow representing `true` if the state is at or above [minimumState], and `false` when
  * below.
  *
- * The flow ends when the lifecycle is [destroyed][Lifecycle.State.DESTROYED]
+ * The flow ends when the lifecycle is [destroyed][Lifecycle.State.DESTROYED].
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 internal fun Lifecycle.eventFlow(

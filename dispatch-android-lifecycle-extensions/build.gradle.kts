@@ -18,6 +18,10 @@ plugins {
   published
 }
 
+android {
+  namespace = "dispatch.android.lifecycle.extensions"
+}
+
 dependencies {
 
   api(libs.androidx.fragment.core)
