@@ -17,7 +17,6 @@ package dispatch.core
 
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -30,13 +29,13 @@ import kotlin.coroutines.CoroutineContext
 @ExperimentalCoroutinesApi
 internal class CoroutineScopeExtKtTest {
 
-  val provider = object : DispatcherProvider {
-    override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
-  }
+  val provider = DispatcherProvider(
+    default = TestCoroutineDispatcher(),
+    io = TestCoroutineDispatcher(),
+    main = TestCoroutineDispatcher(),
+    mainImmediate = TestCoroutineDispatcher(),
+    unconfined = TestCoroutineDispatcher()
+  )
 
   @Test
   fun `CoroutineScope default dispatcher`() {

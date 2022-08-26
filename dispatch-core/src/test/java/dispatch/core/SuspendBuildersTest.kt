@@ -17,7 +17,6 @@ package dispatch.core
 
 import dispatch.internal.test.shouldEqualFolded
 import hermit.test.junit.HermitJUnit5
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -30,23 +29,23 @@ import kotlin.coroutines.CoroutineContext
 internal class SuspendBuildersTest : HermitJUnit5() {
 
   val baseProvider by resets {
-    object : DispatcherProvider {
-      override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
-    }
+    DispatcherProvider(
+      default = TestCoroutineDispatcher(),
+      io = TestCoroutineDispatcher(),
+      main = TestCoroutineDispatcher(),
+      mainImmediate = TestCoroutineDispatcher(),
+      unconfined = TestCoroutineDispatcher()
+    )
   }
 
   val secondProvider by resets {
-    object : DispatcherProvider {
-      override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-      override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
-    }
+    DispatcherProvider(
+      default = TestCoroutineDispatcher(),
+      io = TestCoroutineDispatcher(),
+      main = TestCoroutineDispatcher(),
+      mainImmediate = TestCoroutineDispatcher(),
+      unconfined = TestCoroutineDispatcher()
+    )
   }
 
   @Nested

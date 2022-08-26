@@ -59,15 +59,38 @@ class IdlingDispatcherProvider(
    * corresponds to the [Dispatchers.Unconfined] [CoroutineDispatcher].
    */
   override val unconfined: IdlingDispatcher
-) : DispatcherProvider
+) : DispatcherProvider {
+
+  /**
+   * @return a copy of this DispatcherProvider, retaining the properties of the original if they're
+   *     not specified as arguments.
+   * @sample dispatch.core.samples.DispatcherProviderCopySample.copySample
+   */
+  override fun copy(
+    default: CoroutineDispatcher,
+    io: CoroutineDispatcher,
+    main: CoroutineDispatcher,
+    mainImmediate: CoroutineDispatcher,
+    unconfined: CoroutineDispatcher
+  ): IdlingDispatcherProvider {
+
+    return IdlingDispatcherProvider(
+      default = default as IdlingDispatcher,
+      io = io as IdlingDispatcher,
+      main = main as IdlingDispatcher,
+      mainImmediate = mainImmediate as IdlingDispatcher,
+      unconfined = unconfined as IdlingDispatcher
+    )
+  }
+}
 
 /**
  * [IdlingDispatcherProvider] factory function, which creates an instance using an existing
  * [DispatcherProvider].
  *
  * @param delegate *optional* Use this [DispatcherProvider] to create a single [IdlingDispatcher]
- *   which is used as all properties for the [IdlingDispatcherProvider].
- *   Uses [DefaultDispatcherProvider.get] if no instance provided.
+ *     which is used as all properties for the [IdlingDispatcherProvider]. Uses
+ *     [DefaultDispatcherProvider.get] if no instance provided.
  * @see IdlingResource
  * @see DispatcherProvider
  * @see IdlingDispatcher

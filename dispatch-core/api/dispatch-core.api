@@ -51,6 +51,7 @@ public final class dispatch/core/DefaultDispatcherProvider {
 
 public abstract interface class dispatch/core/DispatcherProvider : kotlin/coroutines/CoroutineContext$Element {
 	public static final field Key Ldispatch/core/DispatcherProvider$Key;
+	public abstract fun copy (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/core/DispatcherProvider;
 	public abstract fun getDefault ()Lkotlinx/coroutines/CoroutineDispatcher;
 	public abstract fun getIo ()Lkotlinx/coroutines/CoroutineDispatcher;
 	public abstract fun getKey ()Lkotlin/coroutines/CoroutineContext$Key;
@@ -60,6 +61,8 @@ public abstract interface class dispatch/core/DispatcherProvider : kotlin/corout
 }
 
 public final class dispatch/core/DispatcherProvider$DefaultImpls {
+	public static fun copy (Ldispatch/core/DispatcherProvider;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/core/DispatcherProvider;
+	public static synthetic fun copy$default (Ldispatch/core/DispatcherProvider;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;ILjava/lang/Object;)Ldispatch/core/DispatcherProvider;
 	public static fun fold (Ldispatch/core/DispatcherProvider;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
 	public static fun get (Ldispatch/core/DispatcherProvider;Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element;
 	public static fun getDefault (Ldispatch/core/DispatcherProvider;)Lkotlinx/coroutines/CoroutineDispatcher;
@@ -77,6 +80,7 @@ public final class dispatch/core/DispatcherProvider$Key : kotlin/coroutines/Coro
 
 public final class dispatch/core/DispatcherProviderKt {
 	public static final fun DispatcherProvider ()Ldispatch/core/DispatcherProvider;
+	public static final fun DispatcherProvider (Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlinx/coroutines/CoroutineDispatcher;)Ldispatch/core/DispatcherProvider;
 }
 
 public final class dispatch/core/FlowKt {

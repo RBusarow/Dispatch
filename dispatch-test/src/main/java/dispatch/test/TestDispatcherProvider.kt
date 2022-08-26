@@ -73,6 +73,26 @@ public class TestDispatcherProvider(
    */
   override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
 ) : DispatcherProvider {
+
+  /**
+   * @return a copy of this DispatcherProvider, retaining the properties of the original if they're
+   *     not specified as arguments.
+   * @sample dispatch.core.samples.DispatcherProviderCopySample.copySample
+   */
+  override fun copy(
+    default: CoroutineDispatcher,
+    io: CoroutineDispatcher,
+    main: CoroutineDispatcher,
+    mainImmediate: CoroutineDispatcher,
+    unconfined: CoroutineDispatcher
+  ): TestDispatcherProvider = TestDispatcherProvider(
+    default = default,
+    io = io,
+    main = main,
+    mainImmediate = mainImmediate,
+    unconfined = unconfined
+  )
+
   /** @suppress */
   override fun toString(): String {
     return """${this::class.java.simpleName}: default       -> $default

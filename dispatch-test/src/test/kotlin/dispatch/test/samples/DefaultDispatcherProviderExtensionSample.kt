@@ -49,7 +49,7 @@ class DefaultDispatcherProviderExtensionSample {
   }
 
   @Sample
-  fun defaultDispatcherProviderResetSample() {
+  fun resetSample() {
 
     val custom = CustomDispatcherProvider()
     DefaultDispatcherProvider.set(custom)
