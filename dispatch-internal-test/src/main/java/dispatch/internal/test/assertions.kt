@@ -16,6 +16,7 @@
 package dispatch.internal.test
 
 import dispatch.core.DispatcherProvider
+import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.shouldFail
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
@@ -25,12 +26,16 @@ import kotlinx.coroutines.Job
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 
-public fun Job.shouldBeSupervisorJob() {
+@TrimAssertion
+@Suppress("NOTHING_TO_INLINE")
+public inline fun Job.shouldBeSupervisorJob() {
 
   this::class.simpleName shouldBe "SupervisorJobImpl"
 }
 
-public infix fun Job?.shouldBeOrChildOf(other: Job?) {
+@TrimAssertion
+@Suppress("NOTHING_TO_INLINE")
+public inline infix fun Job?.shouldBeOrChildOf(other: Job?) {
 
   if (this == null) return
 
@@ -39,24 +44,65 @@ public infix fun Job?.shouldBeOrChildOf(other: Job?) {
   } else {
     other?.let { parameter ->
       parameter.children.toList() shouldContain this
-    } ?: this shouldBe other
+    } ?: (this shouldBe other)
   }
 }
 
-public infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
-  get(Job) shouldBeOrChildOf other[Job]
-  get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]
-  get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
-  get(CoroutineName) shouldBe other[CoroutineName]
-  get(DispatcherProvider) shouldBe other[DispatcherProvider]
+@TrimAssertion
+@Suppress("NOTHING_TO_INLINE")
+public inline infix fun CoroutineContext.shouldEqualFolded(other: CoroutineContext) {
+  trimAssertion {
+    assertSoftly {
+      get(Job) shouldBeOrChildOf other[Job]
+      get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]
+      get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
+      get(CoroutineName) shouldBe other[CoroutineName]
+      get(DispatcherProvider) shouldBe other[DispatcherProvider]
+    }
+  }
 }
 
+@TrimAssertion
 public infix fun CoroutineContext.shouldNotEqualFolded(other: CoroutineContext) {
-  shouldFail {
-    get(Job) shouldBeOrChildOf other[Job]
-    get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]
-    get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
-    get(CoroutineName) shouldBe other[CoroutineName]
-    get(DispatcherProvider) shouldBe other[DispatcherProvider]
+  trimAssertion {
+    shouldFail {
+      get(Job) shouldBeOrChildOf other[Job]
+      get(ContinuationInterceptor) shouldBe other[ContinuationInterceptor]
+      get(CoroutineExceptionHandler) shouldBe other[CoroutineExceptionHandler]
+      get(CoroutineName) shouldBe other[CoroutineName]
+      get(DispatcherProvider) shouldBe other[DispatcherProvider]
+    }
   }
+}
+
+public annotation class TrimAssertion
+
+public inline fun <T> trimAssertion(testAction: () -> T): T {
+  return try {
+    testAction()
+  } catch (error: Throwable) {
+    throw AssertionError(error.message, error)
+      .apply {
+        stackTrace = error.stackTrace
+          .asSequence()
+          .filterNot { it.isSuppressed() }
+          .filterNot { it.className.startsWith("io.kotest") }
+          .filterNot { it.className.startsWith("kotlin.coroutines") }
+          .filterNot { it.className.startsWith("kotlinx.coroutines") }
+          .toList()
+          .toTypedArray()
+      }
+  }
+}
+
+@TrimAssertion
+@PublishedApi
+internal fun StackTraceElement.isSuppressed(): Boolean {
+
+  val method = Class.forName(className)
+    .methods
+    .singleOrNull { it.name == methodName }
+    ?: return false
+
+  return method.isAnnotationPresent(TrimAssertion::class.java)
 }

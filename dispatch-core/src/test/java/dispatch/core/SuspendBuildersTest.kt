@@ -16,10 +16,10 @@
 package dispatch.core
 
 import dispatch.internal.test.shouldEqualFolded
+import hermit.test.junit.HermitJUnit5
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.jupiter.api.Nested
@@ -27,14 +27,26 @@ import org.junit.jupiter.api.Test
 import kotlin.coroutines.CoroutineContext
 
 @ExperimentalCoroutinesApi
-internal class SuspendBuildersTest {
+internal class SuspendBuildersTest : HermitJUnit5() {
 
-  val testProvider = object : DispatcherProvider {
-    override val default: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val io: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val main: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
-    override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+  val baseProvider by resets {
+    object : DispatcherProvider {
+      override val default: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val io: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val main: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+    }
+  }
+
+  val secondProvider by resets {
+    object : DispatcherProvider {
+      override val default: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val io: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val main: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val mainImmediate: CoroutineDispatcher = TestCoroutineDispatcher()
+      override val unconfined: CoroutineDispatcher = TestCoroutineDispatcher()
+    }
   }
 
   @Nested
@@ -44,21 +56,32 @@ internal class SuspendBuildersTest {
     fun `empty context arg should use receiver context with provided default dispatcher`() =
       runBlockingProvided {
 
-        val ctx: CoroutineContext = coroutineContext + testProvider.default
+        val ctx: CoroutineContext = coroutineContext + baseProvider.default
 
         withDefault { coroutineContext shouldEqualFolded ctx }
       }
 
     @Test
-    fun `context should not override specified provider dispatcher`() = runBlockingProvided {
+    fun `context dispatcher should not override extension function dispatcher`() =
+      runBlockingProvided {
 
-      val job = Job()
-      val ctx: CoroutineContext = coroutineContext + testProvider.default
+        val ctx: CoroutineContext = coroutineContext + baseProvider.default
 
-      withDefault(testProvider.io + job) {
-        coroutineContext shouldEqualFolded ctx + job
+        withDefault(baseProvider.io) {
+          coroutineContext shouldEqualFolded ctx
+        }
       }
-    }
+
+    @Test
+    fun `context argument provider should override extension function provider`() =
+      runBlocking(baseProvider) {
+
+        val ctx: CoroutineContext = coroutineContext + secondProvider + secondProvider.default
+
+        withDefault(secondProvider) {
+          coroutineContext shouldEqualFolded ctx
+        }
+      }
   }
 
   @Nested
@@ -68,21 +91,32 @@ internal class SuspendBuildersTest {
     fun `empty context arg should use receiver context with provided io dispatcher`() =
       runBlockingProvided {
 
-        val ctx: CoroutineContext = coroutineContext + testProvider.io
+        val ctx: CoroutineContext = coroutineContext + baseProvider.io
 
         withIO { coroutineContext shouldEqualFolded ctx }
       }
 
     @Test
-    fun `context should not override specified provider dispatcher`() = runBlockingProvided {
+    fun `context dispatcher should not override extension function dispatcher`() =
+      runBlockingProvided {
 
-      val job = Job()
-      val ctx: CoroutineContext = coroutineContext + testProvider.io
+        val ctx: CoroutineContext = coroutineContext + baseProvider.io
 
-      withIO(testProvider.default + job) {
-        coroutineContext shouldEqualFolded ctx + job
+        withIO(baseProvider.default) {
+          coroutineContext shouldEqualFolded ctx
+        }
       }
-    }
+
+    @Test
+    fun `context argument provider should override extension function provider`() =
+      runBlocking(baseProvider) {
+
+        val ctx: CoroutineContext = coroutineContext + secondProvider + secondProvider.io
+
+        withIO(secondProvider) {
+          coroutineContext shouldEqualFolded ctx
+        }
+      }
   }
 
   @Nested
@@ -92,21 +126,32 @@ internal class SuspendBuildersTest {
     fun `empty context arg should use receiver context with provided main dispatcher`() =
       runBlockingProvided {
 
-        val ctx: CoroutineContext = coroutineContext + testProvider.main
+        val ctx: CoroutineContext = coroutineContext + baseProvider.main
 
         withMain { coroutineContext shouldEqualFolded ctx }
       }
 
     @Test
-    fun `context should not override specified provider dispatcher`() = runBlockingProvided {
+    fun `context dispatcher should not override extension function dispatcher`() =
+      runBlockingProvided {
 
-      val job = Job()
-      val ctx: CoroutineContext = coroutineContext + testProvider.main
+        val ctx: CoroutineContext = coroutineContext + baseProvider.main
 
-      withMain(testProvider.default + job) {
-        coroutineContext shouldEqualFolded ctx + job
+        withMain(baseProvider.default) {
+          coroutineContext shouldEqualFolded ctx
+        }
       }
-    }
+
+    @Test
+    fun `context argument provider should override extension function provider`() =
+      runBlocking(baseProvider) {
+
+        val ctx: CoroutineContext = coroutineContext + secondProvider + secondProvider.main
+
+        withMain(secondProvider) {
+          coroutineContext shouldEqualFolded ctx
+        }
+      }
   }
 
   @Nested
@@ -116,21 +161,32 @@ internal class SuspendBuildersTest {
     fun `empty context arg should use receiver context with provided mainImmediate dispatcher`() =
       runBlockingProvided {
 
-        val ctx: CoroutineContext = coroutineContext + testProvider.mainImmediate
+        val ctx: CoroutineContext = coroutineContext + baseProvider.mainImmediate
 
         withMainImmediate { coroutineContext shouldEqualFolded ctx }
       }
 
     @Test
-    fun `context should not override specified provider dispatcher`() = runBlockingProvided {
+    fun `context dispatcher should not override extension function dispatcher`() =
+      runBlockingProvided {
 
-      val job = Job()
-      val ctx: CoroutineContext = coroutineContext + testProvider.mainImmediate
+        val ctx: CoroutineContext = coroutineContext + baseProvider.mainImmediate
 
-      withMainImmediate(testProvider.default + job) {
-        coroutineContext shouldEqualFolded ctx + job
+        withMainImmediate(baseProvider.default) {
+          coroutineContext shouldEqualFolded ctx
+        }
       }
-    }
+
+    @Test
+    fun `context argument provider should override extension function provider`() =
+      runBlocking(baseProvider) {
+
+        val ctx: CoroutineContext = coroutineContext + secondProvider + secondProvider.mainImmediate
+
+        withMainImmediate(secondProvider) {
+          coroutineContext shouldEqualFolded ctx
+        }
+      }
   }
 
   @Nested
@@ -140,24 +196,35 @@ internal class SuspendBuildersTest {
     fun `empty context arg should use receiver context with provided unconfined dispatcher`() =
       runBlockingProvided {
 
-        val ctx: CoroutineContext = coroutineContext + testProvider.unconfined
+        val ctx: CoroutineContext = coroutineContext + baseProvider.unconfined
 
         withUnconfined { coroutineContext shouldEqualFolded ctx }
       }
 
     @Test
-    fun `context should not override specified provider dispatcher`() = runBlockingProvided {
+    fun `context dispatcher should not override extension function dispatcher`() =
+      runBlockingProvided {
 
-      val job = Job()
-      val ctx: CoroutineContext = coroutineContext + testProvider.unconfined
+        val ctx: CoroutineContext = coroutineContext + baseProvider.unconfined
 
-      withUnconfined(testProvider.default + job) {
-        coroutineContext shouldEqualFolded ctx + job
+        withUnconfined(baseProvider.default) {
+          coroutineContext shouldEqualFolded ctx
+        }
       }
-    }
+
+    @Test
+    fun `context argument provider should override extension function provider`() =
+      runBlocking(baseProvider) {
+
+        val ctx: CoroutineContext = coroutineContext + secondProvider + secondProvider.unconfined
+
+        withUnconfined(secondProvider) {
+          coroutineContext shouldEqualFolded ctx
+        }
+      }
   }
 
   fun runBlockingProvided(
     block: suspend CoroutineScope.() -> Unit
-  ) = runBlocking(testProvider, block)
+  ) = runBlocking(baseProvider, block)
 }
