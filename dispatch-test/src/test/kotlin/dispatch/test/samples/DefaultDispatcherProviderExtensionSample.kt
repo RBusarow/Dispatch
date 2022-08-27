@@ -17,7 +17,7 @@ package dispatch.test.samples
 
 import dispatch.core.DefaultDispatcherProvider
 import dispatch.core.DispatcherProvider
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.test.reset
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -48,7 +48,7 @@ class DefaultDispatcherProviderExtensionSample {
     Dispatchers.resetMain()
   }
 
-  @Sample
+  @Sample5
   fun resetSample() {
 
     val custom = CustomDispatcherProvider()

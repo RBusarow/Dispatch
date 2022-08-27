@@ -64,7 +64,9 @@ internal class AssertionsTest {
     fun `parameter job as child of receiver should fail`() = runBlocking<Unit> a@{
 
       launch b@{
-        assertFails { this@a.coroutineContext[Job]!! shouldBeOrChildOf this@b.coroutineContext[Job]!! }
+        assertFails {
+          this@a.coroutineContext[Job]!! shouldBeOrChildOf this@b.coroutineContext[Job]!!
+        }
       }
     }
 

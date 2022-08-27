@@ -22,13 +22,15 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
-import org.junit.Test
 import java.io.PrintStream
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.knit.test.captureOutput as knitCaptureOutput
+import org.junit.Test as TestJunit4
+import org.junit.jupiter.api.Test as TestJunit5
 
-public typealias Sample = Test
+public typealias Sample4 = TestJunit4
+public typealias Sample5 = TestJunit5
 
 public infix fun Any?.shouldPrint(expected: String) {
   toString() shouldBe expected

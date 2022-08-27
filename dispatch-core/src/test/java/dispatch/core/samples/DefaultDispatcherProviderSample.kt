@@ -19,7 +19,7 @@ import dispatch.core.DefaultDispatcherProvider
 import dispatch.core.DispatcherProvider
 import dispatch.core.MainImmediateCoroutineScope
 import dispatch.core.mainImmediateDispatcher
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +48,7 @@ class DefaultDispatcherProviderSample {
     Dispatchers.resetMain()
   }
 
-  @Sample
+  @Sample5
   fun setSample() {
 
     val custom = CustomDispatcherProvider()

@@ -16,7 +16,7 @@ package dispatch.android.espresso.samples
 
 import dispatch.android.espresso.MainIdlingCoroutineScope
 import dispatch.android.espresso.registerAllIdlingResources
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample4
 import kotlinx.coroutines.Job
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -24,7 +24,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class MainIdlingCoroutineScope {
 
-  @Sample
+  @Sample4
   fun createNoArgMain() {
 
     val scope = MainIdlingCoroutineScope()
@@ -32,7 +32,7 @@ class MainIdlingCoroutineScope {
     scope.idlingDispatcherProvider.registerAllIdlingResources()
   }
 
-  @Sample
+  @Sample4
   fun createCustomMain() {
 
     val scope = MainIdlingCoroutineScope(

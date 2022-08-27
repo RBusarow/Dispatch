@@ -17,11 +17,11 @@ package dispatch.android.lifecycle.samples
 
 import dispatch.android.lifecycle.dispatchLifecycleScope
 import dispatch.core.launchMain
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 
 class LifecycleScopeExtensionSamples {
 
-  @Sample
+  @Sample5
   fun sample() {
 
     // This could be any LifecycleOwner -- Fragments, Activities, Services...
