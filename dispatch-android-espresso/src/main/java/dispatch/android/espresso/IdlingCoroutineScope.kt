@@ -36,13 +36,13 @@ import kotlin.coroutines.CoroutineContext
  * @see IdlingDispatcherProvider
  * @see IdlingResource
  */
-interface IdlingCoroutineScope : CoroutineScope {
+public interface IdlingCoroutineScope : CoroutineScope {
 
   /**
    * Any [IdlingCoroutineScope] has an [idlingDispatcherProvider] property which can be registered
    * in the [IdlingRegistry].
    */
-  val idlingDispatcherProvider: IdlingDispatcherProvider
+  public val idlingDispatcherProvider: IdlingDispatcherProvider
 }
 
 /**
@@ -53,7 +53,7 @@ interface IdlingCoroutineScope : CoroutineScope {
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface DefaultIdlingCoroutineScope :
+public interface DefaultIdlingCoroutineScope :
   IdlingCoroutineScope,
   DefaultCoroutineScope
 
@@ -65,7 +65,7 @@ interface DefaultIdlingCoroutineScope :
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface IOIdlingCoroutineScope :
+public interface IOIdlingCoroutineScope :
   IdlingCoroutineScope,
   IOCoroutineScope
 
@@ -77,7 +77,7 @@ interface IOIdlingCoroutineScope :
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface MainIdlingCoroutineScope :
+public interface MainIdlingCoroutineScope :
   IdlingCoroutineScope,
   MainCoroutineScope
 
@@ -89,7 +89,7 @@ interface MainIdlingCoroutineScope :
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface MainImmediateIdlingCoroutineScope :
+public interface MainImmediateIdlingCoroutineScope :
   IdlingCoroutineScope,
   MainImmediateCoroutineScope
 
@@ -101,7 +101,7 @@ interface MainImmediateIdlingCoroutineScope :
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-interface UnconfinedIdlingCoroutineScope :
+public interface UnconfinedIdlingCoroutineScope :
   IdlingCoroutineScope,
   UnconfinedCoroutineScope
 
@@ -118,7 +118,7 @@ interface UnconfinedIdlingCoroutineScope :
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-fun IdlingCoroutineScope(
+public fun IdlingCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): IdlingCoroutineScope = object : IdlingCoroutineScope {
@@ -139,7 +139,7 @@ fun IdlingCoroutineScope(
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-fun DefaultIdlingCoroutineScope(
+public fun DefaultIdlingCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): DefaultIdlingCoroutineScope = object : DefaultIdlingCoroutineScope {
@@ -160,7 +160,7 @@ fun DefaultIdlingCoroutineScope(
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-fun IOIdlingCoroutineScope(
+public fun IOIdlingCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): IOIdlingCoroutineScope = object : IOIdlingCoroutineScope {
@@ -181,7 +181,7 @@ fun IOIdlingCoroutineScope(
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-fun MainIdlingCoroutineScope(
+public fun MainIdlingCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): MainIdlingCoroutineScope = object : MainIdlingCoroutineScope {
@@ -202,7 +202,7 @@ fun MainIdlingCoroutineScope(
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-fun MainImmediateIdlingCoroutineScope(
+public fun MainImmediateIdlingCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): MainImmediateIdlingCoroutineScope = object : MainImmediateIdlingCoroutineScope {
@@ -224,7 +224,7 @@ fun MainImmediateIdlingCoroutineScope(
  * @see IdlingResource
  * @see IdlingCoroutineScope
  */
-fun UnconfinedIdlingCoroutineScope(
+public fun UnconfinedIdlingCoroutineScope(
   job: Job = SupervisorJob(),
   dispatcherProvider: IdlingDispatcherProvider = IdlingDispatcherProvider()
 ): UnconfinedIdlingCoroutineScope = object : UnconfinedIdlingCoroutineScope {

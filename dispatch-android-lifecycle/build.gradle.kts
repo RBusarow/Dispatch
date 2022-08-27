@@ -18,6 +18,10 @@ plugins {
   published
 }
 
+android {
+  namespace = "dispatch.android.lifecycle"
+}
+
 dependencies {
 
   api(libs.androidx.lifecycle.common)

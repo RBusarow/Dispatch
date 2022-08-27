@@ -44,7 +44,7 @@ import kotlin.coroutines.CoroutineContext
  * @see DispatchLifecycleScope
  * @see DispatchLifecycleScopeFactory
  */
-object LifecycleScopeFactory {
+public object LifecycleScopeFactory {
 
   private val defaultFactory: DispatchLifecycleScopeFactory
     get() = DispatchLifecycleScopeFactory { MainImmediateContext() }

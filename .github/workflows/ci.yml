@@ -345,3 +345,25 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           report_paths: '**/build/**/TEST-*.xml'
           check_name: Unit Test Results - Ubuntu
+
+  android-lint:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: android lint
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: lintMain "${{ env.macosGradleArgs }}"
+          cache-read-only: false

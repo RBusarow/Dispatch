@@ -30,12 +30,12 @@ import kotlin.coroutines.EmptyCoroutineContext
  *
  * @param T the type to be returned by [block]
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
- *   coroutine.
+ *     coroutine.
  * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOwnerOnNextCreate
  * @see [DispatchLifecycleScope.launchOnCreate] for repeating behavior.
  */
-suspend fun <T> LifecycleOwner.onNextCreate(
+public suspend fun <T> LifecycleOwner.onNextCreate(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T? = lifecycle.onNext(context, Lifecycle.State.CREATED, block)
@@ -48,12 +48,12 @@ suspend fun <T> LifecycleOwner.onNextCreate(
  *
  * @param T the type to be returned by [block]
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
- *   coroutine.
+ *     coroutine.
  * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOnNextCreateSample
  * @see [DispatchLifecycleScope.launchOnCreate]
  */
-suspend fun <T> Lifecycle.onNextCreate(
+public suspend fun <T> Lifecycle.onNextCreate(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T? = onNext(context, Lifecycle.State.CREATED, block)
@@ -66,12 +66,12 @@ suspend fun <T> Lifecycle.onNextCreate(
  *
  * @param T the type to be returned by [block]
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
- *   coroutine.
+ *     coroutine.
  * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOwnerOnNextStartSample
  * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
  */
-suspend fun <T> LifecycleOwner.onNextStart(
+public suspend fun <T> LifecycleOwner.onNextStart(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T? = lifecycle.onNext(context, Lifecycle.State.STARTED, block)
@@ -84,12 +84,12 @@ suspend fun <T> LifecycleOwner.onNextStart(
  *
  * @param T the type to be returned by [block]
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
- *   coroutine.
+ *     coroutine.
  * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOnNextStartSample
  * @see [DispatchLifecycleScope.launchOnStart] for repeating behavior.
  */
-suspend fun <T> Lifecycle.onNextStart(
+public suspend fun <T> Lifecycle.onNextStart(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T? = onNext(context, Lifecycle.State.STARTED, block)
@@ -102,12 +102,12 @@ suspend fun <T> Lifecycle.onNextStart(
  *
  * @param T the type to be returned by [block]
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
- *   coroutine.
+ *     coroutine.
  * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOwnerOnNextResumeSample
  * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
  */
-suspend fun <T> LifecycleOwner.onNextResume(
+public suspend fun <T> LifecycleOwner.onNextResume(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T? = lifecycle.onNext(context, Lifecycle.State.RESUMED, block)
@@ -120,12 +120,12 @@ suspend fun <T> LifecycleOwner.onNextResume(
  *
  * @param T the type to be returned by [block]
  * @param context *optional* - additional to [CoroutineScope.coroutineContext] context of the
- *   coroutine.
+ *     coroutine.
  * @param block the action to be performed
  * @sample dispatch.android.lifecycle.samples.LifecycleSuspend.lifecycleOnNextResumeSample
  * @see [DispatchLifecycleScope.launchOnResume] for repeating behavior.
  */
-suspend fun <T> Lifecycle.onNextResume(
+public suspend fun <T> Lifecycle.onNextResume(
   context: CoroutineContext = EmptyCoroutineContext,
   block: suspend CoroutineScope.() -> T
 ): T? = onNext(context, Lifecycle.State.RESUMED, block)

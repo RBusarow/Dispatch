@@ -39,7 +39,7 @@ import kotlinx.coroutines.CoroutineScope
   "Use dispatchLifecycleScope to avoid collisions with the Androidx library",
   ReplaceWith("dispatchLifecycleScope")
 )
-val LifecycleOwner.lifecycleScope: DispatchLifecycleScope
+public val LifecycleOwner.lifecycleScope: DispatchLifecycleScope
   get() = dispatchLifecycleScope
 
 /**
@@ -57,5 +57,5 @@ val LifecycleOwner.lifecycleScope: DispatchLifecycleScope
  *
  * @sample dispatch.android.lifecycle.samples.LifecycleScopeExtensionSamples.sample
  */
-val LifecycleOwner.dispatchLifecycleScope: DispatchLifecycleScope
+public val LifecycleOwner.dispatchLifecycleScope: DispatchLifecycleScope
   get() = DispatchLifecycleScopeStore.get(this.lifecycle)

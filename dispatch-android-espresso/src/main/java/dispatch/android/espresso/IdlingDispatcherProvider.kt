@@ -32,7 +32,7 @@ import kotlinx.coroutines.MainCoroutineDispatcher
  * @see IdlingDispatcher
  * @see CoroutineDispatcher
  */
-class IdlingDispatcherProvider(
+public class IdlingDispatcherProvider(
   /**
    * [IdlingDispatcher] implementation of [DispatcherProvider.default], which typically corresponds
    * to the [Dispatchers.Default] [CoroutineDispatcher].
@@ -96,7 +96,7 @@ class IdlingDispatcherProvider(
  * @see IdlingDispatcher
  * @see CoroutineDispatcher
  */
-fun IdlingDispatcherProvider(
+public fun IdlingDispatcherProvider(
   delegate: DispatcherProvider = DefaultDispatcherProvider.get()
 ): IdlingDispatcherProvider = IdlingDispatcherProvider(
   default = IdlingDispatcher(delegate.default),
@@ -117,7 +117,7 @@ fun IdlingDispatcherProvider(
  *
  * @see IdlingDispatcherProvider.unregisterAllIdlingResources
  */
-fun IdlingDispatcherProvider.registerAllIdlingResources() {
+public fun IdlingDispatcherProvider.registerAllIdlingResources() {
 
   listOf(
     default,
@@ -142,7 +142,7 @@ fun IdlingDispatcherProvider.registerAllIdlingResources() {
  *
  * @see IdlingDispatcherProvider.registerAllIdlingResources
  */
-fun IdlingDispatcherProvider.unregisterAllIdlingResources() {
+public fun IdlingDispatcherProvider.unregisterAllIdlingResources() {
 
   listOf(
     default,

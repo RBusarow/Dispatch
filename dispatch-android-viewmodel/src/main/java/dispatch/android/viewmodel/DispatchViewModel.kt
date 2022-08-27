@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicReference
   "Use DispatchViewModel",
   replaceWith = ReplaceWith("DispatchViewModel")
 )
-typealias CoroutineViewModel = DispatchViewModel
+public typealias CoroutineViewModel = DispatchViewModel
 
 /**
  * Base class for [ViewModel]s which will be using a [viewModelScope].
@@ -46,7 +46,7 @@ typealias CoroutineViewModel = DispatchViewModel
  *
  * @sample dispatch.android.viewmodel.samples.ViewModelScopeSample.viewModelScopeSample
  */
-abstract class DispatchViewModel : ViewModel() {
+public abstract class DispatchViewModel : ViewModel() {
 
   private val _coroutineScope = AtomicReference<CoroutineScope?>(null)
 
@@ -63,7 +63,7 @@ abstract class DispatchViewModel : ViewModel() {
    *
    * @sample dispatch.android.viewmodel.samples.ViewModelScopeSample.viewModelScopeSample
    */
-  val viewModelScope: CoroutineScope
+  public val viewModelScope: CoroutineScope
     get() {
       val scope = _coroutineScope.get()
       if (scope != null) {
@@ -93,7 +93,6 @@ abstract class DispatchViewModel : ViewModel() {
   /**
    * This method will be called when this ViewModel is no longer used and will be destroyed.
    *
-   * <p>
    * It is useful when ViewModel observes some data and you need to clear this subscription to
    * prevent a leak of this ViewModel.
    */

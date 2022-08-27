@@ -17,6 +17,7 @@ import org.jetbrains.kotlin.gradle.dsl.*
 
 plugins {
   kotlin("jvm")
+  id("com.android.lint")
   id("detekt")
   id("dokka")
 }

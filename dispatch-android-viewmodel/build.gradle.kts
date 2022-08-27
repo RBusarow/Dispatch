@@ -18,6 +18,10 @@ plugins {
   published
 }
 
+android {
+  namespace = "dispatch.android.viewmodel"
+}
+
 dependencies {
   api(libs.androidx.lifecycle.viewModel.core)
   api(libs.kotlinx.coroutines.core)
