@@ -23,12 +23,12 @@ import dispatch.android.lifecycle.MainImmediateContext
 import dispatch.core.DispatcherProvider
 import dispatch.internal.test.Application
 import dispatch.internal.test.MyCustomElement
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import kotlinx.coroutines.SupervisorJob
 
 class LifecycleScopeFactorySample {
 
-  @Sample
+  @Sample5
   fun productionSample() {
 
     class MyApplication : Application {
@@ -40,7 +40,7 @@ class LifecycleScopeFactorySample {
     }
   }
 
-  @Sample
+  @Sample5
   fun espressoSample() {
 
     class MyEspressoTest {
@@ -57,7 +57,7 @@ class LifecycleScopeFactorySample {
     }
   }
 
-  @Sample
+  @Sample5
   fun resetSample() {
 
     class MyEspressoTest {

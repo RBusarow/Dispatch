@@ -20,10 +20,10 @@ package dispatch.android.lifecycle.samples
 
 import androidx.fragment.app.Fragment
 import dispatch.android.lifecycle.withViewLifecycleScope
+import dispatch.internal.test.Sample4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -32,7 +32,7 @@ import org.robolectric.annotation.Config
 @Config(manifest = Config.NONE)
 class WithViewLifecycleScopeExtensionSample {
 
-  @Test
+  @Sample4
   fun sample() {
 
     class MyViewModel {

@@ -20,7 +20,7 @@ import dispatch.core.launchIO
 import dispatch.core.launchMain
 import dispatch.core.launchMainImmediate
 import dispatch.core.launchUnconfined
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.internal.test.dispatcherName
 import dispatch.internal.test.someDispatcherProvider
 import io.kotest.matchers.shouldBe
@@ -28,7 +28,7 @@ import kotlinx.coroutines.runBlocking
 
 class LaunchSample {
 
-  @Sample
+  @Sample5
   fun launchDefaultSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -39,7 +39,7 @@ class LaunchSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun launchIOSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -50,7 +50,7 @@ class LaunchSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun launchMainSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -61,7 +61,7 @@ class LaunchSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun launchMainImmediateSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"
@@ -72,7 +72,7 @@ class LaunchSample {
     }.join()
   }
 
-  @Sample
+  @Sample5
   fun launchUnconfinedSample() = runBlocking(someDispatcherProvider) {
 
     dispatcherName() shouldBe "runBlocking thread"

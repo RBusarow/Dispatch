@@ -18,13 +18,14 @@ package dispatch.android.viewmodel.samples
 import dispatch.android.espresso.MainImmediateIdlingCoroutineScope
 import dispatch.android.viewmodel.ViewModelScopeFactory
 import dispatch.core.MainImmediateCoroutineScope
+import dispatch.internal.test.Sample5
 import dispatch.test.TestProvidedCoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 class ViewModelScopeFactorySample {
 
-  @Sample
+  @Sample5
   fun productionSample() {
 
     class MyApplication : Application {
@@ -35,7 +36,7 @@ class ViewModelScopeFactorySample {
     }
   }
 
-  @Sample
+  @Sample5
   fun espressoSample() {
 
     class MyEspressoTest {
@@ -47,7 +48,7 @@ class ViewModelScopeFactorySample {
     }
   }
 
-  @Sample
+  @Sample5
   fun resetSample() {
 
     class MyEspressoTest {
@@ -64,7 +65,7 @@ class ViewModelScopeFactorySample {
     }
   }
 
-  @Sample
+  @Sample5
   fun jvmSample() {
 
     class MyJvmTest {

@@ -15,7 +15,7 @@
 
 package dispatch.test.samples
 
-import dispatch.internal.test.Sample
+import dispatch.internal.test.Sample5
 import dispatch.test.TestProvidedCoroutineScope
 import dispatch.test.runBlockingProvided
 import dispatch.test.testProvided
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test
 @ExperimentalCoroutinesApi
 class BuildersSample {
 
-  @Sample
+  @Sample5
   fun runBlockingProvidedSample() {
 
     @Test
@@ -41,7 +41,7 @@ class BuildersSample {
     }
   }
 
-  @Sample
+  @Sample5
   fun testProvidedSample() {
 
     @Test
@@ -56,7 +56,7 @@ class BuildersSample {
     }
   }
 
-  @Sample
+  @Sample5
   fun testProvidedExtensionSample() {
 
     val scope = TestProvidedCoroutineScope()
