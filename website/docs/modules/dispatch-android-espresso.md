@@ -87,8 +87,8 @@ repositories {
 dependencies {
 
   // core
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
   implementation("com.rickbusarow.dispatch:dispatch-core:1.0.0-beta10-SNAPSHOT")
 
   androidTestImplementation("com.rickbusarow.dispatch:dispatch-android-espresso:1.0.0-beta10-SNAPSHOT")
