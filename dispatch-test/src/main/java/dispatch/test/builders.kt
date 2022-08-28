@@ -16,10 +16,8 @@
 package dispatch.test
 
 import dispatch.core.DispatcherProvider
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.TestDispatcher
@@ -32,38 +30,6 @@ import kotlinx.coroutines.test.setMain
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-
-/**
- * Delegates to [runBlocking], but injects a [DispatcherProvider] into the created [CoroutineScope].
- *
- * The resultant [CoroutineContext] will use a
- * [BlockingEventLoop][kotlinx.coroutines.BlockingEventLoop]
- * as its default [ContinuationInterceptor].
- *
- * If the `context` does not contain a `DispatcherProvider`, a [TestDispatcherProvider] will be
- * created using the [kotlinx.coroutines.BlockingEventLoop] interceptor.
- *
- * @param context The base `CoroutineContext` which will be modified to use a
- *     [TestDispatcherProvider]. [EmptyCoroutineContext] is used if one is not provided.
- * @param block the action to be performed
- * @sample dispatch.test.samples.BuildersSample.runBlockingProvidedSample
- * @see runBlocking
- * @see testProvided
- */
-@ExperimentalCoroutinesApi
-public fun runBlockingProvided(
-  context: CoroutineContext = EmptyCoroutineContext,
-  block: suspend CoroutineScope.() -> Unit
-) {
-
-  val existingDispatcherProvider = context[DispatcherProvider]
-
-  val newContext = if (existingDispatcherProvider == null) {
-    context + DispatcherProvider()
-  } else context
-
-  runBlocking(newContext, block)
-}
 
 /**
  * Delegates to [runBlockingTest], but injects a [DispatcherProvider] into the created
@@ -82,7 +48,6 @@ public fun runBlockingProvided(
  * @param testBody the action to be performed
  * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @see runBlockingTest
- * @see runBlockingProvided
  */
 @ExperimentalCoroutinesApi
 public fun testProvided(
@@ -144,7 +109,6 @@ public fun testProvidedUnconfined(
  * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @sample dispatch.test.samples.BuildersSample.testProvidedExtensionSample
  * @see runBlockingTest
- * @see runBlockingProvided
  */
 @ExperimentalCoroutinesApi
 public fun TestDispatchScope.testProvided(
@@ -165,7 +129,6 @@ public fun TestDispatchScope.testProvided(
  * @sample dispatch.test.samples.BuildersSample.testProvidedSample
  * @sample dispatch.test.samples.BuildersSample.testProvidedExtensionSample
  * @see runBlockingTest
- * @see runBlockingProvided
  */
 @ExperimentalCoroutinesApi
 public fun TestScope.testProvided(
