@@ -27,6 +27,11 @@ import kotlinx.coroutines.MainCoroutineDispatcher
  * [IdlingResource] helper for coroutines. This [DispatcherProvider] implementation utilizes an
  * [IdlingDispatcher] for each [CoroutineDispatcher].
  *
+ * @property default
+ * @property io
+ * @property main
+ * @property mainImmediate
+ * @property unconfined
  * @see IdlingResource
  * @see DispatcherProvider
  * @see IdlingDispatcher
@@ -80,6 +85,28 @@ public class IdlingDispatcherProvider(
       main = main as IdlingDispatcher,
       mainImmediate = mainImmediate as IdlingDispatcher,
       unconfined = unconfined as IdlingDispatcher
+    )
+  }
+
+  /**
+   * @return a copy of this DispatcherProvider, retaining the properties of the original if they're
+   *     not specified as arguments.
+   * @sample dispatch.core.samples.DispatcherProviderCopySample.copySample
+   */
+  public fun copy(
+    default: IdlingDispatcher,
+    io: IdlingDispatcher,
+    main: IdlingDispatcher,
+    mainImmediate: IdlingDispatcher,
+    unconfined: IdlingDispatcher
+  ): IdlingDispatcherProvider {
+
+    return IdlingDispatcherProvider(
+      default = default,
+      io = io,
+      main = main,
+      mainImmediate = mainImmediate,
+      unconfined = unconfined
     )
   }
 }

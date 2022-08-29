@@ -62,12 +62,12 @@ class EspressoMockingWrapper : TestWatcher() {
 
   val idlingRegistry = mockk<IdlingRegistry>(relaxed = true)
 
-  override fun starting(description: Description?) {
+  override fun starting(description: Description) {
     mockkStatic(IdlingRegistry::class)
     every { IdlingRegistry.getInstance() } returns idlingRegistry
   }
 
-  override fun finished(description: Description?) {
+  override fun finished(description: Description) {
     unmockkStatic(IdlingRegistry::class)
   }
 }

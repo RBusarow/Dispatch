@@ -25,6 +25,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestDispatcher
 import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -38,35 +39,43 @@ import kotlin.coroutines.EmptyCoroutineContext
  * This means that it can be injected into any class or function regardless of what type of
  * `CoroutineScope` is required.
  */
-@Deprecated(
-  "renamed to `dispatch.test.TestDispatchScope`",
-  replaceWith = ReplaceWith("TestDispatchScope", "dispatch.test.TestDispatchScope")
-)
 @ExperimentalCoroutinesApi
-public typealias TestProvidedCoroutineScope = TestDispatchScope
+public interface TestDispatchScope :
+  DefaultCoroutineScope,
+  IOCoroutineScope,
+  MainCoroutineScope,
+  MainImmediateCoroutineScope,
+  UnconfinedCoroutineScope {
+  /** single [DispatcherProvider] promise for the [TestProvidedCoroutineScope] */
+  public val dispatcherProvider: DispatcherProvider
+}
+
+/** @suppress internal use only */
+@ExperimentalCoroutinesApi
+internal class TestDispatchScopeImpl(
+  override val dispatcherProvider: DispatcherProvider,
+  context: CoroutineContext = EmptyCoroutineContext
+) : TestDispatchScope,
+  CoroutineScope by CoroutineScope(context + dispatcherProvider)
 
 /**
- * Creates a [TestProvidedCoroutineScope] implementation with optional parameters
- * of [TestCoroutineDispatcher][kotlinx.coroutines.test.TestCoroutineDispatcher],
- * [TestDispatcherProvider], and a generic [CoroutineContext].
+ * Creates a [TestDispatchScope] implementation with optional parameters of
+ * [TestDispatcher][kotlinx.coroutines.test.TestDispatcher], [TestDispatcherProvider], and a generic
+ * [CoroutineContext].
  *
- * The resultant `TestProvidedCoroutineScope` will utilize a single `TestCoroutineDispatcher`
+ * The resultant `TestDispatchScope` will utilize a single `StandardTestDispatcher`
  * for all the [CoroutineDispatcher] properties of its [DispatcherProvider], and the
- * [ContinuationInterceptor] Key of the `CoroutineContext` will also return that
- * `TestCoroutineDispatcher`.
+ * [ContinuationInterceptor] Key of the `CoroutineContext` will also return that `TestDispatcher`.
  */
-@Deprecated(
-  "Deprecated following TestCoroutineScope and TestCoroutineDispatcher deprecation.  " +
-    "Use `TestDispatchScope` instead.",
-  ReplaceWith("TestDispatchScope(dispatcher, dispatcherProvider, context)")
-)
 @ExperimentalCoroutinesApi
-public fun TestProvidedCoroutineScope(
-  @Suppress("DEPRECATION")
-  dispatcher: kotlinx.coroutines.test.TestCoroutineDispatcher = kotlinx.coroutines.test.TestCoroutineDispatcher(),
-  dispatcherProvider: TestDispatcherProvider = TestDispatcherProvider(dispatcher),
-  context: CoroutineContext = EmptyCoroutineContext
-): TestDispatchScope = TestDispatchScope(
+public fun TestDispatchScope(
+  context: CoroutineContext = EmptyCoroutineContext,
+  dispatcherProvider: DispatcherProvider = context[DispatcherProvider]
+    ?: (context[ContinuationInterceptor] as? TestDispatcher)
+      ?.let { existing ->
+        TestDispatcherProvider(existing)
+      } ?: TestDispatcherProvider()
+): TestDispatchScope = TestDispatchScopeImpl(
   dispatcherProvider = dispatcherProvider,
-  context = context + dispatcher
+  context = context
 )

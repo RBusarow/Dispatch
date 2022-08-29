@@ -17,48 +17,45 @@ package dispatch.test
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.DelayController
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.UncaughtExceptionCaptor
-import kotlinx.coroutines.test.UncompletedCoroutinesError
+import kotlinx.coroutines.test.TestCoroutineScheduler
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestRule
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
 
 /**
  * A basic JUnit 4 [TestRule] which creates a new [TestProvidedCoroutineScope] for each test, sets
- * [Dispatchers.Main], and calls [cleanupTestCoroutines] afterwards.
+ * [Dispatchers.Main], and resets [Dispatchers.Main] afterwards.
  *
  * The rule itself implements [TestProvidedCoroutineScope], so it can be used as follows:
  *
  * ### Before the test:
- * * [Dispatchers.Main] is set to the [TestCoroutineDispatcher] used by the [CoroutineContext].
+ * * [Dispatchers.Main] is set to the [main][dispatch.core.DispatcherProvider.main] dispatcher in
+ *   this scope's [dispatcherProvider].
  *
  * ### After the test:
- * * [cleanupTestCoroutines] is called to ensure there are no leaking coroutines. Any unfinished
- *   coroutine will throw an [UncompletedCoroutinesError].
  * * [Dispatchers.Main] is reset via [Dispatchers.resetMain].
  *
  * ### Requires JUnit 4.
  *
  * ```kotlin
  * dependencies {
- *   testImplementation("junit:junit:4.12")
+ *   testImplementation("junit:junit:<latest version>")
  *   -- or --
- *   testImplementation("org.junit.vintage:junit-vintage-engine:5.5.1")
+ *   testImplementation("org.junit.vintage:junit-vintage-engine:<latest version>")
  * }
  * ```
  *
  * @param factory *optional* factory for a custom [TestProvidedCoroutineScope]. If a factory is not
- *     provided, the resultant scope uses the same [TestCoroutineDispatcher] for each property in
- *     its [TestDispatcherProvider]
+ *     provided, the resultant scope uses the same
+ *     [TestDispatcher][kotlinx.coroutines.test.TestDispatcher] for each property in its
+ *     [TestDispatcherProvider]
  * @see TestRule
- * @see TestCoroutineScope
+ * @see TestScope
  * @see TestProvidedCoroutineScope
  * @sample dispatch.core.test.samples.TestCoroutineRuleSample
  * @sample dispatch.core.test.samples.TestCoroutineRuleWithFactorySample
@@ -70,22 +67,22 @@ public class TestCoroutineRule(
   TestProvidedCoroutineScope by factory() {
 
   /**
-   * The underlying [TestCoroutineDispatcher] which is responsible for virtual time control.
+   * The underlying [TestDispatcher][kotlinx.coroutines.test.TestDispatcher] which is responsible
+   * for virtual time control.
    *
-   * @see UncaughtExceptionCaptor
-   * @see DelayController
+   * @see TestDispatcher
+   * @see TestCoroutineScheduler
    */
-  public val dispatcher: TestCoroutineDispatcher =
-    coroutineContext[ContinuationInterceptor] as TestCoroutineDispatcher
+  public val dispatcher: TestDispatcher =
+    coroutineContext[ContinuationInterceptor] as TestDispatcher
 
   /** @suppress */
-  override fun starting(description: Description?) {
-    Dispatchers.setMain(dispatcher)
+  override fun starting(description: Description) {
+    Dispatchers.setMain(dispatcherProvider.main)
   }
 
   /** @suppress */
-  override fun finished(description: Description?) {
-    cleanupTestCoroutines()
+  override fun finished(description: Description) {
     Dispatchers.resetMain()
   }
 }
