@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>dispatch-test-junit4</title>
+</head><body><link href="../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../";</script>
+    <script type="text/javascript" src="../scripts/sourceset_dependencies.js" async></script><link href="../styles/style.css" rel="Stylesheet"><link href="../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../styles/main.css" rel="Stylesheet"><link href="../styles/prism.css" rel="Stylesheet"><link href="../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../scripts/clipboard.js" async></script><script type="text/javascript" src="../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../scripts/main.js" defer></script><script type="text/javascript" src="../scripts/prism.js" async></script><script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+
+  
+    <div class="navigation-wrapper" id="navigation-wrapper">
+      <div id="leftToggler"><span class="icon-toggler"></span></div>
+      <div class="library-name"><a href="../index.html"><span>Dispatch</span></a></div>
+      <div></div>
+      <div class="pull-right d-flex"><button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div class="main-content" id="content" pageids="dispatch-test-junit4::////PointingToDeclaration//-33230598">
+          <div class="breadcrumbs"></div>
+          <div class="cover ">
+            <h1 class="cover"><span><span>dispatch-test-junit4</span></span></h1>
+            <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-test-junit4:dokkaHtmlPartial/main"><h2 class=""> Contents</h2><!-- TOC --><ul><li><p class="paragraph">#features</p></li><li><p class="paragraph">#setting-dispatchersmain</p></li><li><p class="paragraph">#this-module-replaces-dispatch-test</p></li><li><p class="paragraph">#junit-dependencies</p></li><ul><li><p class="paragraph">#minimum-gradle-config</p></li><li><p class="paragraph">#junit-5-interoperability</p></li></ul></ul><!-- END --><h2 class=""> Features</h2><p class="paragraph">In addition to all the functionality in <a href="https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/index.html">dispatch-test</a>, this module exposes a <a href="https://rbusarow.github.io/Dispatch/api/dispatch-test-junit4/dispatch.test/-test-coroutine-rule/index.html">TestCoroutineRule</a> to handle set-up and tear-down of a <a href="https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html">TestProvidedCoroutineScope</a>.</p><p class="paragraph">Since <a href="https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html">TestProvidedCoroutineScope</a> is a <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-scope/index.html">TestCoroutineScope</a>, this Rule also invokes <a href="https://rbusarow.github.io/Dispatch/api/dispatch-test/dispatch.test/-test-provided-coroutine-scope/index.html#kotlinx.coroutines.test/TestCoroutineScope/cleanupTestCoroutines/#/PointingToDeclaration/">cleanupTestCoroutines</a> after the test.</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">class SomeClassTest {<br><br>  @JvmField<br>  @Rule<br>  val rule = TestCoroutineRule()<br><br>  @Test<br>  fun `some test`() = runBlocking {<br><br>    val subject = SomeClass(rule)<br><br>    val job = subject.fireAndForget()<br><br>    // TODO: assertions go here<br>  }<br><br>}<br><br>class SomeClass(val coroutineScope: CoroutineScope) {<br>  fun fireAndForget() = launch { }<br>}</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class=""> Setting Dispatchers.Main</h2><p class="paragraph">Even though <code class="lang-kotlin">dispatch-core</code> eliminates the need to use <code class="lang-kotlin">Dispatchers.Main</code> in internal code, it’s still possible that code which has yet to be migrated, or a third-party library is making use of the hard-coded dispatcher. Because of this, the rule still calls <code class="lang-kotlin">Dispatchers.setMain(...)</code> in its setup and <code class="lang-kotlin">Dispatchers.resetMain()</code> afterwards.</p><h2 class=""> This module replaces dispatch-test</h2><p class="paragraph">If using this module, there is no need to include the <code class="lang-kotlin">dispatch-test</code> artifact in your dependencies.</p><h2 class=""> JUnit dependencies</h2><h3 class=""> Minimum Gradle Config</h3><p class="paragraph">Because this is a JUnit 4 Rule, it requires a variant of that artifact. No external libraries are bundled as part of Dispatch, so you’ll need to add it to your <code class="lang-kotlin">dependencies</code> block yourself. The two official options would be:</p><ul><li><p class="paragraph">classic JUnit 4</p></li><ul><li><p class="paragraph"><code class="lang-kotlin">org.junit.jupiter:junit-jupiter:4.13</code></p></li></ul><li><p class="paragraph">JUnit 5 "vintage"</p></li><ul><li><p class="paragraph"><code class="lang-kotlin">org.junit.vintage:junit-vintage-engine:5.5.1</code></p></li></ul></ul><p class="paragraph">Add to your module's <code class="lang-kotlin">build.gradle.kts</code>:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">repositories {<br>  mavenCentral()<br>}<br><br>dependencies {<br><br>  // core<br>  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")<br>  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")<br>  implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-beta10"))<br>  implementation("com.rickbusarow.dispatch:dispatch-core")<br><br>  // the junit4 artifact also provides the dispatch-test artifact<br>  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4")<br>  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")<br>}</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h3 class=""> JUnit 5 interoperability</h3><p class="paragraph">Junit 5 provides a “vintage” (JUnit 4) artifact for legacy support (such as Robolectric or Android instrumented tests). Dispatch also supports running both in the same project by just adding both artifacts.</p><p class="paragraph">Add to your module's <code class="lang-kotlin">build.gradle.kts</code>:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">repositories {<br>  mavenCentral()<br>}<br><br>dependencies {<br><br>  // core<br>  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")<br>  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")<br>  implementation(platform("com.rickbusarow.dispatch:dispatch-bom:1.0.0-beta10"))<br>  implementation("com.rickbusarow.dispatch:dispatch-core")<br><br>  // the junit4 and junit5 artifacts also provides the dispatch-test artifact<br>  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit4")<br>  testImplementation("com.rickbusarow.dispatch:dispatch-test-junit5")<br>  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")<br>}</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+          </div>
+          <h2 class="">Packages</h2>
+          <div class="table"><a data-name="-739896600%2FPackages%2F-33230598" anchor-label="dispatch.test" id="-739896600%2FPackages%2F-33230598" data-filterable-set=":dispatch-test-junit4:dokkaHtmlPartial/main"></a>
+            <div class="table-row" data-filterable-current=":dispatch-test-junit4:dokkaHtmlPartial/main" data-filterable-set=":dispatch-test-junit4:dokkaHtmlPartial/main">
+              <div>
+                <div class="main-subrow ">
+                  <div class=""><span class="inline-flex">
+                      <div><a href="dispatch.test/index.html">dispatch.test</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-739896600%2FPackages%2F-33230598"></span>
+                        <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                      </span></span></div>
+                  <div class="pull-right"></div>
+                </div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  
+</body></html>
+
+

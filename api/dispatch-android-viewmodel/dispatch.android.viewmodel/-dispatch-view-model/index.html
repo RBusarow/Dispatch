@@ -1,0 +1,182 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DispatchViewModel</title>
+</head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script><script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" defer></script><script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script src="https://unpkg.com/kotlin-playground@1"></script>
+  
+    <div class="navigation-wrapper" id="navigation-wrapper">
+      <div id="leftToggler"><span class="icon-toggler"></span></div>
+      <div class="library-name"><a href="../../../index.html"><span>Dispatch</span></a></div>
+      <div></div>
+      <div class="pull-right d-flex"><button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div class="main-content" id="content" pageids="dispatch-android-viewmodel::dispatch.android.viewmodel/DispatchViewModel///PointingToDeclaration//1284309248">
+          <div class="breadcrumbs"><a href="../../index.html">dispatch-android-viewmodel</a>/<a href="../index.html">dispatch.android.viewmodel</a>/<a href="index.html">DispatchViewModel</a></div>
+          <div class="cover ">
+            <h1 class="cover"><span>Dispatch</span><wbr><span>View</span><wbr><span><span>Model</span></span></h1>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">DispatchViewModel</a> : <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Base class for <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>s which will be using a <a href="view-model-scope.html">viewModelScope</a>.</p><p class="paragraph">The <code class="lang-kotlin">viewModelScope</code> instance is created automatically upon first access from the factory set in <a href="../-view-model-scope-factory/index.html">ViewModelScopeFactory</a>.</p><p class="paragraph">The type of <span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span> created is configurable via <a href="../-view-model-scope-factory/set.html">ViewModelScopeFactory.set</a>.</p><p class="paragraph">This must be an abstract class since nothing about the <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared--">ViewModel.onCleared</a> event is exposed.</p><p class="paragraph"><code class="lang-kotlin">viewModelScope</code> is automatically cancelled when <code class="lang-kotlin">onCleared()</code> is invoked.</p></div></div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Sources">Sources</button><button class="section-tab" data-togglable="Samples">Samples</button></div>
+            <div class="tabs-section-body">
+              <h2 class="">Samples</h2>
+              <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import dispatch.android.viewmodel.DispatchViewModel
+import dispatch.core.launchMain
+import dispatch.internal.test.Sample5
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.isActive
+fun main() { 
+   //sampleStart 
+   class SomeViewModel : DispatchViewModel() {
+
+  init {
+
+    // auto-created MainImmediateCoroutineScope which is auto-cancelled in onClear()
+    viewModelScope // ...
+
+    // it works as a normal CoroutineScope (because it is)
+    viewModelScope.launchMain { }
+
+    // this is the same CoroutineScope instance each time
+    viewModelScope.launchMain { }
+  }
+
+  override fun onClear() {
+    viewModelScope.isActive shouldBe false
+  }
+} 
+   //sampleEnd
+}</code></pre></div></div></div>
+              <h2 class="tabbedcontent">Constructors</h2>
+              <div class="table" data-togglable="Constructors"><a data-name="1745274102%2FConstructors%2F1284309248" anchor-label="DispatchViewModel" id="1745274102%2FConstructors%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-viewmodel:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue TabbedContent">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-dispatch-view-model.html"><span>Dispatch</span><wbr><span>View</span><wbr><span><span>Model</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1745274102%2FConstructors%2F1284309248"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-dispatch-view-model.html"><span class="token function">DispatchViewModel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="264516373%2FFunctions%2F1284309248" anchor-label="addCloseable" id="264516373%2FFunctions%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-viewmodel:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#264516373%2FFunctions%2F1284309248"><span>add</span><wbr><span><span>Closeable</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="264516373%2FFunctions%2F1284309248"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#264516373%2FFunctions%2F1284309248"><span class="token function">addCloseable</span></a><span class="token punctuation">(</span><span><span class="token annotation">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html"><span class="token annotation">NonNull</span></a>&nbsp;</span>p0<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html">Closeable</a><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-1936886459%2FFunctions%2F1284309248" anchor-label="clear" id="-1936886459%2FFunctions%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-viewmodel:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#-1936886459%2FFunctions%2F1284309248"><span><span>clear</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1936886459%2FFunctions%2F1284309248"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html"><span class="token annotation">MainThread</span></a></div></div><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-1936886459%2FFunctions%2F1284309248"><span class="token function">clear</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-215894976%2FFunctions%2F1284309248" anchor-label="getTag" id="-215894976%2FFunctions%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-viewmodel:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#-215894976%2FFunctions%2F1284309248"><span>get</span><wbr><span><span>Tag</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-215894976%2FFunctions%2F1284309248"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html#-215894976%2FFunctions%2F1284309248">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="index.html#-215894976%2FFunctions%2F1284309248"><span class="token function">getTag</span></a><span class="token punctuation">(</span>p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#-215894976%2FFunctions%2F1284309248">T</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-1567230750%2FFunctions%2F1284309248" anchor-label="setTagIfAbsent" id="-1567230750%2FFunctions%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-viewmodel:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#-1567230750%2FFunctions%2F1284309248"><span>set</span><wbr><span>Tag</span><wbr><span>If</span><wbr><span><span>Absent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1567230750%2FFunctions%2F1284309248"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html#-1567230750%2FFunctions%2F1284309248">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="index.html#-1567230750%2FFunctions%2F1284309248"><span class="token function">setTagIfAbsent</span></a><span class="token punctuation">(</span>p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>p1<span class="token operator">: </span><a href="index.html#-1567230750%2FFunctions%2F1284309248">T</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#-1567230750%2FFunctions%2F1284309248">T</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="-872773270%2FProperties%2F1284309248" anchor-label="viewModelScope" id="-872773270%2FProperties%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-viewmodel:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="view-model-scope.html">viewModelScope</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-872773270%2FProperties%2F1284309248"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-viewmodel:dokkaHtmlPartial/release"><a data-name="-872773270%2FProperties%2F1284309248" anchor-label="viewModelScope" id="-872773270%2FProperties%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="view-model-scope.html">viewModelScope</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-872773270%2FProperties%2F1284309248" anchor-label="viewModelScope" id="-872773270%2FProperties%2F1284309248" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/release"></a><p class="paragraph"><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span> instance for the <a href="index.html">DispatchViewModel</a>. By default, it uses the <span data-unresolved-link="kotlinx.coroutines/MainCoroutineDispatcher/immediate/#/PointingToDeclaration/">Dispatchers.Main.immediate</span> dispatcher</p></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Sources</h2>
+              <div class="table" data-togglable="Sources"><a data-name="1847743429%2FSource%2F249958164" anchor-label="https://github.com/RBusarow/Dispatch/blob/main/dispatch-android-viewmodel/dokkaHtmlPartial/src/main/java/dispatch/android/viewmodel/DispatchViewModel.kt#L35" id="1847743429%2FSource%2F249958164" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/main"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-viewmodel:dokkaHtmlPartial/main" data-filterable-set=":dispatch-android-viewmodel:dokkaHtmlPartial/main">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="https://github.com/RBusarow/Dispatch/blob/main/dispatch-android-viewmodel/dokkaHtmlPartial/src/main/java/dispatch/android/viewmodel/DispatchViewModel.kt#L35">androidJvm source</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1847743429%2FSource%2F249958164"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  
+</body></html>
+
+

@@ -1,0 +1,283 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DispatchLifecycleScope</title>
+</head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" defer></script><script type="text/javascript" src="../../../scripts/prism.js" async></script><script src="https://unpkg.com/kotlin-playground@1"></script><script src="https://unpkg.com/kotlin-playground@1"></script>
+  
+    <div class="navigation-wrapper" id="navigation-wrapper">
+      <div id="leftToggler"><span class="icon-toggler"></span></div>
+      <div class="library-name"><a href="../../../index.html"><span>Dispatch</span></a></div>
+      <div></div>
+      <div class="pull-right d-flex"><button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div class="main-content" id="content" pageids="dispatch-android-lifecycle::dispatch.android.lifecycle/DispatchLifecycleScope///PointingToDeclaration//296330618">
+          <div class="breadcrumbs"><a href="../../index.html">dispatch-android-lifecycle</a>/<a href="../index.html">dispatch.android.lifecycle</a>/<a href="index.html">DispatchLifecycleScope</a></div>
+          <div class="cover ">
+            <h1 class="cover"><span>Dispatch</span><wbr><span>Lifecycle</span><wbr><span><span>Scope</span></span></h1>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">DispatchLifecycleScope</a><span class="token punctuation">(</span>lifecycle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a><span class="token punctuation">, </span>coroutineContext<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token punctuation">)</span> : <a href="../../../dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.html">MainImmediateCoroutineScope</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph"><a href="../../../dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.html">MainImmediateCoroutineScope</a> which is tied to a <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.</p><p class="paragraph">The <span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span> provides lifecycle-aware <span data-unresolved-link="kotlinx.coroutines//launch/kotlinx.coroutines.CoroutineScope#kotlin.coroutines.CoroutineContext#kotlinx.coroutines.CoroutineStart#kotlin.coroutines.SuspendFunction1[kotlinx.coroutines.CoroutineScope,kotlin.Unit]/PointingToDeclaration/">launch</span> functions which will automatically start upon reaching their associated <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html">Lifecycle.Event</a>, then automatically cancel upon the lifecycle dropping below that state. Reaching that state again will start a new <span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span>.</p><p class="paragraph">This <code class="lang-kotlin">CoroutineScope</code>'s <span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span> will be cancelled automatically as soon as the <code class="lang-kotlin">lifecycle</code> reaches <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">DESTROYED</a>.</p><ol><li><p class="paragraph">If a <a href="../../../dispatch-core/dispatch.core/-dispatcher-provider/index.html">DispatcherProvider</a> element isn't present, <a href="../../../dispatch-core/dispatch.core/-default-dispatcher-provider/get.html">DefaultDispatcherProvider.get</a> will be     added.</p></li><li><p class="paragraph">If a <span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span> element isn't present, a <span data-unresolved-link="kotlinx.coroutines//SupervisorJob/#kotlinx.coroutines.Job?/PointingToDeclaration/">SupervisorJob</span> will be added.</p></li><li><p class="paragraph">If the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation-interceptor/index.html">ContinuationInterceptor</a> does not match the     one referenced by the <a href="../../../dispatch-core/dispatch.core/-dispatcher-provider/main-immediate.html">possibly new</a> property, it will be     updated to match.</p></li></ol></div></div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button><button class="section-tab" data-togglable="Sources">Sources</button><button class="section-tab" data-togglable="Samples">Samples</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
+            <div class="tabs-section-body">
+              <h2 class="">Samples</h2>
+              <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANCEL
+import dispatch.android.lifecycle.dispatchLifecycleScope
+import dispatch.core.DispatcherProvider
+import dispatch.core.launchMain
+import dispatch.internal.test.Sample5
+import dispatch.internal.test.android.LiveDataTest
+import dispatch.test.CoroutineTest
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
+fun main() { 
+   //sampleStart 
+   runBlocking {
+
+    // This could be any LifecycleOwner -- Fragments, Activities, Services...
+    class SomeFragment : Fragment() {
+
+      val lifecycleScope = DispatchLifecycleScope(lifecycle)
+
+      init {
+
+        // active only when "resumed".  starts a fresh coroutine each time
+        lifecycleScope.launchOnResume { }
+
+        // active only when "started".  starts a fresh coroutine each time
+        // this is a rough proxy for LiveData behavior
+        lifecycleScope.launchOnStart { }
+
+        // active after only the first "started" event, and never re-started
+        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) { }
+
+        // launch when created, automatically stop on destroy
+        lifecycleScope.launchOnCreate { }
+
+        // it works as a normal CoroutineScope as well (because it is)
+        lifecycleScope.launchMain { }
+      }
+    }
+  } 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import dispatch.android.lifecycle.DispatchLifecycleScope
+import dispatch.android.lifecycle.DispatchLifecycleScope.MinimumStatePolicy.CANCEL
+import dispatch.android.lifecycle.dispatchLifecycleScope
+import dispatch.core.DispatcherProvider
+import dispatch.core.launchMain
+import dispatch.internal.test.Sample5
+import dispatch.internal.test.android.LiveDataTest
+import dispatch.test.CoroutineTest
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
+fun main() { 
+   //sampleStart 
+   runBlocking {
+
+    // This could be any LifecycleOwner -- Fragments, Activities, Services...
+    class SomeFragment : Fragment() {
+
+      val context = Job() + DispatcherProvider()
+
+      val lifecycleScope = DispatchLifecycleScope(lifecycle, context)
+
+      init {
+
+        // active only when "resumed".  starts a fresh coroutine each time
+        lifecycleScope.launchOnResume { }
+
+        // active only when "started".  starts a fresh coroutine each time
+        // this is a rough proxy for LiveData behavior
+        lifecycleScope.launchOnStart { }
+
+        // active after only the first "started" event, and never re-started
+        lifecycleScope.launchOnStart(minimumStatePolicy = CANCEL) { }
+
+        // launch when created, automatically stop on destroy
+        lifecycleScope.launchOnCreate { }
+
+        // it works as a normal CoroutineScope as well (because it is)
+        lifecycleScope.launchMain { }
+      }
+    }
+  } 
+   //sampleEnd
+}</code></pre></div></div></div>
+              <h2 class="">Parameters</h2>
+              <div data-togglable="Parameters">
+                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>coroutine</span><wbr><span><span>Context</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph"><i>optional</i> the source CoroutineContext which will be converted to a     <a href="../../../dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.html">MainImmediateCoroutineScope</a>. Its <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">Elements</a> will be re-used.</p></div></div></div></div></div></div></div></div></div>
+              </div>
+              <h2 class="tabbedcontent">Constructors</h2>
+              <div class="table" data-togglable="Constructors"><a data-name="1578632893%2FConstructors%2F296330618" anchor-label="DispatchLifecycleScope" id="1578632893%2FConstructors%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue TabbedContent">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-dispatch-lifecycle-scope.html"><span>Dispatch</span><wbr><span>Lifecycle</span><wbr><span><span>Scope</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1578632893%2FConstructors%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-dispatch-lifecycle-scope.html"><span class="token function">DispatchLifecycleScope</span></a><span class="token punctuation">(</span>lifecycle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a><span class="token punctuation">, </span>coroutineContext<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token operator"> = </span>MainImmediateContext()<span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Types</h2>
+              <div class="table" data-togglable="Types"><a data-name="481714090%2FClasslikes%2F296330618" anchor-label="MinimumStatePolicy" id="481714090%2FClasslikes%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-minimum-state-policy/index.html"><span>Minimum</span><wbr><span>State</span><wbr><span><span>Policy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="481714090%2FClasslikes%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-minimum-state-policy/index.html">MinimumStatePolicy</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="-minimum-state-policy/index.html">DispatchLifecycleScope.MinimumStatePolicy</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Describes the way a particular <span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span> will behave if the <a href="lifecycle.html">lifecycle</a> passes below the minimum state before said <span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span> has completed.</p></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="-361885821%2FFunctions%2F296330618" anchor-label="launchOnCreate" id="-361885821%2FFunctions%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="launch-on-create.html"><span>launch</span><wbr><span>On</span><wbr><span><span>Create</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-361885821%2FFunctions%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="launch-on-create.html"><span class="token function">launchOnCreate</span></a><span class="token punctuation">(</span>context<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token operator"> = </span>EmptyCoroutineContext<span class="token punctuation">, </span>minimumStatePolicy<span class="token operator">: </span><a href="-minimum-state-policy/index.html">DispatchLifecycleScope.MinimumStatePolicy</a><span class="token operator"> = </span>MinimumStatePolicy.RESTART_EVERY<span class="token punctuation">, </span>block<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token keyword"></span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Lifecycle-aware function for launching a coroutine any time the <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a> is at least <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a>.</p></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="129438836%2FFunctions%2F296330618" anchor-label="launchOnResume" id="129438836%2FFunctions%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="launch-on-resume.html"><span>launch</span><wbr><span>On</span><wbr><span><span>Resume</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="129438836%2FFunctions%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="launch-on-resume.html"><span class="token function">launchOnResume</span></a><span class="token punctuation">(</span>context<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token operator"> = </span>EmptyCoroutineContext<span class="token punctuation">, </span>minimumStatePolicy<span class="token operator">: </span><a href="-minimum-state-policy/index.html">DispatchLifecycleScope.MinimumStatePolicy</a><span class="token operator"> = </span>MinimumStatePolicy.RESTART_EVERY<span class="token punctuation">, </span>block<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token keyword"></span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Lifecycle-aware function for launching a coroutine any time the <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a> is at least <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a>.</p></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="281843071%2FFunctions%2F296330618" anchor-label="launchOnStart" id="281843071%2FFunctions%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="launch-on-start.html"><span>launch</span><wbr><span>On</span><wbr><span><span>Start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="281843071%2FFunctions%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="launch-on-start.html"><span class="token function">launchOnStart</span></a><span class="token punctuation">(</span>context<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token operator"> = </span>EmptyCoroutineContext<span class="token punctuation">, </span>minimumStatePolicy<span class="token operator">: </span><a href="-minimum-state-policy/index.html">DispatchLifecycleScope.MinimumStatePolicy</a><span class="token operator"> = </span>MinimumStatePolicy.RESTART_EVERY<span class="token punctuation">, </span>block<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token keyword"></span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/Job///PointingToDeclaration/">Job</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Lifecycle-aware function for launching a coroutine any time the <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a> is at least <a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a>.</p></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="-1654120400%2FProperties%2F296330618" anchor-label="coroutineContext" id="-1654120400%2FProperties%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="../-view-lifecycle-coroutine-scope/index.html#-1654120400%2FProperties%2F296330618">coroutineContext</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1654120400%2FProperties%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><a data-name="-1654120400%2FProperties%2F296330618" anchor-label="coroutineContext" id="-1654120400%2FProperties%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="../-view-lifecycle-coroutine-scope/index.html#-1654120400%2FProperties%2F296330618">coroutineContext</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="124651366%2FProperties%2F296330618" anchor-label="lifecycle" id="124651366%2FProperties%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="lifecycle.html">lifecycle</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="124651366%2FProperties%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-lifecycle:dokkaHtmlPartial/release"><a data-name="124651366%2FProperties%2F296330618" anchor-label="lifecycle" id="124651366%2FProperties%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="lifecycle.html">lifecycle</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="124651366%2FProperties%2F296330618" anchor-label="lifecycle" id="124651366%2FProperties%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a><p class="paragraph">the lifecycle to which this <a href="../../../dispatch-core/dispatch.core/-main-immediate-coroutine-scope/index.html">MainImmediateCoroutineScope</a> is linked.</p></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Inheritors</h2>
+              <div class="table" data-togglable="Inheritors"><a data-name="-1201569208%2FInheritors%2F296330618" anchor-label="ViewLifecycleCoroutineScope" id="-1201569208%2FInheritors%2F296330618" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="../-view-lifecycle-coroutine-scope/index.html">ViewLifecycleCoroutineScope</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1201569208%2FInheritors%2F296330618"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Sources</h2>
+              <div class="table" data-togglable="Sources"><a data-name="-1900917099%2FSource%2F1121864922" anchor-label="https://github.com/RBusarow/Dispatch/blob/main/dispatch-android-lifecycle/dokkaHtmlPartial/src/main/java/dispatch/android/lifecycle/DispatchLifecycleScope.kt#L57" id="-1900917099%2FSource%2F1121864922" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/main"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-lifecycle:dokkaHtmlPartial/main" data-filterable-set=":dispatch-android-lifecycle:dokkaHtmlPartial/main">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="https://github.com/RBusarow/Dispatch/blob/main/dispatch-android-lifecycle/dokkaHtmlPartial/src/main/java/dispatch/android/lifecycle/DispatchLifecycleScope.kt#L57">androidJvm source</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1900917099%2FSource%2F1121864922"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  
+</body></html>
+
+

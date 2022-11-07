@@ -1,0 +1,232 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>IdlingDispatcherProviderRule</title>
+</head><body><link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" defer></script><script type="text/javascript" src="../../../scripts/prism.js" async></script><script src="https://unpkg.com/kotlin-playground@1"></script><script src="https://unpkg.com/kotlin-playground@1"></script>
+  
+    <div class="navigation-wrapper" id="navigation-wrapper">
+      <div id="leftToggler"><span class="icon-toggler"></span></div>
+      <div class="library-name"><a href="../../../index.html"><span>Dispatch</span></a></div>
+      <div></div>
+      <div class="pull-right d-flex"><button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div class="main-content" id="content" pageids="dispatch-android-espresso::dispatch.android.espresso/IdlingDispatcherProviderRule///PointingToDeclaration//1986783226">
+          <div class="breadcrumbs"><a href="../../index.html">dispatch-android-espresso</a>/<a href="../index.html">dispatch.android.espresso</a>/<a href="index.html">IdlingDispatcherProviderRule</a></div>
+          <div class="cover ">
+            <h1 class="cover"><span>Idling</span><wbr><span>Dispatcher</span><wbr><span>Provider</span><wbr><span><span>Rule</span></span></h1>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">IdlingDispatcherProviderRule</a><span class="token punctuation">(</span>factory<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../-idling-dispatcher-provider/index.html">IdlingDispatcherProvider</a><span class="token punctuation">)</span> : <span data-unresolved-link="org.junit.rules/TestWatcher///PointingToDeclaration/">TestWatcher</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">A JUnit 4 <span data-unresolved-link="org.junit.rules/TestRule///PointingToDeclaration/">TestRule</span> which creates a new <a href="../-idling-dispatcher-provider/index.html">IdlingDispatcherProvider</a> for each test, registering all <a href="../-idling-dispatcher/index.html">IdlingDispatcher</a>s with <span data-unresolved-link="androidx.test.espresso/IdlingRegistry///PointingToDeclaration/">IdlingRegistry</span> before <code class="lang-kotlin">@Before</code> and unregistering them after <code class="lang-kotlin">@After</code>.</p><p class="paragraph">The rule takes an optional <a href="../-idling-dispatcher-provider/index.html">IdlingDispatcherProvider</a> factory, in which case it only handles registration.</p><p class="paragraph">When doing Espresso testing, it's important that the same <a href="../-idling-dispatcher/index.html">IdlingDispatcher</a>s are used throughout a codebase. For this reason, it's a good idea to use a dependency injection framework just as Dagger or Koin to provide <span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span>s.</p><p class="paragraph">If using the <code class="lang-kotlin">lifecycleScope</code> and <code class="lang-kotlin">viewModelScope</code> properties, be sure to use the versions from the <code class="lang-kotlin">dispatch-android-lifecycle</code> artifacts to make use of their settable factories.</p><h3 class=""> Before the test:</h3><ul><li><p class="paragraph"><a href="../register-all-idling-resources.html">IdlingDispatcherProvider.registerAllIdlingResources</a> is called to register all dispatchers with <span data-unresolved-link="androidx.test.espresso/IdlingRegistry///PointingToDeclaration/">IdlingRegistry</span>.</p></li></ul><h3 class=""> After the test:</h3><ul><li><p class="paragraph"><a href="../unregister-all-idling-resources.html">IdlingDispatcherProvider.unregisterAllIdlingResources</a> is called to unregister all dispatchers with <span data-unresolved-link="androidx.test.espresso/IdlingRegistry///PointingToDeclaration/">IdlingRegistry</span>.</p></li></ul><h3 class=""> Requires JUnit 4.</h3><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">dependencies {<br>  testImplementation "junit:junit:4.12"<br>  -- or --<br>  testImplementation "org.junit.vintage:junit-vintage-engine:5.5.1"<br>}</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Sources">Sources</button><button class="section-tab" data-togglable="Samples">Samples</button><button class="section-tab" data-togglable="See also">See also</button></div>
+            <div class="tabs-section-body">
+              <h2 class="">Samples</h2>
+              <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import dispatch.android.espresso.IdlingDispatcherProvider
+import dispatch.android.espresso.IdlingDispatcherProviderRule
+import kotlinx.coroutines.runBlocking
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+fun main() { 
+   //sampleStart 
+   @RunWith(RobolectricTestRunner::class)
+class IdlingCoroutineScopeRuleSample {
+
+  // Retrieve the DispatcherProvider from a dependency graph,
+  // so that the same one is used throughout the codebase.
+  val customDispatcherProvider = testAppComponent.customDispatcherProvider
+
+  @JvmField
+  @Rule
+  val idlingRule = IdlingDispatcherProviderRule {
+    IdlingDispatcherProvider(customDispatcherProvider)
+  }
+
+  @Test
+  fun testThings() = runBlocking {
+
+    // Now any CoroutineScope which uses the DispatcherProvider
+    // in TestAppComponent will sync its "idle" state with Espresso
+  }
+} 
+   //sampleEnd
+}</code></pre></div><div class="sample-container"><pre><code class="runnablesample monospace block lang-kotlin" theme="idea">import dispatch.android.espresso.IdlingDispatcherProvider
+import dispatch.android.espresso.IdlingDispatcherProviderRule
+import dispatch.android.lifecycle.LifecycleScopeFactory
+import dispatch.android.viewmodel.ViewModelScopeFactory
+import dispatch.core.MainImmediateCoroutineScope
+import kotlinx.coroutines.runBlocking
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+fun main() { 
+   //sampleStart 
+   @RunWith(RobolectricTestRunner::class)
+class IdlingCoroutineScopeRuleWithLifecycleSample {
+
+  // Retrieve the DispatcherProvider from a dependency graph,
+  // so that the same one is used throughout the codebase.
+  val customDispatcherProvider = testAppComponent.customDispatcherProvider
+
+  @JvmField
+  @Rule
+  val idlingRule = IdlingDispatcherProviderRule {
+    IdlingDispatcherProvider(customDispatcherProvider)
+  }
+
+  @Before
+  fun setUp() {
+    LifecycleScopeFactory.set { customDispatcherProvider }
+    ViewModelScopeFactory.set {
+      MainImmediateCoroutineScope(customDispatcherProvider)
+    }
+    // now all scopes use the same IdlingDispatcherProvider
+  }
+
+  @Test
+  fun testThings() = runBlocking {
+
+    // Now any CoroutineScope which uses the DispatcherProvider
+    // in TestAppComponent will sync its "idle" state with Espresso
+  }
+} 
+   //sampleEnd
+}</code></pre></div></div></div>
+              <h2 class="">See also</h2>
+              <div data-togglable="See also">
+                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="See also"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div data-togglable="See also"><div class="table" data-togglable="See also"><div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span data-unresolved-link="org.junit.rules/TestRule///PointingToDeclaration/"><span>org.</span><wbr><span>junit.</span><wbr><span>rules.</span><wbr><span>TestRule</span></span></div></span></div><div><div class="title"><div data-togglable="See also"></div></div></div></div></div><div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span data-unresolved-link="androidx.test.espresso/IdlingRegistry///PointingToDeclaration/"><span>androidx.</span><wbr><span>test.</span><wbr><span>espresso.</span><wbr><span>Idling</span><wbr><span><span>Registry</span></span></span></div></span></div><div><div class="title"><div data-togglable="See also"></div></div></div></div></div></div></div></div></div>
+              </div>
+              <h2 class="tabbedcontent">Constructors</h2>
+              <div class="table" data-togglable="Constructors"><a data-name="-488817587%2FConstructors%2F1986783226" anchor-label="IdlingDispatcherProviderRule" id="-488817587%2FConstructors%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue TabbedContent">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-idling-dispatcher-provider-rule.html"><span>Idling</span><wbr><span>Dispatcher</span><wbr><span>Provider</span><wbr><span><span>Rule</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-488817587%2FConstructors%2F1986783226"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-idling-dispatcher-provider-rule.html"><span class="token function">IdlingDispatcherProviderRule</span></a><span class="token punctuation">(</span>factory<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../-idling-dispatcher-provider/index.html">IdlingDispatcherProvider</a><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="-1929544992%2FFunctions%2F1986783226" anchor-label="apply" id="-1929544992%2FFunctions%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#-1929544992%2FFunctions%2F1986783226"><span><span>apply</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1929544992%2FFunctions%2F1986783226"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1929544992%2FFunctions%2F1986783226"><span class="token function">apply</span></a><span class="token punctuation">(</span>p0<span class="token operator">: </span><span data-unresolved-link="org.junit.runners.model/Statement///PointingToDeclaration/">Statement</span><span class="token punctuation">, </span>p1<span class="token operator">: </span><span data-unresolved-link="org.junit.runner/Description///PointingToDeclaration/">Description</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="org.junit.runners.model/Statement///PointingToDeclaration/">Statement</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="2019667857%2FFunctions%2F1986783226" anchor-label="failed" id="2019667857%2FFunctions%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#2019667857%2FFunctions%2F1986783226"><span><span>failed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2019667857%2FFunctions%2F1986783226"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#2019667857%2FFunctions%2F1986783226"><span class="token function">failed</span></a><span class="token punctuation">(</span>p0<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html">Throwable</a><span class="token punctuation">, </span>p1<span class="token operator">: </span><span data-unresolved-link="org.junit.runner/Description///PointingToDeclaration/">Description</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-518806935%2FFunctions%2F1986783226" anchor-label="skipped" id="-518806935%2FFunctions%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#-1682087327%2FFunctions%2F1986783226"><span><span>skipped</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-518806935%2FFunctions%2F1986783226"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#-1682087327%2FFunctions%2F1986783226"><span class="token function">skipped</span></a><span class="token punctuation">(</span>p0<span class="token operator">: </span><span data-unresolved-link="org.junit/AssumptionViolatedException///PointingToDeclaration/">AssumptionViolatedException</span><span class="token punctuation">, </span>p1<span class="token operator">: </span><span data-unresolved-link="org.junit.runner/Description///PointingToDeclaration/">Description</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace strikethrough"><strike><span class="token keyword">open </span></strike><strike><span class="token keyword"></span></strike><strike><span class="token keyword">fun </span></strike><a href="index.html#-1688344674%2FFunctions%2F1986783226"><strike><span class="token function">skipped</span></strike></a><strike><span class="token punctuation">(</span></strike><strike>p0</strike><strike><span class="token operator">: </span></strike><span data-unresolved-link="org.junit.internal/AssumptionViolatedException///PointingToDeclaration/">AssumptionViolatedException</span><strike><span class="token punctuation">, </span></strike><strike>p1</strike><strike><span class="token operator">: </span></strike><span data-unresolved-link="org.junit.runner/Description///PointingToDeclaration/">Description</span><strike><span class="token punctuation">)</span></strike><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="1776812923%2FFunctions%2F1986783226" anchor-label="succeeded" id="1776812923%2FFunctions%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="index.html#1776812923%2FFunctions%2F1986783226"><span><span>succeeded</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1776812923%2FFunctions%2F1986783226"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="index.html#1776812923%2FFunctions%2F1986783226"><span class="token function">succeeded</span></a><span class="token punctuation">(</span>p0<span class="token operator">: </span><span data-unresolved-link="org.junit.runner/Description///PointingToDeclaration/">Description</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="840647005%2FProperties%2F1986783226" anchor-label="dispatcherProvider" id="840647005%2FProperties%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/release" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="dispatcher-provider.html">dispatcherProvider</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="840647005%2FProperties%2F1986783226"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dispatch-android-espresso:dokkaHtmlPartial/release"><a data-name="840647005%2FProperties%2F1986783226" anchor-label="dispatcherProvider" id="840647005%2FProperties%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">lateinit </span><span class="token keyword">var </span><a href="dispatcher-provider.html">dispatcherProvider</a><span class="token operator">: </span><a href="../-idling-dispatcher-provider/index.html">IdlingDispatcherProvider</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="840647005%2FProperties%2F1986783226" anchor-label="dispatcherProvider" id="840647005%2FProperties%2F1986783226" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/release"></a><p class="paragraph">The <a href="../-idling-dispatcher-provider/index.html">IdlingDispatcherProvider</a> which is automatically registered with <span data-unresolved-link="androidx.test.espresso/IdlingRegistry///PointingToDeclaration/">IdlingRegistry</span>.</p></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Sources</h2>
+              <div class="table" data-togglable="Sources"><a data-name="-500730454%2FSource%2F981932634" anchor-label="https://github.com/RBusarow/Dispatch/blob/main/dispatch-android-espresso/dokkaHtmlPartial/src/main/java/dispatch/android/espresso/IdlingDispatcherProviderRule.kt#L24" id="-500730454%2FSource%2F981932634" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/main"></a>
+                <div class="table-row" data-filterable-current=":dispatch-android-espresso:dokkaHtmlPartial/main" data-filterable-set=":dispatch-android-espresso:dokkaHtmlPartial/main">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="https://github.com/RBusarow/Dispatch/blob/main/dispatch-android-espresso/dokkaHtmlPartial/src/main/java/dispatch/android/espresso/IdlingDispatcherProviderRule.kt#L24">androidJvm source</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-500730454%2FSource%2F981932634"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  
+</body></html>
+
+
