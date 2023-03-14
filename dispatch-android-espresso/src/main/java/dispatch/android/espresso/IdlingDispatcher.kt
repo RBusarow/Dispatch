@@ -53,9 +53,9 @@ public class IdlingDispatcher(
    * suspension.
    */
   override fun dispatch(context: CoroutineContext, block: Runnable) {
-
+    counter.increment()
+    
     val runnable = Runnable {
-      counter.increment()
       try {
         block.run()
       } finally {
