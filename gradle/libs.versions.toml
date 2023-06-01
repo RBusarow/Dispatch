@@ -156,7 +156,7 @@ androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "an
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "androidx-room" }
 
-androidx-savedstate = "androidx.savedstate:savedstate:1.2.0"
+androidx-savedstate = "androidx.savedstate:savedstate:1.2.1"
 
 androidx-security-crypto = "androidx.security:security-crypto:1.0.0"
 
