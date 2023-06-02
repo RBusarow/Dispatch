@@ -222,7 +222,7 @@ google-ksp = "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.7.10-1.0
 
 google-material-android = { module = "com.google.android.material:material", version.ref = "google-material" }
 
-google-truth = "com.google.truth:truth:1.1.3"
+google-truth = "com.google.truth:truth:1.1.4"
 
 hermit-core = { module = "com.rickbusarow.hermit:hermit-core", version.ref = "hermit" }
 hermit-coroutines = { module = "com.rickbusarow.hermit:hermit-coroutines", version.ref = "hermit" }
