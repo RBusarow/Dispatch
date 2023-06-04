@@ -46,7 +46,7 @@ google-dagger = "2.43.2"
 google-material = "1.6.1"
 
 rickBusarow-dependencySync = "0.11.4"
-rickBusarow-moduleCheck = "0.12.3"
+rickBusarow-moduleCheck = "0.12.5"
 
 square-anvil = "2.4.2"
 square-moshi = "1.13.0"
