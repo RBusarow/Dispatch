@@ -20,7 +20,7 @@ ktlint-gradle = "11.0.0"
 sonarPlugin = "2.6.1"
 spotless = "5.10.1"
 targetSdk = "30"
-taskTree = "2.1.0"
+taskTree = "2.1.1"
 
 androidx-activity = "1.5.1"
 androidx-compose = "1.3.0"
