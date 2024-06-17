@@ -43,7 +43,7 @@ jobs:
           java-version: '11'
 
       - name: detekt
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: detekt
           cache-read-only: false
@@ -73,7 +73,7 @@ jobs:
 
       - name: KtLint format (used by main repo)
         if: github.event.pull_request.head.repo.full_name == github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: ktlintformat
           cache-read-only: false
@@ -88,7 +88,7 @@ jobs:
 
       - name: KtLint check (used by forks)
         if: github.event.pull_request.head.repo.full_name != github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: ktlintcheck
           cache-read-only: false
@@ -118,21 +118,21 @@ jobs:
           java-version: '11'
 
       - name: Check that the version is a -SNAPSHOT version
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: checkVersionIsSnapshot
           cache-read-only: false
 
       - name: Sync versions in website docs (used by main repo)
         if: github.event.pull_request.head.repo.full_name == github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: updateWebsiteNextDocsVersionRefs
           cache-read-only: false
 
       - name: Check versions in website docs (used by forks)
         if: github.event.pull_request.head.repo.full_name != github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: checkWebsiteNextDocsVersionRefs
           cache-read-only: false
@@ -145,14 +145,14 @@ jobs:
 
       - name: Update version in website package.json (used by main repo)
         if: github.event.pull_request.head.repo.full_name == github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: updateWebsitePackageJsonVersion
           cache-read-only: false
 
       - name: Check version in website package.json (used by forks)
         if: github.event.pull_request.head.repo.full_name != github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: checkWebsitePackageJsonVersion
           cache-read-only: false
@@ -183,7 +183,7 @@ jobs:
           java-version: '11'
 
       - name: api check
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: apicheck
           cache-read-only: false
@@ -213,7 +213,7 @@ jobs:
 
       - name: ModuleCheck with auto-correct (used by main repo)
         if: github.event.pull_request.head.repo.full_name == github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: moduleCheckAuto
           cache-read-only: false
@@ -228,7 +228,7 @@ jobs:
 
       - name: ModuleCheck check (used by forks)
         if: github.event.pull_request.head.repo.full_name != github.repository
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: moduleCheck
           cache-read-only: false
@@ -251,7 +251,7 @@ jobs:
           java-version: '11'
 
       - name: dependency-guard
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: dependencyGuard
           cache-read-only: false
@@ -286,25 +286,25 @@ jobs:
           java-version: '11'
 
       - name: compileKotlin
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: compileKotlin "${{ env.macosGradleArgs }}"
           cache-read-only: false
 
       - name: dokkaHtmlMultiModule
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: dokkaHtmlMultiModule "${{ env.macosGradleArgs }}"
           cache-read-only: false
 
       - name: buildSite
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: buildSite "${{ env.macosGradleArgs }}"
           cache-read-only: false
 
       - name: knit check
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: knitcheck
           cache-read-only: false
@@ -326,7 +326,7 @@ jobs:
           java-version: '11'
 
       - name: all tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: testJvm "${{ env.macosGradleArgs }}"
           cache-read-only: false
@@ -363,7 +363,7 @@ jobs:
           java-version: '11'
 
       - name: android lint
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: lintMain "${{ env.macosGradleArgs }}"
           cache-read-only: false

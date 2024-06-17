@@ -39,19 +39,19 @@ jobs:
           java-version: '11'
 
       - name: compileKotlin
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: compileKotlin "${{ env.gradleArgs }}"
           cache-read-only: false
 
       - name: dokkaHtmlMultiModule
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: dokkaHtmlMultiModule "${{ env.gradleArgs }}"
           cache-read-only: false
 
       - name: build website
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: buildSite "${{ env.gradleArgs }}"
           cache-read-only: false

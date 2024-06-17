@@ -27,17 +27,17 @@ jobs:
       # takes too long and times out, no cache is retained.
 
       - name: Compile Kotlin
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: compileKotlin "${{ env.gradleArgs }}"
 
       - name: Dokka & JavadocJar
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: dokkaJavadocJar "${{ env.gradleArgs }}"
 
       - name: Publish Snapshots
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: publish --no-parallel "${{ env.gradleArgs }}"
         env:
